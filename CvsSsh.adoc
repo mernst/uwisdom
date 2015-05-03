@@ -1,7 +1,6 @@
 = How to use CVS with ssh instead of rsh
 :toc:
 
->entry How to use CVS with ssh instead of rsh
 
 Note that all of the below is not necssary if you use Kerberos
 authentication, which is an even better method.
@@ -29,14 +28,11 @@ any more. Never fear, though, ssh offers a way around this as well!
 
 Here's the recipe:
 
-# Generate a private and public ssh RSA key pair with "ssh-keygen" (and remember that passphrase!)
-
-# Concatenate the `~/.ssh/identity.pub` public key file onto the end of `~/.ssh/authorized_keys` on the machine with the CVS repository.
-
-# At the beginning of each development session, run
+. Generate a private and public ssh RSA key pair with "ssh-keygen" (and remember that passphrase!)
+. Concatenate the `~/.ssh/identity.pub` public key file onto the end of `~/.ssh/authorized_keys` on the machine with the CVS repository.
+. At the beginning of each development session, run
 ```
      ssh-agent bash
      ssh-add
 ```
 
-<entry
