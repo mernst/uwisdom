@@ -1,15 +1,8 @@
-[[summary-information-about-the-uwisdom-collection-of-useful-facts-and-how-to-search-it]]
-summary Information about the uwisdom collection of useful facts, and
-how to search it
-
-
-Contents:
+= Information about the uwisdom collection of useful facts, and how to search it
 :toc:
 
-_________________________________________________________________________________
-entry Description/blurb of the doc/lookup/help program for searching
-wisdom files
-_________________________________________________________________________________
+This is a description/blurb of the doc/lookup/help program for searching wisdom files
+
 
 Albert Einstein said,
 
