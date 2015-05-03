@@ -7,15 +7,14 @@ tool.  There are probably good tutorials that I could now point people at.
 
 ```
 
-===========================================================================
-
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit), select a directory where you want a "code"
 subdirectory containing all the files to appear, and do the following
 
   cvs -d ~mernst/class/573/project/.CVS-medics checkout code
 
-----------------
+
+== Checking out a CVS project
 
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit):
@@ -35,7 +34,8 @@ files which you can edit):
     In the future, from the dasada/ directory, you won't need to specify
     the "-d ..." argument to cvs; cvs will remember that value.
 
-===========================================================================
+
+== Editing
 
 You will do all your editing in this private subdirectory of your own.  You
 have control over all files.  You do not need to check files in or out.  I
@@ -48,7 +48,7 @@ repository since you last updated from it, do
 
   cvs update
 
-(I personally use   cvs -q update   which gives slightly less output.)
+(I personally use  `cvs -q update`  which gives slightly less output.)
 Alternately, you may use  M-x cvs-update  in Emacs if you use pcl-cvs.el.
 
 You might wish to update from my changes even if you're not ready to commit
@@ -90,7 +90,8 @@ The CVS manual is available online (via the Web, the Info documentation
 system, etc.), as are additional tutorials.
 
 You may wish to create a ~/.cvsrc file containing the following two lines:
+..cvsrc
+----
 diff -u
 update -d -P
-```
-
+----
