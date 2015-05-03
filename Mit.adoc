@@ -2,7 +2,7 @@
 :toc:
 
 
----------------------------------------------------------------------------
+
 == MIT-specific
 
 MIT medical service personal physicians:
@@ -111,12 +111,10 @@ UROP Homepage for Faculty:  https://sisapp.mit.edu/uropweb/facultyHome.mit
 UROP Homepage for Students:  https://sisapp.mit.edu/uropweb/home.mit
 
 
----------------------------------------------------------------------------
+
 == Athena-specific
 
-<wiki:comment>
-% This section contains information about Athena, the MIT computing system.
-</wiki:comment>
+// This section contains information about Athena, the MIT computing system.
 
 To find out whether a particular software program is available/installed on
 Athena, use
@@ -202,7 +200,7 @@ done.  ( http://scripts.mit.edu/start/ for more details )
 though this had worked for me earlier.)
 
 
----------------------------------------------------------------------------
+
 == CSAIL-specific
 
 CSAIL Personnel Assistant: Rachel Avery
@@ -404,7 +402,7 @@ Don't forget to:
     fs sa _dir-with-htpasswd_ svn rl
 
 
----------------------------------------------------------------------------
+
 == CSAIL printing
 
 CSAIL printer and copier locations:
@@ -453,7 +451,7 @@ http://tig.csail.mit.edu/twiki/bin/view/OOPS/VideoConference
 To call Mike in Germany, use IP 139.19.100.30
 
 
----------------------------------------------------------------------------
+
 == EECS-specific
 
 Info about undergraduate theses (including prizes):
@@ -473,7 +471,7 @@ The HKN undeground guide doesn't include classes that they skipped, and may
 not include 
 
 
----------------------------------------------------------------------------
+
 == PAG-specific
 
 EDG C front end:
@@ -537,7 +535,7 @@ The interesting lines are those with Type "Disk", so then do:
 ```
 
 
----------------------------------------------------------------------------
+
 == Boston-specific
 
 Apollo Travel (617-876-4471, 860 Mass. Ave., between Harvard and Central
@@ -559,14 +557,10 @@ Can recycle styrofoam packing peanuts ("loose fill") at
  * UPS Store, Davis Square
 
 
----------------------------------------------------------------------------
-<wiki:comment>
-Please put new content in the appropriate section above, don't just
-dump it all here at the end of the file.
-</wiki:comment>
 
-<wiki:comment>
-LocalWords:  Guralnick admin Runkle HR FRU Choate Perrigo Helman WEBSIS faq gi
-LocalWords:  firelane eetimes DesignJet lpoptions xerox psets StapleLocation
-LocalWords:  DualLandscape lpr myfile listname PACG Cron
-</wiki:comment>
+// Please put new content in the appropriate section above, don't just
+// dump it all here at the end of the file.
+
+// LocalWords:  Guralnick admin Runkle HR FRU Choate Perrigo Helman WEBSIS faq gi
+// LocalWords:  firelane eetimes DesignJet lpoptions xerox psets StapleLocation
+// LocalWords:  DualLandscape lpr myfile listname PACG Cron

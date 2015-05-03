@@ -73,12 +73,11 @@ http://code.google.com/p/support/wiki/WikiSyntax .
 To preview, paste into a Google code wiki editing page and press the
 "Preview" button, even if you don't save there; but note that URLs are not
 live in the preview.
-<wiki:comment>
-There is an interactive preview tool at
-http://phenxdesign.net/projects/wikiwyg/,
-but it failed for the first markup I gave it (an indented/quoted
-paragraph).
-</wiki:comment>
+// There is an interactive preview tool at
+// http://phenxdesign.net/projects/wikiwyg/,
+// but it failed for the first markup I gave it (an indented/quoted
+// paragraph).
+
 
 == Installing the lookup program, and shell aliases
 
@@ -103,7 +102,5 @@ You can learn more about the Lookup program from its documentation.
 
 <entry
 
-<wiki:comment>
- LocalWords:  wiki PAG pag pdfnup Cytron's bibfind cytron quotefind einstein
- LocalWords:  rolo rebelo Lookup lookup
-</wiki:comment>
+// LocalWords:  wiki PAG pag pdfnup Cytron's bibfind cytron quotefind einstein
+// LocalWords:  rolo rebelo Lookup lookup

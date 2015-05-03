@@ -1,7 +1,6 @@
 = Wisdom about Emacs
 :toc:
 
----------------------------------------------------------------------------
 == General tips
 
 
@@ -33,36 +32,7 @@ string with contents a \ | b and \| is the regexp routine's alternative
 specifier.
 
 
----------------------------------------------------------------------------
-== Less-polished Emacs wisdom
-
-
-To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
-
-(symbol-function 'foo) to determine whether an emacs function is coded in C
-or elisp; C-h f now also gives that information.
-
-just-one-space                ESC SPC
-  Function: Delete all spaces and tabs around point, leaving one space.
-
-To get local variables in emacs, put one of the following at the end of the
-file, preferrably following a page-feed (^L) character:
-Local Variables:
-page-delimiter: "^\f\n===========================================================================\n"
-End:
-/* Local Variables: */
-/* compile-command: "gcc thisfile.c -o thisfile -lm -O -g" */
-/* compile-history: ("gcc thisfile.c -o thisfile -lm -O -g") */
-/* End: */
-(Compile-command first cd's to default-directory.)
-These are equivalent (save a mode line update), but the second doesn't
-require eval:
-Local Variables:
-eval: (auto-fill-mode 0)
-End:
-Local Variables:
-auto-fill-function: nil
-End:
+== Gnus news/mail reader
 
 To save (or execute some other gnus keystroke command upon) multiple
 articles to a file in GNUS, use '&' in Subject mode.  This only works on
@@ -78,6 +48,47 @@ will un-kill all except foo or bar in subject.  (There might be a faster
 way, but this works fine.)
 
 In gnus, "S o m" to forward/resend article via mail.
+
+
+== Uncategorized Emacs wisdom
+
+
+To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
+
+(symbol-function 'foo) to determine whether an emacs function is coded in C
+or elisp; C-h f now also gives that information.
+
+just-one-space                ESC SPC
+  Function: Delete all spaces and tabs around point, leaving one space.
+
+To get local variables in emacs, put one of the following at the end of the
+file, preferrably following a page-feed (^L) character:
+//
+----
+Local Variables:
+page-delimiter: "^\f\n===========================================================================\n"
+End:
+----
+//
+----
+/* Local Variables: */
+/* compile-command: "gcc thisfile.c -o thisfile -lm -O -g" */
+/* compile-history: ("gcc thisfile.c -o thisfile -lm -O -g") */
+/* End: */
+----
+(Compile-command first cd's to default-directory.)
+These are equivalent (save a mode line update), but the second doesn't
+require eval:
+----
+Local Variables:
+eval: (auto-fill-mode 0)
+End:
+----
+----
+Local Variables:
+auto-fill-function: nil
+End:
+----
 
 The following form will make the emacs buffer-list `transient':
 ```
@@ -146,11 +157,14 @@ The gnuserv program lets you force a running Emacs to edit a file or
 evaluate Lisp code.
 
 In Emacs, to show only those unindented lines that are *not* preceded by _N_
-spaces, do ```
+spaces, do
+----
   C-u _N_ C-x $
-``` To reset, do ```
+----
+To reset, do
+----
   C-x $
-```
+----
 
 A crude, undocumented, and not-guaranteed-to-work-in-the-future way to
 silence any Emacs function is to temporarily bind executing-kbd-macro to a
@@ -271,6 +285,7 @@ To change the font while emacs is running,
   M-x set-frame-font RET 9x15 RET
 ```
 To list available fonts:
+
  * use program xlsfonts.
    Any font with `m' or `c' in the SPACING field of
    the long name is a fixed-width font.  Here's how to use the `xlsfonts'
@@ -295,7 +310,9 @@ then do:
 since that font is generally defined.
 
 To recompile my emacs directory:
-```emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '^Add to load-path: ' | grep -v '^Checking'```
+```
+emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '^Add to load-path: ' | grep -v '^Checking'
+```
 
 This bit of text makes Emacs automatically update the date at the bottom of
 a webpage when it is saved.
@@ -328,9 +345,9 @@ as distinguished from where the .elc versions can be found:
 
 To run a command whenever a file is saved, add to its end:
 ```
-# Local variables:
-# eval: (add-hook 'after-save-hook '(lambda () (shell-command "make")) nil t)
-# end:
+  # Local variables:
+  # eval: (add-hook 'after-save-hook '(lambda () (shell-command "make")) nil t)
+  # end:
 ```
 
 To select an input method [e.g., spanish-postfix, to get accents] in Emacs:
@@ -405,7 +422,5 @@ the lines but the underlying buffer text retains long lines, use M-x
 visual-line-mode.  It's better than longlines mode.
 
 
-<wiki:comment>
-% This last  is to prevent emacs from thinking the local variables above
-% are for real; there are no local variables mentioned on the last page now.
-</wiki:comment>
+// This last  is to prevent emacs from thinking the local variables above
+// are for real; there are no local variables mentioned on the last page now.

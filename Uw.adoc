@@ -2,7 +2,7 @@
 :toc:
 
 
----------------------------------------------------------------------------
+
 == UW (non-CSE-specific)
 
 UW Travel Card rules, from http://www.washington.edu/admin/procsrvcs/ecommerce/cta/travelcardpolicy.html:
@@ -98,7 +98,7 @@ To approve spending:
  * Repeat until there is no more red "PI review" text
 
 
----------------------------------------------------------------------------
+
 == CSE
 
 UW CSE printer: ps581
@@ -351,7 +351,7 @@ this may be due to a slow or laggy connection.  Try going directly to
 https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 
 
----------------------------------------------------------------------------
+
 == Seattle
 
 Options for short-term Seattle housing/rentals/apartments/sublets:
@@ -380,8 +380,6 @@ Visitors should get on the wasp and 590n mailing lists.
  * 590n (software engineering): https://mailman.cs.washington.edu/mailman/listinfo/cse590n
 
 
----------------------------------------------------------------------------
-<wiki:comment>
-Please put new content in the appropriate section above, don't just
-dump it all here at the end of the file.
-</wiki:comment>
+
+// Please put new content in the appropriate section above, don't just
+// dump it all here at the end of the file.

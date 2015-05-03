@@ -136,7 +136,7 @@ Builds an AST.  Includes an unparser.  Apparently keeps around comments.
 The AST built by Barat is a passive data structure which cannot be changed.
 Parses the Java 1.1 language.
 
----------------------------------------------------------------------------
+
 
 == Java compilers
 
@@ -209,7 +209,7 @@ Eclipse refactorings.
 http://jackpot.netbeans.org/
 Perhaps it only works under NetBeans.
 
----------------------------------------------------------------------------
+
 
 == Pretty-printers/decompilers for .class files
 
@@ -265,7 +265,7 @@ Jasmine:  http://members.tripod.com/~SourceTec/jasmine.htm
 "Java Decompiler Workshop 1.0", http://www.megatrend.hu/jdw.htm, is
 actually a disassembler, not a decompiler, it seems.
 
----------------------------------------------------------------------------
+
 
 == Bytecode/classfile instrumenters/processing/rewriters
 
@@ -412,7 +412,7 @@ http://www.gnu.org/software/kawa/api/gnu/bytecode/package-summary.html
 Documentation doesn't seem stellar.
 Also see http://www.gnu.org/software/java/java-software.html
 
----------------------------------------------------------------------------
+
 
 == Bytecode instrumenters and other tools
 
@@ -464,7 +464,7 @@ In summary, I find that using BCEL for instrumentation and JODE for
 verification/decompilation is currently the best working environment for 
 me.  Your mileage may vary.
 
----------------------------------------------------------------------------
+
 
 Kaffe: free Java VM, http://www.transvirtual.com/
 
@@ -675,10 +675,8 @@ http://www.khelekore.org/jmp/tijmp/ -- works on Java 6 and later
 JProfiler
 http://www.ej-technologies.com/products/jprofiler/overview.html
 
-<wiki:comment>
-J-Sprint (shareware) was once good, but http://www.j-sprint.com/ no longer
-exists as of May 2007.
-</wiki:comment>
+// J-Sprint (shareware) was once good, but http://www.j-sprint.com/ no longer
+// exists as of May 2007.
 
 ProfileViewer helps in interpreting Java profiling output.
 http://www.ulfdittmer.com/profileviewer/index.html

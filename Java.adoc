@@ -2,7 +2,6 @@
 :toc:
 
 
----------------------------------------------------------------------------
 == JIT
 
 To disable the JIT, run Java with the  -Djava.compiler=DISABLED  option.
@@ -24,7 +23,6 @@ when the problem was that I had used "invokevirtual" where I should have
 used "invokestatic".
 
 
----------------------------------------------------------------------------
 == JUnit
 
 JUnit:  helps in writing Java test suites.  www.junit.org
@@ -65,7 +63,6 @@ isn't always easier to read, this can be worthwhile.
 ```
 
 
----------------------------------------------------------------------------
 == Debugging
 
 Graphical Java debugger:  jswat (http://www.bluemarsh.com/java/jswat/),
@@ -92,7 +89,6 @@ To get line numbers too, make the VM create a core dump, then use jstack:
 ```
 
 
----------------------------------------------------------------------------
 == Profiling
 
 For notes about Java garbage collection and the heap, see wiki page JavaHeap.
@@ -113,7 +109,7 @@ to milliseconds.  I couldn't find anything more precise.  Nor anything
 that works with CPU time rather than wallclock time.
 
 
----------------------------------------------------------------------------
+
 == Generics
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
@@ -156,7 +152,7 @@ They don't have a name for a use of type parameter/variable, to distinguish
 from the declaration.
 
 
----------------------------------------------------------------------------
+
 == javac
 
 
@@ -219,7 +215,7 @@ in the source code, but this still requires you to run javac as follows:
 ```
 
 
----------------------------------------------------------------------------
+
 == javadoc
 
 To find Javadoc comments that use "<" or ">" but shouldn't:
@@ -235,7 +231,7 @@ To avoid doclint messages about missing Javadoc tags, such as "no @param for som
 This only works with Javadoc 8 and later.
 
 
----------------------------------------------------------------------------
+
 == Everything else
 
 
@@ -432,12 +428,10 @@ java.home is the JRE install directory, e.g., ...jre .
 
 
 
-<wiki:comment>
-%  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava
-%  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
-%  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
-%  LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
-%  LocalWords:  PublicTest ProfileViewer javac JSR JWhich classpath jwhich pid
-%  LocalWords:  instanceof traceback ctrl aaaaab boolean lookingAt unjar jdk src
-%  LocalWords:  RFEs LVTT BCEL daikon LVT BCELUtil
-</wiki:comment>
+//  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava
+//  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
+//  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
+//  LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
+//  LocalWords:  PublicTest ProfileViewer javac JSR JWhich classpath jwhich pid
+//  LocalWords:  instanceof traceback ctrl aaaaab boolean lookingAt unjar jdk src
+//  LocalWords:  RFEs LVTT BCEL daikon LVT BCELUtil

@@ -1,7 +1,7 @@
 = Wisdom about Linux
 :toc:
 
----------------------------------------------------------------------------
+
 == Debian
 
 Debian installation:  see ~/wisdom/setup/setup-debian
@@ -130,7 +130,7 @@ To make the Caps Lock key an additional Control/Ctrl key under Linux:
   Keyboard Layout > Options > Ctrl key position
 
 
----------------------------------------------------------------------------
+
 == Ubuntu
 
 It is a bug in Ubuntu 13.10 that pdflatex produces A4 output.
@@ -168,7 +168,7 @@ Ubuntu 14.04 LTS (Trusty Tahr)
 Ubuntu 14.10 (Utopic Unicorn)
 
 
----------------------------------------------------------------------------
+
 == Devices
 
 When using a USB stick under Linux, give it plenty of time to finish
@@ -209,7 +209,7 @@ When an Amazon Kindle is plugged into Ubuntu Linux, it is mounted not at
 /mnt but at /media/${HOME}/Kindle .
 
 
----------------------------------------------------------------------------
+
 == Everything else
 
 SSH timeouts seem to be controlled in a variety of ways.  The
@@ -369,7 +369,7 @@ or alternately:
   date ; sudo service ntp stop ; sudo ntpd -gq ; sudo service ntp start ; date
 
 
----------------------------------------------------------------------------
+
 == long entries below
 
 >entry bsh/csh/tsh quote arbitrary string with single quotes
