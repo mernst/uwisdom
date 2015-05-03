@@ -311,6 +311,7 @@ To run an entire X-session underneath ssh-agent:
   1. move .xinitrc file (other X client startup script) to .xinitrc-real.
   2. add the command "ssh-add" to the beginning of that script.
   3. create a new .xinitrc script containing the sole command:
+
 [source]
 .~/.xinitrc
 ----
@@ -318,8 +319,8 @@ exec ssh-agent $HOME/.xinitrc-real
 ----
 
 To set up public keys for ssh-agent and similar programs:
- # On client machine (from which I will login), do `ssh-keygen`
- # Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
+ 1. On client machine (from which I will login), do `ssh-keygen`
+ 2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
 ssh2 needs file ~/.ssh/authorized_keys2; to make it, do
 ```
   cd ~/.ssh; cat is_dsa.pub > authorized_keys2; chmod 600 authorized_keys2
