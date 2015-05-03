@@ -1,4 +1,4 @@
-Brief comparison of Mercurial (Hg) and Subversion (SVN):
+= Brief comparison of Mercurial (Hg) and Subversion (SVN)
 
 Pros of Mercurial:
 
