@@ -4,12 +4,11 @@
 This is a description/blurb of the doc/lookup/help program for searching wisdom files
 
 
-Albert Einstein said,
-
-______________________________________________________________________________________
+[quote,Albert Einstein]
+____
 I never waste memory on things that can easily be stored and retrieved
 from elsewhere.
-______________________________________________________________________________________
+____
 
 The "wisdom" files store information that is not worth memorizing, but
 which I may wish to look up later. You can retrieve the information with
