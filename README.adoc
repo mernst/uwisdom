@@ -1,13 +1,10 @@
 [[summary-information-about-the-uwisdom-collection-of-useful-facts-and-how-to-search-it]]
 summary Information about the uwisdom collection of useful facts, and
 how to search it
---------------------------------------------------------------------------------------
 
-[[labels-featured]]
-labels Featured
----------------
 
 Contents:
+:toc:
 
 _________________________________________________________________________________
 entry Description/blurb of the doc/lookup/help program for searching
