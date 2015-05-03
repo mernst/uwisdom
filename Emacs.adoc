@@ -91,10 +91,8 @@ The following form will make the emacs buffer-list
 `transient': \`\`\`   (global-set-key "\C-x\C-b" 'electric-buffer-list) \`\`\` The following will make emacs`help'
 windows transient:
 
-----------------------------------------
   (progn (require 'ehelp)
          (fset 'help-command ehelp-map))
-----------------------------------------
 
 To prevent emacs from wrapping lines, (setq truncate-lines t). I have a
 function M-x truncate-lines that toggles this value.
