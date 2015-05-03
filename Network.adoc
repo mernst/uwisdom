@@ -39,11 +39,6 @@ In Google Groups, to permit "reply all" to go to the sender:
 
 == Source code repository hosting
 
-For GitHub, to link directly to files in the repository, use rawgit.com.
-Examples:
-  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
-This does not seem to work for wiki files.
-
 For Google Code, it is possible to link straight to HTML files in the
 repository.  Examples:
   http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
@@ -60,6 +55,23 @@ Google code wiki syntax (a variant of MoinMoin syntax):
   Contents:
   <wiki:toc max_depth="1" />
 ```
+
+For GitHub, to link directly to files in the repository, use rawgit.com.
+Examples:
+  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
+This does not seem to work for wiki files.
+
+In GitHub, just
+----
+  :toc:
+----
+doesn't produce a table of contents.  Instead, you need
+----
+  :toc:
+  :toc-placement: manual
+
+  toc::[]
+----
 
 
 == Uncategorized

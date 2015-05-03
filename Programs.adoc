@@ -70,9 +70,13 @@ Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 == AFS
 
 To modify AFS directory/file permissions/acls/access control lists, see
+/nobreak
+
  * http://www-2.cs.cmu.edu/~help/afs/afs_quickref.html
  * http://openafs.org/
  * http://web.mit.edu/answers/unix/unix_chmod.html
+/nobreak
+
 To view permissions:
 ```
   fs listacl directory
@@ -95,15 +99,25 @@ To make a directory and all subdirectories world-readable:
 Seven rights/permissions are predefined by AFS: four control access to
 a directory and three to all of the files in a directory.
 The four directory rights are:
+//nobreak
+
     * lookup (l) -- list the contents of a directory
     * insert (i) -- add files or subdirectories to a directory
     * delete (d) -- delete entries from a directory
     * administer (a) -- modify the ACL
+//nobreak
+
 The three rights that affect all of the files in a directory are:
+//nobreak
+
     * read (r) -- read file content and query file status
     * write (w) -- write file content and change the Unix permission modes
     * lock (k) -- use full-file advisory locks
+//nobreak
+
 The following are shortcuts:
+//nobreak
+
     * all : gives all rights - rlidwka
     * write : gives rlidwk rights
     * read : gives rl rights
@@ -156,6 +170,8 @@ such problems.)
 == Shells
 
 Redirecting output in command shells:
+//nobreak
+
  * In csh/tcsh:
    * To overwrite an existing file, redirect via ">!" instead of ">".
    * To redirect both standard error and standard output to a file,
@@ -178,7 +194,7 @@ In bash shell scripts, `"$@"` is preferred, because it quotes each argument
 individually before concatenating them (separated by spaces).
 In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".
 
-In bash, interactive shells call .bashrc; noninteractive shells call
+In bash, interactive shells call `.bashrc`; noninteractive shells call
 `.bash_profile`.
 
 In tcsh, a for loop looks like
@@ -197,8 +213,8 @@ In csh, it is stored in variable "$status".
 Zero means success, non-zero means failure.
 
 Command substitution, performed by a subshell, in csh/bash:
-enclose in backquotes/backticks (`...`).
-In sh, it's better style to use $(...) than `...`, but both have the same effect.
+enclose in backquotes/backticks (``...``).
+In sh, it's better style to use `$(...)` than ``...``, but both have the same effect.
 
 The bash, of csh's "rehash" command is "hash -r".
 
