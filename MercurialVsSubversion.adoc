@@ -1,6 +1,7 @@
 Brief comparison of Mercurial (Hg) and Subversion (SVN):
 
 Pros of Mercurial:
+
  * faster
  * more robust.
    I've had SVN repositories get wedged because of using
@@ -40,6 +41,7 @@ Pros of Mercurial:
    re-resolve the same problem as you continue to work.
 
 Pros of Subversion:
+
  * more widely used at present, and familiar to more developers
  * less flexible, and therefore less complicated.
    This can simplify the user's mental model.

@@ -19,8 +19,8 @@ users = mernst, apache
 ```
 
 Then, for a few tips on using Mercurial, see
-http://code.google.com/p/uwisdom/wiki/VersionControl#Mercurial_(Hg)
+https://github.com/mernst/uwisdom/blob/wiki/VersionControl.adoc#mercurial-hg
 
 To avoid having to type your password for every version control operation
 (and when logging in to other machines, etc.), see
-http://code.google.com/p/uwisdom/wiki/Programs#ssh_(secure_shell)
+https://github.com/mernst/uwisdom/blob/wiki/Programs.adoc#ssh-secure-shell

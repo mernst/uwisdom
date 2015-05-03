@@ -318,6 +318,13 @@ machine into `authorized_keys` on server machine.
 ssh2 supports sftp, an ftp client.  It does not seem to be free for
 research use.  OpenSSH doesn not seem to have sftp.
 
+SSH timeouts seem to be controlled in a variety of ways.  The
+file /etc/ssh/sshd_config contains a number of setups.  It
+was suggested to set KeepAlive (possibly TCPKeepAlive) to
+avoid the firewall dropping an inactive connection.  Also
+ClientAliveInterval which causes the daemon to periodically
+poll the client to see if it is still alive.
+
 
 
 == Perl
