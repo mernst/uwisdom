@@ -528,6 +528,8 @@ Samba accounts at pag.lcs.mit.edu:
   See ~ts/bin/samba/add-windows-user, which calls
     /usr/bin/smbpasswd -a -n -d NEWUSERNAME
 * use smbpasswd to change password for the user (as root)
+// nobreak
+
 The user should now have a valid entry at pag.lcs.mit.edu:/etc/samba/smbpasswd :
 ----
   sudo grep ${username} /etc/samba/smbpasswd
@@ -557,13 +559,17 @@ Abra Smith (abratravel@yahoo.com) of Council Travel, who has worked similar
 or greater miracles.
 
 Boston-area housing/renting/rental apartments/condos:
-reuse-housing@mit.edu
-boston.craigslist.org/roo/
-boston.craigslist.org/hsw/
-web.mit.edu/housing/och/
-reuse@csail.mit.edu
+// nobreak
+
+ * reuse-housing@mit.edu
+ * boston.craigslist.org/roo/
+ * boston.craigslist.org/hsw/
+ * web.mit.edu/housing/och/
+ * reuse@csail.mit.edu
 
 Can recycle styrofoam packing peanuts ("loose fill") at
+// nobreak
+
  * Mailboxes Etc, 831 Beacon St, Newton Center
  * UPS Store, Davis Square
 

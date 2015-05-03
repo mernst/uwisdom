@@ -9,6 +9,60 @@ toc::[]
 // In the brave new Google world of effective searching, it may be somewhat
 // less important than it was in the past.
 
+== Email
+
+Anyone may subscribe to the Computing Research Association's jobs@cra.org
+list, but only organizations that advertise in Computing Research News may
+post jobs announcements.
+To Subscribe: Send the following mail message to listproc@cra.org:
+                      subscribe jobs firstname lastname
+
+Any username characters after "+" are ignored by mail delivery systems.
+This makes it easy for me to add "+" suffices to simplify sorting of my
+mail.
+
+To obfuscate mailto email address links on web pages with Javascript to
+avoid spam:  http://www.u.arizona.edu/~trw/spam/spam.htm
+But this is probably hopeless:  your email address is probably out there
+already, and you're probably using spam filtering already.
+
+In Horde mail reader, I must create folders with names like
+"INBOX.Daily", not "Daily" (which gives me "Permission denied" errors).
+
+To join a Google Groups mailing list with a Google Apps account (e.g.,
+@cs.washington.edu), you have to create your own URL:
+  http://groups.google.com/group/_groupname_/boxsubscribe?email=_email_
+
+In Google Groups, to permit "reply all" to go to the sender:
+  Settings >> Email options >> Post replies: Users decide
+
+
+== Source code repository hosting
+
+For GitHub, to link directly to files in the repository, use rawgit.com.
+Examples:
+  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
+This does not seem to work for wiki files.
+
+For Google Code, it is possible to link straight to HTML files in the
+repository.  Examples:
+  http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
+  http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
+However, it's not convenient to link to files that are not in the
+repository (such as a release or other generated files),
+so it's generally better to put a project's webpages elsewhere.
+
+Google code wiki syntax (a variant of MoinMoin syntax):
+ * Don't break a bullet point across lines.
+ * Don't break an external link (in square brackets) across lines.
+ * For a table of contents, use
+```
+  Contents:
+  <wiki:toc max_depth="1" />
+```
+
+
+== Uncategorized
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
 
@@ -29,12 +83,6 @@ the graph as labeled nodes and edges in an X window.  The user can then
 edit the graph.  Once happy with the graph layout, xgrab can write a
 postscript file or a text file describing the resulting graph.
 
-Anyone may subscribe to the Computing Research Association's jobs@cra.org
-list, but only organizations that advertise in Computing Research News may
-post jobs announcements.
-To Subscribe: Send the following mail message to listproc@cra.org:
-                      subscribe jobs firstname lastname
-
 ACM copyright form is available at
 http://www.acm.org/pubs/copyright_form.html.
 
@@ -50,26 +98,17 @@ support service that provides, among other things, CVS repositories and
 access to compile farms.
 Savannah is the GNU/FSF alternative.
 
-Any username characters after "+" are ignored by mail delivery systems.
-This makes it easy for me to add "+" suffices to simplify sorting of my
-mail.
-
 Register domain names:  joker.com is cheap; also dotearth.com.
 
 BSD calendar program:
-# old: ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
-# old: ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm
+// old: ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
+// old: ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm
 ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
-Or, use "qalendar", but it doesn't permit comment lines
+Or, use "qalendar", but it doesn't permit comment lines.
 Install:
 ```
   rpm -Uvh -vv ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
 ```
-
-To obfuscate mailto email address links on web pages with Javascript to
-avoid spam:  http://www.u.arizona.edu/~trw/spam/spam.htm
-But this is probably hopeless:  your email address is probably out there
-already, and you're probably using spam filtering already.
 
 To donate used inkjet printer cartriges:  www.donateinkjets.com
 
@@ -77,9 +116,6 @@ The Elements of Style by Strunk and White is online (do a search for it).
 
 NSF GPG (Grant Proposal Guide):
 http://www.nsf.gov/pubs/2004/nsf042/nsf04_2.pdf
-
-In Horde mail reader, I must create folders with names like
-"INBOX.Daily", not "Daily" (which gives me "Permission denied" errors).
 
 wget is a command-line utility to fetch web pages and save them to the
 local disk.  http://www.gnu.org/software/wget/wget.html
@@ -115,6 +151,8 @@ VistaPrint.com: cheap business cards
 
 Shimano road bicycle components, as explained by
 http://www.epinions.com/content_957259908:
+//nobreak
+
  * Sora
    Like the Deore mountain bike parts, the Sora is entry-level components.
  * Tiagra
@@ -153,30 +191,8 @@ Web polls:
   surveymonkey.com
 ```
 
-To run NetMeeting on Windows XP,
-  Start - > Run -> conf.exe
-
-For GitHub, to link directly to files in the repository, use rawgit.com.
-Examples:
-  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
-This does not seem to work for wiki files.
-
-For Google Code, it is possible to link straight to HTML files in the
-repository.  Examples:
-  http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
-  http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
-However, it's not convenient to link to files that are not in the
-repository (such as a release or other generated files),
-so it's generally better to put a project's webpages elsewhere.
-
-Google code wiki syntax (a variant of MoinMoin syntax):
- * Don't break a bullet point across lines.
- * Don't break an external link (in square brackets) across lines.
- * For a table of contents, use
-```
-  Contents:
-  <wiki:toc max_depth="1" />
-```
+// To run NetMeeting on Windows XP,
+//   Start -> Run -> conf.exe
 
 The plume-bib README instructions are available at
 ```
@@ -184,6 +200,8 @@ The plume-bib README instructions are available at
 ```
 
 For PC remote control:
+//nobreak
+
  * logmein.com, 
  * If they are running Windows 7, its extremely easy to walk them through
     - Hitting the start button,
@@ -200,32 +218,31 @@ For a Google spreadsheets survey, be sure to ask for repsondents' name,
 because the user ID is not recorded by default.
 
 For scheduling a meeting:
+//nobreak
+
  * Doodle contains iCalendar integration (for $40/year).  WhenIsGood does not.
  * Doodle supports "if-need-be" responses.  WhenIsGood does not.
  * WhenIsGood's interface is far nicer.  With Doodle, you need to create
    many 30-minute proposals even to schedule a 1-hour meeting.  Each one
    takes multiple clicks to create and to answer.  Doodle just lets you
    quickly paint over the relevant times.
+//nobreak
+
 (Tungle.me combined the best of both, but it is no longer supported as of
 December 3, 2012.)
 Other possibilities, none of which seems great
-      Framadate: Not bad, but no calendar integration
-      Dudle:  by default gives just by-hour; slightly clunky interface.  No calendar integration
-      schedule once: has Google Calendar integration; $5+/month; not really for group meetings?
-      meetomatic.com: advanced is $20/year; without that, only per-day, not per-hour, control over times
-      gathergrid.com: only by hour; no calendar integration
-      whenshouldwe.com: terribly basic; not acceptable
-      selectthedate.com: selects a date, not among multiple times on one date
+/nobreak
 
-To join a Google Groups mailing list with a Google Apps account (e.g.,
-@cs.washington.edu), you have to create your own URL:
-  http://groups.google.com/group/_groupname_/boxsubscribe?email=_email_
+ * Framadate: Not bad, but no calendar integration
+ * Dudle:  by default gives just by-hour; slightly clunky interface.  No calendar integration
+ * schedule once: has Google Calendar integration; $5+/month; not really for group meetings?
+ * meetomatic.com: advanced is $20/year; without that, only per-day, not per-hour, control over times
+ * gathergrid.com: only by hour; no calendar integration
+ * whenshouldwe.com: terribly basic; not acceptable
+ * selectthedate.com: selects a date, not among multiple times on one date
 
 Briticizer:  http://us2uk.eu/
 also: http://www.translatebritish.com/reverse.php
-
-In Google Groups, to permit "reply all" to go to the sender:
-  Settings >> Email options >> Post replies: Users decide
 
 If someone asks a question whose answer can be easily Googled, you can supply them a link from the "Let me Google that for you" website, such as
 http://lmgtfy.com/?q=UI+Chicago
@@ -234,6 +251,8 @@ To save a URL to Pocket, email one link at a time, in the body of mail to
 add@getpocket.com.
 
 Amazon Web Services (AWS) tips, from Darioush Jalali:
+//nobreak
+
  * Billing is not logged by default. This can be confusing if you are
    trying to figure out how much money you are spending initially.
  * If you have jobs that can be restarted easily, spot instances are
