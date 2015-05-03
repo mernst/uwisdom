@@ -5,7 +5,8 @@ This file contains instructions about using CVS that I have sometimes sent
 to people, to introduce them to the concept of version control and the CVS
 tool.  There are probably good tutorials that I could now point people at.
 
-```
+
+== Checking out a CVS project (version 1)
 
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit), select a directory where you want a "code"
@@ -14,7 +15,7 @@ subdirectory containing all the files to appear, and do the following
   cvs -d ~mernst/class/573/project/.CVS-medics checkout code
 
 
-== Checking out a CVS project
+== Checking out a CVS project (version 1)
 
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit):
