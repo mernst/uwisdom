@@ -92,7 +92,7 @@ system, etc.), as are additional tutorials.
 
 You may wish to create a ~/.cvsrc file containing the following two lines:
 [source]
-..cvsrc
+cvsrc
 ----
 diff -u
 update -d -P
