@@ -1,14 +1,9 @@
-[[summary-wisdom-about-emacs]]
-summary Wisdom about Emacs
---------------------------
+= Wisdom about Emacs
 
 Contents:
 
-'''''
 
-[[general-tips]]
-General tips
-------------
+== General tips
 
 Emacs's tags facility allows you to easily find a definition (of a
 function, variable, class, etc.) or search a collection of related
@@ -17,7 +12,7 @@ files. To create a tags table, run `etags _files_`; for instance,
 To search all files in the tags table, type M-x tags-search RET To
 select a different tags table, type M-x visit-tags-table RET
 
-You should always run gdb within Emacs; use M-x gdb RET One advantage is
+You should always run gdb within Emacs rather than from the command line; use `M-x gdb RET`.  One advantage is
 that when you move up and down the stack, the file with the relevant
 code is read into a buffer and displayed. (Getting jdb to work within
 Emacs is a tiny bit tricky; I find that the JDE package with a few
@@ -36,14 +31,11 @@ happen to use backslash as their escape character. So "a\|b" is a
 four-character string with contents a  | b and | is the regexp routine's
 alternative specifier.
 
-'''''
 
-[[less-polished-emacs-wisdom]]
-Less-polished Emacs wisdom
---------------------------
+== Less-polished Emacs wisdom
 
-To not load .emacs file, do "emacs -q". To debug it, "emacs
---debug-init".
+To not load .emacs file, do `emacs -q`.
+To debug it, `emacs --debug-init`.
 
 (symbol-function 'foo) to determine whether an emacs function is coded
 in C or elisp; C-h f now also gives that information.
@@ -54,10 +46,10 @@ just-one-space                ESC SPC
 -----------------------------------------------------------------------
 
 To get local variables in emacs, put one of the following at the end of
-the file, preferrably following a page-feed (^L) character: Local
-Variables:
+the file, preferrably following a page-feed (^L) character: 
 
 ----------------------------------------------------------------------------------------------------
+Local Variables:
 page-delimiter: "^\f\n===========================================================================\n"
 End:
 ----------------------------------------------------------------------------------------------------
@@ -303,12 +295,15 @@ To change the font while emacs is running,
   M-x set-frame-font RET 9x15 RET
 ---------------------------------
 
-To list available fonts: * use program xlsfonts. Any font with `m' or`c'
-in the SPACING field of the long name is a fixed-width font. Here's how
-to use the
-`xlsfonts'     program to list all the fixed-width fonts available on your system: \`\`\`      xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"      xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'      xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*' \`\`\`   * see variable x-fixed-font-alist   * run`(x-list-fonts
-"*")`To see what a particular font looks like, use the`xfd' command, eg
-
+To list available fonts:
+ * use program xlsfonts. Any font with "m" or "c" in the SPACING field of the long name is a fixed-width font. Here's how to use the
+   `xlsfonts'     program to list all the fixed-width fonts available on your system:
+----
+  xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"      xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'      xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
+----
+   * see variable x-fixed-font-alist
+   * run `(x-list-fonts "*")`
+To see what a particular font looks like, use the`xfd' command, eg
 --------------
   xfd -fn 6x13
 --------------
