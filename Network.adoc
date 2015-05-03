@@ -37,43 +37,6 @@ In Google Groups, to permit "reply all" to go to the sender:
   Settings >> Email options >> Post replies: Users decide
 
 
-== Source code repository hosting
-
-For Google Code, it is possible to link straight to HTML files in the
-repository.  Examples:
-  http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
-  http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
-However, it's not convenient to link to files that are not in the
-repository (such as a release or other generated files),
-so it's generally better to put a project's webpages elsewhere.
-
-Google code wiki syntax (a variant of MoinMoin syntax):
- * Don't break a bullet point across lines.
- * Don't break an external link (in square brackets) across lines.
- * For a table of contents, use
-```
-  Contents:
-  <wiki:toc max_depth="1" />
-```
-
-For GitHub, to link directly to files in the repository, use rawgit.com.
-Examples:
-  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
-This does not seem to work for wiki files.
-
-In GitHub, just
-----
-  :toc:
-----
-doesn't produce a table of contents.  Instead, you need
-----
-  :toc:
-  :toc-placement: manual
-
-  toc::[]
-----
-
-
 == Uncategorized
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.

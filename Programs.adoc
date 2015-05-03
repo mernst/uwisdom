@@ -319,6 +319,8 @@ exec ssh-agent $HOME/.xinitrc-real
 ----
 
 To set up public keys for ssh-agent and similar programs:
+//nobreak
+
  1. On client machine (from which I will login), do `ssh-keygen`
  2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
 ssh2 needs file ~/.ssh/authorized_keys2; to make it, do
@@ -335,7 +337,7 @@ ssh: secure remote login.  Need to copy contents of identify.pub on client
 machine into `authorized_keys` on server machine.
 
 ssh2 supports sftp, an ftp client.  It does not seem to be free for
-research use.  OpenSSH doesn not seem to have sftp.
+research use.  OpenSSH does not seem to have sftp.
 
 SSH timeouts seem to be controlled in a variety of ways.  The
 file /etc/ssh/sshd_config contains a number of setups.  It
@@ -349,17 +351,24 @@ poll the client to see if it is still alive.
 == Perl
 
 Perl5:
+//nobreak
+
  * arguments are in `@_`, that is `$_[0]`, `$_[1]`, etc.
  * "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
  * Forward jumps screw up containing for loops, it seems.
  * foreach implicitly localizes the argument inside the for body.
  * `wantarray` (no parens) returns true if current sub called in list context
-Regexps:
+
+Perl5 regexps:
+//nobreak
+
  * To match end of line without newline, `\Z(?!\n)`.
  * Add `?` after a repetition operator to render it stingy instead of greedy: `foo(.*?)bar`
  * To quote regexp metacharacters, use `\Q...\E` or `quotemeta()`.
  * `(?:REGEXP)` is like `(REGEXP)` but doesn't make backreferences.
-Data structures:
+//nobreak
+
+Perl5 data structures:
 ```
   @foo[$bar] => my @foo; returns one-element slice of foo = ($foo[$bar])
   @{$foo[$bar]} => my @foo = list of references to arrays; @{...} converts
@@ -418,7 +427,7 @@ or, alternately:
   eval 'exec perl -S -w -n $0 "$@"'
   if 0;
 ```
-Using #!/usr/bin/perl is faster but requires knowing perl's path.
+Using `#!/usr/bin/perl` is faster but requires knowing perl's path.
 
 To install/build a perl module, do the following as root:
 ```
@@ -438,6 +447,8 @@ $WARNING = 1;
 ```
 
 In perl:
+//nobreak
+
  * To read a whole file:  $/ = undef.
  * To read by paragraphs:  $/ = "\n\n".
  * To read by paragraphs, eliminating empty paragraphs: $/ = "".
@@ -487,16 +498,24 @@ use lib "$FindBin::Bin";
 
 To convert a text file to PostScript or PDF, here are possibilities.
 Reasonable choices:
+//nobreak
+
  * paps: is packaged for Unix distributions (Ubuntu, Red Hat), so perhaps
    it is widely used, even though the last release was in 2007
  * cedilla: works fine, many cammand-line arguments.  A bit of a pain to
    install because you have to install clisp first.
+//nobreak
+
 Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
+//nobreak
+
  * enscript: doesn't handle 8-bit by default
  * a2ps: doesn't handle 8-bit by default
  * mpage: doesn't handle 8-bit by default
  * u2ps: Internet chatter says it is not as good as paps?
  * h2ps and bg5ps: intended specifically for Asian fonts
+//nobreak
+
 Enscript is a standby, since it has so many options and is widely
 installed, but it doesn't handle UTF-8.
 
@@ -546,8 +565,12 @@ the "L" or "R" or "U" modifiers.  For instance:
 ```
 
 Two sets of tools for transforming PDF files are pdftk and PDFjam.
+//nobreak
+
  * pdftk is a single program with many command-line options.  Installed on Ubuntu.
  * PDFjam is a single program, along with 10 wrappers, each with a single purpose (e.g., pdf90 to rotate by 90 degrees).  Installed on Red Hat and Fedora.
+//nobreak
+
 Separate/split a file into individual pages:
 ```
   pdftk infile.pdf burst
@@ -644,7 +667,7 @@ up; in case of that trouble, deselect this option.
 
 If you are having trouble printing from Acrobat Reader (such as mising
 characters on some pages):
- * Printer Properties >> Advanced >> Postscript Options >> PS Output : Optimize for Portability
+Printer Properties >> Advanced >> Postscript Options >> PS Output : Optimize for Portability
 
 If ghostview can't view a document correctly, then perhaps the PostScript
 file starts with something like
@@ -679,6 +702,8 @@ GhostScript (GS) 6.0 includes a ps2ps script that can munge printed output from
 Excel well enough to turn it into an eps file with ps2epsi and
 put it in a LaTeX document.
 Alternately, Mike Perkowitz says:
+//nobreak
+
  1. print chart to a postscript file in excel.
  2. edit the postscript:
     - the file is full of little blocks that are, i assume, the PC representation
@@ -694,6 +719,8 @@ Alternately, Mike Perkowitz says:
       or just remove the *whole* line that contains the word "rotate"
  4. convert to EPS. on june: "ps2epsi file-r.ps file-r.eps"
  5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
+//nobreak
+
 Note that the ghostscript viewer on the PCs can also convert from PS to EPS,
 but i had trouble getting it to rotate and save that rotation. and if you do
 psfix after the EPS conversion, i think your bounding box gets made full page
@@ -721,10 +748,10 @@ PrimoPDF.com is a free PDF converter for most Windows applications.
 sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
 
 To turn off screensavers in Gnome:
- # Click on the little foot in the lower left
+ 1. Click on the little foot in the lower left
     Programs->Settings->Desktop->Screensaver
- # Select 'No Screensaver' in the list in the upper left
- # Click 'OK'
+ 2. Select 'No Screensaver' in the list in the upper left
+ 3. Click 'OK'
 
 Do 
 ```
@@ -815,6 +842,8 @@ main one, F3 for the third one, etc.
 /usr/lib/X11/ is directory with rgb.txt, which is names of X11 colors.
 
 Sawfish window manager themes (list of problems with them)
+//nobreak
+
  * brushed-metal
     slightly goofly looking window title bar
  * CoolClean
@@ -828,12 +857,12 @@ Sawfish window manager themes (list of problems with them)
 "xlock -mode blank" locks the screen without running a compute-intensive
 screensaver.
 
-gnomecc:  adjust properties of window manager
-Especially:
- * Sawfish window manager >> Matched Windows
- * Sawfish window manager >> Shortcuts
- * Sawfish window manager >> Meta >> Advanced
-(But I think I now use metacity under Gnome.)
+// gnomecc:  adjust properties of window manager
+// Especially:
+//  * Sawfish window manager >> Matched Windows
+//  * Sawfish window manager >> Shortcuts
+//  * Sawfish window manager >> Meta >> Advanced
+// (But I think I now use metacity under Gnome.)
 
 Debian Linux screen resolution:
 Applications >> Desktop Preferences >> Screen Resolution

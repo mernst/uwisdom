@@ -934,30 +934,6 @@ The git equivalent to `hg incoming` is:
   git fetch && git log master..FETCH_HEAD
 ```
 
-Here is how to create a GitHub pull request for a single git commit, if I
-have already committed more than 1 commit to my local repository.  I do
-that because it is more convenient during development to put all commits in
-a single working copy; then I make a sequence of commits, all in a single
-branch.  But I seem to need one commit per branch to submit a proper GitHub pull
-request.
-```
-  ## <mybranchname> is by convention "upstream"
-  ## <git repository> is, for example, git@github.com:mernst/asciidoctor.org.git
-  git remote add <mybranchname> <git repository>
-  # "git remote update" would also work
-  git fetch <mybranchname>
-  ## If I did my work on a named branch:
-  git checkout -b <mybranchname> <mybranchname>/master
-  ## else if I did my work in master (of my repository) and the commit I want is right after those in the central repo:
-  git checkout -B <mybranchname> <mycommithash>
-  ## else if I did my work in master (of my repository) and the commit I want is not right after those in the central repo:
-  git checkout -B <mybranchname> <commithash-of-last-commit-on-master>
-  git cherry-pick <mycommithash>
-  ## endif
-  git push origin <mybranchname>
-}}
-Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
-
 In Git, to list branches:  `git branch`.
 In Git, to delete a local branch:
 ```
@@ -1024,11 +1000,77 @@ fails with
 then add a new ssh key.  From your personal page in Launchpad, follow
 "Change details" and then "SSH Keys".
 
+
+== GitHub
+
+For GitHub, to link directly to files in the repository, use rawgit.com.
+Examples:
+  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
+This does not seem to work for wiki files.
+
+In GitHub, just
+----
+  :toc:
+----
+doesn't produce a table of contents.  Instead, you need
+----
+  :toc:
+  :toc-placement: manual
+
+  toc::[]
+----
+
 The standard way to collaborate on Github-based projects is for you to fork
 the project on Github, and then commit your changes to your clone, and then
 on the Github page describing your commit there is a button whereby you can
 submit a "pull request" which lets the owner know that you want a patch to
 be merged.
+
+GitHub doesn't support pull requests for the wiki repository, only the main repository, according to http://stackoverflow.com/questions/10642928/ .
+
+Here is how to create a GitHub pull request for a single git commit, if I
+have already committed more than 1 commit to my local repository.  I do
+that because it is more convenient during development to put all commits in
+a single working copy; then I make a sequence of commits, all in a single
+branch.  But I seem to need one commit per branch to submit a proper GitHub pull
+request.
+```
+  ## <mybranchname> is by convention "upstream"
+  ## <git repository> is, for example, git@github.com:mernst/asciidoctor.org.git
+  git remote add <mybranchname> <git repository>
+  # "git remote update" would also work
+  git fetch <mybranchname>
+  ## If I did my work on a named branch:
+  git checkout -b <mybranchname> <mybranchname>/master
+  ## else if I did my work in master (of my repository) and the commit I want is right after those in the central repo:
+  git checkout -B <mybranchname> <mycommithash>
+  ## else if I did my work in master (of my repository) and the commit I want is not right after those in the central repo:
+  git checkout -B <mybranchname> <commithash-of-last-commit-on-master>
+  git cherry-pick <mycommithash>
+  ## endif
+  git push origin <mybranchname>
+}}
+Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
+
+
+// == Google Code
+
+// For Google Code, it is possible to link straight to HTML files in the
+// repository.  Examples:
+//   http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
+//   http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
+// However, it's not convenient to link to files that are not in the
+// repository (such as a release or other generated files),
+// so it's generally better to put a project's webpages elsewhere.
+
+// Google code wiki syntax (a variant of MoinMoin syntax):
+//  * Don't break a bullet point across lines.
+//  * Don't break an external link (in square brackets) across lines.
+//  * For a table of contents, use
+// ```
+//   Contents:
+//   <wiki:toc max_depth="1" />
+// ```
 
 
 == Bitbucket
