@@ -1,5 +1,8 @@
 = pstops HOWTO
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 ```

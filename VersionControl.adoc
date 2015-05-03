@@ -1,5 +1,8 @@
 = Wisdom about version control systems such as CVS, Git, Mercurial (Hg), RCS, and Subversion (SVN)
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 
@@ -830,7 +833,7 @@ A way to review patches against a Mercurial repository (such as from ReviewBoard
   hg addremove
   hg commit -m "${DIFFNAME} as of `date +%Y-%m-%d`"
   # make changes, and send back the results of "hg diff"
-```  
+```
 Alternate approach:
 ```
   cp -pR checker-framework checker-framework-${DIFFNAME}-base
@@ -840,7 +843,7 @@ Alternate approach:
   cp -pR checker-framework checker-framework-${DIFFNAME}-edited
   # make changes
   # now compare the *-base and *-edited versions
-```  
+```
 If you get a bundle:
 ```
   cd ~/research/types
@@ -889,7 +892,9 @@ To undo the change:
 ```
 
 In git, to unadd an accidentally-added file, do
-```git reset FILE```
+```
+  git reset FILE
+```
 
 In git, after resolving the conflicts in the appropriate files:
  # `git add` all of the conflicted files

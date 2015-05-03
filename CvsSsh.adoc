@@ -1,5 +1,8 @@
 = How to use CVS with ssh instead of rsh
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 Note that all of the below is not necssary if you use Kerberos

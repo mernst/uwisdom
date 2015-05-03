@@ -1,5 +1,8 @@
 = Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
 
@@ -350,13 +353,13 @@ permits line breaks at spaces within the argument (but not within words),
 respects current series (such as boldface), and works in both horizontal (text)
 and math mode.
 ```
-  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1```\else{\smaller\ttfamily #1}\fi}
+  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ```
 Here's a version that takes care of URLs, too:
 ```
   \def\codesize{\smaller}
   %HEVEA \def\codesize{\relax}
-  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1```\else{\codesize\ttfamily #1}\fi}
+  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1}}}\else{\codesize\ttfamily #1}\fi}
   \newcommand{\myurl}[1]{{\codesize\url{#1```
   %HEVEA \def\myurl{\url}
 ```
@@ -378,18 +381,18 @@ that it is worthwhile to get the typesetting right.)
 // in a LaTeX document.
 
 Here are definitions for identifiers in LaTeX math mode formulas:
-```
+----
   % \|name| or \mathid{name} denotes identifiers and slots in formulas
   \def\|#1|{\mathid{#1}}
   \newcommand{\mathid}[1]{\ensuremath{\mathit{#1```
   % \<name> or \codeid{name} denotes computer code identifiers
   \def\<#1>{\codeid{#1}}
-  \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}
-```
+  \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+----
 This alternate definition of `\codeid` does not work inside an array environments (see http://tex.stackexchange.com/questions/27592/ ):
-```
-  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}
-```
+----
+  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+----
 
 To permit hyphenation in tt font globally throughout a document, see
 http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt
@@ -422,7 +425,7 @@ For multiple bibliographies (say, one per chapter), use chapterbib.sty.
 
 How can I permit line breaks in a citation?
 I'm not sure if this is good style or not, but this is how to do it:
-```
+----
  % undo LaTeX's decision to make citation labels be \hbox'd.
  \makeatletter
  \def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
@@ -430,9 +433,9 @@ I'm not sure if this is good style or not, but this is how to do it:
      {\@citea\def\@citea{,\penalty\@m\ }\@ifundefined
         {b@\@citeb}{{\bf ?}\@warning
         {Citation `\@citeb' on page \thepage \space undefined}}%
- {\csname b@\@citeb\endcsname```{#1}}
+ {\csname b@\@citeb\endcsname}}}{#1}}
  \makeatother
-```
+----
 
 BibTeX journal abbreviations are in /usr/local/lib/tex/bib/abbreviations,
 which is pointed to by ~/tex/abbreviations.
@@ -951,7 +954,7 @@ For alphabetic enumeration, do:
 \newenvironment{alphaenum}%
 {\begin{list}%
 {\alph{alphaenum@count})}%
-{\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph```%
+{\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph}}}%
 {\end{list}}
 ```
 
@@ -1256,7 +1259,7 @@ To disable the warnings globally, say "\hbadness=10000", this
 disables overfull hbox warnings too.
 
 In LaTeX, 
-to typeset text in a superscript or subscript, use A_{\mathit{pred```
+to typeset text in a superscript or subscript, use A_{\mathit{pred}}
 
 To produce a footnote without a footnote mark (as for a copyright notice in
 the lower left-hand corner of a conference paper) in LaTeX, do this:
@@ -1377,7 +1380,7 @@ In LaTeX-Beamer:
 In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no
 larger in display mode than in any other math mode), do something like
 ```
-  \newcommand{\bigforall}[2]```\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2```
+  \newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}
 ```
 
 For a paragraph in a smaller font, on the smaller font's baseline
@@ -1596,7 +1599,7 @@ rather than
 because the latter would leave a space before the period when todo comments
 are disabled.
 (An alternate definition would be
-`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]````
+`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`
 but that executes \leavevmode and so it cannot span paragraphs.)
 
 Absolute value in LaTeX:
@@ -1649,9 +1652,11 @@ There is no `\subsubsubsection` command, but you can make `\paragraph` be number
   \setcounter{secnumdepth}{4}
 ```
 
-If a paragraph has only a word or two on its last line, try adding ```
+If a paragraph has only a word or two on its last line, try adding
+----
 \looseness=-1
-``` to the end of it. If possible TeX will change line breaks to
+----
+to the end of it. If possible TeX will change line breaks to
 reduce/shorten the length of the paragraph by a line. This won't always
 work because there is a limit to how close TeX will move words. The longer
 the paragraph, the more likely this trick is successful.
@@ -1723,7 +1728,7 @@ Ways to get a circled number in LaTeX with better formatting than \textcircled:
  \usepackage{pifont}
  \newcommand{\numcircled}[1]{\ding{\numexpr191+#1\relax}}
  % Without using any extra packages
- \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1```}
+ \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
 ```
 
 

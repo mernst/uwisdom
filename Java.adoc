@@ -1,5 +1,8 @@
 = Wisdom about Java
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 == JIT
@@ -36,9 +39,11 @@ Start the TestRunner under the debugger and configure the debugger so that
 it catches the junit.framework.AssertionFailedError.  Notice that this will
 only launch the debugger when an expected failure occurs.
 For example:
+----
   java -cp whatever:/path/to/junit.jar junit.textui.TestRunner MyTestClass
   catch junit.framework.AssertionFailedError
   run
+----
 
 Here are Emacs commands for replacing JUnit assertions with Hamcrest
 versions that produce more readable output.  Even though the Hamcrest code
@@ -65,8 +70,8 @@ isn't always easier to read, this can be worthwhile.
 
 == Debugging
 
-Graphical Java debugger:  jswat (http://www.bluemarsh.com/java/jswat/),
-Run:
+Graphical Java debugger:  jswat (http://www.bluemarsh.com/java/jswat/).
+To run it:
 ```
   java com.bluemarsh.jswat.Main
 ```
@@ -113,6 +118,7 @@ that works with CPU time rather than wallclock time.
 == Generics
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
+
  * The formal type parameter is called a "type parameter".
    The parameter is
    also, equivalently, called a "type variable".  But "type parameter"
@@ -129,28 +135,28 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
    classes.  "A generic class declaration defines a set of parameterized
    types, one for each possible invocation of the type parameter section."
 
-Terminology for generics/parametrc polymorphism in Java, from _Effective
-Java_, second editon, page 115.  It differs from the terminology used in
-the JLS.
-|| Parameterized type      || ```   List<String>                ``` ||
-|| Actual type parameter   || ```   String                      ``` ||
-|| Generic type            || ```   List<E>                     ``` ||
-|| Formal type parameter   || ```   E                           ``` ||
-|| Unbounded wildcard type || ```   List<?>                     ``` ||
-|| Raw type                || ```   List                        ``` ||
-|| Bounded type parameter  || ```   <E extends Number>          ``` ||
-|| Recursive type bound    || ```   <T extends Comparable<T>>   ``` ||
-|| Bounded wildcard type   || ```   List<? extends Number>      ``` ||
-|| Generic method static   || ```   <E> List<E> asList(E[] a)   ``` ||
-|| Type token              || ```   String.class                ``` ||
-The first part ("```List```") of a parameterized type name is called the
+.Terminology for generics/parametrc polymorphism in Java, from _Effective Java_, second editon, page 115.
+|====
+| Parameterized type      | `List<String>` |
+| Actual type parameter   | `String` |
+| Generic type            | `List<E>` |
+| Formal type parameter   | `E` |
+| Unbounded wildcard type | `List<?>` |
+| Raw type                | `List` |
+| Bounded type parameter  | `<E extends Number>` |
+| Recursive type bound    | `<T extends Comparable<T>>` |
+| Bounded wildcard type   | `List<? extends Number>` |
+| Generic method static   | `<E> List<E> asList(E[] a)` |
+| Type token              | `String.class` |
+|====
+The first part ("`List`") of a parameterized type name is called the
 class name.
-The first part ("```List```") of a generic type name is called:  (??? no
+The first part ("`List`") of a generic type name is called:  (??? no
 good name, Alex Buckley suggested that it also be "class name", but that
 isn't quite right).
 They don't have a name for a use of type parameter/variable, to distinguish
 from the declaration.
-
+(The _Effective Java_ terminology differs from that used in the JLS.)
 
 
 == javac
@@ -167,10 +173,14 @@ that JVM using the -J argument.  In particular, you can pass -J-Xmx1024M to
 give the JVM a gig of memory for the heap.
 
 The command
+----
   javac -jar myjar.jar
+----
 ignores the CLASSPATH environment variable, so you may need to pass it
 explicitly: 
+----
   javac -jar myjar.jar -cp ${CLASSPATH}
+----
 
 To limit/increase the number of errors that javac will print use, -Xmaxerrs N
 
@@ -197,14 +207,14 @@ Approach #1 is to run
   javac -XDignore.symbol.file ...
 ```
 flag which will compile your program against Oracle's/Sun's internal rt.jar
-rather than the public-facing symbol file ct.sym.
-.
+rather than the public-facing symbol file ct.sym. +
+//
 Approach #2a is to run
 ```
   javac -XDenableSunApiLintControl -Xlint:-sunapi ...
 ```
-This still issues a "note" but not a warning.
-...
+This still issues a "note" but not a warning. +
+//
 Approach #2b is to suppress the warning and the note by writing
 ```
   @SuppressWarnings("sunapi")
@@ -219,15 +229,21 @@ in the source code, but this still requires you to run javac as follows:
 == javadoc
 
 To find Javadoc comments that use "<" or ">" but shouldn't:
-```search -i -n '^ *\*.*(<[^/]|>)'```
+----
+search -i -n '^ *\*.*(<[^/]|>)'
+----
 and then, in the result:
-```(query-replace-regexp "</?\\(li\\|p\\|b\\|tt\\|pre\\|i\\|a\\|a [^<>]*\\|blockquote\\|ul\\|code\\|em\\|strong\\|br\\)>" "" nil (if (and transient-mark-mode mark-active) (region-beginning)) (if (and transient-mark-mode mark-active) (region-end)))```
+----
+(query-replace-regexp "</?\\(li\\|p\\|b\\|tt\\|pre\\|i\\|a\\|a [^<>]*\\|blockquote\\|ul\\|code\\|em\\|strong\\|br\\)>" "" nil (if (and transient-mark-mode mark-active) (region-beginning)) (if (and transient-mark-mode mark-active) (region-end)))
+----
 and finally look for instances of `[<>]`.
 
 To quote/escape the @ symbol in Javadoc, use {@literal @} or &#064;
 
 To avoid doclint messages about missing Javadoc tags, such as "no @param for someArg":
-```-Xdoclint:all,-missing```
+----
+-Xdoclint:all,-missing
+----
 This only works with Javadoc 8 and later.
 
 
@@ -242,14 +258,15 @@ Or, at http://java.sun.com/javase/downloads/, click on "Previous Releases".
 To get a copy of the JDK 7 source:
   hg clone http://hg.openjdk.java.net/jdk7/jdk7/jdk
 
-Java 1.4 ("J2SE 1.4") was released in February 2002.
-Java 5 ("J2SE 5.0") was released in September 2004.
-Java 6 ("J2SE 6") was released in December 2006 (public beta by February 2006).
+Java 1.4 ("J2SE 1.4") was released in February 2002. +
+Java 5 ("J2SE 5.0") was released in September 2004. +
+Java 6 ("J2SE 6") was released in December 2006 (public beta by February 2006). +
 Java 7 ("J2SE 7") release date is September 2011.  See:
   http://openjdk.java.net/projects/jdk7/milestones/
   http://openjdk.java.net/projects/jdk7/calendar/
 
 Major version number for the Java class file format (JVM version number):
+----
   J2SE 9.0 = 53 (0x35 hex)    [goal is to release around March 2016?]
   J2SE 8.0 = 52 (0x34 hex)    [released March 2014]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
@@ -259,6 +276,7 @@ Major version number for the Java class file format (JVM version number):
   JDK 1.3 = 47 (0x2F hex)
   JDK 1.2 = 46 (0x2E hex)
   JDK 1.1 = 45 (0x2D hex)
+----
 
 To pretty-print or indent a Java program, do "java JavaPP filename.java".
 Or, use my shell script "javapp file1.java file2.java file3.java ...",
@@ -310,13 +328,14 @@ or, less frequently,
 Java issues (bug reports, RFEs, etc.):  http://bugs.sun.com/bugdatabase/
 
 LVTT - Local Variable Type Table
-  Errors can occur when instrumenting with BCEL.  One error is:
-     LVTT entry for 'list' in class file daikon/dcomp/Test does not match 
-     any LVT entry
-  The easiest solution I've found so far is to simply remove these tables.
-  They are only used by debuggers and when instrumenting, that is seldom
-  an issue.  utilMDE/BCELUtil has a method (remove_local_variable_type_tables)
-  that does this for a method.
+Errors can occur when instrumenting with BCEL.  One error is:
+----
+     LVTT entry for 'list' in class file daikon/dcomp/Test does not match any LVT entry
+----
+The easiest solution I've found so far is to simply remove these tables.
+They are only used by debuggers and when instrumenting, that is seldom
+an issue.  utilMDE/BCELUtil has a method (remove_local_variable_type_tables)
+that does this for a method.
 
 Java nested classes are of two varieties:  static and inner.
 
@@ -358,11 +377,13 @@ To iterate over the values:
 A disadvantage of the new-style for loop is that there is no name for the
 iterator, so there is no way to access important information such as the
 current index or other information that a specialized iterator may make
-available.
+available. +
+//
   A way to get around this is for a single object to implement both
 Iterator and Iterable.  The Iterable.iterator() method would just return
 "this", and within the foor loop body, the client can refer to the iterable
-to obtain the desired information.
+to obtain the desired information. +
+//
   The problem with this design is that it assumes that there is exactly one
 iterator for the object at a time.  Clients may expect that it is possible
 to have multiple iterators over a given Iterable, and thus may expect that
@@ -393,6 +414,7 @@ violates Sun's license agreement.  It is not clear why this is true.
 
 You can turn off the verifier on any VM with -Xverify:none.  Derek discovered
 this like so:
+----
 $ strings `which java` | grep -i verif
 -Xverify:all
 -verify
@@ -400,21 +422,26 @@ $ strings `which java` | grep -i verif
 -Xverify:remote
 -noverify
 -Xverify:none
+----
 
 Jardiff takes two jar files and outputs all the public API changes.
 http://www.osjava.org/jardiff/
 
 To read a file line by line from Java use:
+----
     BufferedReader br = new BufferedReader (new FileReader (filename));
     for (String line = br.readLine(); line != null; line = br.readLine())
         ;
+----
 Unfortunately, this will throw IOExceptions.  I don't know of any standard
-Java class that does not.  
- or
-To read lines with line numbers use:
+Java class that does not. +
+//
+Or, to read lines with line numbers use:
+----
     LineNumberReader lr = new LineNumberReader (new FileReader (filename));
     for (String line = lr.readLine(); line != null; line = lr.readLine())
         lr.getLineNumber();
+----
 Or, you can use utilMDE.EntryReader which supports the new-style for loop.
 
 Don't use Runtime.exec(); instead, use ProcessBuilder.start().
@@ -422,8 +449,8 @@ Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 "Could not reserve enough space for object heap" means that the
 "-Xmx" argument on the java command line was too large.
 
-JAVA_HOME is the JDK install directory, e.g., ...jdk1.7.0 .
-java.home is the JRE install directory, e.g., ...jre .
+`JAVA_HOME` is the JDK install directory, e.g., ...jdk1.7.0 .
+`java.home` is the JRE install directory, e.g., ...jre .
 (See http://javahowto.blogspot.com/2006/05/javahome-vs-javahome.html .)
 
 

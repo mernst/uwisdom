@@ -1,9 +1,12 @@
 = A beginner's guide to CVS
 :toc:
+:toc-placement: manual
 
 This file contains instructions about using CVS that I have sometimes sent
 to people, to introduce them to the concept of version control and the CVS
 tool.  There are probably good tutorials that I could now point people at.
+
+toc::[]
 
 
 == Checking out a CVS project (version 1)

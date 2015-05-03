@@ -1,5 +1,8 @@
 = Wisdom about Linux
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 == Debian

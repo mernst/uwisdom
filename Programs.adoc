@@ -1,9 +1,12 @@
 = Wisdom about programs
 :toc:
+:toc-placement: manual
+
 
 This file is a bit of a catch-all, for everything that does not have a
-dedicated page.
+dedicated wiki page.
 
+toc::[]
 
 
 == Kerberos
@@ -290,7 +293,11 @@ To run an entire X-session underneath ssh-agent:
   1. move .xinitrc file (other X client startup script) to .xinitrc-real.
   2. add the command "ssh-add" to the beginning of that script.
   3. create a new .xinitrc script containing the sole command:
-```exec ssh-agent $HOME/.xinitrc-real```
+[source]
+.~/.xinitrc
+----
+exec ssh-agent $HOME/.xinitrc-real
+----
 
 To set up public keys for ssh-agent and similar programs:
  # On client machine (from which I will login), do `ssh-keygen`
@@ -1420,7 +1427,7 @@ approaches.
                 <modified/>
             </fileset>
         </copy>
-```        
+```
 <p>
 There is also Ivy, but I can't tell from its documentation whether it
 provides this feature.  The key use case in the documentation seems to be

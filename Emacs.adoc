@@ -307,7 +307,7 @@ To see what a particular font looks like, use the `xfd' command, eg
   xfd -fn 6x13
 ```
 
-If starting Emacs gives an error like ```Font `Inconsolata 12' is not defined```,
+If starting Emacs gives an error like "Font `Inconsolata 12' is not defined",
 then do:
 ```
  emacs --font Monospace
@@ -390,9 +390,9 @@ Example:
 (But I don't need to use any special suffix.)
 
 To do incremental search (isearch) across multiple files or buffers:
- * In dired, ```M-s a C-s``` for isearch across marked files.
- * In dired, ```Q``` does query-replace-regexp on all marked files.
- * In buffer-menu (Buffer List buffer) ```M-s a C-s``` for isearch across marked buffers.
+ * In dired, `M-s a C-s` for isearch across marked files.
+ * In dired, `Q` does query-replace-regexp on all marked files.
+ * In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
 
 To override dtrt-indent (which guesses indentation), do:
 ```

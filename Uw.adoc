@@ -1,5 +1,8 @@
 = Wisdom about the University of Washington.
 :toc:
+:toc-placement: manual
+
+toc::[]
 
 
 
@@ -173,7 +176,7 @@ The /uns Maintainers' unFAQ:
 http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
 
 Remote desktop from Linux workstation to Windows Terminal Server:
-``` 	
+```
   xfreerdp -u mernst aqua.cs.washington.edu
   xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
 ```
