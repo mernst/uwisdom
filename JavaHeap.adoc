@@ -1,10 +1,9 @@
-[[summary-notes-on-working-with-large-64-bit-heaps-in-java]]
-summary Notes on working with large 64-bit heaps in Java
---------------------------------------------------------
+#summary Notes on working with large 64-bit heaps in Java
 
 Contents:
+<wiki:toc max_depth="1" />
 
--------------------------------------------------------------------------
+```
 From: Derek Rayside
 Date: Wed, 9 May 2007
 
@@ -96,4 +95,4 @@ It is possible to generate garbage that is too big for the GC to collect.
 For a particular input, my analysis generates a large graph (about 5GB of
 heap space).  This is too big for the GC to collect:  it first has to be
 cut up into smaller pieces (ie, set lots of pointers to null).
--------------------------------------------------------------------------
+```

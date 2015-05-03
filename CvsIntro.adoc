@@ -1,14 +1,15 @@
-= A beginner's guide to CVS
----------------------------------
+#summary A beginner's guide to CVS
 
 Contents:
+<wiki:toc max_depth="1" />
 
+```
 This file contains instructions about using CVS that I have sometimes sent
 to people, to introduce them to the concept of version control and the CVS
 tool.  There are probably good tutorials that I could now point people at.
 
+===========================================================================
 
---------------------------------------------------------------------------------------------------------------
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit), select a directory where you want a "code"
 subdirectory containing all the files to appear, and do the following
@@ -92,4 +93,5 @@ system, etc.), as are additional tutorials.
 You may wish to create a ~/.cvsrc file containing the following two lines:
 diff -u
 update -d -P
---------------------------------------------------------------------------------------------------------------
+```
+

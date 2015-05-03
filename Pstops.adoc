@@ -1,10 +1,9 @@
-[[summary-pstops-howto]]
-summary pstops HOWTO
---------------------
+#summary pstops HOWTO
 
 Contents:
+<wiki:toc max_depth="1" />
 
-----------------------------------------------------------------------
+```
 Date: Wed, 4 Dec 2002 14:07:30 -0500
 From: Alan Donovan
 Subject: pstops HOWTO
@@ -138,4 +137,4 @@ Note that paper sizes are:
   ISO A4                  21.00cm x 29.70cm
 
 and that 1 in = 72 pt ~ 2.54cm.
-----------------------------------------------------------------------
+```
