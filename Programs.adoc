@@ -213,9 +213,8 @@ In csh, it is stored in variable "$status".
 Zero means success, non-zero means failure.
 
 Command substitution, performed by a subshell, in csh/bash:
-enclose in backquotes/backticks (+`...`+).
+enclose in backquotes/backticks (+\`...\`+).
 In sh, it's better style to use +$(...)+ than +`...`+, but both have the same effect.
-`\`foo\``
 
 Bash's `hash -r` command is equivalent to csh's `rehash`.
 
