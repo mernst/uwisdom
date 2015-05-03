@@ -91,6 +91,7 @@ The CVS manual is available online (via the Web, the Info documentation
 system, etc.), as are additional tutorials.
 
 You may wish to create a ~/.cvsrc file containing the following two lines:
+
 ..cvsrc
 ----
 diff -u
