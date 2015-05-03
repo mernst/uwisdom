@@ -1,5 +1,8 @@
-Contents:
+#summary Information about the uwisdom collection of useful facts, and how to search it
+#labels Featured
 
+Contents:
+<wiki:toc max_depth="1" />
 
 >entry Description/blurb of the doc/lookup/help program for searching wisdom files
 

@@ -1,7 +1,7 @@
-@summary pstops HOWTO
+#summary pstops HOWTO
 
 Contents:
-
+<wiki:toc max_depth="1" />
 
 ```
 Date: Wed, 4 Dec 2002 14:07:30 -0500

@@ -1,8 +1,11 @@
+#summary Wisdom about programs
+
 This file is a bit of a catch-all, for everything that does not have a
 dedicated page.
 
 
 Contents:
+<wiki:toc max_depth="1" />
 
 
 
@@ -46,19 +49,24 @@ kpasswd:  change Kerberos password
 
 Cross-realm Kerberos authentication:
 To get athena tickets:
-> setenv KRB5CCNAME /tmp/krb5cc_$$.athena
-> kinit -5 $USER@ATHENA.MIT.EDU
-> aklog -cell athena
+```
+  setenv KRB5CCNAME /tmp/krb5cc_$$.athena 
+  kinit -5 $USER@ATHENA.MIT.EDU
+  aklog -cell athena
+```
 To get CSAIL tickets:
-> setenv KRB5CCNAME /tmp/krb5cc_$$.csail
-> kinit -5 $USER@CSAIL.MIT.EDU
-> aklog -cell csail.mit.edu
+```
+  setenv KRB5CCNAME /tmp/krb5cc_$$.csail
+  kinit -5 $USER@CSAIL.MIT.EDU
+  aklog -cell csail.mit.edu
+```
 To get UW CSE tickets:
-> setenv KRB5CCNAME /tmp/krb5cc_$$.uwcse
-> kinit -5 $USER@CS.WASHINGTON.EDU
+```
+  setenv KRB5CCNAME /tmp/krb5cc_$$.uwcse
+  kinit -5 $USER@CS.WASHINGTON.EDU
+```
 Also see:  http://tig.csail.mit.edu/twiki/bin/view/TIG/CrossCellHowto
-Also see:  ~mernst/bin/share/csail-athena-tickets.bash_
-
+Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 
 
 ---
@@ -109,8 +117,8 @@ In AFS, (only) the user mode bits of regular files retain their function;
 they are applied to anyone who can access the file.
 
 AFS groups:
-On Athena, don't use these commands.
-> Instead, use blanche, listmaint, or http://web.mit.edu/moira.
+(On Athena, don't use these commands.
+Instead, use blanche, listmaint, or http://web.mit.edu/moira.)
 Add a user to an AFS group:
 ```
   pts adduser USERNAME GROUPNAME
@@ -157,24 +165,24 @@ Redirecting output in command shells:
   * In csh/tcsh:
     * To overwrite an existing file, redirect via ">!" instead of ">".
     * To redirect both standard error and standard output to a file,
-> > > use ">&" (">" redirects just standard output to the file).
+      use ">&" (">" redirects just standard output to the file).
     * To redirect standard error and output through the pipe, use "|&".
   * In sh/bash:
     * To redirect standard error to standard output, use "2>&1".
-> > > Warning:  this must come after any file redirection:  "cmd > file 2>&1".
-> > > This is because "2>&1" means to make stderr a copy of stdout.  If you
-> > > redirect to a file with "> file" after doing so, then stdout is
-> > > reopened as the file, but stderr (a copy of the original stdout) is
-> > > not affected.
+      Warning:  this must come after any file redirection:  "cmd > file 2>&1".
+      This is because "2>&1" means to make stderr a copy of stdout.  If you
+      redirect to a file with "> file" after doing so, then stdout is
+      reopened as the file, but stderr (a copy of the original stdout) is
+      not affected.
     * To send both standard error and standard output through a pipe: "2>&1 |".
-> > > There are simpler commands in bash, but they don't work in sh.
+      There are simpler commands in bash, but they don't work in sh.
     * To redirect standard error to a file, use "2>filename".
-> > > For more details, see http://tomecat.com/jeffy/tttt/shredir.html
+      For more details, see http://tomecat.com/jeffy/tttt/shredir.html
 
-In csh shell scripts, $**means all the arguments.
-In bash shell scripts, "$@" is preferred, because it quotes each argument
+In csh shell scripts, `$*` means all the arguments.
+In bash shell scripts, `"$@"` is preferred, because it quotes each argument
 individually before concatenating them (separated by spaces).
-In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".**
+In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".
 
 In bash, interactive shells call .bashrc; noninteractive shells call
 .bash\_profile.
@@ -203,10 +211,11 @@ The bash, of csh's "rehash" command is "hash -r".
 When debugging a bash script, it can be helpful to turn on Bash's strict
 error handling and debug options (exit on error, unset variable detection
 and execution tracing) to make sure problems are caught early:
-  1. /bin/bash
-
-> set -o errexit -o nounset -o xtace
-> ...
+```
+  #!/bin/bash
+  set -o errexit -o nounset -o xtace
+  ...
+```
 
 To get bash 3.0 to fail if any command in a pipeline fails, do
 ```
@@ -221,7 +230,7 @@ To give make this semantics, put the following in the Makefile:
   export SHELL=/bin/bash -o pipefail
 ```
 Alternatives, if stuck with bash 2.x:
-> ${PIPESTATUS[n](n.md)} where n=0 is the status from the first command in the pipe,
+  `${PIPESTATUS[n]}` where n=0 is the status from the first command in the pipe,
 The exact syntax for a Makefile is:
 ```
   foo | bar | baz && exit $${PIPESTATUS[0]}
@@ -290,14 +299,14 @@ or, alternately:
 ```
 To run an entire X-session underneath ssh-agent:
   1. move .xinitrc file (other X client startup script) to .xinitrc-real.
-  1. add the command "ssh-add" to the beginning of that script.
-  1. create a new .xinitrc script containing the sole command:
-> > exec ssh-agent $HOME/.xinitrc-real
+  2. add the command "ssh-add" to the beginning of that script.
+  3. create a new .xinitrc script containing the sole command:
+```exec ssh-agent $HOME/.xinitrc-real```
 
 To set up public keys for ssh-agent and similar programs:
   1. On client machine (from which I will login), do `ssh-keygen`
-  1. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
-ssh2 needs file ~/.ssh/authorized\_keys2; to make it, do
+  2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
+ssh2 needs file `~/.ssh/authorized_keys2`; to make it, do
 ```
   cd ~/.ssh; cat is_dsa.pub > authorized_keys2; chmod 600 authorized_keys2
 ```
@@ -308,7 +317,7 @@ The `authorized_keys*` files must not be group-writeable; do this:
 ```
 
 ssh: secure remote login.  Need to copy contents of identify.pub on client
-machine into authorized\_keys on server machine.
+machine into `authorized_keys` on server machine.
 
 ssh2 supports sftp, an ftp client.  It does not seem to be free for
 research use.  OpenSSH doesn not seem to have sftp.
@@ -353,7 +362,10 @@ Perl 5 uses $PERLLIB environment variable as include path for libraries
 
 In awk, perl, and C, output format "%2.1f" rounds, does not truncate.
 
-Perl regular expression to match a string: /"([^"\\]|\\[\000-\377])**"/**
+Perl regular expression to match a string:
+```
+  /"([^"\\]|\\[\000-\377])*"/
+```
 
 In Perl, to read (slurp) a whole file into a string, do
 ```
@@ -409,7 +421,7 @@ In perl:
   * To read a whole file:  $/ = undef.
   * To read by paragraphs:  $/ = "\n\n".
   * To read by paragraphs, eliminating empty paragraphs: $/ = "".
-  * $/ is also known as $RS or $INPUT\_RECORD\_SEPARATOR.
+  * $/ is also known as `$RS` or `$INPUT_RECORD_SEPARATOR`.
 
 In perl, to properly open a file, check like this:
 ```
@@ -458,9 +470,9 @@ use lib "$FindBin::Bin";
 To convert a text file to PostScript or PDF, here are possibilities.
 Reasonable choices:
   * paps: is packaged for Unix distributions (Ubuntu, Red Hat), so perhaps
-> > it is widely used, even though the last release was in 2007
+    it is widely used, even though the last release was in 2007
   * cedilla: works fine, many cammand-line arguments.  A bit of a pain to
-> > install because you have to install clisp first.
+    install because you have to install clisp first.
 Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
   * enscript: doesn't handle 8-bit by default
   * a2ps: doesn't handle 8-bit by default
@@ -583,7 +595,7 @@ in Acrobat Professional.  Or, do this:
   * save as PDF
   * pdftops -eps file.pdf
   * bbfig -o file.eps | gv -
-> > and add the %%BoundingBox line to the header of the ps file.
+    and add the %%BoundingBox line to the header of the ps file.
 
 
 <a href='Hidden comment: 
@@ -604,7 +616,7 @@ Conversions between PostScript and PDF:
    ps2pdf foo.ps
 ```
   * PDF -> PS:
-> > Avoid these acroread invocations; pdftops seems better.
+    Avoid these acroread invocations; pdftops seems better.
 ```
    acroread -toPostScript file.pdf
    cat sample.pdf | acroread -toPostScript > sample.ps
@@ -641,7 +653,7 @@ notations, and be sure there are no ^M characters in the file.)
   excel-ps-to-eps graph1.ps graph2.ps
 ```
 It may produce lots of spurious warning messages but creates a valid .eps file.
-[used to only work on Linux, with ~gjb/bin/{share,linux} in your path.](This.md)
+(This used to only work on Linux, with `~gjb/bin/{share,linux}` in your path.
 Another problem is that the PostScript's clipping region won't be set; this
 draws a (too) big white box.  To fix that, in LaTeX2e, use
 ```
@@ -654,25 +666,20 @@ Excel well enough to turn it into an eps file with ps2epsi and
 put it in a LaTeX document.
 Alternately, Mike Perkowitz says:
   1. print chart to a postscript file in excel.
-
-> 2. edit the postscript:
-> > - the file is full of little blocks that are, i assume, the PC representation
-> > > of unix linefeeds or crs or whatever. (if you're editing on PC)
-
-> > - remove everything before "%!PS-Adobe-3.0" at the beginning
-> > - remove everything after "end" at the end
-> > - at the beginning remove all "%%BeginFeature" through "%%EndFeature"
-> > > things
-
-> > - my file, at the end, after showpage, had a line "Page SV restore" which
-> > > seemed to cause a gratuitous page advance. i removed it
-
-> 3. rotate the document properly.
-> > on june: "psfix -r 270 file.ps > file-r.ps"
-> > or just remove the **whole** line that contains the word "rotate"
-
-> 4. convert to EPS. on june: "ps2epsi file-r.ps file-r.eps"
-> 5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
+  2. edit the postscript:
+    - the file is full of little blocks that are, i assume, the PC representation
+      of unix linefeeds or crs or whatever. (if you're editing on PC)
+    - remove everything before "%!PS-Adobe-3.0" at the beginning
+    - remove everything after "end" at the end
+    - at the beginning remove all "%%BeginFeature" through "%%EndFeature"
+      things
+    - my file, at the end, after showpage, had a line "Page SV restore" which
+      seemed to cause a gratuitous page advance. i removed it
+  3. rotate the document properly.
+    on june: "psfix -r 270 file.ps > file-r.ps"
+    or just remove the **whole** line that contains the word "rotate"
+  4. convert to EPS. on june: "ps2epsi file-r.ps file-r.eps"
+  5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
 Note that the ghostscript viewer on the PCs can also convert from PS to EPS,
 but i had trouble getting it to rotate and save that rotation. and if you do
 psfix after the EPS conversion, i think your bounding box gets made full page
@@ -702,15 +709,14 @@ sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
 To turn off screensavers in Gnome:
   1. Click on the little foot in the lower left
 > > Programs->Settings->Desktop->Screensaver
-  1. Select 'No Screensaver' in the list in the upper left
-  1. Click 'OK'
+  2. Select 'No Screensaver' in the list in the upper left
+  3. Click 'OK'
 
 Do
 ```
   xmodmap -e 'add mod1 = Alt_R'
 ```
 to work around this bug with right Meta (Alt) Tab not working:
-
 > http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=258003
 It's supposed to be fixed now.
 
@@ -827,7 +833,6 @@ Applications >> Desktop Preferences >> Screen Resolution
 # WWW and HTML #
 
 To make a webpage automatically forward/redirect, see
-
 > http://www.cs.washington.edu/info/faq/homefaq.html#else
 More simply, do:
 ```
@@ -862,9 +867,9 @@ following to /etc/httpd/conf/httpd.conf:
 
 HTML checking:
   * htmlchek is quite picky (not necessarily a problem) and hasn't been
-> > updated since February 20, 1995
+    updated since February 20, 1995
   * NetMechanic seems reasonable.  http://www.netmechanic.com/html_check.htm
-> > Can check both HTML and links (the latter very slow).  Only checks 5 pages.
+    Can check both HTML and links (the latter very slow).  Only checks 5 pages.
   * weblint is basic but functional:  http://www.weblint.org
   * Try W3C HTML Validation Service, http://validator.w3.org/
 
@@ -925,8 +930,9 @@ Also consider running, in Emacs, M-x html-add-heading-anchors .
 
 The checklink program (from W3C) tells about broken links in HTML documents.
 Run like this:
-
-> checklink -q -r http://pag.lcs.mit.edu/~mernst
+```
+  checklink -q -r http://pag.lcs.mit.edu/~mernst
+```
 (Linkchecker (from http://linkchecker.sourceforge.net/?) seems to spawn
 lots of threads and never return.)
 Probably best to run these in the background with output sent to a file.
@@ -950,10 +956,10 @@ html2ps converts a HTML file to PostScript, potentially recursively.
   * "-u" means underline links
   * "-C bh" means generate a table of contents.
   * "-W bp" means process recursively retrieving hyperlinked documents ("p"
-> > means prompt for remote documents).  Watch out:  using -W b might seem
-> > reasonable, but it will try to print some binary files!
+    means prompt for remote documents).  Watch out:  using -W b might seem
+    reasonable, but it will try to print some binary files!
   * "-2L" means two-column landscape
-[is the program that Jeff Perkins recommended as well.](This.md)
+(This is the program that Jeff Perkins recommended as well.)
 
 Apache 1.3.33 recognizes only the last "Options" directive, it seems.
 So put all the arguments in one directive:
@@ -963,1621 +969,1727 @@ So put all the arguments in one directive:
 Alternately, precede each argument by +, which means to modify the
 existing option directives instead of overriding and resetting them.
 <br>
-A caveat about FollowSymLinks:  if any directory along the path is not<br>
-accessible to the web server, then the symbolic link will appear not to<br>
-exist.<br>
-<br>
-If guidescope isn't working, try "guidescope &".  I'm not sure exactly how<br>
-to make this start up automatically every time.<br>
-<br>
-Here is a template/boilerplate for the start/beginning of a typical HTML file:<br>
-<pre><code>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"<br>
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;<br>
-&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;<br>
-&lt;head&gt;<br>
-  &lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /&gt;<br>
-  &lt;title&gt;TITLE&lt;/title&gt;<br>
-  &lt;link rel="Start" href="http://www.mit.edu/~6.170/" /&gt;<br>
-  &lt;link rel="StyleSheet" href="stylesheet.css" /&gt;<br>
-&lt;/head&gt;<br>
-&lt;body&gt;<br>
-&lt;h1&gt;TITLE&lt;/h1&gt;<br>
-...<br>
-&lt;/body&gt;<br>
-&lt;/html&gt;<br>
-</code></pre>
+A caveat about FollowSymLinks:  if any directory along the path is not
+accessible to the web server, then the symbolic link will appear not to
+exist.
 
-To find out the location of the apache/httpd config files and other<br>
-information about the server, execute 'httpd -V'.  This works on all<br>
-systems that support apache (macos, windows, linux)<br>
-<br>
-To add a "favicon.ico" image to the address bar, do this in the<br>
-<code>&lt;head&gt;...&lt;/head&gt;</code> section of the HTML document:<br>
-<pre><code>  &lt;link rel="icon" type="image/png" href="my-favicon.png" /&gt;<br>
-</code></pre>
+If guidescope isn't working, try "guidescope &".  I'm not sure exactly how
+to make this start up automatically every time.
 
-How to quote less than and greater than (angle brackets) and at-signs, such as for generics, in Javadoc comments:<br>
-<pre><code> Equation: {@literal i &gt; j}<br>
- Inline code: {@code getThat()}<br>
- Multi line code:<br>
-   &lt;pre&gt;{@code<br>
-   ...<br>
-   }&lt;/pre&gt;<br>
-</code></pre>
+Here is a template/boilerplate for the start/beginning of a typical HTML file:
+```
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>TITLE</title>
+  <link rel="Start" href="http://www.mit.edu/~6.170/" />
+  <link rel="StyleSheet" href="stylesheet.css" />
+</head>
+<body>
+<h1>TITLE</h1>
+...
+</body>
+</html>
+```
 
+To find out the location of the apache/httpd config files and other
+information about the server, execute 'httpd -V'.  This works on all
+systems that support apache (macos, windows, linux)
 
-<hr />
-<h1>C and C++</h1>
+To add a "favicon.ico" image to the address bar, do this in the
+`<head>...</head>` section of the HTML document:
+```
+  <link rel="icon" type="image/png" href="my-favicon.png" />
+```
 
-In C++, an auto_ptr is automatically deleted at the end of its scope.<br>
-<br>
-In C++,<br>
-char <b>const s;   declares a constant pointer to possibly varying data<br>
-const char</b> s;   declares a possibly varying pointer to constant data<br>
-char const <b>s;   is the same as "const char</b> s"<br>
-In other words, const modifies the type-element to its left.<br>
-Put another way:  "const" and "int" are declaration specifiers which may<br>
-occur in any order; "<b><a href='const.md'>const</a>" is a type modifier.</b>
-
-Do not use dbmalloc; use dmalloc instead.<br>
-<br>
-The GNU program checker (gccchecker) detects memory use errors in a program.<br>
-<br>
-To run just the GNU C preprocessor (analogous to cpp), do gcc -E.<br>
-To suppress line markers (line numbers) in the output, use gcc -E -P.<br>
-To retain comments (/<b>...</b>/) in the output, use gcc -E -C.<br>
-<br>
-When compiling a C program with cc, put the -lLIBNAME flag at the end of<br>
-the line, after the cfile name (the order matters).<br>
-<br>
-Debugging C memory (pointer) corruption problems:<br>
-<ul><li>setenv MALLOC_CHECK<i>2<br>
-</li><li>compile with "-lefence"</li></ul></i>
-
-GNU Checker:  like Purify (includes gc).<br>
-<a href='http://www.gnu.org/software/checker/checker.html'>http://www.gnu.org/software/checker/checker.html</a>, <a href='ftp://alpha.gnu.org/gnu'>ftp://alpha.gnu.org/gnu</a>
-It's sometimes called gccchecker or checkergcc.<br>
-It has not been tested on C++ (or updated since August 1998, as of 6/2001).<br>
-Other Purify-like tools:  <a href='http://www.hotfeet.ch/~gemi/LDT/tools_deb.html'>http://www.hotfeet.ch/~gemi/LDT/tools_deb.html</a>
-(libYaMa detects leaks and some other memory errors; is a malloc replacement:<br>
-<a href='http://freshmeat.net/projects/libyama/'>http://freshmeat.net/projects/libyama/</a>)<br>
-Also consider dmalloc (debug malloc); don't use dbmalloc.<br>
-(dmalloc is somewhat distributed with Linux; I had trouble making it work.)<br>
-Electric Fence (efence) is distributed with (some versions of?) Linux, and<br>
-is available from <a href='ftp://ftp.perens.com/pub/ElectricFence/'>ftp://ftp.perens.com/pub/ElectricFence/</a>.<br>
-It uses the virtual memory hardware to detect the instruction at which a<br>
-bad memory reference occurs.  (I had a problem with it running out of memory.)<br>
-<br>
-The c++filt program demangles (unmangles) mangled overloaded C++<br>
-method/function names.<br>
-<br>
-To write a cpp macro which takes a variable number of arguments:<br>
-One popular trick is to define the macro with a single argument,<br>
-and call it with a double set of parentheses, which appear to<br>
-the preprocessor to indicate a single argument:<br>
-<ol><li>efine DEBUG(args) {printf("DEBUG: "); printf args;}<br>
-</li></ol><blockquote>if(n != 0) DEBUG(("n is %d\n", n));</blockquote>
-
-To strip all comments and blank lines from a (Java or C) file, use<br>
-<pre><code>  cpp -P -nostdinc -undef<br>
-</code></pre>
-(This also expands any #include directives.)<br>
-This can help in computing non-comment non-blank (NCNB) lines of code<br>
-(though you may want to remove #include directives before doing that, then<br>
-reinsert them afterward).  The script ~jhp/bin/ncnbcode.php accepts<br>
-a list of files and reports their ncnb lines of code, all lines, and<br>
-a total.<br>
-÷<br>
-This error:<br>
-<pre><code>    Undefined symbol            first referenced in file<br>
-    socket                              /usr/X11R6/lib/libX11.so<br>
-</code></pre>
-means I should add more "-lsocket" and such flags to my link command.  Do<br>
-"man <i>undefinedsymbol</i>" to see where the symbol is defined.<br>
-<br>
-Insight:  GUI front end to gdb.<br>
-<a href='http://sources.redhat.com/insight/'>http://sources.redhat.com/insight/</a>
-Also see DDD.<br>
-<br>
-gdb:<br>
-<ul><li>For wide strings, just print with wstring2string.<br>
-</li><li>"x/20s wstr" gives characters one per line; look at every third element.<br>
-</li><li>"print wstr@20" gives characters on one line, but in ASCII.</li></ul>
-
-If having trouble with gdb not being able to step over inlined functions,,<br>
-add these arguments to gcc:<br>
-<pre><code> -O0 -fno-default-inline -fno-inline<br>
-</code></pre>
-
-Why g++ 3.2 doesn't like uses of vector that g++ does:<br>
-Two things to check:<br>
-<ul><li>you must <code>#include &lt;vector&gt;</code>, not <code>&lt;vector.h&gt;</code>
-</li><li>you must either say "using namespace std;" or say "std::vector", the<br>
-<blockquote>latter being preferable in header files, of course.</blockquote></li></ul>
+How to quote less than and greater than (angle brackets) and at-signs, such as for generics, in Javadoc comments:
+```
+ Equation: {@literal i > j}
+ Inline code: {@code getThat()}
+ Multi line code:
+   <pre>{@code
+   ...
+   }</pre>
+```
 
 
-<hr />
-<h1>Email</h1>
+---------------------------------------------------------------------------
+=C and C++=
 
-Websieve (sieve) RFC is rfc3028, with Sieve grammar and rules.<br>
-There is a sieve email filter script tester (and syntax checker) at<br>
-<blockquote><a href='http://sastools.com/SieveTest/sievetest.php'>http://sastools.com/SieveTest/sievetest.php</a>
-(websieve itself only creates scripts, doesn't validate them.)<br>
-Be sure to remove any "From VM" rule before running sievetest!</blockquote>
+In C++, an auto_ptr is automatically deleted at the end of its scope.
 
-To have mailing list errors reflected to the list administrator:<br>
-<ul><li>If you are using sendmail, the first thing to do is create the alias:<br>
-<blockquote>owner-edb-list: edb-list-request<br>
-</blockquote><blockquote>This causes errors occuring on edb-list to be reflected to "owner-edb-list".<br>
-</blockquote></li><li>The other, sure-fire way is to pipe the edb-list mail through a sendmail<br>
-<blockquote>invocation which changes the sender:<br>
-<pre><code>    edb-list: "|/usr/lib/sendmail -fedb-list-request -oi real-edb-list"<br>
-    real-edb-list: :include:/usr/lib/edb-list.alias<br>
-</code></pre></blockquote></li></ul>
+In C++,
+char * const s;   declares a constant pointer to possibly varying data
+const char * s;   declares a possibly varying pointer to constant data
+char const * s;   is the same as "const char * s"
+In other words, const modifies the type-element to its left.
+Put another way:  "const" and "int" are declaration specifiers which may
+occur in any order; "* [const]" is a type modifier.
 
-To expand a mailing list (alias), to learn its members:<br>
-<pre><code>  telnet gh 25<br>
-  expn elbows<br>
-  quit<br>
-</code></pre>
-Another technique is "finger -a list@host"; at UW this works for me from<br>
-Solaris (eg hoh), but not from Linux (eg nishin).<br>
-If you get a 503 error, try doing "helo HOSTNAME" and then doing expn.<br>
-<br>
-Rich Salz's newsgate/mail2news program can inject all mailing list mail<br>
-into a similarly named (local only) newsgroup, and vice versa.<br>
-ftp.uu.net:/usenet/comp.sources.unix/volume24/newsgate/part0[1-4].Z<br>
-<br>
-To decode a MIME file (actually just one component of a mime message), use<br>
-<pre><code>  mmencode -u mimefile &gt; plainfile<br>
-</code></pre>
-You need to save to a file (it doesn't read from standard input), and to<br>
-strip off all headers (e.g., "Content-Type:" and "Content-Transfer-Encoding:").<br>
-For quoted-printable, use -q flag as well.<br>
-Also see the script (stolen from Greg Badros) "decode_mime", which<br>
-<ul><li>strips off headers<br>
-</li><li>chooses a filename intelligently</li></ul>
+Do not use dbmalloc; use dmalloc instead.
 
-Mime unpacking:  use <a href='ftp://ftp.andrew.cmu.edu/pub/mpack/'>ftp://ftp.andrew.cmu.edu/pub/mpack/</a>
-Options:<br>
-<ul><li>-f<br>
-<blockquote>Forces the overwriting of existing files.  If a message<br>
-suggests a file name of an existing file, the file will be<br>
-overwritten.  Without this flag, munpack appends ".1", ".2",<br>
-etc to find a nonexistent file.<br>
-</blockquote></li><li>-t<br>
-<blockquote>Also unpack the text parts of multipart messages to files.<br>
-By default, text parts that do not have a filename parameter<br>
-do not get unpacked.<br>
-</blockquote></li><li>-q<br>
-<blockquote>Be quiet--suppress messages about saving partial messages.<br>
-</blockquote></li><li>-C directory<br>
-<blockquote>Change the current directory to "directory" before reading<br>
-any files.  This is useful when invoking munpack<br>
-from a mail or news reader.</blockquote></li></ul>
+The GNU program checker (gccchecker) detects memory use errors in a program.
 
-To send a single file as a MIME email (attachment), do (be sure to copy myself):<br>
-<pre><code>  mpack -s "Subject line" -d descriptionfile filename address@host address2@host2<br>
-  mpack -s "Subject line" filename address@host address2@host2<br>
-</code></pre>
-To write to a file,<br>
-<pre><code>  mpack -s "Subject line" -o outputfile filename<br>
-</code></pre>
-To add some ASCII text at the beginning:<br>
-<pre><code>  mpack -s "Subject line" -d descriptionfile -o outputfile filename<br>
-</code></pre>
-mpack can only encode one file, not multiple files.  For that, try pine.<br>
-<br>
-Mailing lists are in /etc/aliases on pag.<br>
-To redirect to a file, it must be in a non-group-writeable directory.<br>
-<br>
-In Horde, to "bulk delete" or "delete all", go to the folders view, mark<br>
-the desired folder, and then "Choose Action:  Empty Folder(s)".<br>
-<br>
-To upload mbox files to Gmail IMAP, use:  <a href='http://imap-upload.sourceforge.net/'>http://imap-upload.sourceforge.net/</a>
-Typical invocation (for hosted apps at cs.washington.edu):<br>
-<blockquote>python imap_upload.py --gmail --user=$USER@cs.washington.edu --password=PASSWORD --box GMAIL-LABEL --error ~/error.mail TO-UPLOAD.mail<br>
-It may be necessary to convert a BABYL file to mbox format.<br>
-Don't use b2m for that; instead, use:  M-x unrmail</blockquote>
+To run just the GNU C preprocessor (analogous to cpp), do gcc -E.
+To suppress line markers (line numbers) in the output, use gcc -E -P.
+To retain comments (/* ... */) in the output, use gcc -E -C.
 
-If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.<br>
-You only want to do this for Google Mail that is in <a href='Imap.md'>Imap</a>/trash and has no other user or system labels.  (I can't use -has:userlabels, unfortunately.)<br>
-I want the trash label and no others; the way seems to be to list every label!<br>
-<blockquote>-in:sent -in:chat -in:draft -in:inbox -in:...<br>
-Here is also has:nouserlabels; is that useful?<br>
-Also see the tips here:<br>
-<a href='https://support.google.com/mail/answer/78892?hl=en'>https://support.google.com/mail/answer/78892?hl=en</a></blockquote>
+When compiling a C program with cc, put the -lLIBNAME flag at the end of
+the line, after the cfile name (the order matters).
+
+Debugging C memory (pointer) corruption problems:
+ * setenv MALLOC_CHECK_ 2
+ * compile with "-lefence"
+
+GNU Checker:  like Purify (includes gc).  
+http://www.gnu.org/software/checker/checker.html, ftp://alpha.gnu.org/gnu
+It's sometimes called gccchecker or checkergcc.
+It has not been tested on C++ (or updated since August 1998, as of 6/2001).
+Other Purify-like tools:  http://www.hotfeet.ch/~gemi/LDT/tools_deb.html
+(libYaMa detects leaks and some other memory errors; is a malloc replacement:
+http://freshmeat.net/projects/libyama/)
+Also consider dmalloc (debug malloc); don't use dbmalloc.
+(dmalloc is somewhat distributed with Linux; I had trouble making it work.)
+Electric Fence (efence) is distributed with (some versions of?) Linux, and
+is available from ftp://ftp.perens.com/pub/ElectricFence/.
+It uses the virtual memory hardware to detect the instruction at which a
+bad memory reference occurs.  (I had a problem with it running out of memory.)
+
+The c++filt program demangles (unmangles) mangled overloaded C++
+method/function names.
+
+To write a cpp macro which takes a variable number of arguments:
+One popular trick is to define the macro with a single argument,
+and call it with a double set of parentheses, which appear to
+the preprocessor to indicate a single argument:
+  #define DEBUG(args) {printf("DEBUG: "); printf args;}
+  if(n != 0) DEBUG(("n is %d\n", n));
+
+To strip all comments and blank lines from a (Java or C) file, use
+```
+  cpp -P -nostdinc -undef
+```
+(This also expands any #include directives.)
+This can help in computing non-comment non-blank (NCNB) lines of code
+(though you may want to remove #include directives before doing that, then
+reinsert them afterward).  The script ~jhp/bin/ncnbcode.php accepts
+a list of files and reports their ncnb lines of code, all lines, and
+a total.
+÷
+This error:
+```
+    Undefined symbol            first referenced in file
+    socket                              /usr/X11R6/lib/libX11.so
+```
+means I should add more "-lsocket" and such flags to my link command.  Do
+"man _undefinedsymbol_" to see where the symbol is defined.
+
+Insight:  GUI front end to gdb.
+http://sources.redhat.com/insight/
+Also see DDD.
+
+gdb:
+  * For wide strings, just print with wstring2string.
+  * "x/20s wstr" gives characters one per line; look at every third element.
+  * "print wstr@20" gives characters on one line, but in ASCII.
+
+If having trouble with gdb not being able to step over inlined functions,,
+add these arguments to gcc:
+```
+ -O0 -fno-default-inline -fno-inline
+```
+
+Why g++ 3.2 doesn't like uses of vector that g++ does:
+Two things to check:
+ * you must `#include <vector>`, not `<vector.h>`
+ * you must either say "using namespace std;" or say "std::vector", the
+   latter being preferable in header files, of course.
 
 
-<hr />
-<h1>Make and Makefiles (and ant and buildfiles, build.xml)</h1>
+---------------------------------------------------------------------------
+=Email=
 
-In Makefiles, variables in rule targets and dependences are expanded as<br>
-soon as the rule target is read, but variables in rule actions are expanded<br>
-only when the action is actually executed.  Watch out for this<br>
-inconsistency!  This means that rules with variables in their<br>
-targets/dependences should come at the end of Makefiles.<br>
-<br>
-In a Makefile, the right way to invoke make on a subdirectory or other<br>
-directory is<br>
-<pre><code>             cd subdir &amp;&amp; $(MAKE)<br>
-</code></pre>
-or, equivalently,<br>
-<pre><code>             $(MAKE) -C subdir<br>
-</code></pre>
-To execute parallel jobs on a multiprocessor, use the "-j2" option.<br>
-<br>
-In make, to ensure that a rule always runs even if the target seems to be<br>
-up to date, add an extra rule of the form<br>
-<pre><code>     .PHONY : clean<br>
-</code></pre>
-Once this is done, `make clean' will run the commands regardless of<br>
-whether there is a file named `clean'.<br>
-<br>
-After Makefile.in is changed, it is necessary to rerun "config.status" and<br>
-then rerun "make".<br>
-<br>
-Particularly useful "automatic variables" used by make (in Makefile rules):<br>
-<ul><li>$@   the target of the rule<br>
-</li><li>$<   the first prerequisite<br>
-</li><li>$^   all the prerequisites</li></ul>
+Websieve (sieve) RFC is rfc3028, with Sieve grammar and rules.
+There is a sieve email filter script tester (and syntax checker) at
+  http://sastools.com/SieveTest/sievetest.php
+(websieve itself only creates scripts, doesn't validate them.)
+Be sure to remove any "From VM" rule before running sievetest!
 
-In Makefiles, to test whether a file/directory exists, do something like this:<br>
-<pre><code>  # Test that the directory exists.  There must be a better way to do this.<br>
-  INV:=$(wildcard $(INV))<br>
-  ifndef INV<br>
-    $(error Environment variable INV is not set to an existing directory)<br>
-  endif<br>
-</code></pre>
-or alternately:<br>
-<pre><code>  ifeq "$(wildcard ${INV}/scripts)" "${INV}/scripts"<br>
-       ... it exists ...<br>
-  else<br>
-       ... it does not exist ...<br>
-  endif<br>
-</code></pre>
+To have mailing list errors reflected to the list administrator:
+ * If you are using sendmail, the first thing to do is create the alias:
+      owner-edb-list: edb-list-request
+   This causes errors occuring on edb-list to be reflected to "owner-edb-list".
+ * The other, sure-fire way is to pipe the edb-list mail through a sendmail
+   invocation which changes the sender:
+```
+    edb-list: "|/usr/lib/sendmail -fedb-list-request -oi real-edb-list"
+    real-edb-list: :include:/usr/lib/edb-list.alias
+```
 
-## Ant and buildfiles<br>
-<br>
-An Ant guide (documentation) for beginners:<br>
-<a href='http://wiki.apache.org/ant/TheElementsOfAntStyle'>http://wiki.apache.org/ant/TheElementsOfAntStyle</a>
+To expand a mailing list (alias), to learn its members:
+```
+  telnet gh 25
+  expn elbows
+  quit
+```
+Another technique is "finger -a list@host"; at UW this works for me from
+Solaris (eg hoh), but not from Linux (eg nishin).
+If you get a 503 error, try doing "helo HOSTNAME" and then doing expn.
 
-To permit user-specific setting of variables in a Makefile, add this at the<br>
-top (and change assignments to use "=?" syntax):<br>
-<pre><code>  # Put user-specific changes in your own Makefile.user.<br>
-  # Make will silently continue if that file does not exist.<br>
-  -include Makefile.user<br>
-</code></pre>
+Rich Salz's newsgate/mail2news program can inject all mailing list mail
+into a similarly named (local only) newsgroup, and vice versa.
+ftp.uu.net:/usenet/comp.sources.unix/volume24/newsgate/part0[1-4].Z
 
-Suppose I want to write a rule that always performs a task, but doesn't<br>
-necessarily cause its dependence to execute first.  This is a snippet of<br>
-the Makefile I would like to write:<br>
-<pre><code>.PHONY: maybe-update-file1<br>
-maybe-update-file1:<br>
-	Command A:  may or may not update file1.txt<br>
-file2.txt:  maybe-update-file1 file1.txt<br>
-	Command B:  computes file2.txt from file1.txt<br>
-</code></pre>
-Problem: because the maybe-update-file1 target always executes, Command B<br>
-always executes.  That wastes the time to execute Command B, and because it<br>
-unconditionally updates file2.txt, any command that depends on file2.txt<br>
-also executes unnecessarily.<br>
-.<br>
-Here is an approach that works:<br>
-<pre><code>file2.txt: maybe-update-file1 .timestamp-file2<br>
-.PHONY: maybe-update-file1<br>
-maybe-update-file1:<br>
-	@if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi<br>
-.timestamp-file2: file1.txt<br>
-	cp file1.txt file2.txt<br>
-	touch .timestamp-file2<br>
-</code></pre>
+To decode a MIME file (actually just one component of a mime message), use
+```
+  mmencode -u mimefile > plainfile
+```
+You need to save to a file (it doesn't read from standard input), and to
+strip off all headers (e.g., "Content-Type:" and "Content-Transfer-Encoding:").
+For quoted-printable, use -q flag as well.
+Also see the script (stolen from Greg Badros) "decode_mime", which 
+ * strips off headers
+ * chooses a filename intelligently
 
-To make a tags table for a LaTeX paper, using an Ant buildfile:<br>
-<pre><code>  &lt;target name="etags" depends="tags"&gt;<br>
-  &lt;/target&gt;<br>
-  &lt;target name="tags" depends="init" description="builds Emacs TAGS table"&gt;<br>
-    &lt;exec os="Linux" executable="etags" failonerror="true"&gt;<br>
-      &lt;!-- args explicitly specified so that they are in the right order --&gt;<br>
-      &lt;!-- To regenerate, run:  latex-process-inputs -antlist main.tex --&gt;<br>
-      ...<br>
-    &lt;/exec&gt;<br>
-  &lt;/target&gt;<br>
-</code></pre>
-To make a tags table for a Java project, using an Ant buildfile:<br>
-<pre><code>  &lt;target name="etags" depends="tags"&gt;<br>
-  &lt;/target&gt;<br>
-  &lt;target name="tags" description="Create Emacs TAGS table"&gt;<br>
-    &lt;exec executable="/bin/sh"&gt;<br>
-      &lt;arg value="-c"/&gt;<br>
-      &lt;arg value="etags `find -name '*.java' | sort-directory-order`"/&gt;<br>
-    &lt;/exec&gt;<br>
-  &lt;/target&gt;<br>
-</code></pre>
+Mime unpacking:  use ftp://ftp.andrew.cmu.edu/pub/mpack/
+Options:
+ * -f
+          Forces the overwriting of existing files.  If a message
+          suggests a file name of an existing file, the file will be
+          overwritten.  Without this flag, munpack appends ".1", ".2",
+          etc to find a nonexistent file.
+ * -t
+          Also unpack the text parts of multipart messages to files.
+          By default, text parts that do not have a filename parameter
+          do not get unpacked.
+ * -q
+          Be quiet--suppress messages about saving partial messages.
+ * -C directory
+          Change the current directory to "directory" before reading
+          any files.  This is useful when invoking munpack
+          from a mail or news reader.
 
-To print out a path in ant, use this snippet of code at the end of your ant<br>
-file.  This is good for debugging classpath issues when running javac, as<br>
-ant ordinarily doesn't let you see the classpath or the javac command line.<br>
-<pre><code>  &lt;!-- = = = = = = = = = = = = = = = = =<br>
-       macrodef: echopath<br>
-       Use as:    &lt;echopath pathid="mypath"/&gt;<br>
-       = = = = = = = = = = = = = = = = = --&gt;<br>
-  &lt;macrodef name="echopath"&gt;<br>
-    &lt;attribute name="pathid"/&gt;<br>
-    &lt;sequential&gt;<br>
-      &lt;property name="line.pathprefix" value="| |-- "/&gt;<br>
-      &lt;!-- get given path in a printable form --&gt;<br>
-      &lt;pathconvert pathsep="${line.separator}${line.pathprefix}"<br>
-       property="echo.@{pathid}"<br>
-       refid="@{pathid}"&gt;<br>
-      &lt;/pathconvert&gt;<br>
-      &lt;echo&gt;Path @{pathid}&lt;/echo&gt;<br>
-      &lt;echo&gt;${line.pathprefix}${echo.@{pathid}}&lt;/echo&gt;<br>
-    &lt;/sequential&gt;<br>
-  &lt;/macrodef&gt;<br>
-</code></pre>
+To send a single file as a MIME email (attachment), do (be sure to copy myself):
+```
+  mpack -s "Subject line" -d descriptionfile filename address@host address2@host2
+  mpack -s "Subject line" filename address@host address2@host2
+```
+To write to a file, 
+```
+  mpack -s "Subject line" -o outputfile filename
+```
+To add some ASCII text at the beginning:
+```
+  mpack -s "Subject line" -d descriptionfile -o outputfile filename
+```
+mpack can only encode one file, not multiple files.  For that, try pine.
 
-To print a fileset in Ant:<br>
-<pre><code>    &lt;macrodef name="echo-fileset"&gt;<br>
-		    &lt;attribute name="filesetref" /&gt;<br>
-		    &lt;sequential&gt;<br>
-		    &lt;pathconvert pathsep="\n " property="@{filesetref}.echopath"&gt;<br>
-				    &lt;path&gt;<br>
-					    &lt;fileset refid="@{filesetref}" /&gt;<br>
-				    &lt;/path&gt;<br>
-			    &lt;/pathconvert&gt;<br>
-		    &lt;echo&gt;   ------- echoing fileset @{filesetref} -------&lt;/echo&gt;<br>
-		    &lt;echo&gt;${@{filesetref}.echopath}&lt;/echo&gt;<br>
-		    &lt;/sequential&gt;<br>
-    &lt;/macrodef&gt;<br>
-...<br>
-    &lt;echo-fileset filesetref="src.files"/&gt;<br>
-</code></pre>
+Mailing lists are in /etc/aliases on pag.
+To redirect to a file, it must be in a non-group-writeable directory.
 
-To access environment variables in Ant:<br>
-<pre><code>  &lt;property environment="env"/&gt;<br>
-</code></pre>
-and then use<br>
-<pre><code>  ${env.HOME}<br>
-</code></pre>
+In Horde, to "bulk delete" or "delete all", go to the folders view, mark
+the desired folder, and then "Choose Action:  Empty Folder(s)".
 
-A recipe for a temporary directory in Ant:<br>
-<pre><code>  &lt;property name="tmpdir" location="${java.io.tmpdir}/${user.name}/${ant.project.name}" /&gt;<br>
-  &lt;delete dir="${tmpdir}" /&gt;    <br>
-  &lt;mkdir dir="${tmpdir}" /&gt;<br>
-</code></pre>
+To upload mbox files to Gmail IMAP, use:  http://imap-upload.sourceforge.net/
+Typical invocation (for hosted apps at cs.washington.edu):
+  python imap_upload.py --gmail --user=$USER@cs.washington.edu --password=PASSWORD --box GMAIL-LABEL --error ~/error.mail TO-UPLOAD.mail
+It may be necessary to convert a BABYL file to mbox format.
+Don't use b2m for that; instead, use:  M-x unrmail
 
-ant wildcards -  means the current directory or any directory<br>
-below it.  I still can't find where this is documented.<br>
-<br>
-In Ant, to check whether files have the same contents, there is no "diff"<br>
-task but you can use the "filesmatch" condition.<br>
-<br>
-In Ant, to convert a relative filename/pathname to absolute, use:<br>
-<pre><code>  &lt;property name="x" location="folder/file.txt" /&gt;<br>
-</code></pre>
-and ${X} will be the absolute path of the file relative to the ${basedir} value.<br>
-In general, for a file or directory, it's less error-prone to use<br>
-<pre><code>  &lt;property name="x" location="folder/file.txt" /&gt;<br>
-</code></pre>
-rather than<br>
-<pre><code>  &lt;property name="x" value="folder/file.txt" /&gt;<br>
-</code></pre>
-Also consider using ${basedir}, which is already absolute.<br>
-It defaults to the containing directory of the buildfile, and it can appear<br>
-in a build.properties file.<br>
-A slightly less clean approach than ${basedir} is<br>
-<pre><code>  &lt;dirname property="ant.file.dir" file="${ant.file}"/&gt;<br>
-</code></pre>
+If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.
+You only want to do this for Google Mail that is in [Imap]/trash and has no other user or system labels.  (I can't use -has:userlabels, unfortunately.)
+I want the trash label and no others; the way seems to be to list every label!
+ -in:sent -in:chat -in:draft -in:inbox -in:...
+Here is also has:nouserlabels; is that useful?
+Also see the tips here:
+https://support.google.com/mail/answer/78892?hl=en
 
-Ant permits you to specify that one target depends on another, but by<br>
-default every prerequisite is always rebuilt, even if it is already up to<br>
-date.  (This is a key difference between Ant and make:  by default, make<br>
-only re-builds a target if some prerequisite is newer.)<br>
+
+---------------------------------------------------------------------------
+=Make and Makefiles (and ant and buildfiles, build.xml)=
+
+In Makefiles, variables in rule targets and dependences are expanded as
+soon as the rule target is read, but variables in rule actions are expanded
+only when the action is actually executed.  Watch out for this
+inconsistency!  This means that rules with variables in their
+targets/dependences should come at the end of Makefiles.
+
+In a Makefile, the right way to invoke make on a subdirectory or other
+directory is
+```
+             cd subdir && $(MAKE)
+```
+or, equivalently,
+```
+             $(MAKE) -C subdir
+```
+To execute parallel jobs on a multiprocessor, use the "-j2" option.
+
+In make, to ensure that a rule always runs even if the target seems to be
+up to date, add an extra rule of the form
+```
+     .PHONY : clean
+```
+Once this is done, `make clean' will run the commands regardless of
+whether there is a file named `clean'.
+
+After Makefile.in is changed, it is necessary to rerun "config.status" and
+then rerun "make".
+
+Particularly useful "automatic variables" used by make (in Makefile rules):
+ * $@   the target of the rule
+ * $<   the first prerequisite
+ * $^   all the prerequisites
+
+In Makefiles, to test whether a file/directory exists, do something like this:
+```
+  # Test that the directory exists.  There must be a better way to do this.
+  INV:=$(wildcard $(INV))
+  ifndef INV
+    $(error Environment variable INV is not set to an existing directory)
+  endif
+```
+or alternately:
+```
+  ifeq "$(wildcard ${INV}/scripts)" "${INV}/scripts"
+       ... it exists ...
+  else
+       ... it does not exist ...
+  endif
+```
+
+## Ant and buildfiles
+
+An Ant guide (documentation) for beginners:
+http://wiki.apache.org/ant/TheElementsOfAntStyle
+
+To permit user-specific setting of variables in a Makefile, add this at the
+top (and change assignments to use "=?" syntax):
+```
+  # Put user-specific changes in your own Makefile.user.
+  # Make will silently continue if that file does not exist.
+  -include Makefile.user
+```
+
+Suppose I want to write a rule that always performs a task, but doesn't
+necessarily cause its dependence to execute first.  This is a snippet of
+the Makefile I would like to write:
+```
+.PHONY: maybe-update-file1
+maybe-update-file1:
+	Command A:  may or may not update file1.txt
+file2.txt:  maybe-update-file1 file1.txt
+	Command B:  computes file2.txt from file1.txt
+```
+Problem: because the maybe-update-file1 target always executes, Command B
+always executes.  That wastes the time to execute Command B, and because it
+unconditionally updates file2.txt, any command that depends on file2.txt
+also executes unnecessarily.
+.
+Here is an approach that works:
+```
+file2.txt: maybe-update-file1 .timestamp-file2
+.PHONY: maybe-update-file1
+maybe-update-file1:
+	@if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
+.timestamp-file2: file1.txt
+	cp file1.txt file2.txt
+	touch .timestamp-file2
+```
+
+To make a tags table for a LaTeX paper, using an Ant buildfile:
+```
+  <target name="etags" depends="tags">
+  </target>
+  <target name="tags" depends="init" description="builds Emacs TAGS table">
+    <exec os="Linux" executable="etags" failonerror="true">
+      <!-- args explicitly specified so that they are in the right order -->
+      <!-- To regenerate, run:  latex-process-inputs -antlist main.tex -->
+      ...
+    </exec>
+  </target>
+```
+To make a tags table for a Java project, using an Ant buildfile:
+```
+  <target name="etags" depends="tags">
+  </target>
+  <target name="tags" description="Create Emacs TAGS table">
+    <exec executable="/bin/sh">
+      <arg value="-c"/>
+      <arg value="etags `find -name '*.java' | sort-directory-order`"/>
+    </exec>
+  </target>
+```
+
+To print out a path in ant, use this snippet of code at the end of your ant
+file.  This is good for debugging classpath issues when running javac, as
+ant ordinarily doesn't let you see the classpath or the javac command line.
+```
+  <!-- = = = = = = = = = = = = = = = = =
+       macrodef: echopath
+       Use as:    <echopath pathid="mypath"/>
+       = = = = = = = = = = = = = = = = = -->
+  <macrodef name="echopath">
+    <attribute name="pathid"/>
+    <sequential>
+      <property name="line.pathprefix" value="| |-- "/>
+      <!-- get given path in a printable form -->
+      <pathconvert pathsep="${line.separator}${line.pathprefix}"
+       property="echo.@{pathid}"
+       refid="@{pathid}">
+      </pathconvert>
+      <echo>Path @{pathid}</echo>
+      <echo>${line.pathprefix}${echo.@{pathid}}</echo>
+    </sequential>
+  </macrodef>
+```
+
+To print a fileset in Ant:
+```
+    <macrodef name="echo-fileset">
+		    <attribute name="filesetref" />
+		    <sequential>
+		    <pathconvert pathsep="\n " property="@{filesetref}.echopath">
+				    <path>
+					    <fileset refid="@{filesetref}" />
+				    </path>
+			    </pathconvert>
+		    <echo>   ------- echoing fileset @{filesetref} -------</echo>
+		    <echo>${@{filesetref}.echopath}</echo>
+		    </sequential>
+    </macrodef>
+...
+    <echo-fileset filesetref="src.files"/>
+```
+
+To access environment variables in Ant:
+```
+  <property environment="env"/>
+```
+and then use
+```
+  ${env.HOME}
+```
+
+A recipe for a temporary directory in Ant:
+```
+  <property name="tmpdir" location="${java.io.tmpdir}/${user.name}/${ant.project.name}" />
+  <delete dir="${tmpdir}" />    
+  <mkdir dir="${tmpdir}" />
+```
+
+ant wildcards - ** means the current directory or any directory
+below it.  I still can't find where this is documented.
+
+In Ant, to check whether files have the same contents, there is no "diff"
+task but you can use the "filesmatch" condition.
+
+In Ant, to convert a relative filename/pathname to absolute, use:
+```
+  <property name="x" location="folder/file.txt" />
+```
+and ${X} will be the absolute path of the file relative to the ${basedir} value.
+In general, for a file or directory, it's less error-prone to use
+```
+  <property name="x" location="folder/file.txt" />
+```
+rather than
+```
+  <property name="x" value="folder/file.txt" />
+```
+Also consider using ${basedir}, which is already absolute.
+It defaults to the containing directory of the buildfile, and it can appear
+in a build.properties file.
+A slightly less clean approach than ${basedir} is
+```
+  <dirname property="ant.file.dir" file="${ant.file}"/>
+```
+
+Ant permits you to specify that one target depends on another, but by
+default every prerequisite is always rebuilt, even if it is already up to
+date.  (This is a key difference between Ant and make:  by default, make
+only re-builds a target if some prerequisite is newer.)
 <p>
-To make Ant re-build prerequisites only if necessary, there are two general<br>
-approaches.<br>
-<ol><li>Use the uptodate task to set a property.  Then, your task can test the<br>
-<blockquote>property and build only if the property is (not) set.<br>
-<pre><code>  &lt;uptodate property="mytarget.uptodate"&gt;  // in set.mytarget.uptodate task<br>
-    ...<br>
-  &lt;/uptodate&gt;<br>
-  &lt;!-- The prerequisites are executed before the "unless" is checked. --&gt;<br>
-  &lt;target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate"&gt;<br>
-    ...<br>
-  &lt;/target&gt;<br>
-</code></pre>
-Alternately, use the outofdate task from ant contrib.  It's nicer in<br>
-that it is just one target without a separate property being defined; by<br>
-contrast, outofdate requires separate targets to set and to test the<br>
-property.<br>
-</blockquote></li><li>Create a <br>
-<br>
-<fileset><br>
-<br>
- using the <br>
-<br>
-<modified><br>
-<br>
- selector.  It calculates MD5<br>
-<blockquote>hashes for files and selects files whose MD5 differs from earlier stored<br>
-values.  It's optional to set<br>
-<pre><code>     &lt;param name="cache.cachefile"     value="cache.properties"/&gt;<br>
-</code></pre>
-inside the <br>
-<br>
-<modified><br>
-<br>
- selector; it defaults to "cache.properties".<br>
-Example that copies all files from src to dest whose content has changed:<br>
-<pre><code>        &lt;copy todir="dest"&gt;<br>
-            &lt;fileset dir="src"&gt;<br>
-                &lt;modified/&gt;<br>
-            &lt;/fileset&gt;<br>
-        &lt;/copy&gt;<br>
-</code></pre>
+To make Ant re-build prerequisites only if necessary, there are two general
+approaches.
+ # Use the uptodate task to set a property.  Then, your task can test the
+   property and build only if the property is (not) set.
+```
+  <uptodate property="mytarget.uptodate">  // in set.mytarget.uptodate task
+    ...
+  </uptodate>
+  <!-- The prerequisites are executed before the "unless" is checked. -->
+  <target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate">
+    ...
+  </target>
+```
+   Alternately, use the outofdate task from ant contrib.  It's nicer in
+   that it is just one target without a separate property being defined; by
+   contrast, outofdate requires separate targets to set and to test the
+   property.
+ # Create a <fileset> using the <modified> selector.  It calculates MD5
+   hashes for files and selects files whose MD5 differs from earlier stored
+   values.  It's optional to set
+```
+     <param name="cache.cachefile"     value="cache.properties"/>
+```
+   inside the <modified> selector; it defaults to "cache.properties".
+   Example that copies all files from src to dest whose content has changed:
+```
+        <copy todir="dest">
+            <fileset dir="src">
+                <modified/>
+            </fileset>
+        </copy>
+```        
 <p>
-There is also Ivy, but I can't tell from its documentation whether it<br>
-provides this feature.  The key use case in the documentation seems to be<br>
-downloading subprojects from the Internet rather than avoiding wasted work<br>
-by staging the parts of a single project.</blockquote></li></ol>
-
-In Ant, the path to the current ant build file (typically build.xml) is<br>
-available as property ant.file .  You can get its directory in this way:<br>
-<br>
-<br>
-<dirname property="ant.file.dir" file="${ant.file}"/><br>
-<br>
-<br>
-<br>
-In Ant, to jar up the contents of a set of existing .jar files:<br>
-<pre><code>    &lt;zip destfile="out.jar"&gt;<br>
-	&lt;zipgroupfileset dir="lib" includes="*.jar"/&gt;<br>
-    &lt;/zip&gt;<br>
-</code></pre>
-
-Vizant (<a href='http://vizant.sourceforge.net/'>http://vizant.sourceforge.net/</a>) is an ant build visualization tool.<br>
-<br>
-<br>
-<hr />
-<h1>Eclipse</h1>
-
-Useful keystrokes in Eclipse:<br>
-<blockquote>C-S-t:  lookup type (like M-. in Emacs, but only for classes, not methods)<br>
-F3: open definition, also like M-.<br>
-<blockquote>(how do you find a method's definitions?)<br>
-</blockquote>C-S-h: all callers (call sites) for a particular method implemention (but<br>
-<blockquote>not calls via a superclass or interface):  opposite of F3<br>
-</blockquote>C-S-r:  lookup resources: finds all uses of this method name, like grep; but<br>
-<blockquote>stays within the type hierarchy, not just textual; more useful than C-S-h<br>
-</blockquote>C-h:  textual search through Java files<br>
-F5:   refresh (for updates made through the file system)<br>
-C-O:  quickly type your way to a field or method declaration<br>
-F4: class hierarchy (also available from a context menu)<br>
-Eclipse Debugger:  F6 goes to next line</blockquote>
-
-To make Eclipse use spaces instead of tabs for indentation:<br>
-<ul><li>Go  to 'Window | Preferences | Java | Code Formatter':<br>
-<ul><li>In the "Style" tab:<br>
-<ul><li>Uncheck "Insert tabs for indentation, not spaces."<br>
-</li><li>Set "Number of spaces representing an indentation level" to 2.<br>
-</li></ul></li></ul></li><li>Go to 'Window | Preferences | Java | Editor':<br>
-<ul><li>In the "Typing" tab:<br>
-<ul><li>Check "Insert space for tabs"</li></ul></li></ul></li></ul>
-
-Changing the font size in Eclipse:<br>
-<blockquote>Window > Preferences > General > Appearance > Colors and Fonts > Basic ><br>
-Text Font > Change : select and apply the new font size<br>
-To go back to the old font size, click the Reset button.<br>
-Or, use this plugin: <a href='http://smallwiki.unibe.ch/fontsizebuttons'>http://smallwiki.unibe.ch/fontsizebuttons</a></blockquote>
-
-Under Eclipse "Run configurations", a useful VM argument is "-ea".<br>
-<br>
-When compiling Daikon, may be simpler to add daikon.jar to "User Entries"<br>
-section of Eclipse classpath.<br>
-You can define your own variables.<br>
-<br>
-Eclipse Javadoc:  .html files get written to working directory.<br>
-So be sure to save changes to these before you start testing javadoc.<br>
-<br>
-Mahmood suggests:<br>
-<ul><li>Eclipse for debugging and writing classes from scratch.<br>
-</li><li>Ant or command line for anything complicated.</li></ul>
-
-Eclipse has two compilers.<br>
-The model reconciler operates on buffers and runs on every keystroke to create red squigglies.  (It's called that because it reconciles the internal representation or model of the program with the visual representation in the editor.)<br>
-The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  <a href='Occasionally.md'>people use the term "reconciler" incorrectly to refer to incremental project building.</a>
-
-<hr />
-<h1>General wisdom (that is, everything without its own section above)</h1>
-
-Information about a variety of Java tools can be found in the wisdom<br>
-repository, in file java-tools.txt.<br>
-<br>
-expand, unexpand:  change TABs to SPACEs and vice versa.<br>
-<br>
-rehash:  If my path seems messed up, or I've added programs, do rehash.<br>
-(Perhaps this only works under csh.)<br>
-<br>
-sed:  for example, sed -e '/^SED/ s|SED|SOGGY|' man-sed | more<br>
-<br>
-ps:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,<br>
-ps -lf gives a long full listing (use -e or -d to see more processes).<br>
-"top" shows percent of CPU being used by each process; good adjunct to ps.<br>
-ps options:<br>
-<ul><li>-l long format, shows priorities (set by nice or renice)<br>
-</li><li>-u user-oriented format<br>
-also:<br>
-</li><li>-a show all processes<br>
-</li><li>-x show even processes with no controlling terminal<br>
-</li><li>-w use wide display</li></ul>
-
-xterm:  give -ut flag to prevent appearing in finger.<br>
-<br>
-system, eval evaluate their argument.<br>
-exec replaces the current shell with its argument.  Be careful!<br>
-<br>
-sleep:  delays execution; waits that many seconds.<br>
-<br>
-expr:  Bourne shell way to do lots of stuff (ex regular expressions,<br>
-arithmetic, comparisons); see also TEST<br>
-<br>
-Programs for drawing figures under X Windows (from best to worst in ease of use):<br>
-<ul><li>OpenOffice/LibreOffice draw<br>
-</li><li>inkscape -- can't attach text to an object easily (could group them to<br>
-<blockquote>fix the position, but then scalng doesn't work right)<br>
-</blockquote></li><li>xfig (abandoned in 2005)<br>
-</li><li>idraw (abandoned in 2002)<br>
-</li><li>skencil (formerly called sketch) (Skencil 0.6.17 released 2005-06-19)<br>
-</li><li>dia (0.96 was released 2007-03-25; latest as of Sep 2012)<br>
-</li><li>tgif -- (version 4.1.45 released 6/2006)<br>
-The mayura draw program for Windows takes Windows Metafiles (such as produced by<br>
-PowerPoint) and creates PostScript.<br>
-It may be best just to create figures using PowerPoint (but that is<br>
-crashing for me when I try to create PDF...).</li></ul>
-
-split:<br>
-Use<br>
-<pre><code>  wc -l &lt;file&gt;<br>
-</code></pre>
-then<br>
-<pre><code>  split -&lt;numberoflines&gt; &lt;file&gt; &lt;newfilebase&gt;<br>
-</code></pre>
-to split files into parts.<br>
-<br>
-du:  disk usage.<br>
-<ul><li>du -s <b>only display grand total for each file and subdirectory in this dir<br>
-</li><li>du -S       not sum child directories in count for parent<br>
-</li><li>du | sort -r -n   sort directories, with most usage first.<br>
-</li><li>du | xdu -- only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories<br>
-Also see Alan Donovan's program "prune"<br>
-(executable: ~adonovan/bin/Linux-i686/prune; sources: ~/work/c/prune/)<br>
-For example,<br>
-<pre><code>  ~adonovan/bin/Linux-i686/prune -size 104857600 -age 604800 ~<br>
-</code></pre>
-Looking at files within a single directory, rather than a whole directory tree:<br>
-</li><li>ls -l | sort -n +4 -- sorts files in size order, good for finding big files in a directory<br>
-</li><li>du -s</b> | sort -n -- similar to above, find the biggest files & subdirectories of the current dir</li></ul>
-
-.DESKTOP file:  Macintosh info about my files.  Safe to delete.<br>
-<br>
-To make a soft link, do<br>
-<pre><code>  ln -s filename linkname<br>
-</code></pre>
-
-expect:  controls interactive programs to permit them to be used in a batch<br>
-fashion via send/expect sequences, job control, user interaction, etc.<br>
-<br>
-To create a script file that will respond to any prompt, not just a<br>
-top-level one:<br>
-<pre><code>  #! /bin/csh<br>
-  ftp -n foo.bar.baz &lt;&lt;END<br>
-  user anonymous mernst@theory.lcs.mit.edu<br>
-  cd pub/random<br>
-  get some-useful-file<br>
-  quit<br>
-  END<br>
-</code></pre>
-
-crontab:  batch sorts of programs run repeatedly (say, each night)<br>
-<br>
-Format manual pages:  nroff -man foo.1 | more<br>
-Print roff files:     troff -t filename | lpr -t<br>
-.ms => PostScript:    groff -pte -ms file.ms > file.ps<br>
-man pages => PS:      groff -pte -man foo.1 > file.ps<br>
-<br>
-nslookup converts domain names into ip numbers.<br>
-"host" and "dig" also query the same DNS information.<br>
-<br>
-ftp:  do "prompt off" to turn off confirmation requests on multiple commands<br>
-<br>
-David Wilson says about running background jobs:<br>
-The simplest thing to do is a shell script that does <code>rsh &lt;nice command&gt;</code> on<br>
-the various machines, and then run the shell script on a machine that<br>
-doesn't get rebooted very often.<br>
-<br>
-If there is no password specified in the netrc file, then the macdef init<br>
-seems not to take.<br>
-<br>
-To permit arbitrary-size core dumps:  unlimit corelimit<br>
-<br>
-Undo the setuid bit of a file with chmod -s.<br>
-<br>
-df:  Report free disk space and which filesystems are mounted.<br>
-<br>
-tar:  tape archive program.  Usual extraction from files is<br>
-<pre><code>  tar xf filename<br>
-</code></pre>
-Create an archive file recursively containing all the files in the current<br>
-directory with<br>
-<pre><code>  tar cf tarfile.tar *<br>
-</code></pre>
-It's better, though, to create a tar archive that extracts itself into a<br>
-directory by doing<br>
-<pre><code>  tar cf tarfile.tar dir<br>
-</code></pre>
-
-To extract a rar archive:<br>
-<pre><code>  unrar e archive.rar<br>
-</code></pre>
-
-Francesco Potorti` (pot@CNUCE.CNR.IT) says:<br>
-To make a single tags file for all the source files in your tree,<br>
-<pre><code>    find . -name '*.[chCH]' -print | etags [options] -<br>
-    find . \( -name '*.[chCH]' -o -name '*.[cC][cC]' \) -print | etags -<br>
-    find . \( -name UNUSED -o -name CVS -o -name SCCS -o -name RCS \) -prune -o \( -name '*.[cC][cC]' -o -name '*.[chCH]' \) -print | etags -<br>
-</code></pre>
-To create a tags file per directory, write a two line shell script:<br>
-<pre><code>    cd $1<br>
-    etags *.[chCH]<br>
-</code></pre>
-and then call it from the root of your source tree like this:<br>
-<pre><code>    find . -type d -exec script {} \;<br>
-</code></pre>
-
-To see and manipulate your junk files which are taking up precious<br>
-space on the computer, use the program junk.  Typing<br>
-just "junk" will show you the names of all the junk files subordinate<br>
-to your current directory.  Typing "junk -c rm" will remove them<br>
-(CAREFUL!).  For more information, see /a/aviary/unix/junk.doc.<br>
-<br>
-Converting binhex files:<br>
-<blockquote>"hexbin foo" creates "foo.bin".  Also consider "-u" or "-U" option.</blockquote>
-
-In /usr/local/man, manX subdirectories contain raw man pages.<br>
-catX subdirectories contain formatted man pages preprocessed by<br>
-<pre><code>  neqn man1/emacs.1 | tbl | nroff -man &gt; cat1/emacs.1<br>
-  pack -f cat1/emacs.1<br>
-</code></pre>
-The .z suffix on these files indicates that they were created by pack (use<br>
-unpack or pcat to view), NOT gzip.<br>
-<br>
-ppanel program: control printing from a GUI<br>
-<br>
-"polite" is like "nice"; it runs runs a program at lower priority.<br>
-It allows other users to 'nap' the 'polite' program for an interval.<br>
-<pre><code>  % polite big-cache-simulator -assoc 2 -size 8192 -other flags<br>
-</code></pre>
-and then an interactive user of merganser could do<br>
-<pre><code>  % nap all<br>
-</code></pre>
-putting the cache simulator to sleep for 15 minutes.<br>
-See the man pages for more information.<br>
-Child jobs spawned by the polited process aren't run under polite, however.<br>
-<br>
-renice causes a running program to acquire only idle resources<br>
-<br>
-truss, strace tell all systems calls made by a process (a program run from<br>
-the command line).  It's truss on Solaris, strace everywhere else.<br>
-<br>
-ldd <i>executablename</i> tells which shared libraries a program uses.<br>
-<br>
-/etc/groups on some systems is "ypcat group" on others.<br>
-The "id" program also lists the groups for each user.<br>
-<br>
-jgraph - filter for graph plotting to postscript.<br>
-Also see ~jdean/graph, which is a preprocessor for it by Eric Brewer.<br>
-Sample invocation:<br>
-<pre><code>graph -e -g -p -c &lt;sample-input.graph | jgraph -P | gv -<br>
-</code></pre>
-
-gnuplot: with the "eps" terminal, has only six symbols available.  The<br>
-"latex" terminal has more symbols (and the output is more customizable),<br>
-though the output isn't as pretty.<br>
-<br>
-An alternative to gnuplot/jgraph is xmgr; supposedly nice but has steep<br>
-learning curve.<br>
-<br>
-xdvi: use "s" to set shrink (image/font size); 3 is a reasonable prefix<br>
-argument<br>
-<br>
-The "search" program is like a combination of 'find' and 'grep' (but using<br>
-Perl regular expressions, and more powerful and efficient).<br>
-Files:<br>
-<ul><li>the program: ~mernst/bin/share/search<br>
-</li><li>its manpage: ~mernst/bin/share/search.manpage<br>
-</li><li>example dotfile: ~mernst/.search<br>
-I find <code>search' easier to use than </code>grep<code>, but </code>grep` can often replace<br>
-it.  For example, these give identical results (except for order):<br>
-<pre><code>search -dir lucene -n 'SuppressWarnings.*interning'<br>
-grep -r -n -e 'SuppressWarnings.*interning' lucene<br>
-</code></pre></li></ul>
-
-To find/search and replace in multiple files (say, an entire directory)<br>
-use<br>
-<pre><code>  preplace [options] oldregexp newregexp [files]<br>
-</code></pre>
-which is like<br>
-<pre><code>  perl -pi -e 's/OLD/NEW/g'<br>
-</code></pre>
-except that the timestamp on each file is updated only if the replacement<br>
-is performed.<br>
-<a href='WATCH.md'>OUT when omitting the [files</a> argument, since you generally do <b>not</b>
-want to perform the replacement in files in the .svn directory.]<br>
-[WARNING: This program does not respect symbolic links, instead replacing<br>
-each symbolic link with a copy of its contents.  So, generate the <a href='files.md'>files</a>
-part without symbolic links.]<br>
-See below for more details.<br>
-.<br>
-To find/search and replace in multiple files (say, an entire directory)<br>
-from the command line via perl, do<br>
-<pre><code>  perl -pi.bak -e 's/OLD/NEW/g' *<br>
-</code></pre>
-NOTE caveats below; it's better to search, then replace only in relevant files.<br>
-Add "i" after g for case-insensitive.<br>
-Other possible invocations:<br>
-<pre><code>  find . -type f -print | xargs perl -pi.bak -e 's/OLD/NEW/g'<br>
-  find . -type f -name '*.html' -print | xargs grep -l 'sdg.lcs.mit.edu/~mernst/' | xargs perl -pi.bak -e 's|sdg.lcs.mit.edu/~mernst/|pag.lcs.mit.edu/~mernst/|g'<br>
-  find . -type f -name Root -print | xargs grep -l '/g1/users/adbirka/.cvs' | xargs perl -pi.bak -e 's|/g1/users/adbirka/.cvs|/g4/projects/constjava/.cvs|g'<br>
-  preplace /g1/users/adbirka/.cvs /g4/projects/constjava/.cvs `find . -type f -name Root -print`<br>
-</code></pre>
-(You can do the same for SVN with <code>svn switch --relocate OLD-PREFIX NEW-PREFIX</code>,<br>
-which retargets a checkout, or for many repositories:<br>
-<pre><code>  find . -path \*/.svn/entries -print0 | xargs -0 preplace manioc.csail login.csail<br>
-</code></pre>
-)<br>
-Problems with the first invocation, fixed by the others:<br>
-<ul><li>The first invocation will search/replace in compressed, binary, PostScript,<br>
-<blockquote>etc. files.  (a few examples: .tar .gz .gif .pdf .ps .Z)<br>
-</blockquote></li><li>The first invocation will update all the files' modification dates, even if<br>
-<blockquote>no replacement occurs.<br>
-</blockquote></li><li>The first invocation will copy links into regular files.<br>
-.<br>
-An alternate way to fix CVS repositories is<br>
-<pre><code>  cd ~/research/invariants<br>
-  echo ":ext:${USER}@pag.csail.mit.edu:/g4/projects/invariants/.CVS' &gt;new-root<br>
-  find . -name Root | xargs -n1 cp ~/research/invariants/new-root<br>
-</code></pre></li></ul>
-
-In CMU Common Lisp (cmucl), smaller applications can result from<br>
-<pre><code>    (declaim (optimize (speed 3) (safety 0) (debug 0)))<br>
-</code></pre>
-An apparently reasonable development setting:<br>
-<pre><code>    (declaim (optimize (safety 3) (speed 2) (debug 2) (compilation-speed 0)))<br>
-</code></pre>
-
-To copy a (local) directory recursively:  cp -pR source target-parent<br>
-To copy a (remote) directory structure from one machine to another:<br>
-<pre><code>  tar cf - packages | rsh ebi "cd /tmp/mernst/pack-cppp-new &amp;&amp; tar xf -"<br>
-  tar cfz - packages | rsh hokkigai "cd /tmp/mernst &amp;&amp; tar xfz -"<br>
-</code></pre>
-This is like<br>
-<pre><code>  rcp -rp mernst@torigai:/tmp/mernst .<br>
-</code></pre>
-except that the latter doesn't preserve symbolic links.<br>
-<br>
-Regular expressions (regexps):<br>
-<ul><li>In alternation, first match is chosen, not longest match.  For<br>
-<blockquote>efficiency, put most likely match (or most likely to fail fast) first.<br>
-</blockquote></li><li><code>(ab)?(abcd)?</code> matches "ab" in "abcde"; does not match the longer "abcd"<br>
-</li><li>character class <code>[abc]</code> is more efficient than alternation <code>(a|b|c)</code>
-</li><li>unrolling the loop:     <code>opening normal* (special normal*)* closing</code>
-<blockquote>eg, for a quoted string:   <code>/L?"[^"\\]*(?:\\.[^"\\]*)*"/</code>
-or <code>$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';</code>
-</blockquote><ul><li>start of normal and special must never intersect<br>
-</li><li>special must not match nothingness<br>
-</li><li>text matched by one application of special must not be matched by<br>
-<blockquote>multiple applications of special</blockquote></li></ul></li></ul>
-
-uname gives operating system (uname -a gives more info).<br>
-<br>
-sysinfo:  information about this hardware, like amount of memory,<br>
-architecture, operating system, and much more.<br>
-/usr/sbin/psrinfo -v:  information about processor speed and coprocessor.<br>
-The "top" program also tells the machine's amount of memory and swap space.<br>
-Also see "uname -a" and "cat /proc/cpuinfo" (as<br>
-well as some of the other kernel pseudo-files under /proc).<br>
-<br>
-In Python, by default variables have function (not block) scope.  To refer<br>
-to (really, to change) a global variable, use the "global" declaration in<br>
-the class/function/whatever.<br>
-<br>
-To test whether a file exists in Python, do os.path.exists('/file/name').<br>
-In Python, to reimport module foo, do reload(foo).<br>
-<br>
-Python debugger:  pdb ~/python/test.py<br>
-You need to "s"tep a few times before "n"ext, which would jump over the<br>
-entire program.  Or just do "continue" to the error.<br>
-<br>
-For time-critical Python runs, disable assertions via -O command-line<br>
-option to Python or setting variable debug to false:  debug = 0.<br>
-You can be sure that the optimized version is running if a .pyo instead of<br>
-a .pyc file is created after you do "import".<br>
-To make Python run optimized, do:<br>
-<pre><code>  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))<br>
-</code></pre>
-To make Python run unoptimized, do:<br>
-<pre><code>  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))<br>
-</code></pre>
-To evaluate these in Emacs, put the cursor at the end of the line and type<br>
-C-x C-e.<br>
-After you change py-which-args, kill the <code>*Python*</code> buffer and restart<br>
-(it's not enough to kill the Python process and restart).<br>
-<br>
-As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,<br>
-even if it is faster...<br>
-<br>
-The ispell program will merge personal dictionaries (.ispell_english) found<br>
-in the current directory and the home directory.<br>
-<br>
-To run a program disowned (so that exiting the shell doesn't exit the<br>
-program), precede it by "nohup".  Programs run in the background also<br>
-continue running when the shell exits (though interactive programs and some<br>
-others seem to be exceptions to this rule; or maybe the rule about<br>
-background jobs continuing only applies for programs that ignore the hangup<br>
-(hup) signal).<br>
-<br>
-To make a diff file good for patching old-file to produce new-file,<br>
-<pre><code>  diff -c old-file new-file<br>
-</code></pre>
-In GNU diff, specify lines of context using -C # (not -c #).<br>
-<br>
-With patch version 2.4 or 2.5 (and maybe other versions), you must set the<br>
-environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at<br>
-the "Index:" lines and it will ask for the filename for each patch.<br>
-<br>
-moss:  a software plagiarism detector by Alex Aiken.<br>
-<a href='http://www.cs.berkeley.edu/~aiken/moss.html'>http://www.cs.berkeley.edu/~aiken/moss.html</a>
-
-To add Frostbyte's public key to my PGP keyring:<br>
-<pre><code>  pgpk -a http://sub-zero.mit.edu/fbyte/pgp.html<br>
-</code></pre>
-
-To find all the executables on my path with a particular name, use<br>
-/usr/local/bin/which -a<br>
-<br>
-/uns/share/bin/ps2img converts PostScript to gif (or other image format?)<br>
-files.  It will handle multipage postscript files fairly gracefully without<br>
-filling up your disk, and it will look for and pay attention to the<br>
-BoundingBox of EPS files if you give the the -e option.  Run it with no<br>
-arguments to see the options.<br>
-<br>
-To convert a directory from DOS to Unix conventions:<br>
-<pre><code>foreach f ( `find . -type f` )<br>
-  echo $f<br>
-  dos2unix $f $f | grep -v 'get keyboard type US keyboard assumed'<br>
-end<br>
-</code></pre>
-
-LAOLA converts Microsoft Word .doc documents to plain text.  It is<br>
-superseded by the Perl OLE::Storage module<br>
-(<a href='http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/'>http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/</a> or<br>
-<a href='http://www.cs.tu-berlin.de/~schwartz/perl/'>http://www.cs.tu-berlin.de/~schwartz/perl/</a>), which gives access to<br>
-"structured storage", the binary data format of standard Microsoft Windows<br>
-OLE documents.<br>
-<br>
-mkid (part of GNU's id-utils) is something like tags, but records all uses<br>
-of all tokens and permits lookup.  There's an Emacs interface, too.<br>
-<br>
-The file command gives information about the file format (type of file,<br>
-executable (including debugging format), etc).<br>
-<br>
-On a Kinesis Advantage contoured keyboard:<br>
-Soft reset: Press Progrm + Shift + F10.<br>
-Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.<br>
-Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)<br>
-Toggle the tone: progrm+hyphen<br>
-Dvorak:  progrm+shift+f5 (this erases any remapping, but not macros)<br>
-If I am getting bizarre "super" modifiers, then the keyboard may be in Mac<br>
-<blockquote>mode.  Holding down = then tapping s may produce "v3.2<a href='.md'>.md</a>".  Change to PC<br>
-mode by holding down = then tapping p; now holding down = and tapping s may<br>
-produce "v3.2<a href='SL.md'>K H x e </a>".</blockquote>
-
-There's no perfectly reliable way to determine the version of Red Hat Linux<br>
-is being run, but you can try:<br>
-<pre><code>  rpm -q redhat-release<br>
-  cat /etc/redhat-release  # the single file that the above package installs<br>
-</code></pre>
-
-ImageMagick is a replacement for (part of) xv:  three of its programs are:<br>
-<ul><li>display will view images in a great many different file formats.<br>
-</li><li>import grabs screen shots, either that you select with the mouse, that<br>
-<blockquote>you specify by window ID, or the root window.<br>
-</blockquote></li><li>convert old.gif new.jpg lets you easily change image formats.</li></ul>
-
-"locate" finds a file of a given name anywhere on the system.<br>
-Database is updated nightly or so.<br>
-<br>
-To use "crypt" to encrypt a string, like in the password file /etc/passwd,<br>
-use "openssl passwd".<br>
-(Note that "crypt" is known to be insecure; only use it for /etc/passwd.)<br>
-<br>
-Use "chsh" to set/change your shell.<br>
-<br>
-make: "error 139" means that your program segfaulted:  139 = 128+11, and 11<br>
-is a segfault (<a href='http://www.bitwizard.nl/sig11/'>http://www.bitwizard.nl/sig11/</a>).<br>
-<br>
-If using YP for password (yppasswd) and other files, don't edit /etc/group;<br>
-instead, as root, edit, then rebuild the NIS database:<br>
-<pre><code> ${EDITOR} /var/yp/etc/group<br>
- cd /var/yp; make<br>
-</code></pre>
-If yppasswd does not work, then maybe the ypbind and/or yppasswd daemons<br>
-have died.  "ypwhich" will return an error message if ypbind has stopped.<br>
-To restart the daemons, do (as root)<br>
-<pre><code>  /etc/rc.d/init.d/ypbind restart<br>
-  /etc/rc.d/init.d/yppasswdd restart<br>
-</code></pre>
-
-Find all subdirectories:<br>
-<pre><code>  find . -type d -print<br>
-  find . -type d -exec script {} \;<br>
-</code></pre>
-Make all subdirectories readable and executable by group:<br>
-<pre><code>  find . -type d -exec chmod g+rx {} \;<br>
-</code></pre>
-Make all files readable by group:<br>
-<pre><code>  find . -type f -exec chmod g+r {} \;<br>
-</code></pre>
-Find all group-writeable files:<br>
-<pre><code>  find . -type l -prune -o -perm -020 -print<br>
-</code></pre>
-
-To install an RPM, do  rpm -Uvh foo.rpm<br>
-<br>
-If machines come up before the ntpd server (and as a result their time<br>
-and date are not synchronized/synched), run this command on each machine:<br>
-<pre><code>  /etc/rc.d/init.d/xntpd restart<br>
-</code></pre>
-
-On pag, use "yppasswd" instead of "passwd".<br>
-<br>
-SAS:<br>
-<ul><li>Avoid all comments.  Comments in random places cause bizarre behavior<br>
-<blockquote>and inscrutible error messages.<br>
-</blockquote></li><li>In programs (in particular, in "datalines"), lines longer than 127<br>
-<blockquote>characters (assuming 8-character tabs) are silently discarded.<br>
-</blockquote></li><li>In "infile" files, tab characters cause confusion; untabify.</li></ul>
-
-SAS tips:<br>
-Run SAS:<br>
-<ul><li>using GUI:  sas<br>
-</li><li>from command line:   sas myfile.sas<br>
-Data input:<br>
-</li><li>skip first observation (first line):<br>
-<blockquote>infile 'blah.dat' firstobs=2;<br>
-</blockquote></li><li>allow for really long records:<br>
-<blockquote>infile 'blah.dat' lrecl=2000;<br>
-</blockquote></li><li>data values must be space-separated (tabs cause problems on some systems)<br>
-New data set which is a subsets of the original data:<br>
-</li><li>data bigx; set orig;<br>
-<blockquote>if x > 10;<br>
-</blockquote></li><li>data nocontrol; set orig;<br>
-<blockquote>if trt = 'control' then delete;<br>
-When comparing strings, use only the first 8 characters (!):  not<br>
-</blockquote><blockquote>if treat = 'non_partic' then treat_numeric = 0;<br>
-</blockquote><blockquote>but<br>
-<blockquote>if treat = 'non_part' then treat_numeric = 0;<br>
-Subgroups of a data set:  must be sorted before invoking "proc means"<br>
-</blockquote></blockquote></li><li>proc sort; by sex trt;<br>
-</li><li>proc means; by sex trt;<br>
-Procecure return values:<br>
-</li><li>proc means noprint;<br>
-<blockquote>var x y;<br>
-output out=b mean=mx my std=sx sy;  /<b>output means and SD for x,y</b>/<br>
-Interaction plot:  plot of the average values of y for each period and trt.<br>
-</blockquote></li><li>proc sort; by period trt;<br>
-<blockquote>proc means noprint; by period trt;<br>
-<blockquote>var y;<br>
-output out=means mean=my;<br>
-</blockquote>proc plot;<br>
-<blockquote>plot my*period=trt;<br>
-Proc GLM permits using both regressor (continuous) type variables and<br>
-</blockquote></blockquote><blockquote>categorical (class) variables as independent variables.  However, the<br>
-dependent variable must be continuous.<br>
-Furthermore, no variable noted in the "class" section may be (always missing).<br>
-The chi-square test is good for nominal (categorical, class) independent<br>
-and dependent variables.<br>
-Three-way anova with all interactions:<br>
-</blockquote></li><li>proc anova;<br>
-<blockquote>class a b c;<br>
-model y = a b c a*b a*c b*c a*b*c;<br>
-</blockquote></li><li>proc anova;       /<b>shorthand</b>/<br>
-<blockquote>class a b c;<br>
-model y = a | b | c;<br>
-Multivariate methods (manova) may be <b>less</b> powerful than univariate ones<br>
-</blockquote><blockquote>if responses are <b>not</b> correlated.<br>
-Frequency tables: proc freq<br>
-</blockquote></li><li>proc freq;<br>
-<blockquote>tables sex;   /<b>one-way table</b>/<br>
-</blockquote></li><li>proc freq;<br>
-<blockquote>tables infilt*score;   /<b>two-way table</b>/</blockquote></li></ul>
-
-zip -r foo foo<br>
-makes a zip archive named foo.zip, which contains directory foo and all its<br>
-contents.<br>
-<br>
-To uuencode a file:   uuencode filename filename > filename.UUE<br>
-<br>
-Use unzip to extract files from zip/pkzip archives.<br>
-<br>
-finger crashes on NIS clients when the GECOS field of the NIS-entry is<br>
-blank and the user home directories is chmod'd to 700.  (as of 1/2002)<br>
-<br>
-To compute a file's checksum, use "sum" or "cksum" or "md5sum".<br>
-For an entire directory, "md5deep" works.<br>
-<br>
-A way to find typos and grammar errors in papers:  run ps2ascii on a<br>
-(one-column) PostScript file, then paste the result into Microsoft Word and<br>
-run its grammar checker.<br>
-<br>
-If the crontab log says "bad user", that typically means that the password<br>
-is expired.  On marjoram, we fixed this (maybe) by adding an entry (with an<br>
-in-the-future expiration time) to /etc/shadow, though it really should have<br>
-been in /etc/shadow.local.  Other possibilities:<br>
-<ul><li>account is not locked<br>
-</li><li>password is not expired<br>
-</li><li>pwck does not complain about the account<br>
-</li><li>account is in /etc/cron.d/cron.allow<br>
-</li><li>or maybe (probably not) that the command was run and exited with a<br>
-<blockquote>return status of 1 (maybe the command wasn't in the path when cron ran?)</blockquote></li></ul>
-
-Sometimes a single NFS client cannot see a directory when other clients of<br>
-the same server can see the directory.  A workaround is to run 'rmdir' on<br>
-the troublesome directory; this seems to fix the problem.<br>
-<br>
-Valgrind is a free, good Purify-like detector of memory errors (for x86<br>
-Linux only).  It's better than what is built into gcc.<br>
-<a href='http://developer.kde.org/~sewardj/'>http://developer.kde.org/~sewardj/</a>
-
-To see the equivalent of a yppasswd entry for user foo, do<br>
-"ypmatch foo passwd" or "ypcat passwd | grep -i foo" or "~/bin/getpwent foo".<br>
-Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.<br>
-<br>
-To encrypt/decrypt with blowfish:<br>
-<pre><code>  openssl enc -bf -e -in file -out file.bfe<br>
-  openssl enc -bf -d -in file.bfe -out file.decrypted<br>
-</code></pre>
-Optional argument:  -k secretkey<br>
-For rc4 (which is insecure), change -bf to -rc4<br>
-<br>
-Greg Shomo recommends that one use RPM to install anything that was<br>
-included in the original (Red Hat) Linux distribution:  bugfixes and<br>
-updates.  He recommends using source to install any new programs.<br>
-He recommends installing package foo-1.2 with<br>
-<pre><code>  ./configure --prefix=/usr/local/pkg/foo/foo-1.2<br>
-</code></pre>
-then using gnu stow (<a href='ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz'>ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz</a>) to make<br>
-the proper symlinks into that subdirectory.<br>
-<br>
-Don't use the "follow" option in Unison, which can delete the real file<br>
-behind a symbolic link in ~/.synchronized -- see my Unison files for details.<br>
-<br>
-After adding a script to /etc/rc.d/init.d, add two symbolic links to<br>
-/etc/rc.d/rcN.d/.<br>
-The one starting with "S" (start) is invoked when runlevel N is entered.<br>
-The one starting with "K" (kill) is invoked when runlevel N is exited.<br>
-<br>
-At LCS, to upgrade a Red Hat Linux machine with the latest security (or<br>
-other) patches:<br>
-<pre><code>  # Prepare (can always determine mount point by executing<br>
-  # '/usr/sbin/showmount -e coua.lcs.mit.edu')<br>
-  mount coua.lcs.mit.edu:/scratch /mnt<br>
-  # Check status (a nice list of the rpms that require "freshening")<br>
-  # (Does this script need to have "/i686" appended to its pathnames?)<br>
-  /mnt/bin/amIUp2Date<br>
-  # Update<br>
-  cd /mnt/mirror.techsquare.com/redhat-7.2-ia32/suggested/i686<br>
-  # Don't do "rpm -Fvh *.rpm"!  Select all the rpms *except* for anything<br>
-  # XFree86*, since my laptop's hardware isn't supported and that will prevent<br>
-  # X from starting.<br>
-  rpm -Fvh `\ls *.rpm | grep -v XFree86`<br>
-  # Unmount<br>
-  cd /<br>
-  umount /mnt<br>
-</code></pre>
-
-"chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created<br>
-in that directory will have their group set to the directory's group.<br>
-Directories created in that directory also have their SGID bit set.<br>
-(The SGID bit has nothing to do with the sticky bit.)<br>
-<br>
-/usr/lib/ical/v2.2/contrib/ contains hacks for ical.<br>
-<br>
-lpr can assign "classes" or priorities to jobs.  For instance, to bypass<br>
-all other jobs in the queue, do "lpr -C Z <i>filename</i>" (Z is the highest<br>
-priority/class).<br>
-<br>
-If trying to print results in the error<br>
-<blockquote>lpr: error - scheduler not responding!<br>
-then make sure that your PRINTER environment variable is properly set.</blockquote>
-
-ispell that requires only one argument at a time:<br>
-<pre><code>foreach file (*.tex)<br>
-  ispell $file<br>
-end<br>
-</code></pre>
-
-To run VNC:<br>
-<pre><code>  vncviewer `cat ~/.vncip`<br>
-</code></pre>
-
-Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,<br>
-AIX), eg:<br>
-smbclient '\\rfilesrv1\students' -W cseresearch<br>
-<br>
-Run smbpasswd to set samba passwords (there is a separate password file for<br>
-them).<br>
-<br>
-To make Samba work from certain locations, I must first edit<br>
-/etc/samba/smb.conf to add those IP addresses in the "hosts allow" section.<br>
-Also edit /etc/hosts.allow similarly.<br>
-<br>
-To execute a command on all the PAG clients:<br>
-<pre><code>  pagdo sudo &lt;full-path-to-that-command &amp;&amp; args&gt;<br>
-</code></pre>
-(But that command apparently can't be "emacs", as the X connection gets<br>
-rejected due to "wrong authentication.  Also, apparently don't include ";"<br>
-to split multiple commands; use multiple "pagdo sudo" commands.)<br>
-This requires typing my password N times for N machines.<br>
-To make this easier, we could add a /root/.ssh/authorized_keys file to each<br>
-client which includes (y)our public key and use "root@" in the ssh command<br>
-in pagdo.<br>
-<br>
-/etc/sudoers says<br>
-<pre><code>  # This file MUST be edited with the 'visudo' command as root.<br>
-</code></pre>
-But the visudo command just does file-locking and checks for syntax errors;<br>
-it's fine to edit the file with another editor.<br>
-<br>
-Combinatorial games suite (supersedes David Wolfe's package):<br>
-<a href='http://cgsuite.sourceforge.net/'>http://cgsuite.sourceforge.net/</a>
-
-To have a mount re-done at each reboot:<br>
-Put in /etc/fstab<br>
-<pre><code>  jbod.ai.mit.edu:/fs/jbod1/mernst-temp /mnt/dtrace-store nfs     defaults       \<br>
- 0 0<br>
-</code></pre>
-(And you can also issue just "mount /mnt/dtrace-store" now.)<br>
-This particular mount requires that the following appear in /etc/hosts.allow:<br>
-<pre><code>  ALL: 128.52.0.0/255.255.0.0<br>
-</code></pre>
-
-Delta debugging appliation, written in perl:<br>
-<blockquote><a href='http://daniel-wilkerson.appspot.com/;'>http://daniel-wilkerson.appspot.com/;</a> look for "Delta", under "Software"<br>
-Or, at pag: ~smcc/bin/delta<br>
-Also, Zeller's Python implementation is at:<br>
-<a href='http://www.st.cs.uni-sb.de/dd/'>http://www.st.cs.uni-sb.de/dd/</a></blockquote>
-
-To exit the vi or vim editor:<br>
-<pre><code> :q<br>
-</code></pre>
-To exit without saving changes:<br>
-<pre><code> :qa!<br>
-</code></pre>
-For help:<br>
-<pre><code> :help<br>
-</code></pre>
-
-To find a meeting time that fits with everyone's schedule, consider using:<br>
-<blockquote>~mernst/bin/share/schedule<br>
-on a file containing lines such as<br>
-<pre><code>  mernst  TR12:30-3,R4-5,W9-5  MR12-1<br>
-  notearly MTWRF9-10<br>
-  cpacheco  MW1-4 TR9:30-11<br>
-  awilliam  T11-4,W11:30-1:30,R11-3,R4-5,F10-12  M11-12,F12-4:30<br>
-  smcc  R1-2,R4-5<br>
-  jhp     MW9:30-11,F2-3<br>
-  akiezun TR11:00-3,F10-12:30<br>
-  artzi TR10-17,F10-12<br>
-  pgbovine MWF1-4,T4:30-5:30,R1-2<br>
-  galen F12:30-1:30<br>
-  tschantz MW10:30-4,F10-11<br>
-  chenx05 M12-5,TR9:30-11,TR12-1,TR2-5:30,W1-3,F11-3<br>
-  mao F9-5<br>
-</code></pre>
-But you can also use a web survey such as doodle.com</blockquote>
-
-Parallel/distributed jobs across many machines:<br>
-<ul><li>The distcc compiler permits compilation jobs to be distributed (in<br>
-<blockquote>parallel) across many machines.  See <a href='http://distcc.samba.org/'>http://distcc.samba.org/</a>.<br>
-</blockquote></li><li>Another useful tool for speeding up compilation is ccache; to use it,<br>
-<blockquote>change the "CC=gcc" line in your Makefile to be "CC=ccache gcc".<br>
-</blockquote></li><li>"drqueue", the distributed renderer queue; I'm not sure how<br>
-<blockquote>rendering-specific it is.<br>
-</blockquote></li><li>There are two add-ons to GNU make:<br>
-<ol><li>The customs library; read about it in the make distro in README.customs.<br>
-<blockquote>(It will ask you to download pmake from<br>
-<a href='ftp://ftp.icsi.berkeley.edu/pub/ai/stolcke/software/'>ftp://ftp.icsi.berkeley.edu/pub/ai/stolcke/software/</a>, among other things.)<br>
-</blockquote></li><li>The GNU make port to PVM: <a href='http://www.crosswinds.net/~jlabrous/GNU/PVMGmake/'>http://www.crosswinds.net/~jlabrous/GNU/PVMGmake/</a>
-<blockquote>More about PVM: <a href='http://www.epm.ornl.gov/pvm/'>http://www.epm.ornl.gov/pvm/</a>
-</blockquote></li></ol></li><li>OpenPBS: <a href='http://www-unix.mcs.anl.gov/openpbs/'>http://www-unix.mcs.anl.gov/openpbs/</a></li></ul>
-
-Firefox extensions (.xpi files): to install, open them in Firefox.<br>
-Adblock: <a href='http://adblock.mozdev.org/'>http://adblock.mozdev.org/</a>
-Firefox Adblock filter list: <a href='http://www.geocities.com/pierceive/adblock/'>http://www.geocities.com/pierceive/adblock/</a>
-(Must update by hand via "Tools > Adblock > Preferences > Adblock Options<br>
->> Import filters".)<br>
-Also get the Adblock filter updater extension.<br>
-<br>
-In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in<br>
-about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &<br>
-Colors >> Default Font) causes webpages to appear in sans serif font by<br>
-default.  It also makes webpages print in sans serif, which is not<br>
-necessarily desirable:  sans serif is easier to read on screen, but serif<br>
-is easier to read on paper.  I wish there was an easy way to get both of<br>
-those features.<br>
-<br>
-If Firefox or Thunderbird says that a copy is already running, but that<br>
-doesn't seem to be the case, then find and delete the file .parentlock<br>
-somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .<br>
-<br>
-In Firefox, to make searches ("find") default to case-insensitive:<br>
-Press Ctrl+F , the quick find appears at taskbar.<br>
-Uncheck the Match case check box<br>
-<br>
-If Firefox behaves badly (doesn't go to homepage, address bar doesn't<br>
-update, back button doesn't work), try moving your ~/.mozilla directory<br>
-aside, because one of your plugins may be corrupting Firefox.<br>
-<br>
-vi commands:<br>
-:q quits vi after a file has been saved<br>
-:q! quits vi without saving the file<br>
-:x saves the file and quits vi<br>
-:wq saves the file and quits vi<br>
-<br>
-To start up network on Linux laptop (for NIC; not necessary for PCMCIA):<br>
-Debian:<br>
-<pre><code>  /sbin/ifup eth 0<br>
-</code></pre>
-Red Hat:<br>
-<pre><code>  /etc/sysconfig/network-scripts/ifup eth0<br>
-</code></pre>
-
-To set wireless card SSID and key, run (as root):<br>
-<pre><code>  /sbin/iwconfig eth1 essid "Chaos"<br>
-  /sbin/iwconfig eth1 key 03-ef-etc.<br>
-  /sbin/iwconfig eth1 key "s:asfd"<br>
-</code></pre>
-To see your current settings:<br>
-<pre><code>  /sbin/iwconfig eth1<br>
-</code></pre>
-
-
-Use the rss2email program as follows:<br>
-First, run<br>
-<pre><code> r2e new mernst@csail.mit.edu<br>
-</code></pre>
-but don't re-run that as it blows away all configuration files.<br>
-Then, run one of<br>
-<pre><code> r2e add 'http://forum6170.csail.mit.edu/index.php?type=rss;action=.xml'<br>
- r2e add 'http://forum6170.csail.mit.edu/index.php?type=rss;action=.xml;limit=255'<br>
- r2e add 'http://cathowell.blogspot.com/feeds/posts/default?alt=rss'<br>
-</code></pre>
-and finally, nothing happens unless I run<br>
-<pre><code> r2e run<br>
-</code></pre>
-periodically -- say, every minute or hour in a cron job.<br>
-<br>
-To make the junit task work in Ant without setting classpath, use the hack from:<br>
-<a href='http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes'>http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes</a>
-
-To list the projects (top-level targets) in an Ant build.xml file, do either of:<br>
-<pre><code>  ant -projecthelp<br>
-  ant -p<br>
-</code></pre>
-
-To get the current working directory from an ant file:<br>
-<pre><code>  ${bsh:WorkDirPath.getPath()}<br>
-</code></pre>
-
-
-To print a reasonable map from google maps do the following:<br>
-<ul><li>execute 'import map.jpg'<br>
-</li><li>Draw a rectangle over the part of the map you want.  The result will<br>
-<blockquote>be saved in map.jpg<br>
-</blockquote></li><li>execute 'gimp map.jpg'<br>
-</li><li>print from gimp.  Gimp does a nice job of laying the jpeg out on<br>
-<blockquote>the screen and allows you to scale it and the like.</blockquote></li></ul>
-
-To get a list of LaTeX files that are \inputted (not \included) in a LaTeX<br>
-file, for use in making a tags table or in a Makefile or Ant build.xml file:<br>
-<pre><code>  TEX_FILES=$(shell latex-process-inputs -list main.tex)<br>
-</code></pre>
-or, to run tags directly:<br>
-<pre><code>  etags `latex-process-inputs -list main.tex`<br>
-</code></pre>
-
-To run VMware tools:<br>
-<pre><code>  vmware-toolbox &amp;<br>
-</code></pre>
-To install VMware tools, see ~mernst/wisdom/build/build-vmware<br>
-<br>
-Information on how to configure our ESX VMware servers is available<br>
-in PAG logistics at:  <a href='http://groups.csail.mit.edu/pag/pag/esx.html'>http://groups.csail.mit.edu/pag/pag/esx.html</a>
-
-In VMware, shared folders from the host appear in /mnt/hgfs/.<br>
-<br>
-To create a transparent signature stamp:<br>
-<ul><li>scan a hardcopy of my signature<br>
-</li><li>clean it up (in Paint or in the Gimp)<br>
-</li><li>use Gimp to make the background transparent:<br>
-<ul><li>menu > layer > transparency > add alpha channel<br>
-</li><li>click on the fuzzy selector tool<br>
-</li><li>for each area to remove, select it, then "edit > clear" (ctrl + k)<br>
-</li><li>save as gif or png<br>
-</li></ul><blockquote>(instructions from <a href='http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp'>http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp</a>)<br>
-</blockquote></li><li>Imagemagick's "convert" program didn't work, so convert the gif or png to<br>
-<blockquote>PDF with Acrobat Professional<br>
-</blockquote></li><li>Convert the PDF to EPS via imagemagick's "convert" program (other<br>
-<blockquote>techniques might work, too)</blockquote></li></ul>
-
-When you have a PDF file that is marked up with annotations, you can either<br>
-view the annotation text one-by-one in a PDF reader, or you can create a PDF<br>
-file that contains the annotations visibly.  Different people prefer the<br>
-two approaches, and some PDF readers such as Evince don't seem to provide<br>
-any way to view the annotations.<br>
-Here is how to create a PDF that shows the annotation text:<br>
-<ul><li>Using Acrobat Reader: start Print, then select "Summarize Comments" near<br>
-<blockquote>the upper right corner of the print dialog.  That pops up another print<br>
-dialog, where you can finally print or save to PDF.  The final PDF has<br>
-alternating pages of the original document and the comments, with each<br>
-annotation in the original document cross-referenced to the comments page.<br>
-</blockquote></li><li>In Acrobat Professional:  Review & Comment >> Summarize Comments<br>
-<blockquote>This can draw lines between the annotations in the original document and<br>
-the comments, or print in other ways such as the way Acrobat Reader does.<br>
-(The free version of Foxit Reader 5.4 can create a separate document that<br>
-lists all the comments, but it doesn't indicate the location in the<br>
-original document as the Adobe Acrobat tools do.)</blockquote></li></ul>
-
-To make a screencast video demo (i.e., screen capture/recording from a<br>
-running program), Marat Boshernitsan recommends<br>
-Camtasia Studio from TechSmith (<a href='http://www.techsmith.com/camtasia.asp'>http://www.techsmith.com/camtasia.asp</a>).<br>
-(It's a full suite of tools and has affordable educational pricing.)<br>
-Marat Boshernitsan says,<br>
-<blockquote>My biggest piece of advice is to edit heavily for length and to add as<br>
-many visual annotations to the video as possible.  Camtasia's<br>
-video-editing component allows the user to extract all pauses (as short<br>
-as a fraction of a second) from the video to create a smooth-flowing<br>
-presentation.  Their annotation tools enable insertion of highlights and<br>
-callouts to focus the viewer's attention on the important areas of the<br>
-screen.  I prefer screen annotations to voiceovers, because they allow<br>
-watching the video without reaching for headphones.<br>
-To see an example, click on one of the demo links on this page:<br>
-<a href='http://nitsan.org/~maratb/blog/2007/05/01/aligning-development-tools-with-the-way-programmers-think-about-code-changes/'>http://nitsan.org/~maratb/blog/2007/05/01/aligning-development-tools-with-the-way-programmers-think-about-code-changes/</a>
-It is a bit time-compressed to fit into the 5 minute limit imposed by CHI.</blockquote>
-
-If OpenOffice or LibreOffice is trying to restore a file that no longer<br>
-exists, press 'escape' at the Recovery window.<br>
-<br>
-%% More manual, less desirable solution:<br>
-% If OpenOffice is trying to restore a file that no longer exists, delete a<br>
-% file such as one of these:<br>
-% ```<br>
-%   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu<br>
-%   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu<br>
-% ```<br>
-<br>
-To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:<br>
-<blockquote>Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1<br>
-Alternately:<br>
-Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1</blockquote>
-
-In OpenOffice, to freeze rows/columns so that they do not scroll but are<br>
-always visible, select the row (or cell) below (and to the right of) the<br>
-one you want to freeze, then do Window > Freeze.<br>
-<br>
-Setting up a new USB microphone/headset:  run<br>
-<pre><code>  gnome-volume-control<br>
-</code></pre>
-When the application starts, choose the default device and unmute both the<br>
-headphones <b>and</b> the microphone.<br>
-For Skype, under Linux, see<br>
-<blockquote><a href='http://www.skype.com/help/guides/soundsetup_linux.html'>http://www.skype.com/help/guides/soundsetup_linux.html</a>
-Under Fedora, I had to unset "allow skype to automatically adjust my mixer<br>
-levels" lest the recording level was much too low.</blockquote>
-
-On Linux, after plugging in headphones, you have to tell the application<br>
-(e.g., Skype) you are trying to use with the headset to use the second<br>
-soundcard (card1) in order to get audio over the headphones.<br>
-<br>
-The "-e" argument to mail means send no mail if the body is empty.  So use<br>
-(in csh)<br>
-<pre><code>  ${COMMAND} |&amp; ${MAIL} -e -s "${SUBJECT}" mernst &lt; /tmp/mailbody-$$<br>
-</code></pre>
-instead of<br>
-<pre><code>  ${COMMAND} &gt; /tmp/mailbody-$$<br>
-  if (!(-z /tmp/mailbody-$$)) ${MAIL} -s "${SUBJECT}" mernst &lt; /tmp/mailbody-$$<br>
-  \rm -f /tmp/mailbody-$$<br>
-</code></pre>
-
-mkpasswd: generate one random password<br>
-pwgen -N1: generate one random password<br>
-<br>
-Server-side includes (SSI) for web pages:<br>
-<pre><code>  &lt;!--#include file="filename.html"--&gt;<br>
-  &lt;!--#include virtual="/directory/included.html" --&gt;<br>
-</code></pre>
-Use "file=" for relative filenames, "virtual=" for relative or non-relative<br>
-filenames (e.g., an address starting at the server root).<br>
-In some cases, you must configure the webserver to preprocess all<br>
-pages with a distinctive extension (normally, ".shtml").<br>
-UW CSE lets us tweak our .htaccess file such that we can have<br>
-all regular .html files get this behavior, not just .shtml files.  See the<br>
-WASP webpages for an example.<br>
-<br>
-The "rev" program reverses the order of characters in every line of input.<br>
-It's the way to reverse all lines of a file.<br>
-To sort lines, with the sort key being the reverse of each line:<br>
-<blockquote>cat myfile | rev | sort -r | rev</blockquote>
-
-"cd -" connects to your previous directory.<br>
-<br>
-When printing a blog (or some other types of webpages) from Firefox, often<br>
-only the first page is printed:  each blog post is one box, but overflowed<br>
-boxes are invisibly hanging off the page instead of ontinued to the next<br>
-page.  This is due to a problem in the blog's .css file.<br>
-Here are two fixes:<br>
-<ol><li>Permit wrapping text across pages:  remove<br>
-<pre><code>      &lt;div class="contenttext"&gt;<br>
-</code></pre>
-<blockquote>Also, get rid of sidebars so the blog content prints full width:  remove<br>
-<pre><code>      &lt;div id="leftside"&gt;<br>
-</code></pre>
-through<br>
-<pre><code>      &lt;div class="post"&gt;<br>
-</code></pre>
-(inclusive).<br>
-</blockquote></li></ol><blockquote>2. Fix the .css file.  Copy the blog locally:<br>
-<pre><code>      wget -O localfile.html URL<br>
-</code></pre>
-<blockquote>and also copy its .css file locally.<br>
-Edit the .css file to contain:<br>
-<pre><code>      * {<br>
-      overflow: visible !important;<br>
-      }<br>
-</code></pre>
-</blockquote><blockquote>and edit the .html file to reference the local version of the .css file.</blockquote></blockquote>
-
-The canonical @sys directory for your path is<br>
-<pre><code>  $HOME/bin/`uname`-`uname -m`<br>
-</code></pre>
-
-When a sh/bash script wishes to pass one of its arguments to another<br>
-program, it's necessary to quote those arguments so they are not<br>
-re-interpreted (and in particular, so that embedded spaces do not cause an<br>
-argument to be split into two).  A way to do this is to surround the<br>
-argument by spaces, and then call the other program with "eval" instead of<br>
-directly:<br>
-<pre><code>  eval other-program "${my_variable}"<br>
-</code></pre>
-
-To determine which version of RedHat/Fedora I am running:<br>
-<pre><code>  cat /etc/redhat-release <br>
-</code></pre>
-
-Make has two flavors of variables that may appear in a Makefile.<br>
-The normal type is recursively expanded, re-evaluated on each use:<br>
-<pre><code>     foo = $(bar)<br>
-</code></pre>
-The GNU-specific type is simply expanded, set once when the assignment is<br>
-encountered.<br>
-<pre><code>     x := foo<br>
-</code></pre>
-
-To make the history command show times, do this:<br>
-export HISTTIMEFORMAT='%Y-%b-%d::%Hh:%Mm:%Ss '<br>
-export HISTTIMEFORMAT='%Hh:%Mm:%Ss '<br>
-That can be useful for seeing how long a command took to run, if another<br>
-command is issued immediately afterward.<br>
-<br>
-In Acrobat (not reader), to fill in a form, either:<br>
-<ul><li>use the typewriter tool, or<br>
-</li><li>ctrl-left-click (this is easier from a unability point of view)</li></ul>
-
-To give up and uninstall a package installed by encap/epkg:<br>
-<pre><code>    cd /uns/encap<br>
-    epkg -i $pkg<br>
-</code></pre>
-
-"ack" is like "grep -r" or "search", but claims to be more flexible.<br>
-<blockquote>I've given up using it, though; I find search more featureful and less buggy.<br>
-A problem is that unlike the "search" program, it does not seach in<br>
-compressed (.gz, .Z) files.<br>
-You should always run ack with the --text option (put that in an alias or in<br>
-.ackrc).  Otherwise, ack discards some text files, since by default, text<br>
-files (and also binary and "skipped") are not considered interesting (!),<br>
-but everything else is.  Turning on text, turns off every other type, but<br>
-the files get searched anyway since they are considered text as well as<br>
-their other file type.<br>
-To get a list of files ack is searching (-f means print all files searched):<br>
-<pre><code>  ack -f<br>
-</code></pre></blockquote>
-
-To perform an advanced search of messages in thunderbird, goto<br>
-edit->find->search-messages<br>
-<br>
-Pidgin (previously GAIM) is a Linux IM client that can interoperate with<br>
-Google Talk.<br>
-<br>
-An uninterrupted Hudson build has one of the following statuses:<br>
-<ul><li>Failed - it doesn't compile<br>
-</li><li>Unstable - compiles without errors, but tests fail<br>
-</li><li>Stable - compiles without errors and all the tests are passing<br>
-A manually interrupted Hudson job gives a message like "SCM check out aborted".</li></ul>
-
-To make your slow regular expressions (regexps) faster, restrict the number of<br>
-different ways the regexp could match the same text.  For example, if<br>
-you're trying to match some whitespace followed by all the text until the<br>
-end of the line, don't write this:<br>
-<blockquote>\s-+.<b><br>
-Since the . can match whitespace too, there are as many different ways<br>
-to apportion the match between the two subexpressions "\s-+" and ".</b>"<br>
-as there are whitespace characters.  Instead, write this:<br>
-\s-.<b><br>
-Although this regexp matches exactly the same set of strings, there is<br>
-now only one way to match:  the "\\s-" matches the first whitespace<br>
-character, and ".</b>" matches the rest.  This runs faster.</blockquote>
-
-To convert a Perl program with POD ("plain old documentation") embedded<br>
-documentation into a man page, run pod2man.  For example:<br>
-<pre><code>  pod2man my-script.pl | nroff -man <br>
-</code></pre>
-
-To resolve a symbolic link to its true name (truename), use <code>readlink</code>.<br>
-<br>
-The <code>curl</code> program displays an annoying progress meter.  To disable it<br>
-without also suppressing errors, use <code>curl -s -S</code>.<br>
-<br>
-If running <code>dropbox.py start -i</code> yields<br>
-<pre><code>  To link this computer to a dropbox account, visit the following url: ...<br>
-</code></pre>
-then run:<br>
-<pre><code>  dropbox.py stop<br>
-  dropbox.py start -i<br>
-</code></pre>
-
-To get the current date in a sortable numeric format:<br>
-<pre><code>  date +%Y%m%d<br>
-</code></pre>
-To get yesterday's date:<br>
-<pre><code>  date --date yesterday<br>
-</code></pre>
-
-To recover a closed tab in Chrome:  Ctrl-Shift-t<br>
-<br>
-To replace the dictionary in the Android Kindle app:<br>
-<ul><li>Not officially supported as of May 2013: <a href='http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3CF5CO3HY68KB&cdMsgNo=60&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3CF5CO3HY68KB'>http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&amp;cdForum=Fx1GLDPZMNR1X53&amp;cdMsgID=Mx3CF5CO3HY68KB&amp;cdMsgNo=60&amp;cdPage=3&amp;cdSort=oldest&amp;cdThread=Tx1TP0PSVB5RMFB#Mx3CF5CO3HY68KB</a>
-<blockquote>and later messages say that previously-posted solutions in that thread no longer work either<br>
-</blockquote></li><li>Another possibility: <a href='http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3SFUQ6LQH79EL&cdMsgNo=72&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3SFUQ6LQH79EL'>http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&amp;cdForum=Fx1GLDPZMNR1X53&amp;cdMsgID=Mx3SFUQ6LQH79EL&amp;cdMsgNo=72&amp;cdPage=3&amp;cdSort=oldest&amp;cdThread=Tx1TP0PSVB5RMFB#Mx3SFUQ6LQH79EL</a>
-</li><li>if you have an Internet connection: <a href='http://ebookfriendly.com/translate-words-in-kindle-app/'>http://ebookfriendly.com/translate-words-in-kindle-app/</a>
-</li><li>A Spanish-to-Spanish dictionary is already be installed with the app</li></ul>
-
-For RBCommons, you can submit a review by either downloading their command-line tools, <a href='http://www.reviewboard.org/downloads/rbtools/'>http://www.reviewboard.org/downloads/rbtools/</a>, or by uploading a diff on their webpage.<br>
-<br>
-To compress a JPEG file:<br>
-<pre><code>  convert input.jpg -quality nn output.jpg <br>
-</code></pre>
-where nn is between 1 and 100.  1 is the lowest quality (highest<br>
-compression).<br>
-<br>
-An alternative to markdown, for GitHub-style markdown format, is <code>grip</code>
-(after which browse to localhost:5000 , but that hung my Emacs when I tried<br>
-it) or <code>grip --export</code> which exports to <code>&lt;path&gt;.html</code>.<br>
-<br>
-<br>
-<hr />
-<a href='Hidden comment: 
-Please put new content in the appropriate section above, don"t just
+There is also Ivy, but I can't tell from its documentation whether it
+provides this feature.  The key use case in the documentation seems to be
+downloading subprojects from the Internet rather than avoiding wasted work
+by staging the parts of a single project.
+
+In Ant, the path to the current ant build file (typically build.xml) is 
+available as property ant.file .  You can get its directory in this way:
+<dirname property="ant.file.dir" file="${ant.file}"/>
+
+In Ant, to jar up the contents of a set of existing .jar files:
+```
+    <zip destfile="out.jar">
+	<zipgroupfileset dir="lib" includes="*.jar"/>
+    </zip>
+```
+
+Vizant (http://vizant.sourceforge.net/) is an ant build visualization tool.
+
+
+---------------------------------------------------------------------------
+=Eclipse=
+
+Useful keystrokes in Eclipse:
+  C-S-t:  lookup type (like M-. in Emacs, but only for classes, not methods)
+  F3: open definition, also like M-.
+          (how do you find a method's definitions?)
+  C-S-h: all callers (call sites) for a particular method implemention (but
+    not calls via a superclass or interface):  opposite of F3
+  C-S-r:  lookup resources: finds all uses of this method name, like grep; but
+    stays within the type hierarchy, not just textual; more useful than C-S-h
+  C-h:  textual search through Java files
+  F5:   refresh (for updates made through the file system)
+  C-O:  quickly type your way to a field or method declaration
+  F4: class hierarchy (also available from a context menu)
+  Eclipse Debugger:  F6 goes to next line
+
+To make Eclipse use spaces instead of tabs for indentation:
+ * Go  to 'Window | Preferences | Java | Code Formatter':
+   * In the "Style" tab:
+     * Uncheck "Insert tabs for indentation, not spaces."
+     *  Set "Number of spaces representing an indentation level" to 2.
+ * Go to 'Window | Preferences | Java | Editor':
+   * In the "Typing" tab:
+     * Check "Insert space for tabs"
+
+Changing the font size in Eclipse:
+  Window > Preferences > General > Appearance > Colors and Fonts > Basic >
+  Text Font > Change : select and apply the new font size
+To go back to the old font size, click the Reset button.
+Or, use this plugin: http://smallwiki.unibe.ch/fontsizebuttons
+
+Under Eclipse "Run configurations", a useful VM argument is "-ea".
+
+When compiling Daikon, may be simpler to add daikon.jar to "User Entries"
+section of Eclipse classpath.
+You can define your own variables.
+
+Eclipse Javadoc:  .html files get written to working directory.
+So be sure to save changes to these before you start testing javadoc.
+
+Mahmood suggests:
+ * Eclipse for debugging and writing classes from scratch.
+ * Ant or command line for anything complicated.
+
+Eclipse has two compilers.
+The model reconciler operates on buffers and runs on every keystroke to create red squigglies.  (It's called that because it reconciles the internal representation or model of the program with the visual representation in the editor.)
+The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  [Occasionally people use the term "reconciler" incorrectly to refer to incremental project building.]
+
+---------------------------------------------------------------------------
+=General wisdom (that is, everything without its own section above)=
+
+Information about a variety of Java tools can be found in the wisdom
+repository, in file java-tools.txt.
+
+expand, unexpand:  change TABs to SPACEs and vice versa.
+
+rehash:  If my path seems messed up, or I've added programs, do rehash.
+(Perhaps this only works under csh.)
+
+sed:  for example, sed -e '/^SED/ s|SED|SOGGY|' man-sed | more
+
+ps:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,
+ps -lf gives a long full listing (use -e or -d to see more processes).
+"top" shows percent of CPU being used by each process; good adjunct to ps.
+ps options:
+ * -l long format, shows priorities (set by nice or renice)
+ * -u user-oriented format
+also:
+ * -a show all processes
+ * -x show even processes with no controlling terminal
+ * -w use wide display
+
+xterm:  give -ut flag to prevent appearing in finger.
+
+system, eval evaluate their argument.
+exec replaces the current shell with its argument.  Be careful!
+
+sleep:  delays execution; waits that many seconds.
+
+expr:  Bourne shell way to do lots of stuff (ex regular expressions,
+arithmetic, comparisons); see also TEST
+
+Programs for drawing figures under X Windows (from best to worst in ease of use):
+ * OpenOffice/LibreOffice draw
+ * inkscape -- can't attach text to an object easily (could group them to
+     fix the position, but then scalng doesn't work right)
+ * xfig (abandoned in 2005)
+ * idraw (abandoned in 2002)
+ * skencil (formerly called sketch) (Skencil 0.6.17 released 2005-06-19)
+ * dia (0.96 was released 2007-03-25; latest as of Sep 2012)
+ * tgif -- (version 4.1.45 released 6/2006)
+The mayura draw program for Windows takes Windows Metafiles (such as produced by
+PowerPoint) and creates PostScript.
+It may be best just to create figures using PowerPoint (but that is
+crashing for me when I try to create PDF...).
+
+split:
+Use
+```
+  wc -l <file>
+```
+then
+```
+  split -<numberoflines> <file> <newfilebase>
+```
+to split files into parts.
+
+du:  disk usage.
+ * du -s *     only display grand total for each file and subdirectory in this dir
+ * du -S       not sum child directories in count for parent
+ * du | sort -r -n   sort directories, with most usage first.
+ * du | xdu -- only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
+Also see Alan Donovan's program "prune"
+(executable: ~adonovan/bin/Linux-i686/prune; sources: ~/work/c/prune/)
+For example,
+```
+  ~adonovan/bin/Linux-i686/prune -size 104857600 -age 604800 ~
+```
+Looking at files within a single directory, rather than a whole directory tree:
+ * ls -l | sort -n +4 -- sorts files in size order, good for finding big files in a directory
+ * du -s * | sort -n -- similar to above, find the biggest files & subdirectories of the current dir
+
+.DESKTOP file:  Macintosh info about my files.  Safe to delete.
+
+To make a soft link, do
+```
+  ln -s filename linkname
+```
+
+expect:  controls interactive programs to permit them to be used in a batch
+fashion via send/expect sequences, job control, user interaction, etc.
+
+To create a script file that will respond to any prompt, not just a
+top-level one:
+```
+  #! /bin/csh
+  ftp -n foo.bar.baz <<END
+  user anonymous mernst@theory.lcs.mit.edu
+  cd pub/random
+  get some-useful-file
+  quit
+  END
+```
+
+crontab:  batch sorts of programs run repeatedly (say, each night)
+
+Format manual pages:  nroff -man foo.1 | more
+Print roff files:     troff -t filename | lpr -t
+.ms => PostScript:    groff -pte -ms file.ms > file.ps
+man pages => PS:      groff -pte -man foo.1 > file.ps
+
+nslookup converts domain names into ip numbers.
+"host" and "dig" also query the same DNS information.
+
+ftp:  do "prompt off" to turn off confirmation requests on multiple commands
+
+David Wilson says about running background jobs:
+The simplest thing to do is a shell script that does `rsh <nice command>` on
+the various machines, and then run the shell script on a machine that
+doesn't get rebooted very often.
+
+If there is no password specified in the netrc file, then the macdef init
+seems not to take.
+
+To permit arbitrary-size core dumps:  unlimit corelimit
+
+Undo the setuid bit of a file with chmod -s.
+
+df:  Report free disk space and which filesystems are mounted.
+
+tar:  tape archive program.  Usual extraction from files is
+```
+  tar xf filename
+```
+Create an archive file recursively containing all the files in the current
+directory with
+```
+  tar cf tarfile.tar *
+```
+It's better, though, to create a tar archive that extracts itself into a
+directory by doing 
+```
+  tar cf tarfile.tar dir
+```
+
+To extract a rar archive:
+```
+  unrar e archive.rar
+```
+
+Francesco Potorti` (pot@CNUCE.CNR.IT) says:
+To make a single tags file for all the source files in your tree, 
+```
+    find . -name '*.[chCH]' -print | etags [options] -
+    find . \( -name '*.[chCH]' -o -name '*.[cC][cC]' \) -print | etags -
+    find . \( -name UNUSED -o -name CVS -o -name SCCS -o -name RCS \) -prune -o \( -name '*.[cC][cC]' -o -name '*.[chCH]' \) -print | etags -
+```
+To create a tags file per directory, write a two line shell script:
+```
+    cd $1
+    etags *.[chCH]
+```
+and then call it from the root of your source tree like this:
+```
+    find . -type d -exec script {} \;
+```
+
+To see and manipulate your junk files which are taking up precious
+space on the computer, use the program junk.  Typing
+just "junk" will show you the names of all the junk files subordinate
+to your current directory.  Typing "junk -c rm" will remove them
+(CAREFUL!).  For more information, see /a/aviary/unix/junk.doc.
+
+Converting binhex files:
+  "hexbin foo" creates "foo.bin".  Also consider "-u" or "-U" option.
+
+In /usr/local/man, manX subdirectories contain raw man pages.
+catX subdirectories contain formatted man pages preprocessed by
+```
+  neqn man1/emacs.1 | tbl | nroff -man > cat1/emacs.1
+  pack -f cat1/emacs.1
+```
+The .z suffix on these files indicates that they were created by pack (use
+unpack or pcat to view), NOT gzip.
+
+ppanel program: control printing from a GUI
+
+"polite" is like "nice"; it runs runs a program at lower priority.
+It allows other users to 'nap' the 'polite' program for an interval.
+```
+  % polite big-cache-simulator -assoc 2 -size 8192 -other flags
+```
+and then an interactive user of merganser could do
+```
+  % nap all
+```
+putting the cache simulator to sleep for 15 minutes.
+See the man pages for more information.
+Child jobs spawned by the polited process aren't run under polite, however.
+
+renice causes a running program to acquire only idle resources
+
+truss, strace tell all systems calls made by a process (a program run from
+the command line).  It's truss on Solaris, strace everywhere else.
+
+ldd _executablename_ tells which shared libraries a program uses.
+
+/etc/groups on some systems is "ypcat group" on others.
+The "id" program also lists the groups for each user.
+
+jgraph - filter for graph plotting to postscript.
+Also see ~jdean/graph, which is a preprocessor for it by Eric Brewer.
+Sample invocation:
+```
+graph -e -g -p -c <sample-input.graph | jgraph -P | gv -
+```
+
+gnuplot: with the "eps" terminal, has only six symbols available.  The
+"latex" terminal has more symbols (and the output is more customizable),
+though the output isn't as pretty.
+
+An alternative to gnuplot/jgraph is xmgr; supposedly nice but has steep
+learning curve.
+
+xdvi: use "s" to set shrink (image/font size); 3 is a reasonable prefix
+argument
+
+The "search" program is like a combination of 'find' and 'grep' (but using
+Perl regular expressions, and more powerful and efficient).
+Files:
+ * the program: ~mernst/bin/share/search
+ * its manpage: ~mernst/bin/share/search.manpage
+ * example dotfile: ~mernst/.search
+I find `search' easier to use than `grep`, but `grep` can often replace
+it.  For example, these give identical results (except for order):
+```
+search -dir lucene -n 'SuppressWarnings.*interning'
+grep -r -n -e 'SuppressWarnings.*interning' lucene
+```
+
+To find/search and replace in multiple files (say, an entire directory)
+use 
+```
+  preplace [options] oldregexp newregexp [files]
+```
+which is like
+```
+  perl -pi -e 's/OLD/NEW/g'
+```
+except that the timestamp on each file is updated only if the replacement
+is performed.
+[WATCH OUT when omitting the [files] argument, since you generally do *not*
+want to perform the replacement in files in the .svn directory.]
+[WARNING: This program does not respect symbolic links, instead replacing
+each symbolic link with a copy of its contents.  So, generate the [files]
+part without symbolic links.]
+See below for more details.
+.
+To find/search and replace in multiple files (say, an entire directory)
+from the command line via perl, do
+```
+  perl -pi.bak -e 's/OLD/NEW/g' *
+```
+NOTE caveats below; it's better to search, then replace only in relevant files.
+Add "i" after g for case-insensitive.
+Other possible invocations:
+```
+  find . -type f -print | xargs perl -pi.bak -e 's/OLD/NEW/g'
+  find . -type f -name '*.html' -print | xargs grep -l 'sdg.lcs.mit.edu/~mernst/' | xargs perl -pi.bak -e 's|sdg.lcs.mit.edu/~mernst/|pag.lcs.mit.edu/~mernst/|g'
+  find . -type f -name Root -print | xargs grep -l '/g1/users/adbirka/.cvs' | xargs perl -pi.bak -e 's|/g1/users/adbirka/.cvs|/g4/projects/constjava/.cvs|g'
+  preplace /g1/users/adbirka/.cvs /g4/projects/constjava/.cvs `find . -type f -name Root -print`
+```
+(You can do the same for SVN with `svn switch --relocate OLD-PREFIX NEW-PREFIX`,
+which retargets a checkout, or for many repositories:
+```
+  find . -path \*/.svn/entries -print0 | xargs -0 preplace manioc.csail login.csail
+```
+)
+Problems with the first invocation, fixed by the others:
+ * The first invocation will search/replace in compressed, binary, PostScript,
+   etc. files.  (a few examples: .tar .gz .gif .pdf .ps .Z)
+ * The first invocation will update all the files' modification dates, even if
+   no replacement occurs.
+ * The first invocation will copy links into regular files.
+.
+An alternate way to fix CVS repositories is
+```
+  cd ~/research/invariants
+  echo ":ext:${USER}@pag.csail.mit.edu:/g4/projects/invariants/.CVS' >new-root
+  find . -name Root | xargs -n1 cp ~/research/invariants/new-root
+```
+
+In CMU Common Lisp (cmucl), smaller applications can result from
+```
+    (declaim (optimize (speed 3) (safety 0) (debug 0)))
+```
+An apparently reasonable development setting:
+```
+    (declaim (optimize (safety 3) (speed 2) (debug 2) (compilation-speed 0)))
+```
+
+To copy a (local) directory recursively:  cp -pR source target-parent
+To copy a (remote) directory structure from one machine to another:
+```
+  tar cf - packages | rsh ebi "cd /tmp/mernst/pack-cppp-new && tar xf -"
+  tar cfz - packages | rsh hokkigai "cd /tmp/mernst && tar xfz -"
+```
+This is like
+```
+  rcp -rp mernst@torigai:/tmp/mernst .
+```
+except that the latter doesn't preserve symbolic links.
+
+Regular expressions (regexps):
+ * In alternation, first match is chosen, not longest match.  For
+   efficiency, put most likely match (or most likely to fail fast) first.
+ * `(ab)?(abcd)?` matches "ab" in "abcde"; does not match the longer "abcd"
+ * character class `[abc]` is more efficient than alternation `(a|b|c)`
+ * unrolling the loop:     `opening normal* (special normal*)* closing`
+    eg, for a quoted string:   `/L?"[^"\\]*(?:\\.[^"\\]*)*"/`
+    or `$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';`
+    * start of normal and special must never intersect
+    * special must not match nothingness
+    * text matched by one application of special must not be matched by
+      multiple applications of special
+
+uname gives operating system (uname -a gives more info).
+
+sysinfo:  information about this hardware, like amount of memory,
+architecture, operating system, and much more.
+/usr/sbin/psrinfo -v:  information about processor speed and coprocessor.
+The "top" program also tells the machine's amount of memory and swap space.
+Also see "uname -a" and "cat /proc/cpuinfo" (as 
+well as some of the other kernel pseudo-files under /proc).
+
+In Python, by default variables have function (not block) scope.  To refer
+to (really, to change) a global variable, use the "global" declaration in
+the class/function/whatever.
+
+To test whether a file exists in Python, do os.path.exists('/file/name').
+In Python, to reimport module foo, do reload(foo).
+
+Python debugger:  pdb ~/python/test.py
+You need to "s"tep a few times before "n"ext, which would jump over the
+entire program.  Or just do "continue" to the error.
+
+For time-critical Python runs, disable assertions via -O command-line
+option to Python or setting variable __debug__ to false:  __debug__ = 0.
+You can be sure that the optimized version is running if a .pyo instead of
+a .pyc file is created after you do "import".
+To make Python run optimized, do:
+```
+  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
+```
+To make Python run unoptimized, do:
+```
+  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
+```
+To evaluate these in Emacs, put the cursor at the end of the line and type
+C-x C-e.
+After you change py-which-args, kill the `*Python*` buffer and restart
+(it's not enough to kill the Python process and restart).
+
+As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
+even if it is faster...
+
+The ispell program will merge personal dictionaries (.ispell_english) found
+in the current directory and the home directory.
+
+To run a program disowned (so that exiting the shell doesn't exit the
+program), precede it by "nohup".  Programs run in the background also
+continue running when the shell exits (though interactive programs and some
+others seem to be exceptions to this rule; or maybe the rule about
+background jobs continuing only applies for programs that ignore the hangup
+(hup) signal).
+
+To make a diff file good for patching old-file to produce new-file,
+```
+  diff -c old-file new-file
+```
+In GNU diff, specify lines of context using -C # (not -c #).
+
+With patch version 2.4 or 2.5 (and maybe other versions), you must set the
+environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
+the "Index:" lines and it will ask for the filename for each patch.
+
+moss:  a software plagiarism detector by Alex Aiken.
+http://www.cs.berkeley.edu/~aiken/moss.html
+
+To add Frostbyte's public key to my PGP keyring:
+```
+  pgpk -a http://sub-zero.mit.edu/fbyte/pgp.html
+```
+
+To find all the executables on my path with a particular name, use
+/usr/local/bin/which -a
+
+/uns/share/bin/ps2img converts PostScript to gif (or other image format?)
+files.  It will handle multipage postscript files fairly gracefully without
+filling up your disk, and it will look for and pay attention to the
+BoundingBox of EPS files if you give the the -e option.  Run it with no
+arguments to see the options.
+
+To convert a directory from DOS to Unix conventions:
+```
+foreach f ( `find . -type f` )
+  echo $f
+  dos2unix $f $f | grep -v 'get keyboard type US keyboard assumed'
+end
+```
+
+LAOLA converts Microsoft Word .doc documents to plain text.  It is
+superseded by the Perl OLE::Storage module
+(http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/ or
+http://www.cs.tu-berlin.de/~schwartz/perl/), which gives access to
+"structured storage", the binary data format of standard Microsoft Windows
+OLE documents.
+
+mkid (part of GNU's id-utils) is something like tags, but records all uses
+of all tokens and permits lookup.  There's an Emacs interface, too.
+
+The file command gives information about the file format (type of file,
+executable (including debugging format), etc).
+
+On a Kinesis Advantage contoured keyboard:
+Soft reset: Press Progrm + Shift + F10. 
+Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
+Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
+Toggle the tone: progrm+hyphen
+Dvorak:  progrm+shift+f5 (this erases any remapping, but not macros)
+If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
+  mode.  Holding down = then tapping s may produce "v3.2[]".  Change to PC
+  mode by holding down = then tapping p; now holding down = and tapping s may
+  produce "v3.2[SL K H x e ]".
+
+There's no perfectly reliable way to determine the version of Red Hat Linux
+is being run, but you can try:
+```
+  rpm -q redhat-release
+  cat /etc/redhat-release  # the single file that the above package installs
+```
+
+ImageMagick is a replacement for (part of) xv:  three of its programs are:
+ * display will view images in a great many different file formats.
+ * import grabs screen shots, either that you select with the mouse, that
+   you specify by window ID, or the root window.  
+ * convert old.gif new.jpg lets you easily change image formats.
+
+"locate" finds a file of a given name anywhere on the system.
+Database is updated nightly or so.
+
+To use "crypt" to encrypt a string, like in the password file /etc/passwd,
+use "openssl passwd".
+(Note that "crypt" is known to be insecure; only use it for /etc/passwd.)
+
+Use "chsh" to set/change your shell.
+
+make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
+is a segfault (http://www.bitwizard.nl/sig11/).
+
+If using YP for password (yppasswd) and other files, don't edit /etc/group;
+instead, as root, edit, then rebuild the NIS database:
+```
+ ${EDITOR} /var/yp/etc/group
+ cd /var/yp; make
+```
+If yppasswd does not work, then maybe the ypbind and/or yppasswd daemons
+have died.  "ypwhich" will return an error message if ypbind has stopped.
+To restart the daemons, do (as root)
+```
+  /etc/rc.d/init.d/ypbind restart
+  /etc/rc.d/init.d/yppasswdd restart
+```
+
+Find all subdirectories:
+```
+  find . -type d -print
+  find . -type d -exec script {} \;
+```
+Make all subdirectories readable and executable by group:
+```
+  find . -type d -exec chmod g+rx {} \;
+```
+Make all files readable by group:
+```
+  find . -type f -exec chmod g+r {} \;
+```
+Find all group-writeable files:
+```
+  find . -type l -prune -o -perm -020 -print
+```
+
+To install an RPM, do  rpm -Uvh foo.rpm
+
+If machines come up before the ntpd server (and as a result their time
+and date are not synchronized/synched), run this command on each machine:
+```
+  /etc/rc.d/init.d/xntpd restart
+```
+
+On pag, use "yppasswd" instead of "passwd".
+
+SAS:
+ * Avoid all comments.  Comments in random places cause bizarre behavior
+   and inscrutible error messages.
+ * In programs (in particular, in "datalines"), lines longer than 127
+   characters (assuming 8-character tabs) are silently discarded.
+ * In "infile" files, tab characters cause confusion; untabify.
+
+SAS tips:
+Run SAS:
+ * using GUI:  sas
+ * from command line:   sas myfile.sas
+Data input:
+ * skip first observation (first line):
+   infile 'blah.dat' firstobs=2;
+ * allow for really long records:
+   infile 'blah.dat' lrecl=2000;
+ * data values must be space-separated (tabs cause problems on some systems)
+New data set which is a subsets of the original data:
+ * data bigx; set orig;
+     if x > 10;
+ * data nocontrol; set orig;
+     if trt = 'control' then delete;
+When comparing strings, use only the first 8 characters (!):  not
+    if treat = 'non_partic' then treat_numeric = 0;
+  but
+    if treat = 'non_part' then treat_numeric = 0;
+Subgroups of a data set:  must be sorted before invoking "proc means"
+ * proc sort; by sex trt;
+ * proc means; by sex trt;
+Procecure return values:
+ * proc means noprint;
+     var x y;
+     output out=b mean=mx my std=sx sy;  /* output means and SD for x,y */
+Interaction plot:  plot of the average values of y for each period and trt.
+ * proc sort; by period trt;
+   proc means noprint; by period trt;
+     var y;
+     output out=means mean=my;
+   proc plot;
+     plot my*period=trt; 
+Proc GLM permits using both regressor (continuous) type variables and
+  categorical (class) variables as independent variables.  However, the
+  dependent variable must be continuous.
+  Furthermore, no variable noted in the "class" section may be (always missing).
+The chi-square test is good for nominal (categorical, class) independent
+  and dependent variables.
+Three-way anova with all interactions:
+ * proc anova;
+     class a b c;
+     model y = a b c a*b a*c b*c a*b*c;
+ * proc anova;       /* shorthand */
+     class a b c;
+     model y = a | b | c;
+Multivariate methods (manova) may be *less* powerful than univariate ones
+  if responses are *not* correlated.
+Frequency tables: proc freq
+ * proc freq;
+     tables sex;   /* one-way table */
+ * proc freq;
+     tables infilt*score;   /* two-way table */
+
+zip -r foo foo
+makes a zip archive named foo.zip, which contains directory foo and all its
+contents.
+
+To uuencode a file:   uuencode filename filename > filename.UUE
+
+Use unzip to extract files from zip/pkzip archives.
+
+finger crashes on NIS clients when the GECOS field of the NIS-entry is
+blank and the user home directories is chmod'd to 700.  (as of 1/2002)
+
+To compute a file's checksum, use "sum" or "cksum" or "md5sum".
+For an entire directory, "md5deep" works.
+
+A way to find typos and grammar errors in papers:  run ps2ascii on a
+(one-column) PostScript file, then paste the result into Microsoft Word and
+run its grammar checker.
+
+If the crontab log says "bad user", that typically means that the password
+is expired.  On marjoram, we fixed this (maybe) by adding an entry (with an
+in-the-future expiration time) to /etc/shadow, though it really should have
+been in /etc/shadow.local.  Other possibilities:
+ * account is not locked
+ * password is not expired
+ * pwck does not complain about the account
+ * account is in /etc/cron.d/cron.allow
+ * or maybe (probably not) that the command was run and exited with a
+   return status of 1 (maybe the command wasn't in the path when cron ran?)
+
+Sometimes a single NFS client cannot see a directory when other clients of
+the same server can see the directory.  A workaround is to run 'rmdir' on
+the troublesome directory; this seems to fix the problem.
+
+Valgrind is a free, good Purify-like detector of memory errors (for x86
+Linux only).  It's better than what is built into gcc.
+http://developer.kde.org/~sewardj/
+
+To see the equivalent of a yppasswd entry for user foo, do
+"ypmatch foo passwd" or "ypcat passwd | grep -i foo" or "~/bin/getpwent foo".
+Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
+
+To encrypt/decrypt with blowfish:
+```
+  openssl enc -bf -e -in file -out file.bfe
+  openssl enc -bf -d -in file.bfe -out file.decrypted
+```
+Optional argument:  -k secretkey
+For rc4 (which is insecure), change -bf to -rc4
+
+Greg Shomo recommends that one use RPM to install anything that was
+included in the original (Red Hat) Linux distribution:  bugfixes and
+updates.  He recommends using source to install any new programs.
+He recommends installing package foo-1.2 with
+```
+  ./configure --prefix=/usr/local/pkg/foo/foo-1.2
+```
+then using gnu stow (ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz) to make
+the proper symlinks into that subdirectory.
+
+Don't use the "follow" option in Unison, which can delete the real file
+behind a symbolic link in ~/.synchronized -- see my Unison files for details.
+
+After adding a script to /etc/rc.d/init.d, add two symbolic links to
+/etc/rc.d/rcN.d/.
+The one starting with "S" (start) is invoked when runlevel N is entered.
+The one starting with "K" (kill) is invoked when runlevel N is exited.
+
+At LCS, to upgrade a Red Hat Linux machine with the latest security (or
+other) patches:
+```
+  # Prepare (can always determine mount point by executing
+  # '/usr/sbin/showmount -e coua.lcs.mit.edu')
+  mount coua.lcs.mit.edu:/scratch /mnt
+  # Check status (a nice list of the rpms that require "freshening")
+  # (Does this script need to have "/i686" appended to its pathnames?)
+  /mnt/bin/amIUp2Date
+  # Update
+  cd /mnt/mirror.techsquare.com/redhat-7.2-ia32/suggested/i686
+  # Don't do "rpm -Fvh *.rpm"!  Select all the rpms *except* for anything
+  # XFree86*, since my laptop's hardware isn't supported and that will prevent
+  # X from starting.
+  rpm -Fvh `\ls *.rpm | grep -v XFree86`
+  # Unmount
+  cd /
+  umount /mnt
+```
+
+"chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created
+in that directory will have their group set to the directory's group.
+Directories created in that directory also have their SGID bit set.
+(The SGID bit has nothing to do with the sticky bit.)
+
+/usr/lib/ical/v2.2/contrib/ contains hacks for ical.
+
+lpr can assign "classes" or priorities to jobs.  For instance, to bypass
+all other jobs in the queue, do "lpr -C Z _filename_" (Z is the highest
+priority/class).
+
+If trying to print results in the error
+  lpr: error - scheduler not responding!
+then make sure that your PRINTER environment variable is properly set.
+
+ispell that requires only one argument at a time:
+```
+foreach file (*.tex)
+  ispell $file
+end
+```
+
+To run VNC:
+```
+  vncviewer `cat ~/.vncip`
+```
+
+Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,
+AIX), eg:
+smbclient '\\rfilesrv1\students' -W cseresearch
+
+Run smbpasswd to set samba passwords (there is a separate password file for
+them).
+
+To make Samba work from certain locations, I must first edit
+/etc/samba/smb.conf to add those IP addresses in the "hosts allow" section.
+Also edit /etc/hosts.allow similarly.
+
+To execute a command on all the PAG clients:
+```
+  pagdo sudo <full-path-to-that-command && args>
+```
+(But that command apparently can't be "emacs", as the X connection gets
+rejected due to "wrong authentication.  Also, apparently don't include ";"
+to split multiple commands; use multiple "pagdo sudo" commands.)
+This requires typing my password N times for N machines.
+To make this easier, we could add a /root/.ssh/authorized_keys file to each
+client which includes (y)our public key and use "root@" in the ssh command
+in pagdo.
+
+/etc/sudoers says
+```
+  # This file MUST be edited with the 'visudo' command as root.
+```
+But the visudo command just does file-locking and checks for syntax errors;
+it's fine to edit the file with another editor.
+
+Combinatorial games suite (supersedes David Wolfe's package):
+http://cgsuite.sourceforge.net/
+
+To have a mount re-done at each reboot:
+Put in /etc/fstab
+```
+  jbod.ai.mit.edu:/fs/jbod1/mernst-temp /mnt/dtrace-store nfs     defaults       \
+ 0 0
+```
+(And you can also issue just "mount /mnt/dtrace-store" now.)
+This particular mount requires that the following appear in /etc/hosts.allow:
+```
+  ALL: 128.52.0.0/255.255.0.0
+```
+
+Delta debugging appliation, written in perl:
+  http://daniel-wilkerson.appspot.com/; look for "Delta", under "Software"
+Or, at pag: ~smcc/bin/delta
+Also, Zeller's Python implementation is at:
+  http://www.st.cs.uni-sb.de/dd/
+
+To exit the vi or vim editor:
+```
+ :q
+```
+To exit without saving changes:
+```
+ :qa!
+```
+For help:
+```
+ :help
+```
+
+To find a meeting time that fits with everyone's schedule, consider using:
+  ~mernst/bin/share/schedule
+on a file containing lines such as
+```
+  mernst  TR12:30-3,R4-5,W9-5  MR12-1
+  notearly MTWRF9-10
+  cpacheco  MW1-4 TR9:30-11
+  awilliam  T11-4,W11:30-1:30,R11-3,R4-5,F10-12  M11-12,F12-4:30
+  smcc  R1-2,R4-5
+  jhp     MW9:30-11,F2-3
+  akiezun TR11:00-3,F10-12:30
+  artzi TR10-17,F10-12
+  pgbovine MWF1-4,T4:30-5:30,R1-2
+  galen F12:30-1:30
+  tschantz MW10:30-4,F10-11
+  chenx05 M12-5,TR9:30-11,TR12-1,TR2-5:30,W1-3,F11-3
+  mao F9-5
+```
+But you can also use a web survey such as doodle.com
+
+Parallel/distributed jobs across many machines:
+ * The distcc compiler permits compilation jobs to be distributed (in
+   parallel) across many machines.  See http://distcc.samba.org/.
+ * Another useful tool for speeding up compilation is ccache; to use it,
+   change the "CC=gcc" line in your Makefile to be "CC=ccache gcc".
+ * "drqueue", the distributed renderer queue; I'm not sure how
+   rendering-specific it is.
+ * There are two add-ons to GNU make:
+    #  The customs library; read about it in the make distro in README.customs.
+       (It will ask you to download pmake from
+       ftp://ftp.icsi.berkeley.edu/pub/ai/stolcke/software/, among other things.)
+    #  The GNU make port to PVM: http://www.crosswinds.net/~jlabrous/GNU/PVMGmake/
+       More about PVM: http://www.epm.ornl.gov/pvm/
+ * OpenPBS: http://www-unix.mcs.anl.gov/openpbs/
+
+Firefox extensions (.xpi files): to install, open them in Firefox.
+Adblock: http://adblock.mozdev.org/
+Firefox Adblock filter list: http://www.geocities.com/pierceive/adblock/
+(Must update by hand via "Tools > Adblock > Preferences > Adblock Options
+>> Import filters".)
+Also get the Adblock filter updater extension.
+
+In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in
+about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &
+Colors >> Default Font) causes webpages to appear in sans serif font by
+default.  It also makes webpages print in sans serif, which is not
+necessarily desirable:  sans serif is easier to read on screen, but serif
+is easier to read on paper.  I wish there was an easy way to get both of
+those features.
+
+If Firefox or Thunderbird says that a copy is already running, but that
+doesn't seem to be the case, then find and delete the file .parentlock
+somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .
+
+In Firefox, to make searches ("find") default to case-insensitive:
+Press Ctrl+F , the quick find appears at taskbar.
+Uncheck the Match case check box
+
+If Firefox behaves badly (doesn't go to homepage, address bar doesn't
+update, back button doesn't work), try moving your ~/.mozilla directory
+aside, because one of your plugins may be corrupting Firefox.
+
+vi commands:
+:q quits vi after a file has been saved
+:q! quits vi without saving the file
+:x saves the file and quits vi
+:wq saves the file and quits vi
+
+To start up network on Linux laptop (for NIC; not necessary for PCMCIA):
+Debian:
+```
+  /sbin/ifup eth 0
+```
+Red Hat:
+```
+  /etc/sysconfig/network-scripts/ifup eth0
+```
+
+To set wireless card SSID and key, run (as root):
+```
+  /sbin/iwconfig eth1 essid "Chaos"
+  /sbin/iwconfig eth1 key 03-ef-etc.
+  /sbin/iwconfig eth1 key "s:asfd"
+```
+To see your current settings:
+```
+  /sbin/iwconfig eth1
+```
+
+
+Use the rss2email program as follows:
+First, run 
+```
+ r2e new mernst@csail.mit.edu
+```
+but don't re-run that as it blows away all configuration files.
+Then, run one of
+```
+ r2e add 'http://forum6170.csail.mit.edu/index.php?type=rss;action=.xml'
+ r2e add 'http://forum6170.csail.mit.edu/index.php?type=rss;action=.xml;limit=255'
+ r2e add 'http://cathowell.blogspot.com/feeds/posts/default?alt=rss'
+```
+and finally, nothing happens unless I run
+```
+ r2e run
+```
+periodically -- say, every minute or hour in a cron job.
+
+To make the junit task work in Ant without setting classpath, use the hack from:
+http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes
+
+To list the projects (top-level targets) in an Ant build.xml file, do either of:
+```
+  ant -projecthelp
+  ant -p
+```
+
+To get the current working directory from an ant file:
+```
+  ${bsh:WorkDirPath.getPath()}
+```
+
+
+To print a reasonable map from google maps do the following:
+  * execute 'import map.jpg'
+  * Draw a rectangle over the part of the map you want.  The result will
+    be saved in map.jpg
+  * execute 'gimp map.jpg'
+  * print from gimp.  Gimp does a nice job of laying the jpeg out on
+    the screen and allows you to scale it and the like.
+
+To get a list of LaTeX files that are \inputted (not \included) in a LaTeX
+file, for use in making a tags table or in a Makefile or Ant build.xml file:
+```
+  TEX_FILES=$(shell latex-process-inputs -list main.tex)
+```
+or, to run tags directly:
+```
+  etags `latex-process-inputs -list main.tex`
+```
+
+To run VMware tools:
+```
+  vmware-toolbox &
+```
+To install VMware tools, see ~mernst/wisdom/build/build-vmware
+
+Information on how to configure our ESX VMware servers is available
+in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html
+
+In VMware, shared folders from the host appear in /mnt/hgfs/.
+
+To create a transparent signature stamp:
+ * scan a hardcopy of my signature
+ * clean it up (in Paint or in the Gimp)
+ * use Gimp to make the background transparent:
+    * menu > layer > transparency > add alpha channel
+    * click on the fuzzy selector tool
+    * for each area to remove, select it, then "edit > clear" (ctrl + k)
+    * save as gif or png
+   (instructions from http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp)
+ * Imagemagick's "convert" program didn't work, so convert the gif or png to
+   PDF with Acrobat Professional
+ * Convert the PDF to EPS via imagemagick's "convert" program (other
+   techniques might work, too)
+
+When you have a PDF file that is marked up with annotations, you can either
+view the annotation text one-by-one in a PDF reader, or you can create a PDF
+file that contains the annotations visibly.  Different people prefer the
+two approaches, and some PDF readers such as Evince don't seem to provide
+any way to view the annotations.
+Here is how to create a PDF that shows the annotation text:
+ * Using Acrobat Reader: start Print, then select "Summarize Comments" near
+   the upper right corner of the print dialog.  That pops up another print
+   dialog, where you can finally print or save to PDF.  The final PDF has
+   alternating pages of the original document and the comments, with each
+   annotation in the original document cross-referenced to the comments page.
+ * In Acrobat Professional:  Review & Comment >> Summarize Comments
+   This can draw lines between the annotations in the original document and
+   the comments, or print in other ways such as the way Acrobat Reader does.
+(The free version of Foxit Reader 5.4 can create a separate document that
+lists all the comments, but it doesn't indicate the location in the
+original document as the Adobe Acrobat tools do.)
+
+To make a screencast video demo (i.e., screen capture/recording from a
+running program), Marat Boshernitsan recommends
+Camtasia Studio from TechSmith (http://www.techsmith.com/camtasia.asp).
+(It's a full suite of tools and has affordable educational pricing.)
+Marat Boshernitsan says,
+  My biggest piece of advice is to edit heavily for length and to add as
+  many visual annotations to the video as possible.  Camtasia's
+  video-editing component allows the user to extract all pauses (as short
+  as a fraction of a second) from the video to create a smooth-flowing
+  presentation.  Their annotation tools enable insertion of highlights and
+  callouts to focus the viewer's attention on the important areas of the
+  screen.  I prefer screen annotations to voiceovers, because they allow
+  watching the video without reaching for headphones.
+  To see an example, click on one of the demo links on this page:
+  http://nitsan.org/~maratb/blog/2007/05/01/aligning-development-tools-with-the-way-programmers-think-about-code-changes/
+  It is a bit time-compressed to fit into the 5 minute limit imposed by CHI.
+
+If OpenOffice or LibreOffice is trying to restore a file that no longer
+exists, press 'escape' at the Recovery window.
+
+%% More manual, less desirable solution:
+% If OpenOffice is trying to restore a file that no longer exists, delete a
+% file such as one of these:
+% ```
+%   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu
+%   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu
+% ```
+
+To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
+  Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
+Alternately:
+  Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
+
+In OpenOffice, to freeze rows/columns so that they do not scroll but are
+always visible, select the row (or cell) below (and to the right of) the
+one you want to freeze, then do Window > Freeze.
+
+Setting up a new USB microphone/headset:  run
+```
+  gnome-volume-control
+```
+When the application starts, choose the default device and unmute both the
+headphones *and* the microphone.
+For Skype, under Linux, see
+  http://www.skype.com/help/guides/soundsetup_linux.html
+Under Fedora, I had to unset "allow skype to automatically adjust my mixer
+levels" lest the recording level was much too low.
+
+On Linux, after plugging in headphones, you have to tell the application
+(e.g., Skype) you are trying to use with the headset to use the second
+soundcard (card1) in order to get audio over the headphones.
+
+The "-e" argument to mail means send no mail if the body is empty.  So use
+(in csh)
+```
+  ${COMMAND} |& ${MAIL} -e -s "${SUBJECT}" mernst < /tmp/mailbody-$$
+```
+instead of
+```
+  ${COMMAND} > /tmp/mailbody-$$
+  if (!(-z /tmp/mailbody-$$)) ${MAIL} -s "${SUBJECT}" mernst < /tmp/mailbody-$$
+  \rm -f /tmp/mailbody-$$
+```
+
+mkpasswd: generate one random password
+pwgen -N1: generate one random password
+
+Server-side includes (SSI) for web pages:
+```
+  <!--#include file="filename.html"-->
+  <!--#include virtual="/directory/included.html" -->
+```
+Use "file=" for relative filenames, "virtual=" for relative or non-relative
+filenames (e.g., an address starting at the server root).
+In some cases, you must configure the webserver to preprocess all 
+pages with a distinctive extension (normally, ".shtml").
+UW CSE lets us tweak our .htaccess file such that we can have 
+all regular .html files get this behavior, not just .shtml files.  See the
+WASP webpages for an example.
+
+The "rev" program reverses the order of characters in every line of input.
+It's the way to reverse all lines of a file.
+To sort lines, with the sort key being the reverse of each line:
+  cat myfile | rev | sort -r | rev
+
+"cd -" connects to your previous directory.
+
+When printing a blog (or some other types of webpages) from Firefox, often
+only the first page is printed:  each blog post is one box, but overflowed
+boxes are invisibly hanging off the page instead of ontinued to the next
+page.  This is due to a problem in the blog's .css file.
+Here are two fixes:
+ 1. Permit wrapping text across pages:  remove
+```
+      <div class="contenttext">
+```
+    Also, get rid of sidebars so the blog content prints full width:  remove
+```
+      <div id="leftside">
+```
+    through
+```
+      <div class="post">
+```
+    (inclusive).
+ 2. Fix the .css file.  Copy the blog locally:
+```
+      wget -O localfile.html URL
+```
+    and also copy its .css file locally.
+    Edit the .css file to contain:
+```
+      * {
+      overflow: visible !important;
+      }
+```
+   and edit the .html file to reference the local version of the .css file.
+
+The canonical @sys directory for your path is
+```
+  $HOME/bin/`uname`-`uname -m`
+```
+
+When a sh/bash script wishes to pass one of its arguments to another
+program, it's necessary to quote those arguments so they are not
+re-interpreted (and in particular, so that embedded spaces do not cause an
+argument to be split into two).  A way to do this is to surround the
+argument by spaces, and then call the other program with "eval" instead of
+directly:
+```
+  eval other-program "${my_variable}"
+```
+
+To determine which version of RedHat/Fedora I am running:
+```
+  cat /etc/redhat-release 
+```
+
+Make has two flavors of variables that may appear in a Makefile.
+The normal type is recursively expanded, re-evaluated on each use:
+```
+     foo = $(bar)
+```
+The GNU-specific type is simply expanded, set once when the assignment is
+encountered.
+```
+     x := foo
+```
+
+To make the history command show times, do this:
+export HISTTIMEFORMAT='%Y-%b-%d::%Hh:%Mm:%Ss '
+export HISTTIMEFORMAT='%Hh:%Mm:%Ss '
+That can be useful for seeing how long a command took to run, if another
+command is issued immediately afterward.
+
+In Acrobat (not reader), to fill in a form, either:
+ * use the typewriter tool, or
+ * ctrl-left-click (this is easier from a unability point of view)
+
+To give up and uninstall a package installed by encap/epkg:
+```
+    cd /uns/encap
+    epkg -i $pkg
+```
+
+"ack" is like "grep -r" or "search", but claims to be more flexible.
+  I've given up using it, though; I find search more featureful and less buggy.
+  A problem is that unlike the "search" program, it does not seach in
+compressed (.gz, .Z) files.
+  You should always run ack with the --text option (put that in an alias or in
+.ackrc).  Otherwise, ack discards some text files, since by default, text
+files (and also binary and "skipped") are not considered interesting (!),
+but everything else is.  Turning on text, turns off every other type, but
+the files get searched anyway since they are considered text as well as
+their other file type.
+  To get a list of files ack is searching (-f means print all files searched):
+```
+  ack -f
+```
+
+To perform an advanced search of messages in thunderbird, goto
+edit->find->search-messages
+
+Pidgin (previously GAIM) is a Linux IM client that can interoperate with
+Google Talk.
+
+An uninterrupted Hudson build has one of the following statuses:
+ * Failed - it doesn't compile
+ * Unstable - compiles without errors, but tests fail
+ * Stable - compiles without errors and all the tests are passing
+A manually interrupted Hudson job gives a message like "SCM check out aborted".
+
+To make your slow regular expressions (regexps) faster, restrict the number of
+different ways the regexp could match the same text.  For example, if
+you're trying to match some whitespace followed by all the text until the
+end of the line, don't write this:
+	\s-+.*
+Since the . can match whitespace too, there are as many different ways
+to apportion the match between the two subexpressions "\s-+" and ".*"
+as there are whitespace characters.  Instead, write this:
+	\s-.*
+Although this regexp matches exactly the same set of strings, there is
+now only one way to match:  the "\\s-" matches the first whitespace
+character, and ".*" matches the rest.  This runs faster.
+
+To convert a Perl program with POD ("plain old documentation") embedded
+documentation into a man page, run pod2man.  For example:
+```
+  pod2man my-script.pl | nroff -man 
+```
+
+To resolve a symbolic link to its true name (truename), use `readlink`.
+
+The `curl` program displays an annoying progress meter.  To disable it
+without also suppressing errors, use `curl -s -S`.
+
+If running `dropbox.py start -i` yields
+```
+  To link this computer to a dropbox account, visit the following url: ...
+```
+then run:
+```
+  dropbox.py stop
+  dropbox.py start -i
+```
+
+To get the current date in a sortable numeric format:
+```
+  date +%Y%m%d
+```
+To get yesterday's date:
+```
+  date --date yesterday
+```
+
+To recover a closed tab in Chrome:  Ctrl-Shift-t
+
+To replace the dictionary in the Android Kindle app:
+ * Not officially supported as of May 2013: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3CF5CO3HY68KB&cdMsgNo=60&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3CF5CO3HY68KB
+   and later messages say that previously-posted solutions in that thread no longer work either
+ * Another possibility: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3SFUQ6LQH79EL&cdMsgNo=72&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3SFUQ6LQH79EL
+ * if you have an Internet connection: http://ebookfriendly.com/translate-words-in-kindle-app/
+ * A Spanish-to-Spanish dictionary is already be installed with the app
+
+For RBCommons, you can submit a review by either downloading their command-line tools, http://www.reviewboard.org/downloads/rbtools/, or by uploading a diff on their webpage.
+
+To compress a JPEG file:
+```
+  convert input.jpg -quality nn output.jpg 
+```
+where nn is between 1 and 100.  1 is the lowest quality (highest 
+compression).
+
+An alternative to markdown, for GitHub-style markdown format, is `grip`
+(after which browse to localhost:5000 , but that hung my Emacs when I tried
+it) or `grip --export` which exports to `<path>.html`.
+
+
+---------------------------------------------------------------------------
+<wiki:comment>
+Please put new content in the appropriate section above, don't just
 dump it all here at the end of the file.
-'></a>
+</wiki:comment>

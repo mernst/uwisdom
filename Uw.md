@@ -14,9 +14,9 @@ UW Travel Card rules, from http://www.washington.edu/admin/procsrvcs/ecommerce/c
 You may use the UW Travel Card only for expenses related to the following
 official UW business while on travel status.
   * UW business related travel expenses
-> > such as airfare, lodging, meals, registration, car rental, ground transportation and miscellaneous travel expenses.
+    such as airfare, lodging, meals, registration, car rental, ground transportation and miscellaneous travel expenses.
   * Meals associated with hosting and entertaining, and employee recruitment meals.
-> > (Reimbursement is based on department approval and funding source.)
+    (Reimbursement is based on department approval and funding source.)
   * UW business related expenses such as photocopying and faxing.
 
 Taxi stands near UW:
@@ -43,18 +43,18 @@ Which is linked from here:
 For off-campus access to the ACM digital library and similar UW-licensed
 collections of content, three options:
   * Go to lib.washington.edu and click the off-campus login button at the
-> > top right (or go directly to http://offcampus.lib.washington.edu/).
-> > Then, restricted links should work.
+    top right (or go directly to http://offcampus.lib.washington.edu/).
+    Then, restricted links should work.
   * Add offcampus.lib.washington.edu to the end of the hostname.
 
 Getting study approval from IRB (run by HSD, Human Subjects Division):
   * Exempt studies:  usually interviews, questionnaires, and use of existing data
   * Non-emempt studies:
-> > For the purposes of a grant proposal, you file an "approval in principle".
-> > It's an IRB application for expedited review, but without consent forms
-> > or other materials. The IRB generates a human subjects application #,
-> > but not actual approval to do the study.  NSF only needs a box checked by
-> > UW OSP, and UW OSP only needs an IRB application #.
+    For the purposes of a grant proposal, you file an "approval in principle".
+    It's an IRB application for expedited review, but without consent forms
+    or other materials. The IRB generates a human subjects application #,
+    but not actual approval to do the study.  NSF only needs a box checked by
+    UW OSP, and UW OSP only needs an IRB application #.
 Another option is to use Western IRB, in Olympia (contact:  Elaine Weakley).
 UW apparently has an arrangement with Western IRB whereby Western IRB can
 handle the IRB function for at least some subset of UW studies.  As with
@@ -80,10 +80,10 @@ To get access, visit the ACM DL, then visit the bookmark.
 
 In UW Hires (https://uwhires.admin.washington.edu/eng/hm/default.cfm?szcat=hm):
   * to remove an individual from your main homepage (doesn't remove the
-> > applicant from the position's homepage), click "complete evaluation
-> > form" and enter "yes".
+    applicant from the position's homepage), click "complete evaluation
+    form" and enter "yes".
   * to see the cover letter, select the position (not the specific
-> > applicant), then click on the percentage in the "score" column.
+    applicant), then click on the percentage in the "score" column.
 
 Cheap ($10) Microsoft Office/Project/Visio for home use, for UW faculty and
 staff:  https://www.washington.edu/itconnect/wares/uware/microsoft/hup.html
@@ -110,12 +110,12 @@ To approve spending:
 
 UW CSE printer: ps581
   * One-sided (single-sided):
-> > ps581/noduplex
+    ps581/noduplex
   * No header pages:
-> > ps581/nobanner
+    ps581/nobanner
 Color printer: psc581
-> > I can't seem to create
-> > > psc581/noduplex
+    I can't seem to create
+      psc581/noduplex
 Too often landscape PDF comes out rotated (& scaled down).  A solution is
 to print from Acrobat Reader, and to check the "landscape" button.
 
@@ -158,9 +158,9 @@ You probably want a "guest, research account".
 A guest account is only permitted to use 25 MB of space, so:
   * Always log into the same machine.
   * On that machine, create a directory /scratch/${USER} and store your
-> > bigger files there.
+    bigger files there.
   * make symbolic links from your home directory so you don't even notice
-> > the disk quota limitation.
+    the disk quota limitation.
 
 /cse/www2/types/ contains the content served at
 http://types.cs.washington.edu/
@@ -196,14 +196,14 @@ directory, which will get reaped eventually when you graduate or leave UW.
 
 In the UW CSE visitor reservation schedule system (mvis):
   * To not show your name, prefix a description with "-" , e.g., "-Lunch at Canlis".
-> > http://reserve.cs.washington.edu/visitor/help.php?#SEC25
+    http://reserve.cs.washington.edu/visitor/help.php?#SEC25
   * To blackout some periods, prefix with "--", e.g., "--unavailable".
-> > http://reserve.cs.washington.edu/visitor/help.php?#SEC22
+    http://reserve.cs.washington.edu/visitor/help.php?#SEC22
 
 How to sign up for undergrad research for credit in the UW CSE department:
 1. Go to http://www.cs.washington.edu/students/ugrad/research#registration
-> (Also available via: cs.washington.edu -> Current Students -> Information for
-> > Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
+  (Also available via: cs.washington.edu -> Current Students -> Information for
+    Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
 2. Fill out and submit the form on that page
 3. It will send the professor the approval email
 4. When the professor approves, it sends the student an SLN and add code.
@@ -366,17 +366,17 @@ https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 Options for short-term Seattle housing/rentals/apartments/sublets:
   * Craigslist: http://seattle.craigslist.org/sub/
   * UW Visiting Personnel and Visiting Students: stay in a dorm
-> > http://www.hfs.washington.edu/conferences/planners.aspx?id=141
+    http://www.hfs.washington.edu/conferences/planners.aspx?id=141
   * Visiting Faculty Housing Service: http://depts.washington.edu/uwfacaux/vfhs.html
   * J-1 Scholar Guide (see Housing, and also the complete guide):
-> > http://iso.uw.edu/jfirst.html#Arrival_in_Seattle
+    http://iso.uw.edu/jfirst.html#Arrival_in_Seattle
   * Seattle Times: http://marketplace.nwsource.com/realestate/rentals/
   * Belltown Inn: http://www.belltown-inn.com/
-> > (Fausto Spoto says it is very nice, but a touch more expensive than other options.)
+    (Fausto Spoto says it is very nice, but a touch more expensive than other options.)
   * Radford Court: http://radfordcourt.com/
   * UW Daily: http://dailyuw.com/classifieds/
-> > (UW Daily mostly has offers of sharing with students, which is probably
-> > too much of a risk, but it has some furnished apartments/houses too.)
+    (UW Daily mostly has offers of sharing with students, which is probably
+    too much of a risk, but it has some furnished apartments/houses too.)
 Be sure to check where the apartment or house is in relation to the
 university.  Sites include
   * hotpads.com

@@ -1,18 +1,20 @@
-Contents:
+#summary Tips about conducting technical research, and writing it up
 
+Contents:
+<wiki:toc max_depth="1" />
 
 Adapted from http://en.wikipedia.org/wiki/Dependability:
   * Defect:
-> > A flaw, failing, or imperfection in a system, such as an
-> > incorrect design, algorithm, or implementation.  Also known as a
-> > fault or bug.  Typically caused by a human mistake.
+    A flaw, failing, or imperfection in a system, such as an
+    incorrect design, algorithm, or implementation.  Also known as a
+    fault or bug.  Typically caused by a human mistake.
   * Error:
-> > An error is a discrepancy between the intended behaviour of a
-> > system and its actual behavior inside the system boundary.  Not
-> > detectable without assert statements and the like.
+    An error is a discrepancy between the intended behaviour of a
+    system and its actual behavior inside the system boundary.  Not
+    detectable without assert statements and the like.
   * Failure:
-> > A failure is an instance in time when a system displays
-> > behavior that is contrary to its specification.
+    A failure is an instance in time when a system displays
+    behavior that is contrary to its specification.
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
 Terminology says:
 ```
@@ -43,30 +45,30 @@ discrepancy.
 Threats to the validity of research.
 Most often these are clumped into just
   * Internal validity
-> > refers specifically to whether an experimental
-> > treatment/condition makes a difference or not, and whether there is
-> > sufficient evidence to support the claim.
+    refers specifically to whether an experimental
+    treatment/condition makes a difference or not, and whether there is
+    sufficient evidence to support the claim.
   * External validity
-> > refers to the generalizibility of the treatment/condition outcomes.
+    refers to the generalizibility of the treatment/condition outcomes.
 But sometimes the threats are more finely broken down.  Example from
 http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm
   1. Threats to construct validity.
-> > The measured variables may not actually measure the conceptual variable.
+    The measured variables may not actually measure the conceptual variable.
 
-> 2. Threats to statistical conclusion validity.
-> > Type I (mistakenly rejects null hypothesis) or Type II error (mistake
-> > of failing to reject the null) may have occurred.
+  2. Threats to statistical conclusion validity.
+    Type I (mistakenly rejects null hypothesis) or Type II error (mistake
+    of failing to reject the null) may have occurred.
 
-> 3. Threats to internal validity.
-> > IV - DV relation may not be directly causal (confounds = another
-> > variable mixed up with the IV; confounds provide alternative
-> > interpretations or alternative explanations for the results of the
-> > experiment).   Internal validity is perfect only when there are no
-> > confounding influences.
+  3. Threats to internal validity.
+    IV - DV relation may not be directly causal (confounds = another
+    variable mixed up with the IV; confounds provide alternative
+    interpretations or alternative explanations for the results of the
+    experiment).   Internal validity is perfect only when there are no
+    confounding influences.
 
-> 4. Threats to external validity.
-> > Results may only apply to limited set of
-> > circumstances (e.g., specific groups of people or only some typefaces...)
+  4. Threats to external validity.
+    Results may only apply to limited set of
+    circumstances (e.g., specific groups of people or only some typefaces...)
 Another list of types of threats is:
   * construct (correct measurements)
   * internal (alternative explanations)
@@ -75,7 +77,6 @@ Another list of types of threats is:
 
 
 Item #2 of Strunk & White's _The Elements of Style_ states,
-
 > In a series of three or more terms with a single conjunction, use a
 > comma after each term except the last.
 For example, don't write
@@ -97,7 +98,7 @@ of a sample must we take?
   * n = ((z `*` sigma) / E)^2
 If the original sample size is 30 or more, you can safely replace the
 population standard deviation with the sample standard deviation.
-Taken from: http://www.isixsigma.com/library/content/c000709ex.asp_
+Taken from: http://www.isixsigma.com/library/content/c000709ex.asp
 
 In statistics:
   * a type I error is a false alarm
