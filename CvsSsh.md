@@ -1,5 +1,7 @@
-Contents:
+#summary How to use CVS with ssh instead of rsh
 
+Contents:
+<wiki:toc max_depth="1" />
 
 >entry How to use CVS with ssh instead of rsh
 
@@ -17,8 +19,10 @@ Instead of using pserver and cvs login, you can set CVSROOT to use
 'ext' authentication. By default, ext means rsh, but you can change it
 to use ssh:
 
-export CVSROOT=:ext:user@machine.name:/cvsroot
-export CVS\_RSH=/usr/bin/ssh
+```
+    export CVSROOT=:ext:user@machine.name:/cvsroot
+    export CVS_RSH=/usr/bin/ssh
+```
 
 Now, instead of doing cvs login, each cvs command (add, commit, etc.)
 will prompt you for your password as it connects via ssh.
@@ -31,7 +35,7 @@ Here's the recipe:
 
 # Generate a private and public ssh RSA key pair with "ssh-keygen" (and remember that passphrase!)
 
-# Concatenate the ~/.ssh/identity.pub public key file onto the end of ~/.ssh/authorized\_keys on the machine with the CVS repository.
+# Concatenate the `~/.ssh/identity.pub` public key file onto the end of `~/.ssh/authorized_keys` on the machine with the CVS repository.
 
 # At the beginning of each development session, run
 ```

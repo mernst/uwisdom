@@ -1,5 +1,7 @@
-Contents:
+#summary Notes on working with large 64-bit heaps in Java
 
+Contents:
+<wiki:toc max_depth="1" />
 
 ```
 From: Derek Rayside

@@ -1,7 +1,7 @@
+#summary Wisdom about Emacs
+
 Contents:
-
-
-
+<wiki:toc max_depth="1" />
 
 ---
 
@@ -10,7 +10,7 @@ Contents:
 
 Emacs's tags facility allows you to easily find a definition (of a
 function, variable, class, etc.) or search a collection of related files.
-To create a tags table, run "etags _files_"; for instance, "etags **.h**.c"
+To create a tags table, run `etags _files_`; for instance, `etags *.h *.c`
 To find a tag within Emacs, type  M-.  or  M-x find-tag RET
 To search all files in the tags table, type  M-x tags-search RET
 To select a different tags table, type  M-x visit-tags-table RET
@@ -47,27 +47,37 @@ To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
 (symbol-function 'foo) to determine whether an emacs function is coded in C
 or elisp; C-h f now also gives that information.
 
+```
 just-one-space                ESC SPC
-> Function: Delete all spaces and tabs around point, leaving one space.
+  Function: Delete all spaces and tabs around point, leaving one space.
+```
 
 To get local variables in emacs, put one of the following at the end of the
 file, preferrably following a page-feed (^L) character:
 Local Variables:
+```
 page-delimiter: "^\f\n===========================================================================\n"
 End:
-/**Local Variables:**/
-/**compile-command: "gcc thisfile.c -o thisfile -lm -O -g"**/
-/**compile-history: ("gcc thisfile.c -o thisfile -lm -O -g")**/
-/**End:**/
+```
+```
+/* Local Variables: */
+/* compile-command: "gcc thisfile.c -o thisfile -lm -O -g" */
+/* compile-history: ("gcc thisfile.c -o thisfile -lm -O -g") */
+/* End: */
+```
 (Compile-command first cd's to default-directory.)
 These are equivalent (save a mode line update), but the second doesn't
 require eval:
+```
 Local Variables:
 eval: (auto-fill-mode 0)
 End:
+```
+```
 Local Variables:
 auto-fill-function: nil
 End:
+```
 
 To save (or execute some other gnus keystroke command upon) multiple
 articles to a file in GNUS, use '&' in Subject mode.  This only works on
@@ -129,7 +139,8 @@ arguments, and remove them from it when done.
 
 To redump emacs, put the following in a file (say load-and-dump.el) and run
 it as
-> gnuemacs -batch -l load-and-dump
+`gnuemacs -batch -l load-and-dump`:
+```
 (load "pkg1.elc")
 (garbage-collect)
 (load "pkg2.elc")
@@ -138,6 +149,7 @@ it as
 (setq command-line-processed nil)
 (garbage-collect)
 (dump-emacs "product" "/local/bin/gnuemacs")
+```
 For more info, see startup.el.
 
 To add hooks to an Emacs function, use advice, which, like Aspect-Oriented
@@ -149,10 +161,11 @@ The gnuserv program lets you force a running Emacs to edit a file or
 evaluate Lisp code.
 
 In Emacs, to show only those unindented lines that are **not** preceded by _N_
-spaces, do
-> C-u _N_ C-x $
-To reset, do
-> C-x $
+spaces, do ```
+  C-u _N_ C-x $
+``` To reset, do ```
+  C-x $
+```
 
 A crude, undocumented, and not-guaranteed-to-work-in-the-future way to
 silence any Emacs function is to temporarily bind executing-kbd-macro to a
@@ -175,7 +188,7 @@ Windows, do
       (setq baud-rate 153600))
 ```
 
-In Emacs C source, initial\_define\_key sets up default keybindings.
+In Emacs C source, `initial_define_key` sets up default keybindings.
 
 To create a standalone program that does Emacs Lisp, you can do something like
 ```
@@ -230,7 +243,9 @@ Emacs perl (and cperl) mode mismatches the parentheses in "(\b|$)" because
 parenthesis.  The solution is to reverse the parts of the test:  "($|\b)".
 
 When debugging Emacs Lisp that does frame/window/buffer switching:
-> (setq special-display-buffer-names '("**Backtrace**"))
+```
+  (setq special-display-buffer-names '("*Backtrace*"))
+```
 
 Emacs pretests are available from alpha.gnu.org,
 but a better way to get them is via CVS:
@@ -272,18 +287,20 @@ To change the font while emacs is running,
 ```
 To list available fonts:
   * use program xlsfonts.
-> > Any font with `m' or `c' in the SPACING field of
-> > the long name is a fixed-width font.  Here's how to use the `xlsfonts'
-> > program to list all the fixed-width fonts available on your system:
-> > > xlsfonts -fn '**x**' | egrep "^[0-9]+x[0-9]+"
-> > > xlsfonts -fn '**-**-**-**-**-**-**-**-**-**-**-m**'
-> > > xlsfonts -fn '**-**-**-**-**-**-**-**-**-**-**-c**'
+    Any font with `m' or `c' in the SPACING field of
+    the long name is a fixed-width font.  Here's how to use the `xlsfonts'
+    program to list all the fixed-width fonts available on your system:
+```
+     xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"
+     xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'
+     xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
+```
   * see variable x-fixed-font-alist
-  * run (x-list-fonts "**")
+  * run `(x-list-fonts "*")`
 To see what a particular font looks like, use the `xfd' command, eg
 ```
   xfd -fn 6x13
-```**
+```
 
 If starting Emacs gives an error like ``Font `Inconsolata 12' is not defined``,
 then do:
@@ -293,7 +310,7 @@ then do:
 since that font is generally defined.
 
 To recompile my emacs directory:
-emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '<sup>Add to load-path: ' | grep -v '</sup>Checking'
+```emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '^Add to load-path: ' | grep -v '^Checking'```
 
 This bit of text makes Emacs automatically update the date at the bottom of
 a webpage when it is saved.
@@ -346,8 +363,11 @@ is that the mule format is not recognized by other programs; for example,
 printing such a file from the command line (or via enscript) leads to
 gibberish.  (Doing so from within Emacs does the right thing.)  To make
 Emacs save files in a different format, after reading the file, do "M-x
-set-buffer-file-coding-system".  Also consider adding a line like "-**-
-coding: latin-0 -**-" to the top of the file, or in the local variables
+set-buffer-file-coding-system".  Also consider adding a line like
+```
+  -*- coding: latin-0 -*-
+```
+to the top of the file, or in the local variables
 section.  (Even without this, Emacs ought to recognize the file's format
 when you read it back in, though Emacs can't tell among the various latin-X
 variants.)
@@ -376,15 +396,14 @@ them in this entry because someone searching for this entry might use them.
 
 In Mew, use the following for searching:
   * `C-cC-s`
-
-> > Incremental search forward in Message mode, only within the
-> > current message.
+    Incremental search forward in Message mode, only within the
+    current message.
   * `C-cC-r` Incremental search backward in Message mode, only within the
-> > current message.
+    current message.
   * `?`
-> > Put the `*` mark onto messages in this folder, which are matched
-> > to a specified pattern. Either `mewl` or `grep` is called according to
-> > the specified pattern.
+    Put the `*` mark onto messages in this folder, which are matched
+    to a specified pattern. Either `mewl` or `grep` is called according to
+    the specified pattern.
 
 In Mew, bcc: changes the Subject to "A blind carbon copy".
 To keep the original Subject line, use dcc: instead of bcc:.
@@ -394,7 +413,9 @@ In Emacs, to search and replace a regex across multiple files:
   * mark files of interest: `% m`
   * invoke search and replace: `Q`
 To search through symbolic links, first do
-> > (setq find-program "find -L")
+```
+  (setq find-program "find -L")
+```
 
 In Emacs, to edit a file with long lines so the display wraps/flows/fills
 the lines but the underlying buffer text retains long lines, use M-x

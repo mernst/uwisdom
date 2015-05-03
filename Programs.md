@@ -554,9 +554,9 @@ One can also use pdfnup:
 pdfnup is part of PDFjam.  Also see pdftk, an alternative to PDFjam.
 <a href='Hidden comment: 
 % Sample use of mpage (-o suppresses lines between pages):
-% {{{
+% ```
 %   mpage -2 file.ps > file-2up.ps
-% }}}
+% ```
 % but don"t use it; psnup seems better.
 % mpage remains in the paragraph above because I too often search on it when I
 % can"t remember the name of psnup.
@@ -590,9 +590,9 @@ in Acrobat Professional.  Or, do this:
 % bbfig computes the bounding boxes of PostScript figures.
 % See the bbfig man page for more details.
 % To avoid wasting paper and time going to the printer, use
-% {{{
+% ```
 %   bbfig -o file.ps | gv -
-% }}}
+% ```
 '></a>
 
 ghostview:  view PostScript on an X windows display.
@@ -2363,10 +2363,10 @@ exists, press 'escape' at the Recovery window.<br>
 %% More manual, less desirable solution:<br>
 % If OpenOffice is trying to restore a file that no longer exists, delete a<br>
 % file such as one of these:<br>
-% {{{<br>
+% ```<br>
 %   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu<br>
 %   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu<br>
-% }}}<br>
+% ```<br>
 <br>
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:<br>
 <blockquote>Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1<br>

@@ -1,4 +1,7 @@
+#summary Wisdom about the University of Washington.
+
 Contents:
+<wiki:toc max_depth="1" />
 
 
 
@@ -25,7 +28,6 @@ south of the Hub, but the dispatchers seem to have assigned an address
 plotted within the grid surrounding campus:  3815 Stevens Way.
 
 Career center, for prospective employers who want to hire a student:
-
 > http://careers.washington.edu/employers
 
 To enter grades online:  https://catalyst.uw.edu/gradepage
@@ -68,7 +70,7 @@ UWMC, or the Montlake station above 520.  Exit the bus at the "NE 40th St
 freeway station" (aka "Overlake TC"?); on Google Maps this is "SR 520 Ramp
 & NE 40th St".  From there, take a Microsoft
 shuttle, or walk.  A relevant Microsoft campus map is:
-![http://members.microsoft.com/careers/mslife/locations/images/west_campus.jpg](http://members.microsoft.com/careers/mslife/locations/images/west_campus.jpg)
+http://members.microsoft.com/careers/mslife/locations/images/west_campus.jpg
 
 To access the ACM digital library (or other content licensed by the UW
 libraries) from an IP address that is not at washington.edu:
@@ -150,7 +152,6 @@ http://www.cs.washington.edu/lab/www/MediaWiki.shtml
 
 To apply for a new UW CSE computer account at cs.washington.edu,
 fill out the form at
-
 > http://www.cs.washington.edu/lab/support/accountapp20.pdf
 and then scan & email it, or fax it back.
 You probably want a "guest, research account".
@@ -170,8 +171,7 @@ http://courses.cs.washington.edu/courses/cse331/13sp/
 
 Incoming anonymous ftp:
 You can upload files here via anonymous ftp:
-
-> [ftp://ftp.cs.washington.edu/incoming](ftp://ftp.cs.washington.edu/incoming)
+ftp://ftp.cs.washington.edu/incoming
 You won't be able to see the files (but that directory is readable by me as
 /cse/ftp/incoming).  Let me know when the files are there so I can retrieve
 them.
@@ -202,7 +202,6 @@ In the UW CSE visitor reservation schedule system (mvis):
 
 How to sign up for undergrad research for credit in the UW CSE department:
 1. Go to http://www.cs.washington.edu/students/ugrad/research#registration
-
 > (Also available via: cs.washington.edu -> Current Students -> Information for
 > > Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
 2. Fill out and submit the form on that page
@@ -286,7 +285,6 @@ http://www.cs.washington.edu/lab/sw/windows/office2010/
 
 To add a visitor's talk to the CSE colloquium talk calendar, send to eithe
 Connie Ivey-Pasche or Kay Beck-Benton:
-
 > name, affiliation, title and abstract, date, room, time,
 > visitor schedule in MVIS if available
 
@@ -307,7 +305,9 @@ For read permissions/access to the UW CSE grad student and advising
 database, ask Dan Boren.  Then, access it via the Web:
 > https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/
 or from the command line (you need postgres, and you need to be on the CSE network):
-> psql --dbname=cse\_admin --host=norfolk.cs.washington.edu --username=suciu
+```
+  psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
+```
 
 Instructions for maintaining UW CSE Drupal webpages/website:
 https://wasp.cs.washington.edu/Internal/plse-webpages.html
@@ -319,14 +319,13 @@ cs-ugrads-urgent@cs.
 
 Jenkins setup:
   1. Created a jenkins user with the same uid as before and
-> > /scratch/secs-jenkins/jenkins-home/ as home directory.
-
-> 2. Installed the latest Jenkins.
-> 3. Edited /etc/sysconfig/jenkins to set the home directory.
-> 4. Started it.
-> 5. Added it to runtime startup.
-> 6. Visited http://buffalo.cs.washington.edu:8080/
-> 7. Waited.
+     /scratch/secs-jenkins/jenkins-home/ as home directory.
+  2. Installed the latest Jenkins.
+  3. Edited /etc/sysconfig/jenkins to set the home directory.
+  4. Started it.
+  5. Added it to runtime startup.
+  6. Visited http://buffalo.cs.washington.edu:8080/
+  7. Waited.
 Try this for file .hgrc in ~jenkins (/var/lib/jenkins):
 ```
 [trusted]

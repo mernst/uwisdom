@@ -1,3 +1,5 @@
+#summary Using Mercurial at UW CSE
+
 Create a file `~/.hgrc` with the following contents (customize to your
 username, etc.), on **both** the UW file
 system and on any other machine (such as a laptop or a departmental VM)

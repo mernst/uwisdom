@@ -1,6 +1,7 @@
+#summary Wisdom about Linux
+
 Contents:
-
-
+<wiki:toc max_depth="1" />
 
 ---
 
@@ -66,7 +67,7 @@ To shutdown a Linux PC:
   sudo shutdown -h now
 ```
 To reboot a Linux PC:  Ctrl-Alt-F6 to get to a Virtual Terminal Console,
-> then Ctrl-Alt-Delete.  When it says it's rebooting, you may power down.
+then Ctrl-Alt-Delete.  When it says it's rebooting, you may power down.
 To stop debian Linux, run "halt" (as root), which itself invokes "shutdown".
 
 To upgrade your kernel you must first choose the kernel most appropriate
@@ -115,7 +116,7 @@ at: peanut:/usr/local/firefox3.0/gtk2-10/usr/lib.  To enable
 printing, you must add a link from the normal spot for gtk2-10
 back to the new version:
 > /usr/lib/gtk-2.0/2.10.0 -> /usr/local/firefox3.0/gtk2-10/usr/lib/gtk-2.0/2.10.0/.
-Your LD\_LIBRARY\_PATH must include gtk1-10.  If you put it in the firefox
+Your `LD_LIBRARY_PATH` must include gtk1-10.  If you put it in the firefox
 script, it will get overwritten each time firefox upgrades.  But if it
 is somewhere else, you won't be able to start firefox from thunderbird.
 
@@ -182,14 +183,16 @@ writing a file.
 To mount a USB stick drive or CD-ROM on Ubuntu:
 > Just insert it, and it appears under /run/media/${USER}/ or /media
 To eject it, first do
-> umount /run/media/${USER}/DISKNAME
-> umount /media/DISKNAME
+```
+  umount /run/media/${USER}/DISKNAME
+  umount /media/DISKNAME
+```
 
 To use a floppy under Linux, either dd or mtools is probably all you need.
-(Just use the "m**" commands such as "mdir", "mcopy", etc.)
+(Just use the `m*` commands such as "mdir", "mcopy", etc.)
 To use a CD-ROM/DVD drive under Linux, mount it.  (The same may go for ZIP
 drives, but some weirdnesses apply, so use a /dev/zip link instead to get
-all that right.)**
+all that right.)
 
 A better solution for using a floppy is mtools:  use mdir, mcopy, etc.
 On 7/12/2001, these commands mounted the meoptiplex zip drive:
@@ -221,7 +224,7 @@ When an Amazon Kindle is plugged into Ubuntu Linux, it is mounted not at
 # Everything else #
 
 SSH timeouts seem to be controlled in a variety of ways.  The
-file /etc/ssh/sshd\_config contains a number of setups.  It
+file `/etc/ssh/sshd_config` contains a number of setups.  It
 was suggested to set KeepAlive (possibly TCPKeepAlive) to
 avoid the firewall dropping an inactive connection.  Also
 ClientAliveInterval which causes the daemon to periodically
@@ -233,7 +236,8 @@ machines, those with IDE disks) show whether or not DMA is
 turned on.  '/sbin/hdparm -d 1 /dev/hda' will turn DMA on.  This
 may cause a hang/crash if done while the disk is being used.
 
-Linux system messages can be found in /var/log/messages**Look at the man pages on dmesg and syslogd as well.**
+Linux system messages can be found in `/var/log/messages*`.
+Look at the man pages on dmesg and syslogd as well.
 
 You can get a simple list of all of the subscribers to a mailing
 list by sending mail to _list_-request@lists.csail.mit.edu and
@@ -278,7 +282,7 @@ can be compress or removed (delete,rm) by the following commands:
   sudo /etc/init.d/sysklogd start
 ```
 
-File /etc/debian\_version gives the version number of Debian that you are
+File `/etc/debian_version` gives the version number of Debian that you are
 running.  Versionnumber-to-codename correspondence:
 > http://en.wikipedia.org/wiki/Debian#Releases
 ```
@@ -298,7 +302,9 @@ I disabled ipv6 by editing /etc/modprobe.d/aliases:
   +alias ipv6 off
 ```
 because "dmesg" said:
-> [758.258184](.md) eth0: no IPv6 routers present
+```
+  [  758.258184] eth0: no IPv6 routers present
+```
 
 To recompile the Debian package "foobar" from source code:
 ```
@@ -312,7 +318,7 @@ To recompile the Debian package "foobar" from source code:
   # Make .deb package:
   fakeroot debian/rules binary
 ```
-You'll then have a foobar\_1.42-12\_i386.deb file in the directory you
+You'll then have a `foobar_1.42-12_i386.deb` file in the directory you
 **started in**, which you can install with "dpkg -i". The version of the
 source that apt-get gets is controlled by the /etc/apt/sources.list
 file.  You can often "backport" an updated package from a newer
@@ -370,29 +376,30 @@ To get the search box:
 > Click the Ubuntu logo in the upper left corner, then press ESC
 
 To update the date on Ubuntu Linux:
-> date ; sudo ntpdate -s time.nist.gov ; date
+```
+  date ; sudo ntpdate -s time.nist.gov ; date
+```
 or alternately:
-> date ; sudo service ntp stop ; sudo ntpdate -s time.nist.gov ; sudo service ntp start ; date
-> date ; sudo service ntp stop ; sudo ntpd -gq ; sudo service ntp start ; date
-
+```
+  date ; sudo service ntp stop ; sudo ntpdate -s time.nist.gov ; sudo service ntp start ; date
+  date ; sudo service ntp stop ; sudo ntpd -gq ; sudo service ntp start ; date
+```
 
 
 ---
 
+bsh/csh/tsh quote arbitrary string with single quotes:
+Single quotes quote anything but other single quotes.  A single quote
+can be quoted by a backslash, but NOT within single quotes.  Thus, to
+quote a string with single quotes, terminate the string, escape the single
+quote, and start a new single quoted string.
+For example, to quote: Jeff's toy
+```
+  'Jeff'\''s toy'
+```
+The replace strings are: "'" and "'\\''"
+
 # long entries below #
-
->entry bsh/csh/tsh quote arbitrary string with single quotes
-
-> Single quotes quote anything but other single quotes.  A single quote
-> can be quoted by a backslash, but NOT within single quotes.  Thus, to
-> quote a string with single quotes, terminate the string, escape the single
-> quote, and start a new single quoted string.
-
-> For example, to quote: Jeff's toy
-
-> 'Jeff'\''s toy'
-
-> The replace strings are: "'" and "'\\''"
 
 >entry changing display
 

@@ -1,4 +1,7 @@
+#summary Wisdom about Java
+
 Contents:
+<wiki:toc max_depth="1" />
 
 
 
@@ -42,9 +45,11 @@ Start the TestRunner under the debugger and configure the debugger so that
 it catches the junit.framework.AssertionFailedError.  Notice that this will
 only launch the debugger when an expected failure occurs.
 For example:
-> java -cp whatever:/path/to/junit.jar junit.textui.TestRunner MyTestClass
-> catch junit.framework.AssertionFailedError
-> run
+```
+  java -cp whatever:/path/to/junit.jar junit.textui.TestRunner MyTestClass
+  catch junit.framework.AssertionFailedError
+  run
+```
 
 Here are Emacs commands for replacing JUnit assertions with Hamcrest
 versions that produce more readable output.  Even though the Hamcrest code
@@ -108,14 +113,13 @@ For notes about Java garbage collection and the heap, see wiki page JavaHeap.
 For notes about Java profiling, see wiki page JavaTools.
 
 Some ways to profile/understand java memory use
-> The Runtime class has methods that will return the total amount of
-> memory used.  These don't seem to be terribly accurate.
-> There is a heap/CPU profiler that seems to work pretty well.
-> look at:
-> > http://java.sun.com/j2se/1.4.2/docs/guide/jvmpi/jvmpi.html#hprof
-
-> By default, it gives only heap usage profiles; for CPU profiling, use:
-> > java -Xrunhprof:cpu=samples
+ * The Runtime class has methods that will return the total amount of
+   memory used.  These don't seem to be terribly accurate.
+ * There is a heap/CPU profiler that seems to work pretty well.
+   look at:
+   http://java.sun.com/j2se/1.4.2/docs/guide/jvmpi/jvmpi.html#hprof
+   By default, it gives only heap usage profiles; for CPU profiling, use:
+   `java -Xrunhprof:cpu=samples`
 
 Java timing information via System.currentTimeMillis() is only accurate
 to milliseconds.  I couldn't find anything more precise.  Nor anything
@@ -129,20 +133,20 @@ that works with CPU time rather than wallclock time.
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
   * The formal type parameter is called a "type parameter".
-> > The parameter is
-> > also, equivalently, called a "type variable".  But "type parameter"
-> > tends to be used when speaking of the declaration and "type variable"
-> > tends to be used when speaking of its uses in the body.
-> > (For a method/constructor, it's called the "formal type parameter";
-> > JLS3, sec 8.4.4.)
-> > The "type parameter section" is delimited by angle brackets and
-> > declares the type variables.  (JLS3, sec 8.1.2).
+    The parameter is
+    also, equivalently, called a "type variable".  But "type parameter"
+    tends to be used when speaking of the declaration and "type variable"
+    tends to be used when speaking of its uses in the body.
+    (For a method/constructor, it's called the "formal type parameter";
+    JLS3, sec 8.4.4.)
+    The "type parameter section" is delimited by angle brackets and
+    declares the type variables.  (JLS3, sec 8.1.2).
   * The actual type parameter is called a "type argument".
   * A "parameterized type" is a type that has type arguments/parameters.
   * A class is generic if it declares one or more type variables (JLS3, sec 8.1.2).
-> > JLS only uses "generic" to refer to class **declarations**, not
-> > classes.  "A generic class declaration defines a set of parameterized
-> > types, one for each possible invocation of the type parameter section."
+    JLS only uses "generic" to refer to class **declarations**, not
+    classes.  "A generic class declaration defines a set of parameterized
+    types, one for each possible invocation of the type parameter section."
 
 Terminology for generics/parametrc polymorphism in Java, from _Effective
 Java_, second editon, page 115.  It differs from the terminology used in
@@ -185,16 +189,21 @@ that JVM using the -J argument.  In particular, you can pass -J-Xmx1024M to
 give the JVM a gig of memory for the heap.
 
 The command
-
-> javac -jar myjar.jar
+```
+  javac -jar myjar.jar
+```
 ignores the CLASSPATH environment variable, so you may need to pass it
 explicitly:
-> javac -jar myjar.jar -cp ${CLASSPATH}
+```
+  javac -jar myjar.jar -cp ${CLASSPATH}
+```
 
 To limit/increase the number of errors that javac will print use, -Xmaxerrs N
 
 If javac says
-> warning: unmappable character for encoding UTF8
+```
+  warning: unmappable character for encoding UTF8
+```
 then change the Ant task:
 ```
   <javac encoding="8859_1" ...
@@ -257,29 +266,29 @@ This only works with Javadoc 8 and later.
 
 
 JDK 1.4 is still distributed, but at an obscure URL:
-> http://java.sun.com/javase/downloads/jdk/142/
+http://java.sun.com/javase/downloads/jdk/142/
 Or, at http://java.sun.com/javase/downloads/, click on "Previous Releases".
 
 To get a copy of the JDK 7 source:
-> hg clone http://hg.openjdk.java.net/jdk7/jdk7/jdk
+```hg clone http://hg.openjdk.java.net/jdk7/jdk7/jdk```
 
 Java 1.4 ("J2SE 1.4") was released in February 2002.
 Java 5 ("J2SE 5.0") was released in September 2004.
 Java 6 ("J2SE 6") was released in December 2006 (public beta by February 2006).
 Java 7 ("J2SE 7") release date is September 2011.  See:
-> http://openjdk.java.net/projects/jdk7/milestones/
-> http://openjdk.java.net/projects/jdk7/calendar/
+  http://openjdk.java.net/projects/jdk7/milestones/
+  http://openjdk.java.net/projects/jdk7/calendar/
 
 Major version number for the Java class file format (JVM version number):
-> J2SE 9.0 = 53 (0x35 hex)    [is to release around March 2016?](goal.md)
-> J2SE 8.0 = 52 (0x34 hex)    [March 2014](released.md)
-> J2SE 7.0 = 51 (0x33 hex)    [July 2011](released.md)
-> J2SE 6.0 = 50 (0x32 hex)    [December 2006](released.md)
-> J2SE 5.0 = 49 (0x31 hex)
-> JDK 1.4 = 48 (0x30 hex)
-> JDK 1.3 = 47 (0x2F hex)
-> JDK 1.2 = 46 (0x2E hex)
-> JDK 1.1 = 45 (0x2D hex)
+  J2SE 9.0 = 53 (0x35 hex)    (goal is to release around March 2016?)
+  J2SE 8.0 = 52 (0x34 hex)    (released March 2014)
+  J2SE 7.0 = 51 (0x33 hex)    (released July 2011)
+  J2SE 6.0 = 50 (0x32 hex)    (released December 2006, public beta by Feb 2006)
+  J2SE 5.0 = 49 (0x31 hex)
+  JDK 1.4 = 48 (0x30 hex)
+  JDK 1.3 = 47 (0x2F hex)
+  JDK 1.2 = 46 (0x2E hex)
+  JDK 1.1 = 45 (0x2D hex)
 
 To pretty-print or indent a Java program, do "java JavaPP filename.java".
 Or, use my shell script "javapp file1.java file2.java file3.java ...",
@@ -314,7 +323,7 @@ I have a "jwhich" shell script wrapped around this.
 
 In Java, "null instanceof Class" returns false for any Class.
 
-Canonical use of package java.util.regex.**for Java regular expressions:
+Canonical use of package `java.util.regex.*` for Java regular expressions:
 ```
   Pattern p = Pattern.compile("a*b");
   Matcher m = p.matcher("aaaaab");
@@ -326,19 +335,18 @@ Canonical use of package java.util.regex.**for Java regular expressions:
 or, less frequently,
 ```
   boolean b = Pattern.matches("a*b", "aaaaab");
-```**
+```
 
 Java issues (bug reports, RFEs, etc.):  http://bugs.sun.com/bugdatabase/
 
 LVTT - Local Variable Type Table
-> Errors can occur when instrumenting with BCEL.  One error is:
-> > LVTT entry for 'list' in class file daikon/dcomp/Test does not match
-> > any LVT entry
-
-> The easiest solution I've found so far is to simply remove these tables.
-> They are only used by debuggers and when instrumenting, that is seldom
-> an issue.  utilMDE/BCELUtil has a method (remove\_local\_variable\_type\_tables)
-> that does this for a method.
+Errors can occur when instrumenting with BCEL.  One error is:
+LVTT entry for 'list' in class file daikon/dcomp/Test does not match
+any LVT entry.
+The easiest solution I've found so far is to simply remove these tables.
+They are only used by debuggers and when instrumenting, that is seldom
+an issue.  utilMDE/BCELUtil has a method (`remove_local_variable_type_tables`)
+that does this for a method.
 
 Java nested classes are of two varieties:  static and inner.
 
@@ -347,7 +355,9 @@ To determine which class files require a given JDK version (or earlier):
   find | xargs java ClassFileVersion -min 1.6 | grep -v "is neither a"
 ```
 This is good for debugging errors of the form
-> Exception in thread "main" java.lang.UnsupportedClassVersionError: Bad version number in .class file
+```
+  Exception in thread "main" java.lang.UnsupportedClassVersionError: Bad version number in .class file
+```
 that give no indication of what .class file was problematic.
 
 To execute a shell command in Java:
@@ -359,8 +369,10 @@ In Java, File.getName() returns the basename:  no directory components, but
 does include the filename extension.
 
 After starting jdb, do something like
-> stop in utilMDE.JWhich.main
-> run
+```
+  stop in utilMDE.JWhich.main
+  run
+```
 lest when you issue the "run" command the application continues to termination.
 
 In Java, to iterate over the elements of a HashMap, do:
@@ -381,11 +393,11 @@ A disadvantage of the new-style for loop is that there is no name for the
 iterator, so there is no way to access important information such as the
 current index or other information that a specialized iterator may make
 available.
-> A way to get around this is for a single object to implement both
+  A way to get around this is for a single object to implement both
 Iterator and Iterable.  The Iterable.iterator() method would just return
 "this", and within the foor loop body, the client can refer to the iterable
 to obtain the desired information.
-> The problem with this design is that it assumes that there is exactly one
+  The problem with this design is that it assumes that there is exactly one
 iterator for the object at a time.  Clients may expect that it is possible
 to have multiple iterators over a given Iterable, and thus may expect that
 each call to Iterable.iterator returns a fresh iterator that shares no
@@ -427,17 +439,19 @@ Jardiff takes two jar files and outputs all the public API changes.
 http://www.osjava.org/jardiff/
 
 To read a file line by line from Java use:
-> BufferedReader br = new BufferedReader (new FileReader (filename));
-> for (String line = br.readLine(); line != null; line = br.readLine())
-> > ;
+```
+    BufferedReader br = new BufferedReader (new FileReader (filename));
+    for (String line = br.readLine(); line != null; line = br.readLine())
+        ;
+```
 Unfortunately, this will throw IOExceptions.  I don't know of any standard
 Java class that does not.
-
-> or
 To read lines with line numbers use:
-> > LineNumberReader lr = new LineNumberReader (new FileReader (filename));
-> > for (String line = lr.readLine(); line != null; line = lr.readLine())
-> > > lr.getLineNumber();
+```
+    LineNumberReader lr = new LineNumberReader (new FileReader (filename));
+    for (String line = lr.readLine(); line != null; line = lr.readLine())
+        lr.getLineNumber();
+```
 Or, you can use utilMDE.EntryReader which supports the new-style for loop.
 
 Don't use Runtime.exec(); instead, use ProcessBuilder.start().
@@ -445,8 +459,8 @@ Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 "Could not reserve enough space for object heap" means that the
 "-Xmx" argument on the java command line was too large.
 
-JAVA\_HOME is the JDK install directory, e.g., ...jdk1.7.0 .
-java.home is the JRE install directory, e.g., ...jre .
+`JAVA_HOME` is the JDK install directory, e.g., ...jdk1.7.0 .
+`java.home` is the JRE install directory, e.g., ...jre .
 (See http://javahowto.blogspot.com/2006/05/javahome-vs-javahome.html .)
 
 

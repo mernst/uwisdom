@@ -1,4 +1,7 @@
+#summary A beginner's guide to CVS
+
 Contents:
+<wiki:toc max_depth="1" />
 
 
 ```

@@ -349,13 +349,13 @@ Here is a LaTeX command that typesets its argument in a smaller \tt font.  It<br
 permits line breaks at spaces within the argument (but not within words),<br>
 respects current series (such as boldface), and works in both horizontal (text)<br>
 and math mode.<br>
-<pre><code>  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}<br>
+<pre><code>  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1```\else{\smaller\ttfamily #1}\fi}<br>
 </code></pre>
 Here's a version that takes care of URLs, too:<br>
 <pre><code>  \def\codesize{\smaller}<br>
   %HEVEA \def\codesize{\relax}<br>
-  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1}}}\else{\codesize\ttfamily #1}\fi}<br>
-  \newcommand{\myurl}[1]{{\codesize\url{#1}}}<br>
+  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1```\else{\codesize\ttfamily #1}\fi}<br>
+  \newcommand{\myurl}[1]{{\codesize\url{#1```<br>
   %HEVEA \def\myurl{\url}<br>
 </code></pre>
 Similarly, "\scshape" is generally preferred to "\sc", because it<br>
@@ -379,13 +379,13 @@ that it is worthwhile to get the typesetting right.)<br>
 Here are definitions for identifiers in LaTeX math mode formulas:<br>
 <pre><code>  % \|name| or \mathid{name} denotes identifiers and slots in formulas<br>
   \def\|#1|{\mathid{#1}}<br>
-  \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}<br>
+  \newcommand{\mathid}[1]{\ensuremath{\mathit{#1```<br>
   % \&lt;name&gt; or \codeid{name} denotes computer code identifiers<br>
   \def\&lt;#1&gt;{\codeid{#1}}<br>
-  \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}<br>
+  \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}<br>
 </code></pre>
 This alternate definition of <code>\codeid</code> does not work inside an array environments (see <a href='http://tex.stackexchange.com/questions/27592/'>http://tex.stackexchange.com/questions/27592/</a> ):<br>
-<pre><code>  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}<br>
+<pre><code>  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}<br>
 </code></pre>
 
 To permit hyphenation in tt font globally throughout a document, see<br>
@@ -425,7 +425,7 @@ I'm not sure if this is good style or not, but this is how to do it:<br>
      {\@citea\def\@citea{,\penalty\@m\ }\@ifundefined<br>
         {b@\@citeb}{{\bf ?}\@warning<br>
         {Citation `\@citeb' on page \thepage \space undefined}}%<br>
- {\csname b@\@citeb\endcsname}}}{#1}}<br>
+ {\csname b@\@citeb\endcsname```{#1}}<br>
  \makeatother<br>
 </code></pre>
 
@@ -440,7 +440,7 @@ For mix-n-match BibTeX citations,<br>
 <pre><code>  \makeatletter<br>
   \def\bibref#1{\nocite{#1}\@ifundefined{b@#1}{{\bf ??}\@warning<br>
      {Citation `#1' on page \thepage \space <br>
-      undefined}}{\@nameuse{b@#1}}}<br>
+      undefined}}{\@nameuse{b@#1```<br>
   \makeatother<br>
 </code></pre>
 and then<br>
@@ -752,41 +752,41 @@ but perhaps I want to ignore that and focus on using standard <br>
 <br>
 <br>
 URLs in HTML and PDF documents:<br>
-{{{<br>
+```<br>
  % Make a URL visible in PDF the but just be attached to anchor text in HTML:<br>
  %BEGIN LATEX<br>
  \newcommand{\ahreforurl}[2]{#2 (\url{#1})}<br>
  %END LATEX<br>
  %HEVEA \newcommand{\ahreforurl}[2]{\ahref{#1}{#2}}<br>
-}}}<br>
+```<br>
 <br>
 The url package for LaTeX linebreaks a URL appropriately.<br>
 For a moving argument (or a URL containing characters like %), use<br>
-{{{<br>
+```<br>
     \urldef{\myself}\url{myself%node@gateway.net}   or<br>
     \urldef{\myself}\url|myself%node@gateway.net|<br>
-}}}<br>
+```<br>
 and then use "\myself" instead of "\url{myself%node@gateway.net}".<br>
 However, the hyperref package forbids URL line breaks; the workaround is<br>
-{{{<br>
+```<br>
   \usepackage{hyperref}<br>
   \usepackage{breakurl}<br>
-}}}<br>
+```<br>
 <br>
 To typeset URLs in a smaller font in LaTeX, using \package{url}:<br>
 First approach (shorter, usually works):<br>
-{{{<br>
+```<br>
   \def\UrlFont{\smaller\ttfamily}<br>
-}}}<br>
+```<br>
 Second approach (better style, possibly more robust):<br>
-{{{<br>
+```<br>
   %% Define and use a 'smallertt' URL style.<br>
   \makeatletter<br>
   \def\url@smallerttstyle{%<br>
-    \@ifundefined{selectfont}{\def\UrlFont{\smaller\tt}}{\def\UrlFont{\smaller\ttfamily}}}<br>
+    \@ifundefined{selectfont}{\def\UrlFont{\smaller\tt}}{\def\UrlFont{\smaller\ttfamily```<br>
   \makeatother<br>
   \urlstyle{smallertt}<br>
-}}}<br>
+```<br>
 <br>
 <br>
 <br>
@@ -799,43 +799,43 @@ redefine macros with %HEVEA, but to use the \ifhevea conditional.<br>
 <br>
 In LaTeX files, to avoid the "This document was translated from LaTeX to<br>
 Hevea" advertisement, write:<br>
-{{{<br>
+```<br>
   %HEVEA \footerfalse    % Disable hevea advertisement in footer<br>
-}}}<br>
+```<br>
 <br>
 Adding info to HTML header in Hevea (this must come after \begin{document}):<br>
-{{{<br>
+```<br>
 \let\oldmeta=\@meta<br>
 \renewcommand{\@meta}{%<br>
 \oldmeta<br>
 \begin{rawhtml}<br>
 <link rel="icon" type="image/png" href="my-favicon.png" /><br>
 \end{rawhtml}}<br>
-}}}<br>
+```<br>
 <br>
 <br>
 ---------------------------------------------------------------------------<br>
 =Everything else=<br>
 <br>
 In LaTeX, rather than<br>
-{{{<br>
+```<br>
   \usepackage{times}<br>
-}}}<br>
+```<br>
 consider<br>
-{{{<br>
+```<br>
   \usepackage{pslatex}<br>
-}}}<br>
+```<br>
 which differs in that it uses a specially narrowed Courier font.<br>
 (Also consider \usepackage{palatino}?)<br>
 <br>
 To change fonts temporarily in LaTeX, use comands like the following<br>
-{{{<br>
+```<br>
   {\fontfamily{phv}\selectfont Helvetica looks like this}<br>
-}}}<br>
+```<br>
 and<br>
-{{{<br>
+```<br>
   {\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.<br>
-}}}<br>
+```<br>
 <br>
 LaTeX style files are found in the directories listed in the TEXINPUTS<br>
 environment variable.<br>
@@ -868,13 +868,13 @@ the system and encoded in the resulting .dvi file.)<br>
 Here is a script that does this for a latex document, so that the variable<br>
 \fileid can be used at will in the document and will expand to the absolute<br>
 pathname with hostname prepended<br>
-{{{<br>
+```<br>
  FN=`basename $1 .tex`.tex<br>
  FILEID=`hostname`:`pwd`/$FN<br>
  FILEID=`echo $FILEID | tr _ .`<br>
  echo Inserting $FILEID...<br>
  virtex "&"lplain \\def\\fileid{$FILEID}\\input $1<br>
-}}}<br>
+```<br>
 2) Use rcs or make.<br>
 3) Use a script and UNIX file-editing filters to replace tokens in the text<br>
 with dynamically obtained environment information.<br>
@@ -888,7 +888,7 @@ you use \maketitle, you have to place a \thispagestyle{empty} after the<br>
 <br>
 You can use MakeIndex to process a glossary (.glo file).  Here's an example<br>
 of a MakeIndex style-file you'd need:<br>
-{{{<br>
+```<br>
 keyword "\\glossaryentry"<br>
 preamble "\\begin{theglossary}\n"<br>
 postamble "\n\n\\end{theglossary}\n"<br>
@@ -900,47 +900,47 @@ delim_0 "\\pfill"<br>
 delim_1 "\\pfill"<br>
 delim_2 "\\pfill"<br>
 lethead_flag 0<br>
-}}}<br>
+```<br>
 Use it with the command:<br>
-{{{<br>
+```<br>
   makeindex -s glossary.ist -o your-file.gls your-file.glo<br>
-}}}<br>
+```<br>
 <br>
 For alphabetic enumeration, do:<br>
-{{{<br>
+```<br>
 \newcounter{alphaenum@count}<br>
 \newenvironment{alphaenum}%<br>
 {\begin{list}%<br>
 {\alph{alphaenum@count})}%<br>
-{\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph}}}%<br>
+{\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph```%<br>
 {\end{list}}<br>
-}}}<br>
+```<br>
 <br>
 In LaTeX, to make the first line of all sections etc be indented by the<br>
 usual paragraph indentation:<br>
-{{{<br>
+```<br>
   \let\@afterindentfalse\@afterindenttrue<br>
   \@afterindenttrue<br>
-}}}<br>
+```<br>
 OR, change the definition of \section (example from art10; '-' becomes '+')<br>
-{{{<br>
+```<br>
   \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus <br>
    -.2ex}{2.3ex plus .2ex}{\Large\bf}}<br>
-}}}<br>
+```<br>
 to<br>
-{{{<br>
+```<br>
   \def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus <br>
    +.2ex}{2.3ex plus .2ex}{\Large\bf}}<br>
-}}}<br>
+```<br>
 <br>
 To remove some of the extra whitespace around section headers:<br>
-{{{<br>
+```<br>
   \usepackage[compact]{titlesec}<br>
-}}}<br>
+```<br>
 <br>
 A simple LaTeX environment that keeps everything within it<br>
 on the same page:<br>
-{{{<br>
+```<br>
  \def\window#1{\@need=#1\advance\@need\pagetotal<br>
  \if\@need>\textheight\vfil\newpage\else\fi}<br>
  %<br>
@@ -950,7 +950,7 @@ on the same page:<br>
  }{%<br>
    \egroup\window{\ht\@keepbox}\box\@keepbox<br>
  }<br>
-}}}<br>
+```<br>
 This works fine, except that if the \vbox is higher than textheight, it<br>
 overflows the page. So it needs to be broken up somehow.<br>
 <br>
@@ -958,16 +958,16 @@ TeX primitive \time is the number of minutes since midnight this morning.<br>
 Use it via \number\time.  For a timestamp, use it with \today (which<br>
 prints something like `August 7, 1989').<br>
 If you want something like ``13:48'' try the following:<br>
-{{{<br>
+```<br>
  \def\clocktime{{\newcount\scratch<br>
   \scratch=\time<br>
   \divide\scratch by 60<br>
   \number\scratch :\multiply\scratch by -60<br>
   \advance\scratch by\time<br>
   \number\scratch}}<br>
-}}}<br>
+```<br>
 Another version by Nelson Beebe, U. of Utah., is:<br>
-{{{<br>
+```<br>
  % TIME OF DAY<br>
  \newcount\hh<br>
  \newcount\mm<br>
@@ -979,12 +979,12 @@ Another version by Nelson Beebe, U. of Utah., is:<br>
  \mm=-\mm<br>
  \advance\mm by \time<br>
  \def\hhmm{\number\hh:\ifnum\mm<10{}0\fi\number\mm}<br>
-}}}<br>
+```<br>
 <br>
 I once had to set<br>
-{{{<br>
+```<br>
   \topskip = 0pt<br>
-}}}<br>
+```<br>
 to remove extra space before the first paragraph of a LaTeX document.<br>
 <br>
 Marcel van der Goot's midnight macros (.tex and .doc files):<br>
@@ -1001,10 +1001,10 @@ default document styles.<br>
 <br>
 In text with explicit line breaks, we can make a box just wide enough to<br>
 hold the widest one via (see LaTeX manual under tabbing for explanation):<br>
-{{{<br>
+```<br>
   \newenvironment{centerlongestline}{\begin{center}\begin{minipage}{\linewidth}<br>
      \begin{tabbing}}{\end{tabbing}\end{minipage}\end{center}}<br>
-}}}<br>
+```<br>
 Another alternative would be to use \begin{tabular}{l} ...<br>
 \end{tabular} rather than a tabbing environment, in which case<br>
 the minipage environment could be omitted entirely.<br>
@@ -1016,7 +1016,7 @@ To capitalize (the first letter only of) a string in TeX, use<br>
 <br>
 To number tables, figures, footnotes, consecutively through the entire<br>
 report (not by chapters) in LaTeX:<br>
-{{{<br>
+```<br>
         \makeatletter<br>
         \def\cl@chapter{}<br>
         \@addtoreset{section}{chapter}<br>
@@ -1024,9 +1024,9 @@ report (not by chapters) in LaTeX:<br>
         \def\thefigure{\@arabic\c@figure}<br>
         \def\theequation{\arabic{equation}}<br>
         \makeatother<br>
-}}}<br>
+```<br>
 One could also define<br>
-{{{<br>
+```<br>
     \def\@takefromreset#1#2{%<br>
         \def\@tempa{#1}%<br>
         \let\@tempd\@elt<br>
@@ -1040,9 +1040,9 @@ One could also define<br>
         \@tempc<br>
         \let\@elt\@tempd<br>
     }<br>
-}}}<br>
+```<br>
 and then the solution to the original problem becomes:<br>
-{{{<br>
+```<br>
         \@takefromreset{footnote}{chapter}<br>
         \@takefromreset{table}{chapter}<br>
         \@takefromreset{figure}{chapter}<br>
@@ -1050,7 +1050,7 @@ and then the solution to the original problem becomes:<br>
         \def\thetable{\@arabic\c@table}<br>
         \def\thefigure{\@arabic\c@figure}<br>
         \def\theequation{\arabic{equation}}<br>
-}}}<br>
+```<br>
 <br>
 From the ``Golden Rules of Macro Coding'' (for TeX)<br>
   If a macro starts with \if..., put a \relax in front of it.<br>
@@ -1061,24 +1061,24 @@ From the ``Golden Rules of Macro Coding'' (for TeX)<br>
   within \halign's.<br>
 <br>
 TeX code for definitions including multiple alternatives:<br>
-{{{<br>
+```<br>
   \newcommand{\twolinedef}[4]{\left\{ \begin{array}{ll}<br>
         #1 & \mbox{#2} \\<br>
         #3 & \mbox{#4} \\<br>
   \end{array} \right.}<br>
-}}}<br>
+```<br>
 <br>
 To run TeX or LaTeX in batch mode on file foo.tex, do<br>
-{{{<br>
+```<br>
   [la]tex \\batchmode \\input foo.tex<br>
-}}}<br>
+```<br>
 The doubled backslashes are for the shell; TeX will see just one of each pair.<br>
 <br>
 6) How can I get TeX to see LaTeX \ref{...} as a _number_?<br>
-{{{<br>
+```<br>
 \def\alphref#1{\@ifundefined{r@#1}{?}{\edef\@tempa{\@nameuse{r@#1}}\expandafter<br>
     \expandafter\expandafter\@alph\expandafter\@car\@tempa \@nil\null}}<br>
-}}}<br>
+```<br>
 <br>
 LaTeX's \raisebox is like TeX's \smash:  change the apparent height of a<br>
 piece of text.<br>
@@ -1091,31 +1091,31 @@ horizontal mode; if the latter, it automatically switches to math mode.<br>
 <br>
 ACM LaTeX styles FAQ:<br>
   http://www.acm.org/sigs/publications/sigfaq<br>
-{{{<br>
+```<br>
   % "\let\thepage\relax" in sig-alternate.cls causes hyperref to issue warnings.<br>
   % Fix those warnings:<br>
   \pagenumbering{arabic}<br>
   \pagestyle{empty}<br>
-}}}<br>
+```<br>
 but I'm not sure how to do it wit<br>
 <br>
 To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove<br>
 the copyright box):<br>
-{{{<br>
+```<br>
   % Add page numbers, remove copyright box.  For submitted version only.<br>
   \pagenumbering{arabic}<br>
   \makeatletter<br>
   \def\@copyrightspace{\relax}<br>
   \makeatother<br>
-}}}<br>
+```<br>
 In sigplanconf style, it's even easier:<br>
-{{{<br>
+```<br>
   \documentclass[preprint,nocopyrightspace]{sigplanconf}<br>
-}}}<br>
+```<br>
 In acmlarge.cls, remove the copyright info by doing:<br>
-{{{<br>
+```<br>
   \def\permission{}<br>
-}}}<br>
+```<br>
 Fixes to ACM SIG style (sig-alternate.cls):<br>
  * Uncapitalize section titles: <br>
     * Delete all instances of "\@ucheadtrue"<br>
@@ -1135,43 +1135,43 @@ Fixes to ACM SIG style (sig-alternate.cls):<br>
        * remove (comment out) "\advance\leftmargin\labelsep"<br>
  * Copyright data:<br>
     * In sig-alternate, change two lines to the following:<br>
-{{{<br>
+```<br>
        \begin{picture}(20,5) %Space for copyright notice<br>
        \put(0,-.75){\crnotice{\@toappear}}<br>
-}}}<br>
+```<br>
       (or use a slightly more negative last number like -.95 instead of -.75).<br>
     * In sigplanconf.cls, change "\vbox to 1in" so that we use:<br>
-{{{<br>
+```<br>
        \@float{copyrightbox}[b]%<br>
          \vbox to .8in{%<br>
-}}}<br>
+```<br>
  * Font size:<br>
-{{{<br>
+```<br>
     \def\footnotesize{\@setsize\footnotesize{8pt}\viipt\@viipt}<br>
-}}}<br>
+```<br>
 Fixes to sigplanconf.cls:<br>
-{{{<br>
+```<br>
   \vbox to .8in{%<br>
     % \vfill<br>
-}}}<br>
+```<br>
 Maybe:<br>
-{{{<br>
+```<br>
   % \vspace{2pt}<br>
-}}}<br>
+```<br>
 To reduce whitespace in the titlebox (near the title and authors):<br>
  * Comment out:<br>
-{{{<br>
+```<br>
     %\vskip 2em                   % Vertical space above title.<br>
-}}}<br>
+```<br>
  * To reduce space *after* the authors, reduce "12.75" on this line:<br>
-{{{<br>
+```<br>
  \advance\dimen0 by -12.75pc\relax % Increased space for title box -- KBT<br>
-}}}<br>
+```<br>
  * To reduce space between the title and authors (without affecting the<br>
    total size of the title box), reduce "1.25" in this line:<br>
-{{{<br>
+```<br>
   {\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi<br>
-}}}<br>
+```<br>
 <br>
 Fixes to IEEETran style file, to save space and improve appearance:<br>
  * \usepackage{microtype}<br>
@@ -1180,7 +1180,7 @@ Fixes to IEEETran style file, to save space and improve appearance:<br>
 <br>
 To remove the extra vertical space from around \begin{definition}, make the<br>
 following change to sig-alternate.cls.<br>
-{{{<br>
+```<br>
 --- a/sig-alternate.cls	Sat Aug 14 14:00:55 2010 -0700<br>
 +++ b/sig-alternate.cls	Sat Aug 14 14:13:52 2010 -0700<br>
 @@ -948,8 +948,8 @@<br>
@@ -1194,39 +1194,39 @@ following change to sig-alternate.cls.<br>
      }%<br>
  }<br>
  \def\@defthm#1#2{%<br>
-}}}<br>
+```<br>
 <br>
 Make these fixes to figures and captions when writing a paper using IEEE latex8.sty:<br>
  * Remove all references to \tenhv<br>
  * Edit the setting of \@figindent as follows:<br>
-{{{<br>
+```<br>
   \setlength{\@figindent}{0pc}<br>
-}}}<br>
+```<br>
  * In definition of @makecaption, change "then" clause to:<br>
-{{{<br>
+```<br>
       % THEN set as an indented paragraph<br>
       {\parbox{\hsize}{#1: #2\strut}}\par<br>
-}}}<br>
+```<br>
 <br>
 To permit underfull hboxes in LaTeX, use <br>
-{{{<br>
+```<br>
 \begin{sloppypar} ... \end{sloppypar}<br>
-}}}<br>
+```<br>
 I can't get \sloppy to work.<br>
 To disable the warnings globally, say "\hbadness=10000", this<br>
 disables overfull hbox warnings too.<br>
 <br>
 In LaTeX, <br>
-to typeset text in a superscript or subscript, use A_{\mathit{pred}}}<br>
+to typeset text in a superscript or subscript, use A_{\mathit{pred```<br>
 <br>
 To produce a footnote without a footnote mark (as for a copyright notice in<br>
 the lower left-hand corner of a conference paper) in LaTeX, do this:<br>
-{{{<br>
+```<br>
   \renewcommand{\thefootnote}{}<br>
   \footnotetext{A version of this paper will appear in the 25th <br>
   Annual International Symposium on Computer Architecture, June 1998}<br>
   \renewcommand{\thefootnote}{\arabic{footnote}}<br>
-}}}<br>
+```<br>
 <br>
 The Harvard bib style for LaTeX<br>
         http://www.arch.su.edu.au/~peterw/latex/harvard/<br>
@@ -1240,18 +1240,18 @@ though the source recommends<br>
   http://www.cbl.leeds.ac.uk/nikos/tex2html/doc/latex2html/<br>
 <br>
 To use a smaller (9-point) font in a LaTeX document, use<br>
-{{{<br>
+```<br>
   \makeatletter\input{size09.clo}\makeatother<br>
-}}}<br>
+```<br>
 as the first set of commands after \documentclass.<br>
 <br>
 To use a thinner (narrower) version of a font in a LaTeX document, run the<br>
 following before running pdflatex:<br>
-{{{<br>
+```<br>
 # Run with --clean once if the --xscale argument changes.<br>
 #	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean<br>
 	-/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94<br>
-}}}<br>
+```<br>
 <br>
 The TeX FAQ is searchable:<br>
     http://www.tex.ac.uk/cgi-bin/texfaq2html<br>
@@ -1271,11 +1271,11 @@ In LaTeX, any character can be obtained by giving its ASCII code.<br>
 The left and right braces are, respectively, \char"7B and \char"7D.<br>
 Using \{ in \tt yields a Roman "{", it seems.  Here are macros that use the<br>
 \tt font:<br>
-{{{<br>
+```<br>
   % Left and right curly braces in tt font<br>
   \newcommand{\ttlcb}{\texttt{\char "7B}}<br>
   \newcommand{\ttrcb}{\texttt{\char "7D}}<br>
-}}}<br>
+```<br>
 <br>
 To set the page number in LaTeX:  \setcounter{page}{98}<br>
 <br>
@@ -1286,17 +1286,17 @@ Dvipdfm is a DVI to PDF translator.<br>
 http://gaspra.kettering.edu/dvipdfm/<br>
 <br>
 This Makefile rule runs LaTeX until it stops saying "Labels may have changed":<br>
-{{{<br>
+```<br>
 latex:<br>
   latex ${TEXFILE}<br>
   (fgrep 'Label(s) may have changed' $(subst .tex,.log,${TEXFILE}) && $(MAKE) latex) || true<br>
-}}}<br>
+```<br>
 But you could use "rubber" instead.<br>
 <br>
 Rubber is a latex build system written in python.  Run it like this:<br>
-{{{<br>
+```<br>
   rubber main.tex<br>
-}}}<br>
+```<br>
 It iterates latex / bibtex until a fixed-point (more or less: it won't loop<br>
 forever, and if you use some obscure latex packages you may need an extra<br>
 run).  Rubber filters the latex output to report only issues of importance.<br>
@@ -1324,54 +1324,54 @@ The "beamer" package permits making nice slides with LaTeX.<br>
 "t" class option puts slide content at top rather than vertically centered.<br>
 <br>
 Any LaTeX-Beamer slide containing a verbatim environment must start out:<br>
-{{{<br>
+```<br>
   \begin{frame}[fragile]<br>
-}}}<br>
+```<br>
 (or [containsverbatim], though that's more typing)<br>
 <br>
 In LaTeX-Beamer:<br>
-{{{<br>
+```<br>
   \begin{frame}[shrink=5]   permits change of font size<br>
   \begin{frame}[squeeze]    reduces vertical space<br>
-}}}<br>
+```<br>
 <br>
 In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no<br>
 larger in display mode than in any other math mode), do something like<br>
-{{{<br>
-  \newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}<br>
-}}}<br>
+```<br>
+  \newcommand{\bigforall}[2]```\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2```<br>
+```<br>
 <br>
 For a paragraph in a smaller font, on the smaller font's baseline<br>
 inter-line spacing (but it isn't permitted to be broken across columns), do<br>
-{{{<br>
+```<br>
   {\small\noindent\parbox{\columnwidth}{\quad<br>
   ...<br>
   }<br>
-}}}<br>
+```<br>
 <br>
 This defines a \Hline macro that is like \hline, but it has an independent<br>
 thickness.<br>
-{{{<br>
+```<br>
 \newdimen\arrayruleHwidth<br>
 \setlength{\arrayruleHwidth}{1pt}<br>
 \makeatletter<br>
 \def\Hline{\noalign{\ifnum0=`}\fi\hrule \@height \arrayruleHwidth<br>
   \futurelet \@tempa\@xhline}<br>
 \makeatother<br>
-}}}<br>
+```<br>
 <br>
 LLNCS (LaTeX LNCS) style:<br>
 wget ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip<br>
 <br>
 Derek Rayside says:<br>
 I wrote a little latex macro that lets one write things such as:<br>
-{{{<br>
+```<br>
     \digraph{MyGraph}{a->b}<br>
-}}}<br>
+```<br>
 this produces MyGraph.dot with the contents:<br>
-{{{<br>
+```<br>
     digraph MyGraph {a->b}<br>
-}}}<br>
+```<br>
 If you run dot to get MyGraph.ps (ie, dot -Tps -o MyGraph.ps MyGraph.dot),<br>
 then the \digraph macro will include the postscript file in your document.<br>
 The macro file is available at:<br>
@@ -1384,12 +1384,12 @@ more text on it.<br>
 <br>
 Tell TeX programs (from the teTeX distribution, which is standard on modern<br>
 Unix systems) to default to US-Letter-sized paper:<br>
-{{{<br>
+```<br>
   texconfig xdvi us<br>
   texconfig dvips paper letter<br>
   texconfig dvipdfm paper letter<br>
   texconfig pdftex paper letter<br>
-}}}<br>
+```<br>
 Alternately, a less desirable fix that only solves part of the problems above:<br>
 To make dvips produce lettersize output by default, edit config.ps (maybe in<br>
 /usr/share/texmf/dvips/config/config.ps or<br>
@@ -1407,7 +1407,7 @@ options, 1.1 indicates the second page numbered 1, 1.2 indicates the third<br>
 page numbered 1, and so forth.<br>
 <br>
 Emacs "Local variables" section of a LaTeX file looks like one of the following:<br>
-{{{<br>
+```<br>
  %%% Local Variables: <br>
  %%% mode: latex<br>
  %%% TeX-master: t<br>
@@ -1415,33 +1415,33 @@ Emacs "Local variables" section of a LaTeX file looks like one of the following:
  %%% fill-column: 75<br>
  %%% TeX-command-default: "PDF"<br>
  %%% End: <br>
-}}}<br>
+```<br>
 .<br>
-{{{<br>
+```<br>
  %%% Local Variables: <br>
  %%% mode: latex<br>
  %%% TeX-master: "daikon-ioa-2002"<br>
  %%% End: <br>
-}}}<br>
+```<br>
 <br>
 LaTeX Verbatim environment with embedded commands:<br>
-{{{<br>
+```<br>
 \usepackage{fancyvrb}<br>
 \begin{Verbatim}[commandchars=\\\{\}]<br>
 ...<br>
 \end{Verbatim}<br>
-}}}<br>
+```<br>
 Other initial lines:<br>
-{{{<br>
+```<br>
 \begin{Verbatim}[commandchars=\|\[\]]<br>
 \begin{Verbatim}[commandchars=\\\<\>]   % < and > cannot be used as delimiters<br>
 \begin{Verbatim}[commandchars=\\\<\>,numbers=left,numbersep=6pt,xleftmargin=12pt]<br>
-}}}<br>
+```<br>
 Or set parameters globally:<br>
-{{{<br>
+```<br>
 \fvset{fontsize=\small}<br>
 \fvset{fontsize=\relsize{-2}}<br>
-}}}<br>
+```<br>
 The fancyvrb package is preferable to:<br>
  * the moreverb package.  (The moreverb documentation recommends fancyvrb!)<br>
  * \alltt, which is built into LaTeX (except possibly for very simple tasks<br>
@@ -1463,56 +1463,56 @@ Note that Computer Modern font has no bold fixed width font.<br>
 <br>
 To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here are some options.<br>
 When using Computer Modern fonts), use<br>
-{{{<br>
+```<br>
   \usepackage{bold-extra}<br>
-}}}<br>
+```<br>
 See installation instructions at<br>
    http://www.tex.ac.uk/cgi-bin/texfaq2html?label=bold-extras<br>
 (which also offers other solutions).<br>
 Or, use underlining for emphasis.<br>
 Or, try a different font than Computer Modern.  For example, try<br>
-{{{<br>
+```<br>
   \usepackage[T1]{fontenc}<br>
   \usepackage{lmodern} % "latin modern", which has a boldface typewriter font<br>
   \usepackage[lighttt]{lmodern} % lighter non-bold version (looks better)<br>
   %\usepackage{luximono}<br>
   %\usepackage[scaled=0.85]{beramono}<br>
   \usepackage[T1]{lucidabr}<br>
-}}}<br>
+```<br>
 but if you use Lucida Bright, you probably want to scope the Lucida Bright to<br>
 only the verbatim text.<br>
 Courier also has regular and bold options, but it's considered very ugly.<br>
 <br>
 To include a literal backslash (or other special characters) in a LaTeX<br>
 Verbatim (fancyverb) environment, use \SaveVerb and \UseVerb.<br>
-{{{<br>
+```<br>
   \DefineShortVerb{\|}<br>
   \SaveVerb{myname}|verbatim text \ _ ^|<br>
   \UndefineShortVerb{\|}<br>
   \UseVerb{myname}<br>
-}}}<br>
+```<br>
 Even simpler is the verbdef package:<br>
-{{{<br>
+```<br>
   \usepackage{verbdef}<br>
   \verbdef\mymacroname|verbatim text \ _ ^|<br>
   \mymacroname<br>
-}}}<br>
+```<br>
 <br>
 In LaTeX, as a general rule, backslashing punctuation characters inside<br>
 \code{} won't give you the right tt-font ones:  you need to either replace<br>
 \code with \verb or use \char and an ASCII code for the symbol, such as<br>
-{{{<br>
+```<br>
   \renewcommand{\_}{\char"5F}<br>
-}}}<br>
+```<br>
 or, to get a backslash<br>
-{{{<br>
+```<br>
   \newcommand{\bs}{\char"5C}<br>
-}}}<br>
+```<br>
 <br>
 The llncs.cls style (class) file (and also sig-alternate.cls) does<br>
-{{{<br>
+```<br>
   \let\footnotesize\small<br>
-}}}<br>
+```<br>
 which changes the font in footnotes.  This is an acceptable goal, but the<br>
 implementation is seriously flawed, since it makes it impossible to get<br>
 that size font in the program.  To fix this, find the "\newcommand" for<br>
@@ -1524,9 +1524,9 @@ the pstricks package, but works with PDF and is much more powerful than<br>
 LaTeX picture mode.<br>
 <br>
 To generate foo.sty (or foo.cls) from foo.dtx, run<br>
-{{{<br>
+```<br>
   latex foo.ins<br>
-}}}<br>
+```<br>
 and then copy the resulting file somewhere appropriate.<br>
 <br>
 TeX fonts are in /usr/local/lib/tex/fonts/tfm.<br>
@@ -1541,29 +1541,29 @@ the document.  This also makes the figures more likely to draw readers into<br>
 the text.<br>
 <br>
 Here is a definition of a \todo macro for LaTeX (it needs `\usepackage{color}`):<br>
-{{{<br>
+```<br>
  %% Comment out one of these two definitions.<br>
  % \newcommand{\todo}[1]{\relax}<br>
  \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}<br>
-}}}<br>
+```<br>
 When using the macro, don't leave space around it.  For example, write<br>
-{{{<br>
+```<br>
   The approach is effective\todo{add citations}.<br>
-}}}<br>
+```<br>
 rather than<br>
-{{{<br>
+```<br>
   The approach is effective \todo{add citations}.<br>
-}}}<br>
+```<br>
 because the latter would leave a space before the period when todo comments<br>
 are disabled.<br>
 (An alternate definition would be<br>
-`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`<br>
+`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]````<br>
 but that executes \leavevmode and so it cannot span paragraphs.)<br>
 <br>
 Absolute value in LaTeX:<br>
-{{{<br>
+```<br>
   \left| \frac{A+B}{3} \right|<br>
-}}}<br>
+```<br>
 <br>
 Typesetting pseudocode in LaTeX:<br>
 http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms<br>
@@ -1586,33 +1586,33 @@ is \clearpage. (I think the other difference is that it also acts as a<br>
 fence for floats, but you often want that too anyway.)<br>
 <br>
 To get extra space in a document:<br>
-{{{<br>
+```<br>
   \renewcommand{\baselinestretch}{.994}<br>
-}}}<br>
+```<br>
 But that is terrible, so consider<br>
-{{{<br>
+```<br>
   \enlargethispage{10pt} in strategic locations.<br>
-}}}<br>
+```<br>
 Also helpful is <br>
-{{{<br>
+```<br>
   \usepackage{microtype}<br>
-}}}<br>
+```<br>
 after which only pdflatex, not regular latex, works.<br>
 The `makethin` program of the savetrees package creates thinner versions of<br>
 fonts.<br>
 <br>
 To adjust section numbering in LaTeX (e.g., make subsubsections be numbered):<br>
-{{{<br>
+```<br>
   \setcounter{secnumdepth}{3}<br>
-}}}<br>
+```<br>
 There is no `\subsubsubsection` command, but you can make `\paragraph` be numbered:<br>
-{{{<br>
+```<br>
   \setcounter{secnumdepth}{4}<br>
-}}}<br>
+```<br>
 <br>
-If a paragraph has only a word or two on its last line, try adding {{{<br>
+If a paragraph has only a word or two on its last line, try adding ```<br>
 \looseness=-1<br>
-}}} to the end of it. If possible TeX will change line breaks to<br>
+``` to the end of it. If possible TeX will change line breaks to<br>
 reduce/shorten the length of the paragraph by a line. This won't always<br>
 work because there is a limit to how close TeX will move words. The longer<br>
 the paragraph, the more likely this trick is successful.<br>
@@ -1625,10 +1625,10 @@ LaTeX), but it's the most consistent and convenient graphics package I've<br>
 found yet.<br>
 <br>
 To use color in LaTeX:<br>
-{{{<br>
+```<br>
 \usepackage{color}<br>
 \textcolor{color}{words to be in color}<br>
-}}}<br>
+```<br>
 <br>
 To find LaTeX special command that matches a given character shape,<br>
 scribble the shape here:<br>
@@ -1641,42 +1641,42 @@ These give "class" 1..8 to the math character or formula.<br>
 (There is no \binop or \binrel.)<br>
 <br>
 More attractive monospaced fonts:<br>
-{{{<br>
+```<br>
   % sans-serif monospaced font<br>
   \usepackage{inconsolata}<br>
-}}}<br>
-{{{<br>
+```<br>
+```<br>
   % serifed monospaced font<br>
   \usepackage[T1]{fontenc}  % Is this necessary?<br>
   \usepackage[scaled=0.88]{luximono}<br>
-}}}<br>
+```<br>
 <br>
 Your LaTeX documents should always use<br>
-{{{<br>
+```<br>
   \usepackage[T1]{fontenc}<br>
-}}}<br>
+```<br>
 Even if you don't care about foreign languages, it has the advantage of<br>
 providing typewriter fonts for curly braces, and other characters that look<br>
 bad due to the fact that OT1 has only 128 glyphs and LaTeX has to get some<br>
 characters such as curly braces from a different font.<br>
 It particular, it solves the problem<br>
-{{{<br>
+```<br>
   Font shape `OMS/cmss/m/n' undefined using `OMS/cmsy/m/n' instead for symbol `textbraceleft'<br>
-}}}<br>
+```<br>
 <br>
 The default Computer Modern fonts are Type 3 (bitmap).  Here is how to use<br>
 "Latin Modern" fonts, which are a Type 1 reimplementation of the Computer<br>
 Modern fonts, and ensure you only get Type 1 fonts:<br>
-{{{<br>
+```<br>
 \usepackage{lmodern}<br>
 \usepackage[T1]{fontenc}<br>
-}}}<br>
+```<br>
 However, it is easier and better to just use pdflatex, which will use the<br>
 good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a<br>
 different font like Times.<br>
 <br>
 Ways to get a circled number in LaTeX with better formatting than \textcircled:<br>
-{{{<br>
+```<br>
  % serif font:<br>
  \usepackage{pifont}<br>
  \newcommand{\numcircled}[1]{\ding{\numexpr171+#1\relax}}<br>
@@ -1684,8 +1684,8 @@ Ways to get a circled number in LaTeX with better formatting than \textcircled:<
  \usepackage{pifont}<br>
  \newcommand{\numcircled}[1]{\ding{\numexpr191+#1\relax}}<br>
  % Without using any extra packages<br>
- \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}<br>
-}}}<br>
+ \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1```}<br>
+```<br>
 <br>
 <br>
 ---------------------------------------------------------------------------<br>
