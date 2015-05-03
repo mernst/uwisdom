@@ -1,4 +1,4 @@
-#summary Using Mercurial at UW CSE
+= Using Mercurial at UW CSE
 
 Create a file `~/.hgrc` with the following contents (customize to your
 username, etc.), on *both* the UW file
@@ -19,8 +19,8 @@ users = mernst, apache
 ```
 
 Then, for a few tips on using Mercurial, see
-[http://code.google.com/p/uwisdom/wiki/VersionControl#Mercurial_(Hg)]
+http://code.google.com/p/uwisdom/wiki/VersionControl#Mercurial_(Hg)
 
 To avoid having to type your password for every version control operation
 (and when logging in to other machines, etc.), see
-[http://code.google.com/p/uwisdom/wiki/Programs#ssh_(secure_shell)]
+http://code.google.com/p/uwisdom/wiki/Programs#ssh_(secure_shell)

@@ -1,21 +1,21 @@
-% Generic top-level wisdom file.  If file root_user exists, it is
-% used instead.  Therefore, a root_user file is often of the form
-%   \include{root}
-%   \include{my-personal-file1}
-%   \include{my-personal-file2}
-%   ...
-% Note that files "Mit.wiki" and "Uw.wiki" are not included in this file;
-% users must include them explicitly.
+// Generic top-level wisdom file.  If file root_user exists, it is
+// used instead.  Therefore, a root_user file is often of the form
+//   \include{root}
+//   \include{my-personal-file1}
+//   \include{my-personal-file2}
+//   ...
+// Note that files "Mit.adoc" and "Uw.adoc" are not included in this file;
+// users must include them explicitly.
 
-\include{README.wiki}
-\include{Emacs.wiki}
-\include{Java.wiki}
-\include{Linux.wiki}
-\include{Mac.wiki}
-\include{MicrosoftWindows.wiki}
-\include{Network.wiki}
-\include{Php.wiki}
-\include{Programs.wiki}
-\include{Research.wiki}
-\include{Tex.wiki}
-\include{VersionControl.wiki}
+\include{README.adoc}
+\include{Emacs.adoc}
+\include{Java.adoc}
+\include{Linux.adoc}
+\include{Mac.adoc}
+\include{MicrosoftWindows.adoc}
+\include{Network.adoc}
+\include{Php.adoc}
+\include{Programs.adoc}
+\include{Research.adoc}
+\include{Tex.adoc}
+\include{VersionControl.adoc}

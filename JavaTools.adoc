@@ -1,4 +1,4 @@
-= Tools for manipulating Java programs.
+= Tools for manipulating Java programs
 :toc:
 :toc-placement: manual
 
@@ -706,13 +706,13 @@ http://www.ulfdittmer.com/profileviewer/index.html
      trial version available
   * JIE does branch coverage
 
-%% Tools that no longer exist:
-% * glassjartoolkit.com: Java branch code coverage, Jeremy Nimmer says
-%    "it seems to be a well-engineered tool with good reporting"; academic
-%    license $99.  (Later was at http://www.testersedge.com/glass.htm ?)
-% * JavaScope:  http://www.codework.com/suntest/jscope.htm
-%    free trial version available
-% * SilkScope:  http://www.tngsoft.com/dextera/s_ds_silk_scope.htm
+//// Tools that no longer exist:
+// * glassjartoolkit.com: Java branch code coverage, Jeremy Nimmer says
+//    "it seems to be a well-engineered tool with good reporting"; academic
+//    license $99.  (Later was at http://www.testersedge.com/glass.htm ?)
+// * JavaScope:  http://www.codework.com/suntest/jscope.htm
+//    free trial version available
+// * SilkScope:  http://www.tngsoft.com/dextera/s_ds_silk_scope.htm
 
 
 == Mutation coverage ("mutation testing") tools

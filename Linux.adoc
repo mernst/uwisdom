@@ -7,15 +7,10 @@ toc::[]
 
 == Debian
 
-Debian installation:  see ~/wisdom/setup/setup-debian
-
-Documentation on installing OpenAFS and kerberos on a Debian machine:
-See file ~/wisdom/debian-kerberos.mail (or just see my installation notes).
-
 Debian installation and package maintenance with APT:
-IMPORTANT NOTE:
-  On a Linux/Debian/Ubuntu VMware guest, may need to reinstall VMware tools
-  after an update/upgrade that requires a reboot, lest guest has no network.
+(IMPORTANT NOTE:
+On a Linux/Debian/Ubuntu VMware guest, may need to reinstall VMware tools
+after an update/upgrade that requires a reboot, lest guest has no network.)
 To install a new package on debian:
 ```
   sudo apt-get install <package-name>
@@ -100,9 +95,9 @@ To remove a user's account, do
   (cd /var/yp; sudo make)
 ```
 `useradd` is standard; `adduser` is a wrapper around it.
-% After running useradd or userdel (or userdel -r), always do
-%   cd /var/yp
-%   sudo make
+// After running useradd or userdel (or userdel -r), always do
+//   cd /var/yp
+//   sudo make
 
 
 
@@ -148,6 +143,7 @@ It seems I need to wait a while before the fix arrives in Ubuntu:
 https://bugs.launchpad.net/ubuntu/+source/texlive-base/+bug/1242914
 
 Ubuntu release names:
+----
 Ubuntu 4.10 (Warty Warthog)
 Ubuntu 5.04 (Hoary Hedgehog)
 Ubuntu 5.10 (Breezy Badger)
@@ -169,18 +165,21 @@ Ubuntu 13.04 (Raring Ringtail)
 Ubuntu 13.10 (Saucy Salamander)
 Ubuntu 14.04 LTS (Trusty Tahr)
 Ubuntu 14.10 (Utopic Unicorn)
-
+Ubuntu 15.04 LTS (Vivid Vervet)
+----
 
 
 == Devices
 
 When using a USB stick under Linux, give it plenty of time to finish
 writing a file.
-To mount a USB stick drive or CD-ROM on Ubuntu:
-  Just insert it, and it appears under /run/media/${USER}/ or /media
+To mount a USB stick drive or CD-ROM on Ubuntu,
+  just insert it, and it appears under `/run/media/${USER}/' or '/media'.
 To eject it, first do
+----
   umount /run/media/${USER}/DISKNAME
   umount /media/DISKNAME
+----
 
 To use a floppy under Linux, either dd or mtools is probably all you need.
 (Just use the "m*" commands such as "mdir", "mcopy", etc.)
@@ -214,13 +213,6 @@ When an Amazon Kindle is plugged into Ubuntu Linux, it is mounted not at
 
 
 == Everything else
-
-SSH timeouts seem to be controlled in a variety of ways.  The
-file /etc/ssh/sshd_config contains a number of setups.  It
-was suggested to set KeepAlive (possibly TCPKeepAlive) to
-avoid the firewall dropping an inactive connection.  Also
-ClientAliveInterval which causes the daemon to periodically
-poll the client to see if it is still alive.
 
 DMA settings on the hard disks make a significant (10X) difference
 in performance.  The command '/sbin/hdparm /dev/hda' will (on most
@@ -322,6 +314,7 @@ generally represent a serious bug in a program that needs to be
 fixed. But what if you just want the program to keep running so you
 can get your real work done? Depending on the failure, one or more of
 the following might allow execution to continue:
+
   * Run the program under valgrind (Memcheck)
   * Run with the environment variable `MALLOC_CHECK_` (note trailing underscore) set to 0
   * Run the program under gdb, and give gdb the command
@@ -366,27 +359,43 @@ To get the search box:
   Click the Ubuntu logo in the upper left corner, then press ESC
 
 To update the date on Ubuntu Linux:
+----
   date ; sudo ntpdate -s time.nist.gov ; date
+----
 or alternately:
+----
   date ; sudo service ntp stop ; sudo ntpdate -s time.nist.gov ; sudo service ntp start ; date
   date ; sudo service ntp stop ; sudo ntpd -gq ; sudo service ntp start ; date
+----
 
+bsh/csh/tsh quote arbitrary string with single quotes:
+Single quotes quote anything but other single quotes.  A single quote
+can be quoted by a backslash, but NOT within single quotes.  Thus, to
+quote a string with single quotes, terminate the string, escape the single
+quote, and start a new single quoted string.
+For example, to quote: "Jeff's toy":
+---
+    'Jeff'\''s toy'
+---
+  The replace strings are: "'" and "'\\''"
+
+
+X11 problems monitor logfile XF86Config-4:
+If the X11 server doesn't start, look at the log file it creates.
+The log file is:  /var/log/XFree86.0.log.  Older version of the
+log file should also be present.
+
+Resolution and/or font problems:
+Sometimes the problem is simply that the display has screwed up when
+it autoadjusts.  Try logging in and out.  If that doesn't work play
+with the buttons on the front of the screen to make sure it is correct
+(peanut currently has a 1920x1200 monitor).
+To see what X thinks, use xdpyinfo | grep -i pixel  or
+xrandr (with no arguments) will print out the choices.
 
 
 == long entries below
 
->entry bsh/csh/tsh quote arbitrary string with single quotes
-
-  Single quotes quote anything but other single quotes.  A single quote
-  can be quoted by a backslash, but NOT within single quotes.  Thus, to
-  quote a string with single quotes, terminate the string, escape the single
-  quote, and start a new single quoted string.
-
-  For example, to quote: Jeff's toy
-
-    'Jeff'\''s toy'
-
-  The replace strings are: "'" and "'\\''"
 
 >entry changing display
 
@@ -403,22 +412,6 @@ or alternately:
     The X server needs to be restarted to do this.  Use
     ctrl-alt-backspace while the login box is displayed to
     reset the server
-
->entry X11 problems monitor logfile XF86Config-4
-
-    If the X11 server doesn't start, look at the log file it creates.
-    The log file is:  /var/log/XFree86.0.log.  Older version of the
-    log file should also be present.
-
->entry resolution and/or font problems
-
-    Sometimes the problem is simply that the display has screwed up when
-    it autoadjusts.  Try logging in and out.  If that doesn't work play
-    with the buttons on the front of the screen to make sure it is correct
-    (peanut currently has a 1920x1200 monitor).
-
-    To see what X thinks, use xdpyinfo | grep -i pixel  or
-    xrandr (with no arguments) will print out the choices.
 
 >entry fonts on debian
 
@@ -594,20 +587,20 @@ Follow the instructions for release 5.5 at:
 
 >entry Installing VMWare 6.0 on linux
 
-0. If you have a previous version installed, uninstall it with
+1. If you have a previous version installed, uninstall it with
    the vmware-uninstall.pl script.  That script is usually
    found in /usr/vmware/bin, or the original vmware-distrib/bin
    directory.
 
-1. Get the download from tig.  It is available on TIGs list of
+2. Get the download from tig.  It is available on TIGs list of
    of software (https://tig.csail.mit.edu/software/) or directly
    at: https://tig.csail.mit.edu/software/software_title/show/87.
 
-2. Untar the distribution
+3. Untar the distribution
 
    tar -xvzf VMware-workstation-6.0.0-45731.i386.tar.gz
 
-3. Run "cd vmware-distrib; sudo ./vmware-install.pl":
+4. Run "cd vmware-distrib; sudo ./vmware-install.pl":
 
    * Choose to install in /usr/vmware.
    * You will need to build a module for your kernel. When it asks for
@@ -618,9 +611,9 @@ Follow the instructions for release 5.5 at:
 
       /var/autofs/net/peanut/scratch2/jhp/vmware6/linux-source-2.6.18.8-csail-64/include
 
-4. Now, you can say /usr/vmware/bin/vmware to start VMware.
+5. Now, you can say /usr/vmware/bin/vmware to start VMware.
 
-5. You'll need a license key (serial number) to actually do
+6. You'll need a license key (serial number) to actually do
    anything. You can get a 30-day evaluation for free from VMware's
    web site in return for agreeing to receive spam, or you can request
    a permanent key from TIG (from the same place where you downloaded
@@ -636,7 +629,7 @@ command must match the csail name you see in 'uname -rv'.
   make-kpkg --append-to-version=-csail configure
   make scripts
 
-[Instruction from smcc, updated for 6.0 by jhp on Sept 26 2007]
+(Instruction from smcc, updated for 6.0 by jhp on Sept 26 2007)
 
 >entry Installing windows and other setup in VMWare
 

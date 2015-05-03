@@ -2434,13 +2434,13 @@ Marat Boshernitsan says,
 If OpenOffice or LibreOffice is trying to restore a file that no longer
 exists, press 'escape' at the Recovery window.
 
-%% More manual, less desirable solution:
-% If OpenOffice is trying to restore a file that no longer exists, delete a
-% file such as one of these:
-% ```
-%   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu
-%   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu
-% ```
+//// More manual, less desirable solution:
+// If OpenOffice is trying to restore a file that no longer exists, delete a
+// file such as one of these:
+// ```
+//   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu
+//   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu
+// ```
 
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
   Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
@@ -2564,8 +2564,10 @@ encountered.
 ```
 
 To make the history command show times, do this:
-export HISTTIMEFORMAT='%Y-%b-%d::%Hh:%Mm:%Ss '
-export HISTTIMEFORMAT='%Hh:%Mm:%Ss '
+----
+  export HISTTIMEFORMAT='%Y-%b-%d::%Hh:%Mm:%Ss '
+  export HISTTIMEFORMAT='%Hh:%Mm:%Ss '
+----
 That can be useful for seeing how long a command took to run, if another
 command is issued immediately afterward.
 
