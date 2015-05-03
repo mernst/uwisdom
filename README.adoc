@@ -37,16 +37,15 @@ the "doc" program. Here are some sample invocations:
 
 Run `doc -h` for complete usage instructions (see `doc` alias below).
 
-[[obtaining-the-files]]
+
 Obtaining the files
 -------------------
 
-The wisdom files appear on the web at >
-http://code.google.com/p/uwisdom/w/list You can get a local copy by
-following the instructions at >
-http://code.google.com/p/uwisdom/source/checkout?repo=wiki
+The wisdom files appear on the web at
+https://github.com/mernst/uwisdom/tree/wiki .
+That page also contains instructions about how to get a local copy by cloning the repository.
 
-[[comparison-to-webemailetc.-search]]
+
 Comparison to web/email/etc. search
 -----------------------------------
 
@@ -62,7 +61,7 @@ a wisdom file. Then, when I am searching for information, I first search
 my wisdom files, which only takes a moment. Only if that fails do I
 proceed to the manual, a web search, etc.
 
-[[writing-a-wisdom-entry]]
+
 Writing a wisdom entry
 ----------------------
 
@@ -83,7 +82,7 @@ into a Google code wiki editing page and press the "Preview" button,
 even if you don't save there; but note that URLs are not live in the
 preview.
 
-[[installing-the-lookup-program-and-shell-aliases]]
+
 Installing the lookup program, and shell aliases
 ------------------------------------------------
 
