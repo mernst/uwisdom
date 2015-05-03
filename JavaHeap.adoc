@@ -1,8 +1,4 @@
 = Notes on working with large 64-bit heaps in Java
-:toc:
-:toc-placement: manual
-
-toc::[]
 
 ```
 From: Derek Rayside

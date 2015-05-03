@@ -518,7 +518,6 @@ For Java compilers:
 Performance-oriented:
  * JavaSPEC
 
-----
 
 javacheck, javadis:  Gun's Java bytecode verifier and disassembler
         javacheck nameofclass
@@ -768,7 +767,6 @@ for $99; we should buy it when it comes out.
 
 == JVMs
 
-----------------
 
 Supporting Java 5.0:
 
@@ -783,7 +781,6 @@ multiple processors.
 
 Eclipse 3.1
 
-----------------
 
 Not supporting Java 5.0 (as of early 2005):
 
@@ -808,7 +805,6 @@ kaffe - A JVM to run Java bytecode
 sablevm - Free implementation of Java Virtual Machine (JVM) second edition
   Does not appear to support Java 5.0
 
-----------------
 
 summer 2002:  KaffeOS Java (from Wilson Hsieh at the University of Utah)
 virtual machine provides precise accounting of memory by applications.
@@ -853,7 +849,6 @@ available.
 
 Several publicly available slicing tools exist for C, however.
 
-----------------
 
 More details, mostly taken from papers that claim to have a Java slicer:
 
