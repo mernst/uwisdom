@@ -63,13 +63,13 @@ End:
 
 (Compile-command first cd's to default-directory.) These are equivalent
 (save a mode line update), but the second doesn't require eval:
-
+//
 ------------------------
 Local Variables:
 eval: (auto-fill-mode 0)
 End:
 ------------------------
-
+//
 -----------------------
 Local Variables:
 auto-fill-function: nil
