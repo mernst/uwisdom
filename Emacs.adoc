@@ -2,7 +2,7 @@
 :toc:
 
 ---------------------------------------------------------------------------
-=General tips=
+== General tips
 
 
 Emacs's tags facility allows you to easily find a definition (of a
@@ -34,7 +34,7 @@ specifier.
 
 
 ---------------------------------------------------------------------------
-=Less-polished Emacs wisdom=
+== Less-polished Emacs wisdom
 
 
 To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".

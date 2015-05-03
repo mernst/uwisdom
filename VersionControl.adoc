@@ -3,7 +3,7 @@
 
 
 ---------------------------------------------------------------------------
-=Other ways to sync=
+== Other ways to sync
 
 My ideas about using version control (VC) vs. rsync vs. Unison:
  * VC is essential when others will collaborate.
@@ -20,7 +20,7 @@ To mirror one directory to another (including deletions), you can use:
 
 
 ---------------------------------------------------------------------------
-=RCS=
+== RCS
 
 To set up RCS, create a subdirectory called RCS in the directory with the files.
 To add a file:
@@ -34,7 +34,7 @@ When you check in an RCS file via Emacs, type  C-c C-c  to finish the comment.
 
 
 ---------------------------------------------------------------------------
-=CVS=
+== CVS
 
 File cvs-intro in this directory is a quick beginner's guide to the CVS
 version control system.
@@ -285,7 +285,7 @@ this from ~/tmp:
 
 
 ---------------------------------------------------------------------------
-=SVN=
+== SVN
 
 To make a new, empty SVN repository:
 ```
@@ -497,7 +497,7 @@ Or:
 
 
 ---------------------------------------------------------------------------
-=Mercurial (Hg)=
+== Mercurial (Hg)
 
 To a first approximation, Git and Hg (Mercurial) have the same
 capabilities.  Hg is easier to use, because it has better IDE support and a
@@ -853,7 +853,7 @@ If you get a bundle:
 ```
 
 ---------------------------------------------------------------------------
-=Git=
+== Git
 
 In git,
 ```
@@ -981,7 +981,7 @@ Then to get the contents:
 ```
 
 ---------------------------------------------------------------------------
-=bzr bazaar=
+== bzr bazaar
 
 To create a bzr (Bazaar) repository for a project using the normal pag
 directories, the following:
@@ -1026,7 +1026,7 @@ submit a "pull request" which lets the owner know that you want a patch to
 be merged.
 
 ---------------------------------------------------------------------------
-=Bitbucket=
+== Bitbucket
 
 For email notifications of changesets in Bitbucket, use Admin >> Services;
 then, for each email address: Email >> Add service.

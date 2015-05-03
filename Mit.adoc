@@ -3,7 +3,7 @@
 
 
 ---------------------------------------------------------------------------
-=MIT-specific=
+== MIT-specific
 
 MIT medical service personal physicians:
 http://web.mit.edu/medical/service/persphys.htm
@@ -112,7 +112,7 @@ UROP Homepage for Students:  https://sisapp.mit.edu/uropweb/home.mit
 
 
 ---------------------------------------------------------------------------
-=Athena-specific=
+== Athena-specific
 
 <wiki:comment>
 % This section contains information about Athena, the MIT computing system.
@@ -203,7 +203,7 @@ though this had worked for me earlier.)
 
 
 ---------------------------------------------------------------------------
-=CSAIL-specific=
+== CSAIL-specific
 
 CSAIL Personnel Assistant: Rachel Avery
 EECS Personnel: Lisa Bella, 253-4611
@@ -405,7 +405,7 @@ Don't forget to:
 
 
 ---------------------------------------------------------------------------
-=CSAIL printing=
+== CSAIL printing
 
 CSAIL printer and copier locations:
   http://tig.csail.mit.edu/twiki/bin/view/TIG/ListOfPublicPrinters
@@ -454,7 +454,7 @@ To call Mike in Germany, use IP 139.19.100.30
 
 
 ---------------------------------------------------------------------------
-=EECS-specific=
+== EECS-specific
 
 Info about undergraduate theses (including prizes):
   http://www.eecs.mit.edu/ug/thesis-guide.html#anchor13
@@ -474,7 +474,7 @@ not include
 
 
 ---------------------------------------------------------------------------
-=PAG-specific=
+== PAG-specific
 
 EDG C front end:
 https://www.edg.com/download, user id mit, password saman6398.
@@ -538,7 +538,7 @@ The interesting lines are those with Type "Disk", so then do:
 
 
 ---------------------------------------------------------------------------
-=Boston-specific=
+== Boston-specific
 
 Apollo Travel (617-876-4471, 860 Mass. Ave., between Harvard and Central
 Squares) knocked 22% off Jeremy Nimmer's ticket price (sometimes requires

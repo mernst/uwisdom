@@ -2,11 +2,9 @@
 :toc:
 
 
-===========================================================================
 
 One advantage of ASTs is that they give information about variable scope.
 
-===========================================================================
 
 In javac, the best place is probably just after a ClassDeclaration is set
 to CS_CHECKED (but then I'll want to re-check it, no?); that is in
@@ -19,7 +17,6 @@ do this immediately before SourceClass.check (though is that too late?).
   Some control flow analysis (on bytecodes) in
 src/share/sun/sun/tools/debug/FlowTracer.java
 
-===========================================================================
 
 [Email I sent (long ago) looking for additional suggestions.]
 
@@ -50,7 +47,6 @@ Each of these has its own advantages and disadvantages; I am leaning toward
 modifying an existing Java compiler.  If you have any advice or
 suggestions, I would be grateful to hear it.
 
-===========================================================================
 
 Gail Murphy says:
   The JavaCC approach has worked out fine, but does require writing a *ton*
@@ -142,7 +138,7 @@ Parses the Java 1.1 language.
 
 ---------------------------------------------------------------------------
 
-=Java compilers=
+== Java compilers
 
 http://dir.yahoo.com/Computers_and_Internet/Programming_Languages/Java/Compilers/
 
@@ -215,7 +211,7 @@ Perhaps it only works under NetBeans.
 
 ---------------------------------------------------------------------------
 
-=Pretty-printers/decompilers for .class files=
+== Pretty-printers/decompilers for .class files
 
 As of 9/2009, a survey paper "An evaluation of current Java bytecode
 decompilers", by Hamilton and Danicic (appears in SCAM 2009), recommends:
@@ -271,7 +267,7 @@ actually a disassembler, not a decompiler, it seems.
 
 ---------------------------------------------------------------------------
 
-=Bytecode/classfile instrumenters/processing/rewriters=
+== Bytecode/classfile instrumenters/processing/rewriters
 
 Comparison of "Open Source ByteCode Libraries in Java" 
 (really just a list of them with a paragraph taken from each one's website,
@@ -418,7 +414,7 @@ Also see http://www.gnu.org/software/java/java-software.html
 
 ---------------------------------------------------------------------------
 
-=Bytecode instrumenters and other tools=
+== Bytecode instrumenters and other tools
 
 From David Saff, October 3, 2004:
 
@@ -481,9 +477,8 @@ available to Java programmers. Rivet has a modular internal structure that
 makes it easy to add new tools.
 [Abandoned by 1999 or so.]
 
-==========================================================================
 
-=Java test suites=
+== Java test suites
 
 TCK: Java Technology Compatibility Kits.  There is one for each JSR.  The
 one for J2SE (Java language and VM) is called JCK, Java Compatibility Kit.
@@ -520,7 +515,7 @@ For Java compilers:
 Performance-oriented:
  * JavaSPEC
 
-=========================================================================
+----
 
 javacheck, javadis:  Gun's Java bytecode verifier and disassembler
         javacheck nameofclass
@@ -535,9 +530,8 @@ BCEL bytecode verifier: Diagnostics an order of magnitude better than
 Java's built-in complaints.  However, it also gripes about some javac
 quirks, which you have to work around or ignore.
 
-=========================================================================
 
-=Java interpreter=
+== Java interpreter
 
 http://www.beanshell.org/
 Version 0.96 was released in January 1999.
@@ -558,16 +552,14 @@ Eclipse's "Scrapbook page"
 
 DrJava
 
-=========================================================================
 
 Metamata has a commercial product for semantic analysis of Java:
         http://www.metamata.com
 It is not free but they do have an educational license program.
 If you are intersted, send email to: contact@metamata.com.
 
-=========================================================================
 
-==Java debuggers===
+== Java debuggers
 
 deja.com ratings for Java Development Software
 http://www.deja.com/rate/list_items.xp?CID=11956&PCID=11805&N=0
@@ -610,7 +602,7 @@ building debuggers and such.
 
 List of debuggers at http://www.daimi.au.dk/~beta/ooli/Compare.html
 
-=Compilers=
+== Compilers
 
 The Flex compiler system built by Martin Rinard's group, over 100,000 lines
 of Java for compilation and analysis. We've used it for doing our
@@ -620,9 +612,8 @@ with back ends to byte code, C, StrongARM assembly, and MIPS
 assembly. Right now it reads in Java byte codes and builds an intermediate
 representation based on a variant of SSA form.  See www.flexc.lcs.mit.edu.
 
-==========================================================================
 
-=Lightweight static checkers=
+== Lightweight static checkers
 
 findbugs:
 findbugs.sourceforge.net
@@ -641,12 +632,11 @@ maudit (from metamata)
 Metamata no longer exists (as a company), and I can't find this software
 for download any longer.
 
-=========================================================================
 
-=Profilers=
+== Profilers
 
 
-==Profilers in the JDK===
+=== Profilers in the JDK
 
 java -prof
   puts output in java.prof
@@ -662,7 +652,7 @@ Other profiling tools in the JDK are jconsole (time and space), jmap
 (space), and jhat (space).
 
 
-==Other Java profilers==
+== Other Java profilers
 
 Yourkit, or YJP, is a Java profiler.
 (Ilya Sergey of Jetbrains, Ivan Beschastnikh, and others say it is nice.)
@@ -693,9 +683,8 @@ exists as of May 2007.
 ProfileViewer helps in interpreting Java profiling output.
 http://www.ulfdittmer.com/profileviewer/index.html
 
-==========================================================================
 
-=Java code coverage=
+== Java code coverage
 
   * Cobertura: http://cobertura.sourceforge.net/
      Jeff Perkins says it's pretty good (as of 5/2009).
@@ -726,7 +715,7 @@ http://www.ulfdittmer.com/profileviewer/index.html
 % * SilkScope:  http://www.tngsoft.com/dextera/s_ds_silk_scope.htm
 
 
-==Mutation coverage ("mutation testing") tools==
+== Mutation coverage ("mutation testing") tools
 
 For a much more complete survey, see Gareth Snow's report of June 2010.
  * muJava
@@ -761,7 +750,6 @@ For a much more complete survey, see Gareth Snow's report of June 2010.
     Many broken links (esp. in documentation) at http://jester.sourceforge.net/ .
     Recommended at JavaOne 2009.
 
-==========================================================================
 
 On Oct 15, 2001, IBM released the Jikes Research Virtual Machine (formerly
 Jalapeno) under an open-source license.
@@ -770,18 +758,14 @@ Jalapeno) under an open-source license.
   Press release: 
   http://www-124.ibm.com/developerworks/forum/forum.php?forum_id=362
 
-==========================================================================
 
 Branch coverage for Java:
   http://glassjartoolkit.com/gjtk.html
 As of April 2002, it is in beta.  They will sell it to us (academic price)
 for $99; we should buy it when it comes out.
 
-=========================================================================
 
-=========================================================================
-
-=JVMs=
+== JVMs
 
 ----------------
 
@@ -831,14 +815,12 @@ virtual machine provides precise accounting of memory by applications.
 Also see JMP, http://www.khelekore.org/jmp/.  Actively developed as of July
 2003.
 
-=========================================================================
 
 Sameer Ajmani says (10/2002):
 Andrew Meyers's "Polyglot" framework permits easy construction of tools for
 (dialects of Java); he has used it for three different such extensions so
 far.
 
-=========================================================================
 
 Kopi is a Java compiler that both Chandra Boyapati and Bill Thies have used
 as a framework for Java language extensions (10/2002).
@@ -848,21 +830,18 @@ Polyglot only supports Java 1.4.  There is an extension for Java 5, but it
 only supports a subset of the Java 5 features.  As of 4/2009, the latest
 release is 3/2007.
 
-=========================================================================
 
 JTest creates random unit tests based on the types of the arguments.
 If pre- and post-conditions are present, then it additionally uses them.
 (Gary Sevitsky and Tao Xie used it at IBM during summer 2002.)
 
-=========================================================================
 
 Semantic Designs (www.semanticdesigns.com) offers Java/C++ front ends
 (parser and unparser), designed for source-to-source transformation tools.
 It's $5000 for an academic license ($50,000 for a commercial one).
 
-=========================================================================
 
-=Slicers=
+== Slicers
 
 Many papers claim results from a slicing tool (for example, there is a long
 series of papers from Georgia Tech), but in January 2006 the only publicly
@@ -915,21 +894,17 @@ Tao Wang, Abhik Roychoudhury (NUS)
 Probes to extract runtime data without source code:
 Aspectwerks, TPTP
 
-=========================================================================
 
 Jass: Java extended assertions (pre-and post-conditions, class invariants).
 
-=========================================================================
 
 Non-Java tools:
 For C, see http://saturn.stanford.edu (and it links to related projects on
 its webpage).
 
-=========================================================================
 
 XStream: quick-and-dirty, human-legible, easy-to-use object serialization.
 
-=========================================================================
 
 Java HTML parsing:  There are two fundamental models
  tree-based (object model) such as DOM
@@ -966,7 +941,6 @@ Some advice:
   Since XHTML is a dialect of XML, it can be processed by any XML parser.
 But some parsers claim to deal with bad HTML.
 
-=========================================================================
 
 Java call graph (dependences) extraction:
  * Understand: http://www.scitools.com/products/understand/
@@ -993,9 +967,8 @@ Java call graph (dependences) extraction:
  * JChord, http://code.google.com/p/jchord/
  * Dynamic call graphs: AspectJ makes it trivial to weave into call sites
 
-=========================================================================
 
-=Continuous integration=
+== Continuous integration
 
   Hudson -- most popular (as of May 2009)
 
@@ -1013,11 +986,9 @@ Java call graph (dependences) extraction:
 
   Infinitest -- continuous test runner for JUnit tests
 
-=========================================================================
 
 spock -- like JUnit, but more Scala-like.  Can be used with Java.
 
-===========================================================================
 
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
 
@@ -1065,9 +1036,8 @@ scons
   No Scala support
   Limited Java support
 
-=========================================================================
 
-=C# tools=
+== C# tools
 
 Static rewriting:
   CCI
@@ -1089,4 +1059,3 @@ Dynamic rewriting:
       http://research.microsoft.com/en-us/projects/pex/community.aspx
   CHESS
 
-==========================================================================

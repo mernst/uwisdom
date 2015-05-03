@@ -35,14 +35,14 @@ the "doc" program.  Here are some sample invocations:
 
 Run `doc -h` for complete usage instructions (see `doc` alias below).
 
-=Obtaining the files=
+== Obtaining the files
 
 The wisdom files appear on the web at
   http://code.google.com/p/uwisdom/w/list
 You can get a local copy by following the instructions at
   http://code.google.com/p/uwisdom/source/checkout?repo=wiki
 
-=Comparison to web/email/etc. search=
+== Comparison to web/email/etc. search
 
 Why would you want to use this program when you can just search the web
 instead?
@@ -56,7 +56,7 @@ wisdom file.  Then, when I am searching for information, I first search my
 wisdom files, which only takes a moment.  Only if that fails do I proceed
 to the manual, a web search, etc.
 
-=Writing a wisdom entry=
+== Writing a wisdom entry
 
 Please help to improve this resource by adding and updating the information!
 You can submit a paragraph of text, a patch, a Mercurial bundle, or an
@@ -80,7 +80,7 @@ but it failed for the first markup I gave it (an indented/quoted
 paragraph).
 </wiki:comment>
 
-=Installing the lookup program, and shell aliases=
+== Installing the lookup program, and shell aliases
 
 The Lookup program is available as part of plume-lib
 (http://code.google.com/p/plume-lib/).

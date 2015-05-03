@@ -2,7 +2,7 @@
 :toc:
 
 ---------------------------------------------------------------------------
-=VMware=
+== VMware
 
 Do not switch between VMware regular and virtual console while the mouse is
 moving, because the switch might occur between packets that the mouse is
@@ -23,7 +23,7 @@ Spoof MAC address under Linux:
 
 
 ---------------------------------------------------------------------------
-=Microsoft Windows=
+== Microsoft Windows
 
 Ctrl-ESC opens the "Start" menu.
 

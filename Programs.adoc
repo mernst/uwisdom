@@ -6,7 +6,7 @@ dedicated page.
 
 
 ---------------------------------------------------------------------------
-=Kerberos=
+== Kerberos
 
 
 For jobs running longer than 8 days that need Kerberos tickets, see
@@ -64,7 +64,7 @@ Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 
 
 ---------------------------------------------------------------------------
-=AFS=
+== AFS
 
 To modify AFS directory/file permissions/acls/access control lists, see
  * http://www-2.cs.cmu.edu/~help/afs/afs_quickref.html
@@ -150,7 +150,7 @@ such problems.)
 
 
 ---------------------------------------------------------------------------
-=Shells=
+== Shells
 
 Redirecting output in command shells:
  * In csh/tcsh:
@@ -272,7 +272,7 @@ To create a shell with no environment variables set:
 
 
 ---------------------------------------------------------------------------
-=ssh (secure shell)=
+== ssh (secure shell)
 
 To use ssh (and other tools like CVS, SVN, git, Hg, ...) with RSA public keys, 
 do this at the beginning of each development session (say, immediately
@@ -313,7 +313,7 @@ research use.  OpenSSH doesn not seem to have sftp.
 
 
 ---------------------------------------------------------------------------
-=Perl=
+== Perl
 
 Perl5:
  * arguments are in `@_`, that is `$_[0]`, `$_[1]`, etc.
@@ -450,7 +450,7 @@ use lib "$FindBin::Bin";
 
 
 ---------------------------------------------------------------------------
-=PostScript and PDF=
+== PostScript and PDF
 
 To convert a text file to PostScript or PDF, here are possibilities.
 Reasonable choices:
@@ -743,7 +743,7 @@ PostScript and used poster instead.)
 
 
 ---------------------------------------------------------------------------
-=X Windows=
+== X Windows
 
 X Windows initialization depends on .Xdefaults and .xsession files, among others.
 (.Xdefaults, aka .Xresources, is used by xrdb.)
@@ -811,7 +811,7 @@ Applications >> Desktop Preferences >> Screen Resolution
 
 
 ---------------------------------------------------------------------------
-=WWW and HTML=
+== WWW and HTML
 
 To make a webpage automatically forward/redirect, see
   http://www.cs.washington.edu/info/faq/homefaq.html#else
@@ -997,7 +997,7 @@ How to quote less than and greater than (angle brackets) and at-signs, such as f
 
 
 ---------------------------------------------------------------------------
-=C and C++=
+== C and C++
 
 In C++, an auto_ptr is automatically deleted at the end of its scope.
 
@@ -1090,7 +1090,7 @@ Two things to check:
 
 
 ---------------------------------------------------------------------------
-=Email=
+== Email
 
 Websieve (sieve) RFC is rfc3028, with Sieve grammar and rules.
 There is a sieve email filter script tester (and syntax checker) at
@@ -1189,7 +1189,7 @@ https://support.google.com/mail/answer/78892?hl=en
 
 
 ---------------------------------------------------------------------------
-=Make and Makefiles (and ant and buildfiles, build.xml)=
+== Make and Makefiles (and ant and buildfiles, build.xml)
 
 In Makefiles, variables in rule targets and dependences are expanded as
 soon as the rule target is read, but variables in rule actions are expanded
@@ -1446,7 +1446,7 @@ Vizant (http://vizant.sourceforge.net/) is an ant build visualization tool.
 
 
 ---------------------------------------------------------------------------
-=Eclipse=
+== Eclipse
 
 Useful keystrokes in Eclipse:
   C-S-t:  lookup type (like M-. in Emacs, but only for classes, not methods)
@@ -1495,7 +1495,7 @@ The model reconciler operates on buffers and runs on every keystroke to create r
 The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  [Occasionally people use the term "reconciler" incorrectly to refer to incremental project building.]
 
 ---------------------------------------------------------------------------
-=General wisdom (that is, everything without its own section above)=
+== General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
 repository, in file java-tools.txt.

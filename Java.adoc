@@ -3,7 +3,7 @@
 
 
 ---------------------------------------------------------------------------
-=JIT=
+== JIT
 
 To disable the JIT, run Java with the  -Djava.compiler=DISABLED  option.
 
@@ -25,7 +25,7 @@ used "invokestatic".
 
 
 ---------------------------------------------------------------------------
-=JUnit=
+== JUnit
 
 JUnit:  helps in writing Java test suites.  www.junit.org
 To run JUnit:
@@ -66,7 +66,7 @@ isn't always easier to read, this can be worthwhile.
 
 
 ---------------------------------------------------------------------------
-=Debugging=
+== Debugging
 
 Graphical Java debugger:  jswat (http://www.bluemarsh.com/java/jswat/),
 Run:
@@ -93,7 +93,7 @@ To get line numbers too, make the VM create a core dump, then use jstack:
 
 
 ---------------------------------------------------------------------------
-=Profiling=
+== Profiling
 
 For notes about Java garbage collection and the heap, see wiki page JavaHeap.
 
@@ -114,7 +114,7 @@ that works with CPU time rather than wallclock time.
 
 
 ---------------------------------------------------------------------------
-=Generics=
+== Generics
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
  * The formal type parameter is called a "type parameter".
@@ -157,7 +157,7 @@ from the declaration.
 
 
 ---------------------------------------------------------------------------
-=javac=
+== javac
 
 
 To pass the -Xlint argument to javac when running from Ant, do:
@@ -220,7 +220,7 @@ in the source code, but this still requires you to run javac as follows:
 
 
 ---------------------------------------------------------------------------
-=javadoc=
+== javadoc
 
 To find Javadoc comments that use "<" or ">" but shouldn't:
 ```search -i -n '^ *\*.*(<[^/]|>)'```
@@ -236,7 +236,7 @@ This only works with Javadoc 8 and later.
 
 
 ---------------------------------------------------------------------------
-=Everything else=
+== Everything else
 
 
 JDK 1.4 is still distributed, but at an obscure URL:

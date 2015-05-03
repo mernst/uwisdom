@@ -16,8 +16,10 @@ Instead of using pserver and cvs login, you can set CVSROOT to use
 'ext' authentication. By default, ext means rsh, but you can change it
 to use ssh:
 
+```
 export CVSROOT=:ext:user@machine.name:/cvsroot
 export CVS_RSH=/usr/bin/ssh
+```
 
 Now, instead of doing cvs login, each cvs command (add, commit, etc.)
 will prompt you for your password as it connects via ssh.

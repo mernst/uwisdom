@@ -10,7 +10,7 @@
 
 
 ---------------------------------------------------------------------------
-=Figures (floats)=
+== Figures (floats)
 
 In LaTeX, always put a \protect in front of a \ref in a \caption.
 
@@ -91,7 +91,7 @@ and use the following definition of \captionfont:
 ```
 
 ---------------------------------------------------------------------------
-=Tables=
+== Tables
 
 To reduce intercolumn space in tables:
 ```
@@ -157,7 +157,7 @@ You can nest \multirow in \multicolumn but not vice versa.
 
 
 ---------------------------------------------------------------------------
-=Displays=
+== Displays
 
 To intersperse left-justified text with aligned equations, use the TeX
 \noalign primitive. For example, 
@@ -189,7 +189,7 @@ to reduce the width of columns in a table or tabular environment.
 
 
 ---------------------------------------------------------------------------
-=Lists=
+== Lists
 
 To eliminate LaTeX list/itemize/enumerate spacing between items:
 1. From one list:
@@ -303,7 +303,7 @@ environment does:
 
 
 ---------------------------------------------------------------------------
-=Defining macros=
+== Defining macros
 
 Here are ways to test wither a macro argument is empty/null:
  1. The following macro definition will test whether a macro argument is empty:
@@ -402,7 +402,7 @@ However, all of those solutions give me a Roman font that differs from the text 
 
 
 ---------------------------------------------------------------------------
-=Bibliographies and citations=
+== Bibliographies and citations
 
 Very simple BibTeX usage:
  # See ~mernst/bib for bibliographies (but you should get your own copy).
@@ -519,7 +519,7 @@ This is rarely worthwhile, though:  the savings tend to be very small.
 
 
 ---------------------------------------------------------------------------
-=Texinfo=
+== Texinfo
 
 In Texinfo, to prevent the last index pages from being numbered i, ii,
 etc., add an @page before @summarycontents or @contents.
@@ -555,7 +555,7 @@ Texinfo summary of cross reference commands (@xref @ref @pxref @inforef):
 http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands
 
 ---------------------------------------------------------------------------
-=Hyphenization; word, line, and page breaking=
+== Hyphenization; word, line, and page breaking
 
 raymond@sunkist.berkeley.edu (Raymond Chen) says:
 To prevent word breaking (hyphenation) in (La)TeX, \hypenpenalty=10000
@@ -696,7 +696,7 @@ in \mathrel or the like.
 
 
 ---------------------------------------------------------------------------
-=pdf and pdflatex=
+== pdf and pdflatex
 
 TeX uses bitmap based fonts by default, so PDF looks bad for them.  To
 correct this, do one of 2 things:
@@ -774,7 +774,7 @@ that are supposed to make pdflatex embed the fonts did not work for me.)
 
 
 ---------------------------------------------------------------------------
-=URLs=
+== URLs
 
 To make hyperlinks (e.g., to URLs) in a LaTeX document:
 ```
@@ -834,7 +834,7 @@ Second approach (better style, possibly more robust):
 
 
 ---------------------------------------------------------------------------
-=Hevea=
+== Hevea
 
 Conditional compilation with LaTeX and Hevea:
 To avoid problems with the imagen program, it's usually best to not
@@ -858,7 +858,7 @@ Adding info to HTML header in Hevea (this must come after \begin{document}):
 
 
 ---------------------------------------------------------------------------
-=Everything else=
+== Everything else
 
 In LaTeX, rather than
 ```
