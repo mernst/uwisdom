@@ -344,20 +344,20 @@ To make SVN update the `$Id: ...$` text in a file, use
 From Seth Teller: how to recover a repos "papers" created with BDB
 (doesn't mix with AFS), and convert it to FSFS:
 ```
-# correct any errors in place
-svnadmin recover /afs/csail.mit.edu/group/rvsn/papers
-# dump all svn actions to a log
-svnadmin dump /afs/csail.mit.edu/group/rvsn/papers > svn.dump
-# move existing repos out of the way
-cd /afs/csail.mit.edu/group/rvsn/
-mv papers papers.bdb
-# recreate repos; default type is FSFS
-svnadmin create papers
-# replay the log
-svnadmin load /afs/csail.mit.edu/group/rvsn/papers < svn.dump
-# if everything worked
-rm svn.dump
-rm -rf papers.bdb
+  # correct any errors in place
+  svnadmin recover /afs/csail.mit.edu/group/rvsn/papers
+  # dump all svn actions to a log
+  svnadmin dump /afs/csail.mit.edu/group/rvsn/papers > svn.dump
+  # move existing repos out of the way
+  cd /afs/csail.mit.edu/group/rvsn/
+  mv papers papers.bdb
+  # recreate repos; default type is FSFS
+  svnadmin create papers
+  # replay the log
+  svnadmin load /afs/csail.mit.edu/group/rvsn/papers < svn.dump
+  # if everything worked
+  rm svn.dump
+  rm -rf papers.bdb
 ```
 
 To retrieve a specific version (revision) of a file under Subversion control:
@@ -995,6 +995,10 @@ Then to get the contents:
 ```
    git clone repo.bundle -b master repo
 ```
+
+Tip about how to use over https git when ssh is not possible:
+https://help.github.com/articles/using-ssh-over-the-https-port/
+
 
 ---------------------------------------------------------------------------
 =bzr bazaar=
