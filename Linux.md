@@ -401,210 +401,205 @@ The replace strings are: "'" and "'\\''"
 
 # long entries below #
 
->entry changing display
+Changing the display:
+get-edid and parse-edid programs will get information about
+a monitor.  Execute
+```
+  sudo get-edid | parse-edid
+```
+to get a section that can be plugged into the /etc/X11/XF86Config-4
+file.  Add the new resolution (if necessary) onto the appropriate
+mode lines and change the 'Monitor' setting under 'Screen' to point
+to the new Monitor entry.
+The X server needs to be restarted to do this.  Use
+ctrl-alt-backspace while the login box is displayed to
+reset the server
 
-> get-edid and parse-edid programs will get information about
-> a monitor.  Execute
+X11 problems monitor logfile XF86Config-4:
+If the X11 server doesn't start, look at the log file it creates.
+The log file is:  /var/log/XFree86.0.log.  Older version of the
+log file should also be present.
 
-> sudo get-edid | parse-edid
-
-> to get a section that can be plugged into the /etc/X11/XF86Config-4
-> file.  Add the new resolution (if necessary) onto the appropriate
-> mode lines and change the 'Monitor' setting under 'Screen' to point
-> to the new Monitor entry.
-
-> The X server needs to be restarted to do this.  Use
-> ctrl-alt-backspace while the login box is displayed to
-> reset the server
-
->entry X11 problems monitor logfile XF86Config-4
-
-> If the X11 server doesn't start, look at the log file it creates.
-> The log file is:  /var/log/XFree86.0.log.  Older version of the
-> log file should also be present.
-
->entry resolution and/or font problems
-
-> Sometimes the problem is simply that the display has screwed up when
-> it autoadjusts.  Try logging in and out.  If that doesn't work play
-> with the buttons on the front of the screen to make sure it is correct
-> (peanut currently has a 1920x1200 monitor).
-
-> To see what X thinks, use xdpyinfo | grep -i pixel  or
-> xrandr (with no arguments) will print out the choices.
+Resolution and/or font problems:
+Sometimes the problem is simply that the display has screwed up when
+it autoadjusts.  Try logging in and out.  If that doesn't work play
+with the buttons on the front of the screen to make sure it is correct
+(peanut currently has a 1920x1200 monitor).
+To see what X thinks, use xdpyinfo | grep -i pixel  or
+xrandr (with no arguments) will print out the choices.
 
 >entry fonts on debian
 
-> Most fonts under kde are controlled from the kde control panel (available
-> on the panel or through the K)
+Most fonts under kde are controlled from the kde control panel (available
+on the panel or through the K)
 
-> Some fonts, however, are controlled by the gnome font chooser.  This
-> is gnome-font-properties.  In particular the mozilla menus and text outside
-> of browser pages/mail are controlled by the application font choice here.
-> A good choice seems to be Aria 9, but others are good as well.
+Some fonts, however, are controlled by the gnome font chooser.  This
+is gnome-font-properties.  In particular the mozilla menus and text outside
+of browser pages/mail are controlled by the application font choice here.
+A good choice seems to be Aria 9, but others are good as well.
 
-> Note that under Lenny, there is no longer a gnome-font-properties.  There
-> is a gnome-control-center which has similar capabilities.  But, it
-> relies on the gnome-settings-daemon which I can't get to run under
-> KDE.  I did find that you can edit the file .gtkrc-2.0 with the
-> following lines:
+Note that under Lenny, there is no longer a gnome-font-properties.  There
+is a gnome-control-center which has similar capabilities.  But, it
+relies on the gnome-settings-daemon which I can't get to run under
+KDE.  I did find that you can edit the file .gtkrc-2.0 with the
+following lines:
 
-> gtk-icon-theme-name = "Human"
-> gtk-theme-name = "Human"
-> gtk-font-name = "Arial 9"
-> style "font"
-> {
-> font\_name = "Tahoma 8"
-> }
-> widget\_class **" style "font"**
+gtk-icon-theme-name = "Human"
+gtk-theme-name = "Human"
+gtk-font-name = "Arial 9"
+style "font"
+{
+font\_name = "Tahoma 8"
+}
+widget\_class **" style "font"**
 
-> I think the critical line is gtk-font-name.  Creating this file does
-> seem to control the gtk fonts
+I think the critical line is gtk-font-name.  Creating this file does
+seem to control the gtk fonts
 
-> Jeff likes the following fonts in gnome-font-properties:
+Jeff likes the following fonts in gnome-font-properties:
 
-> Application font:     Arial 9
-> Document font:        Sans 10
-> Desktop font:         URW Palladio L Roman 10
-> Windows Title Font:   Sans Bold 10
-> Fixed width font:     MiscFixedSC613
+Application font:     Arial 9
+Document font:        Sans 10
+Desktop font:         URW Palladio L Roman 10
+Windows Title Font:   Sans Bold 10
+Fixed width font:     MiscFixedSC613
 
-> Newer applications use truetype or postscript fonts.  These are the
-> only ones that will show up in their lists.  Older applications (emacs,
-> xterm, etc) use standard X fonts and -fixed still seems to be an excellent
-> choice.  If you need a good monospace font that is truetype use
-> MiscFixedSC613 which is very smilar to the old fixed font.  As of
-> the new release of Debian (9/2007), the 'neep' font seems pretty
-> good for a fixed width font, it you don't want to install special
-> fonts (instruction to do so are below).
+Newer applications use truetype or postscript fonts.  These are the
+only ones that will show up in their lists.  Older applications (emacs,
+xterm, etc) use standard X fonts and -fixed still seems to be an excellent
+choice.  If you need a good monospace font that is truetype use
+MiscFixedSC613 which is very smilar to the old fixed font.  As of
+the new release of Debian (9/2007), the 'neep' font seems pretty
+good for a fixed width font, it you don't want to install special
+fonts (instruction to do so are below).
 
-> Some information from David:
+Some information from David:
 
-> debian boxes by default run KDE.  Also, by default, the gnome desktop
-> is rather broken, with the window list unoperational.  So, KDE seems
-> a fine choice as a desktop.  However, there are several problems:
+debian boxes by default run KDE.  Also, by default, the gnome desktop
+is rather broken, with the window list unoperational.  So, KDE seems
+a fine choice as a desktop.  However, there are several problems:
 
   1. Eclipse looks bad under KDE: Among other problems, there is no
-> > highlighting in context menus, making keyboard-only operations
-> > painful.
+> highlighting in context menus, making keyboard-only operations
+> painful.
 
-> 2) Eclipse chooses huge fonts for UI elements, under KDE and Gnome.
-> 3) Even if you could get fonts normal-sized, the available TrueType fonts
-> > under Linux are severely restricted
-
-
-> 4) Apps started under KDE do not inherit your environment from
-> > .bashrc (or whatever).  If you run, for example, TeX under
-> > Emacs, this is annoying.
+2) Eclipse chooses huge fonts for UI elements, under KDE and Gnome.
+3) Even if you could get fonts normal-sized, the available TrueType fonts
+> under Linux are severely restricted
 
 
-> Depending on your preferences, these might not all feel like problems.
+4) Apps started under KDE do not inherit your environment from
+> .bashrc (or whatever).  If you run, for example, TeX under
+> Emacs, this is annoying.
 
-> Here, then, is my setup:
+
+Depending on your preferences, these might not all feel like problems.
+
+Here, then, is my setup:
 
   1. I have the following in my .xsession:
 
   1. /bin/bash
-> source ~/.bashrc
-> startkde
+source ~/.bashrc
+startkde
 
-> 2) At the login screen, I set my session type to Default.  This
-> > will invoke the .xsession, which will set my environment
-> > variables, and then start KDE.
-
-
-> 3) I executed the following command:
-
-> ln -s /usr/bin/gnome-settings-daemon ~/.kde/Autostart/
-
-> This lets Gnome take over font selection and UI elements.
-
-> 4) I added some better fonts.  If you copy over from turnip
-> > /usr/share/fonts/truetype/msttcorefonts/**,
-> > /etc/defoma/hints/tahoma.hints, and
-> > /etc/defoma/hints/msttcorefonts.hints, then you can install the
-> > fonts with**
+2) At the login screen, I set my session type to Default.  This
+> will invoke the .xsession, which will set my environment
+> variables, and then start KDE.
 
 
-> defoma-font register-all /etc/defoma/hints/tahoma.hints
-> defoma-font register-all /etc/defoma/hints/msttcorefonts.hints
+3) I executed the following command:
 
-> 5) I selected the fonts I wanted.  This requires settings in several
-> > places:
-> > a) The KDE control panel
-> > b) The Gnome control panel: /usr/bin/gnome-font-properties
-> > c) Eclipse's internal fonts: Window > Preferences > Colors and Fonts
+ln -s /usr/bin/gnome-settings-daemon ~/.kde/Autostart/
+
+This lets Gnome take over font selection and UI elements.
+
+4) I added some better fonts.  If you copy over from turnip
+> /usr/share/fonts/truetype/msttcorefonts/**,
+> /etc/defoma/hints/tahoma.hints, and
+> /etc/defoma/hints/msttcorefonts.hints, then you can install the
+> fonts with**
 
 
-> My personal favorites are Tahoma for UI elements, and 6x13 for
-> monotype text, but your mileage may vary.  I strongly recommend, when
-> using gnome-font-properties, that you go into the Details... pane and
-> select Full Hinting.  Other settings are up to you.
+defoma-font register-all /etc/defoma/hints/tahoma.hints
+defoma-font register-all /etc/defoma/hints/msttcorefonts.hints
 
-> Share and Enjoy,
+5) I selected the fonts I wanted.  This requires settings in several
+> places:
+> a) The KDE control panel
+> b) The Gnome control panel: /usr/bin/gnome-font-properties
+> c) Eclipse's internal fonts: Window > Preferences > Colors and Fonts
 
-> David Saff
+
+My personal favorites are Tahoma for UI elements, and 6x13 for
+monotype text, but your mileage may vary.  I strongly recommend, when
+using gnome-font-properties, that you go into the Details... pane and
+select Full Hinting.  Other settings are up to you.
+
+Share and Enjoy,
+
+David Saff
 
 >entry Berkeley DB database
 
-> The Berkeley DB is a simple hash or B tree database that correlates
-> keys and values.  It can be saved in a file.  There are many versions
-> of the database.  The following describes some of it.
+The Berkeley DB is a simple hash or B tree database that correlates
+keys and values.  It can be saved in a file.  There are many versions
+of the database.  The following describes some of it.
 
-> We have a number of different versions installed.  The utilities are
-> named with their version number.  For example we have db\_dump, db3\_dump,
-> db4.2\_dump, db\_dump185.  The 4.2 versions are used by perl.  The
-> documentation for the 4.2 versions are at
-> /usr/share/doc/db4.2-doc/utility/**.html**
+We have a number of different versions installed.  The utilities are
+named with their version number.  For example we have db\_dump, db3\_dump,
+db4.2\_dump, db\_dump185.  The 4.2 versions are used by perl.  The
+documentation for the 4.2 versions are at
+/usr/share/doc/db4.2-doc/utility/**.html**
 
-> Oh boy.  Welcome to the world of pain that is Berkeley DB.
+Oh boy.  Welcome to the world of pain that is Berkeley DB.
 
-> We have the API changes (1.85, 2, 3.0, 3.1, 3.2, 3.3, 4.0, 4.1, ...)
-> Then there are the on-disc database format versions
+We have the API changes (1.85, 2, 3.0, 3.1, 3.2, 3.3, 4.0, 4.1, ...)
+Then there are the on-disc database format versions
 
-> 4.1 changed:
-> > Btree/Recno: version 8 to version 9
-> > Hash: version 7 to version 8
-> > Queue: version 3 to version 4
+4.1 changed:
+> Btree/Recno: version 8 to version 9
+> Hash: version 7 to version 8
+> Queue: version 3 to version 4
 
-> 4.0 changed the on-disc log format
-> 3.3 did not change any on-disc formats.
-> 3.2 changed:
-> > Queue: version 2 to version 3
+4.0 changed the on-disc log format
+3.3 did not change any on-disc formats.
+3.2 changed:
+> Queue: version 2 to version 3
 
-> 3.1 changed:
-> > Btree/Recno: version 7 to version 8
-> > Hash: version 6 to version 7.
+3.1 changed:
+> Btree/Recno: version 7 to version 8
+> Hash: version 6 to version 7.
 
-> 3.0 changed:
-> > Btree/Recno: version 6 to version 7
-> > Hash: version 5 to version 6.
+3.0 changed:
+> Btree/Recno: version 6 to version 7
+> Hash: version 5 to version 6.
 
 
-> (fwiw, Debian's db3 is db3.2.  other distributions vary.)
+(fwiw, Debian's db3 is db3.2.  other distributions vary.)
 
-> So far, all versions of Berkeley DB support the 1.85 interface.
-> However none, that I'm aware of, support the previous version's
-> interfaces.  There's some hope since db4.1's on-disc formats are
-> backwards-compatible with 4.0's, and do not require upgrades.
+So far, all versions of Berkeley DB support the 1.85 interface.
+However none, that I'm aware of, support the previous version's
+interfaces.  There's some hope since db4.1's on-disc formats are
+backwards-compatible with 4.0's, and do not require upgrades.
 
-> There's no tool to _downgrade_ a db to an older version so going
-> backwards is kind of hard.
+There's no tool to _downgrade_ a db to an older version so going
+backwards is kind of hard.
 
-> Changing what version of DB you use is a major pain.
+Changing what version of DB you use is a major pain.
 
-> > I'm in the middle of building an application that uses BerkeleyDB but
-> > I'd prefer to use a newer version, and I'd prefer to use
-> > libberkeley-db-perl under mod\_perl ... but that's impossible, since
-> > Apache (and its whole dependency tree) are linked against libdb2.
+> I'm in the middle of building an application that uses BerkeleyDB but
+> I'd prefer to use a newer version, and I'd prefer to use
+> libberkeley-db-perl under mod\_perl ... but that's impossible, since
+> Apache (and its whole dependency tree) are linked against libdb2.
 
-> Trust me, I don't like it any more than you do.
+Trust me, I don't like it any more than you do.
 
-> > It's clear that libdb3 is handy, since there are 315 packages that
-> > Depend: on it.  Thank heavens libdb4 hasn't made it in yet (altho
-> > -utils has),  or it'd be worse ...
+> It's clear that libdb3 is handy, since there are 315 packages that
+> Depend: on it.  Thank heavens libdb4 hasn't made it in yet (altho
+> -utils has),  or it'd be worse ...
 
-> both libdb4.0 and libdb4.1 are in sid.
+both libdb4.0 and libdb4.1 are in sid.
 
 >entry installing vmware workstation tools on a linux guest
 
@@ -613,86 +608,87 @@ is supposed to occur automatically when you choose 'install vmware
 tools' from the VM menu.  However, that does not seem to work.
 Follow the instructions for release 5.5 at:
 
-> http://www.vmware.com/support/ws55/doc/ws_newguest_tools_linux.html
+http://www.vmware.com/support/ws55/doc/ws_newguest_tools_linux.html
 
 >entry Installing VMWare 6.0 on linux
 
 0. If you have a previous version installed, uninstall it with
-> the vmware-uninstall.pl script.  That script is usually
-> found in /usr/vmware/bin, or the original vmware-distrib/bin
-> directory.
+the vmware-uninstall.pl script.  That script is usually
+found in /usr/vmware/bin, or the original vmware-distrib/bin
+directory.
 
 1. Get the download from tig.  It is available on TIGs list of
-> of software (https://tig.csail.mit.edu/software/) or directly
-> at: https://tig.csail.mit.edu/software/software_title/show/87.
+of software (https://tig.csail.mit.edu/software/) or directly
+at: https://tig.csail.mit.edu/software/software_title/show/87.
 
 2. Untar the distribution
 
-> tar -xvzf VMware-workstation-6.0.0-45731.i386.tar.gz
+tar -xvzf VMware-workstation-6.0.0-45731.i386.tar.gz
 
 3. Run "cd vmware-distrib; sudo ./vmware-install.pl":
 
   * Choose to install in /usr/vmware.
   * You will need to build a module for your kernel. When it asks for
-> > the location of your kernel include files, on a 32 bit machine say:
+> the location of your kernel include files, on a 32 bit machine say:
 
 
-> /var/autofs/net/peanut/scratch2/jhp/vmware6/linux-source-2.6.18.8-csail-32/include
-> on a 64 bit machine say:
+/var/autofs/net/peanut/scratch2/jhp/vmware6/linux-source-2.6.18.8-csail-32/include
+on a 64 bit machine say:
 
-> /var/autofs/net/peanut/scratch2/jhp/vmware6/linux-source-2.6.18.8-csail-64/include
+/var/autofs/net/peanut/scratch2/jhp/vmware6/linux-source-2.6.18.8-csail-64/include
 
 4. Now, you can say /usr/vmware/bin/vmware to start VMware.
 
 5. You'll need a license key (serial number) to actually do
-> anything. You can get a 30-day evaluation for free from VMware's
-> web site in return for agreeing to receive spam, or you can request
-> a permanent key from TIG (from the same place where you downloaded
-> the software).
+anything. You can get a 30-day evaluation for free from VMware's
+web site in return for agreeing to receive spam, or you can request
+a permanent key from TIG (from the same place where you downloaded
+the software).
 
 The include directory in step 3 is generated as follows.  Note that
 the name specified in the append-to-version switch of the make-kpkg
 command must match the csail name you see in 'uname -rv'.
 
-> tar xvjf /usr/src/linux-source-2.6.18.8-csail.tar.bz2
-> cd linux-source-2.6.18.8-csail/
-> copy /boot/config-2.6.18.8-csail .config
-> make-kpkg --append-to-version=-csail configure
-> make scripts
+tar xvjf /usr/src/linux-source-2.6.18.8-csail.tar.bz2
+cd linux-source-2.6.18.8-csail/
+copy /boot/config-2.6.18.8-csail .config
+make-kpkg --append-to-version=-csail configure
+make scripts
 
-[from smcc, updated for 6.0 by jhp on Sept 26 2007](Instruction.md)
+(Instruction from smcc, updated for 6.0 by jhp on Sept 26 2007)
 
 >entry Installing windows and other setup in VMWare
 
-> - You can install windows from an ISO disk image.  The image is available
-> > on the TIG software page.  From vmware, select
-> > vm->removable-devices->cd-rom->edit and then attach the CD to the
-> > image.  Don't use a dell re-install disk or the like.  The license key
-> > from TIG will not work with it.
+- You can install windows from an ISO disk image.  The image is available
+on the TIG software page.  From vmware, select
+vm->removable-devices->cd-rom->edit and then attach the CD to the
+image.  Don't use a dell re-install disk or the like.  The license key
+from TIG will not work with it.
 
 
-> - Install vmware tools.  This vastly improves performance that mouse
-> > operation.  From the VMware menu, choose vm->install-vmware-tools.
+- Install vmware tools.  This vastly improves performance that mouse
+operation.  From the VMware menu, choose vm->install-vmware-tools.
 
 
-> - Get the MIT certificates into your new windows browser.  First
-> > download the certificate that identifes MIT.  Then import your
-> > identification certificate.  This is done from tools->internet-options.
-> > On that page choose 'Content'.  Under 'Certificates' you can import
-> > certificates.  I also found that I had to click on the 'advanced'
-> > button on that page and select 'client authentication' which wasn't
-> > initially selected.
+- Get the MIT certificates into your new windows browser.  First
+download the certificate that identifes MIT.  Then import your
+identification certificate.  This is done from tools->internet-options.
+On that page choose 'Content'.  Under 'Certificates' you can import
+certificates.  I also found that I had to click on the 'advanced'
+button on that page and select 'client authentication' which wasn't
+initially selected.
 
 
-> Export your certificates from Mozilla from edit->preferences.  Then
-> expand 'Privacy & Security'->certificates.  Under 'Manage Certificates'
-> you can export/backup a certificate.
+Export your certificates from Mozilla from edit->preferences.  Then
+expand 'Privacy & Security'->certificates.  Under 'Manage Certificates'
+you can export/backup a certificate.
 
-> - Install MicroSoft office.  This is available from TIG as a download.
+- Install Microsoft Office.  This is available from TIG as a download.
 
-> - Install Visual Studio C++ version 6.0.  The ID number is:
+- Install Visual Studio C++ version 6.0.  The ID number is:
 
-> 335-3353356
+335-3353356
 
-> - Install cygwin.  See http://www.cygwin.com for more info.  Basically
-> > download and run setup.exe (which is referenced on that page).
+- Install cygwin.  See http://www.cygwin.com for more info.  Basically
+download and run setup.exe (which is referenced on that page).
+

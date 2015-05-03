@@ -102,7 +102,7 @@ The zeroes seem to make everyhing happy.
 %     Also remove any blank lines near top of file.
 %  4. excel-ps-to-eps file.eps
 %     (Yuriy says just ps2epsi will work here.)
-% (There"s no need to use bbfig.)
+% (There is no need to use bbfig.)
 '></a>
 
 To crop whitespace while converting from PostScript to Encapsulated PostScript:
@@ -116,7 +116,7 @@ To get kinit and other Kerberos programs for Cygwin:
 > http://people.csail.mit.edu/rahimi/csail-cygwin-krb.tgz
 You have to do a separate kinit in cygwin (it
 doesn't access your leash tickets).
-Or, just ge tthe binaries (with instructions):
+Or, just get the binaries (with instructions):
 > /afs/csail.mit.edu/u/d/dalleyg/public/ssh-krb5.zip
 In addition to following the directions, I had to do
 ```

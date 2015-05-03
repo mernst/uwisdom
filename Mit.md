@@ -1,4 +1,7 @@
+#summary Wisdom about MIT
+
 Contents:
+<wiki:toc max_depth="1" />
 
 
 
@@ -190,7 +193,7 @@ Athena combination:  on Athena, run:  tellme combo
 
 If your Athena dotfiles (.bashrc, .cshrc, .environment) become corrupted,
 you can try 'quarantining' your personalized dotfiles (move them aside) and
-then copying over the dotfiles found in /usr/prototype\_usr/ .
+then copying over the dotfiles found in `/usr/prototype_usr/` .
 
 athena.csail.mit.edu is owned by Frans Kaashoek.
 
@@ -276,7 +279,7 @@ One way to do this is just to make the crontab command be of the form
   $AFS COMMAND
 ```
 
-CSAIL acroread is /afs/csail/i386\_linux24/local/bin/acroread
+CSAIL acroread is `/afs/csail/i386_linux24/local/bin/acroread`
 
 To run INQUIR on a CSAIL machine:
 ```
@@ -287,8 +290,8 @@ CSAIL email:
 IMAP (incoming) mail server: imap.csail.mit.edu
 SMTP (outgoing) mail server: outgoing.csail.mit.edu
 You must also configure your mail client to at least one of SSL/TLS
-> encryption or CRAM-MD5 (or DIGEST-MD5) to protect your password from
-> traversing the network unsafely.
+encryption or CRAM-MD5 (or DIGEST-MD5) to protect your password from
+traversing the network unsafely.
 You may also access your account via the webmail interface.
 
 CSAIL certificates available at:
@@ -444,7 +447,6 @@ For a list of all options:
 
 CSAIL xerox7 (7th-floor copier/scanner) can output to files in AFS, via the
 "Network Scanning" icon.  The file shows up about 5 minutes later in
-
 > /afs/csail.mit.edu/service/scan-to-file/${USER}/
 
 When a CSAIL printer runs out of ink/toner or paper, send mail to
@@ -528,26 +530,26 @@ which were installed just as dependencies; packages of the latter type
 might need to be removed to accommodate other upgrades.
 
 Samba accounts at pag.lcs.mit.edu:
-**all samba accounts must (first) have real unix accounts
-> (aka, exist at pag.lcs.mit.edu:/etc/passwd)** use smbpasswd to add a user (as root)
-> See ~ts/bin/samba/add-windows-user, which calls
-> > /usr/bin/smbpasswd -a -n -d NEWUSERNAME
-**use smbpasswd to change password for the user (as root)
-The user should now have a valid entry at pag.lcs.mit.edu:/etc/samba/smbpasswd :
-
-> sudo grep ${username} /etc/samba/smbpasswd**
+  * all samba accounts must (first) have real unix accounts
+    (aka, exist at pag.lcs.mit.edu:/etc/passwd)
+  * use smbpasswd to add a user (as root)
+    See ~ts/bin/samba/add-windows-user, which calls
+    /usr/bin/smbpasswd -a -n -d NEWUSERNAME
+  * use smbpasswd to change password for the user (as root)
+    The user should now have a valid entry at pag.lcs.mit.edu:/etc/samba/smbpasswd :
+    sudo grep ${username} /etc/samba/smbpasswd
 
 To test the samba connectivity at pag.lcs.mit.edu:
 > smbclient -L pag.lcs.mit.edu
 The interesting lines are those with Type "Disk", so then do:
-> $ smbclient '\\pag.lcs.mit.edu\ts'
-> added interface ip=18.24.8.42 bcast=18.24.8.255 nmask=255.255.255.0
-> Password:
-> Domain=[PROGRAMANALYSIS](PROGRAMANALYSIS.md) OS=[Unix](Unix.md) Server=[2.2.7-security-rollup-fix](Samba.md)
-> smb: \> ls
-> ;; shows me ~ts
-
-
+```
+  $ smbclient '\\pag.lcs.mit.edu\ts'
+  added interface ip=18.24.8.42 bcast=18.24.8.255 nmask=255.255.255.0
+  Password: 
+  Domain=[PROGRAMANALYSIS] OS=[Unix] Server=[Samba 2.2.7-security-rollup-fix]
+  smb: \> ls
+  ;; shows me ~ts
+```
 
 ---
 

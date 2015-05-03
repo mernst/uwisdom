@@ -1,3 +1,5 @@
+#summary Information about resources available on the network
+
 <a href='Hidden comment: 
 % Examples include download locations, ftp sites, web sites, and some
 % information on network-specific programs.
@@ -6,7 +8,7 @@
 '></a>
 
 Contents:
-
+<wiki:toc max_depth="1" />
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
 
@@ -18,9 +20,9 @@ http://www.graphviz.org/
 DaVinci is similar, but for X windows:
 http://www.informatik.uni-bremen.de/~inform/forschung/daVinci/
 
-[is a comparison between xgrab and graphviz?](What.md)
+(What is a comparison between xgrab and graphviz?)
 'xgrab' (X graph browser), a graph layout and browser package running under
-X11.[R4](https://code.google.com/p/uwisdom/source/detail?r=4), is available as cs.washington.edu:pub/xgrab.tar.Z.
+X11.R4, is available as cs.washington.edu:pub/xgrab.tar.Z.
 Xgrab reads a textual specification of a graph, lays out the graph
 using heuristics to minimize the number of edge crossings, and displays
 the graph as labeled nodes and edges in an X window.  The user can then
@@ -55,9 +57,9 @@ mail.
 Register domain names:  joker.com is cheap; also dotearth.com.
 
 BSD calendar program:
-# old: [ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm](ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm)
-# old: [ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm](ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm)
-[ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm](ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm)
+# old: ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
+# old: ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm
+ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
 Or, use "qalendar", but it doesn't permit comment lines
 Install:
 ```
@@ -102,29 +104,29 @@ conference management system he has used.
 Many others recommend HotCRP, especially the systems community.
 
 Paperdyne conference management system:
-  * To view all abstracts, the key is to log in as reviewer (not PCC).
-> > Then, go to "Papers" and click "show abstracts' bodies".  (Click on
-> > "printer-friendly" version if printing.)
-  * In Paperdyne the submission phase is not cloased automatically.
-> > Paperdyne closes if you switch to the next phase (see
-> > http://www.paperdyne.com/faq/p1_2.html).
+ * To view all abstracts, the key is to log in as reviewer (not PCC).
+   Then, go to "Papers" and click "show abstracts' bodies".  (Click on
+   "printer-friendly" version if printing.)
+ * In Paperdyne the submission phase is not cloased automatically. 
+   Paperdyne closes if you switch to the next phase (see 
+   http://www.paperdyne.com/faq/p1_2.html).
 
 VistaPrint.com: cheap business cards
 
 Shimano road bicycle components, as explained by
 http://www.epinions.com/content_957259908:
-  * Sora
-> > Like the Deore mountain bike parts, the Sora is entry-level components.
-  * Tiagra
-> > Like the LX side of Shimano.
-  * 105
-> > The 105 component group is somewhere between an LX component group and
-> > an XT component group in the mountain biking division.
-  * Ultegra
-> > This product line will be most comparable to the XT product line in the
-> > mountain division of Shimano.
-  * Dura-Ace
-> > Like the XTR component group in the mountain bike division.
+ * Sora
+   Like the Deore mountain bike parts, the Sora is entry-level components.
+ * Tiagra
+   Like the LX side of Shimano.
+ * 105
+   The 105 component group is somewhere between an LX component group and
+   an XT component group in the mountain biking division.
+ * Ultegra
+   This product line will be most comparable to the XT product line in the
+   mountain division of Shimano.
+ * Dura-Ace
+   Like the XTR component group in the mountain bike division.
 
 Buy clip art and photos:  http://istockphoto.com
 
@@ -152,12 +154,12 @@ Web polls:
 ```
 
 To run NetMeeting on Windows XP,
-
 > Start - > Run -> conf.exe
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
 Examples:
 > https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
+This does not seem to work for wiki files.
 
 For Google Code, it is possible to link straight to HTML files in the
 repository.  Examples:
@@ -184,10 +186,10 @@ The plume-bib README instructions are available at
 For PC remote control:
   * logmein.com,
   * If they are running Windows 7, its extremely easy to walk them through
-> > - Hitting the start button,
-> > - Typing 'Windows Remote Assistance' in the search bar
-> > - Clicking 'Invite someone you trust to help you,'
-> > - Clicking Easy Connect and having them recite the letters on their screen.
+     - Hitting the start button,
+     - Typing 'Windows Remote Assistance' in the search bar
+     - Clicking 'Invite someone you trust to help you,'
+     - Clicking Easy Connect and having them recite the letters on their screen.
   * www.mikogo.com
   * teamviewer
   * ultraVNC single click
@@ -201,32 +203,23 @@ For scheduling a meeting:
   * Doodle contains iCalendar integration (for $40/year).  WhenIsGood does not.
   * Doodle supports "if-need-be" responses.  WhenIsGood does not.
   * WhenIsGood's interface is far nicer.  With Doodle, you need to create
-> > many 30-minute proposals even to schedule a 1-hour meeting.  Each one
-> > takes multiple clicks to create and to answer.  Doodle just lets you
-> > quickly paint over the relevant times.
+    many 30-minute proposals even to schedule a 1-hour meeting.  Each one
+    takes multiple clicks to create and to answer.  Doodle just lets you
+    quickly paint over the relevant times.
 (Tungle.me combined the best of both, but it is no longer supported as of
 December 3, 2012.)
 Other possibilities, none of which seems great
-> > > Framadate: Not bad, but no calendar integration
-> > > Dudle:  by default gives just by-hour; slightly clunky interface.  No calendar integration
-> > > schedule once: has Google Calendar integration; $5+/month; not really for group meetings?
-> > > meetomatic.com: advanced is $20/year; without that, only per-day, not per-hour, control over times
-> > > gathergrid.com: only by hour; no calendar integration
-> > > whenshouldwe.com: terribly basic; not acceptable
-> > > selectthedate.com: selects a date, not among multiple times on one date
+  *    Framadate: Not bad, but no calendar integration
+  *    Dudle:  by default gives just by-hour; slightly clunky interface.  No calendar integration
+  *    schedule once: has Google Calendar integration; $5+/month; not really for group meetings?
+  *    meetomatic.com: advanced is $20/year; without that, only per-day, not per-hour, control over times
+  *    gathergrid.com: only by hour; no calendar integration
+  *    whenshouldwe.com: terribly basic; not acceptable
+  *    selectthedate.com: selects a date, not among multiple times on one date
 
 To join a Google Groups mailing list with a Google Apps account (e.g.,
 @cs.washington.edu), you have to create your own URL:
-
-> http://groups.google.com/group/
-
-&lt;groupname&gt;
-
-/boxsubscribe?email=
-
-&lt;email&gt;
-
-
+  http://groups.google.com/group/_groupname_/boxsubscribe?email=_email_
 
 Briticizer:  http://us2uk.eu/
 also: http://www.translatebritish.com/reverse.php
@@ -242,9 +235,9 @@ add@getpocket.com.
 
 Amazon Web Services (AWS) tips, from Darioush Jalali:
   * Billing is not logged by default. This can be confusing if you are
-> > trying to figure out how much money you are spending initially.
+    trying to figure out how much money you are spending initially.
   * If you have jobs that can be restarted easily, spot instances are
   * up to 10x cheaper than on-demand instances. Amazon may turn them off
-> > whenever they choose (this is rare).
+    whenever they choose (this is rare).
   * Amazon limits the number of types of certain instances they grant.
-> > Customer support will increase this, but it takes a couple days.
+    Customer support will increase this, but it takes a couple days.
