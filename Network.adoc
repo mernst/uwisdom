@@ -1,14 +1,11 @@
-#summary Information about resources available on the network
+= Information about resources available on the network
+:toc:
 
-<wiki:comment>
-% Examples include download locations, ftp sites, web sites, and some
-% information on network-specific programs.
-% In the brave new Google world of effective searching, it may be somewhat
-% less important than it was in the past.
-</wiki:comment>
+// Examples include download locations, ftp sites, web sites, and some
+// information on network-specific programs.
+// In the brave new Google world of effective searching, it may be somewhat
+// less important than it was in the past.
 
-Contents:
-<wiki:toc max_depth="1" />
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
 

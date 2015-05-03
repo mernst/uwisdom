@@ -1,11 +1,8 @@
-#summary Wisdom about programs
+= Wisdom about programs
+:toc:
 
 This file is a bit of a catch-all, for everything that does not have a
 dedicated page.
-
-
-Contents:
-<wiki:toc max_depth="1" />
 
 
 ---------------------------------------------------------------------------

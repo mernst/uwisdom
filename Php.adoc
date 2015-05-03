@@ -1,7 +1,5 @@
-#summary Wisdom about PHP
-
-Contents:
-<wiki:toc max_depth="1" />
+= Wisdom about PHP
+:toc:
 
 To change the memory
 available to PHP, use `ini_set ("memory_limit", "32M")`.

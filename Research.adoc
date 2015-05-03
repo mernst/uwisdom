@@ -1,7 +1,6 @@
-#summary Tips about conducting technical research, and writing it up
+= Tips about conducting technical research, and writing it up
+:toc:
 
-Contents:
-<wiki:toc max_depth="1" />
 
 Adapted from http://en.wikipedia.org/wiki/Dependability:
     * Defect:

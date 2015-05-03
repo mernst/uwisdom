@@ -1,8 +1,5 @@
-#summary Wisdom about Emacs
-
-Contents:
-<wiki:toc max_depth="1" />
-
+= Wisdom about Emacs
+:toc:
 
 ---------------------------------------------------------------------------
 =General tips=

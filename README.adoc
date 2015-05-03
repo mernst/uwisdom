@@ -1,10 +1,8 @@
-#summary Information about the uwisdom collection of useful facts, and how to search it
-#labels Featured
+= Information about the uwisdom collection of useful facts, and how to search it
+:toc:
 
-Contents:
-<wiki:toc max_depth="1" />
 
->entry Description/blurb of the doc/lookup/help program for searching wisdom files
+This is a description/blurb of the doc/lookup/help program for searching wisdom files.
 
 Albert Einstein said,
 

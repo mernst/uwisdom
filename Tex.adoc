@@ -1,16 +1,13 @@
-#summary Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
+= Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
+:toc:
 
-<wiki:comment>
-% Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
+// Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
 
-% PROBLEM with this file is that TeX comments starting in column 1 will be
-% ignored by the database searching program!  Therefore, put a space before
-% any "%" character that is part of an entry.
-</wiki:comment>
+// PROBLEM with this file is that TeX comments starting in column 1 will be
+// ignored by the database searching program!  Therefore, put a space before
+// any "%" character that is part of an entry.
 
 
-Contents:
-<wiki:toc max_depth="1" />
 
 ---------------------------------------------------------------------------
 =Figures (floats)=

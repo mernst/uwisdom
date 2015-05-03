@@ -1,7 +1,5 @@
-#summary How to use CVS with ssh instead of rsh
-
-Contents:
-<wiki:toc max_depth="1" />
+= How to use CVS with ssh instead of rsh
+:toc:
 
 >entry How to use CVS with ssh instead of rsh
 

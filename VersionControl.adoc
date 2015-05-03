@@ -1,7 +1,5 @@
-#summary Wisdom about version control systems such as CVS, Git, Mercurial (Hg), RCS, and Subversion (SVN).
-
-Contents:
-<wiki:toc max_depth="1" />
+= Wisdom about version control systems such as CVS, Git, Mercurial (Hg), RCS, and Subversion (SVN)
+:toc:
 
 
 ---------------------------------------------------------------------------

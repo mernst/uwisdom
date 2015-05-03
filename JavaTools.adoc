@@ -1,7 +1,6 @@
-Contents:
-<wiki:toc max_depth="1" />
+= Tools for manipulating Java programs.
+:toc:
 
-This file contains information about tools for manipulating Java programs.
 
 ===========================================================================
 

@@ -1,7 +1,6 @@
-#summary Wisdom about MIT
+= Wisdom about MIT
+:toc:
 
-Contents:
-<wiki:toc max_depth="1" />
 
 ---------------------------------------------------------------------------
 =MIT-specific=

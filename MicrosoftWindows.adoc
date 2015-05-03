@@ -1,7 +1,5 @@
-#summary Wisdom about using Microsoft Windows on a personal computer (PC)
-
-Contents:
-<wiki:toc max_depth="1" />
+= Wisdom about using Microsoft Windows on a personal computer (PC)
+:toc:
 
 ---------------------------------------------------------------------------
 =VMware=

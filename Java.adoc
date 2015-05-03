@@ -1,7 +1,5 @@
-#summary Wisdom about Java
-
-Contents:
-<wiki:toc max_depth="1" />
+= Wisdom about Java
+:toc:
 
 
 ---------------------------------------------------------------------------
