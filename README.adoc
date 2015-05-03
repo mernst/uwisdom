@@ -4,7 +4,9 @@
 This is a description/blurb of the doc/lookup/help program for searching wisdom files
 
 
-[quote,Albert Einstein]
+Albert Einstein said,
+
+[quote]
 ____
 I never waste memory on things that can easily be stored and retrieved
 from elsewhere.
