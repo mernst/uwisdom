@@ -88,7 +88,9 @@ subject. (There might be a faster way, but this works fine.)
 In gnus, "S o m" to forward/resend article via mail.
 
 The following form will make the emacs buffer-list
-`transient': \`\`\`   (global-set-key "\C-x\C-b" 'electric-buffer-list) \`\`\` The following will make emacs`help'
+`transient':
+ (global-set-key "\C-x\C-b" 'electric-buffer-list)
+The following will make emacs `help'
 windows transient:
 
   (progn (require 'ehelp)
