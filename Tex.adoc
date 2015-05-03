@@ -1,0 +1,999 @@
+[[summary-wisdom-about-tex-latex-hevea-texinfo-and-related-programs]]
+summary Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
+---------------------------------------------------------------------
+
+Contents:
+
+'''''
+
+[[figures-floats]]
+Figures (floats)
+----------------
+
+In LaTeX, always put a in front of a in a
+
+In LaTeX, to get a line between floats (figures, tables, etc.) and text,
+do something like (these must take up zero vertical space):
+
+--------------------------------------------------------------------------
+ % Add line between figure and text
+ \makeatletter
+ \def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+ \def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+ \def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+ \makeatother
+--------------------------------------------------------------------------
+
+In ACM styles that add a line between the figure and the caption,
+additionally do
+
+---------------
+ \nocaptionrule
+---------------
+
+Once you have the line, you can consider reducing `\floatsep`:
+
+----------------------------------------------------
+ % Reduce space between figures and text
+ \addtolength{\textfloatsep}{-.5\textfloatsep}
+ \addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+ % Optional
+ \addtolength{\floatsep}{-.5\floatsep}
+ \addtolength{\dblfloatsep}{-.5\dblfloatsep}
+----------------------------------------------------
+
+ To prevent having just a couple of figures, and lots of white space, on
+a page produced by LaTeX, do the following. Also consider making it 90%.
+
+----------------------------------------------------------------
+ % At least 80% of every float page must be taken up by
+ % floats; there will be no page with more than 20% white space.
+ \def\topfraction{.8}
+ \def\dbltopfraction{\topfraction}
+ \def\floatpagefraction{\topfraction}     % default .5
+ \def\dblfloatpagefraction{\topfraction}  % default .5
+ \def\textfraction{.2}
+----------------------------------------------------------------
+
+To fix "too many unprocessed floats" error, do one of the following: *
+spread your figures further apart in your document, or * put in a or
+command to allow a page full of figures to be generated.
+
+The change in font size of a LaTeX figure caption won't take unless you
+give an empty optional argument, like so:
+
+------------------------------------
+  \caption[]{{\small Small caption}}
+------------------------------------
+
+But, I think that does not adjust the inter-line spacing in the caption,
+so don't use that approach.
+
+To get inter-line spacing right in LaTeX figure captions that are set
+smaller than body text: In the paper, do
+
+-------------------------------------
+  \renewcommand{\captionfont}{\small}
+-------------------------------------
+
+or
+
+----------------------------------------
+  \renewcommand{\captionfont}{\small\bf}
+----------------------------------------
+
+and use the following definition of :
+
+-------------------------------------------------------------------------------------------------------
+\newcommand{\captionfont}{\bf}
+\long\def\@makecaption#1#2{
+   \vskip \baselineskip
+   \setbox\@tempboxa\hbox{\captionfont{#1: #2\strut}}
+   \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
+       {\captionfont\noindent\parbox{\hsize}{#1: #2\strut}}\par     %   THEN set as ordinary paragraph.
+     \else                      %   ELSE  center.
+       \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+   \fi}
+-------------------------------------------------------------------------------------------------------
+
+'''''
+
+[[tables]]
+Tables
+------
+
+To reduce intercolumn space in tables:
+
+-----------------------------------------
+  \addtolength{\tabcolsep}{-.5\tabcolsep}
+  \setlength{\tabcolsep}{0pt}
+-----------------------------------------
+
+Aligning decimal points (periods) in tables in TeX/LaTeX: use dcolumn
+package (described in the LaTeX Companion). In particular:
+
+-------------------------------------------------------------------------------------------------------------------------
+  \usepackage{dcolumn}
+  % dcolumn customization
+  \newcolumntype{d}[1]{D{.}{.}{#1}} % argument is number of decimal places
+  \newcolumntype{.}{d{1}} % "1" means one digit after the decimal point
+  \newcolumntype{.}{d{-1}} % "-1" means center the decimal point in the column; ugly
+  \newcolumntype{.}{d{0}} % "0" means decimal point is right-justified, not so different from right-justifying the column
+  \newcolumntype{.}{d{5.1} % 5 places to the left of the decimal, one to the right
+-------------------------------------------------------------------------------------------------------------------------
+
+and then use "." as a column separator, much like "c". These column
+separators do not check the number of decimal points in the table
+itself. Thus, using a value other than -1 can leave additional space at
+the right side of the column, or let extra digits after the decimal
+point lap into the next column.
+
+To put a footnote within a table in LaTeX, surround the table with a
+minipage:
+
+-----------------------------------------
+  \begin{minipage}{\textwidth}
+  \begin{tabular}{ccc}
+  1 & 2 & 3\footnote{Nothing important}\\
+  4 & 5 & 6
+  \end{tabular}
+  \end{minipage}
+-----------------------------------------
+
+To make entries in a LaTeX "tabular" table that span multiple columns,
+as with the HTML "colspan" attribute, use an entry like
+
+---------------------------
+   \multicolumn{3}{l}{text}
+---------------------------
+
+where 3 is the number of columns to span, and "l" is the alignment of
+the spanning contents. seems to want to insert inter-column spacing
+around the contents even if you've tried to disable it in the header
+line with @\{} (or @\{your amount of space}), but you can override it by
+putting a negative version of the space on the *inside* of the
+multicolumn, as in:
+
+-------------------------------------------
+   \multicolumn{3}{l}{\hskip-\tabcolsep...}
+-------------------------------------------
+
+To span multiple rows (as with the HTML "rowspan" attribute), use :
+
+-------------------------------------------------
+  \usepackage{multirow}
+  \multirow{nrows}[bigstruts]{width}[fixup]{text}
+-------------------------------------------------
+
+Multirow documentation is at
+http://mirror.math.ku.edu/tex-archive/macros/latex/contrib/multirow/multirow.sty
+The width is a size like "25mm" or `"*"` for "vertically centered". The
+rows that don’t contain the "multi-row" specification must have empty
+cells where the multi-row is going to appear. requires use of the
+multirow package: You can nest in but not vice versa.
+
+'''''
+
+[[displays]]
+Displays
+--------
+
+To intersperse left-justified text with aligned equations, use the TeX
+primitive. For example,
+
+-----------------------
+  \begin{eqnarray}
+  test & 1 & 2 \\
+  \noalign{\hbox{left}}
+  test & 3 & 4
+  \end{eqnarray}
+-----------------------
+
+produces results like the following:
+
+--------------------------------
+            test  1  2       (1)
+  left
+            test  3  4       (2)
+--------------------------------
+
+Use
+
+---------------------------------
+  \setlength{\arraycolsep}{.25em}
+---------------------------------
+
+to reduce/compress the horizontal spaces (as around equal signs) between
+columns in a LaTeX array or eqnarray environment. Use
+
+--------------------------------------
+  \setlength{\tabcolsep}{.5\tabcolsep}
+--------------------------------------
+
+to reduce the width of columns in a table or tabular environment.
+
+'''''
+
+[[lists]]
+Lists
+-----
+
+To eliminate LaTeX list/itemize/enumerate spacing between items: 1. From
+one list:
+
+-----------------------------
+    \begin{itemize}
+    \itemsep 0pt \parskip 0pt
+    ...
+    \end{itemize}
+-----------------------------
+
+____________________________________________________________________________________________________________________________________
+(Since the default values for and are set in a somewhat roundabout way,
+putting "" in the preamble doesn't work.) 2. From all lists:
+____________________________________________________________________________________________________________________________________
+
+--------------------------------------------------------------------------------
+    %% Bring items closer together in list environments
+    %% This doesn't work with an optional argument to the list environment.
+    % Prevent infinite loops
+    \let\Itemize =\itemize    
+    \let\Enumerate =\enumerate
+    \let\Description =\description
+    % Zero the vertical spacing parameters
+    \def\Nospacing{\itemsep=0pt\topsep=0pt\partopsep=0pt\parskip=0pt\parsep=0pt}
+    % Redefine the environments in terms of the original values
+    \renewenvironment{itemize}{\Itemize\Nospacing}{\endlist}
+    \renewenvironment{enumerate}{\Enumerate\Nospacing}{\endlist}
+    \renewenvironment{description}{\Description\Nospacing}{\endlist}
+--------------------------------------------------------------------------------
+
+_____________________________________________________________________________________________________
+--
+_____________________________________________________________________________________________________
+This doesn't work with an optional argument to the list environment,
+however; if you do, for example,
+_____________________________________________________________________________________________________
+
+--
+_____________________________________________________________________________________________________
+
+--------------------------------
+    \begin{enumerate}[$\bullet$]
+--------------------------------
+
+___________________________________________________________________________________________________________________________________________
+--
+___________________________________________________________________________________________________________________________________________
+then you need to use the other approach. 3. From all lists: Copy the
+(etc.) macros from latex.ltx, and add at the end (before the last ""):
+___________________________________________________________________________________________________________________________________________
+
+--
+___________________________________________________________________________________________________________________________________________
+
+-----------------------------
+    \itemsep 0pt \parskip 0pt
+-----------------------------
+
+1.  From all lists: > PROBLEM: This can put negative vertical space in
+some places (e.g., it > overlaps the list and the following paragraph),
+so isn't worth the hassle. > tweaklist
+(http://dcwww.camp.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html):
++
+--------------------------------------------------------------------------------------------
+  % Remove vertical space from between list/itemize/enumerate items.
+  \usepackage{tweaklist}
+  \renewcommand{\itemhook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
+  \renewcommand{\enumhook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
+  \renewcommand{\descripthook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
+--------------------------------------------------------------------------------------------
+2.  From all lists, or customize: see TeX FAQ at >
+http://www.tex.ac.uk/cgi-bin/texfaq2html?label=complist
+
+To control pre-list space, set (or insert an explicit negative (not )).
+(I had to give an explicit argument, not -etc.; but
+`\vspace*{-\partopsep}` worked for me if it came after the
+PARAGRAPH GOES HERE. \begin\{enumerate}
+
+-------------------------------------------------------------------------
+
+To interrupt an enumerate environment, then continue the numbering later:
+-------------------------------------------------------------------------
+
+-----------------------------------
+\newcounter{saveenumi}
+...
+\begin{enumerate}
+  ...
+  \item ...
+  \setcounter{saveenumi}{\theenumi}
+\end{enumerate}
+...
+\begin{enumerate}
+  \setcounter{enumi}{\thesaveenumi}
+  \item ...
+  ...
+\end{enumerate}
+-----------------------------------
+
+-------------------------------------------------------------------
+
+To change the margins similarly to what the quote (`\begin{quote}`)
+environment does:
+-------------------------------------------------------------------
+
+% Arguments are left and right margins #1#2\{} =
+-------------------------------------------------------------------------------
+
+
+---------------------------------------------------------------------------
+=Defining macros=
+
+Here are ways to test wither a macro argument is empty/null:
+ 1. The following macro definition will test whether a macro argument is empty:
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------
+\def\mymacro#1{%
+ \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
+ }%
+-------------------------------------------------------------
+
+--------------------------------------------------
+    Note that PLAIN.TEX defines \empty as follows:
+--------------------------------------------------
+
+-------------
+\def\empty{}%
+-------------
+
+--------------------------------------------------------------------------------
+    LaTeX defines \@empty in a similar way, if you want to work with .sty files.
+    Note that since this uses \def to assign the value of #2 to a macro, it
+    won't work in TeX's mouth, and needs the stomach as well (so it won't work
+    inside an \edef for example).
+ 2. This way of testing for null arguments can be done entirely in TeX's mouth:
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+  \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+    It does however fail badly if #1 begins with \relax 
+    (e.g., \showempty{\relax...}).
+ 3. Another way of testing for empty arguments in TeX's mouth is to say:
+------------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+   \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
+-----------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+    This will expand to `true text' iff #2 is empty, or begins with
+    \unlikely.  So if you make \unlikely an unlikely macro for #2 to begin
+    with, then you're away.  (It also dies if #2 contains unbalanced \if,
+    \else or \fi's, but that should be pretty rare.  Touch wood.)
+
+LaTeX macros gobble space after them.  If you wish to insert space
+(except before punctuation or other places where it shouldn't be
+inserted) after a macro expansion, then add "\xspace" at the end of the
+macro body.
+--------------------------------------------------------------------------
+
+ ... ... ... and we find available to us ...
+
+-------------------------------------------------------------------------------
+
+Here is a LaTeX command that typesets its argument in a smaller \tt font.  It
+permits line breaks at spaces within the argument (but not within words),
+respects current series (such as boldface), and works in both horizontal (text)
+and math mode.
+-------------------------------------------------------------------------------
+
+[1]\{\ifmmode\{\mbox\{
+
+----------------------------------------------
+Here's a version that takes care of URLs, too:
+----------------------------------------------
+
+ %HEVEA [1]\{\ifmmode\{\mbox\{ [1]\{\{\url\{#1`%HEVEA \def\myurl{\url}`
+Similarly, "
+
+Use (or, simpler, |...|), not latexmath:[$...$], to typeset a
+multi-character identifier in LaTeX math mode. latexmath:[$...$] puts
+incorrect kerning between the letters. (It looks bad, and enough people
+will notice that it is worthwhile to get the typesetting right.)
+
+ % Can't unindent the LaTeX comments or the doc program will respect
+those % comments. That's unfortunate, because I typically unindent when
+inserting % in a LaTeX document.
+
+Here are definitions for identifiers in LaTeX math mode formulas:
+
+-------------------------------------------------------------------------------
+  % \|name| or \mathid{name} denotes identifiers and slots in formulas
+  \def\|#1|{\mathid{#1}}
+  \newcommand{\mathid}[1]{\ensuremath{\mathit{#1```
+  % \<name> or \codeid{name} denotes computer code identifiers
+  \def\<#1>{\codeid{#1}}
+  \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}
+-------------------------------------------------------------------------------
+
+This alternate definition of `\codeid` does not work inside an array
+environments (see http://tex.stackexchange.com/questions/27592/ ):
+
+-------------------------------------------------------------------------------
+  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1```\else{\ttfamily #1}\fi}
+-------------------------------------------------------------------------------
+
+To permit hyphenation in tt font globally throughout a document, see
+http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt
+However, all of those solutions give me a Roman font that differs from
+the text font, whereas I want a typewriter font.
+`\usepackage[htt]{hyphenat}` doesn't seem to work either.
+
+[width="100%",cols="<100%",options="header",]
+|=======================================================================
+|=Bibliographies and citations= Very simple BibTeX usage: # See
+~mernst/bib for bibliographies (but you should get your own copy). # At
+beginning of document: ((Why not at the end?)) # Within document: # At
+end of document: # Run latex, then bibtex, then latex again. Typical
+LaTeX commands for bibliography:
+|=Texinfo=
+
+|In Texinfo, to prevent the last index pages from being numbered i, ii,
+etc., add an @page before @summarycontents or @contents.
+
+|To format a texinfo file (ie, to produce a .dvi file from a .texi
+file), do
+
+|Texinfo definitions can be done like this:
+
+|Help for texinfo: You might want to check out texinfo, a system for
+preparing both high-quality typeset (by TeX) documents and on-line
+hypertext (viewable from Emacs or a stand-alone viewer). It's available
+from prep.ai.mit.edu:/pub/gnu/texinfo-2.??.tar.Z. There's also a
+latexinfo system available from
+tut.cis.ohio-state.edu:pub/gnu/emacs/elisp-archive/packages/LaTeXinfo.shar.*.Z.
+
+|LaTeXinfo takes a different input format than LaTeX -- for instance,
+there are only three special characters (\{}), so comments are
+introduced by and so forth. Thus, it could be a lot of work to convert a
+document into LaTeXinfo.
+
+|Texinfo summary of cross reference commands (@xref @ref @pxref
+@inforef):
+http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands
+|=======================================================================
+
+=Hyphenization; word, line, and page breaking=
+
+raymond@sunkist.berkeley.edu (Raymond Chen) says: To prevent word
+breaking (hyphenation) in (La)TeX, =10000 Note, however, that although
+it'll work, it ain't exactly the nicest thing to do to your CPU :-)
+Reason: TeX will go ahead and hyphenate all the words in your paragraph,
+and consider every possible breakpoint (including the hyphens it
+inserted), but when it's just about ready to insert a hyphen, it looks
+at and say "Whoa! Better not do it here." This is repeated for every
+hyphenation point in every word of your paragraph. A much more polite
+way to do it is to set the to a number not between 0 and 255; typically,
+-1 is used to suppress hyphenation. When the is set to an invalid
+number, TeX skips the hyphenation step altogether. So you would say
+something like
+
+-------------------------
+  \hyphenchar\the\font=-1
+-------------------------
+
+to suppress hyphenation for the current font. If you use several fonts,
+you'll want to set the for each one. So you would start off like this:
+
+-----------------------
+  \hyphenchar\tenrm=-1
+  \hyphenchar\ninerm=-1
+  ...
+-----------------------
+
+You'll probably also want to set =-1 so that any new fonts that get
+loaded will also have hyphenation disabled. . Another way is
+
+---------------------
+  \pretolerance=10000
+---------------------
+
+and, if you get complaints about overfull hboxes, also add
+
+-----------------------
+  \emergencystretch=2em
+-----------------------
+
+or some bigger value.
+
+piet@cs.ruu.nl (Piet van Oostrum) says: To hyphenate words with imbedded
+hyphens, you must disable the hyphenchar while reading the word and
+enable it while TeX hyphenates (i.e. at the end of the paragraph). Two
+ways to do this:
+
+-----------------------------------------------------
+  \def\H#1{\setbox0=\hbox{#1}\unhbox0}
+  \showhyphens{subsystem module \H{subsystem-module}}
+-----------------------------------------------------
+
+or
+
+------------------------------------------------
+  \edef\savehyphenchar{\the\hyphenchar\the\font}
+  \hyphenchar\the\font=0
+  \showhyphens{subsystem module subsystem-module
+  \hyphenchar\the\font=\savehyphenchar} 
+------------------------------------------------
+
+To have TeX hyphenate words with imbedded hyphens, you may use the
+`breakable hyphen' command: \`\`\`       \def\hyph{-\penalty0\hskip0pt\relax} \`\`\` You could play tricks mapping it to a character that's made active for  the purpose, but`-'?
+
+Another way to permit breaking of hyphenated words:
+
+-----------------------------------------
+  \lccode`\-=`\- \hyphenchar\the\font=`\#
+-----------------------------------------
+
+and voila, TeX will hyphenate words containing a
+`-'. There is only one drawback: if TeX hyphenates a word it uses a`#'
+instead of a
+`-', as in \`\`\`   \showhyphens{hyphenation} \`\`\` . \`\`\`   Underfull \hbox (badness 10000) detected at line 0   [] \tenrm hy#phen#ation \`\`\` To solve that, the font should contain two hyphen symbols, one in the normal position and one in the position for`#'.
+
+LaTeX doesn't hyphenate automatically when in font because in the
+customary uses for fonts, one does not want TeX to insert any hyphens.
+Here are two workarounds: 1. Insert explicit "-" wherever you wish to
+permit hyphenization. 2. Non-hyphenization is implemented by setting of
+the tt fonts to -1. You can undo it by explicitly resetting .
+
+In LaTeX, is a way to do custom hyphenization (without necessarily using
+the hyphen character). Use it like
+
+---------------------------------------------------
+  \discretionary{beforebreak}{afterbreak}{unbroken}
+---------------------------------------------------
+
+Examples:
+
+-----------------------------------------------------------------------------------------------------
+  \discretionary{-}{}{}              % normal hyphenization; equivalest to: \-
+  \discretionary{}{}{}               % no space, but permit break
+  \discretionary{}{}{\,}             % thin space, or permit break
+  \discretionary{/}{}{/}             % permit break after slash; equivalent to: /\discretionary{}{}{}
+  \discretionary{}{.}{.}             % permit break before period (e.g., in URL)
+  \discretionary{f-}{fi}{ffi}cult    % kerning
+-----------------------------------------------------------------------------------------------------
+
+Redhat 6's (RH6's) LaTeX hyphenation is totally broken because it uses
+all the different lanaguages hyphenation rules. fixes the problem by
+forcing it to use only English.
+
+To permit more space between words, in order to prevent bad breaks in
+narrow columns (like in a newspaper):
+
+-------------------------------------------------------------------
+ {\spaceskip = \fontdimen2\the\font
+ \advance\spaceskip by 0pt plus 0.5em
+ \xspaceskip = \fontdimen7\the\font
+ \advance\xspaceskip by 0pt plus 0.5em
+ Several features were included in TRACEMAP to make it particularly
+ useful for programmers who need to understand the behavior of
+ their codes.}
+ The most important part is a static pictorial representation of
+ .. etc
+-------------------------------------------------------------------
+
+This adds an extra 0.5em of stretchability to all spaces, producing big
+spaces in the line. This modification is closed as soon as possible by
+the } (could probably be earlier) to avoid having strange spacing
+further down as a space is better than a hyphenation for TeX ... even
+one of these nasty big ones - TeX can't tell the difference. 2is the
+space factor of the current font and 0.5em is the extra space factor.
+
+ appears to prevent LaTeX page breaks, even just before lists.
+
+LATEX can break an inline formula only when a relation symbol (=, >,
+...) or a binary operation symbol (+, -, ...) exists and at least one of
+these symbols appears at the outer level of a formula. Thus
+latexmath:[$a+b+c$] can be broken across lines, but
+latexmath:[${a+b+c}$] cannot. So, you can wrap parts of your formula in
+or the like.
+
+[width="100%",cols="<100%",options="header",]
+|=======================================================================
+|=pdf and pdflatex= TeX uses bitmap based fonts by default, so PDF looks
+bad for them. To correct this, do one of 2 things: * use "pdflatex" on
+your tex documents, to use outline fonts instead (and to generate PDF
+instead of .dvi); however, "pdflatex" cannot cope with included .eps
+files in the documents * tell dvips to use outline fonts; see
+http://web.mit.edu/ajfox/Public/projects/FAQ/BaKoMa.html and, equally
+important, see my athena .dvipsrc Two other solutions: * use dvipdfm to
+convert from .dvi to PDF. * In dvips, using "-P pdf" option fixes many
+problems when later converting to PDF (for instance, it uses outline
+fonts). When using the graphicx package to include figures in a LaTeX
+document: The latex command requires all graphics/images/pictures to be
+in EPS format. The pdflatex command requires all graphics to be in
+JPEG/JPG, TIFF, PNG, or PDF. Therefore, all figures must appear in at
+least two different formats. To convert .eps to .pdf, either of the
+following:
+|=URLs=
+
+|To make hyperlinks (e.g., to URLs) in a LaTeX document:
+
+|URLs in HTML and PDF documents:
+
+|The url package for LaTeX linebreaks a URL appropriately. For a moving
+argument (or a URL containing characters like %), use
+
+|To typeset URLs in a smaller font in LaTeX, using : First approach
+(shorter, usually works):
+|=======================================================================
+
+=Hevea=
+
+Conditional compilation with LaTeX and Hevea: To avoid problems with the
+imagen program, it's usually best to not redefine macros with %HEVEA,
+but to use the conditional.
+
+In LaTeX files, to avoid the "This document was translated from LaTeX to
+Hevea" advertisement, write:
+
+----------------------------------------------------------------
+  %HEVEA \footerfalse    % Disable hevea advertisement in footer
+----------------------------------------------------------------
+
+Adding info to HTML header in Hevea (this must come after
+\begin\{document}):
+
+----------------------------------------------------------
+\let\oldmeta=\@meta
+\renewcommand{\@meta}{%
+\oldmeta
+\begin{rawhtml}
+<link rel="icon" type="image/png" href="my-favicon.png" />
+\end{rawhtml}}
+----------------------------------------------------------
+
+[width="100%",cols="<100%",]
+|=======================================================================
+|=Everything else=
+
+|In LaTeX, rather than
+
+|To change fonts temporarily in LaTeX, use comands like the following
+
+|LaTeX style files are found in the directories listed in the TEXINPUTS
+environment variable.
+
+|Don't forget to check ~/tex/sty/ when looking for TeX files.
+
+|LATEX directory: see /usr/share/texmf/tex/latex/misc, among others
+
+|LaTeX form letter: use "merge" documentstyle option
+
+|Ragged right text in LaTeX: use flushleft environment without explicit
+\'s. Another possibility is =10000 and .
+
+|The following six TeX document style options exist for using PostScript
+fonts as your text fonts on theory machines. (1) avantgarde, for using
+the Avant Garde family. (2) bookman, for using the Bookman family. (3)
+helvetica, for using the Helvetica family. (4) palatino, for using the
+Palatino family. (5) ncs, for using the New Century Schoolbook Roman
+family. (6) times, for using the Times Roman family
+
+|Use the command to get the name of the file that TeX is working on. .
+Summary of UNIX-based methods for "portably" getting FILEID information
+of .tex source into the .dvi file: (By portable, I mean that the .tex
+file does not identify itself; at processing time, its location is
+obtained from the system and encoded in the resulting .dvi file.) 1) Use
+the ability of tex/latex to take information from the invocation. Here
+is a script that does this for a latex document, so that the variable
+can be used at will in the document and will expand to the absolute
+pathname with hostname prepended
+
+|How can I make the pagestyle of the first page be empty (no page
+number)? Put in the preamble (before \begin\{document}). This works as
+long as you don't use , which resets the pagestyle. If you use , you
+have to place a after the command, as well.
+
+|You can use MakeIndex to process a glossary (.glo file). Here's an
+example of a MakeIndex style-file you'd need:
+
+|For alphabetic enumeration, do:
+
+|In LaTeX, to make the first line of all sections etc be indented by the
+usual paragraph indentation:
+
+|To remove some of the extra whitespace around section headers:
+
+|A simple LaTeX environment that keeps everything within it on the same
+page:
+
+|TeX primitive is the number of minutes since midnight this morning. Use
+it via . For a timestamp, use it with (which prints something like
+`August 7, 1989'). If you want something like ``13:48'' try the
+following:
+
+|I once had to set
+
+|Marcel van der Goot's midnight macros (.tex and .doc files): * quire
+Macros for making booklets, printing double pages, and printing outlines
+and crop marks. * gloss: Macros for vertically aligning words in
+consecutive sentences. * loop: A simple looping construct (meta-macros).
+* dolines: Meta-macros to separate arguments by newlines and by empty
+lines. * labels: Macros to print address labels and bulk letters. Do
+`tex make-labels' and then supply the label file name. There are other
+packages for labels, as well.
+
+|sober.sty reduces the spacing around section headings in the default
+document styles.
+
+|In text with explicit line breaks, we can make a box just wide enough
+to hold the widest one via (see LaTeX manual under tabbing for
+explanation):
+
+|To capitalize (the first letter only of) a string in TeX, use . The
+string may contain macros and even embedded macros. #1\{\{}} #1\{}
+
+|To number tables, figures, footnotes, consecutively through the entire
+report (not by chapters) in LaTeX:
+
+|From the ``Golden Rules of Macro Coding'' (for TeX) If a macro starts
+with ..., put a in front of it. ... is not evaluated during the
+syntactic/semantic analysis, but during the lexical analysis. So there
+may be places where TeX scans ahead, and where the scan must be stopped,
+to allow a change to math mode before the test is done. An example where
+this may occur is within 's.
+
+|TeX code for definitions including multiple alternatives:
+
+|To run TeX or LaTeX in batch mode on file foo.tex, do
+
+|6) How can I get TeX to see LaTeX as a _number_?
+
+|LaTeX's is like TeX's : change the apparent height of a piece of text.
+
+|is like phantom, but the space is negative, not positive. [1]\{}
+
+|The useful LaTeX macro lets macros appear in either math or horizontal
+mode; if the latter, it automatically switches to math mode.
+
+|ACM LaTeX styles FAQ: http://www.acm.org/sigs/publications/sigfaq
+
+|To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and
+remove the copyright box):
+
+|Fixes to IEEETran style file, to save space and improve appearance: * *
+pass "nofonttune" option to the class (in \documentclass[...]);
+IEEETran's font metric tuning is very bad, and microtype is better *
+After \begin\{document}:
+`\nonfrenchspacing\hyphenpenalty=50\hbadness=1000` (IEEETran
+inexplicably tells TeX to hyphenate _far_ less frequently than normal,
+wasting space and making things ugly)
+
+|To remove the extra vertical space from around \begin\{definition},
+make the following change to sig-alternate.cls.
+
+|Make these fixes to figures and captions when writing a paper using
+IEEE latex8.sty: * Remove all references to Edit the setting of
+@figindent as follows:
+
+|To permit underfull hboxes in LaTeX, use
+
+|In LaTeX, to typeset text in a superscript or subscript, use
+A_\{\mathit\{pred```
+
+|To produce a footnote without a footnote mark (as for a copyright
+notice in the lower left-hand corner of a conference paper) in LaTeX, do
+this:
+
+|The Harvard bib style for LaTeX
+http://www.arch.su.edu.au/~peterw/latex/harvard/ supports a "URL" field.
+It even works with LaTeX2html so the appropriate links are generated.
+
+|LaTeX2HTML CVS repository:
+http://cdc-server.cdc.informatik.th-darmstadt.de/~latex2html/ though the
+source recommends
+http://www-dsed.llnl.gov/files/programs/unix/latex2html/manual/
+http://www.cbl.leeds.ac.uk/nikos/tex2html/doc/latex2html/
+
+|To use a smaller (9-point) font in a LaTeX document, use
+
+|To use a thinner (narrower) version of a font in a LaTeX document, run
+the following before running pdflatex:
+
+|The TeX FAQ is searchable: http://www.tex.ac.uk/cgi-bin/texfaq2html or
+printable, available from from CTAN, in * usergrps/uktug/faq/newfaq.ps
+(for A4 paper) * usergrps/uktug/faq/newfaq.pdf (likewise) *
+usergrps/uktug/faq/letterfaq.ps (for U.S. letter-size paper) *
+usergrps/uktug/faq/letterfaq.pdf (likewise)
+
+|Environment for formatting pseudocode
+http://homes.cs.washington.edu/~zasha/latex.html
+
+|To get a plain tilde character in LaTeX, do: . This works even in font.
+
+|In LaTeX, any character can be obtained by giving its ASCII code. The
+left and right braces are, respectively, "7B and "7D. Using \{ in yields
+a Roman "\{", it seems. Here are macros that use the font:
+
+|To set the page number in LaTeX:
+
+|One way to number LaTeX figures by chaper/section, 1.1, 1.2, ..., 2.1,
+...: http://www-compiler.csa.iisc.ernet.in/~janaki/tex/numbering.html
+
+|Dvipdfm is a DVI to PDF translator.
+http://gaspra.kettering.edu/dvipdfm/
+
+|This Makefile rule runs LaTeX until it stops saying "Labels may have
+changed":
+
+|Rubber is a latex build system written in python. Run it like this:
+
+|Three LaTeX references, all published by Addison-Wesley: * LaTeX: A
+Document Preparation System, by Leslie Lamport, 1994 * The LaTeX
+Companion, by Goossens, Mittelbach, and Samarin, 1994 * A Guide to
+LaTeX, by Helmut Kopka and Patrick Daly, 1999
+
+|Do not use math mode (such as latexmath:[$define$]) for italics.
+Instead, use or . Math mode does not use ligatures and gets interletter
+spacing wrong. . You have improperly used TeX's math mode as a shortcut
+for producing words in italic type. This is ugly and distracting.
+Instead of saying latexmath:[$START$] (which puts too much space between
+"T" and "A"), you should say \{} or, in a formula, or . (There are also
+other good ways to get the same output.) This small point will improve
+readability and will build confidence that you have been careful
+throughout your work.
+
+|The "beamer" package permits making nice slides with LaTeX. (It's
+better than the "prosper" package, according to Stephen McCamant.) "t"
+class option puts slide content at top rather than vertically centered.
+
+|Any LaTeX-Beamer slide containing a verbatim environment must start
+out:
+
+|In LaTeX-Beamer:
+
+|In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no
+larger in display mode than in any other math mode), do something like
+
+|For a paragraph in a smaller font, on the smaller font's baseline
+inter-line spacing (but it isn't permitted to be broken across columns),
+do
+
+|This defines a macro that is like , but it has an independent
+thickness.
+
+|LLNCS (LaTeX LNCS) style: wget
+ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip
+
+|Derek Rayside says: I wrote a little latex macro that lets one write
+things such as:
+
+|In LaTeX, use to expand a page or column, fitting slightly more text on
+it.
+
+|Tell TeX programs (from the teTeX distribution, which is standard on
+modern Unix systems) to default to US-Letter-sized paper:
+
+|If you edit /usr/lib/tex/ps/config.ps (or wherever that file is) to
+tell dvips that you have a good printer with lots of memory (with a line
+like m 1000000 or maybe even more) then things will in general print
+faster.
+
+|dvips has the undocumented feature that, for use with the -p and -l
+options, 1.1 indicates the second page numbered 1, 1.2 indicates the
+third page numbered 1, and so forth.
+
+|Emacs "Local variables" section of a LaTeX file looks like one of the
+following:
+
+|LaTeX Verbatim environment with embedded commands:
+
+|To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here
+are some options. When using Computer Modern fonts), use
+
+|To include a literal backslash (or other special characters) in a LaTeX
+Verbatim (fancyverb) environment, use and .
+
+|In LaTeX, as a general rule, backslashing punctuation characters inside
+won't give you the right tt-font ones: you need to either replace with
+de for the symbol, such as
+
+|The llncs.cls style (class) file (and also sig-alternate.cls) does
+
+|The PGF package for LaTeX makes drawings, much like LaTeX picture mode
+or the pstricks package, but works with PDF and is much more powerful
+than LaTeX picture mode.
+
+|To generate foo.sty (or foo.cls) from foo.dtx, run
+
+|TeX fonts are in /usr/local/lib/tex/fonts/tfm.
+
+|Aim to make your figure captions self-explanatory. A short caption
+("graph of the results") forces readers to hunt through the text in
+order to comprehend your results or your message. Choose to place
+explanatory sentences (such as describing the meaning of the rows,
+columns, or other elements) in the caption itself; they take up no more
+space there, but are easily located either by a careful reader or by
+someone flipping through the document. This also makes the figures more
+likely to draw readers into the text.
+
+|Here is a definition of a macro for LaTeX (it needs
+`\usepackage{color}`):
+
+|Absolute value in LaTeX:
+
+|Typesetting pseudocode in LaTeX:
+http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms Possible
+choices seem like * algorithmicx bundle, which offers several
+environments. It's more flexible than algorithmic and is probably the
+best choice. * algorithms bundle, which provides the `algorithmic` and
+`algorithms` environments * clrscode * algorithm2e This is the one with
+the vertical lines (which I find ugly and distracting); I've had trouble
+wrestling with it in the past. The algorithmic environment uses , , ,
+... The algpseudocode environment uses , , , ...
+
+|To undo LaTeX's :
+
+|In a two column (or at least twocolumn) document, doesn't give you a
+new page; it just gives you a new column. An alternative that works is .
+(I think the other difference is that it also acts as a fence for
+floats, but you often want that too anyway.)
+
+|To get extra space in a document:
+
+|To adjust section numbering in LaTeX (e.g., make subsubsections be
+numbered):
+
+|If a paragraph has only a word or two on its last line, try adding
+`\looseness=-1` to the end of it. If possible TeX will change line
+breaks to reduce/shorten the length of the paragraph by a line. This
+won't always work because there is a limit to how close TeX will move
+words. The longer the paragraph, the more likely this trick is
+successful.
+
+|PGF/TikZ, is a declarative graphics package and relatively-friendly
+front end syntax * http://sourceforge.net/projects/pgf/ -- to download *
+http://www.fauskes.net/pgftikzexamples/ -- examples Ben Lerner says:
+TikZ is a bit tricky to figure out at first (like most of LaTeX), but
+it's the most consistent and convenient graphics package I've found yet.
+
+|To use color in LaTeX:
+
+|To find LaTeX special command that matches a given character shape,
+scribble the shape here: http://detexify.kirelabs.org/classify.html
+
+|To define a (say) binary operator in TeX or LaTeX, use , , , , , , , .
+These give "class" 1..8 to the math character or formula. (Maybe
+operator has less surrounding space, binary more and relation most?)
+(There is no or .)
+
+|More attractive monospaced fonts:
+
+|Your LaTeX documents should always use
+
+|The default Computer Modern fonts are Type 3 (bitmap). Here is how to
+use "Latin Modern" fonts, which are a Type 1 reimplementation of the
+Computer Modern fonts, and ensure you only get Type 1 fonts:
+
+|Ways to get a circled number in LaTeX with better formatting than :
+|=======================================================================
+
+ Please put new content in the appropriate section above, don't just
+dump it all here at the end of the file.
+
+ This entry is to avoid having the ones earlier in this file be
+interpreted. Local Variables: major-mode: text-mode End:
+
+ LocalWords: Hevea wiki makeatletter topfigrule kern hrule botfigrule
+floatsep LocalWords: dblfigrule makeatother nocaptionrule textfloatsep
+dbltextfloatsep LocalWords: dblfloatsep unindent topfraction
+dbltopfraction floatpagefraction LocalWords: dblfloatpagefraction
+textfraction clearpage cleardoublepage ifdim LocalWords: renewcommand
+captionfont newcommand baselineskip hsize noindent LocalWords: parbox
+hbox fi

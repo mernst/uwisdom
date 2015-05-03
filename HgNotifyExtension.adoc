@@ -1,8 +1,8 @@
 For email notification at cs.washington.edu, add the following to the
-.hg/hgrc in the repository root.  This simplifies and makes more concrete
+.hg/hgrc in the repository root. This simplifies and makes more concrete
 the instructions that appear elsewhere on the web.
 
-```
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 [hooks]
 # One email per changeset/commit, not one email per push
 changegroup.notify = python:hgext.notify.hook
@@ -38,11 +38,11 @@ strip = 4
 # key is glob pattern to repo root, value is comma-separated list of subscriber emails
 [reposubs]
 /projects/swlab1/typelessj/oopsla-2010 = COMMA, SEPARATED, EMAIL, ADDRESSES
-```
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Remote users may also need to add a `[trusted]` section to their
+Mercurial init file (`~/.hgrc` on Unix or `C:\Mercurial\Mercurial.ini`
+on Windows).
 
-Remote users may also need to add a `[trusted]` section to their Mercurial
-init file (`~/.hgrc` on Unix or `C:\Mercurial\Mercurial.ini` on Windows).
-
-Unfortunately, the notify extension doesn't support using patterns to match
-particular files.
+Unfortunately, the notify extension doesn't support using patterns to
+match particular files.
