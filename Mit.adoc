@@ -16,6 +16,8 @@ https://pol.mit.edu/MITWeb/IDXPOL/PSLoginMIT.asp
 (used to be https://pol.mit.edu/)
 
 MIT human resources/benefits/personnel:
+//nobreak
+
  * Benefits office:  E19-215, (617) 253-4251 (x4 for Benefits)
  * Susan Guralnick (x3-4643):  LCS personnel admin
  * Scott Runkle in HR was useful about 401(k), x3-0923
@@ -401,6 +403,8 @@ Instructions from TIG are available at:
   http://tig.csail.mit.edu/twiki/bin/view/TIG/UsingSubversionAtCSAIL
 Make sure that each directory gives the user svn rlidwka access.
 Don't forget to:
+//nobreak
+
  * create the htpasswd file (I don't know how to set up an ACL file):
     htpasswd -c /afs/csail/group/pag/projects/annotations-htpasswd _username_
  * set permissions for the repository directory:

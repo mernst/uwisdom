@@ -48,7 +48,7 @@ For example:
 Here are Emacs commands for replacing JUnit assertions with Hamcrest
 versions that produce more readable output.  Even though the Hamcrest code
 isn't always easier to read, this can be worthwhile.
-```
+----
 (tags-query-replace "assertFalse(\\(\".*\",\\)
 \\([ 	]*\\) \\(.*\\)\\.equals(\\(.*\\)));
 " "assertThat(\\1
@@ -65,7 +65,7 @@ isn't always easier to read, this can be worthwhile.
  *\\)\\(.*\\)\\.equals ?(\\(.*\\)));" "assertEquals\\1(\\2,\\3\\4, \\5);")
 (tags-query-replace "assertTrue\\( ?\\)(\\(\".*\"\\),\\( \\|
  *\\)\\(.*\\) == \\(.*\\));" "assertEquals\\1(\\2,\\3\\4, \\5);")
-```
+----
 
 
 == Debugging
@@ -83,6 +83,8 @@ To debug a Java infinite loop, send SIGQUIT (kill -3) to get a stack trace
 (but Java process keeps running).
 
 To eliminate nondeterminism from a (non-concurrent) Java program:
+//nobreak
+
  * use `LinkedHashMap` and `LinkedHashSet` instead of the non-`Linked*` versions
  * after each call to File.listFiles, call Arrays.sort on the result
 

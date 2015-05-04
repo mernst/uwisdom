@@ -121,6 +121,8 @@ There are many descriptions of how to create a Debian or Ubuntu package.
 Most are confusing and unhelpful, failing to give high-level explanations
 and too focused on long, detailed lists of commands.  The most coherent
 ones I have found are:
+//nobreak
+
  * http://www.debian-administration.org/articles/336 and http://www.debian-administration.org/articles/337
  * https://wiki.ubuntu.com/PackagingGuide/Complete
 

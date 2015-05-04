@@ -51,6 +51,8 @@ You can get a local copy by following the instructions at
 
 Why would you want to use this program when you can just search the web
 instead?
+//nobreak
+
  * You may have local data that you choose not to put on the web for global searching (e.g., your address book).
  * Having a local copy enables offline use.
  * Information may be available elsewhere, but time-consuming to find via a web search or in a manual.

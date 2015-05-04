@@ -695,17 +695,23 @@ in \mathrel or the like.
 
 
 
-== pdf and pdflatex
+== PDF and pdflatex
 
 TeX uses bitmap based fonts by default, so PDF looks bad for them.  To
 correct this, do one of 2 things:
+//nobreak
+
  * use "pdflatex" on your tex documents, to use outline fonts instead (and
    to generate PDF instead of .dvi); however, "pdflatex" cannot cope with
    included .eps files in the documents
  * tell dvips to use outline fonts; see
    http://web.mit.edu/ajfox/Public/projects/FAQ/BaKoMa.html
    and, equally important, see my athena .dvipsrc
+//nobreak
+
 Two other solutions:
+//nobreak
+
  * use dvipdfm to convert from .dvi to PDF.
  * In dvips, using "-P pdf" option fixes many problems
    when later converting to PDF (for instance, it uses outline fonts).
@@ -1030,6 +1036,8 @@ I once had to set
 to remove extra space before the first paragraph of a LaTeX document.
 
 Marcel van der Goot's midnight macros (.tex and .doc files):
+//nobreak
+
  * quire  Macros for making booklets, printing double pages, and printing outlines and crop marks.
  * gloss:  Macros for vertically aligning words in consecutive sentences.
  * loop:   A simple looping construct (meta-macros).
@@ -1159,6 +1167,8 @@ In acmlarge.cls, remove the copyright info by doing:
   \def\permission{}
 ```
 Fixes to ACM SIG style (sig-alternate.cls):
+//nobreak
+
  * Uncapitalize section titles: 
     * Delete all instances of "\@ucheadtrue"
     * Replace "ABSTRACT" by "Abstract" and "REFERENCES" by "References"
@@ -1216,6 +1226,8 @@ To reduce whitespace in the titlebox (near the title and authors):
 ```
 
 Fixes to IEEETran style file, to save space and improve appearance:
+//nobreak
+
  * \usepackage{microtype}
  * pass "nofonttune" option to the class (in \documentclass[...]); IEEETran's font metric tuning is very bad, and microtype is better
  * After \begin{document}: `\nonfrenchspacing\hyphenpenalty=50\hbadness=1000` (IEEETran inexplicably tells TeX to hyphenate *far* less frequently than normal, wasting space and making things ugly)
@@ -1239,6 +1251,8 @@ following change to sig-alternate.cls.
 ```
 
 Make these fixes to figures and captions when writing a paper using IEEE latex8.sty:
+//nobreak
+
  * Remove all references to \tenhv
  * Edit the setting of \@figindent as follows:
 ```
@@ -1298,6 +1312,8 @@ following before running pdflatex:
 The TeX FAQ is searchable:
     http://www.tex.ac.uk/cgi-bin/texfaq2html
 or printable, available from from CTAN, in
+//nobreak
+
  * usergrps/uktug/faq/newfaq.ps     (for A4 paper)
  * usergrps/uktug/faq/newfaq.pdf    (likewise)
  * usergrps/uktug/faq/letterfaq.ps  (for U.S. letter-size paper)
@@ -1345,6 +1361,8 @@ run).  Rubber filters the latex output to report only issues of importance.
 You can apt-get install rubber.
 
 Three LaTeX references, all published by Addison-Wesley:
+//nobreak
+
  * LaTeX:  A Document Preparation System, by Leslie Lamport, 1994
  * The LaTeX Companion, by Goossens, Mittelbach, and Samarin, 1994
  * A Guide to LaTeX, by Helmut Kopka and Patrick Daly, 1999
@@ -1485,6 +1503,8 @@ Or set parameters globally:
 \fvset{fontsize=\relsize{-2}}
 ```
 The fancyvrb package is preferable to:
+//nobreak
+
  * the moreverb package.  (The moreverb documentation recommends fancyvrb!)
  * \alltt, which is built into LaTeX (except possibly for very simple tasks
    or use with Hevea)
@@ -1610,6 +1630,8 @@ Absolute value in LaTeX:
 Typesetting pseudocode in LaTeX:
 http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms
 Possible choices seem like
+//nobreak
+
  * algorithmicx bundle, which offers several environments.
    It's more flexible than algorithmic and is probably the best choice.
  * algorithms bundle, which provides the `algorithmic` and `algorithms` environments
@@ -1617,6 +1639,8 @@ Possible choices seem like
  * algorithm2e
     This is the one with the vertical lines (which I find ugly and
     distracting); I've had trouble wrestling with it in the past.
+//nobreak
+
 The algorithmic environment uses \STATE, \IF, \WHILE, \ENDWHILE...
 The algpseudocode environment uses \State, \If, \While, \EndWhile...
 
@@ -1662,8 +1686,12 @@ work because there is a limit to how close TeX will move words. The longer
 the paragraph, the more likely this trick is successful.
 
 PGF/TikZ, is a declarative graphics package and relatively-friendly front end syntax
+//nobreak
+
  * http://sourceforge.net/projects/pgf/ -- to download
  * http://www.fauskes.net/pgftikzexamples/ -- examples
+//nobreak
+
 Ben Lerner says: TikZ is a bit  tricky to figure out at first (like most of
 LaTeX), but it's the most consistent and convenient graphics package I've
 found yet.

@@ -9,6 +9,8 @@ toc::[]
 == Other ways to sync
 
 My ideas about using version control (VC) vs. rsync vs. Unison:
+//nobreak
+
  * VC is essential when others will collaborate.
  * Unison is useful when the files are very large and/or change frequently, or I wish to update them automatically on the central host without logging in to that host.
  * VC is useful when I only want to include certain files, not all files (for instance, my "dots" directory).
@@ -367,6 +369,8 @@ necessary):
 ```
 It uses file `conf/mailer.conf` in the SVN repository.
 Only two edits to that file are necessary:
+//nobreak
+
  * uncomment the `mail_command` line
  * change the `to_addr` line (the separator is whitespace (no commas))
 .
@@ -474,6 +478,8 @@ work around this, add to the bottom of ~/.subversion/config :
   *.cpp = svn:eol-style=native
 ```
 For more examples, see:
+//nobreak
+
  * http://www.apache.org/dev/svn-eol-style.txt 
  * http://www.bioperl.org/wiki/Svn_auto-props
 
@@ -915,11 +921,15 @@ Git equivalent of `hg rollback`:
 ```
 I'm not sure exactly what is the distiction between these.
 To revise a commit before pushing it -- similarly to what "hg rollback" enbales:
+//nobreak
+
  * do more edits
  * `git commit --amend`
 `git revert' is different:  it makes a new, opposite commit.
 
 In git:
+//nobreak
+
  * HEAD^ or HEAD^1 will be resolved to the first parent of HEAD.
  * HEAD^2 will resolve to the second parent
  * HEAD~ or HEAD~1 will resolve to the first parent of head

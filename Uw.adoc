@@ -11,6 +11,8 @@ toc::[]
 UW Travel Card rules, from http://www.washington.edu/admin/procsrvcs/ecommerce/cta/travelcardpolicy.html:
 You may use the UW Travel Card only for expenses related to the following
 official UW business while on travel status.
+//nobreak
+
  * UW business related travel expenses
    such as airfare, lodging, meals, registration, car rental, ground transportation and miscellaneous travel expenses.
  * Meals associated with hosting and entertaining, and employee recruitment meals.
@@ -18,8 +20,12 @@ official UW business while on travel status.
  * UW business related expenses such as photocopying and faxing. 
 
 Taxi stands near UW:
+//nobreak
+
  * Hotel Deca, 4507 Brooklyn
  * UW Hospital
+//nobreak
+
 Or call Orange Cab, 206-522-8800.  For CSE, specify Paul G. Allen Center
 for CSE - *not* Paul Allen Library - (technical address is 185 Stevens way
 south of the Hub, but the dispatchers seem to have assigned an address
@@ -40,12 +46,16 @@ Which is linked from here:
 
 For off-campus access to the ACM digital library and similar UW-licensed
 collections of content, three options:
+//nobreak
+
  * Go to lib.washington.edu and click the off-campus login button at the
    top right (or go directly to http://offcampus.lib.washington.edu/).
    Then, restricted links should work.
  * Add offcampus.lib.washington.edu to the end of the hostname.
 
 Getting study approval from IRB (run by HSD, Human Subjects Division):
+//nobreak
+
  * Exempt studies:  usually interviews, questionnaires, and use of existing data
  * Non-emempt studies:
    For the purposes of a grant proposal, you file an "approval in principle".
@@ -53,6 +63,8 @@ Getting study approval from IRB (run by HSD, Human Subjects Division):
    or other materials. The IRB generates a human subjects application #,
    but not actual approval to do the study.  NSF only needs a box checked by
    UW OSP, and UW OSP only needs an IRB application #.
+//nobreak
+
 Another option is to use Western IRB, in Olympia (contact:  Elaine Weakley).   
 UW apparently has an arrangement with Western IRB whereby Western IRB can
 handle the IRB function for at least some subset of UW studies.  As with
@@ -71,12 +83,16 @@ shuttle, or walk.  A relevant Microsoft campus map is:
 http://members.microsoft.com/careers/mslife/locations/images/west_campus.jpg
 
 To access the ACM digital library (or other content licensed by the UW
-libraries) from an IP address that is not at washington.edu:
+libraries) from an IP address that is not at washington.edu, 
+//nobreak
+
  * bookmark the following javascript URL:
    javascript:void(location.href=%22http://offcampus.lib.washington.edu/login?url=%22+location.href)
 To get access, visit the ACM DL, then visit the bookmark.
 
 In UW Hires (https://uwhires.admin.washington.edu/eng/hm/default.cfm?szcat=hm):
+//nobreak
+
  * to remove an individual from your main homepage (doesn't remove the
    applicant from the position's homepage), click "complete evaluation
    form" and enter "yes".
@@ -89,6 +105,8 @@ Be sure to copy down the license key, as it is only temporarily saved on the
 Microsoft server.
 
 To approve spending:
+//nobreak
+
  * Visit https://ucs.admin.washington.edu/MyFD/UWNetID/ReconciliationDashboard/ReconciliationDashboard
  * Click on "Reports >> Reconciliation Status"
  * Choose list: My PI Budgets (dynamic)
@@ -105,10 +123,14 @@ To approve spending:
 == CSE
 
 UW CSE printer: ps581
+//nobreak
+
  * One-sided (single-sided):
     ps581/noduplex
  * No header pages:
     ps581/nobanner
+//nobreak
+
 Color printer: psc581
   I can't seem to create
     psc581/noduplex
@@ -124,10 +146,16 @@ An undergrad instructional linux server: attu
 
 Printing enscript and cedilla output at CSE:
 ced2:
+//nobreak
+
  * .pdf: prints portrait (small)
  * .ps: one-sided, otherwise fine
  * .ps --ps2pdf-> .pdf  on ps581: prints portrait (small)
+//nobreak
+
 ens2f:
+//nobreak
+
  * .ps on ps581: does not work
  * .pdf (converted from .ps with ps2pdf) on ps581:  prints portrait (small)
  * .pdf --pdf2ps-> .ps  on ps581: blank pages
@@ -152,6 +180,8 @@ fill out the form at
 and then scan & email it, or fax it back.
 You probably want a "guest, research account".
 A guest account is only permitted to use 25 MB of space, so:
+//nobreak
+
  * Always log into the same machine.
  * On that machine, create a directory /scratch/${USER} and store your
    bigger files there.
@@ -191,6 +221,8 @@ directory, which is less informative.  And don't put this under your home
 directory, which will get reaped eventually when you graduate or leave UW.
 
 In the UW CSE visitor reservation schedule system (mvis):
+//nobreak
+
  * To not show your name, prefix a description with "-" , e.g., "-Lunch at Canlis".
    http://reserve.cs.washington.edu/visitor/help.php?#SEC25
  * To blackout some periods, prefix with "--", e.g., "--unavailable".
@@ -287,9 +319,13 @@ Connie Ivey-Pasche or Kay Beck-Benton:
 After a user has been added to a group using the GrpAdmin tool
 (https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi), it is generally
 necessary for the user to do one of the following:
+//nobreak
+
  * wait an hour
  * log out and log back in
  * use chgrpsh
+//nobreak
+
 after which the user will have access to the group.
 Another potential complication is that each user can have only 20 login
 groups -- those are the ones that are active at any time.  To change login
@@ -358,6 +394,8 @@ https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 == Seattle
 
 Options for short-term Seattle housing/rentals/apartments/sublets:
+//nobreak
+
  * Craigslist: http://seattle.craigslist.org/sub/
  * UW Visiting Personnel and Visiting Students: stay in a dorm
    http://www.hfs.washington.edu/conferences/planners.aspx?id=141
@@ -371,14 +409,22 @@ Options for short-term Seattle housing/rentals/apartments/sublets:
  * UW Daily: http://dailyuw.com/classifieds/
     (UW Daily mostly has offers of sharing with students, which is probably
     too much of a risk, but it has some furnished apartments/houses too.)
+//nobreak
+
 Be sure to check where the apartment or house is in relation to the
 university.  Sites include
+//nobreak
+
  * hotpads.com
  * padmapper.com
+//nobreak
+
 I am happy to help out with logistics in Seattle (such as visiting an
 apartment or helping with signing contracts).
 
 Visitors should get on the wasp and 590n mailing lists.
+//nobreak
+
  * WASP (programming languages): https://mailman.cs.washington.edu/mailman/listinfo/wasp
  * 590n (software engineering): https://mailman.cs.washington.edu/mailman/listinfo/cse590n
 

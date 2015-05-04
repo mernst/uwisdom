@@ -57,6 +57,8 @@ Alternately, you may use  M-x cvs-update  in Emacs if you use pcl-cvs.el.
 
 You might wish to update from my changes even if you're not ready to commit
 your own changes because 
+//nobreak
+
  * if there are conflicts, you would like to find out about them sooner
    rather than later, because the more irreconcilable editing we do the
    harder the merging will be (for both of us)

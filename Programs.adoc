@@ -70,12 +70,12 @@ Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 == AFS
 
 To modify AFS directory/file permissions/acls/access control lists, see
-/nobreak
+//nobreak
 
  * http://www-2.cs.cmu.edu/~help/afs/afs_quickref.html
  * http://openafs.org/
  * http://web.mit.edu/answers/unix/unix_chmod.html
-/nobreak
+//nobreak
 
 To view permissions:
 ```
@@ -541,6 +541,8 @@ for twoup output use
   enscript --margins=:::36 -2r
 ```
 enscript common options:
+//nobreak
+
  * -h: no burst/header page
  * -B: no page headings
 
@@ -631,6 +633,8 @@ bounding box):
 range" choices, only after you have selected PDF) still gives a page-size
 PDF file, and "save as EPS" is no longer supported.  I cropped it by hand
 in Acrobat Professional.  Or, do this:
+//nobreak
+
  * save as PDF
  * pdftops -eps file.pdf
  * bbfig -o file.eps | gv -
@@ -647,6 +651,8 @@ in Acrobat Professional.  Or, do this:
 ghostview:  view PostScript on an X windows display.
 
 Conversions between PostScript and PDF:
+//nobreak
+
  * PS -> PDF:
 ```
    distill foo.ps   (for an entire directory, "distill -files .ps")
@@ -767,11 +773,17 @@ To convert a paper formatted for LNCS into two-column, use
 ```
 
 To convert a Microsoft Word .doc file to PDF:
+//nobreak
+
  * open it in OpenOffice and export as PDF
  * wvPDF file.doc file.pdf
+//nobreak
+
 Neither technique dominates the other, and each is sometimes bad
 
 To annotate a PDF document:
+//nobreak
+
  * pdfedit corrupted my document.
  * I couldn't get Sun PDF Importer (SPI, part of OpenOffice) to work
 
@@ -905,6 +917,8 @@ following to /etc/httpd/conf/httpd.conf:
 (Then I stopped and restarted the http server.)
 
 HTML checking:
+//nobreak
+
  * htmlchek is quite picky (not necessarily a problem) and hasn't been
    updated since February 20, 1995
  * NetMechanic seems reasonable.  http://www.netmechanic.com/html_check.htm
@@ -991,6 +1005,8 @@ html2ps converts a HTML file to PostScript, potentially recursively.
 ```
   html2ps -n -u -C bh -W bp http://pag.csail.mit.edu/daikon/ > index.ps
 ```
+//nobreak
+
  * "-n" means number pages
  * "-u" means underline links
  * "-C bh" means generate a table of contents.
@@ -998,7 +1014,6 @@ html2ps converts a HTML file to PostScript, potentially recursively.
    means prompt for remote documents).  Watch out:  using -W b might seem
    reasonable, but it will try to print some binary files!
  * "-2L" means two-column landscape
-(This is the program that Jeff Perkins recommended as well.)
 
 Apache 1.3.33 recognizes only the last "Options" directive, it seems.
 So put all the arguments in one directive:
@@ -1079,6 +1094,8 @@ When compiling a C program with cc, put the -lLIBNAME flag at the end of
 the line, after the cfile name (the order matters).
 
 Debugging C memory (pointer) corruption problems:
+//nobreak
+
  * setenv MALLOC_CHECK_ 2
  * compile with "-lefence"
 
@@ -1142,6 +1159,8 @@ add these arguments to gcc:
 
 Why g++ 3.2 doesn't like uses of vector that g++ does:
 Two things to check:
+//nobreak
+
  * you must `#include <vector>`, not `<vector.h>`
  * you must either say "using namespace std;" or say "std::vector", the
    latter being preferable in header files, of course.
@@ -1157,6 +1176,8 @@ There is a sieve email filter script tester (and syntax checker) at
 Be sure to remove any "From VM" rule before running sievetest!
 
 To have mailing list errors reflected to the list administrator:
+//nobreak
+
  * If you are using sendmail, the first thing to do is create the alias:
       owner-edb-list: edb-list-request
    This causes errors occuring on edb-list to be reflected to "owner-edb-list".
@@ -1189,11 +1210,15 @@ You need to save to a file (it doesn't read from standard input), and to
 strip off all headers (e.g., "Content-Type:" and "Content-Transfer-Encoding:").
 For quoted-printable, use -q flag as well.
 Also see the script (stolen from Greg Badros) "decode_mime", which 
+//nobreak
+
  * strips off headers
  * chooses a filename intelligently
 
 Mime unpacking:  use ftp://ftp.andrew.cmu.edu/pub/mpack/
 Options:
+//nobreak
+
  * -f
           Forces the overwriting of existing files.  If a message
           suggests a file name of an existing file, the file will be
@@ -1278,6 +1303,8 @@ After Makefile.in is changed, it is necessary to rerun "config.status" and
 then rerun "make".
 
 Particularly useful "automatic variables" used by make (in Makefile rules):
+//nobreak
+
  * $@   the target of the rule
  * $<   the first prerequisite
  * $^   all the prerequisites
@@ -1521,6 +1548,8 @@ Useful keystrokes in Eclipse:
   Eclipse Debugger:  F6 goes to next line
 
 To make Eclipse use spaces instead of tabs for indentation:
+//nobreak
+
  * Go  to 'Window | Preferences | Java | Code Formatter':
    * In the "Style" tab:
      * Uncheck "Insert tabs for indentation, not spaces."
@@ -1545,6 +1574,8 @@ Eclipse Javadoc:  .html files get written to working directory.
 So be sure to save changes to these before you start testing javadoc.
 
 Mahmood suggests:
+//nobreak
+
  * Eclipse for debugging and writing classes from scratch.
  * Ant or command line for anything complicated.
 
@@ -1569,9 +1600,15 @@ ps:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,
 ps -lf gives a long full listing (use -e or -d to see more processes).
 "top" shows percent of CPU being used by each process; good adjunct to ps.
 ps options:
+//nobreak
+
  * -l long format, shows priorities (set by nice or renice)
  * -u user-oriented format
+//nobreak
+
 also:
+//nobreak
+
  * -a show all processes
  * -x show even processes with no controlling terminal
  * -w use wide display
@@ -1587,6 +1624,8 @@ expr:  Bourne shell way to do lots of stuff (ex regular expressions,
 arithmetic, comparisons); see also TEST
 
 Programs for drawing figures under X Windows (from best to worst in ease of use):
+//nobreak
+
  * OpenOffice/LibreOffice draw
  * inkscape -- can't attach text to an object easily (could group them to
      fix the position, but then scalng doesn't work right)
@@ -1595,6 +1634,8 @@ Programs for drawing figures under X Windows (from best to worst in ease of use)
  * skencil (formerly called sketch) (Skencil 0.6.17 released 2005-06-19)
  * dia (0.96 was released 2007-03-25; latest as of Sep 2012)
  * tgif -- (version 4.1.45 released 6/2006)
+//nobreak
+
 The mayura draw program for Windows takes Windows Metafiles (such as produced by
 PowerPoint) and creates PostScript.
 It may be best just to create figures using PowerPoint (but that is
@@ -1612,10 +1653,14 @@ then
 to split files into parts.
 
 du:  disk usage.
+//nobreak
+
  * du -s *     only display grand total for each file and subdirectory in this dir
  * du -S       not sum child directories in count for parent
  * du | sort -r -n   sort directories, with most usage first.
  * du | xdu -- only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
+//nobreak
+
 Also see Alan Donovan's program "prune"
 (executable: ~adonovan/bin/Linux-i686/prune; sources: ~/work/c/prune/)
 For example,
@@ -1623,6 +1668,8 @@ For example,
   ~adonovan/bin/Linux-i686/prune -size 104857600 -age 604800 ~
 ```
 Looking at files within a single directory, rather than a whole directory tree:
+//nobreak
+
  * ls -l | sort -n +4 -- sorts files in size order, good for finding big files in a directory
  * du -s * | sort -n -- similar to above, find the biggest files & subdirectories of the current dir
 
@@ -1774,9 +1821,13 @@ argument
 The "search" program is like a combination of 'find' and 'grep' (but using
 Perl regular expressions, and more powerful and efficient).
 Files:
+//nobreak
+
  * the program: ~mernst/bin/share/search
  * its manpage: ~mernst/bin/share/search.manpage
  * example dotfile: ~mernst/.search
+//nobreak
+
 I find `search' easier to use than `grep`, but `grep` can often replace
 it.  For example, these give identical results (except for order):
 ```
@@ -1823,6 +1874,8 @@ which retargets a checkout, or for many repositories:
 ```
 )
 Problems with the first invocation, fixed by the others:
+//nobreak
+
  * The first invocation will search/replace in compressed, binary, PostScript,
    etc. files.  (a few examples: .tar .gz .gif .pdf .ps .Z)
  * The first invocation will update all the files' modification dates, even if
@@ -1858,6 +1911,8 @@ This is like
 except that the latter doesn't preserve symbolic links.
 
 Regular expressions (regexps):
+//nobreak
+
  * In alternation, first match is chosen, not longest match.  For
    efficiency, put most likely match (or most likely to fail fast) first.
  * `(ab)?(abcd)?` matches "ab" in "abcde"; does not match the longer "abcd"
@@ -1987,6 +2042,8 @@ is being run, but you can try:
 ```
 
 ImageMagick is a replacement for (part of) xv:  three of its programs are:
+//nobreak
+
  * display will view images in a great many different file formats.
  * import grabs screen shots, either that you select with the mouse, that
    you specify by window ID, or the root window.  
@@ -2046,68 +2103,68 @@ and date are not synchronized/synched), run this command on each machine:
 
 On pag, use "yppasswd" instead of "passwd".
 
-SAS:
- * Avoid all comments.  Comments in random places cause bizarre behavior
-   and inscrutible error messages.
- * In programs (in particular, in "datalines"), lines longer than 127
-   characters (assuming 8-character tabs) are silently discarded.
- * In "infile" files, tab characters cause confusion; untabify.
+// SAS:
+//  * Avoid all comments.  Comments in random places cause bizarre behavior
+//    and inscrutible error messages.
+//  * In programs (in particular, in "datalines"), lines longer than 127
+//    characters (assuming 8-character tabs) are silently discarded.
+//  * In "infile" files, tab characters cause confusion; untabify.
+// 
+// SAS tips:
+// Run SAS:
+//  * using GUI:  sas
+//  * from command line:   sas myfile.sas
+// Data input:
+//  * skip first observation (first line):
+//    infile 'blah.dat' firstobs=2;
+//  * allow for really long records:
+//    infile 'blah.dat' lrecl=2000;
+//  * data values must be space-separated (tabs cause problems on some systems)
+// New data set which is a subsets of the original data:
+//  * data bigx; set orig;
+//      if x > 10;
+//  * data nocontrol; set orig;
+//      if trt = 'control' then delete;
+// When comparing strings, use only the first 8 characters (!):  not
+//     if treat = 'non_partic' then treat_numeric = 0;
+//   but
+//     if treat = 'non_part' then treat_numeric = 0;
+// Subgroups of a data set:  must be sorted before invoking "proc means"
+//  * proc sort; by sex trt;
+//  * proc means; by sex trt;
+// Procecure return values:
+//  * proc means noprint;
+//      var x y;
+//      output out=b mean=mx my std=sx sy;  /* output means and SD for x,y */
+// Interaction plot:  plot of the average values of y for each period and trt.
+//  * proc sort; by period trt;
+//    proc means noprint; by period trt;
+//      var y;
+//      output out=means mean=my;
+//    proc plot;
+//      plot my*period=trt; 
+// Proc GLM permits using both regressor (continuous) type variables and
+//   categorical (class) variables as independent variables.  However, the
+//   dependent variable must be continuous.
+//   Furthermore, no variable noted in the "class" section may be (always missing).
+// The chi-square test is good for nominal (categorical, class) independent
+//   and dependent variables.
+// Three-way anova with all interactions:
+//  * proc anova;
+//      class a b c;
+//      model y = a b c a*b a*c b*c a*b*c;
+//  * proc anova;       /* shorthand */
+//      class a b c;
+//      model y = a | b | c;
+// Multivariate methods (manova) may be *less* powerful than univariate ones
+//   if responses are *not* correlated.
+// Frequency tables: proc freq
+//  * proc freq;
+//      tables sex;   /* one-way table */
+//  * proc freq;
+//      tables infilt*score;   /* two-way table */
 
-SAS tips:
-Run SAS:
- * using GUI:  sas
- * from command line:   sas myfile.sas
-Data input:
- * skip first observation (first line):
-   infile 'blah.dat' firstobs=2;
- * allow for really long records:
-   infile 'blah.dat' lrecl=2000;
- * data values must be space-separated (tabs cause problems on some systems)
-New data set which is a subsets of the original data:
- * data bigx; set orig;
-     if x > 10;
- * data nocontrol; set orig;
-     if trt = 'control' then delete;
-When comparing strings, use only the first 8 characters (!):  not
-    if treat = 'non_partic' then treat_numeric = 0;
-  but
-    if treat = 'non_part' then treat_numeric = 0;
-Subgroups of a data set:  must be sorted before invoking "proc means"
- * proc sort; by sex trt;
- * proc means; by sex trt;
-Procecure return values:
- * proc means noprint;
-     var x y;
-     output out=b mean=mx my std=sx sy;  /* output means and SD for x,y */
-Interaction plot:  plot of the average values of y for each period and trt.
- * proc sort; by period trt;
-   proc means noprint; by period trt;
-     var y;
-     output out=means mean=my;
-   proc plot;
-     plot my*period=trt; 
-Proc GLM permits using both regressor (continuous) type variables and
-  categorical (class) variables as independent variables.  However, the
-  dependent variable must be continuous.
-  Furthermore, no variable noted in the "class" section may be (always missing).
-The chi-square test is good for nominal (categorical, class) independent
-  and dependent variables.
-Three-way anova with all interactions:
- * proc anova;
-     class a b c;
-     model y = a b c a*b a*c b*c a*b*c;
- * proc anova;       /* shorthand */
-     class a b c;
-     model y = a | b | c;
-Multivariate methods (manova) may be *less* powerful than univariate ones
-  if responses are *not* correlated.
-Frequency tables: proc freq
- * proc freq;
-     tables sex;   /* one-way table */
- * proc freq;
-     tables infilt*score;   /* two-way table */
-
-zip -r foo foo
+`zip -r foo foo`
 makes a zip archive named foo.zip, which contains directory foo and all its
 contents.
 
@@ -2129,6 +2186,8 @@ If the crontab log says "bad user", that typically means that the password
 is expired.  On marjoram, we fixed this (maybe) by adding an entry (with an
 in-the-future expiration time) to /etc/shadow, though it really should have
 been in /etc/shadow.local.  Other possibilities:
+//nobreak
+
  * account is not locked
  * password is not expired
  * pwck does not complain about the account
@@ -2306,6 +2365,8 @@ on a file containing lines such as
 But you can also use a web survey such as doodle.com
 
 Parallel/distributed jobs across many machines:
+//nobreak
+
  * The distcc compiler permits compilation jobs to be distributed (in
    parallel) across many machines.  See http://distcc.samba.org/.
  * Another useful tool for speeding up compilation is ccache; to use it,
@@ -2438,6 +2499,8 @@ in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html
 In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 To create a transparent signature stamp:
+//nobreak
+
  * scan a hardcopy of my signature
  * clean it up (in Paint or in the Gimp)
  * use Gimp to make the background transparent:
@@ -2457,6 +2520,8 @@ file that contains the annotations visibly.  Different people prefer the
 two approaches, and some PDF readers such as Evince don't seem to provide
 any way to view the annotations.
 Here is how to create a PDF that shows the annotation text:
+//nobreak
+
  * Using Acrobat Reader: start Print, then select "Summarize Comments" near
    the upper right corner of the print dialog.  That pops up another print
    dialog, where you can finally print or save to PDF.  The final PDF has
@@ -2627,6 +2692,8 @@ That can be useful for seeing how long a command took to run, if another
 command is issued immediately afterward.
 
 In Acrobat (not reader), to fill in a form, either:
+//nobreak
+
  * use the typewriter tool, or
  * ctrl-left-click (this is easier from a unability point of view)
 
@@ -2658,9 +2725,13 @@ Pidgin (previously GAIM) is a Linux IM client that can interoperate with
 Google Talk.
 
 An uninterrupted Hudson build has one of the following statuses:
+//nobreak
+
  * Failed - it doesn't compile
  * Unstable - compiles without errors, but tests fail
  * Stable - compiles without errors and all the tests are passing
+//nobreak
+
 A manually interrupted Hudson job gives a message like "SCM check out aborted".
 
 To make your slow regular expressions (regexps) faster, restrict the number of
@@ -2709,6 +2780,8 @@ To get yesterday's date:
 To recover a closed tab in Chrome:  Ctrl-Shift-t
 
 To replace the dictionary in the Android Kindle app:
+//nobreak
+
  * Not officially supported as of May 2013: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3CF5CO3HY68KB&cdMsgNo=60&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3CF5CO3HY68KB
    and later messages say that previously-posted solutions in that thread no longer work either
  * Another possibility: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3SFUQ6LQH79EL&cdMsgNo=72&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3SFUQ6LQH79EL
