@@ -470,3 +470,5 @@ visual-line-mode.  It's better than longlines mode.
 
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
+
+// LocalWords:  toc gdb RET
