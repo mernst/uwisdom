@@ -36,7 +36,9 @@ files which you can edit):
       * at Aero, set environment variable CVS_SERVER to /usr/bin/cvs
  3. Select a directory where you want an "invariants/dasada" subdirectory
     containing all the files to appear, and execute:
+----
       cvs -d :ext:gorlick@june.cs.washington.edu:/projects/se/people/mernst/.CVS-research co invariants/dasada
+----
     In the future, from the dasada/ directory, you won't need to specify
     the "-d ..." argument to cvs; cvs will remember that value.
 
