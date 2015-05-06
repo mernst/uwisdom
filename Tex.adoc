@@ -190,6 +190,15 @@ to reduce the width of columns in a table or tabular environment.
 
 
 
+== Math mode
+
+To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
+\mathbin, \mathrel, \mathopen, \mathclose, \mathpunct, \mathinner.
+These give "class" 1..8 to the math character or formula.
+(Maybe operator has less surrounding space, binary more and relation most?)
+(There is no \binop or \binrel.)
+
+
 == Lists
 
 To eliminate LaTeX list/itemize/enumerate spacing between items, see
@@ -435,22 +444,30 @@ In LaTeX 2e, to adjust bibliography formatting:
     ...
     \makeatother
 ```
-  and change the "newenvironment" to "renewenvironment".
+and change the "newenvironment" to "renewenvironment".
 To make bibliography items less indented, do one or both of the these:
+//nobreak
+
   1. Comment out
++
 ```
        \advance\leftmargin\labelsep
 ```
   2. Change
++
 ```
        \settowidth\labelwidth{\@biblabel{#1}}%
 ```
-     to
++
+to
++
 ```
        \settowidth\labelwidth{~}%
 ```
+{empty}
      (though this is a bit drastic).
 To remove all vertical spacing (space) between bibliography items, add:
++
 ```
   % These two commands remove inter-bib-item spacing
   \setlength{\itemsep}{0pt}
@@ -511,13 +528,13 @@ http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-
 raymond@sunkist.berkeley.edu (Raymond Chen) says:
 To prevent word breaking (hyphenation) in (La)TeX, \hypenpenalty=10000
 Note, however, that although it'll work, it ain't exactly the nicest
-thing to do to your CPU :-)
+thing to do to your CPU :-) +
 Reason:  TeX will go ahead and hyphenate all the words in your
 paragraph, and consider every possible breakpoint (including the
 hyphens it inserted), but when it's just about ready to insert a hyphen,
 it looks at \hyphenpenalty and say "Whoa!  Better not do it here."
 This is repeated for every hyphenation point in every word of your
-paragraph.
+paragraph. +
 A much more polite way to do it is to set the \hyphenchar to a
 number not between 0 and 255; typically, -1 is used to suppress
 hyphenation.  When the \hyphenchar is set to an invalid number,
@@ -536,7 +553,7 @@ would start off like this:
 ```
 You'll probably also want to set \defaulthyphenchar=-1 so that any
 new fonts that get loaded will also have hyphenation disabled.
-.
+ +
 Another way is
 ```
   \pretolerance=10000
@@ -636,7 +653,9 @@ as a space is better than a hyphenation for TeX ... even one of these nasty
 big ones - TeX can't tell the difference. \fontdimen2\the\font is the space
 factor of the current font and 0.5em is the extra space factor.
 
+----
 \def\nopgbrk{\@nobreaktrue}
+----
 appears to prevent LaTeX page breaks, even just before lists.
 
 LATEX can break an inline formula only when a relation symbol (=, >, ...)
@@ -649,24 +668,9 @@ in \mathrel or the like.
 
 == PDF and pdflatex
 
-TeX uses bitmap based fonts by default, so PDF looks bad for them.  To
-correct this, do one of 2 things:
-//nobreak
-
- * use "pdflatex" on your tex documents, to use outline fonts instead (and
-   to generate PDF instead of .dvi); however, "pdflatex" cannot cope with
-   included .eps files in the documents
- * tell dvips to use outline fonts; see
-   http://web.mit.edu/ajfox/Public/projects/FAQ/BaKoMa.html
-   and, equally important, see my athena .dvipsrc
-//nobreak
-
-Two other solutions:
-//nobreak
-
- * use dvipdfm to convert from .dvi to PDF.
- * In dvips, using "-P pdf" option fixes many problems
-   when later converting to PDF (for instance, it uses outline fonts).
+Regular TeX uses bitmap based fonts by default, so PDF looks bad for them.
+To, use "pdflatex" on your tex documents, to use outline fonts instead (and
+to generate PDF instead of .dvi.
 
 When using the graphicx package to include figures in a LaTeX document:
 The latex command requires all graphics/images/pictures to be in EPS format.
@@ -745,7 +749,7 @@ If you also want to line-break the URL text, then:
   \usepackage{url}
   \url{http://www.wikibooks.org}
   \href{\url{http://www.wikibooks.org}}{Wikibooks home}
-}}
+```
 More on LaTeX HEVEA URLs (\ahref, etc.):
   http://pauillac.inria.fr/~maranget/hevea/doc/manual018.html#toc22
 but perhaps I want to ignore that and focus on using standard 
@@ -814,8 +818,7 @@ Adding info to HTML header in Hevea (this must come after \begin{document}):
 ```
 
 
-
-== Everything else
+== Fonts
 
 In LaTeX, rather than
 ```
@@ -837,6 +840,64 @@ and
   {\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.
 ```
 
+The following six TeX document style options exist for using PostScript
+fonts.
+//nobreak
+
+1. avantgarde, for using the Avant Garde family.
+2. bookman, for using the Bookman family.
+3. helvetica, for using the Helvetica family.
+4. palatino, for using the Palatino family.
+5. ncs, for using the New Century Schoolbook Roman family.
+6. times, for using the Times Roman family
+
+To use a thinner (narrower) version of a font in a LaTeX document, run the
+following before running pdflatex:
+```
+  # Run with --clean once if the --xscale argument changes.
+  #	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
+	  -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
+```
+
+More attractive monospaced fonts:
+```
+  % sans-serif monospaced font
+  \usepackage{inconsolata}
+```
+```
+  % serifed monospaced font
+  \usepackage[T1]{fontenc}  % Is this necessary?
+  \usepackage[scaled=0.88]{luximono}
+```
+
+Your LaTeX documents should always use
+```
+  \usepackage[T1]{fontenc}
+```
+Even if you don't care about foreign languages, it has the advantage of
+providing typewriter fonts for curly braces, and other characters that look
+bad due to the fact that OT1 has only 128 glyphs and LaTeX has to get some
+characters such as curly braces from a different font.
+It particular, it solves the problem
+```
+  Font shape `OMS/cmss/m/n' undefined using `OMS/cmsy/m/n' instead for symbol `textbraceleft'
+```
+
+The default Computer Modern fonts are Type 3 (bitmap).  Here is how to use
+"Latin Modern" fonts, which are a Type 1 reimplementation of the Computer
+Modern fonts, and ensure you only get Type 1 fonts:
+```
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+```
+However, it is easier and better to just use pdflatex, which will use the
+good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a
+different font like Times.
+
+
+
+== Everything else
+
 LaTeX style files are found in the directories listed in the TEXINPUTS
 environment variable.
 
@@ -849,25 +910,19 @@ LaTeX form letter:  use "merge" documentstyle option
 Ragged right text in LaTeX:  use flushleft environment without explicit \\'s.
 Another possibility is \pretolerance=10000 and \raggedright.
 
-The following six TeX document style options exist for using PostScript
-fonts as your text fonts on theory machines.
-(1) avantgarde, for using the Avant Garde family.
-(2) bookman, for using the Bookman family.
-(3) helvetica, for using the Helvetica family.
-(4) palatino, for using the Palatino family.
-(5) ncs, for using the New Century Schoolbook Roman family.
-(6) times, for using the Times Roman family
-
 Use the \jobname command to get the name of the file that TeX is working on.
 .
 Summary of UNIX-based methods for "portably" getting FILEID information of
-.tex source into the .dvi file:  (By portable, I mean that the .tex file
+.tex source into the output file:  (By portable, I mean that the .tex file
 does not identify itself; at processing time, its location is obtained from
-the system and encoded in the resulting .dvi file.)
-1) Use the ability of tex/latex to take information from the invocation.
-Here is a script that does this for a latex document, so that the variable
-\fileid can be used at will in the document and will expand to the absolute
-pathname with hostname prepended
+the system and encoded in the resulting output file.)
+//nobreak
+
+1. Use the ability of tex/latex to take information from the invocation.
+  Here is a script that does this for a latex document, so that the variable
+  \fileid can be used at will in the document and will expand to the absolute
+  pathname with hostname prepended
++
 ```
  FN=`basename $1 .tex`.tex
  FILEID=`hostname`:`pwd`/$FN
@@ -875,10 +930,10 @@ pathname with hostname prepended
  echo Inserting $FILEID...
  virtex "&"lplain \\def\\fileid{$FILEID}\\input $1
 ```
-2) Use rcs or make.
-3) Use a script and UNIX file-editing filters to replace tokens in the text
-with dynamically obtained environment information.
-From: vjcarey@sphunix.sph.jhu.edu ("Vincent J. Carey")
+2. Use rcs or make.
+3. Use a script and UNIX file-editing filters to replace tokens in the text
+  with dynamically obtained environment information.
+  From: vjcarey@sphunix.sph.jhu.edu ("Vincent J. Carey")
 
 How can I make the pagestyle of the first page be empty (no page number)?
 Put \pagestyle{empty} in the preamble (before \begin{document}).  This
@@ -1086,20 +1141,15 @@ LaTeX's \raisebox is like TeX's \smash:  change the apparent height of a
 piece of text.
 
 \negphantom is like phantom, but the space is negative, not positive.
+----
 \newcommand{\negphantom}[1]{\settowidth{\nplength}{#1}\hspace*{-\nplength}}
+----
 
 The useful LaTeX macro \ensuremath lets macros appear in either math or
 horizontal mode; if the latter, it automatically switches to math mode.
 
 ACM LaTeX styles FAQ:
   http://www.acm.org/sigs/publications/sigfaq
-```
-  % "\let\thepage\relax" in sig-alternate.cls causes hyperref to issue warnings.
-  % Fix those warnings:
-  \pagenumbering{arabic}
-  \pagestyle{empty}
-```
-but I'm not sure how to do it wit
 
 To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove
 the copyright box):
@@ -1139,12 +1189,15 @@ Fixes to ACM SIG style (sig-alternate.cls):
        *** remove (comment out) "\advance\leftmargin\labelsep"
  * Copyright data:
     ** In sig-alternate, change two lines to the following:
++
 ```
        \begin{picture}(20,5) %Space for copyright notice
        \put(0,-.75){\crnotice{\@toappear}}
 ```
+{empty}
       (or use a slightly more negative last number like -.95 instead of -.75).
     ** In sigplanconf.cls, change "\vbox to 1in" so that we use:
++
 ```
        \@float{copyrightbox}[b]%
          \vbox to .8in{%
@@ -1163,16 +1216,21 @@ Maybe:
   % \vspace{2pt}
 ```
 To reduce whitespace in the titlebox (near the title and authors):
+//nobreak
+
  * Comment out:
++
 ```
     %\vskip 2em                   % Vertical space above title.
 ```
  * To reduce space *after* the authors, reduce "12.75" on this line:
++
 ```
  \advance\dimen0 by -12.75pc\relax % Increased space for title box -- KBT
 ```
  * To reduce space between the title and authors (without affecting the
    total size of the title box), reduce "1.25" in this line:
++
 ```
   {\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi
 ```
@@ -1253,14 +1311,6 @@ To use a smaller (9-point) font in a LaTeX document, use
 ```
 as the first set of commands after \documentclass.
 
-To use a thinner (narrower) version of a font in a LaTeX document, run the
-following before running pdflatex:
-```
-  # Run with --clean once if the --xscale argument changes.
-  #	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
-	  -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
-```
-
 The TeX FAQ is searchable:
     http://www.tex.ac.uk/cgi-bin/texfaq2html
 or printable, available from from CTAN, in
@@ -1292,9 +1342,6 @@ To set the page number in LaTeX:  \setcounter{page}{98}
 One way to number LaTeX figures by chaper/section, 1.1, 1.2, ..., 2.1, ...:
   http://www-compiler.csa.iisc.ernet.in/~janaki/tex/numbering.html
 
-Dvipdfm is a DVI to PDF translator.
-http://gaspra.kettering.edu/dvipdfm/
-
 This Makefile rule runs LaTeX until it stops saying "Labels may have changed":
 ```
 latex:
@@ -1322,7 +1369,9 @@ Three LaTeX references, all published by Addison-Wesley:
 Do not use math mode (such as $define$) for italics.  Instead, use
 \emph{define} or \mathem{define}.  Math mode does not use ligatures and gets
 interletter spacing wrong.
-.
+{empty} +
+Here is text to send to someone who has misused math mode for italics:
+{empty} +
 You have improperly used TeX's math mode as a shortcut for producing words
 in italic type.  This is ugly and distracting.  Instead of saying $START$
 (which puts too much space between "T" and "A"), you should say {\em START}
@@ -1409,15 +1458,6 @@ To make dvips produce lettersize output by default, edit config.ps (maybe in
 pagesize block comes first; the first "@" block is the default.
 (Otherwise, one must invoke dvips with the "-t letter" switch.)
 
-If you edit /usr/lib/tex/ps/config.ps (or wherever that file is) to tell
-dvips that you have a good printer with lots of memory (with a line like
-m 1000000
-or maybe even more) then things will in general print faster.
-
-dvips has the undocumented feature that, for use with the -p and -l
-options, 1.1 indicates the second page numbered 1, 1.2 indicates the third
-page numbered 1, and so forth.
-
 Emacs "Local variables" section of a LaTeX file looks like one of the following:
 ```
  %%% Local Variables: 
@@ -1428,7 +1468,7 @@ Emacs "Local variables" section of a LaTeX file looks like one of the following:
  %%% TeX-command-default: "PDF"
  %%% End: 
 ```
-.
+{empty}
 ```
  %%% Local Variables: 
  %%% mode: latex
@@ -1460,7 +1500,7 @@ The fancyvrb package is preferable to:
  * the moreverb package.  (The moreverb documentation recommends fancyvrb!)
  * \alltt, which is built into LaTeX (except possibly for very simple tasks
    or use with Hevea)
- * listings (which breaks fancyvrb if both are loaded)
+ * listings (which breaks fancyvrb if both are loaded).
    listings provides the lstlisting command, and inserts too much space
    between characters, which looks bad in any font (fixed- or variale-width).
    An advantage of listings is that it provides multi-character escapes to
@@ -1468,6 +1508,8 @@ The fancyvrb package is preferable to:
    do not appear in the text (only multi-character sequences that don't appear.)
    listings can also boldface keywords, but that ends up looking very bad too:
    it's best to emphasize what is most important, which is never the keywords.
+//nobreak
+
 A disadvantage of fancyvrb is that Hevea only partially supports it; for
 example, Hevea does not support the commandchars functionality nor its
 `\VerbatimInput` command.  The Hevea manual (section B.17.12) recommends the
@@ -1658,47 +1700,6 @@ To find LaTeX special command that matches a given character shape,
 scribble the shape here:
 http://detexify.kirelabs.org/classify.html
 
-To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
-\mathbin, \mathrel, \mathopen, \mathclose, \mathpunct, \mathinner.
-These give "class" 1..8 to the math character or formula.
-(Maybe operator has less surrounding space, binary more and relation most?)
-(There is no \binop or \binrel.)
-
-More attractive monospaced fonts:
-```
-  % sans-serif monospaced font
-  \usepackage{inconsolata}
-```
-```
-  % serifed monospaced font
-  \usepackage[T1]{fontenc}  % Is this necessary?
-  \usepackage[scaled=0.88]{luximono}
-```
-
-Your LaTeX documents should always use
-```
-  \usepackage[T1]{fontenc}
-```
-Even if you don't care about foreign languages, it has the advantage of
-providing typewriter fonts for curly braces, and other characters that look
-bad due to the fact that OT1 has only 128 glyphs and LaTeX has to get some
-characters such as curly braces from a different font.
-It particular, it solves the problem
-```
-  Font shape `OMS/cmss/m/n' undefined using `OMS/cmsy/m/n' instead for symbol `textbraceleft'
-```
-
-The default Computer Modern fonts are Type 3 (bitmap).  Here is how to use
-"Latin Modern" fonts, which are a Type 1 reimplementation of the Computer
-Modern fonts, and ensure you only get Type 1 fonts:
-```
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
-```
-However, it is easier and better to just use pdflatex, which will use the
-good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a
-different font like Times.
-
 Ways to get a circled number in LaTeX with better formatting than \textcircled:
 ```
  % serif font:
@@ -1716,10 +1717,11 @@ Ways to get a circled number in LaTeX with better formatting than \textcircled:
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
 
+
 // This entry is to avoid having the ones earlier in this file be interpreted.
-Local Variables: 
-major-mode: text-mode
-End: 
+// Local Variables: 
+// major-mode: text-mode
+// End: 
 
 // LocalWords:  Hevea wiki makeatletter topfigrule kern hrule botfigrule floatsep
 // LocalWords:  dblfigrule makeatother nocaptionrule textfloatsep dbltextfloatsep
