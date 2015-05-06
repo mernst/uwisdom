@@ -40,12 +40,13 @@ the "doc" program.  Here are some sample invocations:
 
 Run `doc -h` for complete usage instructions (see `doc` alias below).
 
+
 == Obtaining the files
 
 The wisdom files appear on the web at
-  http://code.google.com/p/uwisdom/w/list
-You can get a local copy by following the instructions at
-  http://code.google.com/p/uwisdom/source/checkout?repo=wiki
+  https://github.com/mernst/uwisdom/tree/wiki
+You can get a local copy by following the instructions on that webpage.
+
 
 == Comparison to web/email/etc. search
 
@@ -75,21 +76,13 @@ you and others can find the information.  I often intentionally include
 synonyms ("description" and "blurb", or "search" and "find" to make a search
 more likely to find the correct entry.
 
-The Wiki syntax is described at
-http://code.google.com/p/support/wiki/WikiSyntax .
-To preview, paste into a Google code wiki editing page and press the
-"Preview" button, even if you don't save there; but note that URLs are not
-live in the preview.
-// There is an interactive preview tool at
-// http://phenxdesign.net/projects/wikiwyg/,
-// but it failed for the first markup I gave it (an indented/quoted
-// paragraph).
+The files use AsciiDoc syntax.
 
 
 == Installing the lookup program, and shell aliases
 
 The Lookup program is available as part of plume-lib
-(http://code.google.com/p/plume-lib/).
+(https://github.com/mernst/plume-lib).
 
 As indicated in the examples above, the Lookup program can be used for more
 than just searching the wisdom files.  Here are some further bash aliases
