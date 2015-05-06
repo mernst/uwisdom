@@ -192,56 +192,8 @@ to reduce the width of columns in a table or tabular environment.
 
 == Lists
 
-To eliminate LaTeX list/itemize/enumerate spacing between items:
-1. From one list:
-```
-    \begin{itemize}
-    \itemsep 0pt \parskip 0pt
-    ...
-    \end{itemize}
-```
-  (Since the default values for \itemsep and \parskip are set in a somewhat
-  roundabout way, putting "\itemsep=0pt" in the preamble doesn't work.)
-2. From all lists:
-```
-    %% Bring items closer together in list environments
-    %% This doesn't work with an optional argument to the list environment.
-    % Prevent infinite loops
-    \let\Itemize =\itemize    
-    \let\Enumerate =\enumerate
-    \let\Description =\description
-    % Zero the vertical spacing parameters
-    \def\Nospacing{\itemsep=0pt\topsep=0pt\partopsep=0pt\parskip=0pt\parsep=0pt}
-    % Redefine the environments in terms of the original values
-    \renewenvironment{itemize}{\Itemize\Nospacing}{\endlist}
-    \renewenvironment{enumerate}{\Enumerate\Nospacing}{\endlist}
-    \renewenvironment{description}{\Description\Nospacing}{\endlist}
-```
-   This doesn't work with an optional argument to the list environment,
-   however; if you do, for example,
-```
-    \begin{enumerate}[$\bullet$]
-```
-   then you need to use the other approach.
-3. From all lists:
-   Copy the \itemize (etc.) macros from latex.ltx, and add at the end
-   (before the last "\fi"):
-```
-    \itemsep 0pt \parskip 0pt
-```
-4. From all lists:
-  PROBLEM:  This can put negative vertical space in some places (e.g., it
-  overlaps the list and the following paragraph), so isn't worth the hassle.
-  tweaklist (http://dcwww.camp.dtu.dk/~schiotz/comp/LatexTips/LatexTips.html):
-```
-  % Remove vertical space from between list/itemize/enumerate items.
-  \usepackage{tweaklist}
-  \renewcommand{\itemhook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
-  \renewcommand{\enumhook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
-  \renewcommand{\descripthook}{\setlength{\topsep}{-\topsep}\setlength{\itemsep}{-\itemsep}}
-```
-5. From all lists, or customize:  see TeX FAQ at
-  http://www.tex.ac.uk/cgi-bin/texfaq2html?label=complist
+To eliminate LaTeX list/itemize/enumerate spacing between items, see
+link:TexListSpacing.adoc[TexListSpacing.adoc].
 
 To control pre-list space, set \partopsep (or insert an explicit negative
 \vspace (not \vskip)).  (I had to give an explicit argument, not -\parsep
@@ -1304,9 +1256,9 @@ as the first set of commands after \documentclass.
 To use a thinner (narrower) version of a font in a LaTeX document, run the
 following before running pdflatex:
 ```
-# Run with --clean once if the --xscale argument changes.
-#	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
-	-/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
+  # Run with --clean once if the --xscale argument changes.
+  #	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
+	  -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
 ```
 
 The TeX FAQ is searchable:

@@ -2,24 +2,28 @@
 :toc:
 :toc-placement: manual
 
-toc::[]
+// toc::[]
 
 
 Adapted from http://en.wikipedia.org/wiki/Dependability:
-    * Defect:
+//nobreak
+
+Defect::
       A flaw, failing, or imperfection in a system, such as an
       incorrect design, algorithm, or implementation.  Also known as a
       fault or bug.  Typically caused by a human mistake.
-    * Error:
+Error::
       An error is a discrepancy between the intended behaviour of a
       system and its actual behavior inside the system boundary.  Not
       detectable without assert statements and the like.
-    * Failure:
+Failure::
       A failure is an instance in time when a system displays
       behavior that is contrary to its specification.
+//nobreak
+
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
 Terminology says:
-```
+____
   error.
   (1) The difference between a computed, observed, or measured value or
     condition and the true, specified, or theoretically correct value or
@@ -36,7 +40,7 @@ Terminology says:
   definition 3 to the word "failure," and definition 4 to the word "mistake."
   See also: dynamic error; fatal error; indigenous error; semantic error;
   syntactic error; static error; transient error.
-```
+____
 Note that IEEE Std 610.12-1990 does not distinguish between the (Wikipedia)
 dependability notions of error and failure -- it calls them both failures
 (and a failure is either present or not, but does not have a magnitude).

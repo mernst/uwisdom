@@ -44,7 +44,7 @@ Run `doc -h` for complete usage instructions (see `doc` alias below).
 == Obtaining the files
 
 The wisdom files appear on the web at
-  https://github.com/mernst/uwisdom/tree/wiki
+  https://github.com/mernst/uwisdom/tree/wiki .
 You can get a local copy by following the instructions on that webpage.
 
 

@@ -173,7 +173,7 @@ Web polls:
 
 The plume-bib README instructions are available at
 ```
-  http://plume-bib.googlecode.com/hg/README
+  https://raw.githubusercontent.com/mernst/plume-bib/master/README
 ```
 
 For PC remote control:
