@@ -231,7 +231,7 @@ putting 'who _password_' on a line by itself.  It will mail back
 a list of subscribers.  This is not easily available via the 
 web interface.
 
-To enable NFS access, edit the /etc/exports file on each machine.
+To enable NFS access, edit the `/etc/exports` file on each machine.
 For example, to grant access to 128.30.65.238, change the line to
 ```
   /scratch        128.30.84.0/24(rw) 128.30.65.238(rw)
@@ -256,9 +256,13 @@ To get a list of SSIDs of all wireless networks in range:
 ```
 
 To make all CUPS based printing clients spool through CSAIL servers, and
-get theirs PPDs from there as well, create the file /etc/cups/client.conf
+get theirs PPDs from there as well, create the file `/etc/cups/client.conf`
 containing the single line:
+[source]
+./etc/cups/client.conf
+----
 ServerName cups.csail.mit.edu
+----
 
 If a system log file (messages, kern.log, syslog) grows too large, it
 can be compress or removed (delete,rm) by the following commands:
@@ -268,7 +272,7 @@ can be compress or removed (delete,rm) by the following commands:
   sudo /etc/init.d/sysklogd start
 ```
 
-File /etc/debian_version gives the version number of Debian that you are
+File `/etc/debian_version` gives the version number of Debian that you are
 running.  Versionnumber-to-codename correspondence:
   http://en.wikipedia.org/wiki/Debian#Releases
 ```

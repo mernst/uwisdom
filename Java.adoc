@@ -209,7 +209,7 @@ Approach #1 is to run
   javac -XDignore.symbol.file ...
 ```
 flag which will compile your program against Oracle's/Sun's internal rt.jar
-rather than the public-facing symbol file ct.sym. +
+rather than the public-facing symbol file `ct.sym`. +
 //
 Approach #2a is to run
 ```

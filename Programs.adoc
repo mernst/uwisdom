@@ -239,7 +239,7 @@ To give make this semantics, put the following in the Makefile:
 ```
   export SHELL=/bin/bash -o pipefail
 ```
-Alternatives, if stuck with bash 2.x:
+Alternatives, if you are stuck with bash 2.x:
   `${PIPESTATUS[n]}` where n=0 is the status from the first command in the pipe.
 The exact syntax for a Makefile is:
 ```
@@ -308,10 +308,9 @@ or, alternately:
 To run an entire X-session underneath ssh-agent:
 //nobreak
 
-  1. move .xinitrc file (other X client startup script) to .xinitrc-real.
+  1. move `.xinitrc` file (other X client startup script) to `.xinitrc-real`.
   2. add the command "ssh-add" to the beginning of that script.
-  3. create a new .xinitrc script containing the sole command:
-
+  3. create a new `.xinitrc` script containing the sole command:
 [source]
 .~/.xinitrc
 ----
@@ -323,7 +322,7 @@ To set up public keys for ssh-agent and similar programs:
 
  1. On client machine (from which I will login), do `ssh-keygen`
  2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
-ssh2 needs file ~/.ssh/authorized_keys2; to make it, do
+ssh2 needs file `~/.ssh/authorized_keys2`; to make it, do
 ```
   cd ~/.ssh; cat is_dsa.pub > authorized_keys2; chmod 600 authorized_keys2
 ```
@@ -340,7 +339,7 @@ ssh2 supports sftp, an ftp client.  It does not seem to be free for
 research use.  OpenSSH does not seem to have sftp.
 
 SSH timeouts seem to be controlled in a variety of ways.  The
-file /etc/ssh/sshd_config contains a number of setups.  It
+file `/etc/ssh/sshd_config` contains a number of setups.  It
 was suggested to set KeepAlive (possibly TCPKeepAlive) to
 avoid the firewall dropping an inactive connection.  Also
 ClientAliveInterval which causes the daemon to periodically
@@ -1517,7 +1516,7 @@ downloading subprojects from the Internet rather than avoiding wasted work
 by staging the parts of a single project.
 
 In Ant, the path to the current ant build file (typically build.xml) is 
-available as property ant.file .  You can get its directory in this way:
+available as property `ant.file`.  You can get its directory in this way:
 <dirname property="ant.file.dir" file="${ant.file}"/>
 
 In Ant, to jar up the contents of a set of existing .jar files:
@@ -1551,12 +1550,12 @@ To make Eclipse use spaces instead of tabs for indentation:
 //nobreak
 
  * Go  to 'Window | Preferences | Java | Code Formatter':
-   * In the "Style" tab:
-     * Uncheck "Insert tabs for indentation, not spaces."
-     *  Set "Number of spaces representing an indentation level" to 2.
+   ** In the "Style" tab:
+     *** Uncheck "Insert tabs for indentation, not spaces."
+     ***  Set "Number of spaces representing an indentation level" to 2.
  * Go to 'Window | Preferences | Java | Editor':
-   * In the "Typing" tab:
-     * Check "Insert space for tabs"
+   ** In the "Typing" tab:
+     *** Check "Insert space for tabs"
 
 Changing the font size in Eclipse:
   Window > Preferences > General > Appearance > Colors and Fonts > Basic >
@@ -1587,7 +1586,7 @@ The incremental project builder (for short, "builder") operates on files and run
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
-repository, in file java-tools.txt.
+repository, in file JavaTools.adoc.
 
 expand, unexpand:  change TABs to SPACEs and vice versa.
 
@@ -1920,9 +1919,9 @@ Regular expressions (regexps):
  * unrolling the loop:     `opening normal* (special normal*)* closing`
     eg, for a quoted string:   `/L?"[^"\\]*(?:\\.[^"\\]*)*"/`
     or `$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';`
-    * start of normal and special must never intersect
-    * special must not match nothingness
-    * text matched by one application of special must not be matched by
+    ** start of normal and special must never intersect
+    ** special must not match nothingness
+    ** text matched by one application of special must not be matched by
       multiple applications of special
 
 uname gives operating system (uname -a gives more info).
@@ -2020,7 +2019,7 @@ OLE documents.
 mkid (part of GNU's id-utils) is something like tags, but records all uses
 of all tokens and permits lookup.  There's an Emacs interface, too.
 
-The file command gives information about the file format (type of file,
+The `file` command gives information about the file format (type of file,
 executable (including debugging format), etc).
 
 On a Kinesis Advantage contoured keyboard:
@@ -2052,9 +2051,9 @@ ImageMagick is a replacement for (part of) xv:  three of its programs are:
 "locate" finds a file of a given name anywhere on the system.
 Database is updated nightly or so.
 
-To use "crypt" to encrypt a string, like in the password file /etc/passwd,
+To use "crypt" to encrypt a string, like in the password file `/etc/passwd`,
 use "openssl passwd".
-(Note that "crypt" is known to be insecure; only use it for /etc/passwd.)
+(Note that "crypt" is known to be insecure; only use it for `/etc/passwd`.)
 
 Use "chsh" to set/change your shell.
 
@@ -2504,10 +2503,10 @@ To create a transparent signature stamp:
  * scan a hardcopy of my signature
  * clean it up (in Paint or in the Gimp)
  * use Gimp to make the background transparent:
-    * menu > layer > transparency > add alpha channel
-    * click on the fuzzy selector tool
-    * for each area to remove, select it, then "edit > clear" (ctrl + k)
-    * save as gif or png
+    ** menu > layer > transparency > add alpha channel
+    ** click on the fuzzy selector tool
+    ** for each area to remove, select it, then "edit > clear" (ctrl + k)
+    ** save as gif or png
    (instructions from http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp)
  * Imagemagick's "convert" program didn't work, so convert the gif or png to
    PDF with Acrobat Professional
@@ -2610,7 +2609,7 @@ Use "file=" for relative filenames, "virtual=" for relative or non-relative
 filenames (e.g., an address starting at the server root).
 In some cases, you must configure the webserver to preprocess all 
 pages with a distinctive extension (normally, ".shtml").
-UW CSE lets us tweak our .htaccess file such that we can have 
+UW CSE lets us tweak our `.htaccess` file such that we can have 
 all regular .html files get this behavior, not just .shtml files.  See the
 WASP webpages for an example.
 

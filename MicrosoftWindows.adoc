@@ -125,13 +125,13 @@ In Dec 2006, after all that, I am getting "preauthentication failed while
 
 To create labels in Microsoft Word using a Microsoft Excel file of adresses:
 
- * create a .xls (not merely .csv, though you will probably go through that format first
-    * the first line of the .xls file should be column headings, or else be careful when getting addresses from that file.
+ * create a .xls file (not merely .csv, though you will probably go through that format first)
+    ** the first line of the .xls file should be column headings, or else be careful when getting addresses from that file.
  * open Microsoft Word
-    * Tools >> Letters >> Mail Merge
-    * Follow the instructions, but don't insert "address block" lest the first line be slightly indented.  Instead, insert fields F1 through F5 with line breaks between.
+    ** Tools >> Letters >> Mail Merge
+    ** Follow the instructions, but don't insert "address block" lest the first line be slightly indented.  Instead, insert fields F1 through F5 with line breaks between.
 
-If someone sends you ms-tnef attachments with a file named winmail.dat,
+If someone sends you ms-tnef attachments with a file named `winmail.dat`,
 then ask them to:
 Please
 // nobreak

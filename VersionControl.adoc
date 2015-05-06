@@ -167,7 +167,7 @@ To create a branch in CVS (this from Dave Grove via Jake Cockrell):
 ```
 
 To make the HEAD and BASE tags work in CVS, add to directory CVSROOT (in
-the true repository) a file val-tags containing:
+the true repository) a file `val-tags` containing:
 ```
 HEAD y
 BASE y
@@ -244,7 +244,7 @@ log" or "cvs history"; "cvs history" is the better way.  For example,
 (Is the time local or GMT?)
 
 By default, it is not easy to give read-only access to a CVS repository.
-Just to do a checkout, CVS wants to create a read lock file "#cvs.lock" in
+Just to do a checkout, CVS wants to create a read lock file `#cvs.lock` in
 each directory of the CVS repository; and the ability to create and delete
 files essentially gives all write privileges.
   You can patch CVS to add a "-u" option to allow checkouts without read

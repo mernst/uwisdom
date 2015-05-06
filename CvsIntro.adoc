@@ -18,7 +18,7 @@ subdirectory containing all the files to appear, and do the following
   cvs -d ~mernst/class/573/project/.CVS-medics checkout code
 
 
-== Checking out a CVS project (version 1)
+== Checking out a CVS project (version 2)
 
 To check out a CVS project (that is, to obtain your own private copy of the
 files which you can edit):
@@ -99,7 +99,7 @@ To see what has changed, do (optional filename arg says diff only that file):
 The CVS manual is available online (via the Web, the Info documentation
 system, etc.), as are additional tutorials.
 
-You may wish to create a ~/.cvsrc file containing the following two lines:
+You may wish to create a `~/.cvsrc` file containing the following two lines:
 
 [source]
 .~/.cvsrc

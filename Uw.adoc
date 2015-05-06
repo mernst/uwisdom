@@ -114,8 +114,8 @@ To approve spending:
  * Click on any red "PI review" text (you cannot right-click to open it in another tab)
  * Click on green "Change Status/Audit Trail" button
  * In the popup window:
-    * Select the "Sign off" radio button
-    * Click "Save and close"
+    ** Select the "Sign off" radio button
+    ** Click "Save and close"
  * Repeat until there is no more red "PI review" text
 
 

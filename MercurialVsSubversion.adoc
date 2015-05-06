@@ -9,12 +9,12 @@ Pros of Mercurial:
    changed a file (but haven't committed yet), and you deleted that file,
    then my changes are lost forever; it should create a conflict instead.
  * distributed (in the sense of "distributed version control")
-    * Possibility to have a private branch.
+    ** Possibility to have a private branch.
       You commit chonges without making those changes public immediately.
       (But, you can also always make your changes public by pushing
       immediately, if you so desire.)
-    * Can operate offline.
-    * More flexible than centralized version control in other respects.
+    ** Can operate offline.
+    ** More flexible than centralized version control in other respects.
  * easier to manage and merge conflicts.
    Mercurial decouples the actions of updating and merging.  This does make
    the user model a bit more complicated.  You have to check in or undo any
@@ -30,7 +30,7 @@ Pros of Mercurial:
    (Subversion forces you to remember the arcane command "svn propedit
    svn:ignore .", and properties are not versioned or, it seems, even
    stored in the repository -- only in the working copy.)  Also, only one
-   .hgignore file is necessary rather than setting the svn:ignore on each
+   `.hgignore` file is necessary rather than setting the svn:ignore on each
    directory.
  * Better merging
    It is sometimes said that Mercurial has better merging algorithms than

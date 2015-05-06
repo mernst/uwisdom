@@ -1170,29 +1170,29 @@ Fixes to ACM SIG style (sig-alternate.cls):
 //nobreak
 
  * Uncapitalize section titles: 
-    * Delete all instances of "\@ucheadtrue"
-    * Replace "ABSTRACT" by "Abstract" and "REFERENCES" by "References"
-    * Remove (comment out) `\section*{APPENDIX}`
+    ** Delete all instances of "\@ucheadtrue"
+    ** Replace "ABSTRACT" by "Abstract" and "REFERENCES" by "References"
+    ** Remove (comment out) `\section*{APPENDIX}`
  * Captions:
-    * Change "then" clause to the following:
+    ** Change "then" clause to the following:
        {\small\parbox{\hsize}{#1: #2\strut}}\par               %   THEN set as ordinary paragraph.
-    * Remove instances of "textbf"
-    * Add "\strut" after "#2"
-    * Consider adding "\small"
-    * Comment out "\vskip 10pt" and/or "\vskip \baselineskip"
+    ** Remove instances of "textbf"
+    ** Add "\strut" after "#2"
+    ** Consider adding "\small"
+    ** Comment out "\vskip 10pt" and/or "\vskip \baselineskip"
  * References:
-    * No section number: 
-       * change "\section[References]" to `\section*`.  (note removal of optional argument)
-       * remove (comment out) "\vskip -9pt".
-       * remove (comment out) "\advance\leftmargin\labelsep"
+    ** No section number: 
+       *** change "\section[References]" to `\section*`.  (note removal of optional argument)
+       *** remove (comment out) "\vskip -9pt".
+       *** remove (comment out) "\advance\leftmargin\labelsep"
  * Copyright data:
-    * In sig-alternate, change two lines to the following:
+    ** In sig-alternate, change two lines to the following:
 ```
        \begin{picture}(20,5) %Space for copyright notice
        \put(0,-.75){\crnotice{\@toappear}}
 ```
       (or use a slightly more negative last number like -.95 instead of -.75).
-    * In sigplanconf.cls, change "\vbox to 1in" so that we use:
+    ** In sigplanconf.cls, change "\vbox to 1in" so that we use:
 ```
        \@float{copyrightbox}[b]%
          \vbox to .8in{%
@@ -1578,7 +1578,7 @@ The llncs.cls style (class) file (and also sig-alternate.cls) does
 which changes the font in footnotes.  This is an acceptable goal, but the
 implementation is seriously flawed, since it makes it impossible to get
 that size font in the program.  To fix this, find the "\newcommand" for
-"\footnotesize" (perhaps in file /usr/share/texmf/tex/latex/base/size10.clo)
+"\footnotesize" (perhaps in file `/usr/share/texmf/tex/latex/base/size10.clo`)
 and copy it to the document after the "\documentclass" directive.
 
 The PGF package for LaTeX makes drawings, much like LaTeX picture mode or
