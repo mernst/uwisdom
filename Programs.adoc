@@ -172,21 +172,21 @@ such problems.)
 Redirecting output in command shells:
 //nobreak
 
- * In csh/tcsh:
-   * To overwrite an existing file, redirect via ">!" instead of ">".
-   * To redirect both standard error and standard output to a file,
+* In csh/tcsh:
+   ** To overwrite an existing file, redirect via ">!" instead of ">".
+   ** To redirect both standard error and standard output to a file,
       use ">&" (">" redirects just standard output to the file).
-   * To redirect standard error and output through the pipe, use "|&".
- * In sh/bash:
-   * To redirect standard error to standard output, use "2>&1".
+   ** To redirect standard error and output through the pipe, use "|&".
+* In sh/bash:
+   ** To redirect standard error to standard output, use "2>&1".
       Warning:  this must come after any file redirection:  "cmd > file 2>&1".
       This is because "2>&1" means to make stderr a copy of stdout.  If you
       redirect to a file with "> file" after doing so, then stdout is
       reopened as the file, but stderr (a copy of the original stdout) is
       not affected.
-   * To send both standard error and standard output through a pipe: "2>&1 |".
+   ** To send both standard error and standard output through a pipe: "2>&1 |".
      There are simpler commands in bash, but they don't work in sh.
-   * To redirect standard error to a file, use "2>filename".
+   ** To redirect standard error to a file, use "2>filename".
      For more details, see http://tomecat.com/jeffy/tttt/shredir.html
 
 In csh shell scripts, `$*` means all the arguments.

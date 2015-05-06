@@ -26,8 +26,10 @@ files which you can edit):
  1. Log into june.cs.washington.edu and put an line of the form
     "myhost.aero.org gorlick" (with no quotes) in your ~/.rhosts file.
  2. Verify that this worked by executing (at Aero)
+----
       rsh -l gorlick june.cs.washington.edu 'echo $PATH'
       rsh -l gorlick june.cs.washington.edu 'which cvs'
+----
     If cvs isn't found, then you need to either:
       * at Washington, add the appropriate directory (/usr/bin) to your
         path (in ~/.bashrc, ~/.cshrc, etc., not in ~/.login), or
