@@ -204,20 +204,19 @@ There are two ways to disable javac warnings of the form
   ... uses internal proprietary API that may be removed in a future release
   ... is internal proprietary API and may be removed in a future release
 ```
-Approach #1 is to run
+* Approach #1 is to run
 ```
   javac -XDignore.symbol.file ...
 ```
 flag which will compile your program against Oracle's/Sun's internal rt.jar
-rather than the public-facing symbol file `ct.sym`. +
-//
-Approach #2a is to run
+rather than the public-facing symbol file `ct.sym`.
+* Approach 2 has two variants
+** Approach #2a is to run
 ```
   javac -XDenableSunApiLintControl -Xlint:-sunapi ...
 ```
-This still issues a "note" but not a warning. +
-//
-Approach #2b is to suppress the warning and the note by writing
+This still issues a "note" but not a warning.
+** Approach #2b is to suppress the warning and the note by writing
 ```
   @SuppressWarnings("sunapi")
 ```
@@ -379,13 +378,13 @@ To iterate over the values:
 A disadvantage of the new-style for loop is that there is no name for the
 iterator, so there is no way to access important information such as the
 current index or other information that a specialized iterator may make
-available. +
-//
+available.
+ +
   A way to get around this is for a single object to implement both
 Iterator and Iterable.  The Iterable.iterator() method would just return
 "this", and within the foor loop body, the client can refer to the iterable
-to obtain the desired information. +
-//
+to obtain the desired information.
+ +
   The problem with this design is that it assumes that there is exactly one
 iterator for the object at a time.  Clients may expect that it is possible
 to have multiple iterators over a given Iterable, and thus may expect that
@@ -436,8 +435,8 @@ To read a file line by line from Java use:
         ;
 ----
 Unfortunately, this will throw IOExceptions.  I don't know of any standard
-Java class that does not. +
-//
+Java class that does not.
+ +
 Or, to read lines with line numbers use:
 ----
     LineNumberReader lr = new LineNumberReader (new FileReader (filename));

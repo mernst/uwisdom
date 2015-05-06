@@ -9,13 +9,6 @@ toc::[]
 == General tips
 
 
-Emacs's tags facility allows you to easily find a definition (of a
-function, variable, class, etc.) or search a collection of related files.
-To create a tags table, run `etags _files_`; for instance, `etags *.h *.c`
-To find a tag within Emacs, type  M-.  or  M-x find-tag RET
-To search all files in the tags table, type  M-x tags-search RET
-To select a different tags table, type  M-x visit-tags-table RET
-
 You should always run gdb within Emacs; use  M-x gdb RET
 One advantage is that when you move up and down the stack, the file with
 the relevant code is read into a buffer and displayed.
@@ -37,6 +30,49 @@ string with contents a \ | b and \| is the regexp routine's alternative
 specifier.
 
 
+
+== TAGS tables
+
+Emacs's tags facility allows you to easily find a definition (of a
+function, variable, class, etc.) or search a collection of related files.
+To create a tags table, run `etags _files_`; for instance, `etags *.h *.c`
+To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
+To search all files in the tags table, type  M-x tags-search RET
+To select a different tags table, type  M-x visit-tags-table RET
+
+etags returns the best matches in a TAGS table first; however, it examines
+entire TAGS tables at a time, so it is advantageous to use a single TAGS
+table instead of multiple smaller ones (along with include directives).
+
+
+Francesco Potorti` (pot@CNUCE.CNR.IT) says:
+To make a single tags file for all the source files in your tree, 
+```
+    find . -name '*.[chCH]' -print | etags [options] -
+    find . \( -name '*.[chCH]' -o -name '*.[cC][cC]' \) -print | etags -
+    find . \( -name UNUSED -o -name CVS -o -name SCCS -o -name RCS \) -prune -o \( -name '*.[cC][cC]' -o -name '*.[chCH]' \) -print | etags -
+```
+To create a tags file per directory, write a two line shell script:
+```
+    cd $1
+    etags *.[chCH]
+```
+and then call it from the root of your source tree like this:
+```
+    find . -type d -exec script {} \;
+```
+
+To get a list of LaTeX files that are \inputted (not \included) in a LaTeX
+file, for use in making a tags table or in a Makefile or Ant build.xml file:
+```
+  TEX_FILES=$(shell latex-process-inputs -list main.tex)
+```
+or, to run tags directly:
+```
+  etags `latex-process-inputs -list main.tex`
+```
+
+
 == Gnus news/mail reader
 
 To save (or execute some other gnus keystroke command upon) multiple
@@ -53,6 +89,7 @@ will un-kill all except foo or bar in subject.  (There might be a faster
 way, but this works fine.)
 
 In gnus, "S o m" to forward/resend article via mail.
+
 
 
 == Uncategorized Emacs wisdom
@@ -237,10 +274,6 @@ To avoid compiler warnings about undefined symbols, consider compile-time
 require:  (eval-when-compile (require 'dired))
 The downside is that the require also happens if the uncompiled code is
 loaded.
-
-etags returns the best matches in a TAGS table first; however, it examines
-entire TAGS tables at a time, so it is advantageous to use a single TAGS
-table instead of multiple smaller ones (along with include directives).
 
 Emacs perl (and cperl) mode mismatches the parentheses in "(\b|$)" because
 "$)" looks like a variable rather than looking like it contains a close

@@ -1,6 +1,7 @@
 = Wisdom about programs
 :toc:
 :toc-placement: manual
+:experimental:
 
 
 This file is a bit of a catch-all, for everything that does not have a
@@ -311,6 +312,8 @@ To run an entire X-session underneath ssh-agent:
   1. move `.xinitrc` file (other X client startup script) to `.xinitrc-real`.
   2. add the command "ssh-add" to the beginning of that script.
   3. create a new `.xinitrc` script containing the sole command:
+//nobreak
+
 [source]
 .~/.xinitrc
 ----
@@ -501,7 +504,7 @@ Reasonable choices:
 
  * paps: is packaged for Unix distributions (Ubuntu, Red Hat), so perhaps
    it is widely used, even though the last release was in 2007
- * cedilla: works fine, many cammand-line arguments.  A bit of a pain to
+ * cedilla: works fine, many command-line arguments.  A bit of a pain to
    install because you have to install clisp first.
 //nobreak
 
@@ -1021,7 +1024,7 @@ So put all the arguments in one directive:
 ```
 Alternately, precede each argument by +, which means to modify the
 existing option directives instead of overriding and resetting them.
-<br>
+ +
 A caveat about FollowSymLinks:  if any directory along the path is not
 accessible to the web server, then the symbolic link will appear not to
 exist.
@@ -1048,7 +1051,7 @@ Here is a template/boilerplate for the start/beginning of a typical HTML file:
 ```
 
 To find out the location of the apache/httpd config files and other
-information about the server, execute 'httpd -V'.  This works on all
+information about the server, execute `httpd -V`.  This works on all
 systems that support apache (macos, windows, linux)
 
 To add a "favicon.ico" image to the address bar, do this in the
@@ -1066,6 +1069,67 @@ How to quote less than and greater than (angle brackets) and at-signs, such as f
    ...
    }</pre>
 ```
+
+
+=== Firefox
+
+Firefox extensions (.xpi files): to install, open them in Firefox.
+Adblock: http://adblock.mozdev.org/
+Firefox Adblock filter list: http://www.geocities.com/pierceive/adblock/
+(Must update by hand via "Tools > Adblock > Preferences > Adblock Options
+>> Import filters".)
+Also get the Adblock filter updater extension.
+
+In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in
+about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &
+Colors >> Default Font) causes webpages to appear in sans serif font by
+default.  It also makes webpages print in sans serif, which is not
+necessarily desirable:  sans serif is easier to read on screen, but serif
+is easier to read on paper.  I wish there was an easy way to get both of
+those features.
+
+If Firefox or Thunderbird says that a copy is already running, but that
+doesn't seem to be the case, then find and delete the file .parentlock
+somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .
+
+In Firefox, to make searches ("find") default to case-insensitive:
+Press Ctrl+F , the quick find appears at taskbar.
+Uncheck the Match case check box
+
+If Firefox behaves badly (doesn't go to homepage, address bar doesn't
+update, back button doesn't work), try moving your ~/.mozilla directory
+aside, because one of your plugins may be corrupting Firefox.
+
+When printing a blog (or some other types of webpages) from Firefox, often
+only the first page is printed:  each blog post is one box, but overflowed
+boxes are invisibly hanging off the page instead of ontinued to the next
+page.  This is due to a problem in the blog's .css file.
+Here are two fixes:
+ 1. Permit wrapping text across pages:  remove
+```
+      <div class="contenttext">
+```
+    Also, get rid of sidebars so the blog content prints full width:  remove
+```
+      <div id="leftside">
+```
+    through
+```
+      <div class="post">
+```
+    (inclusive).
+ 2. Fix the .css file.  Copy the blog locally:
+```
+      wget -O localfile.html URL
+```
+    and also copy its .css file locally.
+    Edit the .css file to contain:
+```
+      * {
+      overflow: visible !important;
+      }
+```
+   and edit the .html file to reference the local version of the .css file.
 
 
 
@@ -1094,33 +1158,34 @@ the line, after the cfile name (the order matters).
 
 Debugging C memory (pointer) corruption problems:
 //nobreak
+ 
+ * Electric Fence (efence) is distributed with (some versions of?) Linux, and
+   is available from ftp://ftp.perens.com/pub/ElectricFence/.
+   It uses the virtual memory hardware to detect the instruction at which a
+   bad memory reference occurs.  (I had a problem with it running out of memory.)
+    ** `setenv MALLOC_CHECK_ 2`
+    ** compile with "-lefence"
+ * GNU Checker:  like Purify (includes gc).  
+   http://www.gnu.org/software/checker/checker.html, ftp://alpha.gnu.org/gnu
+   It's sometimes called gccchecker or checkergcc.
+   It has not been tested on C++ (or updated since August 1998, as of 6/2001).
+ * Other Purify-like tools:  http://www.hotfeet.ch/~gemi/LDT/tools_deb.html
+ * (libYaMa detects leaks and some other memory errors; is a malloc replacement:
+   http://freshmeat.net/projects/libyama/)
+ * Also consider dmalloc (debug malloc); don't use dbmalloc.
+   (dmalloc is somewhat distributed with Linux; I had trouble making it work.)
 
- * setenv MALLOC_CHECK_ 2
- * compile with "-lefence"
-
-GNU Checker:  like Purify (includes gc).  
-http://www.gnu.org/software/checker/checker.html, ftp://alpha.gnu.org/gnu
-It's sometimes called gccchecker or checkergcc.
-It has not been tested on C++ (or updated since August 1998, as of 6/2001).
-Other Purify-like tools:  http://www.hotfeet.ch/~gemi/LDT/tools_deb.html
-(libYaMa detects leaks and some other memory errors; is a malloc replacement:
-http://freshmeat.net/projects/libyama/)
-Also consider dmalloc (debug malloc); don't use dbmalloc.
-(dmalloc is somewhat distributed with Linux; I had trouble making it work.)
-Electric Fence (efence) is distributed with (some versions of?) Linux, and
-is available from ftp://ftp.perens.com/pub/ElectricFence/.
-It uses the virtual memory hardware to detect the instruction at which a
-bad memory reference occurs.  (I had a problem with it running out of memory.)
-
-The c++filt program demangles (unmangles) mangled overloaded C++
+The `c++filt` program demangles (unmangles) mangled overloaded C++
 method/function names.
 
 To write a cpp macro which takes a variable number of arguments:
 One popular trick is to define the macro with a single argument,
 and call it with a double set of parentheses, which appear to
 the preprocessor to indicate a single argument:
+----
   #define DEBUG(args) {printf("DEBUG: "); printf args;}
   if(n != 0) DEBUG(("n is %d\n", n));
+----
 
 To strip all comments and blank lines from a (Java or C) file, use
 ```
@@ -1132,7 +1197,7 @@ This can help in computing non-comment non-blank (NCNB) lines of code
 reinsert them afterward).  The script ~jhp/bin/ncnbcode.php accepts
 a list of files and reports their ncnb lines of code, all lines, and
 a total.
-÷
+ +
 This error:
 ```
     Undefined symbol            first referenced in file
@@ -1156,7 +1221,7 @@ add these arguments to gcc:
  -O0 -fno-default-inline -fno-inline
 ```
 
-Why g++ 3.2 doesn't like uses of vector that g++ does:
+Why g\++ 3.2 doesn't like uses of vector that g++ does:
 Two things to check:
 //nobreak
 
@@ -1257,21 +1322,25 @@ the desired folder, and then "Choose Action:  Empty Folder(s)".
 
 To upload mbox files to Gmail IMAP, use:  http://imap-upload.sourceforge.net/
 Typical invocation (for hosted apps at cs.washington.edu):
+----
   python imap_upload.py --gmail --user=$USER@cs.washington.edu --password=PASSWORD --box GMAIL-LABEL --error ~/error.mail TO-UPLOAD.mail
+----
 It may be necessary to convert a BABYL file to mbox format.
 Don't use b2m for that; instead, use:  M-x unrmail
 
 If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.
 You only want to do this for Google Mail that is in [Imap]/trash and has no other user or system labels.  (I can't use -has:userlabels, unfortunately.)
 I want the trash label and no others; the way seems to be to list every label!
+----
  -in:sent -in:chat -in:draft -in:inbox -in:...
+----
 Here is also has:nouserlabels; is that useful?
 Also see the tips here:
 https://support.google.com/mail/answer/78892?hl=en
 
 
 
-== Make and Makefiles (and ant and buildfiles, build.xml)
+== Make and Makefiles
 
 In Makefiles, variables in rule targets and dependences are expanded as
 soon as the rule target is read, but variables in rule actions are expanded
@@ -1325,19 +1394,6 @@ or alternately:
   endif
 ```
 
-## Ant and buildfiles
-
-An Ant guide (documentation) for beginners:
-http://wiki.apache.org/ant/TheElementsOfAntStyle
-
-To permit user-specific setting of variables in a Makefile, add this at the
-top (and change assignments to use "=?" syntax):
-```
-  # Put user-specific changes in your own Makefile.user.
-  # Make will silently continue if that file does not exist.
-  -include Makefile.user
-```
-
 Suppose I want to write a rule that always performs a task, but doesn't
 necessarily cause its dependence to execute first.  This is a snippet of
 the Makefile I would like to write:
@@ -1362,6 +1418,20 @@ maybe-update-file1:
 .timestamp-file2: file1.txt
 	cp file1.txt file2.txt
 	touch .timestamp-file2
+```
+
+
+== Ant and buildfiles, build.xml
+
+An Ant guide (documentation) for beginners:
+http://wiki.apache.org/ant/TheElementsOfAntStyle
+
+To permit user-specific setting of variables in a Makefile, add this at the
+top (and change assignments to use "=?" syntax):
+```
+  # Put user-specific changes in your own Makefile.user.
+  # Make will silently continue if that file does not exist.
+  -include Makefile.user
 ```
 
 To make a tags table for a LaTeX paper, using an Ant buildfile:
@@ -1476,12 +1546,14 @@ Ant permits you to specify that one target depends on another, but by
 default every prerequisite is always rebuilt, even if it is already up to
 date.  (This is a key difference between Ant and make:  by default, make
 only re-builds a target if some prerequisite is newer.)
-<p>
+ +
 To make Ant re-build prerequisites only if necessary, there are two general
 approaches.
- # Use the uptodate task to set a property.  Then, your task can test the
+//nobreak
+
+ 1. Use the uptodate task to set a property.  Then, your task can test the
    property and build only if the property is (not) set.
-```
+----
   <uptodate property="mytarget.uptodate">  // in set.mytarget.uptodate task
     ...
   </uptodate>
@@ -1489,12 +1561,12 @@ approaches.
   <target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate">
     ...
   </target>
-```
+----
    Alternately, use the outofdate task from ant contrib.  It's nicer in
    that it is just one target without a separate property being defined; by
    contrast, outofdate requires separate targets to set and to test the
    property.
- # Create a <fileset> using the <modified> selector.  It calculates MD5
+ 2. Create a <fileset> using the <modified> selector.  It calculates MD5
    hashes for files and selects files whose MD5 differs from earlier stored
    values.  It's optional to set
 ```
@@ -1509,7 +1581,6 @@ approaches.
             </fileset>
         </copy>
 ```
-<p>
 There is also Ivy, but I can't tell from its documentation whether it
 provides this feature.  The key use case in the documentation seems to be
 downloading subprojects from the Internet rather than avoiding wasted work
@@ -1517,7 +1588,9 @@ by staging the parts of a single project.
 
 In Ant, the path to the current ant build file (typically build.xml) is 
 available as property `ant.file`.  You can get its directory in this way:
+----
 <dirname property="ant.file.dir" file="${ant.file}"/>
+----
 
 In Ant, to jar up the contents of a set of existing .jar files:
 ```
@@ -1528,32 +1601,47 @@ In Ant, to jar up the contents of a set of existing .jar files:
 
 Vizant (http://vizant.sourceforge.net/) is an ant build visualization tool.
 
+To make the junit task work in Ant without setting classpath, use the hack from:
+http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes
+
+To list the projects (top-level targets) in an Ant build.xml file, do either of:
+```
+  ant -projecthelp
+  ant -p
+```
+
+To get the current working directory from an ant file:
+```
+  ${bsh:WorkDirPath.getPath()}
+```
 
 
 == Eclipse
 
 Useful keystrokes in Eclipse:
-  C-S-t:  lookup type (like M-. in Emacs, but only for classes, not methods)
-  F3: open definition, also like M-.
+//nobreak
+
+ * kbd:[C-S-t]  lookup type (like kbd:[M-.] in Emacs, but only for classes, not methods)
+ * kbd:[F3] open definition, also like kbd:[M-.]
           (how do you find a method's definitions?)
-  C-S-h: all callers (call sites) for a particular method implemention (but
-    not calls via a superclass or interface):  opposite of F3
-  C-S-r:  lookup resources: finds all uses of this method name, like grep; but
-    stays within the type hierarchy, not just textual; more useful than C-S-h
-  C-h:  textual search through Java files
-  F5:   refresh (for updates made through the file system)
-  C-O:  quickly type your way to a field or method declaration
-  F4: class hierarchy (also available from a context menu)
-  Eclipse Debugger:  F6 goes to next line
+ * kbd:[C-S-h] all callers (call sites) for a particular method implemention (but
+    not calls via a superclass or interface):  opposite of kbd:[F3]
+ * kbd:[C-S-r]  lookup resources: finds all uses of this method name, like grep; but
+    stays within the type hierarchy, not just textual; more useful than kbd:[C-S-h]
+ * kbd:[C-h]  textual search through Java files
+ * kbd:[F5]   refresh (for updates made through the file system)
+ * kbd:[C-O]  quickly type your way to a field or method declaration
+ * kbd:[F4] class hierarchy (also available from a context menu)
+  Eclipse Debugger:  kbd:[F6] goes to next line
 
 To make Eclipse use spaces instead of tabs for indentation:
 //nobreak
 
- * Go  to 'Window | Preferences | Java | Code Formatter':
+ * Go to menu:Window[Preferences > Java > Code Formatter]:
    ** In the "Style" tab:
      *** Uncheck "Insert tabs for indentation, not spaces."
-     ***  Set "Number of spaces representing an indentation level" to 2.
- * Go to 'Window | Preferences | Java | Editor':
+     *** Set "Number of spaces representing an indentation level" to 2.
+ * Go to menu:Window[Preferences > Java > Editor]:
    ** In the "Typing" tab:
      *** Check "Insert space for tabs"
 
@@ -1572,15 +1660,23 @@ You can define your own variables.
 Eclipse Javadoc:  .html files get written to working directory.
 So be sure to save changes to these before you start testing javadoc.
 
-Mahmood suggests:
-//nobreak
-
- * Eclipse for debugging and writing classes from scratch.
- * Ant or command line for anything complicated.
-
 Eclipse has two compilers.
-The model reconciler operates on buffers and runs on every keystroke to create red squigglies.  (It's called that because it reconciles the internal representation or model of the program with the visual representation in the editor.)
-The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  [Occasionally people use the term "reconciler" incorrectly to refer to incremental project building.]
+ * The model reconciler operates on buffers and runs on every keystroke to create red squigglies.  (It's called that because it reconciles the internal representation or model of the program with the visual representation in the editor.)
+ * The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  (Occasionally people use the term "reconciler" incorrectly to refer to incremental project building.)
+
+
+== VMware
+
+To run VMware tools:
+```
+  vmware-toolbox &
+```
+To install VMware tools, see ~mernst/wisdom/build/build-vmware
+
+// Information on how to configure our ESX VMware servers is available
+// in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html
+
+In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 
 == General wisdom (that is, everything without its own section above)
@@ -1672,7 +1768,7 @@ Looking at files within a single directory, rather than a whole directory tree:
  * ls -l | sort -n +4 -- sorts files in size order, good for finding big files in a directory
  * du -s * | sort -n -- similar to above, find the biggest files & subdirectories of the current dir
 
-.DESKTOP file:  Macintosh info about my files.  Safe to delete.
+`.DESKTOP` file:  Macintosh info about my files.  Safe to delete.
 
 To make a soft link, do
 ```
@@ -1738,23 +1834,6 @@ directory by doing
 To extract a rar archive:
 ```
   unrar e archive.rar
-```
-
-Francesco Potorti` (pot@CNUCE.CNR.IT) says:
-To make a single tags file for all the source files in your tree, 
-```
-    find . -name '*.[chCH]' -print | etags [options] -
-    find . \( -name '*.[chCH]' -o -name '*.[cC][cC]' \) -print | etags -
-    find . \( -name UNUSED -o -name CVS -o -name SCCS -o -name RCS \) -prune -o \( -name '*.[cC][cC]' -o -name '*.[chCH]' \) -print | etags -
-```
-To create a tags file per directory, write a two line shell script:
-```
-    cd $1
-    etags *.[chCH]
-```
-and then call it from the root of your source tree like this:
-```
-    find . -type d -exec script {} \;
 ```
 
 To see and manipulate your junk files which are taking up precious
@@ -1849,9 +1928,9 @@ is performed.
 want to perform the replacement in files in the .svn directory.]
 [WARNING: This program does not respect symbolic links, instead replacing
 each symbolic link with a copy of its contents.  So, generate the [files]
-part without symbolic links.]
+arguments without symbolic links.]
 See below for more details.
-.
+ +
 To find/search and replace in multiple files (say, an entire directory)
 from the command line via perl, do
 ```
@@ -2023,12 +2102,14 @@ The `file` command gives information about the file format (type of file,
 executable (including debugging format), etc).
 
 On a Kinesis Advantage contoured keyboard:
-Soft reset: Press Progrm + Shift + F10. 
-Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
-Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
-Toggle the tone: progrm+hyphen
-Dvorak:  progrm+shift+f5 (this erases any remapping, but not macros)
-If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
+//nobreak
+
+ * Soft reset: Press Progrm + Shift + F10. 
+ * Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
+ * Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
+ * Toggle the tone: progrm+hyphen
+ * Dvorak:  progrm+shift+f5 (this erases any remapping, but not macros)
+ * If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
   mode.  Holding down = then tapping s may produce "v3.2[]".  Change to PC
   mode by holding down = then tapping p; now holding down = and tapping s may
   produce "v3.2[SL K H x e ]".
@@ -2232,32 +2313,30 @@ After adding a script to /etc/rc.d/init.d, add two symbolic links to
 The one starting with "S" (start) is invoked when runlevel N is entered.
 The one starting with "K" (kill) is invoked when runlevel N is exited.
 
-At LCS, to upgrade a Red Hat Linux machine with the latest security (or
-other) patches:
-```
-  # Prepare (can always determine mount point by executing
-  # '/usr/sbin/showmount -e coua.lcs.mit.edu')
-  mount coua.lcs.mit.edu:/scratch /mnt
-  # Check status (a nice list of the rpms that require "freshening")
-  # (Does this script need to have "/i686" appended to its pathnames?)
-  /mnt/bin/amIUp2Date
-  # Update
-  cd /mnt/mirror.techsquare.com/redhat-7.2-ia32/suggested/i686
-  # Don't do "rpm -Fvh *.rpm"!  Select all the rpms *except* for anything
-  # XFree86*, since my laptop's hardware isn't supported and that will prevent
-  # X from starting.
-  rpm -Fvh `\ls *.rpm | grep -v XFree86`
-  # Unmount
-  cd /
-  umount /mnt
-```
+// At LCS, to upgrade a Red Hat Linux machine with the latest security (or
+// other) patches:
+// ```
+//   # Prepare (can always determine mount point by executing
+//   # '/usr/sbin/showmount -e coua.lcs.mit.edu')
+//   mount coua.lcs.mit.edu:/scratch /mnt
+//   # Check status (a nice list of the rpms that require "freshening")
+//   # (Does this script need to have "/i686" appended to its pathnames?)
+//   /mnt/bin/amIUp2Date
+//   # Update
+//   cd /mnt/mirror.techsquare.com/redhat-7.2-ia32/suggested/i686
+//   # Don't do "rpm -Fvh *.rpm"!  Select all the rpms *except* for anything
+//   # XFree86*, since my laptop's hardware isn't supported and that will prevent
+//   # X from starting.
+//   rpm -Fvh `\ls *.rpm | grep -v XFree86`
+//   # Unmount
+//   cd /
+//   umount /mnt
+// ```
 
 "chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created
 in that directory will have their group set to the directory's group.
 Directories created in that directory also have their SGID bit set.
 (The SGID bit has nothing to do with the sticky bit.)
-
-/usr/lib/ical/v2.2/contrib/ contains hacks for ical.
 
 lpr can assign "classes" or priorities to jobs.  For instance, to bypass
 all other jobs in the queue, do "lpr -C Z _filename_" (Z is the highest
@@ -2380,33 +2459,6 @@ Parallel/distributed jobs across many machines:
        More about PVM: http://www.epm.ornl.gov/pvm/
  * OpenPBS: http://www-unix.mcs.anl.gov/openpbs/
 
-Firefox extensions (.xpi files): to install, open them in Firefox.
-Adblock: http://adblock.mozdev.org/
-Firefox Adblock filter list: http://www.geocities.com/pierceive/adblock/
-(Must update by hand via "Tools > Adblock > Preferences > Adblock Options
->> Import filters".)
-Also get the Adblock filter updater extension.
-
-In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in
-about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &
-Colors >> Default Font) causes webpages to appear in sans serif font by
-default.  It also makes webpages print in sans serif, which is not
-necessarily desirable:  sans serif is easier to read on screen, but serif
-is easier to read on paper.  I wish there was an easy way to get both of
-those features.
-
-If Firefox or Thunderbird says that a copy is already running, but that
-doesn't seem to be the case, then find and delete the file .parentlock
-somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .
-
-In Firefox, to make searches ("find") default to case-insensitive:
-Press Ctrl+F , the quick find appears at taskbar.
-Uncheck the Match case check box
-
-If Firefox behaves badly (doesn't go to homepage, address bar doesn't
-update, back button doesn't work), try moving your ~/.mozilla directory
-aside, because one of your plugins may be corrupting Firefox.
-
 vi commands:
 :q quits vi after a file has been saved
 :q! quits vi without saving the file
@@ -2453,49 +2505,15 @@ and finally, nothing happens unless I run
 ```
 periodically -- say, every minute or hour in a cron job.
 
-To make the junit task work in Ant without setting classpath, use the hack from:
-http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes
-
-To list the projects (top-level targets) in an Ant build.xml file, do either of:
-```
-  ant -projecthelp
-  ant -p
-```
-
-To get the current working directory from an ant file:
-```
-  ${bsh:WorkDirPath.getPath()}
-```
-
-
 To print a reasonable map from google maps do the following:
+//nobreak
+
   * execute 'import map.jpg'
   * Draw a rectangle over the part of the map you want.  The result will
     be saved in map.jpg
   * execute 'gimp map.jpg'
   * print from gimp.  Gimp does a nice job of laying the jpeg out on
     the screen and allows you to scale it and the like.
-
-To get a list of LaTeX files that are \inputted (not \included) in a LaTeX
-file, for use in making a tags table or in a Makefile or Ant build.xml file:
-```
-  TEX_FILES=$(shell latex-process-inputs -list main.tex)
-```
-or, to run tags directly:
-```
-  etags `latex-process-inputs -list main.tex`
-```
-
-To run VMware tools:
-```
-  vmware-toolbox &
-```
-To install VMware tools, see ~mernst/wisdom/build/build-vmware
-
-Information on how to configure our ESX VMware servers is available
-in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html
-
-In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 To create a transparent signature stamp:
 //nobreak
@@ -2553,7 +2571,7 @@ Marat Boshernitsan says,
 If OpenOffice or LibreOffice is trying to restore a file that no longer
 exists, press 'escape' at the Recovery window.
 
-//// More manual, less desirable solution:
+// // More manual, less desirable solution:
 // If OpenOffice is trying to restore a file that no longer exists, delete a
 // file such as one of these:
 // ```
@@ -2562,9 +2580,9 @@ exists, press 'escape' at the Recovery window.
 // ```
 
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
-  Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
+ * Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
 Alternately:
-  Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
+ * Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
 
 In OpenOffice, to freeze rows/columns so that they do not scroll but are
 always visible, select the row (or cell) below (and to the right of) the
@@ -2619,37 +2637,6 @@ To sort lines, with the sort key being the reverse of each line:
   cat myfile | rev | sort -r | rev
 
 "cd -" connects to your previous directory.
-
-When printing a blog (or some other types of webpages) from Firefox, often
-only the first page is printed:  each blog post is one box, but overflowed
-boxes are invisibly hanging off the page instead of ontinued to the next
-page.  This is due to a problem in the blog's .css file.
-Here are two fixes:
- 1. Permit wrapping text across pages:  remove
-```
-      <div class="contenttext">
-```
-    Also, get rid of sidebars so the blog content prints full width:  remove
-```
-      <div id="leftside">
-```
-    through
-```
-      <div class="post">
-```
-    (inclusive).
- 2. Fix the .css file.  Copy the blog locally:
-```
-      wget -O localfile.html URL
-```
-    and also copy its .css file locally.
-    Edit the .css file to contain:
-```
-      * {
-      overflow: visible !important;
-      }
-```
-   and edit the .html file to reference the local version of the .css file.
 
 The canonical @sys directory for your path is
 ```
@@ -2737,11 +2724,15 @@ To make your slow regular expressions (regexps) faster, restrict the number of
 different ways the regexp could match the same text.  For example, if
 you're trying to match some whitespace followed by all the text until the
 end of the line, don't write this:
+----
 	\s-+.*
+----
 Since the . can match whitespace too, there are as many different ways
 to apportion the match between the two subexpressions "\s-+" and ".*"
 as there are whitespace characters.  Instead, write this:
+----
 	\s-.*
+----
 Although this regexp matches exactly the same set of strings, there is
 now only one way to match:  the "\\s-" matches the first whitespace
 character, and ".*" matches the rest.  This runs faster.
@@ -2799,10 +2790,8 @@ compression).
 An alternative to markdown, for GitHub-style markdown format, is `grip`
 (after which browse to localhost:5000 , but that hung my Emacs when I tried
 it) or `grip --export` which exports to `<path>.html`.
+It's better to use AsciiDoc format and the Asciidoctor processor, when possible.
 
 
-
-<wiki:comment>
-Please put new content in the appropriate section above, don't just
-dump it all here at the end of the file.
-</wiki:comment>
+// Please put new content in the appropriate section above, don't just
+// dump it all here at the end of the file.

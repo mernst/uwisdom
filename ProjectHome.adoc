@@ -1,6 +1,6 @@
 Collection of useful facts, searchable via web or command line.
 
-For information, see the link:README.md[README] file.
+For information, see the link:README.adoc[README.adoc] file.
 
 (Note that all content is in the wiki, not in the main source
 repository.)
