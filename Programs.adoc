@@ -1679,6 +1679,22 @@ To install VMware tools, see ~mernst/wisdom/build/build-vmware
 In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 
+== AsciiDoc format
+
+On GitHub, AsciiDoc comments (lines starting with //) seem to be rendered rather than ignored.
+
+In AsciiDoc, to put a callout within a list item (ie, indented rather than at the top level), add unindented "+" on a line by itself immediately before the callout, as in:
+----
+  +
+  ----
+  callout here
+  ----
+----
+Then after the callout use unindented {empty} if the following text is intented.
+{empty} can take the place of + elsewhere.
+
+
+
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
