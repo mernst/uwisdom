@@ -658,12 +658,56 @@ factor of the current font and 0.5em is the extra space factor.
 ----
 appears to prevent LaTeX page breaks, even just before lists.
 
-LATEX can break an inline formula only when a relation symbol (=, >, ...)
-or a binary operation symbol (+, -, ...) exists and at least one of these
-symbols appears at the outer level of a formula. Thus $a+b+c$ can be broken
-across lines, but ${a+b+c}$ cannot.  So, you can wrap parts of your formula
-in \mathrel or the like.
+To break a multi-line display math mode equation, use \begin{multline} or
+the breqn package or the split environment provided by the amsmath package.
 
+LATEX can break an inline math mode formula at a \discretionary{}{}{} command.
+It can automatically break the formula only when a relation symbol
+(=, >, ...)  or a binary operation symbol (+, -, ...) exists and at least
+one of these symbols appears at the outer level of the formula. Thus $a+b+c$
+can be broken across lines, but ${a+b+c}$ cannot and neither can
+$\left\langle ... \right\rangle$.
+You can wrap parts of your formula in \mathrel or the like to fool LaTeX into
+thinking there is a relation symbol at the outer level of the formula.
+There is also \* which is discretionary multiplication sign:  "\times"
+appears in the document only if the document is broken there.
+. +
+//
+From
+http://stackoverflow.com/questions/1703867/latex-how-to-put-line-break-in-a-math,
+here is a definition of \mytuple that can be used as follows:
+----
+  $ \mytuple{ long\_text, other\_long\_text, more\_long\_text } $
+----
+----
+% Permits line breaks after commas.  Use like this:
+%   $ \mytuple{ longtext, otherlongtext, morelongtext } $
+\makeatletter
+\newcommand\mytuple[1]{%
+  \@tempcnta=0
+  \bigl\langle
+  \@for\@ii:=#1\do{%
+    \@insertbreakingcomma
+    \@ii
+  }%
+  \bigr\rangle
+}
+\def\@insertbreakingcomma{%
+  \ifnum \@tempcnta = 0 \else\,,\ \linebreak[1] \fi
+  \advance\@tempcnta\@ne
+}
+\makeatother
+----
+Another solution, from http://tex.stackexchange.com/questions/19094/allowing-line-break-at-in-inline-math-mode-breaks-citations :
+----
+\AtBeginDocument{%
+  \mathchardef\mathcomma\mathcode`\,
+  \mathcode`\,="8000 
+}
+{\catcode`,=\active
+  \gdef,{\mathcomma\discretionary{}{}{}}
+}
+----
 
 
 == PDF and pdflatex
