@@ -268,7 +268,7 @@ Java 7 ("J2SE 7") release date is September 2011.  See:
 
 Major version number for the Java class file format (JVM version number):
 ----
-  J2SE 9.0 = 53 (0x35 hex)    [goal is to release around March 2016?]
+  J2SE 9.0 = 53 (0x35 hex)    [as of 5/7/2015, goal is September 2016]
   J2SE 8.0 = 52 (0x34 hex)    [released March 2014]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
   J2SE 6.0 = 50 (0x32 hex)    [released December 2006]
