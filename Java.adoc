@@ -456,7 +456,7 @@ Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 
 
 
-//  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava
+//  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
 //  LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
