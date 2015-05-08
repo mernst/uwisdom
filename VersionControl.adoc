@@ -1095,3 +1095,5 @@ I'm not sure whether all this works for the wiki repository...
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+
+// LocalWords:  RCS toc VC rsync dir DIR1 DIR2 Cavz
