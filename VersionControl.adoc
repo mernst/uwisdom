@@ -1095,6 +1095,7 @@ Jekyll seems like a mess that I would like to avoid getting entangled in.
 
 For email notifications of changesets in Bitbucket, use Admin >> Services;
 then, for each email address: Email >> Add service.
+Or, maybe now it's just:  Settings >> Hooks >> Email.
 For email notifications of issue tracker changes, use Admin >> Issue
 Tracker Settings >> Notifications.
 I'm not sure whether all this works for the wiki repository...
