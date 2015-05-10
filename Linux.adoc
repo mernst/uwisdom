@@ -173,14 +173,14 @@ Ubuntu 15.04 LTS (Vivid Vervet)
 
 == Devices
 
+To mount a USB stick drive or CD-ROM on Ubuntu,
+just insert it, and it appears under `/media/${USER}/` or `/run/media/${USER}/'.
 When using a USB stick under Linux, give it plenty of time to finish
 writing a file.
-To mount a USB stick drive or CD-ROM on Ubuntu,
-  just insert it, and it appears under `/run/media/${USER}/' or '/media'.
-To eject it, first do
+To eject it, first do one of these:
 ----
+  umount /media/${USER}/DISKNAME
   umount /run/media/${USER}/DISKNAME
-  umount /media/DISKNAME
 ----
 
 To use a floppy under Linux, either dd or mtools is probably all you need.
