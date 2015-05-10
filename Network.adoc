@@ -173,8 +173,23 @@ Web polls:
 
 The plume-bib README instructions are available at
 ```
+  http://rawgit.com/mernst/plume-bib/master/README
+  https://rawgit.com/mernst/plume-bib/master/README
   https://raw.githubusercontent.com/mernst/plume-bib/master/README
 ```
+the latter two of which are identical.
+
+Neither of these redirect:
+```
+  http://rawgit.com/mernst/randoop/master/doc/index.html
+  https://rawgit.com/mernst/randoop/master/doc/index.html
+```
+even though the second one of these two does redirect:
+```
+  http://rawgit.com/mernst/plume-bib/master/README
+  https://rawgit.com/mernst/plume-bib/master/README
+```
+Weird.
 
 For PC remote control:
 //nobreak

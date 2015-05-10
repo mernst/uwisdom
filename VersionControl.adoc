@@ -1026,7 +1026,7 @@ doesn't produce a table of contents.  Instead, you need
 ----
   :toc:
   :toc-placement: manual
-
+  ...
   toc::[]
 ----
 
@@ -1061,6 +1061,14 @@ request.
   git push origin <mybranchname>
 }}
 Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
+
+GitHub wikis:
+ * can write in AsciiDoc
+ * other people can theoretically edit
+GitHub pages:
+ * html only
+Both are in a separate repository from the code proper, which is a negative.
+Jekyll seems like a mess that I would like to avoid getting entangled in.
 
 
 // == Google Code
