@@ -13,7 +13,7 @@ Defect::
       incorrect design, algorithm, or implementation.  Also known as a
       fault or bug.  Typically caused by a human mistake.
 Error::
-      An error is a discrepancy between the intended behaviour of a
+      An error is a discrepancy between the intended behavior of a
       system and its actual behavior inside the system boundary.  Not
       detectable without assert statements and the like.
 Failure::
