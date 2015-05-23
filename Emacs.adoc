@@ -243,7 +243,7 @@ Emerge commands:
   a,b: choose that text
   n,p: next,previous difference
 ```
-(It's probably better to use ediff-merge, rather than emerge.)
+(Emerge is superseded by Ediff.  Thus, it's probably better to use ediff-merge.)
 
 The .texi (texinfo) files for Emacs are in the distribution in the man
 directory.
