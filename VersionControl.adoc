@@ -509,10 +509,11 @@ Or:
 == Mercurial (Hg)
 
 To a first approximation, Git and Hg (Mercurial) have the same
-capabilities.  Hg is easier to use, because it has better IDE support and a
-more cohesive command line interface.  Git is more idiosyncratic, faster on
-very large projects, and integrated with the popular social programming
-website Github; the latter is the most compelling reason to choose it.
+capabilities.  Hg is easier to use, because it has a cleaner usage model
+and more logical and cohesive command line interface.  Git is more
+idiosyncratic, faster on very large projects, and integrated with the
+popular social programming website Github; the latter is the most
+compelling reason to choose it.
 
 If you want to use Mercurial similarly to CVS or SVN, then you can use this
 mapping:
@@ -880,6 +881,10 @@ To display a stash as a diff/patch:
   git stash show -p stash@{0}
 ```
 
+`git merge` always writes a a file with merge conflict markers (if there
+is a conflict); it never asks the user to resolve the conflict.
+The user is expected to run "git mergetool" to resolve the conflict.
+
 When running git under Emacs, to disable the pager when viewing help (& see
 the help topics in a new Emacs buffer), do this:
 ```
@@ -1065,11 +1070,16 @@ request.
 Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
 
 GitHub wikis:
- * can write in AsciiDoc
+ * in a separate wiki
+ * can write in AsciiDoc and other formats
  * other people can theoretically edit
-GitHub pages:
+GitHub pages:  e.g., http://mernst.github.io/randoop 
+ * in a separate branch in the main wiki
  * html only
-Both are in a separate repository from the code proper, which is a negative.
+ * if using automatic page generator:
+    * can paste in Markdown, but it gets converted to .html
+    * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
+Both are in a separate branch from the code proper, which is a negative.
 Jekyll seems like a mess that I would like to avoid getting entangled in.
 
 
