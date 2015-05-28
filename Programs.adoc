@@ -2538,7 +2538,7 @@ To create a transparent signature stamp:
  * clean it up (in Paint or in the Gimp)
  * use Gimp to make the background transparent:
     ** menu > layer > transparency > add alpha channel
-    ** click on the fuzzy selector tool
+    ** click on the fuzzy selector tool (magic wand)
     ** for each area to remove, select it, then "edit > clear" (ctrl + k)
     ** save as gif or png
    (instructions from http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp)
