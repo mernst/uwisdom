@@ -172,7 +172,7 @@ To pass the -Xlint argument to javac when running from Ant, do:
 
 javac is a java class that runs on a JVM, and you can pass parameters to
 that JVM using the -J argument.  In particular, you can pass -J-Xmx1024M to
-give the JVM a gig of memory for the heap.
+give the JVM a gigabyte of memory for the heap.
 
 The command
 ----

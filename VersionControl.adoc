@@ -509,11 +509,14 @@ Or:
 == Mercurial (Hg)
 
 To a first approximation, Git and Hg (Mercurial) have the same
-capabilities.  Hg is easier to use, because it has a cleaner usage model
-and more logical and cohesive command line interface.  Git is more
-idiosyncratic, faster on very large projects, and integrated with the
-popular social programming website Github; the latter is the most
-compelling reason to choose it.
+capabilities.
+Hg is easier to use, because it has a cleaner usage model and more logical
+and cohesive interface.
+Git is more idiosyncratic, faster on very large projects, and integrated
+with the popular social programming website Github.
+Here is an article that criticizes Git's poor interface:
+http://roman.st/Article/What-makes-Git-difficult-someone-coming-Mercurial
+
 
 If you want to use Mercurial similarly to CVS or SVN, then you can use this
 mapping:
