@@ -305,7 +305,7 @@ Stock reply for people trying to recruit/hire students:
 Good luck on your project!
 The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  http://www.cs.washington.edu/affiliates/
 
-UW CSE technical reports (TRs) are handled by Lindsay Michimoto.
+UW CSE technical reports (TRs) are handled by Elise Dorough.
 
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
