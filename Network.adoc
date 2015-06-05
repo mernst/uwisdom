@@ -252,3 +252,9 @@ Amazon Web Services (AWS) tips, from Darioush Jalali:
    whenever they choose (this is rare).
  * Amazon limits the number of types of certain instances they grant.
    Customer support will increase this, but it takes a couple days.
+
+Trello is a popular task management system (a to-do list).  I don't see
+what makes it compelling, though.  It doesn't support the most important
+things that I want to do, such as sorting items, seeing an overview of all
+the issues, integrating with my existing toolchain (version control system,
+editor, etc.), working offline, etc.
