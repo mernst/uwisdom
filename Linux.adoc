@@ -85,7 +85,7 @@ Example:
 
 To create a new account under Unix or Linux:
 ```
-  sudo useradd -m USERNAME
+  sudo useradd -m USERNAME -s /bin/bash
   sudo passwd USERNAME
 ```
 To remove a user's account, do
