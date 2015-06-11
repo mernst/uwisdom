@@ -1060,16 +1060,6 @@ To add a "favicon.ico" image to the address bar, do this in the
   <link rel="icon" type="image/png" href="my-favicon.png" />
 ```
 
-How to quote less than and greater than (angle brackets) and at-signs, such as for generics, in Javadoc comments:
-```
- Equation: {@literal i > j}
- Inline code: {@code getThat()}
- Multi line code:
-   <pre>{@code
-   ...
-   }</pre>
-```
-
 
 === Firefox
 
