@@ -969,10 +969,16 @@ To see the changes in a single git commit, as a diff, do either of these:
   git show COMMIT
 ```
 
-To make a bundle of unpushed changes:
+To make a bundle of all changes:
 ```
+  git bundle create ../yourRepo.bundle master     // for all changes
+```
+To make a bundle of just some changes:
+```
+  git bundle create ../yourRepo.bundle TAG-OR-REVSPEC
+  git bundle create ../yourRepo.bundle SOMECOMMIT..master
+  git bundle create ../yourRepo.bundle master~1....master
   git bundle create ../yourRepo.bundle --since=x.days.ago --all
-  git bundle create ../yourRepo.bundle master     // for unpushed changes
 ```
 Then to get the contents:
 ```
