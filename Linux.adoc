@@ -399,6 +399,15 @@ with the buttons on the front of the screen to make sure it is correct
 To see what X thinks, use xdpyinfo | grep -i pixel  or
 xrandr (with no arguments) will print out the choices.
 
+To edit PDF on Linux or Ubuntu:
+ * PDF Studio works with Ubuntu 15.04
+ * LibreOffice
+ * Gimp
+ * Okular is designed for KDE, so installing it on Ubuntu installs hundreds of megs of KDE modules
+ * Online PDF editor: http://www.pdfescape.com/
+ * not PDFedit (not updated since January 2014, isn't available in Ubuntu 15.04 Vivid Vervet; also based on old Qt 3 toolkit)
+ * not evince, it only reads
+
 
 == long entries below
 
