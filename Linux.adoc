@@ -400,12 +400,15 @@ To see what X thinks, use xdpyinfo | grep -i pixel  or
 xrandr (with no arguments) will print out the choices.
 
 To edit PDF on Linux or Ubuntu:
- * PDF Studio works with Ubuntu 15.04
- * LibreOffice
- * Gimp
- * Okular is designed for KDE, so installing it on Ubuntu installs hundreds of megs of KDE modules
+ * Master PDF Editor, http://code-industry.net/free-pdf-editor.php
+   Good, but there is no way to scale an image while retaining aspect ratio.
+   You have to edit the size and width manually to do that.
+ * Okular is designed for KDE, so installing it on Ubuntu installs hundreds of megs of KDE modules.  I should probably try it anyway.
+ * Gimp (only one page at a time, and converts to lossy image format)
+ * LibreOffice (but the text width was changed in the editing window and then in the saved PDF, probably because the proper fonts were not available)
  * Online PDF editor: http://www.pdfescape.com/
- * not PDFedit (not updated since January 2014, isn't available in Ubuntu 15.04 Vivid Vervet; also based on old Qt 3 toolkit)
+ * PDF Studio works with Ubuntu 15.04, but it's commercial software (their misleading webpage "PDF Studio 10 Free Download" means it's free to download a trial version that watermarks your documents with a huge diagonal "Qoppa Software" across its content, not that it's free to use!)
+ * not PDFedit (not updated since January 2014, isn't available in Ubuntu 15.04 Vivid Vervet; also based on old Qt 3 toolkit; once corrupted my file)
  * not evince, it only reads
 
 

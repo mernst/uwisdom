@@ -783,12 +783,6 @@ To convert a Microsoft Word .doc file to PDF:
 
 Neither technique dominates the other, and each is sometimes bad
 
-To annotate a PDF document:
-//nobreak
-
- * pdfedit corrupted my document.
- * I couldn't get Sun PDF Importer (SPI, part of OpenOffice) to work
-
 To convert PDF to text (txt) format, use the pdftotext program, which is
 part of the xpdf package.
 
