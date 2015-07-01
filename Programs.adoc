@@ -1377,6 +1377,14 @@ or alternately:
        ... it does not exist ...
   endif
 ```
+or:
+```
+ifneq ("$(wildcard $(PATH_TO_FILE))","")
+FILE_EXISTS = 1
+else
+FILE_EXISTS = 0
+endif
+```
 
 Suppose I want to write a rule that always performs a task, but doesn't
 necessarily cause its dependence to execute first.  This is a snippet of
