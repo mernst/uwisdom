@@ -601,10 +601,10 @@ either of these:
   hg log --style changelog
 ```
 To show a patch for a single already-committed changeset, do either of these
-(the first ignores whitespace changes):
+(to ignore whitespace changes, add `-b` to `hg diff` version):
 ```
-  hg diff -b -c REVISIONNUMBER
   hg log -p -r REVISIONNUMBER
+  hg diff -c REVISIONNUMBER
 ```
 To show diffs between two arbitrary revisions:
 ```
