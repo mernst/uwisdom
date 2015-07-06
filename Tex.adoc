@@ -1670,7 +1670,7 @@ http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms
 Possible choices seem like
 //nobreak
 
- * algorithmicx bundle, which offers several environments.
+ * algorithmicx bundle, which includes the algpseudocode package and is compatible with the algorithm package, offers several environments.
    It's more flexible than algorithmic and is probably the best choice.
  * algorithms bundle, which provides the `algorithmic` and `algorithms` environments
  * clrscode
