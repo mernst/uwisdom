@@ -985,6 +985,12 @@ Then to get the contents:
    git clone repo.bundle -b master repo
 ```
 
+To obtain the repository state as of a particular moment in time, do
+```
+  git checkout `git rev-list -1 --before="Jan 17 2014" master`
+```D
+on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
+
 
 == bzr bazaar
 
