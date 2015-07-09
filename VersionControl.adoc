@@ -1037,7 +1037,7 @@ For GitHub, to link directly to files in the repository, use rawgit.com.
 Examples:
   https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
 This does not seem to work for wiki files.
-For Gitlab at UW, n example is:
+For Gitlab at UW, an example is:
   https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md
 
 In GitHub, just

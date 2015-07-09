@@ -87,6 +87,7 @@ To eliminate nondeterminism from a (non-concurrent) Java program:
 
  * use `LinkedHashMap` and `LinkedHashSet` instead of the non-`Linked*` versions
  * after each call to File.listFiles, call Arrays.sort on the result
+ * override hashCode(), so that you don't use Object.hashCode()
 
 JVM segfaults:
 When the VM crashes, it generates a log file of the active frames.
