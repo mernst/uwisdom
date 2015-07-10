@@ -988,7 +988,7 @@ Then to get the contents:
 To obtain the repository state as of a particular moment in time, do
 ```
   git checkout `git rev-list -1 --before="Jan 17 2014" master`
-```D
+```
 on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
 
 
@@ -1096,6 +1096,14 @@ GitHub pages:  e.g., http://mernst.github.io/randoop
     * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
 Both are in a separate branch from the code proper, which is a negative.
 Jekyll seems like a mess that I would like to avoid getting entangled in.
+
+GitHub Issues (GitHub's issue tracker) supports sorting only on creation
+date, date of last update, and number of comments.  To find high-priority
+issues, it is necessary to use labels or milestones.  An advantage of
+milestones is that it is possible to search for issues without a milestone,
+but it's not possible to search for issues without a given set of labels
+(only for issues with no label at all).  The search syntax does not support
+disjunction ("or" queries).
 
 
 // == Google Code
