@@ -2780,11 +2780,10 @@ To recover a closed tab in Chrome:  Ctrl-Shift-t
 To replace the dictionary in the Android Kindle app:
 //nobreak
 
- * Not officially supported as of May 2013: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3CF5CO3HY68KB&cdMsgNo=60&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3CF5CO3HY68KB
-   and later messages say that previously-posted solutions in that thread no longer work either
- * Another possibility: http://www.amazon.com/gp/help/customer/forums/kindleqna/ref=kindle_help_forum_md_pl?ie=UTF8&cdForum=Fx1GLDPZMNR1X53&cdMsgID=Mx3SFUQ6LQH79EL&cdMsgNo=72&cdPage=3&cdSort=oldest&cdThread=Tx1TP0PSVB5RMFB#Mx3SFUQ6LQH79EL
+ * A Spanish-to-Spanish dictionary is already installed with the app
+ * Adding new dictionaries is finally supported in 2015, but I don't see how to change the default dictionary and it's a pain to always have to click to a new dictionary to see definitions.  So, follow these directions:
+   http://learnoutlive.com/add-german-english-dictionary-android-kindle-app/
  * if you have an Internet connection: http://ebookfriendly.com/translate-words-in-kindle-app/
- * A Spanish-to-Spanish dictionary is already be installed with the app
 
 For RBCommons, you can submit a review by either downloading their command-line tools, http://www.reviewboard.org/downloads/rbtools/, or by uploading a diff on their webpage.
 
