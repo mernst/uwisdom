@@ -82,12 +82,12 @@ If java is running in a shell, you can also normally use ctrl-\ as well.
 To debug a Java infinite loop, send SIGQUIT (kill -3) to get a stack trace
 (but Java process keeps running).
 
-To eliminate nondeterminism from a (non-concurrent) Java program:
+To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
 //nobreak
 
- * use `LinkedHashMap` and `LinkedHashSet` instead of the non-`Linked*` versions
- * after each call to File.listFiles, call Arrays.sort on the result
- * override hashCode(), so that you don't use Object.hashCode()
+ * Use `LinkedHashMap` and `LinkedHashSet` rather than `HashMap` and `HashSet`.
+ * Override hashCode(), so that your program does not use Object.hashCode() which is nondeterministic (it depends on when the garbage collector runs). Also don't instantiate the Object class, as in new Object(); instead, use some class that overrides hashCode().
+ * Mitigate other sources of nondeterminism, such as always calling `Arrays.sort` on the result of `File.listFiles`.
 
 JVM segfaults:
 When the VM crashes, it generates a log file of the active frames.
