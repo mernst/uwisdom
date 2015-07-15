@@ -991,6 +991,14 @@ To obtain the repository state as of a particular moment in time, do
 ```
 on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
 
+To unpush a commit:
+```
+git reset --hard <desired-commit>
+  git push -f <remote> <branch>
+```
+where <desired-commit> is something like HEAD~1 or a SHA hash,
+and <remote> and <branch> are optional.
+
 
 == bzr bazaar
 
