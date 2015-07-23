@@ -1047,6 +1047,8 @@ Examples:
 This does not seem to work for wiki files.
 For Gitlab at UW, an example is:
   https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md
+For Bitbucket, an example is:
+  http://htmlpreview.github.io/?https://bitbucket.org/typetools/jsr308-langtools/raw/tip/doc/README-jsr308.html
 
 In GitHub, just
 ----

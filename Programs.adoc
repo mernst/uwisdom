@@ -2769,6 +2769,7 @@ then run:
 To get the current date in a sortable numeric format:
 ```
   date +%Y%m%d
+  date +%Y%m%d%H%M
 ```
 To get yesterday's date:
 ```
