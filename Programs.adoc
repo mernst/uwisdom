@@ -2411,7 +2411,7 @@ This particular mount requires that the following appear in /etc/hosts.allow:
   ALL: 128.52.0.0/255.255.0.0
 ```
 
-Delta debugging appliation, written in perl:
+Delta debugging application, written in perl:
   http://daniel-wilkerson.appspot.com/; look for "Delta", under "Software"
 Or, at pag: ~smcc/bin/delta
 Also, Zeller's Python implementation is at:
