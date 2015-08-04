@@ -1756,6 +1756,9 @@ Ways to get a circled number in LaTeX with better formatting than \textcircled:
  \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
 ```
 
+Use `-O .` To make the latexrun script put auxiliary files in the standard
+locations.  This means that standard commands such as `latex` and
+`pdflatex` can find them, without having to run latexrun every time.
 
 
 // Please put new content in the appropriate section above, don't just
