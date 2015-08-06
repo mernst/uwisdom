@@ -245,6 +245,11 @@ Emerge commands:
 ```
 (Emerge is superseded by Ediff.  Thus, it's probably better to use ediff-merge.)
 
+In Emacs's Diff Mode, to refine the diff region so you see per-character
+diffs, go to the hunk you are interested in and hit C-c C-b for
+refine-hunk.  Or step through the file one hunk at a time with M-n; that
+will do the refining automatically.
+
 The .texi (texinfo) files for Emacs are in the distribution in the man
 directory.
 
