@@ -349,28 +349,6 @@ cs-ugrads@cs.  It will be posted to the blog within 24 hours.
 If you have a time-sensitive message, you should send that to 
 cs-ugrads-urgent@cs.
 
-Jenkins setup:
- 1. Created a jenkins user with the same uid as before and
-    /scratch/secs-jenkins/jenkins-home/ as home directory.
- 2. Installed the latest Jenkins.
- 3. Edited /etc/sysconfig/jenkins to set the home directory.
- 4. Started it.
- 5. Added it to runtime startup.
- 6. Visited http://buffalo.cs.washington.edu:8080/
- 7. Waited.
-Try this for file .hgrc in ~jenkins (/var/lib/jenkins):
-```
-[trusted]
-users = mernst, wmdietl, jenkins, apache
-groups = pl_gang
-[diff]
-git = 1
-[extensions]
-fetch=
-mq=
-progress=
-```
-
 Card key access to rooms in the CSE building (the Allen Center):
 cardkey@cs.washington.edu
 
