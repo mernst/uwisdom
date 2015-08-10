@@ -938,6 +938,8 @@ However, it is easier and better to just use pdflatex, which will use the
 good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a
 different font like Times.
 
+If the line spacing is too large/big in a paragraph typeset in a smaller
+font, then be sure to end the paragraph with \par.
 
 
 == Everything else
