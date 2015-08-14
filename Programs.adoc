@@ -1354,7 +1354,7 @@ whether there is a file named `clean'.
 After Makefile.in is changed, it is necessary to rerun "config.status" and
 then rerun "make".
 
-Particularly useful "automatic variables" used by make (in Makefile rules):
+Particularly useful special "automatic variables" used by make (in Makefile rules):
 //nobreak
 
  * $@   the target of the rule

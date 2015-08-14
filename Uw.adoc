@@ -223,7 +223,10 @@ directory, which will get reaped eventually when you graduate or leave UW.
 In the UW CSE visitor reservation schedule system (mvis):
 //nobreak
 
- * To not show your name, prefix a description with "-" , e.g., "-Lunch at Canlis".
+ * In general, you don't need to fill in a description field because your
+   name and room number are automatically shown.  The description field is
+   shown in addition to that.
+ * To not show your name and room number (that is, to replace it by the description), prefix the description with "-" , e.g., "-Lunch at Canlis".
    http://reserve.cs.washington.edu/visitor/help.php?#SEC25
  * To blackout some periods, prefix with "--", e.g., "--unavailable".
    http://reserve.cs.washington.edu/visitor/help.php?#SEC22
