@@ -258,3 +258,6 @@ what makes it compelling, though.  It doesn't support the most important
 things that I want to do, such as sorting items, seeing an overview of all
 the issues, integrating with my existing toolchain (version control system,
 editor, etc.), working offline, etc.
+
+Coveralls (https://coveralls.io/) reports test coverage.
+For Java, it requires Maven.
