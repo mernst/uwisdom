@@ -1564,6 +1564,11 @@ moreverb package.
 Note that Computer Modern font has no bold fixed width font.
 (See elsewhere in this file for solutions.)
 
+The lstlisting package by default puts its line numbers in the column gutter rather than where it belongs.  To fix this, use:
+```
+  \begin{lstlisting}[xleftmargin=5.0ex]
+```
+
 To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here are some options.
 When using Computer Modern fonts), use
 ```
