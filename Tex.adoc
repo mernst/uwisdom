@@ -1198,6 +1198,12 @@ horizontal mode; if the latter, it automatically switches to math mode.
 ACM LaTeX styles FAQ:
   http://www.acm.org/sigs/publications/sigfaq
 
+To solve the problem
+```
+! pdfTeX warning (ext4): destination with the same identifier ... has been already used, duplicate ignored
+```
+add page numbers to the document.
+
 To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove
 the copyright box):
 ```
