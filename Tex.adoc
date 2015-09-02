@@ -26,20 +26,17 @@ something like (these must take up zero vertical space):
  \def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
  \def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
  \makeatother
+ % If there is a line, you can get away with reducing the separation between
+ % figures and text.  Don't do this without the line, though.
+ \addtolength{\textfloatsep}{-.5\textfloatsep}
+ \addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+ \addtolength{\floatsep}{-.5\floatsep}
+ \addtolength{\dblfloatsep}{-.5\dblfloatsep}
 ```
 In ACM styles that add a line between the figure and the caption,
 additionally do
 ```
  \nocaptionrule
-```
-Once you have the line, you can consider reducing `\floatsep`:
-```
- % Reduce space between figures and text
- \addtolength{\textfloatsep}{-.5\textfloatsep}
- \addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
- % Optional
- \addtolength{\floatsep}{-.5\floatsep}
- \addtolength{\dblfloatsep}{-.5\dblfloatsep}
 ```
 
 // Can't unindent the LaTeX comments or the doc program will respect those
