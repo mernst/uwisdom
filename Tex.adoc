@@ -321,6 +321,12 @@ Here's a version that takes care of URLs, too:
   \newcommand{\myurl}[1]{{\codesize\url{#1}}}
   %HEVEA \def\myurl{\url}
 ```
+Or, if your document does `\usepackage{url}`, for URLs you can just do
+```
+  \renewcommand{\UrlFont}{\smaller}
+```
+but note that that is one command; you cannot specify `\smaller\texttt`.
+.
 Similarly, "\scshape" is generally preferred to "\sc", because it
 respects the typesetting of the current context.
 For Verbatim environments, do this:
