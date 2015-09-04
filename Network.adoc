@@ -90,7 +90,7 @@ To donate used inkjet printer cartriges:  www.donateinkjets.com
 The Elements of Style by Strunk and White is online (do a search for it).
 
 NSF GPG (Grant Proposal Guide):
-http://www.nsf.gov/pubs/2004/nsf042/nsf04_2.pdf
+http://www.nsf.gov/publications/pub_summ.jsp?ods_key=GPG
 
 wget is a command-line utility to fetch web pages and save them to the
 local disk.  http://www.gnu.org/software/wget/wget.html
