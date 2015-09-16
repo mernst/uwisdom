@@ -1777,6 +1777,12 @@ Use `-O .` To make the latexrun script put auxiliary files in the standard
 locations.  This means that standard commands such as `latex` and
 `pdflatex` can find them, without having to run latexrun every time.
 
+Ways to convert LaTeX to plaintext:
+ * detex program (comes with LaTeX distributions):  `detex yourfile > yourfile.txt`
+   opendetex supposedly improves detex but as of 9/2015 hasn't been updated since 10/2008
+ * catdvi program, to retain formatting: `catdvi yourfile.dvi | fmt -u`
+ * convert to PDF (disabling hyphenation), then use pdftotext
+ * use pandoc
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
