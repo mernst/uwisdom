@@ -1000,6 +1000,22 @@ git reset --hard <desired-commit>
 where <desired-commit> is something like HEAD~1 or a SHA hash,
 and <remote> and <branch> are optional.
 
+Two ways to submit pull requests:
+Branching Workflow:  (https://guides.github.com/introduction/flow/)
+a) Create a branch locally.
+b) Work as normal, committing/pulling to your branch as you go.
+c) When finished, push your branch to the main repo.
+d) Initiate a pull request between your branch and the main branch.
+e) Incorporate code review feedback.
+f) merge your branch
+g) delete your branch to keep the list of active branches small (https://help.github.com/articles/deleting-unused-branches/)
+Personal Fork & Pull Workflow: (https://help.github.com/articles/using-pull-requests/)
+a) Create a fork using your GitHub account.
+b) Work on that fork.
+c) When finished, push all your changes to YOUR repo.
+d) Initiate a pull request between your repo and the main branch.
+e) Incorporate code review feedback.
+f) merge pull-request
 
 == bzr bazaar
 
