@@ -1132,6 +1132,10 @@ but it's not possible to search for issues without a given set of labels
 (only for issues with no label at all).  The search syntax does not support
 disjunction ("or" queries).
 
+To pull a GitHub pull request into my local clone/copy,
+click on "command line instructions" at the bottom of the pull request.
+Also see https://help.github.com/articles/checking-out-pull-requests-locally/
+
 
 // == Google Code
 

@@ -1682,7 +1682,7 @@ In AsciiDoc, to put a callout within a list item (ie, indented rather than at th
   callout here
   ----
 ----
-Then after the callout use unindented {empty} if the following text is intented.
+Then after the callout use unindented {empty} if the following text is indented.
 {empty} can take the place of + elsewhere.
 
 
