@@ -472,6 +472,12 @@ In Emacs, to edit a file with long lines so the display wraps/flows/fills
 the lines but the underlying buffer text retains long lines, use M-x
 visual-line-mode.  It's better than longlines mode.
 
+To use Emacs to  resolve a file with merge conflict markers
+of the form <<<<<< ====== >>>>>>,
+use M-x vc-resolve-conflicts.
+Do this in one pass because it slightl edits the <<<<<< ====== >>>>>>
+lines so that a subsequent invocation of M-x vc-resolve-conflicts won't
+recognize them.
 
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
