@@ -370,6 +370,9 @@ If I get
 this may be due to a slow or laggy connection.  Try going directly to
 https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 
+How to order lunches / snack carts at UW CSE:
+https://www.cs.washington.edu/internal/food
+
 
 == Seattle
 
