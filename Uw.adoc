@@ -314,7 +314,7 @@ To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
 http://www.cs.washington.edu/lab/sw/windows/office2010/
 
-To add a visitor's talk to the CSE colloquium talk calendar, send to eithe
+To add a visitor's talk to the CSE colloquium talk calendar, send to either
 Connie Ivey-Pasche or Kay Beck-Benton:
   name, affiliation, title and abstract, date, room, time,
   visitor schedule in MVIS if available
