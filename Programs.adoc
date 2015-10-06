@@ -227,6 +227,13 @@ and execution tracing) to make sure problems are caught early:
   set -o errexit -o nounset -o xtace
   ...
 ```
+Also consider:
+  set -x : Display commands and their arguments as they are executed.
+  set -v : Display shell input lines as they are read.
+It's also possible to set these when running the script:
+```
+  sh -xv myscript.sh
+```
 
 To get bash 3.0 to fail if any command in a pipeline fails, do
 ```
