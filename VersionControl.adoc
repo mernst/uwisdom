@@ -1000,7 +1000,7 @@ git reset --hard <desired-commit>
 where <desired-commit> is something like HEAD~1 or a SHA hash,
 and <remote> and <branch> are optional.
 
-Two ways to submit pull requests:
+Two ways to submit GitHub pull requests:
 Branching Workflow:  (https://guides.github.com/introduction/flow/)
 a) Create a branch locally.
 b) Work as normal, committing/pulling to your branch as you go.
@@ -1016,6 +1016,8 @@ c) When finished, push all your changes to YOUR repo.
 d) Initiate a pull request between your repo and the main branch.
 e) Incorporate code review feedback.
 f) merge pull-request
+The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
+
 
 == bzr bazaar
 
