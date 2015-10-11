@@ -928,7 +928,7 @@ Git equivalent of `hg rollback`:
   git reset --soft HEAD^
 ```
 I'm not sure exactly what is the distiction between these.
-To revise a commit before pushing it -- similarly to what "hg rollback" enbales:
+To revise a commit before pushing it -- similarly to what "hg rollback" enables -- without rewriting the commit message:
 //nobreak
 
  * do more edits

@@ -139,8 +139,8 @@ to print from Acrobat Reader, and to check the "landscape" button.
 
 At UW CSE, Melody Kadenko is a notary.
 
-PL/SE lab is room 315 (phone 206-543-2053).
-jicama.cs.washington.edu is a machine in that room.
+PLSE (PL/SE) lab is room 407.
+It used to be room 315 (phone 206-543-2053).
 
 An undergrad instructional linux server: attu
 
