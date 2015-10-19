@@ -5,505 +5,319 @@
 toc::[]
 
 
+== Git
 
-== Other ways to sync
+In git,
+```
+  git commit
+```
+only commits the files mentioned on the command line; without commands, it
+commits only the files explicitly added via a previous command.  To commit
+all changed files, use
+```
+  git commit -a
+```
 
-My ideas about using version control (VC) vs. rsync vs. Unison:
+To display a stash as a diff/patch:
+```
+  git stash show -p stash@{0}
+```
+
+`git merge` always writes a a file with merge conflict markers (if there
+is a conflict); it never asks the user to resolve the conflict.
+The user is expected to run "git mergetool" to resolve the conflict.
+
+When running git under Emacs, to disable the pager when viewing help (& see
+the help topics in a new Emacs buffer), do this:
+```
+  git config --global man.viewer woman
+```
+Or, to see them in a web browser:
+```
+  apt-get install git-doc
+  git config --global man.viewer firefox
+  git config --global man.firefox.cmd firefox
+  git config --global help.format web
+```
+To undo the change:
+```
+  git config --global man.viewer man
+```
+
+In git, to unadd an accidentally-added file, do
+```
+  git reset FILE
+```
+
+In git, after resolving the conflicts in the appropriate files:
+ # `git add` all of the conflicted files
+ # `git commit`
+   (which will automatically fill in the message with something about
+   resolving conflicts between the appropriate revisions)
+
+To undo a `git add` command before doing a commit, do `git reset <file>`.
+To undo changes in your working copy (like `hg revert`) do
+`git checkout filename`; for the whole tree, `git checkout -f'.
+A different command that undoes all uncommitted changes in the working tree
+is `git reset --hard`, but some people discourage its use because it's "dangerous".
+
+Git equivalent of `hg rollback`:
+```
+  git reset HEAD^
+  git reset --soft HEAD^
+```
+I'm not sure exactly what is the distiction between these.
+To revise a commit before pushing it -- similarly to what "hg rollback" enables -- without rewriting the commit message:
 //nobreak
 
- * VC is essential when others will collaborate.
- * Unison is useful when the files are very large and/or change frequently, or I wish to update them automatically on the central host without logging in to that host.
- * VC is useful when I only want to include certain files, not all files (for instance, my "dots" directory).
- * VC is useful when I expect the files to change in multiple places.
+ * do more edits
+ * `git commit --amend`
+ * or: `git commit --amend --no-edit`
+`git revert' is different:  it makes a new, opposite commit.
 
-To mirror one directory to another (including deletions), you can use:
-```
-  rsync --omit-dir-times --recursive --quiet --delete DIR1 DIR2
-  # This one sets directory times too, which can be a problem
-  rsync -Cavz --quiet --delete DIR1 DIR2
-```
-
-
-
-== RCS
-
-To set up RCS, create a subdirectory called RCS in the directory with the files.
-To add a file:
-```
-  chgrp medics <filename>
-  ci -u <filename>              check in the file
-  rcs -a<namelist> <filename>   add <namelist> (eg: mernst,todd) to access list
-  rcs -L <filename>             add owner of file (eg comp212) as well
-```
-When you check in an RCS file via Emacs, type  C-c C-c  to finish the comment.
-
-
-
-== CVS
-
-File cvs-intro in this directory is a quick beginner's guide to the CVS
-version control system.
-
-CVS update: get from repository
-In update output, my version comes first, latest repository second.
--q means somewhat quietly; suppress informational messages
-```
- cvs -q update
- # really quiet:
- cvs -q update |& egrep -e "^C "
- # even more quiet:
- cvs -q update | grep -v '^U ' | grep -v '^retrieving revision' | grep -v '^RCS' | grep -v "^Merging differences" | grep -v "^cvs update: conflicts found" | grep -v "^rcsmerge: warning: conflicts during merge"
-```
-
-CVS diff: show differences
-```
- cvs diff
- cvs diff -b  -- ignore whitespace changes
- cvs diff -u  -- use unidiff format
- cvs diff -u -r BASE -r HEAD  (what have others changed since I last updated?)
- cvs diff -D "1 week ago"     (or various other date formats)
- cvs diff -r 1.8 -r 1.9
- cvs diff --brief             only list names of changed files
-```
-
-To create a new repository (this is not the same as creating a
-project/module!):
-```
-  cvs -d ~/mydir/.CVS init
-```
-Then, you must ensure the appropriate group can read/write it.  (Entire CVS
-repository must be readable, and CVSROOT/history must be readable and
-writeable, by all repository users.  Files with ",v" counterparts (and the
-",v" files themselves) shouldn't be writeable, however.)
-```
-  # NFS
-  chgrp -R grants ~/mydir/.CVS
-  chmod g+s `find ~/mydir/.CVS -type d`
-  # AFS
-  ... [need to write these instructions]
-```
-To create a project (aka module):
-```
-  mkdir ~/mydir/.CVS/new-module-name
-```
-then possibly edit the loginfo file to have mail sent (or some other
-action taken) whenever a checkin occurs.
-
-To check out a module (aka project) from a CVS repository:
-```
-  cvs -d REPOSITORY-LOCATION checkout MODULE-NAME
-```
-Examples:
-```
-  cvs -d ~gjb/.CVS-macros checkout macros
-  cvs -d ~mernst/class/573/project/.CVS-medics checkout code
-  cvs -d :ext:mernst@pag.csail.mit.edu:/g4/projects/invariants/.CVS checkout papers/esc-annotate-paper
-  cvs -d :ext:mernst@palpatine.mit.edu:/home/adbirka/.cvs checkout anstatic
-  cvs -d :ext:onion.csail.mit.edu:/afs/csail.mit.edu/u/m/mernst/prof/grants/.CVS co 2005-10-darpa-appcommunities
-  cvs -d :pserver:ernst@oss.software.ibm.com:/usr/cvs/jikes login
-  cvs -d :pserver:ernst@oss.software.ibm.com:/usr/cvs/jikes checkout -ko jikes
-```
-Another way to use a remote repository:
-```
-  setenv CVSROOT :pserver:anoncvs@CVS.Sourcery.Org:/cvs/jikes
-  cvs login
-  paswsd anoncvs
-  cvs checkout -ko jikes
-```
-From Windows:
-```
-  cvs -d //pag.csail.mit.edu/mernst/.CVS/.CVS-mernst checkout -ko emacs
-```
-To check out an old version (from a specific date, as of a given date), run
-this from ~/tmp:
-```
-  cvs -d ~gjb/.CVS-macros checkout -D "1 Jan 1998" macros
-```
-
-In CVS, to add a file, do 2 things:
-```
- cvs add FILENAME
- cvs commit FILENAME
-```
-When adding binary files to CVS, use the -kb flag:
-```
-  cvs add -kb filename
-```
-To add the -kb flag to a file that is already in CVS:
-```
-  cvs admin -kb filename
-```
-To commit changes
-```
- cvs commit  -- commits all changed files in current directory
-```
-To quit working and delete your personal copy
-```
- cvs release -d
-```
-To obtain a lock (aka watch),
-```
- cvs edit paper.tex
-```
-To see the change logs:
-```
- cvs log evilmacros
-```
-To get new directories, do "cvs update -d" instead of "cvs update".
-  To avoid the need for this, one should really have
-```
-    diff -u
-    update -d -P
-```
-in one's .cvsrc file.
-
-To create a branch in CVS (this from Dave Grove via Jake Cockrell):
-```
-  cd fromdir; tar cf - . | (cd todir; tar xfBp -)
-    cvs tag <branch_point_tag>
-    cvs rtag -b -r <branch_point_tag> <branch_tag> module
-    cvs update -r <branch_tag>
-  cvs commit
-```
-
-To make the HEAD and BASE tags work in CVS, add to directory CVSROOT (in
-the true repository) a file `val-tags` containing:
-```
-HEAD y
-BASE y
-```
-
-For email or other notification whenever a CVS
-checkin occurs, add the actions to the CVSROOT/loginfo file in the
-repository.  For example, you might add this line to the CVSROOT/loginfo file:
-```
-  ^my-module-name    mail -s "CVS checkin my-module-name" me@mymail.com,you@yourmail.com
-```
-As another example, this is in Scwm's loginfo file (unindented):
-```
-  ^scwm-web /usr/local/bin/cvslog scwm-web; ( date; ( sleep 2; \
-  cd /home/httpd/html/scwm; cvs update -dP ) &) \
-  >> /usr/local/home/gjb/cvslog/err-scwm-web 2>&1
-```
-The cvslog command just mails the other devs on a commit, but the rest
-does an auto-update of the web page to the place where it is served.
-This happens on each commit, and the output goes to a file.
-On AFS, use something similar to the following to auto-update on commit:
-```
-  ^bib (cd /afs/csail.mit.edu/group/pag/www/bib; fs sa . pag rlidwka; \
-        cvs -q up >/dev/null; fs sa . pag rla)
-```
-
-In inetd.conf, the cvspserver notation must be all on one line!
-(At least on redhat-release-6.2-1.)
-
-Anonymous cvs server:
-After editing /etc/inetd.conf, cause inetd to reread the file with "killall
--HUP inetd".
-Make sure repository is readable (and directory is writeable) by anonymous user.
-Add "passwd" and "readers" files in CVSROOT.
-
-cvs diff does not permit specifying both the -D "date" and the -r "tag"
-options for its arguments; each argument gets to use at most one of those
-two options.  (This means, for example, that you cannot use cvs diff to
-determine what has changed in a branch since a particular date.)  To work
-around this problem, make a new checkout with the appropriate date and
-tags, and then use ordinary diff to compare that to another checkout
-(perhaps your current one).
-For instance, to see what has changed in Daikon V2 since a particular
-date, do (in a temporary directory):
-```
-  cvs -d /g4/projects/invariants/.CVS co -r ENGINE_V2_PATCHES -D 2003/06/09 invariants/java/daikon
-```
-and then diff that directory against your daikon.ver2 directory.
-
-If CVS says
-```
-  cvs checkout: Updating module
-  cvs checkout: failed to create lock directory for `/some/path/module' (/some/path/module/#cvs.lock): Permission denied
-  cvs checkout: failed to obtain dir lock in repository `/some/path/module'
-  cvs [checkout aborted]: read lock failed - giving up
-```
-Then the problem is typically that the person who created the CVS
-repository has left it (as default) manipulable only by that person.
-NFS:
-  The directory's group should be changed, and the group should be
-  given permission for all the files in the directory.
-```
-    chgrp -R groupname .
-    find . -type d | xargs chmod g+s
-```
-AFS:
-  (To be written.)
-
-To determine who has made a cvs checkin since a particular date, use "cvs
-log" or "cvs history"; "cvs history" is the better way.  For example,
-```
-  cvs history -a -c -D "2003/12/22 02:05"
-```
-(Is the time local or GMT?)
-
-By default, it is not easy to give read-only access to a CVS repository.
-Just to do a checkout, CVS wants to create a read lock file `#cvs.lock` in
-each directory of the CVS repository; and the ability to create and delete
-files essentially gives all write privileges.
-  You can patch CVS to add a "-u" option to allow checkouts without read
-locks.  The intent is to allow read-only operations such as "checkout"
-to succeed for users who do not have write access to the repository.  
-The patch is at
-  http://ximbiot.com/cvs/cvshome/dev/patches/readlock
-and is potentially dangerous, but generally seems to work.
-It's installed on Athena, so you can try it with
-```
-  /afs/athena.mit.edu/project/gnu/arch/i386_linux24/bin/cvs -u -d path/to/root co module
-```
-
-In CVS/SVN, "reserved checkout" or "file locking" is the name for user locks
-that permit only one user to edit a file at once, forbidding simultaneous 
-editing.
-"advisory locks" are a distinct mechanism that serves a similar purpose.
-Also, the 
-svn:needs-lock property signifies that the file it's attached to ought to
-be locked before editing (by running "svn lock"). The value of the property
-is irrelevant.
-.
-SVN locking avoids conflicts when two people edit the same file unknowingly.
-http://svnbook.red-bean.com/en/1.2/svn.advanced.locking.html
-Before you can edit a file, do
-```
- svn lock filename -m"comment"
-```
-(or in Eclipse, do Team > Lock).
-When you commit, that releases the lock.
-
-In CVS, to get a copy (cat) of a specific revision of a file (the version
-as of a given date), without setting any sticky tags:
-```
-  cvs update -p -r <version> file > file-old
-  cvs update -p -D 2008-11-27 file > file-20081127
-```
-To check out an old version (from a specific date, as of a given date), run
-this from ~/tmp:
-```
-  cvs -d ~gjb/.CVS-macros checkout -D "1 Jan 1998" macros
-```
-
-
-
-== SVN
-
-To make a new, empty SVN repository:
-```
-  svnadmin create --fs-type fsfs DIR
-```
-CSE requires this flag also, as of 6/15/2009:  --pre-1.5-compatible
-(DIR must be a path, not a URL.)
-(DIR is often a subdirectory named for the project of a directory named
-.SVNREPOS .  Or it could just be .SVNREPOS if there will never be more than
-one repository needed in that place.  Users can always just check out part
-of the repository.)
-Examples:
-```
-  svnadmin create --fs-type fsfs --pre-1.5-compatible $HOME/prof/grants/.SVNREPOS
-  chmod -R g+w $HOME/prof/grants/.SVNREPOS
-```
-Now, you may immediately check it out with a command 
-```
-  svn checkout URL
-```
-where URL is of the form
-```
-  file:///homes/gws/mernst/prof/grants/.SVNREPOS/myproj
-  svn+ssh://login.csail.mit.edu/afs/csail/group/pag/projects/.SVNREPOS/igj
-```
-.
-The simple approach above does not set up the "trunk, tags, branches"
-structure, but I'm not entirely sure how to do that or even what the point
-is.
-
-To make SVN ignore a file or files, like the ".cvsignore" file does, do
-```
-  svn propedit svn:ignore .
-```
-(where "." is the directory to edit).
-
-To make SVN update the `$Id: ...$` text in a file, use
-```
-  svn propset svn:keywords "Id" filename...
-```
-
-"svn ls URL" tells which modules are in that repository.
-
-(Isn't there a single script that does all this, too?)
-From Seth Teller: how to recover a repos "papers" created with BDB
-(doesn't mix with AFS), and convert it to FSFS:
-```
-# correct any errors in place
-svnadmin recover /afs/csail.mit.edu/group/rvsn/papers
-# dump all svn actions to a log
-svnadmin dump /afs/csail.mit.edu/group/rvsn/papers > svn.dump
-# move existing repos out of the way
-cd /afs/csail.mit.edu/group/rvsn/
-mv papers papers.bdb
-# recreate repos; default type is FSFS
-svnadmin create papers
-# replay the log
-svnadmin load /afs/csail.mit.edu/group/rvsn/papers < svn.dump
-# if everything worked
-rm svn.dump
-rm -rf papers.bdb
-```
-
-To retrieve a specific version (revision) of a file under Subversion control:
-```
-  svn update -r 140 introduction.tex
-  svn update -r {2008-10-01} introduction.tex
-```
-
-To receive email notification on each SVN commit/checkin, edit file
-`hooks/post-commit` in the SVN repository.  Add a line like this (the full
-filename to mailer.py seems important; prefix with /usr/bin/python if
-necessary):
-```
-  /usr/share/doc/subversion-1.4.6/tools/hook-scripts/mailer/mailer.py commit "$REPOS" "$REV"
-```
-It uses file `conf/mailer.conf` in the SVN repository.
-Only two edits to that file are necessary:
+In git:
 //nobreak
 
- * uncomment the `mail_command` line
- * change the `to_addr` line (the separator is whitespace (no commas))
-.
-(A previous script (buggy, and now deprecated) was commit-email.pl.)
+ * HEAD^ or HEAD^1 will be resolved to the first parent of HEAD.
+ * HEAD^2 will resolve to the second parent
+ * HEAD~ or HEAD~1 will resolve to the first parent of head
+ * HEAD~2 will resolve to the first parent of the first parent of HEAD. This would be the same as HEAD^^
 
-If "svnadmin verify" gives output like:
+The git equivalent to `hg outgoing` is:
 ```
+  git fetch && git log FETCH_HEAD..master
+```
+The git equivalent to `hg incoming` is:
+```
+  git fetch && git log master..FETCH_HEAD
+```
+
+In Git, to list branches:  `git branch`.
+In Git, to delete a local branch:
+```
+  git branch -d the_local_branch
+```
+To remove a remote branch (if you know what you are doing!)
+```
+  git push origin --delete the_remote_branch
+```
+(or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
+
+To see the changes in a single git commit, as a diff, do either of these:
+```
+  git diff COMMIT^ COMMIT
+  git show COMMIT
+```
+
+To make a bundle of all changes:
+```
+  git bundle create ../yourRepo.bundle master     // for all changes
+```
+To make a bundle of just some changes:
+```
+  git bundle create ../yourRepo.bundle TAG-OR-REVSPEC
+  git bundle create ../yourRepo.bundle SOMECOMMIT..master
+  git bundle create ../yourRepo.bundle master~1....master
+  git bundle create ../yourRepo.bundle --since=x.days.ago --all
+```
+Then to get the contents:
+```
+   git clone repo.bundle -b master repo
+```
+
+To obtain the repository state as of a particular moment in time, do
+```
+  git checkout `git rev-list -1 --before="Jan 17 2014" master`
+```
+on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
+
+To unpush a commit:
+```
+git reset --hard <desired-commit>
+  git push -f <remote> <branch>
+```
+where <desired-commit> is something like HEAD~1 or a SHA hash,
+and <remote> and <branch> are optional.
+
+If merging works perfectly then rebasing simplifies the history.
+If there is a problem, then it can cause confusion and can make debugging harder in the future, because you can't get back to the exact same codebase as you had during development.
+So really one should rebase only if there is no merge conflict, and the code continues to compile and all the tests pass.
+.
+In the very most simple case of no collisions:
+ * git pull --rebase: rebases your local commits ontop of remote HEAD and does not create a merge/merge commit
+ * git pull: merges and creates a merge commit
+If there is a textual conflict in file modified-file, you will get asked to resolve them manually and then
+ * continue with rebase:git add modified-file; git rebase --continue, or
+  * merge:git add modified-file; git commit
+
+
+== GitHub (Git-specific items go above)
+
+For GitHub, to link directly to files in the repository, use rawgit.com.
+Examples:
+  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
+This does not seem to work for wiki files.
+For Gitlab at UW, an example is:
+  https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md
+For Bitbucket, an example is:
+  http://htmlpreview.github.io/?https://bitbucket.org/typetools/jsr308-langtools/raw/tip/doc/README-jsr308.html
+
+In GitHub, just
+----
+  :toc:
+----
+doesn't produce a table of contents.  Instead, you need
+----
+  :toc:
+  :toc-placement: manual
   ...
-  * Verified revision 535.
-  svnadmin: Unexpected end of svndiff input
-```
-then version 536 must be corrupted.  You can fix it by running:
-```
-   fsfsverify.py -f REPOS/db/rev/536
-```
-.
-To fix svn repository error/crash (eg, read chunk size: connection truncated)
-use fsfsverify.py to repair the broken revision.  First execute
-```
-  svnadmin verify <repository-path>
-```
-to find out the broken revision (one past the last good revision).
-Then execute fsfsverify on that revision
-```
-  fsfsverify.py -f <repository-path>/db/revs/<revision>
-```
-Its best to copy your repository before trying this.  Its easy to
-find fsfsverify on the web, and a local copy is available at
-/var/autofs/net/peanut/scratch2/jhp/fsfsverify/fsfsverify.py
+  toc::[]
+----
 
-If svn errors of the following sort occur:
-```
-  $ svn commit -m 'attendance 2007' attendance 
-  svn: Commit failed (details follow):
-  svn: OPTIONS request failed on '/jhp_general/public_html/dirt'
-  svn: Can't open file 
-  '/afs/csail.mit.edu/u/j/jhp/REPOS/general/db/revs/10': Permission denied
-```
-AFS has incorrectly cached the permissions on the new revision. Execute
-```
-  fs flushv /afs/csail/u/j/jhp/REPOS/general
-```
-to fix the problem.
+The standard way to collaborate on Github-based projects is for you to fork
+the project on Github, and then commit your changes to your clone, and then
+on the Github page describing your commit there is a button whereby you can
+submit a "pull request" which lets the owner know that you want a patch to
+be merged.
 
-An error like
-```
-  svn: Can't open file .../myrepos/db/revs/1': Permission denied
-```
-is probably a svn interaction with a bug in the afs client that
-causes it to incorrectly cache permissions.   You can clear it with:
-```
-  fs flushv /afs/csail/group/pag/projects/testrepos/
-```
-on the machine running the svn backend/server (e.g., onion).
+Two ways to submit GitHub pull requests:
+Branching Workflow:  (https://guides.github.com/introduction/flow/)
+a) Create a branch locally.
+b) Work as normal, committing/pulling to your branch as you go.
+c) When finished, push your branch to the main repo.
+d) Initiate a pull request between your branch and the main branch.
+e) Incorporate code review feedback.
+f) merge your branch
+g) delete your branch to keep the list of active branches small (https://help.github.com/articles/deleting-unused-branches/)
+Personal Fork & Pull Workflow: (https://help.github.com/articles/using-pull-requests/)
+a) Create a fork using your GitHub account.
+b) Work on that fork.
+c) When finished, push all your changes to YOUR repo.
+d) Initiate a pull request between your repo and the main branch.
+e) Incorporate code review feedback.
+f) merge pull-request
+The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
 
-A command that performs regular expression replacement on an entire
-directory is dangerous for Subversion, since that makes changes to the
-files in the .svn directory!
-The solution is to make a fresh new checkout and copy either the changed
-files into there, or copy its .svn directories into the old copy.
+Here is how to create a GitHub pull request for a single git commit, if I
+have already committed more than 1 commit to my local repository.  I do
+that because it is more convenient during development to put all commits in
+a single working copy; then I make a sequence of commits, all in a single
+branch.  But I seem to need one commit per branch to submit a proper GitHub pull
+request.
+```
+  ## <mybranchname> is by convention "upstream"
+  ## <git repository> is, for example, git@github.com:mernst/asciidoctor.org.git
+  git remote add <mybranchname> <git repository>
+  # "git remote update" would also work
+  git fetch <mybranchname>
+  ## If I did my work on a named branch:
+  git checkout -b <mybranchname> <mybranchname>/master
+  ## else if I did my work in master (of my repository) and the commit I want is right after those in the central repo:
+  git checkout -B <mybranchname> <mycommithash>
+  ## else if I did my work in master (of my repository) and the commit I want is not right after those in the central repo:
+  git checkout -B <mybranchname> <commithash-of-last-commit-on-master>
+  git cherry-pick <mycommithash>
+  ## endif
+  git push origin <mybranchname>
+}}
+Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
 
-Add a password to an svn password file with a command like the following:
-```
-  htpasswd /cse/www2/oigj/.svn_htpasswd <username>
-  htpasswd $pag/projects/<name>/password <username>
-```
-or have users run one of these commands locally:
-```
-  htpasswd -n -d <username>
-  htdigest -c /dev/fd/1 Subversion <username>
-```
-or use an online tool like
-http://home.flash.net/cgi-bin/pw.pl
-http://www.4webhelp.net/us/password.php
-http://www.htaccesstools.com/htpasswd-generator/
+GitHub doesn't support pull requests for the wiki repository, only the main repository, according to http://stackoverflow.com/questions/10642928/ .
 
-To checkout an svn repository over http:  
-```
-  svn co https://svn.csail.mit.edu/<name> <name>
-```
-All of PAG's repositories can be found at:
-  https://svn.csail.mit.edu:1443/admin/admin.cgi
+GitHub wikis:
+ * in a separate wiki
+ * can write in AsciiDoc and other formats
+ * other people can theoretically edit
+GitHub pages:  e.g., http://mernst.github.io/randoop 
+ * in a separate branch in the main wiki
+ * html only
+ * if using automatic page generator:
+    * can paste in Markdown, but it gets converted to .html
+    * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
+Both are in a separate branch from the code proper, which is a negative.
+Jekyll seems like a mess that I would like to avoid getting entangled in.
 
-To diff a file ignoring whitespace use
-```
-  svn diff -x -w <file>
-```
-To diff two revisions/versions/commits, use
-```
-  svn diff -r 63:64
-```
+GitHub Issues (GitHub's issue tracker) supports sorting only on creation
+date, date of last update, and number of comments.  To find high-priority
+issues, it is necessary to use labels or milestones.  An advantage of
+milestones is that it is possible to search for issues without a milestone,
+but it's not possible to search for issues without a given set of labels
+(only for issues with no label at all).  The search syntax does not support
+disjunction ("or" queries).
+
+To pull a GitHub pull request into my local clone/copy,
+click on "command line instructions" at the bottom of the pull request.
+Also see https://help.github.com/articles/checking-out-pull-requests-locally/
 
 
-Editing a file on multiple different operating systems (Unix/Linux,
-Windows, Macintosh) can cause problems with end-of-line conventions.  To
-work around this, add to the bottom of ~/.subversion/config :
-```
-  [miscellany]
-  enable-auto-props = yes
-```
-.
-```
-  [auto-props]
-  *.c = svn:eol-style=native
-  *.cpp = svn:eol-style=native
-```
-For more examples, see:
-//nobreak
+// == Google Code
 
- * http://www.apache.org/dev/svn-eol-style.txt 
- * http://www.bioperl.org/wiki/Svn_auto-props
+// For Google Code, it is possible to link straight to HTML files in the
+// repository.  Examples:
+//   http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
+//   http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
+// However, it's not convenient to link to files that are not in the
+// repository (such as a release or other generated files),
+// so it's generally better to put a project's webpages elsewhere.
 
-To see all changes to a Subversion repository since a certain date, use
+// Google code wiki syntax (a variant of MoinMoin syntax):
+//  * Don't break a bullet point across lines.
+//  * Don't break an external link (in square brackets) across lines.
+//  * For a table of contents, use
+// ```
+//   Contents:
+//   <wiki:toc max_depth="1" />
+// ```
+
+
+== Bitbucket
+
+For email notifications of changesets in Bitbucket, use Admin >> Services;
+then, for each email address: Email >> Add service.
+Or, maybe now it's just:  Settings >> Hooks >> Email.
+For email notifications of issue tracker changes, use Admin >> Issue
+Tracker Settings >> Notifications.
+I'm not sure whether all this works for the wiki repository...
+
+
+
+== bzr bazaar
+
+To create a bzr (Bazaar) repository for a project using the normal pag
+directories, the following:
 ```
-  svn log -r "{2010-06-01}:HEAD"
+  setenv PDIR <name of your project, eg, 'inv' or 'ac'>
+  bzr init-repo $pag/projects/$PDIR/BZR_REPOS
+  bzr init $pag/projects/$PDIR/BZR_REPOS/trunk
+  bzr checkout $pag/projects/$PDIR/BZR_REPOS/trunk ~/research/$PDIR
+  # populate ~/research/$PDIR
+  cd ~/research/$PDIR
+  bzr add *
+  bzr commit -m 'initial version of ...'
 ```
 
-Here is how to relocate a version control repository when the repository has
-changed but you want to keep your local clone/checkout without making a new one.
-Don't forget to commit and push all local changes first.
-In Subversion:
-  svn relocate
-In Mercurial:
-  just edit the .hg/hgrc file
-In git, you need to do this if you get the message "remote: This repository moved. Please use the new location:".
-Possible git gommands (but at least the latter didn't work for me, so just rename the old clone and create a new one):
-  git remote set-url origin NEWURL
-Or:
-  git remote show origin
-  git remote rm origin
-  git remote add origin NEWURL
-  git remote show origin
+To install a relatively recent version of bzr on debian stable, execute
+the following commands on a pag machine:
+```
+  sudo dpkg -i bzr_1.5-1~bpo40+1_i386.deb
+```
+you will also need python-parmiko in order to use sftp, to install that,
+execute:
+```
+  sudo apt-get install python-paramiko
+```
+To install a relatively recent version of bzr on cygwin, it is simply necessary
+to update cygwin and select python-paramiko, and python-crypto as a packages
+(they are not selected by default)
 
+If
+```
+  bzr branch lp:...
+```
+fails with
+  Permission denied (publickey).
+then add a new ssh key.  From your personal page in Launchpad, follow
+"Change details" and then "SSH Keys".
 
 
 == Mercurial (Hg)
@@ -866,307 +680,504 @@ If you get a bundle:
 ```
 
 
-== Git
+== SVN
 
-In git,
+To make a new, empty SVN repository:
 ```
-  git commit
+  svnadmin create --fs-type fsfs DIR
 ```
-only commits the files mentioned on the command line; without commands, it
-commits only the files explicitly added via a previous command.  To commit
-all changed files, use
-```
-  git commit -a
-```
-
-To display a stash as a diff/patch:
-```
-  git stash show -p stash@{0}
-```
-
-`git merge` always writes a a file with merge conflict markers (if there
-is a conflict); it never asks the user to resolve the conflict.
-The user is expected to run "git mergetool" to resolve the conflict.
-
-When running git under Emacs, to disable the pager when viewing help (& see
-the help topics in a new Emacs buffer), do this:
-```
-  git config --global man.viewer woman
-```
-Or, to see them in a web browser:
-```
-  apt-get install git-doc
-  git config --global man.viewer firefox
-  git config --global man.firefox.cmd firefox
-  git config --global help.format web
-```
-To undo the change:
-```
-  git config --global man.viewer man
-```
-
-In git, to unadd an accidentally-added file, do
-```
-  git reset FILE
-```
-
-In git, after resolving the conflicts in the appropriate files:
- # `git add` all of the conflicted files
- # `git commit`
-   (which will automatically fill in the message with something about
-   resolving conflicts between the appropriate revisions)
-
-To undo a `git add` command before doing a commit, do `git reset <file>`.
-To undo changes in your working copy (like `hg revert`) do
-`git checkout filename`; for the whole tree, `git checkout -f'.
-A different command that undoes all uncommitted changes in the working tree
-is `git reset --hard`, but some people discourage its use because it's "dangerous".
-
-Git equivalent of `hg rollback`:
-```
-  git reset HEAD^
-  git reset --soft HEAD^
-```
-I'm not sure exactly what is the distiction between these.
-To revise a commit before pushing it -- similarly to what "hg rollback" enables -- without rewriting the commit message:
-//nobreak
-
- * do more edits
- * `git commit --amend`
- * or: `git commit --amend --no-edit`
-`git revert' is different:  it makes a new, opposite commit.
-
-In git:
-//nobreak
-
- * HEAD^ or HEAD^1 will be resolved to the first parent of HEAD.
- * HEAD^2 will resolve to the second parent
- * HEAD~ or HEAD~1 will resolve to the first parent of head
- * HEAD~2 will resolve to the first parent of the first parent of HEAD. This would be the same as HEAD^^
-
-The git equivalent to `hg outgoing` is:
-```
-  git fetch && git log FETCH_HEAD..master
-```
-The git equivalent to `hg incoming` is:
-```
-  git fetch && git log master..FETCH_HEAD
-```
-
-In Git, to list branches:  `git branch`.
-In Git, to delete a local branch:
-```
-  git branch -d the_local_branch
-```
-To remove a remote branch (if you know what you are doing!)
-```
-  git push origin --delete the_remote_branch
-```
-(or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
-
-To see the changes in a single git commit, as a diff, do either of these:
-```
-  git diff COMMIT^ COMMIT
-  git show COMMIT
-```
-
-To make a bundle of all changes:
-```
-  git bundle create ../yourRepo.bundle master     // for all changes
-```
-To make a bundle of just some changes:
-```
-  git bundle create ../yourRepo.bundle TAG-OR-REVSPEC
-  git bundle create ../yourRepo.bundle SOMECOMMIT..master
-  git bundle create ../yourRepo.bundle master~1....master
-  git bundle create ../yourRepo.bundle --since=x.days.ago --all
-```
-Then to get the contents:
-```
-   git clone repo.bundle -b master repo
-```
-
-To obtain the repository state as of a particular moment in time, do
-```
-  git checkout `git rev-list -1 --before="Jan 17 2014" master`
-```
-on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
-
-To unpush a commit:
-```
-git reset --hard <desired-commit>
-  git push -f <remote> <branch>
-```
-where <desired-commit> is something like HEAD~1 or a SHA hash,
-and <remote> and <branch> are optional.
-
-Two ways to submit GitHub pull requests:
-Branching Workflow:  (https://guides.github.com/introduction/flow/)
-a) Create a branch locally.
-b) Work as normal, committing/pulling to your branch as you go.
-c) When finished, push your branch to the main repo.
-d) Initiate a pull request between your branch and the main branch.
-e) Incorporate code review feedback.
-f) merge your branch
-g) delete your branch to keep the list of active branches small (https://help.github.com/articles/deleting-unused-branches/)
-Personal Fork & Pull Workflow: (https://help.github.com/articles/using-pull-requests/)
-a) Create a fork using your GitHub account.
-b) Work on that fork.
-c) When finished, push all your changes to YOUR repo.
-d) Initiate a pull request between your repo and the main branch.
-e) Incorporate code review feedback.
-f) merge pull-request
-The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
-
-
-== bzr bazaar
-
-To create a bzr (Bazaar) repository for a project using the normal pag
-directories, the following:
-```
-  setenv PDIR <name of your project, eg, 'inv' or 'ac'>
-  bzr init-repo $pag/projects/$PDIR/BZR_REPOS
-  bzr init $pag/projects/$PDIR/BZR_REPOS/trunk
-  bzr checkout $pag/projects/$PDIR/BZR_REPOS/trunk ~/research/$PDIR
-  # populate ~/research/$PDIR
-  cd ~/research/$PDIR
-  bzr add *
-  bzr commit -m 'initial version of ...'
-```
-
-To install a relatively recent version of bzr on debian stable, execute
-the following commands on a pag machine:
-```
-  sudo dpkg -i bzr_1.5-1~bpo40+1_i386.deb
-```
-you will also need python-parmiko in order to use sftp, to install that,
-execute:
-```
-  sudo apt-get install python-paramiko
-```
-To install a relatively recent version of bzr on cygwin, it is simply necessary
-to update cygwin and select python-paramiko, and python-crypto as a packages
-(they are not selected by default)
-
-If
-```
-  bzr branch lp:...
-```
-fails with
-  Permission denied (publickey).
-then add a new ssh key.  From your personal page in Launchpad, follow
-"Change details" and then "SSH Keys".
-
-
-== GitHub
-
-For GitHub, to link directly to files in the repository, use rawgit.com.
+CSE requires this flag also, as of 6/15/2009:  --pre-1.5-compatible
+(DIR must be a path, not a URL.)
+(DIR is often a subdirectory named for the project of a directory named
+.SVNREPOS .  Or it could just be .SVNREPOS if there will never be more than
+one repository needed in that place.  Users can always just check out part
+of the repository.)
 Examples:
-  https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html
-This does not seem to work for wiki files.
-For Gitlab at UW, an example is:
-  https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md
-For Bitbucket, an example is:
-  http://htmlpreview.github.io/?https://bitbucket.org/typetools/jsr308-langtools/raw/tip/doc/README-jsr308.html
-
-In GitHub, just
-----
-  :toc:
-----
-doesn't produce a table of contents.  Instead, you need
-----
-  :toc:
-  :toc-placement: manual
-  ...
-  toc::[]
-----
-
-The standard way to collaborate on Github-based projects is for you to fork
-the project on Github, and then commit your changes to your clone, and then
-on the Github page describing your commit there is a button whereby you can
-submit a "pull request" which lets the owner know that you want a patch to
-be merged.
-
-GitHub doesn't support pull requests for the wiki repository, only the main repository, according to http://stackoverflow.com/questions/10642928/ .
-
-Here is how to create a GitHub pull request for a single git commit, if I
-have already committed more than 1 commit to my local repository.  I do
-that because it is more convenient during development to put all commits in
-a single working copy; then I make a sequence of commits, all in a single
-branch.  But I seem to need one commit per branch to submit a proper GitHub pull
-request.
 ```
-  ## <mybranchname> is by convention "upstream"
-  ## <git repository> is, for example, git@github.com:mernst/asciidoctor.org.git
-  git remote add <mybranchname> <git repository>
-  # "git remote update" would also work
-  git fetch <mybranchname>
-  ## If I did my work on a named branch:
-  git checkout -b <mybranchname> <mybranchname>/master
-  ## else if I did my work in master (of my repository) and the commit I want is right after those in the central repo:
-  git checkout -B <mybranchname> <mycommithash>
-  ## else if I did my work in master (of my repository) and the commit I want is not right after those in the central repo:
-  git checkout -B <mybranchname> <commithash-of-last-commit-on-master>
-  git cherry-pick <mycommithash>
-  ## endif
-  git push origin <mybranchname>
-}}
-Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
+  svnadmin create --fs-type fsfs --pre-1.5-compatible $HOME/prof/grants/.SVNREPOS
+  chmod -R g+w $HOME/prof/grants/.SVNREPOS
+```
+Now, you may immediately check it out with a command 
+```
+  svn checkout URL
+```
+where URL is of the form
+```
+  file:///homes/gws/mernst/prof/grants/.SVNREPOS/myproj
+  svn+ssh://login.csail.mit.edu/afs/csail/group/pag/projects/.SVNREPOS/igj
+```
+.
+The simple approach above does not set up the "trunk, tags, branches"
+structure, but I'm not entirely sure how to do that or even what the point
+is.
 
-GitHub wikis:
- * in a separate wiki
- * can write in AsciiDoc and other formats
- * other people can theoretically edit
-GitHub pages:  e.g., http://mernst.github.io/randoop 
- * in a separate branch in the main wiki
- * html only
- * if using automatic page generator:
-    * can paste in Markdown, but it gets converted to .html
-    * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
-Both are in a separate branch from the code proper, which is a negative.
-Jekyll seems like a mess that I would like to avoid getting entangled in.
+To make SVN ignore a file or files, like the ".cvsignore" file does, do
+```
+  svn propedit svn:ignore .
+```
+(where "." is the directory to edit).
 
-GitHub Issues (GitHub's issue tracker) supports sorting only on creation
-date, date of last update, and number of comments.  To find high-priority
-issues, it is necessary to use labels or milestones.  An advantage of
-milestones is that it is possible to search for issues without a milestone,
-but it's not possible to search for issues without a given set of labels
-(only for issues with no label at all).  The search syntax does not support
-disjunction ("or" queries).
+To make SVN update the `$Id: ...$` text in a file, use
+```
+  svn propset svn:keywords "Id" filename...
+```
 
-To pull a GitHub pull request into my local clone/copy,
-click on "command line instructions" at the bottom of the pull request.
-Also see https://help.github.com/articles/checking-out-pull-requests-locally/
+"svn ls URL" tells which modules are in that repository.
+
+(Isn't there a single script that does all this, too?)
+From Seth Teller: how to recover a repos "papers" created with BDB
+(doesn't mix with AFS), and convert it to FSFS:
+```
+# correct any errors in place
+svnadmin recover /afs/csail.mit.edu/group/rvsn/papers
+# dump all svn actions to a log
+svnadmin dump /afs/csail.mit.edu/group/rvsn/papers > svn.dump
+# move existing repos out of the way
+cd /afs/csail.mit.edu/group/rvsn/
+mv papers papers.bdb
+# recreate repos; default type is FSFS
+svnadmin create papers
+# replay the log
+svnadmin load /afs/csail.mit.edu/group/rvsn/papers < svn.dump
+# if everything worked
+rm svn.dump
+rm -rf papers.bdb
+```
+
+To retrieve a specific version (revision) of a file under Subversion control:
+```
+  svn update -r 140 introduction.tex
+  svn update -r {2008-10-01} introduction.tex
+```
+
+To receive email notification on each SVN commit/checkin, edit file
+`hooks/post-commit` in the SVN repository.  Add a line like this (the full
+filename to mailer.py seems important; prefix with /usr/bin/python if
+necessary):
+```
+  /usr/share/doc/subversion-1.4.6/tools/hook-scripts/mailer/mailer.py commit "$REPOS" "$REV"
+```
+It uses file `conf/mailer.conf` in the SVN repository.
+Only two edits to that file are necessary:
+//nobreak
+
+ * uncomment the `mail_command` line
+ * change the `to_addr` line (the separator is whitespace (no commas))
+.
+(A previous script (buggy, and now deprecated) was commit-email.pl.)
+
+If "svnadmin verify" gives output like:
+```
+  ...
+  * Verified revision 535.
+  svnadmin: Unexpected end of svndiff input
+```
+then version 536 must be corrupted.  You can fix it by running:
+```
+   fsfsverify.py -f REPOS/db/rev/536
+```
+.
+To fix svn repository error/crash (eg, read chunk size: connection truncated)
+use fsfsverify.py to repair the broken revision.  First execute
+```
+  svnadmin verify <repository-path>
+```
+to find out the broken revision (one past the last good revision).
+Then execute fsfsverify on that revision
+```
+  fsfsverify.py -f <repository-path>/db/revs/<revision>
+```
+Its best to copy your repository before trying this.  Its easy to
+find fsfsverify on the web, and a local copy is available at
+/var/autofs/net/peanut/scratch2/jhp/fsfsverify/fsfsverify.py
+
+If svn errors of the following sort occur:
+```
+  $ svn commit -m 'attendance 2007' attendance 
+  svn: Commit failed (details follow):
+  svn: OPTIONS request failed on '/jhp_general/public_html/dirt'
+  svn: Can't open file 
+  '/afs/csail.mit.edu/u/j/jhp/REPOS/general/db/revs/10': Permission denied
+```
+AFS has incorrectly cached the permissions on the new revision. Execute
+```
+  fs flushv /afs/csail/u/j/jhp/REPOS/general
+```
+to fix the problem.
+
+An error like
+```
+  svn: Can't open file .../myrepos/db/revs/1': Permission denied
+```
+is probably a svn interaction with a bug in the afs client that
+causes it to incorrectly cache permissions.   You can clear it with:
+```
+  fs flushv /afs/csail/group/pag/projects/testrepos/
+```
+on the machine running the svn backend/server (e.g., onion).
+
+A command that performs regular expression replacement on an entire
+directory is dangerous for Subversion, since that makes changes to the
+files in the .svn directory!
+The solution is to make a fresh new checkout and copy either the changed
+files into there, or copy its .svn directories into the old copy.
+
+Add a password to an svn password file with a command like the following:
+```
+  htpasswd /cse/www2/oigj/.svn_htpasswd <username>
+  htpasswd $pag/projects/<name>/password <username>
+```
+or have users run one of these commands locally:
+```
+  htpasswd -n -d <username>
+  htdigest -c /dev/fd/1 Subversion <username>
+```
+or use an online tool like
+http://home.flash.net/cgi-bin/pw.pl
+http://www.4webhelp.net/us/password.php
+http://www.htaccesstools.com/htpasswd-generator/
+
+To checkout an svn repository over http:  
+```
+  svn co https://svn.csail.mit.edu/<name> <name>
+```
+All of PAG's repositories can be found at:
+  https://svn.csail.mit.edu:1443/admin/admin.cgi
+
+To diff a file ignoring whitespace use
+```
+  svn diff -x -w <file>
+```
+To diff two revisions/versions/commits, use
+```
+  svn diff -r 63:64
+```
 
 
-// == Google Code
+Editing a file on multiple different operating systems (Unix/Linux,
+Windows, Macintosh) can cause problems with end-of-line conventions.  To
+work around this, add to the bottom of ~/.subversion/config :
+```
+  [miscellany]
+  enable-auto-props = yes
+```
+.
+```
+  [auto-props]
+  *.c = svn:eol-style=native
+  *.cpp = svn:eol-style=native
+```
+For more examples, see:
+//nobreak
 
-// For Google Code, it is possible to link straight to HTML files in the
-// repository.  Examples:
-//   http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html
-//   http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html
-// However, it's not convenient to link to files that are not in the
-// repository (such as a release or other generated files),
-// so it's generally better to put a project's webpages elsewhere.
+ * http://www.apache.org/dev/svn-eol-style.txt 
+ * http://www.bioperl.org/wiki/Svn_auto-props
 
-// Google code wiki syntax (a variant of MoinMoin syntax):
-//  * Don't break a bullet point across lines.
-//  * Don't break an external link (in square brackets) across lines.
-//  * For a table of contents, use
-// ```
-//   Contents:
-//   <wiki:toc max_depth="1" />
-// ```
+To see all changes to a Subversion repository since a certain date, use
+```
+  svn log -r "{2010-06-01}:HEAD"
+```
+
+Here is how to relocate a version control repository when the repository has
+changed but you want to keep your local clone/checkout without making a new one.
+Don't forget to commit and push all local changes first.
+In Subversion:
+  svn relocate
+In Mercurial:
+  just edit the .hg/hgrc file
+In git, you need to do this if you get the message "remote: This repository moved. Please use the new location:".
+Possible git gommands (but at least the latter didn't work for me, so just rename the old clone and create a new one):
+  git remote set-url origin NEWURL
+Or:
+  git remote show origin
+  git remote rm origin
+  git remote add origin NEWURL
+  git remote show origin
 
 
-== Bitbucket
 
-For email notifications of changesets in Bitbucket, use Admin >> Services;
-then, for each email address: Email >> Add service.
-Or, maybe now it's just:  Settings >> Hooks >> Email.
-For email notifications of issue tracker changes, use Admin >> Issue
-Tracker Settings >> Notifications.
-I'm not sure whether all this works for the wiki repository...
+== CVS
+
+File cvs-intro in this directory is a quick beginner's guide to the CVS
+version control system.
+
+CVS update: get from repository
+In update output, my version comes first, latest repository second.
+-q means somewhat quietly; suppress informational messages
+```
+ cvs -q update
+ # really quiet:
+ cvs -q update |& egrep -e "^C "
+ # even more quiet:
+ cvs -q update | grep -v '^U ' | grep -v '^retrieving revision' | grep -v '^RCS' | grep -v "^Merging differences" | grep -v "^cvs update: conflicts found" | grep -v "^rcsmerge: warning: conflicts during merge"
+```
+
+CVS diff: show differences
+```
+ cvs diff
+ cvs diff -b  -- ignore whitespace changes
+ cvs diff -u  -- use unidiff format
+ cvs diff -u -r BASE -r HEAD  (what have others changed since I last updated?)
+ cvs diff -D "1 week ago"     (or various other date formats)
+ cvs diff -r 1.8 -r 1.9
+ cvs diff --brief             only list names of changed files
+```
+
+To create a new repository (this is not the same as creating a
+project/module!):
+```
+  cvs -d ~/mydir/.CVS init
+```
+Then, you must ensure the appropriate group can read/write it.  (Entire CVS
+repository must be readable, and CVSROOT/history must be readable and
+writeable, by all repository users.  Files with ",v" counterparts (and the
+",v" files themselves) shouldn't be writeable, however.)
+```
+  # NFS
+  chgrp -R grants ~/mydir/.CVS
+  chmod g+s `find ~/mydir/.CVS -type d`
+  # AFS
+  ... [need to write these instructions]
+```
+To create a project (aka module):
+```
+  mkdir ~/mydir/.CVS/new-module-name
+```
+then possibly edit the loginfo file to have mail sent (or some other
+action taken) whenever a checkin occurs.
+
+To check out a module (aka project) from a CVS repository:
+```
+  cvs -d REPOSITORY-LOCATION checkout MODULE-NAME
+```
+Examples:
+```
+  cvs -d ~gjb/.CVS-macros checkout macros
+  cvs -d ~mernst/class/573/project/.CVS-medics checkout code
+  cvs -d :ext:mernst@pag.csail.mit.edu:/g4/projects/invariants/.CVS checkout papers/esc-annotate-paper
+  cvs -d :ext:mernst@palpatine.mit.edu:/home/adbirka/.cvs checkout anstatic
+  cvs -d :ext:onion.csail.mit.edu:/afs/csail.mit.edu/u/m/mernst/prof/grants/.CVS co 2005-10-darpa-appcommunities
+  cvs -d :pserver:ernst@oss.software.ibm.com:/usr/cvs/jikes login
+  cvs -d :pserver:ernst@oss.software.ibm.com:/usr/cvs/jikes checkout -ko jikes
+```
+Another way to use a remote repository:
+```
+  setenv CVSROOT :pserver:anoncvs@CVS.Sourcery.Org:/cvs/jikes
+  cvs login
+  paswsd anoncvs
+  cvs checkout -ko jikes
+```
+From Windows:
+```
+  cvs -d //pag.csail.mit.edu/mernst/.CVS/.CVS-mernst checkout -ko emacs
+```
+To check out an old version (from a specific date, as of a given date), run
+this from ~/tmp:
+```
+  cvs -d ~gjb/.CVS-macros checkout -D "1 Jan 1998" macros
+```
+
+In CVS, to add a file, do 2 things:
+```
+ cvs add FILENAME
+ cvs commit FILENAME
+```
+When adding binary files to CVS, use the -kb flag:
+```
+  cvs add -kb filename
+```
+To add the -kb flag to a file that is already in CVS:
+```
+  cvs admin -kb filename
+```
+To commit changes
+```
+ cvs commit  -- commits all changed files in current directory
+```
+To quit working and delete your personal copy
+```
+ cvs release -d
+```
+To obtain a lock (aka watch),
+```
+ cvs edit paper.tex
+```
+To see the change logs:
+```
+ cvs log evilmacros
+```
+To get new directories, do "cvs update -d" instead of "cvs update".
+  To avoid the need for this, one should really have
+```
+    diff -u
+    update -d -P
+```
+in one's .cvsrc file.
+
+To create a branch in CVS (this from Dave Grove via Jake Cockrell):
+```
+  cd fromdir; tar cf - . | (cd todir; tar xfBp -)
+    cvs tag <branch_point_tag>
+    cvs rtag -b -r <branch_point_tag> <branch_tag> module
+    cvs update -r <branch_tag>
+  cvs commit
+```
+
+To make the HEAD and BASE tags work in CVS, add to directory CVSROOT (in
+the true repository) a file `val-tags` containing:
+```
+HEAD y
+BASE y
+```
+
+For email or other notification whenever a CVS
+checkin occurs, add the actions to the CVSROOT/loginfo file in the
+repository.  For example, you might add this line to the CVSROOT/loginfo file:
+```
+  ^my-module-name    mail -s "CVS checkin my-module-name" me@mymail.com,you@yourmail.com
+```
+As another example, this is in Scwm's loginfo file (unindented):
+```
+  ^scwm-web /usr/local/bin/cvslog scwm-web; ( date; ( sleep 2; \
+  cd /home/httpd/html/scwm; cvs update -dP ) &) \
+  >> /usr/local/home/gjb/cvslog/err-scwm-web 2>&1
+```
+The cvslog command just mails the other devs on a commit, but the rest
+does an auto-update of the web page to the place where it is served.
+This happens on each commit, and the output goes to a file.
+On AFS, use something similar to the following to auto-update on commit:
+```
+  ^bib (cd /afs/csail.mit.edu/group/pag/www/bib; fs sa . pag rlidwka; \
+        cvs -q up >/dev/null; fs sa . pag rla)
+```
+
+In inetd.conf, the cvspserver notation must be all on one line!
+(At least on redhat-release-6.2-1.)
+
+Anonymous cvs server:
+After editing /etc/inetd.conf, cause inetd to reread the file with "killall
+-HUP inetd".
+Make sure repository is readable (and directory is writeable) by anonymous user.
+Add "passwd" and "readers" files in CVSROOT.
+
+cvs diff does not permit specifying both the -D "date" and the -r "tag"
+options for its arguments; each argument gets to use at most one of those
+two options.  (This means, for example, that you cannot use cvs diff to
+determine what has changed in a branch since a particular date.)  To work
+around this problem, make a new checkout with the appropriate date and
+tags, and then use ordinary diff to compare that to another checkout
+(perhaps your current one).
+For instance, to see what has changed in Daikon V2 since a particular
+date, do (in a temporary directory):
+```
+  cvs -d /g4/projects/invariants/.CVS co -r ENGINE_V2_PATCHES -D 2003/06/09 invariants/java/daikon
+```
+and then diff that directory against your daikon.ver2 directory.
+
+If CVS says
+```
+  cvs checkout: Updating module
+  cvs checkout: failed to create lock directory for `/some/path/module' (/some/path/module/#cvs.lock): Permission denied
+  cvs checkout: failed to obtain dir lock in repository `/some/path/module'
+  cvs [checkout aborted]: read lock failed - giving up
+```
+Then the problem is typically that the person who created the CVS
+repository has left it (as default) manipulable only by that person.
+NFS:
+  The directory's group should be changed, and the group should be
+  given permission for all the files in the directory.
+```
+    chgrp -R groupname .
+    find . -type d | xargs chmod g+s
+```
+AFS:
+  (To be written.)
+
+To determine who has made a cvs checkin since a particular date, use "cvs
+log" or "cvs history"; "cvs history" is the better way.  For example,
+```
+  cvs history -a -c -D "2003/12/22 02:05"
+```
+(Is the time local or GMT?)
+
+By default, it is not easy to give read-only access to a CVS repository.
+Just to do a checkout, CVS wants to create a read lock file `#cvs.lock` in
+each directory of the CVS repository; and the ability to create and delete
+files essentially gives all write privileges.
+  You can patch CVS to add a "-u" option to allow checkouts without read
+locks.  The intent is to allow read-only operations such as "checkout"
+to succeed for users who do not have write access to the repository.  
+The patch is at
+  http://ximbiot.com/cvs/cvshome/dev/patches/readlock
+and is potentially dangerous, but generally seems to work.
+It's installed on Athena, so you can try it with
+```
+  /afs/athena.mit.edu/project/gnu/arch/i386_linux24/bin/cvs -u -d path/to/root co module
+```
+
+In CVS/SVN, "reserved checkout" or "file locking" is the name for user locks
+that permit only one user to edit a file at once, forbidding simultaneous 
+editing.
+"advisory locks" are a distinct mechanism that serves a similar purpose.
+Also, the 
+svn:needs-lock property signifies that the file it's attached to ought to
+be locked before editing (by running "svn lock"). The value of the property
+is irrelevant.
+.
+SVN locking avoids conflicts when two people edit the same file unknowingly.
+http://svnbook.red-bean.com/en/1.2/svn.advanced.locking.html
+Before you can edit a file, do
+```
+ svn lock filename -m"comment"
+```
+(or in Eclipse, do Team > Lock).
+When you commit, that releases the lock.
+
+In CVS, to get a copy (cat) of a specific revision of a file (the version
+as of a given date), without setting any sticky tags:
+```
+  cvs update -p -r <version> file > file-old
+  cvs update -p -D 2008-11-27 file > file-20081127
+```
+To check out an old version (from a specific date, as of a given date), run
+this from ~/tmp:
+```
+  cvs -d ~gjb/.CVS-macros checkout -D "1 Jan 1998" macros
+```
+
+
+
+== RCS
+
+To set up RCS, create a subdirectory called RCS in the directory with the files.
+To add a file:
+```
+  chgrp medics <filename>
+  ci -u <filename>              check in the file
+  rcs -a<namelist> <filename>   add <namelist> (eg: mernst,todd) to access list
+  rcs -L <filename>             add owner of file (eg comp212) as well
+```
+When you check in an RCS file via Emacs, type  C-c C-c  to finish the comment.
+
+
+
+== Other ways to sync
+
+My ideas about using version control (VC) vs. rsync vs. Unison:
+//nobreak
+
+ * VC is essential when others will collaborate.
+ * Unison is useful when the files are very large and/or change frequently, or I wish to update them automatically on the central host without logging in to that host.
+ * VC is useful when I only want to include certain files, not all files (for instance, my "dots" directory).
+ * VC is useful when I expect the files to change in multiple places.
+
+To mirror one directory to another (including deletions), you can use:
+```
+  rsync --omit-dir-times --recursive --quiet --delete DIR1 DIR2
+  # This one sets directory times too, which can be a problem
+  rsync -Cavz --quiet --delete DIR1 DIR2
+```
+
 
 
 
