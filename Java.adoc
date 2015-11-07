@@ -248,6 +248,7 @@ How to quote less than and greater than (angle brackets), such as for generics, 
    <pre>{@code
    ...
    }</pre>
+ (what if the multi-line code contains curly braces??)
 ```
 To quote/escape the @ (at-sign) symbol in Javadoc, use {@literal @} or &#064;
 

@@ -150,6 +150,12 @@ If there is a textual conflict in file modified-file, you will get asked to reso
  * continue with rebase:git add modified-file; git rebase --continue, or
   * merge:git add modified-file; git commit
 
+To compare two branches in Git:
+```
+  git diff branch1..branch2
+```
+With three dots, it shows what is in branch1 XOR branch2 (either b1 or b2 but not both), so `git diff b1...b2` is the same as `git diff b2...b1`.as 
+
 
 == GitHub (Git-specific items go above)
 
