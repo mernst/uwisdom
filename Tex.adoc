@@ -1682,6 +1682,8 @@ Absolute value in LaTeX:
   \left| \frac{A+B}{3} \right|
 ```
 
+"such that" vertical bar in LaTeX, such as in a set comprehension: \mid
+
 Typesetting pseudocode in LaTeX:
 http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms
 Possible choices seem like
