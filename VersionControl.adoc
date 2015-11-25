@@ -157,6 +157,24 @@ To compare two branches in Git:
 ```
 With three dots, it shows what is in branch1 XOR branch2 (either b1 or b2 but not both), so `git diff b1...b2` is the same as `git diff b2...b1`.as 
 
+To syc a GitHub fork with upstream:
+First, you must have at some point in the past done:
+```
+  git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+```
+Then, do:
+```
+  git fetch upstream
+  git checkout master
+  git merge upstream/master
+  git push
+```
+It's also possible to just do
+```
+  git pull https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+  git push
+```
+
 
 == GitHub (Git-specific items go above)
 
