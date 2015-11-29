@@ -61,7 +61,7 @@ To undo changes in your working copy (like `hg revert`) do
 A different command that undoes all uncommitted changes in the working tree
 is `git reset --hard`, but some people discourage its use because it's "dangerous".
 
-Git equivalent of `hg rollback`:
+Git equivalent of `hg rollback` which uncommits or undoes a commit:
 ```
   git reset HEAD^
   git reset --soft HEAD^
