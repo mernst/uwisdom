@@ -89,7 +89,7 @@ To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
  * Override hashCode(), so that your program does not use Object.hashCode() which is nondeterministic (it depends on when the garbage collector runs). Also don't instantiate the Object class, as in new Object(); instead, use some class that overrides hashCode().
  * Mitigate other sources of nondeterminism, such as always calling `Arrays.sort` on the result of `File.listFiles`.
 
-JVM segfaults:
+JVM segmentation faults (segfaults):
 When the VM crashes, it generates a log file of the active frames.
 To get line numbers too, make the VM create a core dump, then use jstack:
 ```
@@ -137,8 +137,8 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
    JLS only uses "generic" to refer to class *declarations*, not
    classes.  "A generic class declaration defines a set of parameterized
    types, one for each possible invocation of the type parameter section."
-
-.Terminology for generics/parametrc polymorphism in Java, from _Effective Java_, second editon, page 115.
+.
+Terminology for generics/parametric polymorphism in Java, from _Effective Java_, second edition, page 115.
 |====
 | Parameterized type      | `List<String>` |
 | Actual type parameter   | `String` |
@@ -467,7 +467,7 @@ Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 
 
 
-//  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass
+//  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
 //  LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
