@@ -256,8 +256,14 @@ To avoid doclint messages about missing Javadoc tags, such as "no @param for som
 ----
 -Xdoclint:all,-missing
 ----
-This only works with Javadoc 8 and later.
-
+This only works with Javadoc 8 and later; the command-line option is
+illegal under Javadoc 7 and causes it to terminate abnormally.
+In a Makefile, you can set a DOCLINT variable as follows:
+----
+ifneq (,$(findstring 1.8.,$(shell java -version 2>&1)))
+  DOCLINT?=-Xdoclint:all,-missing
+endif
+----
 
 
 == Everything else
