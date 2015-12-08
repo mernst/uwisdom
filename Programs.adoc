@@ -78,7 +78,7 @@ To modify AFS directory/file permissions/acls/access control lists, see
  * http://web.mit.edu/answers/unix/unix_chmod.html
 //nobreak
 
-To view permissions:
+To view AFS permissions:
 ```
   fs listacl directory
 ```
@@ -297,6 +297,9 @@ To create a shell with no environment variables set:
  /usr/bin/bash --noprofile --norc
 ```
 
+In Unix/Linux, owner permissions take precedence over group permissions.
+Suppose a file has o-w and g+w permissions, and suppose that the owner is
+in the group.  Then the owner cannot write the file.
 
 
 == ssh (secure shell)
