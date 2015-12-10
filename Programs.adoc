@@ -1422,6 +1422,11 @@ maybe-update-file1:
 	touch .timestamp-file2
 ```
 
+The directory of the current Makefile:
+```
+THIS_MAKEFILE:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+```
+
 
 == Ant and buildfiles, build.xml
 
