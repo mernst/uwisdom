@@ -283,3 +283,8 @@ Gerrit (https://www.gerritcodereview.com/) doesn't seem like as good a choice:
 Reviewable: https://reviewable.io.  Gives me the creeps because they put
   people's quotes on their webpage as if they are endorsements, when those
   quotes are from people who never used Reviewable.
+
+Whitelist of Ubuntu packages that can can be installed on container-based
+Travis-CI infrastructure using the APT addon mechanism:
+https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+(which is linked from https://github.com/travis-ci/apt-package-whitelist)
