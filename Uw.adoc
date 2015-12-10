@@ -373,6 +373,9 @@ https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 How to order lunches / snack carts at UW CSE:
 https://www.cs.washington.edu/internal/food
 
+If there is trouble with parsing Jekyll webpages (such as those under
+http://uwplse.org/meet/), you can see logs at http://hooknook.uwplse.org/
+
 
 == Seattle
 
