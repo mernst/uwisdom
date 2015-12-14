@@ -288,3 +288,18 @@ Whitelist of Ubuntu packages that can can be installed on container-based
 Travis-CI infrastructure using the APT addon mechanism:
 https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
 (which is linked from https://github.com/travis-ci/apt-package-whitelist)
+
+Travis-CI advantages:
+ * no local sysadmin
+ * setup is checked into the version control repository
+ * the OS limitations below are shared by other cloud CI infrastructure
+ * builds and tests pull requests
+ * every user can enable it for their repositories and forks
+Travis-CI disadvantages:
+ * default build infrastructure is Ubuntu 12.04
+ * jobs are limited to less than 2 hours
+ * for Ubuntu 14.04, jobs are limited to about 50 minutes
+ * no OS more recent than Ubuntu 14.04 is available
+
+A commit that has `[ci skip]` anywhere in the commit message is ignored by
+Travis CI -- Travis does not run the build for that commit.

@@ -276,21 +276,14 @@ Or, at http://java.sun.com/javase/downloads/, click on "Previous Releases".
 To get a copy of the JDK 7 source:
   hg clone http://hg.openjdk.java.net/jdk7/jdk7/jdk
 
-Java 1.4 ("J2SE 1.4") was released in February 2002. +
-Java 5 ("J2SE 5.0") was released in September 2004. +
-Java 6 ("J2SE 6") was released in December 2006 (public beta by February 2006). +
-Java 7 ("J2SE 7") release date is September 2011.  See:
-  http://openjdk.java.net/projects/jdk7/milestones/
-  http://openjdk.java.net/projects/jdk7/calendar/
-
 Major version number for the Java class file format (JVM version number):
 ----
-  J2SE 9.0 = 53 (0x35 hex)    [as of 12/2015, goal is Feature Complete (FC) 25 May 2016, General Availability (GA) 23 March 2017]
+  J2SE 9.0 = 53 (0x35 hex)    [as of 12/2015, goal is Feature Complete (FC) 26 May 2016, General Availability (GA) 23 March 2017]
   J2SE 8.0 = 52 (0x34 hex)    [released March 2014]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
-  J2SE 6.0 = 50 (0x32 hex)    [released December 2006]
+  J2SE 6.0 = 50 (0x32 hex)    [released December 2006, public beta Feb. 2006]
   J2SE 5.0 = 49 (0x31 hex)    [released September 2004]
-  JDK 1.4 = 48 (0x30 hex)
+  JDK 1.4 = 48 (0x30 hex)     [released February 2002]
   JDK 1.3 = 47 (0x2F hex)
   JDK 1.2 = 46 (0x2E hex)
   JDK 1.1 = 45 (0x2D hex)
