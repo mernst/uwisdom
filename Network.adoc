@@ -292,14 +292,22 @@ https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
 Travis-CI advantages:
  * no local sysadmin
  * setup is checked into the version control repository
- * the OS limitations below are shared by other cloud CI infrastructure
- * builds and tests pull requests
+ * builds pull requests and branches as well as the mainline
  * every user can enable it for their repositories and forks
 Travis-CI disadvantages:
- * default build infrastructure is Ubuntu 12.04
- * jobs are limited to less than 2 hours
- * for Ubuntu 14.04, jobs are limited to about 50 minutes
- * no OS more recent than Ubuntu 14.04 is available
+ * old OS:
+    * default build infrastructure is Ubuntu 12.04
+    * no OS more recent than Ubuntu 14.04 is available
+    * these OS limitations are shared by other cloud CI infrastructure
+ * time limits:
+    * jobs are limited to less than 2 hours
+    * for Ubuntu 14.04, jobs are limited to about 50 minutes
+    * if a repository has been tested a lot recently, new builds may be delayed
+ * memory limits:
+    * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
+      maximum heap size; so I sometimes need -Xmx2500M command-line argument
+ * no way to ssh in to virtual machines, which complicates debugging
 
 A commit that has `[ci skip]` anywhere in the commit message is ignored by
-Travis CI -- Travis does not run the build for that commit.
+Travis CI -- Travis does not run the continuous integration build/test
+for that commit.
