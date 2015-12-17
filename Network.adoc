@@ -311,3 +311,13 @@ Travis-CI disadvantages:
 A commit that has `[ci skip]` anywhere in the commit message is ignored by
 Travis CI -- Travis does not run the continuous integration build/test
 for that commit.
+
+To download files from Amazon S3, first install via
+```
+    sudo easy_install awscli
+    aws configure
+```
+and then run a command such as
+```
+   aws s3 sync s3://bucketname .
+```
