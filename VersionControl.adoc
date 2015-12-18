@@ -275,6 +275,9 @@ To pull a GitHub pull request into my local clone/copy,
 click on "command line instructions" at the bottom of the pull request.
 Also see https://help.github.com/articles/checking-out-pull-requests-locally/
 
+To ignore whitespace changes in a GitHub code review diff, add "?w=1"
+at the end of the URL.
+
 
 // == Google Code
 
