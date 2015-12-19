@@ -321,3 +321,9 @@ and then run a command such as
 ```
    aws s3 sync s3://bucketname .
 ```
+For example:
+```
+   mkdir -p ~/tmp/aws-s3
+   cd ~/tmp/aws-s3
+   aws s3 sync s3://travis-checker-framework .
+```
