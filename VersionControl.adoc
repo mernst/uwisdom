@@ -175,6 +175,9 @@ It's also possible to just do
   git push
 ```
 
+`git branch` only shows *local* branches.
+Use `git branch -a` to see all branches.
+
 
 == GitHub (Git-specific items go above)
 
