@@ -178,6 +178,10 @@ It's also possible to just do
 `git branch` only shows *local* branches.
 Use `git branch -a` to see all branches.
 
+To clone a repository, or update it if it already exists:
+```
+  git -C repo pull || git clone https://server/repo repo
+```
 
 == GitHub (Git-specific items go above)
 
