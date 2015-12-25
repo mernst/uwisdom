@@ -815,6 +815,8 @@ To create a multi-page set of tiles that can be tiled together to make a poster:
 (I wasn't able to get the pdfposter program to work, so I converted to
 PostScript and used poster instead.)
 
+To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
+to the end of the link's URL.
 
 
 == X Windows
