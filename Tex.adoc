@@ -1558,7 +1558,7 @@ The fancyvrb package is preferable to:
    or use with Hevea)
  * listings (which breaks fancyvrb if both are loaded).
    listings provides the lstlisting command, and inserts too much space
-   between characters, which looks bad in any font (fixed- or variale-width).
+   between characters, which looks bad in any font (fixed- or variable-width).
    An advantage of listings is that it provides multi-character escapes to
    LaTeX code, so you don't have to find specific command characters that
    do not appear in the text (only multi-character sequences that don't appear.)
