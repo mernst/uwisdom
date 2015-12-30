@@ -327,3 +327,6 @@ For example:
    cd ~/tmp/aws-s3
    aws s3 sync s3://travis-checker-framework .
 ```
+
+Bootstrap (originally from Twitter) gives you templates and CSS for
+creating "repsonsive" mobile-friendly webpages.
