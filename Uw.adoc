@@ -192,6 +192,7 @@ A guest account is only permitted to use 25 MB of space, so:
 http://types.cs.washington.edu/
 /cse/web/research/plse/ contains the content served at
 http://plse.cs.washington.edu/
+For UW CSE class webpages,
 /cse/web/courses/cse331/13sp contains the content served at
 http://courses.cs.washington.edu/courses/cse331/13sp/
 

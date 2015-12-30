@@ -177,6 +177,8 @@ It's also possible to just do
 
 `git branch` only shows *local* branches.
 Use `git branch -a` to see all branches.
+Run `git remote prune origin` periodically to remove branches that have been
+deleted from the remote repository.
 
 To clone a repository, or update it if it already exists:
 ```
