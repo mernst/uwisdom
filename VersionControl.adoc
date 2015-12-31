@@ -141,8 +141,11 @@ where <desired-commit> is something like HEAD~1 or a SHA hash,
 and <remote> and <branch> are optional.
 
 If merging works perfectly then rebasing simplifies the history.
-If there is a problem, then it can cause confusion and can make debugging harder in the future, because you can't get back to the exact same codebase as you had during development.
-So really one should rebase only if there is no merge conflict, and the code continues to compile and all the tests pass.
+If there is a problem, then rebasing can cause confusion and can make debugging
+harder in the future, because you can't get back to the exact same codebase as
+you had during development.
+So really one should rebase only if there is no merge conflict, and the code
+continues to compile and all the tests pass.
 .
 In the very most simple case of no collisions:
  * git pull --rebase: rebases your local commits ontop of remote HEAD and does not create a merge/merge commit
@@ -150,6 +153,12 @@ In the very most simple case of no collisions:
 If there is a textual conflict in file modified-file, you will get asked to resolve them manually and then
  * continue with rebase:git add modified-file; git rebase --continue, or
   * merge:git add modified-file; git commit
+
+To squash multiple commits into one (say, the last 3 commits):
+```
+  git reset --soft HEAD~3
+  git commit
+```
 
 To compare two branches in Git:
 ```
