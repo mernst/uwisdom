@@ -358,6 +358,12 @@ avoid the firewall dropping an inactive connection.  Also
 ClientAliveInterval which causes the daemon to periodically
 poll the client to see if it is still alive.
 
+The single bracket `[` is an alias for the `test` command.
+`[` is specified by Posix and works in any implementation of sh.
+The double bracket `[[` is a builtin (is syntax) and is desirable because
+it is less error-prone and more featureful.  However, `[[` is less
+portable; it works in bash, ksh, and zsh.
+For more on the difference between `[` and `[[`, see http://mywiki.wooledge.org/BashFAQ/031
 
 
 == Perl
