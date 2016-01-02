@@ -297,6 +297,16 @@ To ignore whitespace changes in a GitHub code review diff, add "?w=1"
 at the end of the URL.
 
 
+== GitLab (Git-specific and GitHub-specific items go above)
+
+GitLab CI coordinates runners, farms out work to them, and keeps track build histories and whatnot, but doesn't do the build itself.
+To use GitLab CI (continuous integration):
+ * In your project settings, enable the "Builds" feature.
+ * Click "Save changes"
+ * The page now shows a "CI token", which you can use to register a job runner for your project.
+ * Set up a runner.  If the GitLab server does not provide any shared runners, then set up a specific runner on another computer.  Navigate to "Settings >> Runners", and also see https://gitlab.com/gitlab-org/gitlab-ci-multi-runner
+
+
 // == Google Code
 
 // For Google Code, it is possible to link straight to HTML files in the
