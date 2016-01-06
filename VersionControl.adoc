@@ -328,9 +328,12 @@ To use GitLab CI (continuous integration):
 
 To register a GitLab CI multi-runner:
 ```
-  gitlab-ci-multi-runner register --config=/etc/gitlab-runner/config.toml --url=https://gitlab.cs.washington.edu/ci --token=<runners token from your project's runners page> 
+  gitlab-ci-multi-runner register --config=/etc/gitlab-runner/config.toml
 ```
-To unregister it:
+Get the token it requests from your project's runners page.
+As long as you pass in --config, the runner is automatically started;
+you can ignore the output that tells you to start it.
+To unregister a multi-runner:
 ```
   gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
 ```
