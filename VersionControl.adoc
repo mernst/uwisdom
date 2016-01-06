@@ -326,6 +326,15 @@ To use GitLab CI (continuous integration):
  * The page now shows a "CI token", which you can use to register a job runner for your project.
  * Set up a runner.  If the GitLab server does not provide any shared runners, then set up a specific runner on another computer.  Navigate to "Settings >> Runners", and also see https://gitlab.com/gitlab-org/gitlab-ci-multi-runner
 
+To register a GitLab CI multi-runner:
+```
+  gitlab-ci-multi-runner register --config=/etc/gitlab-runner/config.toml --url=https://gitlab.cs.washington.edu/ci --token=<runners token from your project's runners page> 
+```
+To unregister it:
+```
+  gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
+```
+
 
 // == Google Code
 
