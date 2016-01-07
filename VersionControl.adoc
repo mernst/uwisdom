@@ -333,6 +333,8 @@ To register a GitLab CI multi-runner:
 Get the token it requests from your project's runners page.
 As long as you pass in --config, the runner is automatically started;
 you can ignore the output that tells you to start it.
+Also go to the project's Settings > Services > Builds emails, to set an
+email address for notification of failed builds.
 To unregister a multi-runner:
 ```
   gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
