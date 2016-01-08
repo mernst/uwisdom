@@ -93,7 +93,15 @@ The git equivalent to `hg incoming` is:
   git fetch && git log master..FETCH_HEAD
 ```
 
-In Git, to list branches:  `git branch`.
+In Git, to list branches:
+```
+  git branch
+```
+In Git, to create a branch and switch to it
+(just `git branch newbranch` doesn't switch to the new branch)::
+```
+  git checkout -b newbranch
+```
 In Git, to delete a local branch:
 ```
   git branch -d the_local_branch
