@@ -312,6 +312,9 @@ A commit that has `[ci skip]` anywhere in the commit message is ignored by
 Travis CI -- Travis does not run the continuous integration build/test
 for that commit.
 
+In your Travis CI .travis.yml file, it's best not to set the "notifications" email.  If you do, and someone forks your repository, then you will get notifications about their broken builds.
+There isn't currently a way to send email to a mailing list only if the failure is on the main fork, but not on other people's forks.
+
 To download files from Amazon S3, first install via
 ```
     sudo easy_install awscli
