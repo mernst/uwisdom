@@ -95,8 +95,12 @@ The git equivalent to `hg incoming` is:
 
 In Git, to list branches:
 ```
-  git branch
+  git branch -a
 ```
+Note that `git branch` only shows *local* branches.
+Run `git remote prune origin` periodically to remove branches that have been
+deleted from the remote repository.
+
 In Git, to create a branch and switch to it
 (just `git branch newbranch` doesn't switch to the new branch)::
 ```
@@ -211,11 +215,6 @@ Here are some commands that are not as helpful to me:
   # (note: three dots) 
   git diff ...upstream/master 
 ```
-
-`git branch` only shows *local* branches.
-Use `git branch -a` to see all branches.
-Run `git remote prune origin` periodically to remove branches that have been
-deleted from the remote repository.
 
 To clone a repository, or update it if it already exists:
 ```
