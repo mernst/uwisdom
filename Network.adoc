@@ -37,6 +37,79 @@ In Google Groups, to permit "reply all" to go to the sender:
   Settings >> Email options >> Post replies: Users decide
 
 
+== Travis CI continuous integration
+
+Whitelist of Ubuntu packages that can can be installed on container-based
+Travis-CI infrastructure using the APT addon mechanism:
+https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+(which is linked from https://github.com/travis-ci/apt-package-whitelist)
+
+Travis-CI advantages:
+ * no local sysadmin
+ * setup is checked into the version control repository
+ * builds pull requests and branches as well as the mainline
+ * every user can enable it for their repositories and forks
+Travis-CI disadvantages:
+ * old OS:
+    * default build infrastructure is Ubuntu 12.04
+    * no OS more recent than Ubuntu 14.04 is available
+    * these OS limitations are shared by other cloud CI infrastructure
+ * time limits:
+    * jobs are limited to less than 2 hours
+    * for Ubuntu 14.04, jobs are limited to about 50 minutes
+    * if a repository has been tested a lot recently, new builds may be delayed
+ * memory limits:
+    * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
+      maximum heap size; so I sometimes need -Xmx2500M command-line argument
+ * no way to ssh in to virtual machines, which complicates debugging
+
+A commit that has `[ci skip]` anywhere in the commit message is ignored by
+Travis CI -- Travis does not run the continuous integration build/test
+for that commit.
+
+In your Travis CI .travis.yml file, it's best not to set the
+"notifications" email.  If you do, and someone forks your repository, then
+you will get notifications about their broken builds.  There isn't
+currently a way to send email to a mailing list only if the failure is on
+the main fork, but not on other people's forks.
+
+Bootstrap (originally from Twitter) gives you templates and CSS for
+creating "repsonsive" mobile-friendly webpages.
+
+== AWS Amazon Web services
+
+To download files from Amazon S3, first install via
+```
+    sudo easy_install awscli
+    aws configure
+```
+and then run a command such as
+```
+   aws s3 sync s3://bucketname .
+```
+For example:
+```
+   mkdir -p ~/tmp/aws-s3
+   cd ~/tmp/aws-s3
+   aws s3 sync s3://travis-checker-framework .
+```
+To delete/remove files:
+```
+   aws s3 rm --recursive s3://travis-checker-framework/typetools
+```
+
+Amazon Web Services (AWS) tips, from Darioush Jalali:
+//nobreak
+
+ * Billing is not logged by default. This can be confusing if you are
+   trying to figure out how much money you are spending initially.
+ * If you have jobs that can be restarted easily, spot instances are
+   up to 10x cheaper than on-demand instances. Amazon may turn them off
+   whenever they choose (this is rare).
+ * Amazon limits the number of types of certain instances they grant.
+   Customer support will increase this, but it takes a couple days.
+
+
 == Uncategorized
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
@@ -242,17 +315,6 @@ http://lmgtfy.com/?q=UI+Chicago
 To save a URL to Pocket, email one link at a time, in the body of mail to
 add@getpocket.com.
 
-Amazon Web Services (AWS) tips, from Darioush Jalali:
-//nobreak
-
- * Billing is not logged by default. This can be confusing if you are
-   trying to figure out how much money you are spending initially.
- * If you have jobs that can be restarted easily, spot instances are
- * up to 10x cheaper than on-demand instances. Amazon may turn them off
-   whenever they choose (this is rare).
- * Amazon limits the number of types of certain instances they grant.
-   Customer support will increase this, but it takes a couple days.
-
 Trello is a popular task management system (a to-do list).  I don't see
 what makes it compelling, though.  It doesn't support the most important
 things that I want to do, such as sorting items, seeing an overview of all
@@ -283,56 +345,3 @@ Gerrit (https://www.gerritcodereview.com/) doesn't seem like as good a choice:
 Reviewable: https://reviewable.io.  Gives me the creeps because they put
   people's quotes on their webpage as if they are endorsements, when those
   quotes are from people who never used Reviewable.
-
-Whitelist of Ubuntu packages that can can be installed on container-based
-Travis-CI infrastructure using the APT addon mechanism:
-https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
-(which is linked from https://github.com/travis-ci/apt-package-whitelist)
-
-Travis-CI advantages:
- * no local sysadmin
- * setup is checked into the version control repository
- * builds pull requests and branches as well as the mainline
- * every user can enable it for their repositories and forks
-Travis-CI disadvantages:
- * old OS:
-    * default build infrastructure is Ubuntu 12.04
-    * no OS more recent than Ubuntu 14.04 is available
-    * these OS limitations are shared by other cloud CI infrastructure
- * time limits:
-    * jobs are limited to less than 2 hours
-    * for Ubuntu 14.04, jobs are limited to about 50 minutes
-    * if a repository has been tested a lot recently, new builds may be delayed
- * memory limits:
-    * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
-      maximum heap size; so I sometimes need -Xmx2500M command-line argument
- * no way to ssh in to virtual machines, which complicates debugging
-
-A commit that has `[ci skip]` anywhere in the commit message is ignored by
-Travis CI -- Travis does not run the continuous integration build/test
-for that commit.
-
-In your Travis CI .travis.yml file, it's best not to set the
-"notifications" email.  If you do, and someone forks your repository, then
-you will get notifications about their broken builds.  There isn't
-currently a way to send email to a mailing list only if the failure is on
-the main fork, but not on other people's forks.
-
-To download files from Amazon S3, first install via
-```
-    sudo easy_install awscli
-    aws configure
-```
-and then run a command such as
-```
-   aws s3 sync s3://bucketname .
-```
-For example:
-```
-   mkdir -p ~/tmp/aws-s3
-   cd ~/tmp/aws-s3
-   aws s3 sync s3://travis-checker-framework .
-```
-
-Bootstrap (originally from Twitter) gives you templates and CSS for
-creating "repsonsive" mobile-friendly webpages.
