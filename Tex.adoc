@@ -300,6 +300,8 @@ inserted) after a macro expansion, then add "\xspace" at the end of the
 macro body.
 ```
   \usepackage{xspace}
+  \xspaceaddexceptions{\%}
+  \xspaceremoveexception{-}
   ...
   \newcommand{\restenergy}{\ensuremath{mc^2}\xspace}
   ...
