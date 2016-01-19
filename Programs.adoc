@@ -2090,6 +2090,11 @@ To make a diff file good for patching old-file to produce new-file,
 ```
 In GNU diff, specify lines of context using -C # (not -c #).
 
+There is no standalone `diff` program that incorporates the patience diff algorithm, but instead you can use
+```
+  git diff --no-index --patience ...
+```
+
 With patch version 2.4 or 2.5 (and maybe other versions), you must set the
 environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
 the "Index:" lines and it will ask for the filename for each patch.

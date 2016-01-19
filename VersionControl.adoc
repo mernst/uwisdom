@@ -164,7 +164,7 @@ In the very most simple case of no collisions:
  * git pull: merges and creates a merge commit
 If there is a textual conflict in file modified-file, you will get asked to resolve them manually and then
  * continue with rebase:git add modified-file; git rebase --continue, or
-  * merge:git add modified-file; git commit
+ * merge:git add modified-file; git commit
 
 To squash multiple commits into one (say, the last 3 commits):
 ```
@@ -173,10 +173,16 @@ To squash multiple commits into one (say, the last 3 commits):
 ```
 
 To compare two branches in Git:
+ * To see changes in branch2 without seeing changes that have been done on
+   branch1 (which might be "master") in the meanwhile, do either of these
+   (their effect is identical, but the first is much simpler):
 ```
-  git diff branch1..branch2
+  git diff branch1...branch2
+  git diff `git merge-base branch1 branch2`..branch2
 ```
-With three dots, it shows what is in branch1 XOR branch2 (either b1 or b2 but not both), so `git diff b1...b2` is the same as `git diff b2...b1`.as 
+ * With two dots, `git diff shows what is in branch1 XOR branch2 (either b1
+   or b2 but not both), so `git diff b1...b2` is the opposite patch as
+   `git diff b2...b1`.
 
 To synch a GitHub fork with upstream:
 First, you must have at some point in the past done:
@@ -424,8 +430,10 @@ To a first approximation, Git and Hg (Mercurial) have the same
 capabilities.
 Hg is easier to use, because it has a cleaner usage model and more logical
 and cohesive interface.
-Git is more idiosyncratic, faster on very large projects, and integrated
-with the popular social programming website Github.
+Git is more idiosyncratic, faster on very large projects, integrated
+with the popular social programming website Github, integrated with more
+third-party tools, and more widely used, all of which suggests that Git is
+the more pragmatic choice.
 Here is an article that criticizes Git's poor interface:
 http://roman.st/Article/What-makes-Git-difficult-someone-coming-Mercurial
 
