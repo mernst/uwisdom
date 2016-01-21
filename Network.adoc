@@ -76,6 +76,18 @@ the main fork, but not on other people's forks.
 Bootstrap (originally from Twitter) gives you templates and CSS for
 creating "repsonsive" mobile-friendly webpages.
 
+If your job is timing out because there wasn't any output in the last 10
+minutes, then try making the `script:` line of your .travis.yml file be:
+```
+  script: travis_wait 120 ./.travis-build.sh
+```
+travis_wait can only be used in the .travis.yml file, not in scripts called
+by the .travis.yml file.
+Calling travis_wait does not extend your timeout, it just prints a message
+periodically so your job does not look hung to Travis.
+Note that Travis seems to give more time on container-based than legacy infrastructure.
+
+
 == AWS Amazon Web services
 
 To download files from Amazon S3, first install via
