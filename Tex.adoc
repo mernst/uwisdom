@@ -492,7 +492,6 @@ in the .bst file.
 This is rarely worthwhile, though:  the savings tend to be very small.
 
 
-
 == Texinfo
 
 In Texinfo, to prevent the last index pages from being numbered i, ii,
@@ -586,7 +585,7 @@ or
   \hyphenchar\the\font=\savehyphenchar} 
 ```
 
-To have TeX hyphenate words with imbedded hyphens, you may use the
+To have LaTeX hyphenate words with imbedded hyphens, you may use the
 `breakable hyphen' command:
 ```
       \def\hyph{-\penalty0\hskip0pt\relax}
@@ -594,29 +593,20 @@ To have TeX hyphenate words with imbedded hyphens, you may use the
 You could play tricks mapping it to a character that's made active for 
 the purpose, but `-'?
 
-Another way to permit breaking of hyphenated words:
-```
-  \lccode`\-=`\- \hyphenchar\the\font=`\#
-```
-and voila, TeX will hyphenate words containing a `-'. There is only one
-drawback: if TeX hyphenates a word it uses a `#' instead of a `-', as in
-```
-  \showhyphens{hyphenation}
-```
-.
-```
-  Underfull \hbox (badness 10000) detected at line 0
-  [] \tenrm hy#phen#ation
-```
-To solve that, the font should contain two hyphen symbols, one in the
-normal position and one in the position for `#'.
-
-LaTeX doesn't hyphenate automatically when in font \tt because in the
-customary uses for \tt fonts, one does not want TeX to insert any hyphens.
+LaTeX doesn't hyphenate (line-break) automatically when in font \tt because
+in the customary uses for \tt fonts, one does not want TeX to insert any
+hyphens.
 Here are two workarounds:
  1. Insert explicit "\-" wherever you wish to permit hyphenization.
  2. Non-hyphenization is implemented by setting \hyphenchar of the tt fonts
-    to -1.  You can undo it by explicitly resetting \hyphenchar.
+    to -1.  You can undo it by explicitly resetting \hyphenchar.  To globally enable hyphenation in \texttt:
+```
+\DeclareFontFamily{\encodingdefault}{\ttdefault}{\hyphenchar\font=`\-}
+```
+or to enable it just for one family:
+```
+\DeclareFontFamily{T1}{cmtt}{\hyphenchar \font=45}
+```
 
 In LaTeX, \discretionary is a way to do custom hyphenization (without
 necessarily using the hyphen character).  Use it like
@@ -753,6 +743,8 @@ To include the pdf file:
   ...
   % There should never be a .pdf (or any other) filename extension
   \includegraphics[width=\textwidth]{picture}
+  % For two-column layout:
+  \includegraphics[width=\columnwidth]{picture}
 ```
 
 To check whether fonts are embedded, run
