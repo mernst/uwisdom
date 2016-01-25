@@ -73,7 +73,7 @@ To revise a commit before pushing it -- similarly to what "hg rollback" enables 
 
  * do more edits
  * `git commit --amend`
- * or: `git commit --amend --no-edit`
+ * or, to keep the current commit message: `git commit --amend --no-edit`
 `git revert' is different:  it makes a new, opposite commit.
 
 In git:
