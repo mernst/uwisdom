@@ -1657,7 +1657,7 @@ Here is a definition of a \todo macro for LaTeX (it needs `\usepackage{color}`):
  % \newcommand{\todo}[1]{\relax}
  \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
 ```
-When using the macro, don't leave space around it.  For example, write
+When using the \todo macro, don't leave space around it.  For example, write
 ```
   The approach is effective\todo{add citations}.
 ```
