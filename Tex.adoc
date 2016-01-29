@@ -1627,7 +1627,8 @@ The llncs.cls style (class) file (and also sig-alternate.cls) does
 which changes the font in footnotes.  This is an acceptable goal, but the
 implementation is seriously flawed, since it makes it impossible to get
 that size font in the program.  To fix this, find the "\newcommand" for
-"\footnotesize" (perhaps in file `/usr/share/texmf/tex/latex/base/size10.clo`)
+"\footnotesize" (perhaps in file `/usr/share/texmf/tex/latex/base/size10.clo`
+or in `/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo`)
 and copy it to the document after the "\documentclass" directive.
 
 The PGF package for LaTeX makes drawings, much like LaTeX picture mode or
