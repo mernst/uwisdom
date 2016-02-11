@@ -799,7 +799,7 @@ To convert a Microsoft Word .doc file to PDF:
 
 Neither technique dominates the other, and each is sometimes bad
 
-To convert PDF to text (txt) format, use the pdftotext program, which is
+To convert PDF to ASCII text (txt) format, use the pdftotext program, which is
 part of the xpdf package.
 
 To compress a PDF file:

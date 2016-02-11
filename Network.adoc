@@ -105,6 +105,8 @@ For example:
    cd ~/tmp/aws-s3
    aws s3 sync s3://travis-checker-framework .
 ```
+Doing `aws s3 sync s3://travis-checker-framework/typetools/checker-framework/1048/1048.1 .`
+copies the contents of that remote directory to the current local directory.
 To delete/remove files:
 ```
    aws s3 rm --recursive s3://travis-checker-framework/typetools
