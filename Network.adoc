@@ -359,3 +359,8 @@ Gerrit (https://www.gerritcodereview.com/) doesn't seem like as good a choice:
 Reviewable: https://reviewable.io.  Gives me the creeps because they put
   people's quotes on their webpage as if they are endorsements, when those
   quotes are from people who never used Reviewable.
+
+To search for source code (in approximate order of preference):
+ * SearchCode
+ * GitHub search
+ * http://code.openhub.net/ (was Koders.com; by Black Duck)
