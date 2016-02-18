@@ -208,8 +208,9 @@ http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
 
 Remote desktop from Linux workstation to Windows Terminal Server:
 ```
-  xfreerdp -u mernst aqua.cs.washington.edu
+  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu
   xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
+  xfreerdp -u mernst aqua.cs.washington.edu
 ```
 (xfreerdp replaces rdesktop, but with rdesktop you would need to log in
 with CSERESEARCH\mernst rather than AQUA\mernst.)
