@@ -303,7 +303,7 @@ without warning), then Hudson jobs may fail with the error message:
 Stopping and re-starting Hudson seems to fix the problem.
 
 To reserve seminar rooms 305 and Gates Commons, ask Tracy Erbeck or Heidi
-Dlubac.
+Dlubac.  Or maybe use the cse-maintenance@cs.washington.edu mailing list?
 
 UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
 Stock reply for people trying to recruit/hire students:
