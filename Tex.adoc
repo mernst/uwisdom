@@ -198,7 +198,7 @@ These give "class" 1..8 to the math character or formula.
 
 == Lists
 
-To eliminate LaTeX list/itemize/enumerate spacing between items, see
+To eliminate LaTeX list/itemize/enumerate spacing/space between items, see
 link:TexListSpacing.adoc[TexListSpacing.adoc].
 
 To control pre-list space, set \partopsep (or insert an explicit negative
