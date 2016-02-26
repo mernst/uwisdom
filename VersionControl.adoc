@@ -102,7 +102,7 @@ Run `git remote prune origin` periodically to remove branches that have been
 deleted from the remote repository.
 
 In Git, to create a branch and switch to it
-(just `git branch newbranch` doesn't switch to the new branch)::
+(just `git branch newbranch` doesn't switch to the new branch):
 ```
   git checkout -b newbranch
 ```
@@ -115,6 +115,11 @@ To remove a remote branch (if you know what you are doing!)
   git push origin --delete the_remote_branch
 ```
 (or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
+To pull pull recent changes to master into a branch:
+```
+  git pull --rebase origin master
+```
+
 
 To see the changes in a single git commit, as a diff, do either of these:
 ```
