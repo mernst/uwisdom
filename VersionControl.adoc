@@ -255,6 +255,30 @@ doesn't produce a table of contents.  Instead, you need
   toc::[]
 ----
 
+GitHub wikis:
+ * in a separate wiki
+ * can write in AsciiDoc and other formats
+ * other people can theoretically edit
+GitHub pages:  e.g., http://mernst.github.io/randoop 
+ * in a separate branch in the main wiki
+ * html only
+ * if using automatic page generator:
+    * can paste in Markdown, but it gets converted to .html
+    * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
+Both are in a separate branch from the code proper, which is a negative.
+Jekyll seems like a mess that I would like to avoid getting entangled in.
+
+GitHub Issues (GitHub's issue tracker) supports sorting only on creation
+date, date of last update, and number of comments.  To find high-priority
+issues, it is necessary to use labels or milestones.  An advantage of
+milestones is that it is possible to search for issues without a milestone,
+but it's not possible to search for issues without a given set of labels
+(only for issues with no label at all).  The search syntax does not support
+disjunction ("or" queries).
+
+
+=== GitHub pull requests
+
 The standard way to collaborate on Github-based projects is for you to fork
 the project on Github, and then commit your changes to your clone, and then
 on the Github page describing your commit there is a button whereby you can
@@ -279,6 +303,19 @@ e) Incorporate code review feedback.
 f) merge pull-request
 g) Optionally delete your fork
 The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
+
+In a GitHub pull request, if the upstream has changed, then just pulling the upstream changes into the pull request shows all those pulled changes in the code diffs.  It is a bug in GitHub pull requests that they don't recognize commits pulled from upstream.
+.
+If you want to see the changes against the most recent version of upstream, you need to:
+ * create and save the diffs for your changes, as a .patch file
+ * if using a branch, create a new branch
+ * if using a fork, then:
+     * carefully aside your current clone
+     * remove your GitHub fork
+     * create a new GitHub fork
+ * apply the diffs to your new branch or fork
+ * create a new pull request
+ * discard the old pull request
 
 Here is how to create a GitHub pull request for a single git commit, if I
 have already committed more than 1 commit to my local repository.  I do
@@ -306,33 +343,15 @@ Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname
 
 GitHub doesn't support pull requests for the wiki repository, only the main repository, according to http://stackoverflow.com/questions/10642928/ .
 
-GitHub wikis:
- * in a separate wiki
- * can write in AsciiDoc and other formats
- * other people can theoretically edit
-GitHub pages:  e.g., http://mernst.github.io/randoop 
- * in a separate branch in the main wiki
- * html only
- * if using automatic page generator:
-    * can paste in Markdown, but it gets converted to .html
-    * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
-Both are in a separate branch from the code proper, which is a negative.
-Jekyll seems like a mess that I would like to avoid getting entangled in.
-
-GitHub Issues (GitHub's issue tracker) supports sorting only on creation
-date, date of last update, and number of comments.  To find high-priority
-issues, it is necessary to use labels or milestones.  An advantage of
-milestones is that it is possible to search for issues without a milestone,
-but it's not possible to search for issues without a given set of labels
-(only for issues with no label at all).  The search syntax does not support
-disjunction ("or" queries).
-
 To pull a GitHub pull request into my local clone/copy,
 click on "command line instructions" at the bottom of the pull request.
 Also see https://help.github.com/articles/checking-out-pull-requests-locally/
 
 To ignore whitespace changes in a GitHub code review diff, add "?w=1"
 at the end of the URL.
+
+In GitHub, adding a CONTRIBUTING file to the root of your repository will add a
+link to your file when a contributor creates an Issue or opens a Pull Request.
 
 
 == GitLab (Git-specific and GitHub-specific items go above)
