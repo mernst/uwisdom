@@ -2826,6 +2826,7 @@ An alternative to markdown, for GitHub-style markdown format, is `grip`
 it) or `grip --export` which exports to `<path>.html`.
 It's better to use AsciiDoc format and the Asciidoctor processor, when possible.
 
+When debugging gradle, use `--info` a lot.
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
