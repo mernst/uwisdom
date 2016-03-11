@@ -195,6 +195,12 @@ These give "class" 1..8 to the math character or formula.
 (Maybe operator has less surrounding space, binary more and relation most?)
 (There is no \binop or \binrel.)
 
+When you have a multi-character variable name in LaTeX, please use
+\mathit{...} or \|...|.  If you write $myvar$, then LaTeX typesets that as
+"m times y times v times a times r", putting extra space between the
+letters.  That which looks different (and worse) than typesetting it as a
+single multi-character variable name with proper inter-letter kerning.
+
 
 == Lists
 
