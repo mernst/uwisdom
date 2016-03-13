@@ -304,9 +304,14 @@ f) merge pull-request
 g) Optionally delete your fork
 The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
 
-In a GitHub pull request, if the upstream has changed, then just pulling the upstream changes into the pull request shows all those pulled changes in the code diffs.  It is a bug in GitHub pull requests that they don't recognize commits pulled from upstream.
-.
-If you want to see the changes against the most recent version of upstream, you need to:
+In a GitHub pull request, if the upstream has changed, don't just do `git pull master` because then the pull request shows all those pulled changes in the code diffs.  This seems to be a bug in GitHub pull requests.  Instead, do `git merge master`.  Or, in more detail:
+```
+  git checkout master
+  git pull
+  git checkout mybranch
+  git merge master
+```
+Another  way to see the changes against the most recent version of upstream, is the following unnecessarily complex version:
  * create and save the diffs for your changes, as a .patch file
  * if using a branch, create a new branch
  * if using a fork, then:
