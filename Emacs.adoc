@@ -457,7 +457,7 @@ In Mew, use the following for searching:
 In Mew, bcc: changes the Subject to "A blind carbon copy".
 To keep the original Subject line, use dcc: instead of bcc:.
 
-In Emacs, to search and replace a regex across multiple files:
+In Emacs, to find/search/grep and replace a regex across multiple files:
 //nobreak
 
  * M-x find-grep-dired RET my-regex RET
