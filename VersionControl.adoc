@@ -232,6 +232,15 @@ To clone a repository, or update it if it already exists:
   git -C repo pull || git clone https://server/repo repo
 ```
 
+To search the history for additions/removals (but not in-file moves!) of a given string or regular expression:
+```
+  git log -S"WHERE_DID_IT_GO"
+  git log -G"WHERE_DID.*"
+```
+To see the commit's diff as well, supply the `-p` option.
+Use `--all` to search all branches.
+
+
 == GitHub (Git-specific items go above)
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
