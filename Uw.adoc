@@ -188,13 +188,13 @@ A guest account is only permitted to use 25 MB of space, so:
  * make symbolic links from your home directory so you don't even notice
    the disk quota limitation.
 
-/cse/www2/types/ contains the content served at
-http://types.cs.washington.edu/
-/cse/web/research/plse/ contains the content served at
-http://plse.cs.washington.edu/
-For UW CSE class webpages,
-/cse/web/courses/cse331/13sp contains the content served at
-http://courses.cs.washington.edu/courses/cse331/13sp/
+What files contain the content served at webpages?
+http://types.cs.washington.edu/ : /cse/www2/types/
+http://plse.cs.washington.edu/ : /cse/web/research/plse/
+http://uwplse.org : version control repository
+http://courses.cs.washington.edu/courses/cse331/13sp/ : /cse/web/courses/cse331/13sp
+Via tramp: /tern.cs.washington.edu:/cse/web/courses/cse590n
+
 
 Incoming anonymous ftp:
 You can upload files here via anonymous ftp:
