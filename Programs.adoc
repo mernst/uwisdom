@@ -901,9 +901,10 @@ To make a webpage automatically forward/redirect, see
   http://www.cs.washington.edu/info/faq/homefaq.html#else
 More simply, do:
 ```
-  <meta http-equiv="Refresh" content="1;URL=http://www.mit.edu/~6.170" />
+  <meta http-equiv="Refresh" content="0;URL=http://www.mit.edu/~6.170" />
 ```
 This belongs in the `<head>` section, along with `<title>`.
+The number "0" can be set to a delay in seconds.
 
 To restart the httpd server:
 ```
