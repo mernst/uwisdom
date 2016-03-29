@@ -343,7 +343,8 @@ WALA: http://wala.sourceforge.net
 Javassist: http://www.csg.is.titech.ac.jp/~chiba/javassist/
   Like BCEL, but includes both a high-level (source code) and a low-level
   (bytecode) interface.
-  As of 8/2013, the last release is verion 3.12.0.GA, dated 7/2011.
+  As of 8/2013, the last release is version 3.12.0.GA, dated 7/2011.
+  As of 3/2016, the latest release is verssion 3.20.0-G, dated 6/2015.
 
 The "Java SE Development Kit (7u45) Demos and Samples" contains
 java_crw_demo.[c,h].  This is a byte code rewriter that is used in hprof
