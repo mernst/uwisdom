@@ -230,7 +230,8 @@ To suppress a javac warning like
 ```
 warning: [options] bootstrap class path not set in conjunction with -source 1.7
 ```
-supply the command-line argument: `-Xlint:-options'
+that results from command-line arguments `-source 7 -target 7',
+supply the additional command-line argument: `-Xlint:-options'
 
 
 == javadoc
