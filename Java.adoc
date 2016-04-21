@@ -226,6 +226,11 @@ in the source code, but this still requires you to run javac as follows:
   javac -XDenableSunApiLintControl ...
 ```
 
+To suppress a javac warning like
+```
+warning: [options] bootstrap class path not set in conjunction with -source 1.7
+```
+supply the command-line argument: `-Xlint:-options'
 
 
 == javadoc
