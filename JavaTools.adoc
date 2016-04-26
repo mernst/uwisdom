@@ -1002,6 +1002,12 @@ Java call graph (dependences) extraction:
  * Dynamic call graphs: AspectJ makes it trivial to weave into call sites
 
 
+== Formatters
+
+I prefer google-java-format (https://github.com/google/google-java-format) for Java formatting.
+http://www.peterfriese.de/formatting-your-code-using-the-eclipse-code-formatter/
+left a space at the end of a line
+
 == Continuous integration
 
   Hudson -- most popular (as of May 2009)
