@@ -1787,6 +1787,11 @@ Ways to convert LaTeX to plaintext:
  * convert to PDF (disabling hyphenation), then use pdftotext
  * use pandoc
 
+To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
+`\newcommand{\crefrangeconjunction}{--}`
+to the preamble of the document.
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
 
