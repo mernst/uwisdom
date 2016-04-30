@@ -452,7 +452,7 @@ To install/build a perl module, do the following as root:
   perl -MCPAN -e shell
   install MIME::Base64
 ```
-For more details, see ~mernst/wisdom/build/build-perl-module
+For more details, see ~mernst/wisdom/building/build-perl-module
 
 In Perl, to determine whether file named $foo exists, use "if (-e $foo) ...".
 
@@ -572,7 +572,7 @@ size paper (that is, to shift the text down on the page), use
 Alternately, convert to PDF and then back to PostScript, using ps2pdf and
 pdf2ps.  Or use pdftops, which seems nicer than pdf2ps.
 (By default, dvips creates PostScript for A4 paper.  Some people forget to
-fix this when they install dvips.  See file ~mernst/wisdom/build/build-dvips)
+fix this when they install dvips.  See file ~mernst/wisdom/building/build-dvips)
 To create Encapsulated PostScript, can also run
 ```
   pdftops -eps
@@ -1701,7 +1701,7 @@ To run VMware tools:
 ```
   vmware-toolbox &
 ```
-To install VMware tools, see ~mernst/wisdom/build/build-vmware
+To install VMware tools, see ~mernst/wisdom/building/build-vmware
 
 // Information on how to configure our ESX VMware servers is available
 // in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html

@@ -613,7 +613,7 @@ Or, take a competitive upgrade from J++:  $300.
         current-line marker.
  * AnyJ (an IDE)
  * Java Workshop: http://www.sun.com/workshop/java/download.html
-   See ~/wisdom/build/build-jws
+   See ~/wisdom/building/build-jws
 
 http://jswat.sourceforge.net/ -- a standalone GUI debugger
 
