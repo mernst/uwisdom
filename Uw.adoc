@@ -119,7 +119,6 @@ To approve spending:
  * Repeat until there is no more red "PI review" text
 
 
-
 == CSE
 
 UW CSE printer: ps581
@@ -382,6 +381,11 @@ https://www.cs.washington.edu/internal/food
 
 If there is trouble with parsing Jekyll webpages (such as those under
 http://uwplse.org/meet/), you can see logs at http://hooknook.uwplse.org/
+
+Sandy Kaplan <sandy@cs.washington.edu> is a technical editor who can help
+with grant proposals, technical papers, helping grad students improve their
+writing, etc.  She sits in CSE 462 and works Monday mornings and all day
+Thursday and Friday.
 
 
 == Seattle
