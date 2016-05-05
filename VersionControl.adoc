@@ -104,7 +104,7 @@ deleted from the remote repository.
 In Git, to create a branch and switch to it
 (just `git branch newbranch` doesn't switch to the new branch):
 ```
-  git checkout -b newbranch
+  git checkout -b new_branch_name
 ```
 In Git, to delete a local branch:
 ```
