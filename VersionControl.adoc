@@ -232,11 +232,19 @@ To clone a repository, or update it if it already exists:
   git -C repo pull || git clone https://server/repo repo
 ```
 
-To search the history for additions/removals (but not in-file moves!) of a given string or regular expression:
+To search the git history:
 ```
-  git log -S"WHERE_DID_IT_GO"
   git log -G"WHERE_DID.*"
 ```
+returns all commits that match the given regular expression.
+```
+  git log -S"WHERE_DID_IT_GO"
+```
+returns all commits with a different number of occurrences of the search
+string before and after (ie, removals or additions of the search string,
+but it would not match in-file moves or other patches that don't add or
+remove the string).
+.
 To see the commit's diff as well, supply the `-p` option.
 Use `--all` to search all branches.
 
