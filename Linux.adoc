@@ -209,9 +209,8 @@ then use /mnt/floppy; to unmount,
 To use the devices, I appear to need to be root on the local machine.  But
 that root doesn't necessarily have read-access to my private files!
 
-When an Amazon Kindle is plugged into Ubuntu Linux, it is mounted not at
-/mnt but at /media/${HOME}/Kindle .
-
+When an Amazon Kindle is plugged into Ubuntu Linux via USB,
+it is mounted not at /mnt but at /media/${HOME}/Kindle .
 
 
 == Everything else
