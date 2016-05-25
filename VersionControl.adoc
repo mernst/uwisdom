@@ -100,6 +100,13 @@ In Git, to list branches:
 Note that `git branch` only shows *local* branches.
 Run `git remote prune origin` periodically to remove branches that have been
 deleted from the remote repository.
+.
+You can also see the branches in Github, for example at
+https://github.com/typetools/checker-framework/branches/all
+together with how old, who last changed, whether there is a pull request open.
+You can see diffs by clicking "create pull request", which gets you to a
+page showing the diffs (actually creating the pull request requires another
+click -- don't do that).
 
 In Git, to create a branch and switch to it
 (just `git branch newbranch` doesn't switch to the new branch):
