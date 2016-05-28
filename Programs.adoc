@@ -812,11 +812,18 @@ To convert a 1-page PDF to good-quality .gif:
   convert -density 300 -quality 100 file.pdf file.gif
 ```
 
-To create a multi-page set of tiles that can be tiled together to make a poster:
+To create a multi-page set of tiles (each tile is letter size) that can be tiled together to make a poster:
 ```
   pdftops madrid-transport-center-2009.pdf
   poster -v -mA4 -s1.3 madrid-transport-center-2009.ps > madrid-transport-center-2009-tiled-scaled1.3.ps
   ps2pdf madrid-transport-center-2009-tiled-scaled1.3.ps
+```
+To print a USGS quad map on 8 sheets of letter paper:
+```
+  pdfcrop --margins '-200 -50 -150 -150' foo.pdf
+  pdftops foo-crop.pdf
+  poster -v -mletter -s1.2 foo-crop.ps > foo-scaled1.2.ps
+  ps2pdf foo-scaled1.2.ps
 ```
 (I wasn't able to get the pdfposter program to work, so I converted to
 PostScript and used poster instead.)
