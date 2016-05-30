@@ -18,6 +18,10 @@ all changed files, use
   git commit -a
 ```
 
+Typical operation on a stash:
+```
+  git stash pop
+```
 To display a stash as a diff/patch:
 ```
   git stash show -p stash@{0}
