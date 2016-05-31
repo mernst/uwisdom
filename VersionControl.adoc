@@ -102,8 +102,11 @@ In Git, to list branches:
   git branch -a
 ```
 Note that `git branch` only shows *local* branches.
-Run `git remote prune origin` periodically to remove branches that have been
-deleted from the remote repository.
+Periodically run
+```
+  git remote prune origin
+```
+to remove branches that have been deleted from the remote repository.
 .
 You can also see the branches in Github, for example at
 https://github.com/typetools/checker-framework/branches/all
