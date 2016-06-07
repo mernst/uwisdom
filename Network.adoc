@@ -249,12 +249,6 @@ To get a printable version of a blogger webblog, apply these diffs:
      float:left;
 ```
 
-Web polls:
-```
-  doodle.com
-  surveymonkey.com
-```
-
 // To run NetMeeting on Windows XP,
 //   Start -> Run -> conf.exe
 
@@ -296,6 +290,12 @@ For PC remote control:
 For a Google spreadsheets survey, be sure to ask for repsondents' name,
 because the user ID is not recorded by default.
 
+Web polls:
+```
+  doodle.com
+  surveymonkey.com
+```
+
 For scheduling a meeting:
 //nobreak
 
@@ -319,6 +319,12 @@ Other possibilities, none of which seems great
  * gathergrid.com: only by hour; no calendar integration
  * whenshouldwe.com: terribly basic; not acceptable
  * selectthedate.com: selects a date, not among multiple times on one date
+
+Two tips about Doodle polls:
+//nobreak
+
+ * For a 1-hour meeting, give 30-minute timeslots.  That lets participants  communicate that they could make 1:30-2:30 but not 1-2 or 2-3.  It's especially important at UW since standard classes start on the half hour.
+ * Consider permitting "if-need-be" as a response.  It can give more scheduling flexibiliity.
 
 Briticizer:  http://us2uk.eu/
 also: http://www.translatebritish.com/reverse.php
