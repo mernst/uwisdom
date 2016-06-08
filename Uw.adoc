@@ -187,7 +187,7 @@ A guest account is only permitted to use 25 MB of space, so:
  * make symbolic links from your home directory so you don't even notice
    the disk quota limitation.
 
-What files contain the content served at webpages?
+What files in the file system contain the content served at webpages/URLs?
 http://types.cs.washington.edu/ : /cse/www2/types/
 http://plse.cs.washington.edu/ : /cse/web/research/plse/
 http://uwplse.org : version control repository
