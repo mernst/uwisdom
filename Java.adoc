@@ -246,15 +246,16 @@ and then, in the result:
 ----
 and finally look for instances of `[<>]`.
 
-How to quote less than and greater than (angle brackets), such as for generics, in Javadoc comments:
+How to quote less than and greater than (angle brackets), such as for generics, without using &lt; and &gt; in Javadoc comments:
 ```
  Equation: {@literal i > j}
- Inline code: {@code getThat()}
+ Inline code: {@code getThat<T>()}
  Multi line code:
    <pre>{@code
    ...
    }</pre>
- (what if the multi-line code contains curly braces??)
+ For the latter, if there is an unbalanced close curly brace, that will
+ terminate the `{@code ...}` constrict early, but balanced braces are fine.
 ```
 To quote/escape the @ (at-sign) symbol in Javadoc, use {@literal @} or &#064;
 
