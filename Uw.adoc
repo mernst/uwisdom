@@ -394,9 +394,13 @@ Options for short-term Seattle housing/rentals/apartments/sublets:
 //nobreak
 
  * Craigslist: http://seattle.craigslist.org/sub/
+ * AirBnB: https://www.airbnb.com/
  * UW Visiting Personnel and Visiting Students: stay in a dorm
    http://www.hfs.washington.edu/conferences/planners.aspx?id=141
- * Visiting Faculty Housing Service: http://depts.washington.edu/uwfacaux/vfhs.html
+ * Visiting Faculty Housing Service (VFHS): http://www.washington.edu/uwfa/visiting-faculty-housing/
+   They are stuck in the 20th century with all materials available only in
+   hardcopy, but can sometimes be convinced to fax or scan, or to talk someone
+   through what is available by phone.
  * J-1 Scholar Guide (see Housing, and also the complete guide):
    http://iso.uw.edu/jfirst.html#Arrival_in_Seattle 
  * Seattle Times: http://marketplace.nwsource.com/realestate/rentals/
