@@ -134,6 +134,11 @@ To pull pull recent changes to master into a branch:
   git pull --rebase origin master
 ```
 
+In Git, to clone a particular branch:
+```
+  git clone -b <branch> --single-branch <remote_repo>
+```
+
 
 To see the changes in a single git commit, as a diff, do either of these:
 ```
