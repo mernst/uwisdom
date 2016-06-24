@@ -399,15 +399,15 @@ link to your file when a contributor creates an Issue or opens a Pull Request.
 
 In GitHub, you can squash a pull request into a signal commit and then merge the
 single commit (https://github.com/blog/2141-squash-your-commits).
-(Suzanne says that whoever does the squashing becomes the author, so the main author should do this.
-Ben says anyone can do this and the original author remains the author.)
 To do so:
  * Click "Merge pull request"
  * Click the down arrow next to "Confirm merge"
  * Select "Squash and merge"
- * Edit the commit message
+ * Edit the one-line commit message, and edit or remove the
+   multi-line optional explanation
  * Click "Confirm squash and merge"
-To make someone else the author, do the squash on the command line:
+This keeps the original author, but makes the person doing the squashing the
+committer.  You can also do the squash on the command line:
 ```
 git checkout master
 git merge --squash branch
