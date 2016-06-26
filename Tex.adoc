@@ -359,9 +359,9 @@ Here are definitions for identifiers in LaTeX math mode formulas:
   \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
   % \<name> or \codeid{name} denotes computer code identifiers
   \def\<#1>{\codeid{#1}}
+  \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
   \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
   \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
-  \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
 ----
 This alternate definition of `\codeid` does not work inside an array environments (see http://tex.stackexchange.com/questions/27592/ ):
 ----
@@ -1791,6 +1791,12 @@ Ways to convert LaTeX to plaintext:
 To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
 `\newcommand{\crefrangeconjunction}{--}`
 to the preamble of the document.
+
+If you get an error
+```pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
+been already used, duplicate ignored```
+and your document does not have an index, then add the `pageanchor=false` option to the hyperref package:
+```\usepackage[pageanchor=false]{hyperref}```
 
 
 // Please put new content in the appropriate section above, don't just
