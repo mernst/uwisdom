@@ -129,7 +129,7 @@ To remove a remote branch (if you know what you are doing!)
   git push origin --delete the_remote_branch
 ```
 (or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
-To pull pull recent changes to master into a branch:
+To pull recent changes to master into a branch:
 ```
   git pull --rebase origin master
 ```
