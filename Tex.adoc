@@ -204,7 +204,8 @@ single multi-character variable name with proper inter-letter kerning.
 
 == Lists
 
-To eliminate LaTeX list/itemize/enumerate spacing/space between items, see
+To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
+setting \itemsep and \parskip), see
 link:TexListSpacing.adoc[TexListSpacing.adoc].
 
 To control pre-list space, set \partopsep (or insert an explicit negative
