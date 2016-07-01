@@ -1642,6 +1642,11 @@ To get the current working directory from an ant file:
 
 == Gradle and build.gradle
 
+The standard gradle target, which builds all artifacts and runs all tests, is
+```
+./gradlew build
+```
+
 Gradle task to create a TAGS table:
 ```
 /* Make Emacs TAGS table */
