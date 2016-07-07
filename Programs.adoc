@@ -2855,5 +2855,21 @@ It's better to use AsciiDoc format and the Asciidoctor processor, when possible.
 
 When debugging gradle, use `--info` a lot.
 
+To create a docker image (which is a static template that can be
+instantiated into a running container), good instructions appear at
+https://docs.docker.com/engine/tutorials/dockerimages/.  In brief, run
+the following in an empty directory.
+```
+  docker login
+  # No tag number; we'll just depend on the "latest" tag.
+  docker build -t mdernst/ubuntu-for-cf .
+  # List the available images
+  docker images
+  # Upload to Docker Hub
+  docker push mdernst/ubuntu-for-cf
+  # Browse to https://hub.docker.com/ to verify that it exists
+```
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
