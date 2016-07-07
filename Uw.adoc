@@ -387,6 +387,8 @@ with grant proposals, technical papers, helping grad students improve their
 writing, etc.  She sits in CSE 462 and works Monday mornings and all day
 Thursday and Friday.
 
+"Tips on using Jenkins" document:
+https://docs.google.com/document/d/1OHsgZwyQSaJptAL-OhDNN-IWf5zb3akueQo9Ge4srgs/edit
 
 == Seattle
 
