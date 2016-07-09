@@ -87,6 +87,13 @@ Calling travis_wait does not extend your timeout, it just prints a message
 periodically so your job does not look hung to Travis.
 Note that Travis seems to give more time on container-based than legacy infrastructure.
 
+To enable Travis on your fork:
+ * Go to travis-ci.org
+ * Log in using GitHub
+ * You might need to click "refresh"
+ * turn on the toggle next to your fork's name
+Now, the next time you push, the tests will run.
+
 
 == AWS Amazon Web services
 
