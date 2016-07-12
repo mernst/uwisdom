@@ -315,6 +315,9 @@ but it's not possible to search for issues without a given set of labels
 (only for issues with no label at all).  The search syntax does not support
 disjunction ("or" queries).
 
+The blue vertical bar at the left of a GitHub pull request or issue indicates
+that something in it is new or unread -- you haven't clicked on it before.
+
 
 === GitHub pull requests
 
