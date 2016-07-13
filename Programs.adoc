@@ -2870,6 +2870,18 @@ the following in an empty directory.
   # Browse to https://hub.docker.com/ to verify that it exists
 ```
 
+To stop and remove/delete all docker containers:
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+```
+To remove all non-running containers:
+```docker rm $(docker ps -q -f status=exited)```
+
+To list docker images:
+```docker images```
+To remove/delete a docker image:
+```docker rmi ID```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
