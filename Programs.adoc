@@ -2882,6 +2882,12 @@ To list docker images:
 ```docker images```
 To remove/delete a docker image:
 ```docker rmi ID```
+To remove/delete all docker images:
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
