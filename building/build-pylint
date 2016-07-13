@@ -1,0 +1,4 @@
+sudo pip install pylint
+
+At CSE:
+pip install --user pylint
