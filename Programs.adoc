@@ -2889,6 +2889,8 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
+To convert .svg to vector-format .pdf?
+```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

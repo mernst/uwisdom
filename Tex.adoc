@@ -207,6 +207,9 @@ single multi-character variable name with proper inter-letter kerning.
 To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
 setting \itemsep and \parskip), see
 link:TexListSpacing.adoc[TexListSpacing.adoc].
+The most common incantation is
+`\itemsep 0pt \parskip 0pt`.
+
 
 To control pre-list space, set \partopsep (or insert an explicit negative
 \vspace (not \vskip)).  (I had to give an explicit argument, not -\parsep
@@ -1336,8 +1339,8 @@ To permit underfull hboxes in LaTeX, use
 ```
 \begin{sloppypar} ... \end{sloppypar}
 ```
-I can't get \sloppy to work.
-To disable the warnings globally, say "\hbadness=10000", this
+I can't get `\sloppy` or `\begin{sloppy} ... \end{sloppy}` to work.
+To disable the warnings globally, say `\hbadness=10000`, which
 disables overfull hbox warnings too.
 
 In LaTeX, 
