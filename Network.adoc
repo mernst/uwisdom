@@ -94,6 +94,38 @@ To enable Travis on your fork:
  * turn on the toggle next to your fork's name
 Now, the next time you push, the tests will run.
 
+Travis debug VM:
+1. Add
+```
+- travis_debug
+```
+as one of the commands in the script block.
+1. Send a POST request to /job/:job_id/debug using:
+ TOKEN = your API token; see https://github.com/travis-ci/travis.rb#token
+ JOB_ID = displayed in the build log after expanding "Build system information"
+```
+#! /usr/bin/env bash
+curl -s -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "Authorization: token <TOKEN>" \
+  -d '{ "quiet": true }' \
+  https://api.travis-ci.org/job/<JOB_ID>/debug
+```
+2. Head back to the web UI and in the log of your job. you should see the
+following lines to connect to the VM:
+```
+Setting up debug tools.
+Preparing debug sessions.
+Use the following SSH command to access the interactive debugging environment:
+ssh ukjiuCEkxBBnRAe32Y8xCH0zj@ny2.tmate.io
+```
+3. Connect from your computer using SSH into the interactive session, and once
+you're done, just type `exit` and your build will terminate.
+The job will skip the remaining phases after debug.
+Also, please consider removing the build log after you've finished debugging.
+
 
 == AWS Amazon Web services
 
