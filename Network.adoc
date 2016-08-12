@@ -67,6 +67,10 @@ A commit that has `[ci skip]` anywhere in the commit message is ignored by
 Travis CI -- Travis does not run the continuous integration build/test
 for that commit.
 
+Travis will send email notifications about each broken build.  However, it
+will only do so after you have logged in to the Travis website and given it
+access to your GitHub account.
+
 In your Travis CI .travis.yml file, it's best not to set the
 "notifications" email.  If you do, and someone forks your repository, then
 you will get notifications about their broken builds.  There isn't
