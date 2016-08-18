@@ -2892,5 +2892,14 @@ docker rmi $(docker images -q)
 To convert .svg to vector-format .pdf?
 ```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
 
+Apple Mail, when configured to send mail as "rich text", mangles quoted text.
+The quoted text shows up to the recipient colored, but 
+without a quotation marker such as a vertical bar or ">" in the left column.
+This makes the mail very hard for recipients to read.
+The solution is to use plain text format.
+Choose Mail > Preferences, click Composing, then select "plain text".
+This is an issue with Apple Mail on a Mac laptop.
+Replies sent from an iPhone look fine, with a quotation marker.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
