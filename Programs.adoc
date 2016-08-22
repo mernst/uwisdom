@@ -1387,7 +1387,8 @@ Particularly useful special "automatic variables" used by make (in Makefile rule
  * $@   the target of the rule
  * $<   the first prerequisite
  * $^   all the prerequisites
-Example use: `cp -p $< $@`
+Example use of special automatic variables used by make:
+`cp -p $< $@`
 
 In Makefiles, to test whether a file/directory exists, do something like this:
 ```
