@@ -820,10 +820,11 @@ To create a multi-page set of tiles (each tile is letter size) that can be tiled
 ```
 To print a USGS topographical quad map on 8 sheets of letter paper:
 ```
-  pdfcrop --margins '-200 -50 -150 -150' foo.pdf
-  pdftops foo-crop.pdf
-  poster -v -mletter -s1.2 foo-crop.ps > foo-scaled1.2.ps
-  ps2pdf foo-scaled1.2.ps
+  BASENAME=foo
+  pdfcrop --margins '-200 -50 -150 -150' ${BASENAME}.pdf
+  pdftops ${BASENAME}-crop.pdf
+  poster -v -mletter -s1.2 ${BASENAME}-crop.ps > ${BASENAME}-scaled1.2.ps
+  ps2pdf ${BASENAME}-scaled1.2.ps
 ```
 (I wasn't able to get the pdfposter program to work, so I converted to
 PostScript and used poster instead.)
