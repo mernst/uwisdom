@@ -359,8 +359,19 @@ They are only used by debuggers and when instrumenting, that is seldom
 an issue.  utilMDE/BCELUtil has a method (remove_local_variable_type_tables)
 that does this for a method.
 
-Java nested clasess include member classes, local classes, and anonymous classes.
-Java member classes are of two varieties:  static and inner.
+Java classes are top level or nested:
+```
+class TopLevel {
+  // Java member classes are of two varieties:  static and inner.
+  static class StaticMember {}
+  class Inner {}
+  void m() {
+    class Local {}
+    // this "new" expression creates an instance of an anonymous class
+    new SuperTypeOfAnonymousClass() { ... }
+  }
+}
+```
 
 To determine which class files require a given JDK version (or earlier):
 ```
