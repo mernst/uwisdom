@@ -587,12 +587,17 @@ the "L" or "R" or "U" modifiers.  For instance:
 Two sets of tools for transforming PDF files are pdftk and PDFjam.
 //nobreak
 
- * pdftk is a single program with many command-line options.  Installed on Ubuntu.
- * PDFjam is a single program, along with 10 wrappers, each with a single purpose (e.g., pdf90 to rotate by 90 degrees).  Installed on Red Hat and Fedora.
+ * pdftk is a single program with many command-line options.  Installed on Ubuntu.  Depends on gcj which is in maintenance mode since 2013.  Does not
+   install easily on Red Hat/Fedora/RHEL/CentOS.
+ * PDFjam is a single program, along with 10 wrappers, each with a single purpose (e.g., pdf90 to rotate by 90 degrees).  Used to be installed on
+   Red Hat and Fedora, but no longer.
+ * cpdf is an alternative to both; but is free only for personal use.
+   "Charities and educational institutions still require a license."
 //nobreak
 
 Separate/split a file into individual pages:
 ```
+  cpdf -split in.pdf -o out%%%.pdf
   pdftk infile.pdf burst
 ```
 Select pages from a file:
@@ -604,6 +609,7 @@ Select pages from a file:
 ```
 To concatenate PDF files:
 ```
+  cpdf -merge ${ALL_PDFS} -o singlegfile.pdf
   pdftk ${ALL_PDFS} cat output singlefile.pdf 
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
 ```
@@ -625,6 +631,14 @@ One can also use pdfnup:
   pdfnup --frame true --nup 2x3 file.pdf    6-up slides
 ```
 pdfnup is part of PDFjam.  Also see pdftk, an alternative to PDFjam.
+Maybe I can just do
+``
+  lpr -o number-up=2 filename
+```
+There is also the podofo suite of tools.
+acroread can also do this, as part of its conversion-to-PostScript
+which is available from the command line.  (But acroread isn't installed at CSE.)
+evince's print dialog does not seem available from the command line.
 // Sample use of mpage (-o suppresses lines between pages):
 // ```
 //   mpage -2 file.ps > file-2up.ps
