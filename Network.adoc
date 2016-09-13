@@ -36,6 +36,11 @@ To join a Google Groups mailing list with a Google Apps account (e.g.,
 In Google Groups, to permit "reply all" to go to the sender:
   Settings >> Email options >> Post replies: Users decide
 
+When creating a mailman mailing list, some common good options to change:
+ * General options:
+    * A terse phrase
+    * Should Mailman replace any existing Message-ID: header: no
+ * Membership Management >> Mass Subscription
 
 == Travis CI continuous integration
 

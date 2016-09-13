@@ -2907,6 +2907,9 @@ docker rmi $(docker images -q)
 
 To convert .svg to vector-format .pdf?
 ```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
+To edit a .svg file, use inkscape (or a variety of other tools).
+In Inkscape, to resize/crop the canvas to the size of the drawing:
+ * File >> Document Properties >> Resize page to content >> click "Resize Page to drawing or selection" button
 
 Apple Mail, when configured to send mail as "rich text", mangles quoted text.
 The quoted text shows up to the recipient colored, but 
