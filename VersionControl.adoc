@@ -443,6 +443,16 @@ To unregister a multi-runner:
   gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
 ```
 
+In GitLab, only users with the Master role are allowed to push a merge to a "protected branch".
+(The master branch might be protected by default.)
+If you get this error:
+```
+  remote: GitLab: You are not allowed to push code to protected branches on this project.        
+   ! [remote rejected] master -> master (pre-receive hook declined)
+```
+then go to the project >> settings (gear icon) >> members >> (fill in name, and "Master" for Project Access) >> Add Users to project.
+Or, unprotect it:  go to the project >> settings (gear icon) >> protected branches >> unprotect.
+
 
 // == Google Code
 
