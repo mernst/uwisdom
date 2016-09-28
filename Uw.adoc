@@ -207,6 +207,12 @@ http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
 
 Remote desktop from Linux workstation to Windows Terminal Server:
 ```
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768
+```
+Older commands that require me to enter CSERESEARCH for the domain:
+```
   xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu
   xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu
   xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
