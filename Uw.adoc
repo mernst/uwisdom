@@ -118,6 +118,8 @@ To approve spending:
     ** Click "Save and close"
  * Repeat until there is no more red "PI review" text
 
+Poll Everywhere is free to UW faculty and students.  You can create simple polls that students can vote on anonymously via a URL or text message. It also has integrations with Powerpoint and Google Slides.
+
 
 == CSE
 

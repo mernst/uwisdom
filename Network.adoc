@@ -41,6 +41,9 @@ When creating a mailman mailing list, some common good options to change:
     * A terse phrase
     * Should Mailman replace any existing Message-ID: header: no
  * Membership Management >> Mass Subscription
+ * Privacy options...
+    * Sender filters
+       * non-member addresses whose postings should be automatically accepted
 
 == Travis CI continuous integration
 
