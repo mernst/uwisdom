@@ -314,6 +314,9 @@ Stopping and re-starting Hudson seems to fix the problem.
 To reserve seminar rooms 305 and Gates Commons, ask Tracy Erbeck or Heidi
 Dlubac.  Or maybe use the cse-maintenance@cs.washington.edu mailing list?
 
+Use the cse-maintenance@cs.washington.edu mailing list for requests about facilities (physical plant) issues with the Allen Center.
+space@cs.washington.edu is for asking for office space.
+
 UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
 Stock reply for people trying to recruit/hire students:
 Good luck on your project!
