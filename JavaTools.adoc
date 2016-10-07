@@ -669,6 +669,9 @@ for download any longer.
 
 == Profilers
 
+jcmd can print a stack trace of a running Java program, at the current
+moment.
+This gives a poor man's version of profiling.
 
 === Profilers in the JDK
 
