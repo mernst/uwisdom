@@ -149,6 +149,9 @@ before_install:
   - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
 ```
 
+For a pull request, Travis-CI tests the branch and the PR merge commit.
+These are two different SHAs.
+
 
 == AWS Amazon Web services
 
