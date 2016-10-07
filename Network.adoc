@@ -138,6 +138,17 @@ you're done, just type `exit` and your build will terminate.
 The job will skip the remaining phases after debug.
 Also, please consider removing the build log after you've finished debugging.
 
+To install a different version of Docker on Travis:
+```
+env:
+  global:
+   - DOCKER_VERSION="1.9.1-0~trusty"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get remove docker-engine -yq
+  - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
+```
+
 
 == AWS Amazon Web services
 
