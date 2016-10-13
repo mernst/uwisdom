@@ -120,6 +120,9 @@ To approve spending:
 
 Poll Everywhere is free to UW faculty and students.  You can create simple polls that students can vote on anonymously via a URL or text message. It also has integrations with Powerpoint and Google Slides.
 
+User guide for UW Telecom handsets/telephones:
+https://itconnect.uw.edu/wp-content/uploads/2014/06/9608_9611G-SIP_quick-ref.pdf
+
 
 == CSE
 
