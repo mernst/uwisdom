@@ -214,16 +214,16 @@ http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
 Remote desktop from Linux workstation to Windows Terminal Server
 (enter CSERESEARCH for the domain):
 ```
-  xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu
-  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu
-  xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
-  xfreerdp -u mernst aqua.cs.washington.edu
+  xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu &
+  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu &
+  xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu &
+  xfreerdp -u mernst aqua.cs.washington.edu &
 ```
 Here are newer commands, but they don't work for me:
 ```
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440 &
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200 &
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768 &
 ```
 (xfreerdp replaces rdesktop, but with rdesktop you would need to log in
 with CSERESEARCH\mernst rather than AQUA\mernst.)
@@ -231,7 +231,7 @@ VDI (http://vdi.cs.washington.edu/vdi/) is like instructional Windows machines;
 maybe it doesn't have access to one's research file system like aqua does.
 Example command:
 ```
-  xfreerdp /d:CSEPCLAB /size:1280x1024 /u:bob /v:vdilab12.cs.washington.edu /sec:nla 
+  xfreerdp /d:CSEPCLAB /size:1280x1024 /u:bob /v:vdilab12.cs.washington.edu /sec:nla &
 ```
 
 To create a directory for a new project, such as to store a version control
