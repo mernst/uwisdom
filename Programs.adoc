@@ -2820,7 +2820,9 @@ documentation into a man page, run pod2man.  For example:
   pod2man my-script.pl | nroff -man 
 ```
 
-To resolve a symbolic link to its true name (truename), use `readlink`.
+To resolve a symbolic link to its true name (truename):
+ * in a program, use the `readlink` system call
+ * from the command line, use `realpath`
 
 The `curl` program displays an annoying progress meter.  To disable it
 without also suppressing errors, use `curl -s -S`.
