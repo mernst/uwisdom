@@ -80,10 +80,11 @@ http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm
     circumstances (e.g., specific groups of people or only some typefaces...)
 //nobreak
 
-Another list of types of threats is:
+Another list of types of threats (used in Yin's case study book and maybe
+elsewhere?) is:
 //nobreak
 
- * construct (correct measurements)
+ * construct (relevant measurements)
  * internal (alternative explanations)
  * external (generalize beyond subjects)
  * reliability (reproduce)
