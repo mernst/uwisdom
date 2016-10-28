@@ -129,10 +129,6 @@ To remove a remote branch (if you know what you are doing!)
   git push origin --delete the_remote_branch
 ```
 (or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
-To pull recent changes to master into a branch:
-```
-  git pull --rebase origin master
-```
 
 In Git, to clone a particular branch:
 ```
@@ -208,6 +204,15 @@ To compare two branches in Git:
    or b2 but not both), so `git diff b1...b2` is the opposite patch as
    `git diff b2...b1`.
 
+To pull recent changes to master into a branch:
+```
+  git checkout mybranch
+  git pull
+  git pull origin master
+  git push
+```
+(optionally add `--rebase` argument to `git pull origin mybranch`,
+if the branch has never been shared with anyone else).
 To synch a GitHub fork with upstream:
 First, you must have at some point in the past done:
 ```
