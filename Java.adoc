@@ -76,11 +76,10 @@ To run it:
   java com.bluemarsh.jswat.Main
 ```
 
-kill -QUIT _pid_ causes Java to do a traceback from each thread and keep going.
+`kill -QUIT _pid_` causes Java to do a traceback (stack trace) from each
+thread and keep running.
+This is useful for debugging an infinite loop in a Java program.
 If java is running in a shell, you can also normally use ctrl-\ as well.
-
-To debug a Java infinite loop, send SIGQUIT (kill -3) to get a stack trace
-(but Java process keeps running).
 
 To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
 //nobreak
@@ -258,6 +257,9 @@ How to quote less than and greater than (angle brackets), such as for generics, 
  terminate the `{@code ...}` constrict early, but balanced braces are fine.
 ```
 To quote/escape the @ (at-sign) symbol in Javadoc, use {@literal @} or &#064;
+This is needed only at the beginning of a line to prevent it from being
+interpreted as starting a Javadoc tag.  It is needed even within
+<pre>{@code ...}</pre>.  Another approach is to put &nbsp; before the literal @.
 
 To avoid doclint messages about missing Javadoc tags, such as "no @param for someArg":
 ----
