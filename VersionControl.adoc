@@ -206,7 +206,9 @@ To compare two branches in Git:
 
 To pull recent changes to master into a branch:
 ```
-  git checkout mybranch
+  git checkout master
+  git pull
+  git checkout MY_BRANCH_NAME
   git pull
   git pull origin master
   git push
