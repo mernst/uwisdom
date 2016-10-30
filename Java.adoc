@@ -256,6 +256,8 @@ How to quote less than and greater than (angle brackets), such as for generics, 
  For the latter, if there is an unbalanced close curly brace, that will
  terminate the `{@code ...}` constrict early, but balanced braces are fine.
 ```
+The purpose of `{@code ...}` is to prevent HTML interpretation; <, >, &amp;,
+are passed through unchanged.
 To quote/escape the @ (at-sign) symbol in Javadoc, use {@literal @} or &#064;
 This is needed only at the beginning of a line to prevent it from being
 interpreted as starting a Javadoc tag.  It is needed even within
