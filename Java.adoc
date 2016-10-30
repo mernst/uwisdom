@@ -274,9 +274,9 @@ ifneq (,$(findstring 1.8.,$(shell java -version 2>&1)))
 endif
 ----
 
-In a Javadoc @param clause (and related clauses), the initial text is a
-sentence fragment that starts with a lowercase (not capital) letter and
-does not end with a period unless followed by another sentence.
+In a Javadoc @param, @return, etc. clause, the initial text is a sentence
+fragment that starts with a lowercase (not capital) letter and does not end
+with a period unless followed by another sentence.
 
 
 == Everything else
