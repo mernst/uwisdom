@@ -5,20 +5,6 @@
 // toc::[]
 
 
-Adapted from http://en.wikipedia.org/wiki/Dependability:
-//nobreak
-
-Defect::
-      A flaw, failing, or imperfection in a system, such as an
-      incorrect design, algorithm, or implementation.  Also known as a
-      fault or bug.  Typically caused by a human mistake.
-Error::
-      An error is a discrepancy between the intended behavior of a system and
-      its actual behavior inside the system boundary, such as an incorrect
-      program state.  Not detectable without assert statements and the like.
-Failure::
-      A failure is an instance in time when a system displays
-      behavior that is contrary to its specification.
 //nobreak
 
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
