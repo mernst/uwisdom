@@ -212,13 +212,18 @@ The /uns Maintainers' unFAQ:
 http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
 
 Remote desktop from Linux workstation to Windows Terminal Server
-(enter CSERESEARCH for the domain):
+(cannot run in the background; enter CSERESEARCH for the domain):
 ```
-  xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu &
-  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu &
-  xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu &
-  xfreerdp -u mernst aqua.cs.washington.edu &
+  xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu
+  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu
+  xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
+  xfreerdp -u mernst aqua.cs.washington.edu
 ```
+Once I log in, probably do
+ Control Panel > Ease of Access > Ease of Access Center > Make the computer easier to see > Set the thickness of the blinking cursor : 5
+ Control Panel > Mouse > Change how the mouse pointer looks > [make it as large as possible
+
+.
 Here are newer commands, but they don't work for me:
 ```
   xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440 &
