@@ -1663,8 +1663,9 @@ easily located either by a careful reader or by someone flipping through
 the document.  This also makes the figures more likely to draw readers into
 the text.
 
-Here is a definition of a \todo macro for LaTeX (it needs `\usepackage{color}`):
+Here is a definition of a \todo macro for LaTeX:
 ```
+ \usepackage{color}
  %% Comment out one of these two definitions.
  % \newcommand{\todo}[1]{\relax}
  \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
