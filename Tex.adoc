@@ -58,15 +58,15 @@ To fix "too many unprocessed floats" error, do one of the following:
   * spread your figures further apart in your document, or
   * put in a \clearpage or \cleardoublepage command to allow a page full of figures to be generated.
 
-The change in font size of a LaTeX figure caption won't take unless you give an
-empty optional argument, like so:
+The change in font size of a LaTeX figure caption won't take unless you give
+`\caption` an empty optional argument, like so:
 ```
   \caption[]{{\small Small caption}}
 ```
-But, I think that does not adjust the inter-line spacing in the caption, so don't use that approach.
+However, don't use that approach because it does not adjust the inter-line spacing in the caption.
 
-To get inter-line spacing right in LaTeX figure captions that are set smaller than
-body text:
+To get inter-line spacing right in LaTeX figure captions that are set smaller
+than body text:
 In the paper, do
 ```
   \renewcommand{\captionfont}{\small}
