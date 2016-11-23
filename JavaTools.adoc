@@ -723,6 +723,7 @@ http://www.ulfdittmer.com/profileviewer/index.html
 
 == Java code coverage
 
+  * Codecov.io
   * Cobertura: http://cobertura.sourceforge.net/
      Jeff Perkins says it's pretty good (as of 5/2009).
      You have to remove DOS-style carriage returns from the scripts before
