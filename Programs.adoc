@@ -1021,7 +1021,8 @@ Also consider running, in Emacs, M-x html-add-heading-anchors .
 The checklink program (from W3C) tells about broken links in HTML documents.
 Run like this:
 ```
-  checklink -q -r http://pag.lcs.mit.edu/~mernst
+  checklink -q -r http://homes.cs.washington.edu/~mernst/
+  $pl/bin/checklink -q -r `grep -v '^#' $pl/bin/checklink-args.txt` MYURL
 ```
 (Linkchecker (from http://linkchecker.sourceforge.net/?) seems to spawn
 lots of threads and never return.)
