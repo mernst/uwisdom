@@ -88,6 +88,15 @@ To create a new account under Unix or Linux:
   sudo useradd -m USERNAME -s /bin/bash
   sudo passwd USERNAME
 ```
+To log in as that user, do:
+```
+  su - USERNAME
+```
+This variant is less desirable, because it leaves my environment (such as PATH)
+despite changing the username:
+```
+  sudo -u USERNAME bash
+```
 To remove a user's account, do
 ```
   sudo userdel -r USERNAME
