@@ -1402,6 +1402,7 @@ Particularly useful special "automatic variables" used by make (in Makefile rule
  * $@   the target of the rule
  * $<   the first prerequisite
  * $^   all the prerequisites
+ * $*   the stem with which an implicit rule matches, including directory name
 Example use of special automatic variables used by make:
 `cp -p $< $@`
 
