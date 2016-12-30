@@ -439,3 +439,20 @@ To search for source code (in approximate order of preference):
 To avoid waiting on hold:
 http://www.lucyphone.com/
 http://www.fastcustomer.co/mf
+
+Outsourcing companies (I have no particular reason to prefer one over the other):
+ * Freelancer (was vWorker)
+ * oDesk (Panos Ipeirotis is on sabbatical there)
+ * Elance
+ * others? TaskRabbit, Guru, TopCoder, Craigslist, rentacoder
+For designs: 99designs.com, dribbble.com
+Advice on hiring: https://news.ycombinator.com/item?id=2539892 .  Key: ask
+a simple domain-knowledge type question in the posting, or how they would
+go about the project. Ask for references. Ask them to restate what you want,
+in their own words. Do a Skype interview. Be
+willing to pay (say, $50/hour instead of $25). Give a small test
+project before moving forward. Hire multiple people for that first project.
+Say there may be more work after the initial bit.
+http://www.keithmander.com/?p=243 says:
+ * Use uTest to perform QA of the code.
+ * Always make sure you have a clear agreement in place that spells out how owns the finished output and what the rights are for the contractor.
