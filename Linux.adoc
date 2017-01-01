@@ -422,6 +422,12 @@ To edit PDF on Linux or Ubuntu:
  * not evince, it only reads
 
 
+To find circular symbolic links
+(to solve "Too many levels of symbolic links" error):
+```find -L $HOME -mindepth 25```
+(but note that this may produce huge output, and also that it cannot be pruned).
+
+
 == long entries below
 
 
