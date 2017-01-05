@@ -723,17 +723,21 @@ http://www.ulfdittmer.com/profileviewer/index.html
 
 == Java code coverage
 
-  * Codecov.io
+  * JaCoCo: http://www.eclemma.org/jacoco/
+     (previously named Emma, http://emma.sourceforge.net/)
+  * Codecov.io is GitHub integration with JaCoCo
+  * JCov is a Sun/Oracle tool that was open-sourced as part of the OpenJDK
+     codetools project in 2014.
+     But, the link to the manual at
+     https://wiki.openjdk.java.net/display/CodeTools/jcov does not work.
   * Cobertura: http://cobertura.sourceforge.net/
      Jeff Perkins says it's pretty good (as of 5/2009).
      You have to remove DOS-style carriage returns from the scripts before
      running it.
   * Clover:  http://www.atlassian.com/software/clover/ (was http://www.thecortex.net/clover/)
-     Commercial, but a free trial exists
+     Commercial, but freely available to open source projects and
+     non-profit institutions
      As of 8/2003, David Saff leans toward this one.  Recommended by Elliotte Rusty Harold.
-  * Emma: http://emma.sourceforge.net/
-     Adam Kiezun says: Emma is good and easy to setup.
-     Doesn't seem to have been updated since 2006.
   * Rational's Visual PureCoverage
   * JProbe coverage: http://www.quest.com/jprobe/coverage-home.aspx
      free trial version apparently available
