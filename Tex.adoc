@@ -884,6 +884,14 @@ consider
 which differs in that it uses a specially narrowed Courier font.
 (Also consider \usepackage{palatino}?)
 
+Do not use
+```
+  \documentclass[sigconf,anonymous]{acmart}
+  \usepackage{pslatex}
+```
+because it causes math-mode parentheses not to print.
+Using `times` instead of `pslatex` is fine, though.
+
 To change fonts temporarily in LaTeX, use comands like the following
 ```
   {\fontfamily{phv}\selectfont Helvetica looks like this}
