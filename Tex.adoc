@@ -668,7 +668,7 @@ appears to prevent LaTeX page breaks, even just before lists.
 To break a multi-line display math mode equation, use \begin{multline} or
 the breqn package or the split environment provided by the amsmath package.
 
-LATEX can break an inline math mode formula at a \discretionary{}{}{} command.
+LaTeX can break an inline math mode formula at a \discretionary{}{}{} command.
 It can automatically break the formula only when a relation symbol
 (=, >, ...)  or a binary operation symbol (+, -, ...) exists and at least
 one of these symbols appears at the outer level of the formula. Thus $a+b+c$
@@ -882,7 +882,8 @@ consider
   \usepackage{pslatex}
 ```
 which differs in that it uses a specially narrowed Courier font.
-(Also consider \usepackage{palatino}?)
+(Also consider `\usepackage{palatino}`?
+`\usepackage{times}` is narrower than `\usepackage{gentium}`.  \usepackage{venturis2} is even narrower, but it looks unnatural and makes it clear that you are cheating on space limits.)
 
 Do not use
 ```
@@ -920,14 +921,15 @@ following before running pdflatex:
 	  -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
 ```
 
-More attractive monospaced fonts:
+More attractive monospaced (typewriter, courier) fonts:
 ```
+  \usepackage[T1]{fontenc}
   % sans-serif monospaced font
   \usepackage{inconsolata}
 ```
 ```
   % serifed monospaced font
-  \usepackage[T1]{fontenc}  % Is this necessary?
+  \usepackage[T1]{fontenc}
   \usepackage[scaled=0.88]{luximono}
 ```
 
