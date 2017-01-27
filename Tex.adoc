@@ -58,35 +58,42 @@ To fix "too many unprocessed floats" error, do one of the following:
   * spread your figures further apart in your document, or
   * put in a \clearpage or \cleardoublepage command to allow a page full of figures to be generated.
 
-The change in font size of a LaTeX figure caption won't take unless you give
-`\caption` an empty optional argument, like so:
+To change the font and line spacing for figure captions, do:
 ```
-  \caption[]{{\small Small caption}}
+\usepackage{setspace}
+\usepackage{caption}
+\captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.90}, labelsep=colon, margin=0pt}
 ```
-However, don't use that approach because it does not adjust the inter-line spacing in the caption.
 
-To get inter-line spacing right in LaTeX figure captions that are set smaller
-than body text:
-In the paper, do
-```
-  \renewcommand{\captionfont}{\small}
-```
-or
-```
-  \renewcommand{\captionfont}{\small\bf}
-```
-and use the following definition of \captionfont:
-```
-\newcommand{\captionfont}{\bf}
-\long\def\@makecaption#1#2{
-   \vskip \baselineskip
-   \setbox\@tempboxa\hbox{\captionfont{#1: #2\strut}}
-   \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-       {\captionfont\noindent\parbox{\hsize}{#1: #2\strut}}\par     %   THEN set as ordinary paragraph.
-     \else                      %   ELSE  center.
-       \hbox to\hsize{\hfil\box\@tempboxa\hfil}
-   \fi}
-```
+% The change in font size of a LaTeX figure caption won't take unless you give
+% `\caption` an empty optional argument, like so:
+% ```
+%   \caption[]{{\small Small caption}}
+% ```
+% However, don't use that approach because it does not adjust the inter-line spacing in the caption.
+% 
+% To get inter-line spacing right in LaTeX figure captions that are set smaller
+% than body text:
+% In the paper, do
+% ```
+%   \renewcommand{\captionfont}{\small}
+% ```
+% or
+% ```
+%   \renewcommand{\captionfont}{\small\bf}
+% ```
+% and use the following definition of \captionfont:
+% ```
+% \newcommand{\captionfont}{\bf}
+% \long\def\@makecaption#1#2{
+%    \vskip \baselineskip
+%    \setbox\@tempboxa\hbox{\captionfont{#1: #2\strut}}
+%    \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
+%        {\captionfont\noindent\parbox{\hsize}{#1: #2\strut}}\par     %   THEN set as ordinary paragraph.
+%      \else                      %   ELSE  center.
+%        \hbox to\hsize{\hfil\box\@tempboxa\hfil}
+%    \fi}
+% ```
 
 
 == Tables
