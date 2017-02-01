@@ -545,6 +545,15 @@ LaTeXinfo.
 Texinfo summary of cross reference commands (@xref @ref @pxref @inforef):
 http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands
 
+In Texinfo, to insert literal HTML, do
+```
+@html
+<img src="https://travis-ci.org/typecheck-regex.svg?branch=master" alt="Travis codespecs/daikon status"/>
+@end html
+```
+If `@` appears in the HTML, it must be quoted; this permits Texinfo commands
+to appear within the HTML.
+
 
 == Hyphenization; word, line, and page breaking
 
