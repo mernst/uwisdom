@@ -553,6 +553,8 @@ In Texinfo, to insert literal HTML, do
 ```
 If `@` appears in the HTML, it must be quoted; this permits Texinfo commands
 to appear within the HTML.
+By contrast to `@html`, `@ifhtml` is a conditional but its body is regular
+Texinfo.
 
 
 == Hyphenization; word, line, and page breaking
