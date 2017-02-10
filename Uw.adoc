@@ -337,11 +337,12 @@ Stock reply for people trying to recruit/hire students:
 Good luck on your project!
 The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  http://www.cs.washington.edu/affiliates/
 
-UW CSE technical reports (TRs) are handled by Elise Dorough.
-To create one, send the PDF to tr-request@cs.washington.edu
-and copy a faculty member.  She can also provide a TR number in advance
-of receiving the PDF, if you provide the title, author list, abstract,
-and a date on which you will provide the PDF.
+UW CSE technical reports (TRs) are handled by the TR coordinator
+(currently Garrett Yoshitomi).
+To create a TR, send the PDF to tr-request@cs.washington.edu
+and copy a faculty member.  The TR coordinator can also provide a TR number
+in advance of receiving the PDF, if you provide the title, author list,
+abstract, and a date on which you will provide the PDF.
 
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
