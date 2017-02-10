@@ -184,7 +184,9 @@ explicitly:
   javac -jar myjar.jar -cp ${CLASSPATH}
 ----
 
-To limit/increase the number of errors that javac will print (default 100) use, -Xmaxerrs N
+To limit/increase the number of errors that javac will print (default 100),
+use `-Xmaxerrs N`.
+The analogous command-line option for warnings is `-Xmaxwarns N`.
 
 If javac says
 ```
