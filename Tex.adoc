@@ -212,12 +212,11 @@ single multi-character variable name with proper inter-letter kerning.
 == Lists
 
 To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
-setting \itemsep and \parskip), see
-link:TexListSpacing.adoc[TexListSpacing.adoc].
-The most common incantation is
+setting \itemsep and \parskip), use `\usepackage{enumitem}`.
+If not using that (and maybe even if so), use
 `\itemsep 0pt \parskip 0pt`.
 
-
+[Is this still the best approach with `\usepackage{enumitem}`?]
 To control pre-list space, set \partopsep (or insert an explicit negative
 \vspace (not \vskip)).  (I had to give an explicit argument, not -\parsep
 etc.; but `\vspace*{-\partopsep}` worked for me if it came after the
