@@ -908,7 +908,7 @@ Do not use
   \usepackage{pslatex}
 ```
 because it causes math-mode parentheses not to print.
-Using `times` instead of `pslatex` is fine, though.
+`\usepackage{times}` doesn't work either.
 
 To change fonts temporarily in LaTeX, use comands like the following
 ```
@@ -1229,6 +1229,13 @@ piece of text.
 
 The useful LaTeX macro \ensuremath lets macros appear in either math or
 horizontal mode; if the latter, it automatically switches to math mode.
+
+To save space in a paper using the acmart style:
+```
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+```
 
 ACM LaTeX styles FAQ:
   http://www.acm.org/sigs/publications/sigfaq
