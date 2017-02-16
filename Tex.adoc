@@ -1236,6 +1236,10 @@ To save space in a paper using the acmart style:
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
 ```
+To add page numbers (useful during review):
+```
+\fancyfoot[C]{\thepage}
+```
 
 ACM LaTeX styles FAQ:
   http://www.acm.org/sigs/publications/sigfaq
