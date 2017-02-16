@@ -1837,6 +1837,12 @@ been already used, duplicate ignored```
 and your document does not have an index, then add the `pageanchor=false` option to the hyperref package:
 ```\usepackage[pageanchor=false]{hyperref}```
 
+The `latexmk` program is distributed with LaTeX and so is a fairly
+canonical way to run LaTeX (as opposed to other programs like `rubber`).
+Here is a standard command line:
+```latexmk -pdf -interaction=nonstopmode myfile.tex```
+latexmk's dependency tracking depends on file contents, not timestamps,
+so you cannot make it re-run by `touch`ing a file.
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
