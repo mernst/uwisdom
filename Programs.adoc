@@ -2868,10 +2868,11 @@ To compress a JPEG file:
 where nn is between 1 and 100.  1 is the lowest quality (highest 
 compression).
 
-An alternative to markdown, for GitHub-style markdown format, is `grip`
-(after which browse to localhost:5000 , but that hung my Emacs when I tried
-it) or `grip --export` which exports to `<path>.html`.
-It's better to use AsciiDoc format and the Asciidoctor processor, when possible.
+For converting (GitHub-style) markdown format to HTML, an alternative to
+`markdown` is `grip` (after which browse to localhost:5000 , but that hung
+my Emacs when I tried it) or `grip --export` which exports to
+`<path>.html`.  It's better to use AsciiDoc format and the Asciidoctor
+processor, when possible.
 
 When debugging gradle, use `--info` a lot.
 
