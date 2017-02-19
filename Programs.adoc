@@ -2871,8 +2871,9 @@ compression).
 For converting (GitHub-style) markdown format to HTML, an alternative to
 `markdown` is `grip` (after which browse to localhost:5000 , but that hung
 my Emacs when I tried it) or `grip --export` which exports to
-`<path>.html`.  It's better to use AsciiDoc format and the Asciidoctor
-processor, when possible.
+`<path>.html`.
+Markdown is idiosyncratic, so I think it's better to use AsciiDoc format
+and the Asciidoctor processor, when possible.
 
 When debugging gradle, use `--info` a lot.
 
