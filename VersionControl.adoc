@@ -293,6 +293,8 @@ Examples:
 This does not seem to work for wiki files.
 For Gitlab at UW, an example is:
   https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md
+but Gitlab will not permit direct viewing of HTML files -- Gitlab sets the headers so that the browser shows the HTML code, as in
+  https://gitlab.cs.washington.edu/randoop/toradocu-evaluation/raw/master/docs/index.html
 For Bitbucket, an example is:
   http://htmlpreview.github.io/?https://bitbucket.org/typetools/jsr308-langtools/raw/tip/doc/README-jsr308.html
 
