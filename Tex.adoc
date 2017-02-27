@@ -1846,6 +1846,14 @@ Ways to convert LaTeX to plaintext:
 To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
 `\newcommand{\crefrangeconjunction}{--}`
 to the preamble of the document.
+Alternately, do this:
+```
+\usepackage{cleveref}
+\crefrangelabelformat{section}{#3#1#4--#5\crefstripprefix{#1}{#2}#6}
+\crefrangelabelformat{subsection}{#3#1#4--#5\crefstripprefix{#1}{#2}#6}
+\crefrangelabelformat{equation}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
+\crefrangelabelformat{figure}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
+```
 
 If you get an error
 ```pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
