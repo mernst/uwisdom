@@ -688,6 +688,9 @@ java -Xrunhprof:cpu=samples,heap=all ...
 Other profiling tools in the JDK are jconsole (time and space), jmap
 (space), and jhat (space).
 
+The Java Hotspot profiler is very fast but doesn't do attribution (only
+local counts of time spent, not transitive for all calls within the method).
+
 
 == Other Java profilers
 
@@ -697,7 +700,7 @@ http://www.yourkit.com/
 Cost:
 //nobreak
 
- * Has an academic license for $135, via the Academic tab at: http://www.yourkit.com/purchase/index.jsp
+ * Has an academic license for $99, via the Academic tab at: http://www.yourkit.com/purchase/index.jsp
  * Free to open source projects "with an established and active community"
    in return for referencing them on the project web-page; see the "Open
    Source" tab at: http://www.yourkit.com/purchase/index.jsp
