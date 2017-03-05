@@ -1021,26 +1021,6 @@ left a space at the end of a line
 
 == Continuous integration
 
-  Hudson -- most popular (as of May 2009)
-
-  TeamCity
-
-  Bamboo
-
-  Nexus http://nexus.sonatype.org
-
-  Anthill Pro
-
-  CruiseControl
-
-  Luntbuild
-
-  Infinitest -- continuous test runner for JUnit tests
-
-
-spock -- like JUnit, but more Scala-like.  Can be used with Java.
-
-
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
 
 Gradle
