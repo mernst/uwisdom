@@ -1675,6 +1675,12 @@ task tags(type: Exec, dependsOn: 'clone') {
 }
 ```
 
+To create a Java Gradle project, run one of the following lines:
+```
+gradle init --type java-library
+gradle init --type java-application
+```
+
 
 == Eclipse
 
