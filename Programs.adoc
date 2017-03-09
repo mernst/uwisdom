@@ -224,7 +224,7 @@ error handling and debug options (exit on error, unset variable detection
 and execution tracing) to make sure problems are caught early:
 ```
   #!/bin/bash
-  set -o errexit -o nounset -o xtace
+  set -o errexit -o nounset -o xtrace
   ...
 ```
 Also consider:
