@@ -899,6 +899,15 @@ Adding info to HTML header in Hevea (this must come after \begin{document}):
 \end{rawhtml}}
 ```
 
+Testing whether a file exists, for both LaTeX and Hevea:
+(Note that you need to test for a file, not a directory.)
+```
+ \newif\ifonbuffalo
+ %HEVEA\makeatletter\@iffileexists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}\makeatother
+ %BEGIN LATEX
+ \IfFileExists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}
+ %END LATEX
+```
 
 == Fonts
 
