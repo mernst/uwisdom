@@ -2854,6 +2854,10 @@ To get yesterday's date:
 ```
   date --date yesterday
 ```
+To rename a file to its creation or modification date:
+```
+  mv -f $FILE $FILE-$(date +%Y%m%d -r $FILE)
+```
 
 To recover a closed tab in Chrome:  Ctrl-Shift-t
 
