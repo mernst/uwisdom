@@ -260,13 +260,13 @@ How to quote less than and greater than (angle brackets), such as for generics, 
 ```
 The purpose of `{@code ...}` is to prevent HTML interpretation:  characters
 such as <, >, &amp;, are passed through unchanged.
-To quote/escape the @ (at-sign) symbol in Javadoc, use {@literal @} or &#064;
-Another approach is to put &nbsp; before the literal @.
-This is needed only at the beginning of a line to prevent it from being
-interpreted as starting a Javadoc tag.  Neither {@literal @} nor &#064; works
-within `<pre>{@code ...}</pre>`; for code blocks, use
-`<pre>{@code ... \n{@literal @}...}</pre>` though note that the space after
-`@literal` will make the result one space more indented than you expected.
+.
+You need to quote/escape the @ (at-sign) symbol in Javadoc when it appears
+at the beginning of a line.  Use `{@literal @}` or `&#064;` or `&nbsp;@`
+None of these works within `<pre>{@code ...}</pre>`.  If you need @ at the
+beginning of the line in a code block, use `<pre><code> ... </code></pre>`.
+If you *also* need `<` in that block, use `{@literal <}` though the spacing
+will look bad.
 
 To avoid doclint messages about missing Javadoc tags, such as "no @param for someArg":
 ----

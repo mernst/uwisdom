@@ -44,6 +44,10 @@ etags returns the best matches in a TAGS table first; however, it examines
 entire TAGS tables at a time, so it is advantageous to use a single TAGS
 table instead of multiple smaller ones (along with include directives).
 
+To make an Emacs TAGS table using the ctags program, run:
+```
+  ctags -e -R
+```
 
 Francesco Potorti` (pot@CNUCE.CNR.IT) says:
 To make a single tags file for all the source files in your tree, 
