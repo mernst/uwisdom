@@ -483,6 +483,11 @@ Do this in one pass because it slightly edits the <<<<<< ====== >>>>>>
 lines so that a subsequent invocation of M-x vc-resolve-conflicts won't
 recognize them.
 
+When running Emacs in a Cygwin bash shell, the cursor can be a thin
+vertical bar that is hard to see.  This cannot be changed within Emacs,
+because it is controlled by Cygwin and the shell.  To fix it:
+ * Right-click on the window title bar > Options > Looks > Cursor
+
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
 
