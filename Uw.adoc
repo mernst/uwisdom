@@ -197,6 +197,7 @@ http://types.cs.washington.edu/ : /cse/www2/types/
 http://checkerframework.org/ : /cse/www2/types/checker-framework/
 http://fault-localization.cs.washington.edu/ : /cse/web/research/fault-localization/
 http://plse.cs.washington.edu/ : /cse/web/research/plse/
+http://plse.cs.washington.edu/daikon/ : /cse/web/research/plse/daikon/
 http://uwplse.org : version control repository
 http://courses.cs.washington.edu/courses/cse331/13sp/ : /cse/web/courses/cse331/13sp
 Via tramp: /tern.cs.washington.edu:/cse/web/courses/cse590n
