@@ -9,9 +9,10 @@ Adapted from http://en.wikipedia.org/wiki/Dependability:
 //nobreak
 
 Defect::
-      A flaw, failing, or imperfection in a system, such as an
-      incorrect design, algorithm, or implementation.  Also known as a
-      fault or bug.  Typically caused by a human mistake.
+      A flaw, failing, or imperfection in a system, such as an incorrect design,
+      algorithm, or implementation.  Typically caused by a human mistake.
+      Sometimes known as a fault or bug, but those terms are ambiguous and
+      should be avoided.
 Error::
       An error is a discrepancy between the intended behavior of a system and
       its actual behavior inside the system boundary, such as an incorrect
