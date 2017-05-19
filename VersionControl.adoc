@@ -263,14 +263,14 @@ To clone a repository, or update it if it already exists:
 Here are ways to search the git history.
 For all commits that match the given regular expression:
 ```
-  git log -G"WHERE_DID.*"
+  git log -G"ANY_OCCURRENCE.*"
 ```
 For all commits with a different number of occurrences of the search
 string before and after (ie, removals or additions of the search string,
 but it would not match in-file moves or other patches that don't add or
 remove the string); add `--pickaxe-regex:` to treat the string as a regex:
 ```
-  git log -S"WHERE_DID_IT_GO"
+  git log -S"DIFFERENT_NUMBER_OF_OCCURRENCES"
 ```
 Commits that touch given function:
 ```
