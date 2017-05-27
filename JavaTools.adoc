@@ -54,6 +54,9 @@ Each of these has its own advantages and disadvantages; I am leaning toward
 modifying an existing Java compiler.  If you have any advice or
 suggestions, I would be grateful to hear it.
 
+Spoon Java analysis tool
+http://spoon.gforge.inria.fr/
+It seems to mostly be a wrapper around the AST, permitting analysis and transformation via Java code.
 
 Gail Murphy says:
   The JavaCC approach has worked out fine, but does require writing a *ton*
@@ -958,6 +961,8 @@ Java HTML parsing:  There are two fundamental models
    into memory at once, and you can always use event processing to build a
    tree if memory is not a concern.)
 Some packages claim to support both models.
+
+A newer one I have not tried is jsoup.
 
 Tree-based:
   XOM http://www.cafeconleche.org/XOM/ tree-based API for processing XML,
