@@ -284,6 +284,12 @@ To diff two revisions/commits:
   git diff <commit> <commit> [<path>...]
 ```
 
+In git, to cat or checkout a specific revision/version of a file, do:
+```
+git show REV:FILE
+```
+where FILE is relative to the repository root.
+
 
 == GitHub (Git-specific items go above)
 
