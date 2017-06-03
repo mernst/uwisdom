@@ -298,7 +298,7 @@ To get a copy of the JDK 7 source:
 
 Major version number for the Java class file format (JVM version number):
 ----
-  J2SE 9.0 = 53 (0x35 hex)    [as of 10/2016, General Availability (GA) July 2017]
+  J2SE 9.0 = 53 (0x35 hex)    [as of 6/2017, General Availability (GA) Sep 21, 2017]
   J2SE 8.0 = 52 (0x34 hex)    [released March 2014]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
   J2SE 6.0 = 50 (0x32 hex)    [released December 2006, public beta Feb. 2006]
