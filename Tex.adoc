@@ -555,6 +555,9 @@ to appear within the HTML.
 By contrast to `@html`, `@ifhtml` is a conditional but its body is regular
 Texinfo.
 
+Texinfo does not let you change the margins without changing 'texinfo.tex'
+or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
+
 
 == Hyphenization; word, line, and page breaking
 
