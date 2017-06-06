@@ -736,6 +736,14 @@ Another solution, from http://tex.stackexchange.com/questions/19094/allowing-lin
 }
 ----
 
+LaTeX's \underline{...} macro does not permit hyphenization (line breaking).
+Instead, use
+```
+  \usepackage{soul}
+  ...
+  \ul{...}
+```
+
 
 == PDF and pdflatex
 
