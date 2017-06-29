@@ -598,14 +598,6 @@ If you are intersted, send email to: contact@metamata.com.
 
 == Java debuggers
 
-deja.com ratings for Java Development Software
-http://www.deja.com/rate/list_items.xp?CID=11956&PCID=11805&N=0
-
-JBuilder: http://www.borland.com/jbuilder/
-http://shop.borland.com/shop/catdtl/0,1063,2,00.html
-$800.  Is there an educational discount?
-Or, take a competitive upgrade from J++:  $300.
-
  * NetBeans Developer
    http://www.netbeans.com/ 
  * Jikes debugger?  -- Windows only
@@ -638,6 +630,7 @@ JPDA is Java Platform Debugger Architecture, which is infrastructure for
 building debuggers and such.
 
 List of debuggers at http://www.daimi.au.dk/~beta/ooli/Compare.html
+As of 6/2017, not updated since 8/2011.
 
 == Compilers
 
