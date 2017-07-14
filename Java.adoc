@@ -507,6 +507,11 @@ for (String line; (line = br.readLine()) != null; ) {
 }
 ```
 
+This command lists all supertypes of all .class files in the current directory or below.
+```
+javap -v `find . -name '*.class'` | egrep '^(public |protected |private |abstract |default |static |final |transient |volatile |synchronized |native |strictfp )*(class|interface) .*(extends|implements)' | perl -p -e 's/<[^<>]*>//g' | perl -p -e 's/<[^<>]*>//g' | perl -p -e 's/(^.*?\b(class|interface) | extends | implements |, *)/\n/g' | perl -p -e 's/\$.*//g' | sort | uniq
+```
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
