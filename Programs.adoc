@@ -2892,7 +2892,7 @@ To run an interactive bash shell in a docker image:
   docker images
   docker run -it <image> /bin/bash
 ```
-or try just:
+or try just (but this didn't work on MacOS):
 ```
   docker run OWNER/NAME /bin/bash
 ```
