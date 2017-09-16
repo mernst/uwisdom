@@ -428,6 +428,9 @@ To find circular symbolic links
 ```find -L $HOME -mindepth 25```
 (but note that this may produce huge output, and also that it cannot be pruned).
 
+To encrypt a file:
+```gpg -e -r mernst lastpass.csv```
+
 
 == long entries below
 
