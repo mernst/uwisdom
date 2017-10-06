@@ -2861,6 +2861,11 @@ To rename a file to its creation or modification date:
 
 To recover a closed tab in Chrome:  Ctrl-Shift-t
 
+To open Task Manager in Google Chrome:
+ * right-click the title bar, or
+ * press "Shift-Esc"
+This helps to debug high CPU usage by Chrome.
+
 To replace the dictionary in the Android Kindle app:
 //nobreak
 
