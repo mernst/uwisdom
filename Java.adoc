@@ -265,8 +265,8 @@ You need to quote/escape the @ (at-sign) symbol in Javadoc when it appears
 at the beginning of a line.  Use `{@literal @}` or `&#064;` or `&nbsp;@`
 None of these works within `<pre>{@code ...}</pre>`.  If you need @ at the
 beginning of the line in a code block, use `<pre><code> ... </code></pre>`
-and 
-If you *also* need `<` in that block, use `{@literal <}` (though the spacing
+together with one of the above.
+If you *also* need `<` in that code block, use `{@literal <}` (though the spacing
 will look bad) or `&lt;`.
 
 To avoid doclint messages about missing Javadoc tags, such as "no @param for someArg":
