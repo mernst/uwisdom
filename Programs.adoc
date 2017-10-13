@@ -2951,5 +2951,12 @@ Choose Mail > Preferences, click Composing, then select "plain text".
 This is an issue with Apple Mail on a Mac laptop.
 Replies sent from an iPhone look fine, with a quotation marker.
 
+To retrieve a file from a remote URL, the following two commands are the
+same except that `wget` preserves the remote timestamp and `curl` does not.
+```
+  wget URL
+  curl -s -O URL
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
