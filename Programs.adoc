@@ -2892,7 +2892,7 @@ and the Asciidoctor processor, when possible.
 
 When debugging gradle, use `--info` a lot.
 
-To run an interactive bash shell in a docker image:
+To run an interactive bash shell in a docker container (image is an inert file):
 ```
   docker images
   docker run -it <image> /bin/bash
@@ -2917,7 +2917,7 @@ the following in an empty directory.
   # Browse to https://hub.docker.com/ to verify that it exists
 ```
 
-To stop and remove/delete all docker containers:
+To stop and remove/delete all docker containers (leaves the static images):
 ```
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
@@ -2925,11 +2925,11 @@ docker rm $(docker ps -a -q)
 To remove all non-running containers:
 ```docker rm $(docker ps -q -f status=exited)```
 
-To list docker images:
+To list docker images (static files, that would be instantiated as containers):
 ```docker images```
 To remove/delete a docker image:
 ```docker rmi ID```
-To remove/delete all docker images:
+To stop all docker containers, then remove/delete all docker images:
 ```
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
