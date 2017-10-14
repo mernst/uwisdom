@@ -29,9 +29,13 @@ used "invokestatic".
 == JUnit
 
 JUnit:  helps in writing Java test suites.  www.junit.org
-To run JUnit:
+To run JUnit 4:
 ```
-  java junit.textui.TestRunner ps1.PublicTest
+  java -cp .:junit.jar org.junit.runner.JUnitCore ps1.PublicTest
+```
+To run JUnit 3:
+```
+  java -cp .:junit.jar junit.textui.TestRunner ps1.PublicTest
 ```
 
 How do I launch a debugger (e.g. jdb) when a JUnit test fails?
