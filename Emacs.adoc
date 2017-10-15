@@ -488,6 +488,11 @@ vertical bar that is hard to see.  This cannot be changed within Emacs,
 because it is controlled by Cygwin and the shell.  To fix it:
  * Right-click on the window title bar > Options > Looks > Cursor
 
+To change an Emacs buffer from Mac or Dos to Unix line endings:
+```
+(set-buffer-file-coding-system 'utf-8-unix)
+```
+
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
 
