@@ -422,6 +422,9 @@ https://docs.google.com/document/d/1OHsgZwyQSaJptAL-OhDNN-IWf5zb3akueQo9Ge4srgs/
 
 A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
 
+UW CSE course web template:
+https://gitlab.cs.washington.edu/lab/simple-courseweb-template
+
 
 == Seattle
 
