@@ -319,7 +319,8 @@ If Google Chrome (chromium-browser) hangs, then complains about
 unresponsive pages, try:  `rm -rf ~/.cache`.
 Alternately, clear the relevant cookies from within Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
 
-A cycle server for WASP is nest.cs.washington.edu.
+Cycle servers for UW CSE are:
+bam, boom, bicycle, tricycle, recycle
 
 When CSE lab support upgrades the Java in /usr/java/current (which happens
 without warning), then Hudson jobs may fail with the error message:
@@ -424,6 +425,14 @@ A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be u
 
 UW CSE course web template:
 https://gitlab.cs.washington.edu/lab/simple-courseweb-template
+
+Fellowships/scholarships that students can apply for:
+NSF -- first two years only
+NDSEG -- first two years only
+Adobe Research fellowship
+Facebook fellowship
+Symantec Fellowship
+Google Fellowship
 
 
 == Seattle

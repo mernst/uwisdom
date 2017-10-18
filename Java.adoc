@@ -290,6 +290,9 @@ In a Javadoc @param, @return, etc. clause, the initial text is a sentence
 fragment that starts with a lowercase (not capital) letter and does not end
 with a period unless followed by another sentence.
 
+In Javadoc @see and @link clauses, nested classes must be specified as
+`Outer.Inner`, not simply `Inner`.
+
 
 == Everything else
 
