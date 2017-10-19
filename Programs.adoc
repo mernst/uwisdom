@@ -2775,8 +2775,8 @@ To give up and uninstall a package installed by encap/epkg:
 ```
 
 "ack" is like "grep -r" or "search", but claims to be more flexible.
-  I've given up using it, though; I find search more featureful and less buggy.
-  A problem is that unlike the "search" program, it does not seach in
+  I've given up using it, though; I find `search` more featureful and less buggy.
+  A problem is that unlike the `search` program, it does not seach in
 compressed (.gz, .Z) files.
   You should always run ack with the --text option (put that in an alias or in
 .ackrc).  Otherwise, ack discards some text files, since by default, text
