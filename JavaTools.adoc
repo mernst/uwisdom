@@ -723,21 +723,24 @@ http://www.ulfdittmer.com/profileviewer/index.html
 
 == Java code coverage
 
+  * Comparison of Java code coverage tools:
+    https://confluence.atlassian.com/clover/comparison-of-code-coverage-tools-681706101.html
   * JaCoCo: http://www.eclemma.org/jacoco/
      (previously named Emma, http://emma.sourceforge.net/)
-  * Codecov.io is GitHub integration with JaCoCo
+      * Codecov.io is GitHub integration with JaCoCo
   * JCov is a Sun/Oracle tool that was open-sourced as part of the OpenJDK
      codetools project in 2014.
-     But, the link to the manual at
+     But, the link to the manual from
      https://wiki.openjdk.java.net/display/CodeTools/jcov does not work.
+  * Clover:  http://www.atlassian.com/software/clover/ (was http://www.thecortex.net/clover/)
+     As of 8/2003, David Saff leans toward this one.  Recommended by Elliotte Rusty Harold.
+     Instruments source code (most/all other tools instrument bytecode), so
+     integration requires a build.
   * Cobertura: http://cobertura.sourceforge.net/
      Jeff Perkins says it's pretty good (as of 5/2009).
      You have to remove DOS-style carriage returns from the scripts before
      running it.
-  * Clover:  http://www.atlassian.com/software/clover/ (was http://www.thecortex.net/clover/)
-     Commercial, but freely available to open source projects and
-     non-profit institutions
-     As of 8/2003, David Saff leans toward this one.  Recommended by Elliotte Rusty Harold.
+     As of Oct 2017, last commit was in June 2016.
   * Rational's Visual PureCoverage
   * JProbe coverage: http://www.quest.com/jprobe/coverage-home.aspx
      free trial version apparently available
