@@ -80,10 +80,12 @@ To run it:
   java com.bluemarsh.jswat.Main
 ```
 
-`kill -QUIT _pid_` causes Java to do a traceback (stack trace) from each
-thread and keep running.
+To get a traceback (stack trace) from each Java thread (but keep running):
+ * `jstack _pid_`  (`jcmd` gives a list of pids)
+ * `jcmd _pid_ Thread.print`  (just `jcmd` gives a list of pids)
+ * `kill -QUIT _pid_`
+ * `ctrl-\` if Java is running in a shell.
 This is useful for debugging an infinite loop in a Java program.
-If java is running in a shell, you can also normally use ctrl-\ as well.
 
 To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
 //nobreak
