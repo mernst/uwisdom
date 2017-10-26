@@ -86,6 +86,10 @@ To get a traceback (stack trace) from each Java thread (but keep running):
  * `kill -QUIT _pid_`
  * `ctrl-\` if Java is running in a shell.
 This is useful for debugging an infinite loop in a Java program.
+.
+Use the -Xtrace:trigger option to produce a Java dump by whenever a given method is called.
+For example, for a dump whene the substring method is called:
+```-Xtrace:trigger=method{java/lang/String.substring,javadump}```
 
 To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
 //nobreak
