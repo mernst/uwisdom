@@ -162,13 +162,15 @@ To obtain the repository state as of a particular moment in time, do
 ```
 on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
 
-To unpush a commit:
+To unpush a commit, leaving no trace in the version control history:
 ```
-git reset --hard <desired-commit>
+  git reset --hard <desired-commit>
   git push -f <remote> <branch>
 ```
 where <desired-commit> is something like HEAD~1 or a SHA hash,
 and <remote> and <branch> are optional.
+The commit will still exist in any clones of the repository,
+so it must be removed from each one individually.
 
 If merging works perfectly then rebasing simplifies the history.
 If there is a problem, then rebasing can cause confusion and can make debugging
