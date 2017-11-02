@@ -705,6 +705,8 @@ Cost:
 Oracle's VisualVM (http://visualvm.java.net/); is built on NetBeans (but
 does not require it, I think).
 
+jvmtop: https://github.com/patric-r/jvmtop
+
 Commercial products are sometimes superior for profiling, e.g. Borland
 OptimizeIt or IBM/Rational Quantify or Yourkit.
 
