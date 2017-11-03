@@ -193,16 +193,16 @@ A guest account is only permitted to use 25 MB of space, so:
    the disk quota limitation.
 
 What files in the file system contain the content served at webpages/URLs?
-http://types.cs.washington.edu/ : /cse/www2/types/
-http://checkerframework.org/ : /cse/www2/types/checker-framework/
+https://types.cs.washington.edu/ : /cse/www2/types/
+https://checkerframework.org/ : /cse/www2/types/checker-framework/
 http://fault-localization.cs.washington.edu/ : /cse/web/research/fault-localization/
 http://plse.cs.washington.edu/ : /cse/web/research/plse/
 http://plse.cs.washington.edu/daikon/ : /cse/web/research/plse/daikon/
 http://uwplse.org : version control repository
-http://courses.cs.washington.edu/courses/cse331/13sp/ : /cse/web/courses/cse331/13sp
+https://courses.cs.washington.edu/courses/cse331/13sp/ : /cse/web/courses/cse331/13sp
 Via tramp: /tern.cs.washington.edu:/cse/web/courses/cse590n
 Support can create a new virtual host, putting data under /cse/web/research/.
-(For large data that doesn't need to persis for an extended period of time, can use Google Drive instead.)
+(For large data that doesn't need to persist for an extended period of time, can use Google Drive instead.)
 
 Incoming anonymous ftp:
 You can upload files here via anonymous ftp:
