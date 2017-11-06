@@ -60,8 +60,8 @@ To fix "too many unprocessed floats" error, do one of the following:
 
 To change the font and line spacing for LaTeX figure captions in acmart.cls, do:
 ```
-\usepackage{setspace}
-\usepackage{caption}
+% Change font and line spacing fro figure captions
+\usepackage{setspace,caption}
 \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
 ```
 
