@@ -428,7 +428,13 @@ To find circular symbolic links
 ```find -L $HOME -mindepth 25```
 (but note that this may produce huge output, and also that it cannot be pruned).
 
-To encrypt a file:
+To encrypt a file symmetrically:
+```gpg --symmetric lastpass.csv```
+```gpg --symmetric --cipher-algo AES256 -v foo.txt```
+(Run `echo RELOADAGENT | gpg-connect-agent` to clear the passphrase cache.)
+To decrpyt it:
+```gpg --decrypt --symmetric lastpass.csv.gpg > decrypted.txt```
+To encrypt a file to recipient `mernst`:
 ```gpg -e -r mernst lastpass.csv```
 
 Exit code 137 is a good indication of being killed by the out-of-memory (OOM)
