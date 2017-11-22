@@ -2903,6 +2903,11 @@ or try just (but this didn't work on MacOS):
 ```
   docker run OWNER/NAME /bin/bash
 ```
+A gross way to copy files out of a docker image:
+```
+  scp build/working-directories/jdk-specification-test/randoop-log.txt mernst@godwit.cs.washington.edu:sync
+```
+There must be a way to mount the file system and access it.
 
 To create a docker image (which is a static template that can be
 instantiated into a running container), good instructions appear at
