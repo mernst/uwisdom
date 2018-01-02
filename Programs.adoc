@@ -2896,12 +2896,12 @@ When debugging gradle, use `--info` a lot.
 
 To run an interactive bash shell in a docker container (image is an inert file):
 ```
+  docker run -it OWNER/NAME /bin/bash
+```
+or
+```
   docker images
   docker run -it <image> /bin/bash
-```
-or try just (but this didn't work on MacOS):
-```
-  docker run OWNER/NAME /bin/bash
 ```
 A gross way to copy files out of a docker image:
 ```
