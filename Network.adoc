@@ -365,7 +365,7 @@ For scheduling a meeting:
 //nobreak
 
  * Doodle contains iCalendar integration (for $40/year).  WhenIsGood does not.
- * Doodle supports "if-need-be" responses.  WhenIsGood does not.
+ * Doodle supports "if-need-be" (ifneedbe) responses.  WhenIsGood does not.
  * WhenIsGood's interface is far nicer.  With Doodle, you need to create
    many 30-minute proposals even to schedule a 1-hour meeting.  Each one
    takes multiple clicks to create and to answer.  Doodle just lets you

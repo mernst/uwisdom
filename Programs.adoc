@@ -2376,11 +2376,22 @@ Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
 
 To encrypt/decrypt with blowfish:
 ```
-  openssl enc -bf -e -in file -out file.bfe
-  openssl enc -bf -d -in file.bfe -out file.decrypted
+  openssl enc -aes128 -e -in file -out file.bfe
+  openssl enc -aes128 -d -in file.bfe -out file.decrypted
 ```
 Optional argument:  -k secretkey
-For rc4 (which is insecure), change -bf to -rc4
+For other ciphers, change -aes128 to -bf or -des3
+
+To encrypt a file symmetrically with GPG:
+(I don't like this because it gets entangled with my 
+```gpg --symmetric lastpass.csv```
+```gpg --symmetric --cipher-algo AES256 -v foo.txt```
+(Run `echo RELOADAGENT | gpg-connect-agent` to clear the passphrase cache.)
+To decrpyt it:
+```gpg --decrypt --symmetric lastpass.csv.gpg > decrypted.txt```
+To encrypt a file to recipient `mernst`:
+```gpg -e -r mernst lastpass.csv```
+
 
 Greg Shomo recommends that one use RPM to install anything that was
 included in the original (Red Hat) Linux distribution:  bugfixes and
