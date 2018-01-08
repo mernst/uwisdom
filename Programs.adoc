@@ -2376,8 +2376,8 @@ Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
 
 To encrypt/decrypt with blowfish:
 ```
-  openssl enc -aes128 -e -in file -out file.bfe
-  openssl enc -aes128 -d -in file.bfe -out file.decrypted
+  openssl enc -aes128 -e -in file -out file.aes128
+  openssl enc -aes128 -d -in file.aes128 -out file.decrypted
 ```
 Optional argument:  -k secretkey
 For other ciphers, change -aes128 to -bf or -des3
