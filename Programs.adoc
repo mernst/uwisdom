@@ -2381,6 +2381,11 @@ To encrypt/decrypt with blowfish:
 ```
 Optional argument:  -k secretkey
 For other ciphers, change -aes128 to -bf or -des3
+Concrete example:
+```
+  openssl enc -aes128 -e -in wisdom.machines.decrypted -out wisdom.machines.aes128 && chmod og-rwx wisdom.machines.decrypted && rm -f wisdom.machines.decrypted
+  openssl enc -aes128 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
+```
 
 To encrypt a file symmetrically with GPG:
 (I don't like this because it gets entangled with my 
