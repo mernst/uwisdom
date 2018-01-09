@@ -260,7 +260,7 @@ or the following simple bash script that preserves exit status
   exit $result
 ```
 
-The program "timeout" seems to subsume `exec_cpu_limited` (and perhaps
+The Unix program "timeout" seems to subsume `exec_cpu_limited` (and perhaps
 more).
 The shell builtin "ulimit" can be used to limit a processes stack size, CPU
 time, virtual memory, etc.
