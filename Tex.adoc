@@ -508,6 +508,23 @@ to
 in the .bst file.
 This is rarely worthwhile, though:  the savings tend to be very small.
 
+So that BibTeX does not require the publisher field in ACM conference
+proceedings, make this change:
+```
+--- a/ACM-Reference-Format.bst
++++ b/ACM-Reference-Format.bst
+@@ -2242,7 +2242,8 @@ FUNCTION { inproceedings }
+           format.bvolume.noseries output
+           new.sentence
+           organization output
+-          publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
++	  %% MDE: Don't require, or even output, publisher
++          % publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
+           address "address" bibinfo.output.check  % jtb: require address
+           format.bookpages output
+         }
+```
+
 
 == Texinfo
 
@@ -1888,6 +1905,11 @@ Here is a standard command line:
 latexmk's dependency tracking depends on file contents, not timestamps,
 so you cannot make it re-run by `touch`ing a file.
 
+For a single-colum, double-spaced version of an ACM paper, for review:
+```
+\documentclass[acmlarge,anonymous,]{acmart}
+\usepackage[doublespacing]{setspace}
+```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
