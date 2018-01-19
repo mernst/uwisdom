@@ -58,11 +58,11 @@ To fix "too many unprocessed floats" error, do one of the following:
   * spread your figures further apart in your document, or
   * put in a \clearpage or \cleardoublepage command to allow a page full of figures to be generated.
 
-To change the font and line spacing for LaTeX figure captions in acmart.cls, do:
+To change the font and line spacing for LaTeX figure captions in acmart.cls (eg, prevent captions from being bold or reduce their font size), do:
 ```
-% Change font and line spacing fro figure captions
-\usepackage{setspace,caption}
-\captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
+ % Change font and line spacing for figure captions
+ \usepackage{setspace,caption}
+ \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
 ```
 
 % The change in font size of a LaTeX figure caption won't take unless you give
