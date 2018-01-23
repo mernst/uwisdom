@@ -152,6 +152,12 @@ before_install:
 For a pull request, Travis-CI tests the branch and the PR merge commit.
 These are two different SHAs.
 
+This configuration of Travis cannot run docker; I get "docker: command not found" (though I guess I could install docker, since sudo is enabled):
+```
+sudo: required
+dist: precise
+```
+
 
 == AWS Amazon Web services
 

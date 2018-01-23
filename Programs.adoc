@@ -1745,6 +1745,60 @@ To install VMware tools, see ~mernst/wisdom/building/build-vmware
 In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 
+== Docker
+
+A Docker container image is simply a root filesystem (snapshot) for a given process. This snapshot only encapsulates the userspace pieces (specifically, the filesystem).  Containers use the kernel of the host where they are running, but they do not share libraries such as libc.  Each Docker container has its own set of libraries since each container has its own, unique root filesystem.
+
+To run an interactive bash shell in a docker container (image is an inert file):
+```
+  docker run -it OWNER/NAME /bin/bash
+```
+or
+```
+  docker images
+  docker run -it <image> /bin/bash
+```
+A gross way to copy files out of a docker image:
+```
+  scp build/working-directories/jdk-specification-test/randoop-log.txt mernst@godwit.cs.washington.edu:sync
+```
+There must be a way to mount the file system and access it.
+
+To create a docker image (which is a static template that can be
+instantiated into a running container), good instructions appear at
+https://docs.docker.com/engine/tutorials/dockerimages/.  In brief, run
+the following in an empty directory.
+```
+  docker login
+  # No tag number; we'll just depend on the "latest" tag.
+  docker build -t mdernst/ubuntu-for-cf .
+  # List the available images
+  docker images
+  # Upload to Docker Hub
+  docker push mdernst/ubuntu-for-cf
+  # Browse to https://hub.docker.com/ to verify that it exists
+```
+
+To stop and remove/delete all docker containers (leaves the static images):
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+```
+To remove all non-running containers:
+```docker rm $(docker ps -q -f status=exited)```
+
+To list docker images (static files, that would be instantiated as containers):
+```docker images```
+To remove/delete a docker image:
+```docker rmi ID```
+To stop all docker containers, then remove/delete all docker images:
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+```
+
+
 == AsciiDoc format
 
 On GitHub, AsciiDoc comments (lines starting with //) seem to be rendered rather than ignored.
@@ -2909,55 +2963,6 @@ Markdown is idiosyncratic, so I think it's better to use AsciiDoc format
 and the Asciidoctor processor, when possible.
 
 When debugging gradle, use `--info` a lot.
-
-To run an interactive bash shell in a docker container (image is an inert file):
-```
-  docker run -it OWNER/NAME /bin/bash
-```
-or
-```
-  docker images
-  docker run -it <image> /bin/bash
-```
-A gross way to copy files out of a docker image:
-```
-  scp build/working-directories/jdk-specification-test/randoop-log.txt mernst@godwit.cs.washington.edu:sync
-```
-There must be a way to mount the file system and access it.
-
-To create a docker image (which is a static template that can be
-instantiated into a running container), good instructions appear at
-https://docs.docker.com/engine/tutorials/dockerimages/.  In brief, run
-the following in an empty directory.
-```
-  docker login
-  # No tag number; we'll just depend on the "latest" tag.
-  docker build -t mdernst/ubuntu-for-cf .
-  # List the available images
-  docker images
-  # Upload to Docker Hub
-  docker push mdernst/ubuntu-for-cf
-  # Browse to https://hub.docker.com/ to verify that it exists
-```
-
-To stop and remove/delete all docker containers (leaves the static images):
-```
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-```
-To remove all non-running containers:
-```docker rm $(docker ps -q -f status=exited)```
-
-To list docker images (static files, that would be instantiated as containers):
-```docker images```
-To remove/delete a docker image:
-```docker rmi ID```
-To stop all docker containers, then remove/delete all docker images:
-```
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker rmi $(docker images -q)
-```
 
 To convert .svg to vector-format .pdf?
 ```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
