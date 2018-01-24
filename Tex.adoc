@@ -523,6 +523,17 @@ proceedings, make this change:
            address "address" bibinfo.output.check  % jtb: require address
            format.bookpages output
          }
+@@ -2287,8 +2287,8 @@ FUNCTION { manual }
+   new.block
+   format.btitle "title" output.check
+   organization address new.block.checkb
+-  % jtb: back to normal style: organization, address
+-  organization "organization" output.check
++  % % jtb: back to normal style: organization, address
++  % organization "organization" output.check
+   address output
+   fin.block
+   output.issue.doi.coden.isxn.lccn.url.eprint.note
 ```
 
 
