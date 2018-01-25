@@ -1292,6 +1292,10 @@ horizontal mode; if the latter, it automatically switches to math mode.
 
 To save space in a paper using the acmart style:
 ```
+\settopmatter{printfolios=true,printccs=false,printacmref=false}
+```
+This does a bit more:
+```
 \settopmatter{printacmref=false} % Removes citation information below abstract
 \renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
 \pagestyle{plain} % removes running headers
