@@ -1917,10 +1917,28 @@ Here is a standard command line:
 latexmk's dependency tracking depends on file contents, not timestamps,
 so you cannot make it re-run by `touch`ing a file.
 
-For a single-colum, double-spaced version of an ACM paper, for review:
+For a single-colum, double-spaced version of an ACM LaTeX paper, for review:
 ```
 \documentclass[acmlarge,anonymous,]{acmart}
 \usepackage[doublespacing]{setspace}
+```
+
+To control formatting of a LaTeX paper from the command line, add to the paper:
+```
+\ifdefined\notodocomments
+  \renewcommand{\todo}[1]{\relax}
+\fi
+```
+and then invoke LaTeX like this:
+```
+pdflatex "\def\notodocomments{}\input{main}"
+```
+or, in a Makefile:
+```
+paper-notodos.pdf: paper.pdf
+	pdflatex "\def\notodocomments{}\input{paper}"
+	pdflatex "\def\notodocomments{}\input{paper}"
+	cp -pf $< $@
 ```
 
 // Please put new content in the appropriate section above, don't just
