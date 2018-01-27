@@ -290,6 +290,14 @@ git show REV:FILE
 ```
 where FILE is relative to the repository root.
 
+In git, to pull and push to different remote URLs, use this syntax
+in the `.git/config` file:
+```
+[remote "origin"]
+	url = https://github.com/typetools/checker-framework.git
+	pushurl = git@github.com:typetools/checker-framework.git
+```
+
 
 == GitHub (Git-specific items go above)
 
