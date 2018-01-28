@@ -1908,6 +1908,13 @@ Alternately, do this:
 \crefrangelabelformat{figure}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
 ```
 
+When using the cleveref package, use \Cref at the beginning of a sentence,
+where you would capitalize a word.  Use \cref elsewhere, where you would
+not capitalize a word.  If you want the words "Section", "Figure",
+etc. capitalized throughout (this is personal preference, not a requirement
+of English or of style guides), then do "\usepackage[capitalize]{cleveref}"
+rather than than mis-using \Cref where \cref belongs.
+
 If you get an error
 ```pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
 been already used, duplicate ignored```
