@@ -1952,9 +1952,15 @@ paper-notodos.pdf: paper.pdf
 	cp -pf $< $@
 ```
 
+Here is a way to get a LaTeX section caption to fit on one line:
+```
+\section{\fontsize{10.3pt}{13pt}\selectfont\mbox{Quantitative and Qualitative Analysis}}
+```
+
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
-
 
 // This entry is to avoid having the ones earlier in this file be interpreted.
 // Local Variables: 
