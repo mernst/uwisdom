@@ -200,6 +200,8 @@ http://plse.cs.washington.edu/ : /cse/web/research/plse/
 http://plse.cs.washington.edu/daikon/ : /cse/web/research/plse/daikon/
 http://uwplse.org : version control repository
 https://courses.cs.washington.edu/courses/cse331/13sp/ : /cse/web/courses/cse331/13sp
+http://plumelib.org/ : /cse/web/research/plumelib/
+
 Via tramp: /tern.cs.washington.edu:/cse/web/courses/cse590n
 Support can create a new virtual host, putting data under /cse/web/research/.
 (For large data that doesn't need to persist for an extended period of time, can use Google Drive instead.)
