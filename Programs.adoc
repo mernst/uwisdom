@@ -1681,6 +1681,11 @@ gradle init --type java-library
 gradle init --type java-application
 ```
 
+To replace a remote dependency by a local one in Gradle, do:
+```
+implementation files('/homes/gws/mernst/bin/src/options/build/libs/options-0.2.2-all.jar')
+```
+
 
 == Eclipse
 
