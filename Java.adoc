@@ -299,7 +299,12 @@ with a period unless followed by another sentence.
 In Javadoc @see and @link clauses, nested classes must be specified as
 `Outer.Inner`, not simply `Inner`.
 
-If a type is not used in the source code, then Javadoc mentions of it are not made into links in the generated HTML.  So you need to create a dummy public field (a private one doesn't work).  For example:
+The Javadoc @link clause takes an optional argument to indicate the displayed text:
+```{@link Class#member displaytext}```
+
+If a type is not used in the source code, then Javadoc mentions of it are
+not made into links in the generated HTML.  So you need to create a dummy
+public field (a private one doesn't work).  For example:
 ```
   // Without this, the Javadoc mentions of "java.util.Vector" are not links
   // in the generated HTML.
