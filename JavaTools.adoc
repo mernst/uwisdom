@@ -735,14 +735,11 @@ http://www.ulfdittmer.com/profileviewer/index.html
      But, the link to the manual from
      https://wiki.openjdk.java.net/display/CodeTools/jcov does not work.
   * Clover:  http://www.atlassian.com/software/clover/ (was http://www.thecortex.net/clover/)
-     As of 8/2003, David Saff leans toward this one.  Recommended by Elliotte Rusty Harold.
      Instruments source code (most/all other tools instrument bytecode), so
      integration requires a build.
   * Cobertura: http://cobertura.sourceforge.net/
-     Jeff Perkins says it's pretty good (as of 5/2009).
-     You have to remove DOS-style carriage returns from the scripts before
+     You may have to remove DOS-style carriage returns from the scripts before
      running it.
-     As of Oct 2017, last commit was in June 2016.
   * Rational's Visual PureCoverage
   * JProbe coverage: http://www.quest.com/jprobe/coverage-home.aspx
      free trial version apparently available
