@@ -1957,6 +1957,21 @@ Here is a way to get a LaTeX section caption to fit on one line:
 \section{\fontsize{10.3pt}{13pt}\selectfont\mbox{Quantitative and Qualitative Analysis}}
 ```
 
+In ACM style, to make acknowledgments smaller:
+```
+\specialcomment{acks}{%
+  \noindent
+  \begingroup
+  \begin{minipage}{\columnwidth}
+  \smaller
+  \bigskip
+  \noindent\textbf{Acknowledgments}
+  \phantomsection\addcontentsline{toc}{section}{Acknowledgments}
+}{%
+  \end{minipage}
+  \endgroup
+}
+```
 
 
 // Please put new content in the appropriate section above, don't just
