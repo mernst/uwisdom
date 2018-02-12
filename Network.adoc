@@ -462,3 +462,9 @@ Say there may be more work after the initial bit.
 http://www.keithmander.com/?p=243 says:
  * Use uTest to perform QA of the code.
  * Always make sure you have a clear agreement in place that spells out how owns the finished output and what the rights are for the contractor.
+
+Creating a new Maven Central ("the Central Repository") project:
+http://central.sonatype.org/pages/ossrh-guide.html
+Example issues:
+https://issues.sonatype.org/browse/OSSRH-28628
+https://issues.sonatype.org/browse/OSSRH-37810
