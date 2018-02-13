@@ -1,0 +1,375 @@
+
+
+== Make and Makefiles
+
+make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
+is a segfault (http://www.bitwizard.nl/sig11/).
+
+Make has two flavors of variables that may appear in a Makefile.
+The normal type is recursively expanded, re-evaluated on each use:
+```
+     foo = $(bar)
+```
+The GNU-specific type is simply expanded, set once when the assignment is
+encountered.
+```
+     x := foo
+```
+
+In Makefiles, variables in rule targets and dependences are expanded as
+soon as the rule target is read, but variables in rule actions are expanded
+only when the action is actually executed.  Watch out for this
+inconsistency!  This means that rules with variables in their
+targets/dependences should come at the end of Makefiles.
+
+In a Makefile, the right way to invoke make on a subdirectory or other
+directory is
+```
+             cd subdir && $(MAKE)
+```
+or, equivalently,
+```
+             $(MAKE) -C subdir
+```
+To execute parallel jobs on a multiprocessor, use the "-j2" option.
+
+In make, to ensure that a rule always runs even if the target seems to be
+up to date, add an extra rule of the form
+```
+     .PHONY : clean
+```
+Once this is done, `make clean' will run the commands regardless of
+whether there is a file named `clean'.
+
+After Makefile.in is changed, it is necessary to rerun "config.status" and
+then rerun "make".
+
+Particularly useful special "automatic variables" used by make (in Makefile rules):
+//nobreak
+
+ * $@   the target of the rule
+ * $<   the first prerequisite
+ * $^   all the prerequisites
+ * $*   the stem with which an implicit rule matches, including directory name
+Example use of special automatic variables used by make:
+`cp -p $< $@`
+
+In Makefiles, to test whether a file/directory exists, do something like this:
+```
+  # Test that the directory exists.  There must be a better way to do this.
+  INV:=$(wildcard $(INV))
+  ifndef INV
+    $(error Environment variable INV is not set to an existing directory)
+  endif
+```
+or alternately:
+```
+  ifeq "$(wildcard ${INV}/scripts)" "${INV}/scripts"
+       ... it exists ...
+  else
+       ... it does not exist ...
+  endif
+```
+or:
+```
+ifneq ("$(wildcard $(PATH_TO_FILE))","")
+FILE_EXISTS = 1
+else
+FILE_EXISTS = 0
+endif
+```
+
+Suppose I want to write a rule that always performs a task, but doesn't
+necessarily cause its dependence to execute first.  This is a snippet of
+the Makefile I would like to write:
+```
+.PHONY: maybe-update-file1
+maybe-update-file1:
+	Command A:  may or may not update file1.txt
+file2.txt:  maybe-update-file1 file1.txt
+	Command B:  computes file2.txt from file1.txt
+```
+Problem: because the maybe-update-file1 target always executes, Command B
+always executes.  That wastes the time to execute Command B, and because it
+unconditionally updates file2.txt, any command that depends on file2.txt
+also executes unnecessarily.
+.
+Here is an approach that works:
+```
+file2.txt: maybe-update-file1 .timestamp-file2
+.PHONY: maybe-update-file1
+maybe-update-file1:
+	@if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
+.timestamp-file2: file1.txt
+	cp file1.txt file2.txt
+	touch .timestamp-file2
+```
+
+The directory of the current Makefile:
+```
+THIS_MAKEFILE:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+```
+
+
+
+== Ant and buildfiles, build.xml
+
+An Ant guide (documentation) for beginners:
+http://wiki.apache.org/ant/TheElementsOfAntStyle
+
+To permit user-specific setting of variables in a Makefile, add this at the
+top (and change assignments to use "=?" syntax):
+```
+  # Put user-specific changes in your own Makefile.user.
+  # Make will silently continue if that file does not exist.
+  -include Makefile.user
+```
+
+To make a tags table for a LaTeX paper, using an Ant buildfile:
+```
+  <target name="etags" depends="tags">
+  </target>
+  <target name="tags" depends="init" description="builds Emacs TAGS table">
+    <exec os="Linux" executable="etags" failonerror="true">
+      <!-- args explicitly specified so that they are in the right order -->
+      <!-- To regenerate, run:  latex-process-inputs -antlist main.tex -->
+      ...
+    </exec>
+  </target>
+```
+To make a tags table for a Java project, using an Ant buildfile:
+```
+  <target name="etags" depends="tags">
+  </target>
+  <target name="tags" description="Create Emacs TAGS table">
+    <exec executable="/bin/sh">
+      <arg value="-c"/>
+      <arg value="etags `find -name '*.java' | sort-directory-order`"/>
+    </exec>
+  </target>
+```
+
+To print out a path in ant, use this snippet of code at the end of your ant
+file.  This is good for debugging classpath issues when running javac, as
+ant ordinarily doesn't let you see the classpath or the javac command line.
+```
+  <!-- = = = = = = = = = = = = = = = = =
+       macrodef: echopath
+       Use as:    <echopath pathid="mypath"/>
+       = = = = = = = = = = = = = = = = = -->
+  <macrodef name="echopath">
+    <attribute name="pathid"/>
+    <sequential>
+      <property name="line.pathprefix" value="| |-- "/>
+      <!-- get given path in a printable form -->
+      <pathconvert pathsep="${line.separator}${line.pathprefix}"
+       property="echo.@{pathid}"
+       refid="@{pathid}">
+      </pathconvert>
+      <echo>Path @{pathid}</echo>
+      <echo>${line.pathprefix}${echo.@{pathid}}</echo>
+    </sequential>
+  </macrodef>
+```
+
+To print a fileset in Ant:
+```
+    <macrodef name="echo-fileset">
+		    <attribute name="filesetref" />
+		    <sequential>
+		    <pathconvert pathsep="\n " property="@{filesetref}.echopath">
+				    <path>
+					    <fileset refid="@{filesetref}" />
+				    </path>
+			    </pathconvert>
+		    <echo>   ------- echoing fileset @{filesetref} -------</echo>
+		    <echo>${@{filesetref}.echopath}</echo>
+		    </sequential>
+    </macrodef>
+...
+    <echo-fileset filesetref="src.files"/>
+```
+
+To access environment variables in Ant:
+```
+  <property environment="env"/>
+```
+and then use
+```
+  ${env.HOME}
+```
+
+A recipe for a temporary directory in Ant:
+```
+  <property name="tmpdir" location="${java.io.tmpdir}/${user.name}/${ant.project.name}" />
+  <delete dir="${tmpdir}" />    
+  <mkdir dir="${tmpdir}" />
+```
+
+ant wildcards - ** means the current directory or any directory
+below it.  I still can't find where this is documented.
+
+In Ant, to check whether files have the same contents, there is no "diff"
+task but you can use the "filesmatch" condition.
+
+In Ant, to convert a relative filename/pathname to absolute, use:
+```
+  <property name="x" location="folder/file.txt" />
+```
+and ${X} will be the absolute path of the file relative to the ${basedir} value.
+In general, for a file or directory, it's less error-prone to use
+```
+  <property name="x" location="folder/file.txt" />
+```
+rather than
+```
+  <property name="x" value="folder/file.txt" />
+```
+Also consider using ${basedir}, which is already absolute.
+It defaults to the containing directory of the buildfile, and it can appear
+in a build.properties file.
+A slightly less clean approach than ${basedir} is
+```
+  <dirname property="ant.file.dir" file="${ant.file}"/>
+```
+
+Ant permits you to specify that one target depends on another, but by
+default every prerequisite is always rebuilt, even if it is already up to
+date.  (This is a key difference between Ant and make:  by default, make
+only re-builds a target if some prerequisite is newer.)
+ +
+To make Ant re-build prerequisites only if necessary, there are two general
+approaches.
+//nobreak
+
+ 1. Use the uptodate task to set a property.  Then, your task can test the
+   property and build only if the property is (not) set.
+----
+  <uptodate property="mytarget.uptodate">  // in set.mytarget.uptodate task
+    ...
+  </uptodate>
+  <!-- The prerequisites are executed before the "unless" is checked. -->
+  <target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate">
+    ...
+  </target>
+----
+   Alternately, use the outofdate task from ant contrib.  It's nicer in
+   that it is just one target without a separate property being defined; by
+   contrast, outofdate requires separate targets to set and to test the
+   property.
+ 2. Create a <fileset> using the <modified> selector.  It calculates MD5
+   hashes for files and selects files whose MD5 differs from earlier stored
+   values.  It's optional to set
+```
+     <param name="cache.cachefile"     value="cache.properties"/>
+```
+   inside the <modified> selector; it defaults to "cache.properties".
+   Example that copies all files from src to dest whose content has changed:
+```
+        <copy todir="dest">
+            <fileset dir="src">
+                <modified/>
+            </fileset>
+        </copy>
+```
+There is also Ivy, but I can't tell from its documentation whether it
+provides this feature.  The key use case in the documentation seems to be
+downloading subprojects from the Internet rather than avoiding wasted work
+by staging the parts of a single project.
+
+In Ant, the path to the current ant build file (typically build.xml) is 
+available as property `ant.file`.  You can get its directory in this way:
+----
+<dirname property="ant.file.dir" file="${ant.file}"/>
+----
+
+In Ant, to jar up the contents of a set of existing .jar files:
+```
+    <zip destfile="out.jar">
+	<zipgroupfileset dir="lib" includes="*.jar"/>
+    </zip>
+```
+
+Vizant (http://vizant.sourceforge.net/) is an ant build visualization tool.
+
+To make the junit task work in Ant without setting classpath, use the hack from:
+http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes
+
+To list the projects (top-level targets) in an Ant build.xml file, do either of:
+```
+  ant -projecthelp
+  ant -p
+```
+
+To get the current working directory from an ant file:
+```
+  ${bsh:WorkDirPath.getPath()}
+```
+
+To pass the -Xlint argument to javac when running from Ant, do:
+```
+      <compilerarg value="-Xlint"/>
+```
+
+
+== Gradle and build.gradle
+
+The standard gradle target, which builds all artifacts and runs all tests, is
+```
+./gradlew build
+```
+
+Gradle task to create a TAGS table:
+```
+/* Make Emacs TAGS table */
+task tags(type: Exec, dependsOn: 'clone') {
+  description "Run etags to create an Emacs TAGS table"
+  environment PATH: "$System.env.PATH:$buildDir/utils/plume-lib/bin"
+  commandLine "bash", "-c", "find src/ -name '*.java' | sort-directory-order | xargs etags"
+}
+```
+
+To create a Java Gradle project, run one of the following lines:
+```
+gradle init --type java-library
+gradle init --type java-application
+```
+
+To replace a remote dependency by a local one in Gradle, do:
+```
+implementation files('/homes/gws/mernst/bin/src/options/build/libs/options-0.2.2-all.jar')
+```
+
+
+Preparing the Gradle buildfile for uploading/releasing to Maven Central:
+Set up directory:
+1. Run once ever: ln -s ../../../gradle.properties gradle.properties
+2. Add gradle.properties to .gitignore file.
+3. Gradle buildfile rules:
+http://central.sonatype.org/pages/gradle.html
+This doesn't give instructions about Maven Central in particular:
+https://docs.gradle.org/current/userguide/maven_plugin.html
+Cannot use this, because it doesn't support signing which Maven Central requires:
+https://docs.gradle.org/current/userguide/publishing_maven.html
+
+To make a release to Maven Central:
+1. Increment the version number in buildfiles, documentation (README files), etc.
+2. Run: ./gradlew uploadArchives
+3. Manually release the deployment:
+3a.  Browse to https://oss.sonatype.org/#stagingRepositories
+3b.  Search for and select this repository, by group name.
+3c.  At the top, click "close" then "refresh" then "release".
+     You might have to wait a little while between the clicks.
+     Use the release message "Plume-lib Options X.Y.Z" (w/version number).
+Artifacts should be available in 10+ minutes.
+They will show up at search.maven.org in 2 hours.
+
+
+Setting up a project to build with Gradle:
+```gradle wrapper --gradle-version 4.5```
+(Maybe use an earlier version than 4.5 to avoid warning about using Java 7?)
+Then one of these:
+```
+./gradlew init --type java-library
+./gradlew init --type java-application
+```
