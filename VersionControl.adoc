@@ -298,6 +298,17 @@ in the `.git/config` file:
 	pushurl = git@github.com:typetools/checker-framework.git
 ```
 
+To delete/remove a commit in a local git repository, use one of these:
+```
+git reset --hard HEAD~1
+git reset --hard <sha>
+```
+Then, to delete in a remote branch, use one of these
+```
+git push -f
+git push origin HEAD --force
+```
+
 
 == GitHub (Git-specific items go above)
 
