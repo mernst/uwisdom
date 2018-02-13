@@ -8,6 +8,7 @@
 // users must include them explicitly.
 
 \include{README.adoc}
+\include{BuildSystems.adoc}
 \include{Emacs.adoc}
 \include{Java.adoc}
 \include{Linux.adoc}
