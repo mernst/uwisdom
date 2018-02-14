@@ -354,7 +354,11 @@ https://docs.gradle.org/current/userguide/publishing_maven.html
 
 To make a release to Maven Central:
 1. Increment the version number in buildfiles, documentation (README files), etc.
-2. Run: ./gradlew uploadArchives
+2. Run one of these:
+```
+./gradlew uploadArchives
+./gradlew -b mavencentral.gradle uploadArchives
+```
 3. Manually release the deployment:
 3a.  Browse to https://oss.sonatype.org/#stagingRepositories
 3b.  Search for and select this repository, by group name.
@@ -373,3 +377,8 @@ Then one of these:
 ./gradlew init --type java-library
 ./gradlew init --type java-application
 ```
+
+Gradle 4.1 is the last version that does not complain about use of Java 7.
+The entire 4.x series works on Java 7, but issues distracting warnings about it.
+
+
