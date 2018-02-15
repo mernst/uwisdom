@@ -312,6 +312,20 @@ To pass the -Xlint argument to javac when running from Ant, do:
 ```
 
 
+== Maven and pom.xml
+
+In a Maven buildfiel pom.xml, here is where to put <plugins>:
+```
+<build>
+  <plugins>
+  ...
+```
+
+
+I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
+By contrast, Gradle has one plugin and it works.
+
+
 == Gradle and build.gradle
 
 The standard gradle target, which builds all artifacts and runs all tests, is
@@ -380,5 +394,17 @@ Then one of these:
 
 Gradle 4.1 is the last version that does not complain about use of Java 7.
 The entire 4.x series works on Java 7, but issues distracting warnings about it.
+To use Gradle 4.1:
+```
+gradle wrapper --gradle-version 4.5
+```
 
-
+A problem with the Gradle signing plugin is that it requires a legal GPG keyring.
+(I don't know whether the Maven signing plugin also requires this.)
+If the file doesn't exist or is not valid, the gradle build terminates.
+But signing is only needed when uploading artifacts to Maven Central, and some users may not have a keyring.
+.
+Here are some possibilities, from best to worst:
+ * split the gradle file into parts, and include them in one another.  This is a bit gross since only a gradle script can be included, but only a gradle buildfile can contain a `plugins { ... }` block, and referring to a plugin outside the `plugins { ... }` block is a bit gross.
+ * commit a dummy keyring to the repository, refer to it in the local gradle.properties, and the user's ~/gradle.properties can override it for any user who wants to upload to Maven Central.  A problem is that using a local pathname yields a gradle warning, which we don't want.
+ * use conditional signing.  This does not help -- perhaps the artifacts won't be signed on any particular run, but the signing plugin still requires the file to exist.
