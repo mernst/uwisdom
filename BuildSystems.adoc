@@ -323,7 +323,7 @@ In a Maven buildfiel pom.xml, here is where to put <plugins>:
 
 
 I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
-By contrast, Gradle has one plugin and it works.
+By contrast, Gradle has fewer plugins and I got one to work.
 
 
 == Gradle and build.gradle
@@ -408,3 +408,6 @@ Here are some possibilities, from best to worst:
  * split the gradle file into parts, and include them in one another.  This is a bit gross since only a gradle script can be included, but only a gradle buildfile can contain a `plugins { ... }` block, and referring to a plugin outside the `plugins { ... }` block is a bit gross.
  * commit a dummy keyring to the repository, refer to it in the local gradle.properties, and the user's ~/gradle.properties can override it for any user who wants to upload to Maven Central.  A problem is that using a local pathname yields a gradle warning, which we don't want.
  * use conditional signing.  This does not help -- perhaps the artifacts won't be signed on any particular run, but the signing plugin still requires the file to exist.
+
+Gradle's "maven-publish" plugin does no signing, so it cannot be used with
+Maven Central.
