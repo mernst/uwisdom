@@ -725,8 +725,6 @@ http://www.ulfdittmer.com/profileviewer/index.html
 
 == Java code coverage
 
-  * Comparison of Java code coverage tools:
-    https://confluence.atlassian.com/clover/comparison-of-code-coverage-tools-681706101.html
   * JaCoCo: http://www.eclemma.org/jacoco/
      (previously named Emma, http://emma.sourceforge.net/)
       * Codecov.io is GitHub integration with JaCoCo
@@ -737,6 +735,8 @@ http://www.ulfdittmer.com/profileviewer/index.html
   * Clover:  http://www.atlassian.com/software/clover/ (was http://www.thecortex.net/clover/)
      Instruments source code (most/all other tools instrument bytecode), so
      integration requires a build.
+      * Clover's comparison of Clover, Cobertura, and JaCoCo:
+	https://confluence.atlassian.com/clover/comparison-of-code-coverage-tools-681706101.html
   * Cobertura: http://cobertura.sourceforge.net/
      You may have to remove DOS-style carriage returns from the scripts before
      running it.

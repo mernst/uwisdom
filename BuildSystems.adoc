@@ -321,7 +321,6 @@ In a Maven buildfiel pom.xml, here is where to put <plugins>:
   ...
 ```
 
-
 I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
 By contrast, Gradle has fewer plugins and I got one to work.
 
@@ -343,12 +342,6 @@ task tags(type: Exec, dependsOn: 'clone') {
 }
 ```
 
-To create a Java Gradle project, run one of the following lines:
-```
-gradle init --type java-library
-gradle init --type java-application
-```
-
 To replace a remote dependency by a local one in Gradle, do:
 ```
 implementation files('/homes/gws/mernst/bin/src/options/build/libs/options-0.2.2-all.jar')
@@ -361,12 +354,14 @@ Set up directory:
 2. Add gradle.properties to .gitignore file.
 3. Gradle buildfile rules:
 http://central.sonatype.org/pages/gradle.html
-This doesn't give instructions about Maven Central in particular:
-https://docs.gradle.org/current/userguide/maven_plugin.html
-Cannot use this, because it doesn't support signing which Maven Central requires:
-https://docs.gradle.org/current/userguide/publishing_maven.html
+Here are alternate, but worse, sources of Gradle buildfile rules:
+ * This doesn't give instructions about Maven Central in particular:
+   https://docs.gradle.org/current/userguide/maven_plugin.html
+ * The "maven-publish" plugin doesn't support signing which Maven Central requires:
+   https://docs.gradle.org/current/userguide/publishing_maven.html
 
-To make a release to Maven Central:
+To make a release to Maven Central using Gradle:
+0. Create Gradle files using http://central.sonatype.org/pages/gradle.html
 1. Increment the version number in buildfiles, documentation (README files), etc.
 2. Run one of these:
 ```
@@ -383,10 +378,10 @@ Artifacts should be available in 10+ minutes.
 They will show up at search.maven.org in 2 hours.
 
 
-Setting up a project to build with Gradle:
-```gradle wrapper --gradle-version 4.5```
-(Maybe use an earlier version than 4.5 to avoid warning about using Java 7?)
-Then one of these:
+To set up a Java project to build with Gradle (to create a build.gradle file):
+1. `gradle wrapper --gradle-version 4.5`
+(Use version 4.1 to avoid warning about using Java 7.)
+2. Run one of the following lines:
 ```
 ./gradlew init --type java-library
 ./gradlew init --type java-application
@@ -396,18 +391,29 @@ Gradle 4.1 is the last version that does not complain about use of Java 7.
 The entire 4.x series works on Java 7, but issues distracting warnings about it.
 To use Gradle 4.1:
 ```
-gradle wrapper --gradle-version 4.5
+gradle wrapper --gradle-version 4.1
 ```
 
-A problem with the Gradle signing plugin is that it requires a legal GPG keyring.
-(I don't know whether the Maven signing plugin also requires this.)
-If the file doesn't exist or is not valid, the gradle build terminates.
-But signing is only needed when uploading artifacts to Maven Central, and some users may not have a keyring.
+I am following the instructions at http://central.sonatype.org/pages/gradle.html to use Gradle to upload artifacts to the Maven Central Repository.
+This works.
+
+My problem is that it results in a buildfile that other developers cannot use.
+
+
+The Gradle signing plugin (https://docs.gradle.org/current/userguide/signing_plugin.html) requires a GPG keyring, 
+
+ -- the plugin terminates the build with an error 
+if the file doesn't exist or is not valid.
+But signing is only needed when uploading artifacts to Maven Central.
+I want any user to be able to run the gradle buildfile (except for actually uploading to Maven Central), even if they do not have a GPG keyring or a  `gradle.properties` file with 
+`signing.keyId`, `signing.password`, 'signing.secretKeyRingFile`, `ossrhUsername`, and `ossrhPassword` properties defined.
+
+
 .
 Here are some possibilities, from best to worst:
- * split the gradle file into parts, and include them in one another.  This is a bit gross since only a gradle script can be included, but only a gradle buildfile can contain a `plugins { ... }` block, and referring to a plugin outside the `plugins { ... }` block is a bit gross.
- * commit a dummy keyring to the repository, refer to it in the local gradle.properties, and the user's ~/gradle.properties can override it for any user who wants to upload to Maven Central.  A problem is that using a local pathname yields a gradle warning, which we don't want.
- * use conditional signing.  This does not help -- perhaps the artifacts won't be signed on any particular run, but the signing plugin still requires the file to exist.
-
-Gradle's "maven-publish" plugin does no signing, so it cannot be used with
-Maven Central.
+ * split the gradle file into parts.
+    * Change the main buildfile into a build script (but it can still be used directly).  One gross thing about this is that only a gradle buildfile can contain a `plugins { ... }` block, and referring to a plugin outside the `plugins { ... }` block is verbose and ugly, as at the bottom of (say) https://plugins.gradle.org/plugin/com.github.sherter.google-java-format
+    * Create another buildfile that contains everything related to signing and that uses `apply from:` to include the main one.
+   Is there a way to do this without the ugly buildscript block?
+ * Commit a dummy keyring to the repository, refer to it in the local gradle.properties, and the user's ~/gradle.properties can override it for any user who wants to upload to Maven Central.  A problem is that using a local pathname yields a gradle warning.  Is there a way to do this without a gradle warning?
+ * use conditional signing (https://docs.gradle.org/current/userguide/signing_plugin.html).  In my experiments, this does not help.  Even on a gradle execution where the artifacts are not signed, the signing plugin still requires the GPG keyring to exist.
