@@ -394,26 +394,9 @@ To use Gradle 4.1:
 gradle wrapper --gradle-version 4.1
 ```
 
-I am following the instructions at http://central.sonatype.org/pages/gradle.html to use Gradle to upload artifacts to the Maven Central Repository.
-This works.
-
-My problem is that it results in a buildfile that other developers cannot use.
-
-
-The Gradle signing plugin (https://docs.gradle.org/current/userguide/signing_plugin.html) requires a GPG keyring, 
-
- -- the plugin terminates the build with an error 
-if the file doesn't exist or is not valid.
-But signing is only needed when uploading artifacts to Maven Central.
-I want any user to be able to run the gradle buildfile (except for actually uploading to Maven Central), even if they do not have a GPG keyring or a  `gradle.properties` file with 
-`signing.keyId`, `signing.password`, 'signing.secretKeyRingFile`, `ossrhUsername`, and `ossrhPassword` properties defined.
-
-
-.
-Here are some possibilities, from best to worst:
- * split the gradle file into parts.
-    * Change the main buildfile into a build script (but it can still be used directly).  One gross thing about this is that only a gradle buildfile can contain a `plugins { ... }` block, and referring to a plugin outside the `plugins { ... }` block is verbose and ugly, as at the bottom of (say) https://plugins.gradle.org/plugin/com.github.sherter.google-java-format
-    * Create another buildfile that contains everything related to signing and that uses `apply from:` to include the main one.
-   Is there a way to do this without the ugly buildscript block?
- * Commit a dummy keyring to the repository, refer to it in the local gradle.properties, and the user's ~/gradle.properties can override it for any user who wants to upload to Maven Central.  A problem is that using a local pathname yields a gradle warning.  Is there a way to do this without a gradle warning?
- * use conditional signing (https://docs.gradle.org/current/userguide/signing_plugin.html).  In my experiments, this does not help.  Even on a gradle execution where the artifacts are not signed, the signing plugin still requires the GPG keyring to exist.
+You can include a remote Gradle build script by doing:
+```
+apply from: "http://path/to/script.gradle"
+```
+The downside of this is that it downloads every time; there is no caching.
+And maybe it doesn't work offline?
