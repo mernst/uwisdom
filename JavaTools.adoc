@@ -662,6 +662,7 @@ maudit (from metamata)
 Metamata no longer exists (as a company), and I can't find this software
 for download any longer.
 
+lgtm.com issues false positive warnings, and I don't see how to suppress them.
 
 == Profilers
 
