@@ -344,9 +344,8 @@ task tags(type: Exec, dependsOn: 'clone') {
 
 To replace a remote dependency by a local one in Gradle, do:
 ```
-implementation files('/homes/gws/mernst/bin/src/options/build/libs/options-0.2.2-all.jar')
+implementation files('libs/options-0.2.2-all.jar')
 ```
-
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
