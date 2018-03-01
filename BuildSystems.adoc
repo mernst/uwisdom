@@ -399,3 +399,17 @@ apply from: "http://path/to/script.gradle"
 ```
 The downside of this is that it downloads every time; there is no caching.
 And maybe it doesn't work offline?
+
+To visualize the task dependencies in a Gradle buildfile:
+```
+plugins {
+    id "com.dorongold.task-tree" version "1.3"
+}
+```
+Then run
+```
+gradle SOMETASKNAME taskTree
+```
+When one of the tasks given to the gradle command is `taskTree`, execution
+of all the other tasks on that line is skipped. Instead, their task
+dependency tree is printed.
