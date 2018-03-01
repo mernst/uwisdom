@@ -1505,23 +1505,6 @@ To set the page number in LaTeX:  \setcounter{page}{98}
 One way to number LaTeX figures by chaper/section, 1.1, 1.2, ..., 2.1, ...:
   http://www-compiler.csa.iisc.ernet.in/~janaki/tex/numbering.html
 
-This Makefile rule runs LaTeX until it stops saying "Labels may have changed":
-```
-latex:
-  latex ${TEXFILE}
-  (fgrep 'Label(s) may have changed' $(subst .tex,.log,${TEXFILE}) && $(MAKE) latex) || true
-```
-But you could use "rubber" instead.
-
-Rubber is a latex build system written in python.  Run it like this:
-```
-  rubber main.tex
-```
-It iterates latex / bibtex until a fixed-point (more or less: it won't loop
-forever, and if you use some obscure latex packages you may need an extra
-run).  Rubber filters the latex output to report only issues of importance.
-You can apt-get install rubber.
-
 Three LaTeX references, all published by Addison-Wesley:
 //nobreak
 
@@ -1922,7 +1905,8 @@ and your document does not have an index, then add the `pageanchor=false` option
 ```\usepackage[pageanchor=false]{hyperref}```
 
 The `latexmk` program is distributed with LaTeX and so is a fairly
-canonical way to run LaTeX (as opposed to other programs like `rubber`).
+canonical way to run LaTeX until a fixed point
+(as opposed to non-canonical ways, like the `rubber` program).
 Here is a standard command line:
 ```latexmk -pdf -interaction=nonstopmode myfile.tex```
 latexmk's dependency tracking depends on file contents, not timestamps,
