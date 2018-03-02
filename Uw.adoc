@@ -124,7 +124,104 @@ User guide for UW Telecom handsets/telephones:
 https://itconnect.uw.edu/wp-content/uploads/2014/06/9608_9611G-SIP_quick-ref.pdf
 
 
-== CSE
+== CSE (other than sysadmin)
+
+At UW CSE, Melody Kadenko is a notary.
+
+PLSE (PL/SE) lab is room 407.
+
+To create press releases about UW/CSE research:
+Kristin Osborne
+
+In the UW CSE visitor schedule reservation schedule system (mvis):
+//nobreak
+
+ * In general, you don't need to fill in a description field because your
+   name and room number are automatically shown.  The description field is
+   shown in addition to that.
+ * To not show your name and room number (that is, to replace it by the description), prefix the description with "-" , e.g., "-Lunch at Canlis".
+   http://reserve.cs.washington.edu/visitor/help.php?#SEC25
+ * To blackout some periods, prefix with "--", e.g., "--unavailable".
+   http://reserve.cs.washington.edu/visitor/help.php?#SEC22
+
+How to sign up for undergrad research for credit in the UW CSE department:
+1. Go to http://www.cs.washington.edu/students/ugrad/research#registration
+   (Also available via: cs.washington.edu -> Current Students -> Information for
+    Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
+2. Fill out and submit the form on that page
+3. It will send the professor the approval email
+4. When the professor approves, it sends the student an SLN and add code.
+
+Petitions for non-majors to take a UW CSE majors-only class:
+http://www.cs.washington.edu/education/ugrad/academics/petition.html
+
+To reserve seminar rooms 305 and Gates Commons, ask Tracy Erbeck or Heidi
+Dlubac.  Or maybe use the cse-maintenance@cs.washington.edu mailing list?
+
+Use the cse-maintenance@cs.washington.edu mailing list for requests about facilities (physical plant) issues with the Allen Center.
+space@cs.washington.edu is for asking for office space.
+
+UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
+Stock reply for people trying to recruit/hire students:
+Good luck on your project!
+The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  http://www.cs.washington.edu/affiliates/
+
+UW CSE technical reports (TRs) are handled by the TR coordinator
+(currently Garrett Yoshitomi).
+To create a TR, send the PDF to tr-request@cs.washington.edu
+and copy a faculty member.  The TR coordinator can also provide a TR number
+in advance of receiving the PDF, if you provide the title, author list,
+abstract, and a date on which you will provide the PDF.
+
+To add a visitor's talk to the CSE colloquium talk calendar, send to either
+Connie Ivey-Pasche or Kay Beck-Benton:
+  name, affiliation, title and abstract, date, room, time,
+  visitor schedule in MVIS if available
+
+For read permissions/access to the UW CSE grad student and advising
+database, ask Dan Boren.  Then, access it via the Web:
+  https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/
+or from the command line (you need postgres, and you need to be on the CSE network):
+```
+  psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
+```
+
+Instructions for maintaining UW CSE Drupal webpages/website:
+https://wasp.cs.washington.edu/Internal/plse-webpages.html
+
+If you want to send a message to UW CSE undergrads, send it to
+cs-ugrads@cs.  It will be posted to the blog within 24 hours.
+If you have a time-sensitive message, you should send that to 
+cs-ugrads-urgent@cs.
+
+Card key access to rooms in the CSE building (the Allen Center):
+cardkey@cs.washington.edu
+
+How to order lunches / snack carts at UW CSE:
+https://www.cs.washington.edu/internal/food
+
+Sandy Kaplan <sandy@cs.washington.edu> is a technical editor who can help
+with grant proposals, technical papers, helping grad students improve their
+writing, etc.  She sits in CSE 462 and works Monday mornings and all day
+Thursday and Friday.  Her feedback is often very low-level and you need to
+ensure that the suggested edits do not change the technical content.
+
+UW CSE course web template:
+https://gitlab.cs.washington.edu/lab/simple-courseweb-template
+To use:
+git clone git@gitlab.cs.washington.edu:lab/simple-courseweb-template.git
+and then copy into my course directory.
+
+Fellowships/scholarships that students can apply for:
+NSF -- first two years only
+NDSEG -- first two years only
+Adobe Research fellowship
+Facebook fellowship
+Symantec Fellowship
+Google Fellowship
+
+
+== CSE sysadmin
 
 UW CSE printer: ps581
 //nobreak
@@ -140,11 +237,6 @@ Color printer: psc581
     psc581/noduplex
 Too often landscape PDF comes out rotated (& scaled down).  A solution is
 to print from Acrobat Reader, and to check the "landscape" button.
-
-At UW CSE, Melody Kadenko is a notary.
-
-PLSE (PL/SE) lab is room 407.
-It used to be room 315 (phone 206-543-2053).
 
 An undergrad instructional linux server: attu
 
@@ -171,9 +263,6 @@ ens1f:
  * all other combinations work
 ens1:
  * directly on ps581:  cut off left margin
-
-To create press releases about UW/CSE research:
-Hannah Hickey (hickeyh@u.washington.edu)
 
 To set up a wiki at UW CSE, see
 http://www.cs.washington.edu/lab/www/MediaWiki.shtml
@@ -213,9 +302,6 @@ You won't be able to see the files (but that directory is readable by me as
 /cse/ftp/incoming).  Let me know when the files are there so I can retrieve
 them.
 
-The /uns Maintainers' unFAQ:
-http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
-
 Remote desktop from Linux workstation to Windows Terminal Server
 (cannot run in the background; enter CSERESEARCH for the domain):
 ```
@@ -227,7 +313,6 @@ Remote desktop from Linux workstation to Windows Terminal Server
 Once I log in, probably do
  Control Panel > Ease of Access > Ease of Access Center > Make the computer easier to see > Set the thickness of the blinking cursor : 5
  Control Panel > Mouse > Change how the mouse pointer looks > [make it as large as possible
-
 .
 Here are newer commands, but they don't work for me:
 ```
@@ -250,72 +335,9 @@ repository, do so under /projects/swlab1 (or swlab2, etc.), such as
 directory, which is less informative.  And don't put this under your home
 directory, which will get reaped eventually when you graduate or leave UW.
 
-In the UW CSE visitor schedule reservation schedule system (mvis):
-//nobreak
-
- * In general, you don't need to fill in a description field because your
-   name and room number are automatically shown.  The description field is
-   shown in addition to that.
- * To not show your name and room number (that is, to replace it by the description), prefix the description with "-" , e.g., "-Lunch at Canlis".
-   http://reserve.cs.washington.edu/visitor/help.php?#SEC25
- * To blackout some periods, prefix with "--", e.g., "--unavailable".
-   http://reserve.cs.washington.edu/visitor/help.php?#SEC22
-
-How to sign up for undergrad research for credit in the UW CSE department:
-1. Go to http://www.cs.washington.edu/students/ugrad/research#registration
-   (Also available via: cs.washington.edu -> Current Students -> Information for
-    Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
-2. Fill out and submit the form on that page
-3. It will send the professor the approval email
-4. When the professor approves, it sends the student an SLN and add code.
-
-Typical instructions for installing a package in /uns (see
-http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html#q3.2 ):
-```
-  source /uns/src/generic-builder.sh
-  PKG=graphviz-2.20.3
-  install_generic $PKG http://www.graphviz.org/pub/graphviz/stable/SOURCES/$PKG.tar.gz
-```
-
-nest.cs.washington.edu has 8gb (and 8 processors).  It is several years old
-and usually idle.  It is a Windows machine.  To access the machine, Windows
-Remote Desktop Connection is the easiest route.
-
-To serve a Mercurial (hg) repository via the web (https:), first add
-something like the following to its `.hg/hgrc` file:
-```
-  [web]
-  allow_push = mdb, mernst, rcook, rose
-```
-Then, ask webmaster@cs.washington.edu something like the following:
-```
-  Can you make the https: Mercurial server serve
-  /projects/swlab1/ductile/paper-2010, as
-  https://dada.cs.washington.edu/hgweb/ductile-paper-2010/
-  (Don't forget to change the directory ownership to prohibit access
-  through the file system.)
-  Please use the existing password file, but ensure it has entries for
-  these users:  mdb, mernst, rcook
-  One of:
-    Please make the repository world-readable.
-    Please issue a basic auth challenge on any access.
-  Thanks a lot!
-```
-After this operation, it is only possible to access the repository via https:.
-Direct file URLs will not work, because Apache (I think) will own the file.
-The Hg repositories served by https are listed at
-https://wasp.cs.washington.edu/Internal/hg.html 
-
 /cse/www is not mounted for attu.cs and other undergrad-accessible servers.
 An undergrad (such as a TA) who wants to change such files must log in
 through vole.cs.washington.edu.
-
-Petitions for non-majors to take a UW CSE majors-only class:
-http://www.cs.washington.edu/education/ugrad/academics/petition.html
-
-If Google Chrome (chromium-browser) complains about an out-of-date version
-of the Flash plugin, then copy a new libflashplayer.so to
-/usr/lib/chromium-browser/plugins (I have write access, on godwit only).
 
 If Google Chrome (chromium-browser) hangs, then complains about
 unresponsive pages, try:  `rm -rf ~/.cache`.
@@ -324,39 +346,9 @@ Alternately, clear the relevant cookies from within Chromium (Wrench icon in the
 Cycle servers for UW CSE are:
 bam, boom, bicycle, tricycle, recycle
 
-When CSE lab support upgrades the Java in /usr/java/current (which happens
-without warning), then Hudson jobs may fail with the error message:
-```
-  Caused by: java.util.MissingResourceException: Can't find bundle for base name com.sun.org.apache.xerces.internal.impl.msg.SAXMessages, locale en_US
-```
-Stopping and re-starting Hudson seems to fix the problem.
-
-To reserve seminar rooms 305 and Gates Commons, ask Tracy Erbeck or Heidi
-Dlubac.  Or maybe use the cse-maintenance@cs.washington.edu mailing list?
-
-Use the cse-maintenance@cs.washington.edu mailing list for requests about facilities (physical plant) issues with the Allen Center.
-space@cs.washington.edu is for asking for office space.
-
-UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
-Stock reply for people trying to recruit/hire students:
-Good luck on your project!
-The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  http://www.cs.washington.edu/affiliates/
-
-UW CSE technical reports (TRs) are handled by the TR coordinator
-(currently Garrett Yoshitomi).
-To create a TR, send the PDF to tr-request@cs.washington.edu
-and copy a faculty member.  The TR coordinator can also provide a TR number
-in advance of receiving the PDF, if you provide the title, author list,
-abstract, and a date on which you will provide the PDF.
-
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
 http://www.cs.washington.edu/lab/sw/windows/office2010/
-
-To add a visitor's talk to the CSE colloquium talk calendar, send to either
-Connie Ivey-Pasche or Kay Beck-Benton:
-  name, affiliation, title and abstract, date, room, time,
-  visitor schedule in MVIS if available
 
 After a user has been added to a group using the GrpAdmin tool
 (https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi), it is generally
@@ -375,25 +367,6 @@ groups permanently, use
 https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi?screen=logingroups
 .  To change effective groups temporarily, use chgrpsh.
 
-For read permissions/access to the UW CSE grad student and advising
-database, ask Dan Boren.  Then, access it via the Web:
-  https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/
-or from the command line (you need postgres, and you need to be on the CSE network):
-```
-  psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
-```
-
-Instructions for maintaining UW CSE Drupal webpages/website:
-https://wasp.cs.washington.edu/Internal/plse-webpages.html
-
-If you want to send a message to UW CSE undergrads, send it to
-cs-ugrads@cs.  It will be posted to the blog within 24 hours.
-If you have a time-sensitive message, you should send that to 
-cs-ugrads-urgent@cs.
-
-Card key access to rooms in the CSE building (the Allen Center):
-cardkey@cs.washington.edu
-
 Files of the form
   /cse/www/education/courses/503/11au
 have become
@@ -409,32 +382,49 @@ If I get
 this may be due to a slow or laggy connection.  Try going directly to
 https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi
 
-How to order lunches / snack carts at UW CSE:
-https://www.cs.washington.edu/internal/food
-
 If there is trouble with parsing Jekyll webpages (such as those under
 http://uwplse.org/meet/), you can see logs at http://hooknook.uwplse.org/
 
-Sandy Kaplan <sandy@cs.washington.edu> is a technical editor who can help
-with grant proposals, technical papers, helping grad students improve their
-writing, etc.  She sits in CSE 462 and works Monday mornings and all day
-Thursday and Friday.
-
-"Tips on using Jenkins" document:
-https://docs.google.com/document/d/1OHsgZwyQSaJptAL-OhDNN-IWf5zb3akueQo9Ge4srgs/edit
-
 A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
 
-UW CSE course web template:
-https://gitlab.cs.washington.edu/lab/simple-courseweb-template
 
-Fellowships/scholarships that students can apply for:
-NSF -- first two years only
-NDSEG -- first two years only
-Adobe Research fellowship
-Facebook fellowship
-Symantec Fellowship
-Google Fellowship
+%% Obsolete entries go here
+
+% The /uns Maintainers' unFAQ:
+% http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
+
+% Typical instructions for installing a package in /uns (see
+% http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html#q3.2 ):
+% ```
+%   source /uns/src/generic-builder.sh
+%   PKG=graphviz-2.20.3
+%   install_generic $PKG http://www.graphviz.org/pub/graphviz/stable/SOURCES/$PKG.tar.gz
+% ```
+
+% To serve a Mercurial (hg) repository via the web (https:), first add
+% something like the following to its `.hg/hgrc` file:
+% ```
+%   [web]
+%   allow_push = mdb, mernst, rcook, rose
+% ```
+% Then, ask webmaster@cs.washington.edu something like the following:
+% ```
+%   Can you make the https: Mercurial server serve
+%   /projects/swlab1/ductile/paper-2010, as
+%   https://dada.cs.washington.edu/hgweb/ductile-paper-2010/
+%   (Don't forget to change the directory ownership to prohibit access
+%   through the file system.)
+%   Please use the existing password file, but ensure it has entries for
+%   these users:  mdb, mernst, rcook
+%   One of:
+%     Please make the repository world-readable.
+%     Please issue a basic auth challenge on any access.
+%   Thanks a lot!
+% ```
+% After this operation, it is only possible to access the repository via https:.
+% Direct file URLs will not work, because Apache (I think) will own the file.
+% The Hg repositories served by https are listed at
+% https://wasp.cs.washington.edu/Internal/hg.html 
 
 
 == Seattle
