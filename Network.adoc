@@ -468,3 +468,9 @@ http://central.sonatype.org/pages/ossrh-guide.html
 Example issues:
 https://issues.sonatype.org/browse/OSSRH-28628
 https://issues.sonatype.org/browse/OSSRH-37810
+
+SPL (Seattle Public Library) suggestions for purchane:
+https://www.spl.org/library-collection/suggestions-for-purchase/purchase-suggestion-form-for-books-and-music-scores
+
+SPL (Seattle Public Library) access to Consumer Reports and more databases:
+http://www.spl.org/library-collection/articles-and-research/databases-a-z
