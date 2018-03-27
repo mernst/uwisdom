@@ -317,15 +317,17 @@ To get a copy of the JDK 7 source:
 
 Major version number for the Java class file format (JVM version number):
 ----
-  J2SE 9.0 = 53 (0x35 hex)    [as of 6/2017, General Availability (GA) Sep 21, 2017]
-  J2SE 8.0 = 52 (0x34 hex)    [released March 2014]
+  J2SE 11.0 = 55 (0x37 hex)   [scheduled for release September 2018; LTS version]
+  J2SE 10.0 = 54 (0x36 hex)   [released March 2018]
+  J2SE 9.0 = 53 (0x35 hex)    [released September 2017]
+  J2SE 8.0 = 52 (0x34 hex)    [released March 2014; LTS version]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
   J2SE 6.0 = 50 (0x32 hex)    [released December 2006, public beta Feb. 2006]
   J2SE 5.0 = 49 (0x31 hex)    [released September 2004]
   JDK 1.4 = 48 (0x30 hex)     [released February 2002]
-  JDK 1.3 = 47 (0x2F hex)
-  JDK 1.2 = 46 (0x2E hex)
-  JDK 1.1 = 45 (0x2D hex)
+  JDK 1.3 = 47 (0x2F hex)     [released 2000]
+  JDK 1.2 = 46 (0x2E hex)     [released 1998]
+  JDK 1.1 = 45 (0x2D hex)     [released 1996]
 ----
 
 To pretty-print or indent a Java program, do "java JavaPP filename.java".
