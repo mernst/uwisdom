@@ -388,6 +388,9 @@ http://uwplse.org/meet/), you can see logs at http://hooknook.uwplse.org/
 
 A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
 
+Anonymous feedback for CSE courses:
+https://feedback.cs.washington.edu/
+
 
 %% Obsolete entries go here
 
