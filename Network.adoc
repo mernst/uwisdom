@@ -474,3 +474,47 @@ https://www.spl.org/library-collection/suggestions-for-purchase/purchase-suggest
 
 SPL (Seattle Public Library) access to Consumer Reports and more databases:
 http://www.spl.org/library-collection/articles-and-research/databases-a-z
+
+A tip about combining sections in Canvas.
+Suppose in your Canvas Dashboard (canvas.uw.edu) you see
+- multiple Canvas "courses" as CSE XXX A  Sp 18,  CSE XXX B Sp18, CSE 
+XXX C Sp18, each of which has multiple sections, AA, AB, BA, BB, CA, CB.
+- or a cross-listed course with two "courses" CSE XXX A Sp 18 and CSEM 
+XXX A Sp18.
+.
+1.  Select one of these from your Dashboard and click on it.  You are 
+going to use this one as the "home course" where all the other sections 
+are moved to.
+2. Look at the URL for this page 
+"https://canvas.uw.edu/courses/YYYYYYYY" and copy the "YYYYYYYY" 
+number.  This is the Canvas "ID" that you will use to copy things into 
+this "home course".
+3.  On the very bottom left just to the right of the purple column click 
+on "Settings".  This will bring up the "Course Details" tab for that 
+"course".   Change the "Name" field to whatever name you that you think 
+covers all the sections of your course in Canvas.  (You can also change 
+the "Course Code" field if you want; I am not sure if it matters.   You 
+can't change the SIS ID but you don't need to.)
+4.  Now go to the Canvas Dashboard and click on one of the *other* 
+Canvas "courses" associated with your course.
+5. On the very bottom left just to the right of the purple column click 
+on "Settings".  This will bring up the "Course Details" tab for that 
+"course" as before.
+6. Click on the "Sections" tab near the top of the page to list the 
+sections.  This will list all sections of this *other* course.
+7.  Click on one of these sections, which will bring up a list of 
+current enrollees.   At the right side of the page then click on 
+"Cross-List this Section".  This will be bring up a dialog box. Enter 
+the Canvas ID "YYYYYYYY" number which you copied from step 2, in the ID 
+field of this box.   It will bring up the name of the "home course".   
+Then click that you accept this.  This will cause your section to jump 
+to the "home course" and your view will be teleported to the inside of 
+the "home course".
+8. Go back to your Canvas Dashboard.
+.
+If *other* Canvas "courses" associated with your course still show up 
+then they still have sections that you haven't moved so go back to Step 4.
+If all of their sections have been moved then the Canvas courses will 
+have disappeared from your Dashboard.   Do one final check via 
+"Settings" on your "home course" and the "Sections" tab to make sure 
+that everything is there.  If so, you are done!
