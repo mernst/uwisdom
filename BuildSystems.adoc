@@ -413,3 +413,5 @@ gradle SOMETASKNAME taskTree
 When one of the tasks given to the gradle command is `taskTree`, execution
 of all the other tasks on that line is skipped. Instead, their task
 dependency tree is printed.
+
+Gradle's --dry-run only shows the tasks that would have run, not their actions/commands like make's --dry-run does.
