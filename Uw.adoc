@@ -174,7 +174,8 @@ and copy a faculty member.  The TR coordinator can also provide a TR number
 in advance of receiving the PDF, if you provide the title, author list,
 abstract, and a date on which you will provide the PDF.
 
-To add a visitor's talk to the CSE colloquium talk calendar, send to either
+To add a visitor's talk to the CSE colloquium talk calendar
+(https://www.cs.washington.edu/events/colloquia), send to either
 Connie Ivey-Pasche or Kay Beck-Benton:
   name, affiliation, title and abstract, date, room, time,
   visitor schedule in MVIS if available
