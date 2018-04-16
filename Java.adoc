@@ -304,9 +304,17 @@ public field (a private one doesn't work).  For example:
   public Vector<?> javadocLossage;
 ```
 
+To turn Javadoc warnings into errors, pass `-Xwerror` on the command line.
+In Gradle:
+```
+javadoc {
+options.addStringOption('Xmaxwarns', '10000')
+options.addStringOption('Xwerror', '-quiet')
+}
+```
+
 
 == Everything else
-
 
 JDK 1.4 is still distributed, but at an obscure URL:
  http://java.sun.com/javase/downloads/jdk/142/
