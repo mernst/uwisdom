@@ -270,10 +270,8 @@ To set up a wiki at UW CSE, see
 http://www.cs.washington.edu/lab/www/MediaWiki.shtml
 
 To apply for a new UW CSE computer account at cs.washington.edu,
-fill out the form at
-  http://www.cs.washington.edu/lab/support/accountapp20.pdf
-and then scan & email it, or fax it back.
-You probably want a "guest, research account".
+the sponsor fills out a form at
+  https://password.cs.washington.edu/account/csenetid/
 A guest account is only permitted to use 25 MB of space, so:
 //nobreak
 
