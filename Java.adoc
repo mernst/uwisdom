@@ -50,8 +50,9 @@ For example:
 ----
 
 Here are Emacs commands for replacing JUnit assertions with Hamcrest
-versions that produce more readable output.  Even though the Hamcrest code
-isn't always easier to read, this can be worthwhile.
+versions that produce more readable output.  The Hamcrest code can be
+harder to read, but the error messages can be clearer.  Depending on
+the use case, this may be a worthwhile tradeoff.
 ----
 (tags-query-replace "assertFalse(\\(\".*\",\\)
 \\([ 	]*\\) \\(.*\\)\\.equals(\\(.*\\)));
