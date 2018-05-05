@@ -2635,8 +2635,6 @@ my Emacs when I tried it) or `grip --export` which exports to
 Markdown is idiosyncratic, so I think it's better to use AsciiDoc format
 and the Asciidoctor processor, when possible.
 
-When debugging gradle, use `--info` a lot.
-
 To convert .svg to vector-format .pdf?
 ```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
 To edit a .svg file, use inkscape (or a variety of other tools).

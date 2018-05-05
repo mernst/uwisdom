@@ -332,6 +332,8 @@ The standard gradle target, which builds all artifacts and runs all tests, is
 ./gradlew build
 ```
 
+When debugging gradle, use `--info` or `--debug`.
+
 Gradle task to create a TAGS table:
 ```
 /* Make Emacs TAGS table */
