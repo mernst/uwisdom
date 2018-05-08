@@ -1933,7 +1933,9 @@ On a Kinesis Advantage contoured keyboard:
  * Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
  * Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
  * Toggle the tone: progrm+hyphen
- * Dvorak:  progrm+shift+f5 (this erases any remapping, but not macros)
+ * Dvorak
+    * on Advantage 2 keyboard:  progrm+f4
+    * on Advantage 1 keyboard:  progrm+shift+f5 (this erases any remapping, but not macros)
  * If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
   mode.  Holding down = then tapping s may produce "v3.2[]".  Change to PC
   mode by holding down = then tapping p; now holding down = and tapping s may
