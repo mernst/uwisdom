@@ -280,6 +280,8 @@ A guest account is only permitted to use 25 MB of space, so:
    bigger files there.
  * make symbolic links from your home directory so you don't even notice
    the disk quota limitation.
+ * periodically check whether your jobs have created new files -- say,
+   under ${HOME}/.m2
 
 What files in the file system contain the content served at webpages/URLs?
 https://types.cs.washington.edu/ : /cse/www2/types/
