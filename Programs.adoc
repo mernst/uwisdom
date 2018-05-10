@@ -2425,9 +2425,9 @@ To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first
 Alternately:
  * Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
 
-In OpenOffice, to freeze rows/columns so that they do not scroll but are
-always visible, select the row (or cell) below (and to the right of) the
-one you want to freeze, then do Window > Freeze.
+In LibreOffice/OpenOffice, to freeze rows/columns so that they do not
+scroll but are always visible, select the row (or cell) BELOW (and to the
+right of) the one you want to freeze, then do Window > Freeze.
 
 Setting up a new USB microphone/headset:  run
 ```
