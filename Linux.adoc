@@ -114,6 +114,8 @@ To figure out the version of Ubuntu you are running, do
   System Settings >> System Information >> Overview
 In previous versions of Ubuntu:
   System >> About Ubuntu
+From the command line:
+  lsb_release -a
 
 Firefox 3.0 on etch requires gtk2-10.  A version of this exists
 at: peanut:/usr/local/firefox3.0/gtk2-10/usr/lib.  To enable
