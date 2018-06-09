@@ -348,6 +348,10 @@ To replace a remote dependency by a local one in Gradle, do:
 ```
 implementation files('libs/options-0.2.2-all.jar')
 ```
+To test a new version of a Gradle dependecy locally without creating a
+local repository, just overwrite the `.jar` file in a subdirectory of
+~/.gradle/caches/modules-2/files-2.1/
+
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
@@ -419,6 +423,3 @@ dependency tree is printed.
 Gradle's `--dry-run` only shows the tasks that would have run, not their
 actions/commands like make's `--dry-run` does.
 
-To test a new version of a Gradle dependecy locally without creating a
-local repository, just overwrite the .jar file in a subdirectory of
-~/.gradle/caches/modules-2/files-2.1/
