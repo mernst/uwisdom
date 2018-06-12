@@ -41,8 +41,10 @@ See http://www.washington.edu/students/reg/calendar.html
 
 UW grading guidelines are
   http://depts.washington.edu/grading/practices/guidelines.html
-Which is linked from here:
+which is linked from here:
   http://depts.washington.edu/grading/practices/index.html
+UW CSE grading guidelines are
+  https://homes.cs.washington.edu/~djg/instructors_only/internal_grading_guidelines.html
 
 For off-campus access to the ACM digital library and similar UW-licensed
 collections of content, three options:
