@@ -738,7 +738,8 @@ http://www.ulfdittmer.com/profileviewer/index.html
      integration requires a build.
       * Clover's comparison of Clover, Cobertura, and JaCoCo:
 	https://confluence.atlassian.com/clover/comparison-of-code-coverage-tools-681706101.html
-  * Cobertura: http://cobertura.sourceforge.net/
+  * Cobertura: https://github.com/cobertura/cobertura
+     As of 6/2018, last release is "version 2.1.1, 2015-02-26"
      You may have to remove DOS-style carriage returns from the scripts before
      running it.
   * Rational's Visual PureCoverage
