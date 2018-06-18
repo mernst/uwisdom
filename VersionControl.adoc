@@ -309,6 +309,20 @@ git push -f
 git push origin HEAD --force
 ```
 
+To create a branch from someone else's fork:
+```
+export THEIRUSERNAME=...
+git remote add $THEIRUSERNAME git@github.com:$THEIRUSERNAME/reponame.git
+git fetch $THEIRUSERNAME
+git checkout -b mynamefortheirbranch $THEIRUSERNAME/theirbranch
+```
+Later, you will do
+```
+git push origin mynamefortheirbranch
+```
+but that leaves regular "push" sending to the remote, so you should
+re-checkout (or find a better sequence of operations that does this!).
+
 
 == GitHub (Git-specific items go above)
 
