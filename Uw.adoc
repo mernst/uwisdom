@@ -198,7 +198,7 @@ cs-ugrads@cs.  It will be posted to the blog within 24 hours.
 If you have a time-sensitive message, you should send that to 
 cs-ugrads-urgent@cs.
 
-Card key access to rooms in the CSE building (the Allen Center):
+Card key access to rooms and labs in the CSE building (the Allen Center):
 cardkey@cs.washington.edu
 
 How to order lunches / snack carts at UW CSE:
