@@ -1499,6 +1499,30 @@ Then after the callout use unindented {empty} if the following text is indented.
 
 
 
+== Diff
+
+To make a diff file good for patching old-file to produce new-file,
+```
+  diff -c old-file new-file
+```
+In GNU diff, specify lines of context using -C # (not -c #).
+
+There is no standalone `diff` program that incorporates the patience diff algorithm, but instead you can use
+```
+  git diff --no-index --patience ...
+```
+
+With patch version 2.4 or 2.5 (and maybe other versions), you must set the
+environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
+the "Index:" lines and it will ask for the filename for each patch.
+
+moss:  a software plagiarism detector by Alex Aiken.
+http://www.cs.berkeley.edu/~aiken/moss.html
+
+Use the `-N` command-line option to make diff show the full contents of a new file (a file that did not exist), rather than displaying "Only in ...".
+
+
+
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
@@ -1872,24 +1896,6 @@ continue running when the shell exits (though interactive programs and some
 others seem to be exceptions to this rule; or maybe the rule about
 background jobs continuing only applies for programs that ignore the hangup
 (hup) signal).
-
-To make a diff file good for patching old-file to produce new-file,
-```
-  diff -c old-file new-file
-```
-In GNU diff, specify lines of context using -C # (not -c #).
-
-There is no standalone `diff` program that incorporates the patience diff algorithm, but instead you can use
-```
-  git diff --no-index --patience ...
-```
-
-With patch version 2.4 or 2.5 (and maybe other versions), you must set the
-environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
-the "Index:" lines and it will ask for the filename for each patch.
-
-moss:  a software plagiarism detector by Alex Aiken.
-http://www.cs.berkeley.edu/~aiken/moss.html
 
 To add Frostbyte's public key to my PGP keyring:
 ```
