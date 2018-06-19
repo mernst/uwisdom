@@ -308,9 +308,10 @@ public field (a private one doesn't work).  For example:
 To turn Javadoc warnings into errors, pass `-Xwerror` on the command line.
 In Gradle:
 ```
+// Turn javadoc warnings into errors.
 javadoc {
-options.addStringOption('Xmaxwarns', '10000')
-options.addStringOption('Xwerror', '-quiet')
+  options.addStringOption('Xmaxwarns', '10000')
+  options.addStringOption('Xwerror', '-quiet')
 }
 ```
 
