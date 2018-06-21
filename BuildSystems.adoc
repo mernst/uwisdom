@@ -352,6 +352,19 @@ To test a new version of a Gradle dependecy locally without creating a
 local repository, just overwrite the `.jar` file in a subdirectory of
 ~/.gradle/caches/modules-2/files-2.1/
 
+In Travis, it's a good idea to enable Gradle caching.  It reduces bandwidth
+and time usage, and more importantly it reduces transient failures that
+happen due to loss/reduction of network connectivity.
+```
+# Enable Gradle caching
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+```
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
