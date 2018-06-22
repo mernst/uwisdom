@@ -306,14 +306,23 @@ public field (a private one doesn't work).  For example:
 ```
 
 To turn Javadoc warnings into errors, pass `-Xwerror` on the command line.
-In Gradle:
+Here are two ways to do it in Gradle:
 ```
-// Turn javadoc warnings into errors.
 javadoc {
-  options.addStringOption('Xmaxwarns', '10000')
+  // Turn javadoc warnings into errors.
   options.addStringOption('Xwerror', '-quiet')
 }
 ```
+or
+```
+tasks.withType(Javadoc) {
+  // Turn javadoc warnings into errors.
+  options.addStringOption('Xwerror', '-quiet')
+}
+```
+
+It seems that to reference a nested/inner class in Javadoc requires giving
+the fully-qualified class name.
 
 
 == Everything else
