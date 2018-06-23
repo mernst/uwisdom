@@ -309,16 +309,21 @@ To turn Javadoc warnings into errors, pass `-Xwerror` on the command line.
 Here are two ways to do it in Gradle:
 ```
 javadoc {
-  // Turn javadoc warnings into errors.
+  // Turn Javadoc warnings into errors.
   options.addStringOption('Xwerror', '-quiet')
 }
 ```
 or
 ```
 tasks.withType(Javadoc) {
-  // Turn javadoc warnings into errors.
+  // Turn Javadoc warnings into errors.
   options.addStringOption('Xwerror', '-quiet')
 }
+```
+To catch fewer warnings, use:
+```
+  // Turn some Javadoc warnings into errors.
+  options.addStringOption('Xwerror', '-Xdoclint:all,-missing')
 ```
 
 It seems that to reference a nested/inner class in Javadoc requires giving
