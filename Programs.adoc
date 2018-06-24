@@ -1353,6 +1353,7 @@ Typical invocation (for hosted apps at cs.washington.edu):
 ----
 It may be necessary to convert a BABYL file to mbox format.
 Don't use b2m for that; instead, use:  M-x unrmail
+(No need to read the file in as an RMAIL file; just run M-x unrmail.)
 
 If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.
 You only want to do this for Google Mail that is in [Imap]/trash and has no other user or system labels.  (I can't use -has:userlabels, unfortunately.)
