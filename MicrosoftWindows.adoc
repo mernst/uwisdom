@@ -25,6 +25,13 @@ Spoof MAC address under Linux:
 ```
 
 
+== Windows Subsystem for Linux (WSL)
+
+The Windows filesystem is available in WSL as /mnt/c/ .
+However, I cannot seem to read
+  /mnt/c/Users/mernst/My Documents/
+
+
 
 == Microsoft Windows
 
