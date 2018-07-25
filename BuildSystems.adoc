@@ -436,3 +436,13 @@ dependency tree is printed.
 Gradle's `--dry-run` only shows the tasks that would have run, not their
 actions/commands like make's `--dry-run` does.
 
+Gradle buildfile rules to run Error Prone linter on each compilation:
+```
+plugins {
+  // Run the Error Prone linter.
+  id "net.ltgt.errorprone-base" version "0.0.16"
+}
+dependencies {
+  errorprone 'com.google.errorprone:error_prone_core:2.3.1'
+}
+```
