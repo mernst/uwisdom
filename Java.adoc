@@ -344,7 +344,7 @@ Major version number for the Java class file format (JVM version number):
   J2SE 11.0 = 55 (0x37 hex)   [scheduled for release September 2018; LTS version]
   J2SE 10.0 = 54 (0x36 hex)   [released March 2018]
   J2SE 9.0 = 53 (0x35 hex)    [released September 2017]
-  J2SE 8.0 = 52 (0x34 hex)    [released March 2014; LTS version]
+  J2SE 8.0 = 52 (0x34 hex)    [released March 2014; LTS version; last update Jan 2019 (commercial), Dec 2020 (non-commercial)]
   J2SE 7.0 = 51 (0x33 hex)    [released July 2011]
   J2SE 6.0 = 50 (0x32 hex)    [released December 2006, public beta Feb. 2006]
   J2SE 5.0 = 49 (0x31 hex)    [released September 2004]
