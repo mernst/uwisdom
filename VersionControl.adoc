@@ -328,6 +328,14 @@ This leaves regular "push" sending to the remote, so you should
 possibly remove the new `[branch ...`` section in `.git/config` and
 do a regular checkout of $THEIRUSERNAME-$THEIRBRANCH.
 
+To get the first line of a git commit message, with the commit id:
+```
+git log --oneline -n 1 HEAD
+```
+To get the first line of a git commit message, WITHOUT the commit id:
+```
+git log --oneline --format=%B -n 1 HEAD | head -n 1
+```
 
 == GitHub (Git-specific items go above)
 
