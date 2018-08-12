@@ -446,3 +446,10 @@ dependencies {
   errorprone 'com.google.errorprone:error_prone_core:2.3.1'
 }
 ```
+
+To see which files Gradle's shadowJar plugin/task will put in a fat jarfile:
+```
+    doFirst {
+      println sourceSets.main.runtimeClasspath.asPath
+    }
+```
