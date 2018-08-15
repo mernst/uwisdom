@@ -453,3 +453,18 @@ To see which files Gradle's shadowJar plugin/task will put in a fat jarfile:
       println sourceSets.main.runtimeClasspath.asPath
     }
 ```
+
+To enable Gradle caching of downloaded artifacts on Travis CI:
+```
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+```
+To enable it within a Docker container:
+```
+docker run -v $HOME/.gradle:/root/.gradle USER/IMAGE-NAME /bin/bash -c "..."
+```
