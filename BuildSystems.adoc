@@ -324,6 +324,23 @@ In a Maven buildfiel pom.xml, here is where to put <plugins>:
 I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
 By contrast, Gradle has fewer plugins and I got one to work.
 
+To copy the Checker Framework to the Maven local repository:
+```
+VER=2.5.4 && \
+(cd $cf && ./gradlew copyJarsToDist) && \
+\cp -pf $cf/checker/dist/checker.jar ~/.m2/repository/org/checkerframework/checker/${VER}/checker-${VER}.jar && \
+\cp -pf $cf/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
+\cp -pf $cf/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
+```
+To clean the Maven local repository (rarely needed):
+```
+VER=2.5.4 && \
+rm -rf \
+  ~/.m2/repository/org/checkerframework/checker/${VER}/ \
+  ~/.m2/repository/org/checkerframework/checker-qual/${VER}/ \
+  ~/.m2/repository/org/checkerframework/jdk8/${VER}/
+```
+
 
 == Gradle and build.gradle
 
