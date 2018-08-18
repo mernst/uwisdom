@@ -562,6 +562,18 @@ https://www.slf4j.org/apidocs/index.html
 The 5 error levels are:
 ERROR, WARN, INFO, DEBUG, TRACE
 
+# To validate a class file (from https://asm.ow2.io/faq.html):
+```
+cd ~/tmp
+VER=6.2.1
+wget https://search.maven.org/remotecontent?filepath=org/ow2/asm/asm/${VER}/asm-${VER}.jar -O asm-${VER}.jar
+wget https://search.maven.org/remotecontent?filepath=org/ow2/asm/asm-tree/${VER}/asm-tree-${VER}.jar -O asm-tree-${VER}.jar
+wget https://search.maven.org/remotecontent?filepath=org/ow2/asm/asm-analysis/${VER}/asm-analysis-${VER}.jar -O asm-analysis-${VER}.jar
+wget https://search.maven.org/remotecontent?filepath=org/ow2/asm/asm-util/${VER}/asm-util-${VER}.jar -O asm-util-${VER}.jar
+java -cp "asm-${VER}.jar:asm-tree-${VER}.jar:asm-analysis-${VER}.jar:asm-util-${VER}.jar" org.objectweb.asm.util.CheckClassAdapter ~/tmp/plume-util-1.0.3-jar/org/plumelib/util/OrderedPairIterator.class
+```
+but for me this just crashed rather than giving a useful result.
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
