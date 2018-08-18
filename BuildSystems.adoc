@@ -324,22 +324,6 @@ In a Maven buildfiel pom.xml, here is where to put <plugins>:
 I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
 By contrast, Gradle has fewer plugins and I got one to work.
 
-To copy the Checker Framework to the Maven local repository:
-```
-VER=2.5.4 && \
-(cd $cf && ./gradlew copyJarsToDist) && \
-\cp -pf $cf/checker/dist/checker.jar ~/.m2/repository/org/checkerframework/checker/${VER}/checker-${VER}.jar && \
-\cp -pf $cf/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
-\cp -pf $cf/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
-```
-To clean the Maven local repository (rarely needed):
-```
-VER=2.5.4 && \
-rm -rf \
-  ~/.m2/repository/org/checkerframework/checker/${VER}/ \
-  ~/.m2/repository/org/checkerframework/checker-qual/${VER}/ \
-  ~/.m2/repository/org/checkerframework/jdk8/${VER}/
-```
 
 
 == Gradle and build.gradle
@@ -365,13 +349,15 @@ To replace a remote dependency by a local one in Gradle, do:
 ```
 implementation files('libs/options-0.2.2-all.jar')
 ```
-To test a new version of a Gradle dependecy locally without creating a
+
+To test a new version of a Gradle dependency locally without creating a
 local repository, just overwrite the `.jar` file in a subdirectory of
 ~/.gradle/caches/modules-2/files-2.1/
 
-In Travis, it's a good idea to enable Gradle caching.  It reduces bandwidth
-and time usage, and more importantly it reduces transient failures that
-happen due to loss/reduction of network connectivity.
+In Travis CI, it's a good idea to enable Gradle caching of downloaded
+artifacts.  It reduces bandwidth and time usage, and more importantly it
+reduces transient failures that happen due to loss/reduction of network
+connectivity.
 ```
 # Enable Gradle caching
 before_cache:
@@ -382,6 +368,9 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 ```
+To enable it within a Docker container:
+```
+docker run -v $HOME/.gradle:/root/.gradle USER/IMAGE-NAME /bin/bash -c "..."```
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
@@ -471,17 +460,29 @@ To see which files Gradle's shadowJar plugin/task will put in a fat jarfile:
     }
 ```
 
-To enable Gradle caching of downloaded artifacts on Travis CI:
+
+== Testing local version of Checker Framework by overwriting local caches
+
+To copy the Checker Framework to the Gradle and Maven local caches:
+(Must update artifact IDs when updating $VER!)
 ```
-before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+VER=2.5.4 && \
+(cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/eab2b4c17da64f186aadfdd301ec0c4a581f7b/checker-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/fba37cca207f6dd3f0f0a2c42018bd8f565f986a/checker-qual-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/bf66e86a3e11108b0f22badf159396f9eb88a916/jdk8-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.m2/repository/org/checkerframework/checker/${VER}/checker-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
 ```
-To enable it within a Docker container:
+To clean the Gradle and Maven local caches (rarely needed):
 ```
-docker run -v $HOME/.gradle:/root/.gradle USER/IMAGE-NAME /bin/bash -c "..."
+VER=2.5.4 && \
+rm -rf \
+  ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/ \
+  ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/ \
+  ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/ \
+  ~/.m2/repository/org/checkerframework/checker/${VER}/ \
+  ~/.m2/repository/org/checkerframework/checker-qual/${VER}/ \
+  ~/.m2/repository/org/checkerframework/jdk8/${VER}/
 ```
