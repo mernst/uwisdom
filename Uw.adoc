@@ -320,9 +320,9 @@ Once I log in, probably do
 .
 Here are newer commands, but they don't work for me:
 ```
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440 &
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200 &
-  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768 &
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768
 ```
 (xfreerdp replaces rdesktop, but with rdesktop you would need to log in
 with CSERESEARCH\mernst rather than AQUA\mernst.)
