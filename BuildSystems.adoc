@@ -352,7 +352,11 @@ implementation files('libs/options-0.2.2-all.jar')
 
 To test a new version of a Gradle dependency locally without creating a
 local repository, just overwrite the `.jar` file in a subdirectory of
-~/.gradle/caches/modules-2/files-2.1/
+`~/.gradle/caches/modules-2/files-2.1/` .
+Since you now have locally cached a different version than is in Maven
+Central, your local builds will not be the same as for other people.
+So you should probably delete the versions you put there when you are done
+with your experiments.
 
 In Travis CI, it's a good idea to enable Gradle caching of downloaded
 artifacts.  It reduces bandwidth and time usage, and more importantly it
