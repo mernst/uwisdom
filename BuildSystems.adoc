@@ -464,6 +464,14 @@ To see which files Gradle's shadowJar plugin/task will put in a fat jarfile:
     }
 ```
 
+To exclude a file from Gradle's shadowJar plugin/task:
+```
+shadowJar {
+  // Toxic classfile, crashes Gradle (because ASM considers it malformed)
+  exclude 'org.plumelib.util.OrderedPairIterator'
+}
+```
+
 
 == Testing local version of Checker Framework by overwriting local caches
 
