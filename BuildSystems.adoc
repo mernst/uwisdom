@@ -381,7 +381,10 @@ cache:
 ```
 To enable it within a Docker container:
 ```
-docker run -v $HOME/.gradle:/root/.gradle -v $HOME/.m2:/root/.m2 USER/IMAGE-NAME /bin/bash -c "..."```
+docker run -v $HOME/.gradle:/root/.gradle -v $HOME/.m2:/root/.m2 USER/IMAGE-NAME /bin/bash -c "..."
+```
+Travis says not to cache Docker images:
+https://docs.travis-ci.com/user/caching/#things-not-to-cache
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
