@@ -344,7 +344,7 @@ Or, if your document does `\usepackage{url}`, for URLs you can just do
   \renewcommand{\UrlFont}{\smaller}
 ```
 but note that that is one command; you cannot specify `\smaller\texttt`.
-.
+ +
 Similarly, "\scshape" is generally preferred to "\sc", because it
 respects the typesetting of the current context.
 For Verbatim environments, do this:
@@ -849,7 +849,7 @@ You can set the compatibility level (e.g., PDF 1.7) in LaTex as follows:
 ```
 You can automatically embed all fonts in a PDF file, using ghostscript:
 ```gs -dCompatibilityLevel=1.7 -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=paper-with-embedded-fonts.pdf paper.pdf```
-.
+ +
 R uses font symbols for outliers in a boxplot, and you may not be able to
 embed them.  Minimally tweaking the opacity level of such points, forces R to
 actually draw the points rather than replacing them with symbols:
@@ -1053,7 +1053,7 @@ Ragged right text in LaTeX:  use flushleft environment without explicit \\'s.
 Another possibility is \pretolerance=10000 and \raggedright.
 
 Use the \jobname command to get the name of the file that TeX is working on.
-.
+ +
 Summary of UNIX-based methods for "portably" getting FILEID information of
 .tex source into the output file:  (By portable, I mean that the .tex file
 does not identify itself; at processing time, its location is obtained from

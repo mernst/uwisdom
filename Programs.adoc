@@ -639,7 +639,7 @@ There is also the podofo suite of tools.
 acroread can also do this, as part of its conversion-to-PostScript
 which is available from the command line.  (But acroread isn't installed at CSE.)
 evince's print dialog does not seem available from the command line.
-.
+ +
 psnup or pdfnup seem better than mpage.
 
 Sample use of mpage (-o suppresses lines between pages):
@@ -1503,7 +1503,9 @@ In AsciiDoc, to put a callout within a list item (ie, indented rather than at th
   ----
 ----
 Then after the callout use unindented `{empty}` if the following text is indented.
-`{empty}` can take the place of + elsewhere.
+`{empty}` can take the place of `+` elsewhere.
+
+In AsciiDoc, ` +` (space followed by plus) is a hard line break (newline).
 
 
 == Diff
@@ -1810,7 +1812,7 @@ Problems with the first invocation, fixed by the others:
  * The first invocation will update all the files' modification dates, even if
    no replacement occurs.
  * The first invocation will copy links into regular files.
-.
+ +
 An alternate way to fix CVS repositories is
 ```
   cd ~/research/invariants
@@ -1875,7 +1877,7 @@ You need to "s"tep a few times before "n"ext, which would jump over the
 entire program.  Or just do "continue" to the error.
 
 For time-critical Python runs, disable assertions via -O command-line
-option to Python or setting variable __debug__ to false:  __debug__ = 0.
+option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
 You can be sure that the optimized version is running if a .pyo instead of
 a .pyc file is created after you do "import".
 To make Python run optimized, do:
@@ -2140,15 +2142,20 @@ Concrete example:
   openssl enc -aes128 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
 ```
 
-To encrypt a file symmetrically with GPG:
-(I don't like this because it gets entangled with my 
-```gpg --symmetric lastpass.csv```
-```gpg --symmetric --cipher-algo AES256 -v foo.txt```
+To encrypt a file symmetrically with GPG, do either of these:
+```
+  gpg --symmetric lastpass.csv
+  gpg --symmetric --cipher-algo AES256 -v foo.txt
+```
 (Run `echo RELOADAGENT | gpg-connect-agent` to clear the passphrase cache.)
 To decrpyt it:
-```gpg --decrypt --symmetric lastpass.csv.gpg > decrypted.txt```
+```
+  gpg --decrypt --symmetric lastpass.csv.gpg > decrypted.txt
+```
 To encrypt a file to recipient `mernst`:
-```gpg -e -r mernst lastpass.csv```
+```
+  gpg -e -r mernst lastpass.csv
+```
 
 
 Greg Shomo recommends that one use RPM to install anything that was

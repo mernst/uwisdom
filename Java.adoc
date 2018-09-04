@@ -89,7 +89,7 @@ To get a traceback (stack trace) from each Java thread (but keep running):
  * `kill -QUIT _pid_`
  * `ctrl-\` if Java is running in a shell.
 This is useful for debugging an infinite loop in a Java program.
-.
+ +
 Use the -Xtrace:trigger option to produce a Java dump by whenever a given method is called.
 For example, for a dump whenever the substring method is called:
 ```
@@ -151,7 +151,7 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
    JLS only uses "generic" to refer to class *declarations*, not
    classes.  "A generic class declaration defines a set of parameterized
    types, one for each possible invocation of the type parameter section."
-.
+ +
 Terminology for generics/parametric polymorphism in Java, from _Effective Java_, second edition, page 115.
 |====
 | Parameterized type      | `List<String>`              |
@@ -268,7 +268,7 @@ How to quote less than and greater than (angle brackets), such as for generics, 
 ```
 The purpose of `{@code ...}` is to prevent HTML interpretation:  characters
 such as <, >, &amp;, are passed through unchanged.
-.
+ +
 You need to quote/escape the @ (at-sign) symbol in Javadoc when it appears
 at the beginning of a line.  Use `{@literal @}` or `&#064;` or `&nbsp;@`
 None of these works within `<pre>{@code ...}</pre>`.  If you need @ at the

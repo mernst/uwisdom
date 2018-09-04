@@ -182,7 +182,7 @@ harder in the future, because you can't get back to the exact same codebase as
 you had during development.
 So really one should rebase only if there is no merge conflict, and the code
 continues to compile and all the tests pass.
-.
+ +
 In the very most simple case of no collisions:
  * git pull --rebase: rebases your local commits ontop of remote HEAD and does not create a merge/merge commit
  * git pull: merges and creates a merge commit
@@ -396,7 +396,7 @@ submit a "pull request" which lets the owner know that you want a patch to
 be merged.
 
 Two ways to submit GitHub pull requests:
-.
+ +
 Branching Workflow:  (https://guides.github.com/introduction/flow/)
 a) Create a branch locally.
 b) Work as normal, committing/pushing to your branch as you go.
@@ -406,7 +406,7 @@ e) Incorporate code review feedback by pushing new commits to your branch.
 f) You or another developer merges the pull request
    and deletes your branch to keep the list of active branches small
    (https://help.github.com/articles/deleting-unused-branches/)
-.
+ +
 Personal Fork & Pull Workflow: (https://help.github.com/articles/using-pull-requests/)
 a) Create a fork using your GitHub account.
 b) Work on that fork, commiting/pushing to it as you go.
@@ -894,7 +894,7 @@ To merge choosing your own or the other version,
   hg merge --tool internal:local
 ```
 The "other" and "local" seem to be with respect to what changeset is updated to, and might not be what you expected.
-.
+ +
 Furthermore, see http://mercurial.selenic.com/wiki/TipsAndTricks, section
 'Keep "My" or "Their" files when doing a merge', for caveats about why the
 internal:local and internal:other merge tools only work if both branches
@@ -981,7 +981,7 @@ where URL is of the form
   file:///homes/gws/mernst/prof/grants/.SVNREPOS/myproj
   svn+ssh://login.csail.mit.edu/afs/csail/group/pag/projects/.SVNREPOS/igj
 ```
-.
+ +
 The simple approach above does not set up the "trunk, tags, branches"
 structure, but I'm not entirely sure how to do that or even what the point
 is.
@@ -1038,7 +1038,7 @@ Only two edits to that file are necessary:
 
  * uncomment the `mail_command` line
  * change the `to_addr` line (the separator is whitespace (no commas))
-.
+ +
 (A previous script (buggy, and now deprecated) was commit-email.pl.)
 
 If "svnadmin verify" gives output like:
@@ -1051,7 +1051,7 @@ then version 536 must be corrupted.  You can fix it by running:
 ```
    fsfsverify.py -f REPOS/db/rev/536
 ```
-.
+ +
 To fix svn repository error/crash (eg, read chunk size: connection truncated)
 use fsfsverify.py to repair the broken revision.  First execute
 ```
@@ -1136,7 +1136,7 @@ work around this, add to the bottom of ~/.subversion/config :
   [miscellany]
   enable-auto-props = yes
 ```
-.
+ +
 ```
   [auto-props]
   *.c = svn:eol-style=native
@@ -1398,7 +1398,7 @@ Also, the
 svn:needs-lock property signifies that the file it's attached to ought to
 be locked before editing (by running "svn lock"). The value of the property
 is irrelevant.
-.
+ +
 SVN locking avoids conflicts when two people edit the same file unknowingly.
 http://svnbook.red-bean.com/en/1.2/svn.advanced.locking.html
 Before you can edit a file, do

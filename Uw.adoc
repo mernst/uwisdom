@@ -317,7 +317,7 @@ Remote desktop from Linux workstation to Windows Terminal Server
 Once I log in, probably do
  Control Panel > Ease of Access > Ease of Access Center > Make the computer easier to see > Set the thickness of the blinking cursor : 5
  Control Panel > Mouse > Change how the mouse pointer looks > [make it as large as possible
-.
+ +
 Here are newer commands, but they don't work for me:
 ```
   xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440

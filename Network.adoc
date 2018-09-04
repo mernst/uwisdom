@@ -493,7 +493,7 @@ Suppose in your Canvas Dashboard (canvas.uw.edu) you see
 XXX C Sp18, each of which has multiple sections, AA, AB, BA, BB, CA, CB.
 - or a cross-listed course with two "courses" CSE XXX A Sp 18 and CSEM 
 XXX A Sp18.
-.
+ +
 1.  Select one of these from your Dashboard and click on it.  You are 
 going to use this one as the "home course" where all the other sections 
 are moved to.
@@ -523,7 +523,7 @@ Then click that you accept this.  This will cause your section to jump
 to the "home course" and your view will be teleported to the inside of 
 the "home course".
 8. Go back to your Canvas Dashboard.
-.
+ +
 If *other* Canvas "courses" associated with your course still show up 
 then they still have sections that you haven't moved so go back to Step 4.
 If all of their sections have been moved then the Canvas courses will 
