@@ -1133,9 +1133,9 @@ boxes are invisibly hanging off the page instead of ontinued to the next
 page.  This is due to a problem in the blog's .css file.
 Here are two fixes:
  1. Permit wrapping text across pages:  remove
-    ```
+```
       <div class="contenttext">
-    ```
+```
     Also, get rid of sidebars so the blog content prints full width:  remove
 ```
       <div id="leftside">
@@ -1471,7 +1471,9 @@ docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 ```
 To remove all non-running containers:
-```docker rm $(docker ps -q -f status=exited)```
+```
+docker rm $(docker ps -q -f status=exited)
+```
 
 To list docker images (static files, that would be instantiated as containers):
 ```docker images```
