@@ -245,16 +245,6 @@ supply the additional command-line argument: `-Xlint:-options`
 
 == javadoc
 
-To find Javadoc comments that use "<" or ">" but shouldn't:
-----
-search -i -n '^ *\*.*(<[^/]|>)'
-----
-and then, in the result:
-----
-(query-replace-regexp "</?\\(li\\|p\\|b\\|tt\\|pre\\|i\\|a\\|a [^<>]*\\|blockquote\\|ul\\|code\\|em\\|strong\\|br\\)>" "" nil (if (and transient-mark-mode mark-active) (region-beginning)) (if (and transient-mark-mode mark-active) (region-end)))
-----
-and finally look for instances of `[<>]`.
-
 How to quote less than and greater than (angle brackets), such as for generics, without using &lt; and &gt; in Javadoc comments:
 ```
  Equation: {@literal i > j}
@@ -334,6 +324,16 @@ To catch fewer warnings, use:
 
 It seems that to reference a nested/inner class in Javadoc requires giving
 the fully-qualified class name.
+
+To find Javadoc comments that use "<" or ">" but shouldn't:
+----
+search -i -n '^ *\*.*(<[^/]|>)'
+----
+and then, in the result:
+----
+(query-replace-regexp "</?\\(li\\|p\\|b\\|tt\\|pre\\|i\\|a\\|a [^<>]*\\|blockquote\\|ul\\|code\\|em\\|strong\\|br\\)>" "" nil (if (and transient-mark-mode mark-active) (region-beginning)) (if (and transient-mark-mode mark-active) (region-end)))
+----
+and finally look for instances of `[<>]`.
 
 
 == Everything else
