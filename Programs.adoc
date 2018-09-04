@@ -968,7 +968,7 @@ HTML checking:
 single page, for easier browsing.  The pages are concatenated in
 depth-first order.
 
-In HTML and CSS, to set font color and style, one can do
+In HTML and CSS, to set font color and style, you can do one of the following:
 ```
   <span style="color:red">
   <p style="color:red">
@@ -1133,9 +1133,9 @@ boxes are invisibly hanging off the page instead of ontinued to the next
 page.  This is due to a problem in the blog's .css file.
 Here are two fixes:
  1. Permit wrapping text across pages:  remove
-```
+    ```
       <div class="contenttext">
-```
+    ```
     Also, get rid of sidebars so the blog content prints full width:  remove
 ```
       <div id="leftside">
