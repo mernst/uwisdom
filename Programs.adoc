@@ -2283,26 +2283,6 @@ For help:
  :help
 ```
 
-To find a meeting time that fits with everyone's schedule, consider using:
-  ~mernst/bin/share/schedule
-on a file containing lines such as
-```
-  mernst  TR12:30-3,R4-5,W9-5  MR12-1
-  notearly MTWRF9-10
-  cpacheco  MW1-4 TR9:30-11
-  awilliam  T11-4,W11:30-1:30,R11-3,R4-5,F10-12  M11-12,F12-4:30
-  smcc  R1-2,R4-5
-  jhp     MW9:30-11,F2-3
-  akiezun TR11:00-3,F10-12:30
-  artzi TR10-17,F10-12
-  pgbovine MWF1-4,T4:30-5:30,R1-2
-  galen F12:30-1:30
-  tschantz MW10:30-4,F10-11
-  chenx05 M12-5,TR9:30-11,TR12-1,TR2-5:30,W1-3,F11-3
-  mao F9-5
-```
-But you can also use a web survey such as doodle.com
-
 Parallel/distributed jobs across many machines:
 //nobreak
 
@@ -2441,9 +2421,10 @@ exists, press 'escape' at the Recovery window.
 // ```
 
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
- * Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
+Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
+ +
 Alternately:
- * Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
+Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
 
 In LibreOffice/OpenOffice, to freeze rows/columns so that they do not
 scroll but are always visible, select the row (or cell) BELOW (and to the
@@ -2577,7 +2558,7 @@ end of the line, don't write this:
 ----
 	\s-+.*
 ----
-Since the . can match whitespace too, there are as many different ways
+Since the "." can match whitespace too, there are as many different ways
 to apportion the match between the two subexpressions "\s-+" and ".*"
 as there are whitespace characters.  Instead, write this:
 ----
@@ -2658,8 +2639,10 @@ my Emacs when I tried it) or `grip --export` which exports to
 Markdown is idiosyncratic, so I think it's better to use AsciiDoc format
 and the Asciidoctor processor, when possible.
 
-To convert .svg to vector-format .pdf?
-```rsvg-convert -f pdf -o myfile.pdf myfile.svg```
+To convert .svg to vector-format .:
+```
+  rsvg-convert -f pdf -o myfile.pdf myfile.svg
+```
 To edit a .svg file, use inkscape (or a variety of other tools).
 In Inkscape, to resize/crop the canvas to the size of the drawing:
  * File >> Document Properties >> Resize page to content >> click "Resize Page to drawing or selection" button
