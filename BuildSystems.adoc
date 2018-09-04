@@ -93,7 +93,7 @@ Problem: because the maybe-update-file1 target always executes, Command B
 always executes.  That wastes the time to execute Command B, and because it
 unconditionally updates file2.txt, any command that depends on file2.txt
 also executes unnecessarily.
-{empty}
+ +
 Here is an approach that works:
 ```
 file2.txt: maybe-update-file1 .timestamp-file2
