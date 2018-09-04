@@ -1476,9 +1476,13 @@ docker rm $(docker ps -q -f status=exited)
 ```
 
 To list docker images (static files, that would be instantiated as containers):
-```docker images```
+```
+docker images
+```
 To remove/delete a docker image:
-```docker rmi ID```
+```
+docker rmi ID
+```
 To stop all docker containers, then remove/delete all docker images:
 ```
 docker stop $(docker ps -a -q)
