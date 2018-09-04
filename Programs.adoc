@@ -2661,7 +2661,9 @@ To retrieve a file from a remote URL, the following two commands are similar:
   wget URL
   curl -s -O URL
 ```
-Differences: +
+Differences:
+\nobreak
+
  * `wget` preserves the remote timestamp and `curl` does not.
  * `wget` automatically retries, `curl` does not (use `--retry 3`)
 
