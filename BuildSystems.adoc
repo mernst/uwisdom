@@ -351,6 +351,8 @@ implementation files('libs/options-0.2.2-all.jar')
 ```
 
 To test a new version of a Gradle dependency locally, you have several options:
+\nobreak
+
  * create a local Gradle repository
  * Edit the build.gradle file, for instance by changing
    ```implementation 'org.plumelib:bcel-util:1.1.3'```
