@@ -1810,8 +1810,9 @@ To get extra space in a document:
 ```
 But that is terrible, so consider
 ```
-  \enlargethispage{10pt} in strategic locations.
+  \enlargethispage{10pt}
 ```
+in strategic locations.
 Also helpful is 
 ```
   \usepackage{microtype}
@@ -1902,10 +1903,14 @@ of English or of style guides), then do "\usepackage[capitalize]{cleveref}"
 rather than than mis-using \Cref where \cref belongs.
 
 If you get an error
-```pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
-been already used, duplicate ignored```
+```
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
+been already used, duplicate ignored
+```
 and your document does not have an index, then add the `pageanchor=false` option to the hyperref package:
-```\usepackage[pageanchor=false]{hyperref}```
+```
+\usepackage[pageanchor=false]{hyperref}
+```
 
 The `latexmk` program is distributed with LaTeX and so is a fairly
 canonical way to run LaTeX until a fixed point
