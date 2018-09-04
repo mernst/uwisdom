@@ -1916,16 +1916,22 @@ The `latexmk` program is distributed with LaTeX and so is a fairly
 canonical way to run LaTeX until a fixed point
 (as opposed to non-canonical ways, like the `rubber` program).
 Here is a standard command line:
-```latexmk -pdf -interaction=nonstopmode myfile.tex```
+```
+latexmk -pdf -interaction=nonstopmode myfile.tex
+```
 latexmk's dependency tracking depends on file contents, not timestamps,
 so you cannot make it re-run by `touch`ing a file, but you can do
 `latexmk -C` to clean up all output or
 `latexmk -gg ...` to clean then run.
 
 To get less verbose LaTeX output:
-```latexmk -silent ...```
+```
+latexmk -silent ...
+```
 However, this suppresses some error messages, so use:
-```latexmk -silent -pdf -interaction=nonstopmode myfile.tex || latexmk -gg -pdf -interaction=nonstopmode myfile.tex```
+```
+latexmk -silent -pdf -interaction=nonstopmode myfile.tex || latexmk -gg -pdf -interaction=nonstopmode myfile.tex
+```
 
 For a single-colum, double-spaced version of an ACM LaTeX paper, for review:
 ```
