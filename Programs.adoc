@@ -639,13 +639,14 @@ There is also the podofo suite of tools.
 acroread can also do this, as part of its conversion-to-PostScript
 which is available from the command line.  (But acroread isn't installed at CSE.)
 evince's print dialog does not seem available from the command line.
-// Sample use of mpage (-o suppresses lines between pages):
-// ```
-//   mpage -2 file.ps > file-2up.ps
-// ```
-// but don't use it; psnup seems better.
-// mpage remains in the paragraph above because I too often search on it when I
-// can't remember the name of psnup.
+.
+psnup or pdfnup seem better than mpage.
+
+Sample use of mpage (-o suppresses lines between pages):
+```
+  mpage -2 file.ps > file-2up.ps
+```
+but don't use it; psnup seems better.
 
 To compute a correct bounding box for an Encapsulated PostScript file:
 ```

@@ -427,7 +427,9 @@ To edit PDF on Linux or Ubuntu:
 
 To find circular symbolic links
 (to solve "Too many levels of symbolic links" error):
-```find -L $HOME -mindepth 25```
+```
+  find -L $HOME -mindepth 25
+```
 (but note that this may produce huge output, and also that it cannot be pruned).
 
 Exit code 137 is a good indication of being killed by the out-of-memory (OOM)
