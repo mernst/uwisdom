@@ -854,7 +854,9 @@ You can automatically embed all fonts in a PDF file, using ghostscript:
 R uses font symbols for outliers in a boxplot, and you may not be able to
 embed them.  Minimally tweaking the opacity level of such points, forces R to
 actually draw the points rather than replacing them with symbols:
-```geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))```
+```
+geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
+```
 
 
 == URLs
