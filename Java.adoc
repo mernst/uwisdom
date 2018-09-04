@@ -298,7 +298,9 @@ In Javadoc @see and @link clauses, nested classes must be specified as
 `Outer.Inner`, not simply `Inner`.
 
 The Javadoc @link clause takes an optional argument to indicate the displayed text:
-```{@link Class#member displaytext}```
+```
+{@link Class#member displaytext}
+```
 
 If a type is not used in the source code, then Javadoc mentions of it are
 not made into links in the generated HTML.  So you need to create a dummy
