@@ -484,6 +484,14 @@ shadowJar {
 }
 ```
 
+To solve the Gradle problem "Timeout waiting to lock daemon addresses
+registry. It is currently in use by another Gradle instance..", remove all
+Gradle lock files:
+```
+find ~ -type f -name "*.lock" | grep /.gradle/ | while read f; do rm $f; done
+```
+Possibly also `kill -9` the process number mentioned in the Gradle output.
+
 
 == Testing local version of Checker Framework by overwriting local caches
 
