@@ -492,6 +492,11 @@ find ~ -type f -name "*.lock" | grep /.gradle/ | while read f; do rm $f; done
 ```
 Possibly also `kill -9` the process number mentioned in the Gradle output.
 
+The gradle error "Error snapshotting jar [httpclient-4.5.3.jar]" might be
+due to a corrupted Gradle cache.  Blow away the cache (on Travis, comment
+out the line, do a build, then re-enable; or leave it uncommented since the
+problem may recur at any time).
+
 
 == Testing local version of Checker Framework by overwriting local caches
 
