@@ -2465,7 +2465,7 @@ instead of
 ```
 
 mkpasswd: generate one random password (CentOS)
-pwgen -N1: generate one random password (Ubuntu)
+echo "$(pwgen -N1)$(pwgen -N1)": generate one random password (Ubuntu)
 
 Server-side includes (SSI) for web pages:
 ```
