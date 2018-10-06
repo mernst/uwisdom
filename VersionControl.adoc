@@ -337,6 +337,14 @@ To get the first line of a git commit message, WITHOUT the commit id:
 git log --oneline --format=%B -n 1 HEAD | head -n 1
 ```
 
+To see the dates that annotated tags were created:
+```git for-each-ref --format="%(refname:short) | %(taggerdate)" refs/tags/*```
+To see the dates of the annotated commits:
+```git for-each-ref --format="%(refname:short) | %(creatordate)" refs/tags/*```
+To determine whether a tag is annotated (printed as "tag") or lightweight (printed as "commit"):
+```git for-each-ref refs/tags```
+
+
 == GitHub (Git-specific items go above)
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
