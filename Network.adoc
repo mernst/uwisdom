@@ -530,3 +530,6 @@ If all of their sections have been moved then the Canvas courses will
 have disappeared from your Dashboard.   Do one final check via 
 "Settings" on your "home course" and the "Sections" tab to make sure 
 that everything is there.  If so, you are done!
+
+I don't have permission to edit the calendar event (in Google Calendar).  I personally use this Chrome extension to make that the default
+https://chrome.google.com/webstore/detail/google-calendar-guests-mo/hjhicmeghjagaicbkmhmbbnibhbkcfdb?hl=en
