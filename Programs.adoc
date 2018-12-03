@@ -1100,9 +1100,9 @@ To add a "favicon.ico" image to the address bar, do this in the
 Do not use the `<tt>` tag, which is not supported in HTML5.
 Instead, use one of
  * `<kbd>` for keyboard input
- * `<var>` for variables
- * `<code>` for computer code
- * `<same>` for computer output
+ * `<var>` for variables (mathematical and meta-variables, but not generally code)
+ * `<code>` for computer code (including filenames)
+ * `<samp>` for computer output
 
 
 === Firefox
