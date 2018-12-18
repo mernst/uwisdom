@@ -2643,10 +2643,12 @@ For converting (GitHub-style) markdown format to HTML, an alternative to
 `markdown` is `grip` (after which browse to localhost:5000 , but that hung
 my Emacs when I tried it) or `grip --export` which exports to
 `<path>.html`.
-Markdown is idiosyncratic, so I think it's better to use AsciiDoc format
+(What was bad about `markdown`?)
+Markdown format is idiosyncratic and has many variants,
+so it may be better to use AsciiDoc format
 and the Asciidoctor processor, when possible.
 
-To convert .svg to vector-format .:
+To convert .svg to vector-format PDF:
 ```
   rsvg-convert -f pdf -o myfile.pdf myfile.svg
 ```
