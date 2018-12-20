@@ -354,6 +354,8 @@ To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
 http://www.cs.washington.edu/lab/sw/windows/office2010/
 
+Set UW CSE Unix file permissions and access using the GrpAdmin group management tool.
+
 After a user has been added to a group using the GrpAdmin tool
 (https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi), it is generally
 necessary for the user to do one of the following:
