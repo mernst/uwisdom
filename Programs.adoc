@@ -2136,17 +2136,17 @@ To see the equivalent of a yppasswd entry for user foo, do
 "ypmatch foo passwd" or "ypcat passwd | grep -i foo" or "~/bin/getpwent foo".
 Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
 
-To encrypt/decrypt with blowfish:
+To encrypt/decrypt:
 ```
-  openssl enc -aes128 -e -in file -out file.aes128
-  openssl enc -aes128 -d -in file.aes128 -out file.decrypted
+  openssl enc -aes128 -pbkdf2 -e -in file -out file.aes128
+  openssl enc -aes128 -pbkdf2 -d -in file.aes128 -out file.decrypted
 ```
 Optional argument:  -k secretkey
-For other ciphers, change -aes128 to -bf or -des3
+For other ciphers, change -aes128
 Concrete example:
 ```
-  openssl enc -aes128 -e -in wisdom.machines.decrypted -out wisdom.machines.aes128 && chmod og-rwx wisdom.machines.decrypted && rm -f wisdom.machines.decrypted
-  openssl enc -aes128 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
+  openssl enc -aes128 -pbkdf2 -e -in wisdom.machines.decrypted -out wisdom.machines.aes128 && chmod og-rwx wisdom.machines.decrypted && rm -f wisdom.machines.decrypted
+  openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
 ```
 
 To encrypt a file symmetrically with GPG, do either of these:
