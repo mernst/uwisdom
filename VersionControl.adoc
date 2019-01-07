@@ -424,6 +424,7 @@ e) Owner merges the pull request
 f) Optionally delete your fork
 The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
 
+(Is this still true?)
 In a GitHub pull request, if the upstream has changed, don't just do `git pull master` because then the pull request shows all those pulled changes in the code diffs.  This seems to be a bug in GitHub pull requests.  Instead, do `git merge master`.  Or, in more detail:
 ```
   git checkout master
