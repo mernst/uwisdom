@@ -9,6 +9,7 @@
 
 \include{README.adoc}
 \include{BuildSystems.adoc}
+\include{ContinuousIntegration.adoc}
 \include{Emacs.adoc}
 \include{Java.adoc}
 \include{Linux.adoc}

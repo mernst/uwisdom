@@ -1,0 +1,180 @@
+= Information about continuous integration services
+:toc:
+:toc-placement: manual
+
+toc::[]
+
+
+== CircleCI
+
+CircleCI gives 4GB of memory (to its free users)
+This does not seem to be enough to run the Checker Framework tests.
+By contrast, Travis-CI gives 7.5 GB.
+So, I seem to have to stick with Travis-CI for now.
+
+
+== Travis CI
+
+Whitelist of Ubuntu packages that can can be installed on container-based
+Travis-CI infrastructure using the APT addon mechanism:
+https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
+(which is linked from https://github.com/travis-ci/apt-package-whitelist)
+
+Travis-CI advantages:
+ * no local sysadmin
+ * setup is checked into the version control repository
+ * builds pull requests and branches as well as the mainline
+ * every user can enable it for their repositories and forks
+Travis-CI disadvantages:
+ * old OS:
+    * default build infrastructure is Ubuntu 12.04
+    * no OS more recent than Ubuntu 14.04 is available
+    * these OS limitations are shared by other cloud CI infrastructure
+ * time limits:
+    * jobs are limited to less than 2 hours
+    * for Ubuntu 14.04, jobs are limited to about 50 minutes
+    * if a repository has been tested a lot recently, new builds may be delayed
+ * memory limits:
+    * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
+      maximum heap size; so I sometimes need -Xmx2500M command-line argument
+ * no way to ssh in to virtual machines, which complicates debugging
+
+A commit that has `[ci skip]` anywhere in the commit message is ignored by
+Travis CI -- Travis does not run the continuous integration build/test
+for that commit.
+
+Travis will send email notifications about each broken build.  However, it
+will only do so after you have logged in to the Travis website and given it
+access to your GitHub account.
+
+In your Travis CI .travis.yml file, it's best not to set the
+"notifications" email.  If you do, and someone forks your repository, then
+you will get notifications about their broken builds.  There isn't
+currently a way to send email to a mailing list only if the failure is on
+the main fork, but not on other people's forks.
+
+Bootstrap (originally from Twitter) gives you templates and CSS for
+creating "repsonsive" mobile-friendly webpages.
+
+If your job is timing out because there wasn't any output in the last 10
+minutes, then try making the `script:` line of your .travis.yml file be:
+```
+  script: travis_wait 120 ./.travis-build.sh
+```
+travis_wait can only be used in the .travis.yml file, not in scripts called
+by the .travis.yml file.
+Calling travis_wait does not extend your timeout, it just prints a message
+periodically so your job does not look hung to Travis.
+Note that Travis seems to give more time on container-based than legacy infrastructure.
+
+To enable Travis on your fork:
+ * Go to travis-ci.org
+ * Log in using GitHub
+ * You might need to click "refresh"
+ * turn on the toggle next to your fork's name
+Now, the next time you push, the tests will run.
+
+Travis debug VM:
+1. Add
+```
+- travis_debug
+```
+as one of the commands in the script block.
+1. Send a POST request to /job/:job_id/debug using:
+ TOKEN = your API token; see https://github.com/travis-ci/travis.rb#token
+ JOB_ID = displayed in the build log after expanding "Build system information"
+```
+#! /usr/bin/env bash
+curl -s -X POST \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -H "Travis-API-Version: 3" \
+  -H "Authorization: token <TOKEN>" \
+  -d '{ "quiet": true }' \
+  https://api.travis-ci.org/job/<JOB_ID>/debug
+```
+2. Head back to the web UI and in the log of your job. you should see the
+following lines to connect to the VM:
+```
+Setting up debug tools.
+Preparing debug sessions.
+Use the following SSH command to access the interactive debugging environment:
+ssh ukjiuCEkxBBnRAe32Y8xCH0zj@ny2.tmate.io
+```
+3. Connect from your computer using SSH into the interactive session, and once
+you're done, just type `exit` and your build will terminate.
+The job will skip the remaining phases after debug.
+Also, please consider removing the build log after you've finished debugging.
+
+To install a different version of Docker on Travis:
+```
+env:
+  global:
+   - DOCKER_VERSION="1.9.1-0~trusty"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get remove docker-engine -yq
+  - sudo apt-get install docker-engine=$DOCKER_VERSION -yq --no-install-suggests --no-install-recommends --force-yes -o Dpkg::Options::="--force-confnew"
+```
+
+For a pull request, Travis-CI tests the branch and the PR merge commit.
+These are two different SHAs.
+
+This configuration of Travis cannot run docker; I get "docker: command not found" (though I guess I could install docker, since sudo is enabled):
+```
+sudo: required
+dist: precise
+```
+
+Current branch in a Travis-CI job:
+```
+  BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+  echo "BRANCH=$BRANCH"
+  (cd ../checker-framework-inference && git show-branch remotes/origin/$BRANCH > /dev/null 2>&1)
+  if [ "$?" -eq 0 ]; then
+    echo "Running:  (cd ../checker-framework-inference && git checkout $BRANCH)"
+    (cd ../checker-framework-inference && git checkout $BRANCH)
+    echo "... done: (cd ../checker-framework-inference && git checkout $BRANCH)"
+  fi
+```
+
+
+== GitLab CI runners
+
+GitLab CI coordinates runners, farms out work to them, and keeps track build histories and whatnot, but doesn't do the build itself.
+To use GitLab CI (continuous integration):
+ * In your project settings, enable the "Builds" feature.
+ * Click "Save changes"
+ * The page now shows a "CI token", which you can use to register a job runner for your project.
+ * Set up a runner.  If the GitLab server does not provide any shared runners, then set up a specific runner on another computer.  Navigate to "Settings >> Runners", and also see https://gitlab.com/gitlab-org/gitlab-ci-multi-runner
+
+To register a GitLab CI multi-runner:
+```
+  gitlab-ci-multi-runner register --config=/etc/gitlab-runner/config.toml
+```
+Get the token it requests from your project's runners page.
+As long as you pass in --config, the runner is automatically started;
+you can ignore the output that tells you to start it.
+Also go to the project's Settings > Services > Builds emails, to set an
+email address for notification of failed builds.
+To unregister a multi-runner:
+```
+  gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
+```
+
+
+== Jenkins
+
+To give a new user permissions/privileges in Jenkins:
+1. Find the Jenkins user name for the user:
+  Go to (e.g.) http://tern.cs.washington.edu:8080/
+  -> Manage Jenkins
+  -> Manage Users (second to last option)
+  We should request everybody from CSE to use their CSE account name.
+2. Go to http://tern.cs.washington.edu:8080/
+  -> Manage Jenkins
+  -> Configure Global Security (second option)
+  Now either look for whether that user is already present and adjust the
+  privileges.
+  Or add the user name into the small "User/group to add" box and then
+  adjust the privileges.
