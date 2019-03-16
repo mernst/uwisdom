@@ -613,6 +613,11 @@ To concatenate PDF files:
   pdftk ${ALL_PDFS} cat output singlefile.pdf 
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
 ```
+To rotate a PDF file:
+```
+  cpdf -rotate-contents 180 in.pdf -o out.pdf
+```
+Gradescope has a "rotate submission" feature, but it requires a lot of clicks.
 
 Use psnup to place multiple logical pages of a PostScript document on a single
 physical page (say, to print two-up), try psnup.
