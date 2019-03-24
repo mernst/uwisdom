@@ -392,6 +392,18 @@ http://www.jcp.org/en/jsr/detail?id=175
 JWhich tells where on the classpath a Java file is found.
 I have a "jwhich" shell script wrapped around this.
 
+To print the current classpath:
+```
+import java.net.URL;
+import java.net.URLClassLoader;
+...
+  ClassLoader cl = ClassLoader.getSystemClassLoader();
+  URL[] urls = ((URLClassLoader)cl).getURLs();
+  for(URL url: urls){
+    System.out.println(url.getFile());
+  }
+```
+
 In Java, "null instanceof Class" returns false for any Class.
 
 Canonical use of package java.util.regex.* for Java regular expressions:
