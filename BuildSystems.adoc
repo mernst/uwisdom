@@ -335,6 +335,10 @@ The standard gradle target, which builds all artifacts and runs all tests, is
 
 When debugging gradle, use `--info` (less verbose) or `--debug` (more verbose).
 
+`gradle --debug` outputs the full javac command, which can be given on the
+command line to reproduce the effects of the gradle build.  It's painful to
+find it in the voluminous debug output, though.
+
 Gradle task to create a TAGS table:
 ```
 /* Make Emacs TAGS table */
