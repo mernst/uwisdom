@@ -344,6 +344,13 @@ To see the dates of the annotated commits:
 To determine whether a tag is annotated (printed as "tag") or lightweight (printed as "commit"):
 ```git for-each-ref refs/tags```
 
+To fetch a branch on someone else's fork:
+```
+git remote add theirusername git@github.com:theirusername/reponame.git
+git fetch theirusername
+git checkout -b mynamefortheirbranch theirusername/theirbranch
+```
+
 
 == GitHub (Git-specific items go above)
 
@@ -432,7 +439,7 @@ In a GitHub pull request, if the upstream has changed, don't just do `git pull m
   git checkout mybranch
   git merge master
 ```
-Another  way to see the changes against the most recent version of upstream, is the following unnecessarily complex version:
+Another way to see the changes against the most recent version of upstream, is the following unnecessarily complex version:
  * create and save the diffs for your changes, as a .patch file
  * if using a branch, create a new branch
  * if using a fork, then:
