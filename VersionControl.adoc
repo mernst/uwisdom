@@ -351,6 +351,11 @@ git fetch theirusername
 git checkout -b mynamefortheirbranch theirusername/theirbranch
 ```
 
+To abandon/abort a git merge:
+```
+git reset --hard HEAD
+```
+
 
 == GitHub (Git-specific items go above)
 
