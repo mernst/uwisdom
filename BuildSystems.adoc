@@ -515,6 +515,39 @@ To upgrade to Gradle 5:
  * Ensure that build passes, look for warnings: ./gradlew build
 
 
+How to use Martin Kellogg's gradle Checker Framework plugin:
+```
+// Checker Framework pluggable type-checking
+buildscript {
+  repositories {
+    mavenLocal()
+  }
+
+  dependencies {
+    classpath 'com.jaredsburrows:gradle-checker-framework-plugin:0.2.3-SNAPSHOT'
+  }
+}
+...
+// Checker Framework pluggable type-checking
+apply plugin: 'com.jaredsburrows.checkerframework'
+checkerFramework {
+  checkers = [
+    'org.checkerframework.checker.formatter.FormatterChecker',
+    'org.checkerframework.checker.index.IndexChecker',
+    'org.checkerframework.checker.interning.InterningChecker',
+    'org.checkerframework.checker.lock.LockChecker',
+    'org.checkerframework.checker.nullness.NullnessChecker',
+    'org.checkerframework.checker.nullness.NullnessRawnessChecker',
+    'org.checkerframework.checker.regex.RegexChecker',
+    'org.checkerframework.checker.signature.SignatureChecker'
+  ]
+  extraJavacArgs = [
+    '-AcheckPurityAnnotations'
+  ]
+}
+```
+
+
 == Testing local version of Checker Framework by overwriting local caches
 
 To copy the Checker Framework to the Gradle and Maven local caches:
