@@ -257,12 +257,14 @@ Web polls:
 For scheduling a meeting:
 //nobreak
 
- * Doodle contains iCalendar integration (for $40/year).  WhenIsGood does not.
- * Doodle supports "if-need-be" (ifneedbe) responses.  WhenIsGood does not.
- * WhenIsGood's interface is far nicer.  With Doodle, you need to create
+ * Doodle contains iCalendar integration (for $40/year).  WhenIsGood/When2Meet does not.
+ * Doodle supports "if-need-be" (ifneedbe) responses.  WhenIsGood premium has this.
+   When2Meet does not.  
+ * WhenIsGood/When2Meet has a nicer interface.  With Doodle, you need to create
    many 30-minute proposals even to schedule a 1-hour meeting.  Each one
-   takes multiple clicks to create and to answer.  Doodle just lets you
+   takes multiple clicks to create and to answer.  WhenIsGood/When2Meet just lets you
    quickly paint over the relevant times.
+ * WhenIsGood has accounts.  When2Meet does not.
 //nobreak
 
 (Tungle.me combined the best of both, but it is no longer supported as of
