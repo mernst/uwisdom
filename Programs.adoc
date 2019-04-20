@@ -2101,6 +2101,8 @@ On pag, use "yppasswd" instead of "passwd".
 `zip -r foo foo`
 makes a zip archive named foo.zip, which contains directory foo and all its
 contents.
+The first argument is the zipfile base name, and the rest of the arguments
+are its contents.
 
 To uuencode a file:   uuencode filename filename > filename.UUE
 
