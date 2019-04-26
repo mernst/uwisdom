@@ -485,8 +485,8 @@ To pull a GitHub pull request into my local clone/copy,
 click on "command line instructions" at the bottom of the pull request.
 Also see https://help.github.com/articles/checking-out-pull-requests-locally/
 
-To ignore whitespace changes in a GitHub code review diff, add "?w=1"
-at the end of the URL.
+To ignore whitespace changes in a GitHub code review diff or a commit,
+add "?w=1" at the end of the URL.
 
 In GitHub, adding a CONTRIBUTING file to the root of your repository will add a
 link to your file when a contributor creates an Issue or opens a Pull Request.
