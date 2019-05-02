@@ -138,6 +138,11 @@ Current branch in a Travis-CI job:
   fi
 ```
 
+Typical invocation of trigger-travis:
+```
+~/bin/src/trigger-travis/trigger-travis.sh --branch master typetools commons-bcel `cat ~/private/.travis-access-token`
+```
+
 
 == GitLab CI runners
 

@@ -2689,6 +2689,5 @@ Differences:
  * `wget` preserves the remote timestamp and `curl` does not.
  * `wget` automatically retries, `curl` does not (use `--retry 3`)
 
-
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
