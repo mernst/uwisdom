@@ -547,6 +547,15 @@ checkerFramework {
 }
 ```
 
+To solve
+```
+> Cannot lock execution history cache (...) as it has already been locked by this process.
+```
+run:
+```
+find ~/.gradle -type f -name "*.lock" -delete
+```
+
 
 == Testing local version of Checker Framework by overwriting local caches
 
