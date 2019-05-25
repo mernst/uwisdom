@@ -514,39 +514,6 @@ To upgrade to Gradle 5:
  * Upgrade to gradle 5:  ./gradlew wrapper --gradle-version 5.3.1
  * Ensure that build passes, look for warnings: ./gradlew build
 
-
-How to use Martin Kellogg's gradle Checker Framework plugin:
-```
-// Checker Framework pluggable type-checking
-buildscript {
-  repositories {
-    mavenLocal()
-  }
-
-  dependencies {
-    classpath 'com.jaredsburrows:gradle-checker-framework-plugin:0.2.3-SNAPSHOT'
-  }
-}
-...
-// Checker Framework pluggable type-checking
-apply plugin: 'com.jaredsburrows.checkerframework'
-checkerFramework {
-  checkers = [
-    'org.checkerframework.checker.formatter.FormatterChecker',
-    'org.checkerframework.checker.index.IndexChecker',
-    'org.checkerframework.checker.interning.InterningChecker',
-    'org.checkerframework.checker.lock.LockChecker',
-    'org.checkerframework.checker.nullness.NullnessChecker',
-    'org.checkerframework.checker.nullness.NullnessRawnessChecker',
-    'org.checkerframework.checker.regex.RegexChecker',
-    'org.checkerframework.checker.signature.SignatureChecker'
-  ]
-  extraJavacArgs = [
-    '-AcheckPurityAnnotations'
-  ]
-}
-```
-
 To solve
 ```
 > Cannot lock execution history cache (...) as it has already been locked by this process.
@@ -556,24 +523,40 @@ run:
 find ~/.gradle -type f -name "*.lock" -delete
 ```
 
+To print/show the classpath tha Gradle uses:
+```
+task printClasspath {
+    doLast {
+        configurations.testRuntime.each { println it }
+    }
+}
+```
+
 
 == Testing local version of Checker Framework by overwriting local caches
 
 To copy the Checker Framework to the Gradle and Maven local caches:
-(Must update artifact IDs when updating $VER!)
+(Must update gradle directory names when updating $VER!)
 ```
-VER=2.5.4 && \
+VER=2.8.1 && \
 (cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/eab2b4c17da64f186aadfdd301ec0c4a581f7b/checker-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/fba37cca207f6dd3f0f0a2c42018bd8f565f986a/checker-qual-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/bf66e86a3e11108b0f22badf159396f9eb88a916/jdk8-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/8b9453fbd9a1dff5aa1cad2c2ea4d0a8434b1db1/checker-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/eb2e8ab75598548cc8acf9a1ca227e480e01881e/checker-qual-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/99c6219b7688d0e01f3d6eab920392d4c1ce8d2d/jdk8-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.m2/repository/org/checkerframework/checker/${VER}/checker-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
 ```
+or for version 2.8.0:
+VER=2.8.0 && \
+(cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/d40dfb699cc125d55daf928733036459bbc3948f/checker-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/35b7432f3cc3ff2addabfa537867cb6b190d493b/checker-qual-${VER}.jar && \
+\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/e52ab54bf7fef2257a7b3d01c2c8e64d1d295898/jdk8-${VER}.jar
+.
 To clean the Gradle and Maven local caches (rarely needed):
 ```
-VER=2.5.4 && \
+VER=2.8.1 && \
 rm -rf \
   ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/ \
   ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/ \
