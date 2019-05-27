@@ -304,9 +304,6 @@ editor, etc.), working offline, etc.
 Coveralls (https://coveralls.io/) reports test coverage.
 For Java, it requires Maven.
 
-To convert Markdown to HTML:
-(query-replace-regexp "\\[\\([^]]*\\)\\](\\([^)]*\\)" "<a href=\"\\2\">\\1</a>"))
-
 Code review tools:
 GitHub pull requests: not terrible
 RBCommons (OK, but not enough better than GitHub pull requests that it is worth money)
