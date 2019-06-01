@@ -356,6 +356,13 @@ To abandon/abort a git merge:
 git reset --hard HEAD
 ```
 
+To get a diff between a branch and master, but not including unmerged master commits:
+```git diff master...branch```
+(don't switch the order of the arguments).
+Equivalently:
+```git diff `git merge-base master branch`..branch```
+Merge base is the point where branch diverged from master.
+
 
 == GitHub (Git-specific items go above)
 
