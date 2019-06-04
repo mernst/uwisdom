@@ -528,13 +528,15 @@ To print/show the classpath tha Gradle uses:
 task printCompileClasspath {
   description = 'Print the compile-time classpath'
   doFirst {
-    sourceSets.main.runtimeClasspath.each { println it}
+    println "Compile classpath:"
+    sourceSets.main.compileClasspath.each { println it}
   }
 }
 task printTestClasspath {
-  description = 'Print the test classpath'
+  description = 'Print the runtime classpath'
   doLast {
-    configurations.testRuntime.each { println it }
+    println "Runtime classpath:"
+    sourseSets.main.runtimeClasspath.each { println it }
   }
 }
 ```
