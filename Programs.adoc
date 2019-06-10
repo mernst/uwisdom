@@ -2154,21 +2154,20 @@ Concrete example:
   openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
 ```
 
-To encrypt a file symmetrically with GPG, do either of these:
+To encrypt/decrypt a file symmetrically with GPG:
 ```
-  gpg --symmetric lastpass.csv
-  gpg --symmetric --cipher-algo AES256 -v foo.txt
-```
-(Run `echo RELOADAGENT | gpg-connect-agent` to clear the passphrase cache.)
-To decrpyt it:
-```
-  gpg --decrypt --symmetric lastpass.csv.gpg > decrypted.txt
-```
-To encrypt a file to recipient `mernst`:
-```
-  gpg -e -r mernst lastpass.csv
-```
+  gpg --output encrypted.data --symmetric --cipher-algo AES256 un_encrypted.data
+  gpg --output un_encrypted.data --decrypt encrypted.data
+``
 
+To encrypt a file symmetrically with openssl (but GPG may be a better choice):
+```
+  openssl enc -aes256 -pbkdf2 -e -in lastpass.csv-`date +\%Y\%m\%d` -out lastpass.csv-`date +\%Y\%m\%d`.aes256
+```
+To decrypt:
+```
+  openssl enc -aes256 -pbkdf2 -d -in FILE.aes256 -out FILE.decrypted
+```
 
 Greg Shomo recommends that one use RPM to install anything that was
 included in the original (Red Hat) Linux distribution:  bugfixes and

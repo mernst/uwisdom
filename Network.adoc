@@ -407,3 +407,8 @@ that everything is there.  If so, you are done!
 
 I don't have permission to edit the calendar event (in Google Calendar).  I personally use this Chrome extension to make that the default
 https://chrome.google.com/webstore/detail/google-calendar-guests-mo/hjhicmeghjagaicbkmhmbbnibhbkcfdb?hl=en
+
+Charlie Garrett's perferred C++ references:
+The C++ Standard Library by Josuttis
+C++ Templates by Vandevoorde, Josuttis and Gregor
+C++ for the Impatient by Overland
