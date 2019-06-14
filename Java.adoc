@@ -593,6 +593,12 @@ java -cp "asm-${VER}.jar:asm-tree-${VER}.jar:asm-analysis-${VER}.jar:asm-util-${
 ```
 but for me this just crashed rather than giving a useful result.
 
+To convert a .jar file to a module:
+```
+jdeps --generate-module-info . mylib.jar
+javac --patch-module SOME.MODULE.NAME=mylib.jar module-info.java
+```
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
