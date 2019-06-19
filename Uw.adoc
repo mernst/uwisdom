@@ -472,14 +472,15 @@ university.  Sites include
  * padmapper.com
 //nobreak
 
-I am happy to help out with logistics in Seattle (such as visiting an
+I am happy to help with logistics in Seattle (such as visiting an
 apartment or helping with signing contracts).
 
-Visitors should get on the wasp and 590n mailing lists.
+Visitors should get on the plse, 590n, and 590p mailing lists.
 //nobreak
 
- * WASP (programming languages): https://mailman.cs.washington.edu/mailman/listinfo/wasp
+ * plse: https://mailman.cs.washington.edu/mailman/listinfo/plse
  * 590n (software engineering): https://mailman.cs.washington.edu/mailman/listinfo/cse590n
+ * 590p (programming languages): https://mailman.cs.washington.edu/mailman/listinfo/cse590p
 
 
 
