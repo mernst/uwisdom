@@ -27,13 +27,10 @@ Spoof MAC address under Linux:
 
 == Windows Subsystem for Linux (WSL)
 
-To access Windows from WSL, use /mnt/c/ .
-However, I cannot seem to read
-  /mnt/c/Users/mernst/My Documents/
-To access WSL from Windows, use
-C:\Users\mernst\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\mernst
-but I also have a link on the desktop as "mernst-WSL READONLY".
-Don't make edits to files there.
+WSL:
+In WSL, access Windows files at /mnt/c/ .
+In Windows, access Linux files for a running WSL distro \\wsl$\<distro_name> .
+Never access WSL files at via C:\Users\mernst\AppData\Local\Packages\... !
 
 
 == Microsoft Windows
