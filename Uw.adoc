@@ -353,6 +353,7 @@ Alternately, clear the relevant cookies from within Chromium (Wrench icon in the
 
 Cycle servers for UW CSE are:
 bam, boom, bicycle, tricycle, recycle
+eel is a self-managed Ubuntu machine.
 
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
