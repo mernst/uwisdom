@@ -544,7 +544,7 @@ task printTestClasspath {
 
 == Testing local version of Checker Framework by overwriting local caches
 
-To copy the Checker Framework to the Gradle and Maven local caches:
+To copy a locally-built Checker Framework to the Gradle and Maven local caches:
 (Must update gradle directory names when updating $VER!)
 ```
 VER=2.8.1 && \
@@ -556,12 +556,6 @@ VER=2.8.1 && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
 ```
-or for version 2.8.0:
-VER=2.8.0 && \
-(cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/d40dfb699cc125d55daf928733036459bbc3948f/checker-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/35b7432f3cc3ff2addabfa537867cb6b190d493b/checker-qual-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/e52ab54bf7fef2257a7b3d01c2c8e64d1d295898/jdk8-${VER}.jar
 .
 To clean the Gradle and Maven local caches (rarely needed):
 ```
