@@ -143,6 +143,16 @@ Typical invocation of trigger-travis:
 ~/bin/src/trigger-travis/trigger-travis.sh --branch master typetools commons-bcel `cat ~/private/.travis-access-token`
 ```
 
+Sometimes, the Travis Gradle cache becomes corrupted and must be reset.
+Clear the cache at the repository's settings page at https://travis-ci.com/ORG/REPO/caches
+
+What to do if a Travis pull request fails:
+Sometimes, your Travis pull request may fail even though your local build passed.
+This is usually because Travis performed more tests than you ran locally.
+First, examine the error logs, which contain diagnostic output from the failing command.
+You can determine which command was run from the logs, or from the .travis.yml file.  (It might itself call some other file, such as .travis-build.sh.)
+When there are multiple Travis jobs in a single Travis build, each job runs different commands, or they run the same command with different arguments.  You can determine those commands from the .travis.yml file and run them locally.
+
 
 == GitLab CI runners
 
