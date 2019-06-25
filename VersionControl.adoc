@@ -413,6 +413,12 @@ disjunction ("or" queries).
 The blue vertical bar at the left of a GitHub pull request or issue indicates
 that something in it is new or unread -- you haven't clicked on it before.
 
+To search GitHub, using their public API: https://developer.github.com/v3/
+```
+curl -H "Authorization: token `cat git-personal-access-token`" 'https://api.github.com/search/code?q="com.amazonaws.services.ec2.model.DescribeImagesRequest"+language:java&page=3'
+```
+for each page (above, `3`).
+
 
 === GitHub pull requests
 
