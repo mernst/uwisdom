@@ -392,7 +392,7 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $HOME/.m2
+    - $HOME/.m2/
 ```
 To enable it within a Docker container:
 ```
