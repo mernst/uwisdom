@@ -144,7 +144,7 @@ Typical invocation of trigger-travis:
 ```
 
 Sometimes, the Travis Gradle cache becomes corrupted and must be reset.
-Clear the cache at the repository's settings page at https://travis-ci.com/ORG/REPO/caches
+Clean the cache at the repository's settings page at https://travis-ci.com/ORG/REPO/caches
 
 What to do if a Travis pull request fails:
 Sometimes, your Travis pull request may fail even though your local build passed.

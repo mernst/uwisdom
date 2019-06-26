@@ -384,7 +384,7 @@ artifacts.  It reduces bandwidth and time usage, and more importantly it
 reduces transient failures that happen due to loss/reduction of network
 connectivity.
 ```
-# Enable Gradle and Maven caching
+## If the cache gets corrupted, clean it at https://travis-ci.com/ORG/REPO/caches .
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
