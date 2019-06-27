@@ -544,21 +544,6 @@ task printTestClasspath {
 
 == Testing local version of Checker Framework by overwriting local caches
 
-To use a local version of the Checker Framework along with
-https://github.com/kelloggm/checkerframework-gradle-plugin:
-```
-// To use local Checker Framework, run gradle with "-PcfLocal"
-if (project.hasProperty("cfLocal")) {
-  def cfHome = String.valueOf(System.getenv("CHECKERFRAMEWORK"))
-  dependencies {
-    compileOnly files(cfHome + "/checker/dist/checker-qual.jar")
-    testCompileOnly files(cfHome + "/checker/dist/checker-qual.jar")
-    checkerFramework files(cfHome + "/checker/dist/checker.jar")
-    checkerFrameworkAnnotatedJDK files(cfHome + "/checker/dist/jdk8.jar")
-  }
-}
-```
-
 To copy a locally-built Checker Framework to the Gradle and Maven local caches:
 (Must update gradle directory names when updating $VER!)
 ```
