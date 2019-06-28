@@ -2685,5 +2685,11 @@ Differences:
  * `wget` preserves the remote timestamp and `curl` does not.
  * `wget` automatically retries, `curl` does not (use `--retry 3`)
 
+If rg matches files within the `.git` directory, then add this to the `.gitignore` file:
+```
+# rg needs this:  https://github.com/BurntSushi/ripgrep/issues/1040
+.git/
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
