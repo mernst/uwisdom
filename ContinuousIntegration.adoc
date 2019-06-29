@@ -7,10 +7,10 @@ toc::[]
 
 == CircleCI
 
-CircleCI gives 4GB of memory (to its free users)
+CircleCI gives 4GB of memory (to its free users).
 This does not seem to be enough to run the Checker Framework tests.
 By contrast, Travis-CI gives 7.5 GB.
-So, I seem to have to stick with Travis-CI for now.
+So, I must stick with Travis-CI, or buy a paid plan.
 
 
 == Travis CI
