@@ -12,6 +12,10 @@ This does not seem to be enough to run the Checker Framework tests.
 By contrast, Travis-CI gives 7.5 GB.
 So, I must stick with Travis-CI, or buy a paid plan.
 
+Grant CircleCI access to your organization at:
+https://github.com/settings/connections/applications/78a2ba87f071c28e65bb
+
+
 
 == Travis CI
 
