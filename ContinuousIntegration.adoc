@@ -15,6 +15,11 @@ So, I must stick with Travis-CI, or buy a paid plan.
 Grant CircleCI access to your organization at:
 https://github.com/settings/connections/applications/78a2ba87f071c28e65bb
 
+CircleCI 2.1:
+ * New features:  orbs, commands, and executors are new faces in the config.yml party. Also, workflows no longer have a version number. Make sure to take the version key out of your workflows section or bad things will happen. The only version key in 2.1 is the top-level key.
+    * also jobs with parameters
+ * CircleCI 2.1 pipelines disable the CIRCLE_COMPARE_URL environment variable.
+   https://github.com/iynere/compare-url#examples re-enables it, but crashes sometimes.
 
 
 == Travis CI
