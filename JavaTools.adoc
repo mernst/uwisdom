@@ -690,6 +690,10 @@ local counts of time spent, not transitive for all calls within the method).
 
 VisualVM for heap debugging.
 
+Eclipse's Memory Analyzer (MAT) is well-regarded for analyzing .hprof heap dumps.
+It can be run as a standalone application.  To install:
+https://www.eclipse.org/mat/downloads.php
+
 == Other Java profilers
 
 Yourkit, or YJP, is a Java profiler.
