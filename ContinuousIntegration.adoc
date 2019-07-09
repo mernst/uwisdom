@@ -5,6 +5,23 @@
 toc::[]
 
 
+== Azure Pipelines
+
+Azure Pipelines terminology:
+You can organize your pipeline into jobs. Every pipeline has at least one
+job. A job is a series of steps that run sequentially as a unit. In other
+words, a job is the smallest unit of work that can be scheduled to run.
+
+In Azure Pipelines, to run CI for a new GitHub project, do:
+ * New project.
+ * Pipelines
+ * >> New pipeline
+ *  GitHub
+
+Travis vs. Azure environment variables:
+https://docs.microsoft.com/en-us/azure/devops/pipelines/migrate/from-travis?view=azure-devops
+
+
 == CircleCI
 
 CircleCI gives 4GB of memory (to its free users).
@@ -20,6 +37,8 @@ CircleCI 2.1:
     * also jobs with parameters
  * CircleCI 2.1 pipelines disable the CIRCLE_COMPARE_URL environment variable.
    https://github.com/iynere/compare-url#examples re-enables it, but crashes sometimes.
+ * Triggering a build after a build succeeds (https://discuss.circleci.com/t/if-a-build-completes-in-one-project-is-there-a-way-to-trigger-build-on-another-project/23941/4) apparently doesn't work any longer in v2.1:
+   https://discuss.circleci.com/t/circleci-2-1-is-it-possible-to-trigger-a-job-through-api/26294/8
 
 
 == Travis CI

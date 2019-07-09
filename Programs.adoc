@@ -2691,5 +2691,14 @@ If rg matches files within the `.git` directory, then add this to the `.gitignor
 .git/
 ```
 
+In bash, to determine the directory that contains the currently-executing script:
+```
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+```
+For sh, 
+```
+SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
