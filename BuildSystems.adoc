@@ -522,6 +522,10 @@ run:
 ```
 find ~/.gradle -type f -name "*.lock" -delete
 ```
+Alternately, to blow away *all* gradle caches, run:
+```
+rm -rf ~/.gradle/caches
+```
 
 To print/show the classpath tha Gradle uses:
 ```
