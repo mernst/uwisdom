@@ -40,6 +40,27 @@ CircleCI 2.1:
  * Triggering a build after a build succeeds (https://discuss.circleci.com/t/if-a-build-completes-in-one-project-is-there-a-way-to-trigger-build-on-another-project/23941/4) apparently doesn't work any longer in v2.1:
    https://discuss.circleci.com/t/circleci-2-1-is-it-possible-to-trigger-a-job-through-api/26294/8
 
+To download CircleCI output logs to a local file:
+```
+circle-step-outputter --repoSlug="mernst/randoop" --buildNum=923 --step=./scripts/test-systemTest.sh
+mv test-output.txt system-923.txt
+circle-step-outputter --repoSlug="mernst/randoop" --buildNum=925 --step=./scripts/test-nonSystemTest.sh
+mv test-output.txt nonsystem-925.txt
+circle-step-outputter --repoSlug="mernst/randoop" --buildNum=931 --step=./scripts/test-systemTest.sh
+mv test-output.txt system-930.txt
+circle-step-outputter --repoSlug="mernst/randoop" --buildNum=930 --step=./scripts/test-nonSystemTest.sh
+mv test-output.txt nonsystem-931.txt
+```
+
+When setting up a new CircleCI repository, go to its settings:
+Advanced Settings >>
+ * Build forked pull requests: on
+ * Auto-cancel redundant builds: on
+ * Enable pipelines: on
+Can also enable auto-cancel for pushes:
+https://circleci.com/docs/2.0/skip-build/
+
+
 
 == Travis CI
 
