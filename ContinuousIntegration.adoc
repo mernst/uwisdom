@@ -8,9 +8,12 @@ toc::[]
 == Azure Pipelines
 
 Azure Pipelines terminology:
-You can organize your pipeline into jobs. Every pipeline has at least one
-job. A job is a series of steps that run sequentially as a unit. In other
-words, a job is the smallest unit of work that can be scheduled to run.
+A pipelines is one or more stages.
+A stage consists of one or more jobs, which are units of work assignable to a particular machine. 
+ Examples of stages are "build this app", "run these tests", and "deploy to pre-production".
+ By default, stages run sequentially.
+A job is a series of steps that run sequentially as a unit.
+In a single-job build, you can omit the stages and jobs.
 
 In Azure Pipelines, to run CI for a new GitHub project, do:
  * New project.
