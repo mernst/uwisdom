@@ -239,6 +239,8 @@ Perhaps it only works under NetBeans.
 
 == Pretty-printers/decompilers for .class files
 
+As of 2019, IntelliJ uses Fernflower
+
 As of 9/2009, a survey paper "An evaluation of current Java bytecode
 decompilers", by Hamilton and Danicic (appears in SCAM 2009), recommends:
 //nobreak
