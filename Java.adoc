@@ -557,6 +557,7 @@ Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 "-Xmx" argument on the java command line was too large.
 
 `JAVA_HOME` is the JDK install directory, e.g., ...jdk1.7.0 .
+  A way to set it: export JAVA_HOME=`dirname $(dirname $(readlink -f $(which javac)))`
 `java.home` is the JRE install directory, e.g., ...jre .
 (See http://javahowto.blogspot.com/2006/05/javahome-vs-javahome.html .)
 
