@@ -228,6 +228,10 @@ Facebook fellowship
 Symantec Fellowship
 Google Fellowship
 
+gitlab.cs.washington.edu does not support adding collaborators by email
+address (even though that is an option in the webpage UI, as of August
+2019).  You need to give each collaborator a CSE research guest account.
+
 
 == CSE sysadmin
 
