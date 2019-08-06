@@ -432,13 +432,13 @@ They will show up at search.maven.org in 2 hours.
 
 
 To set up a Java project to build with Gradle (to create a build.gradle file):
-1. `gradle wrapper --gradle-version 4.5`
-(Use version 4.1 to avoid warning about using Java 7.)
+1. `gradle wrapper --gradle-version 5.5.1`
 2. Run one of the following lines:
 ```
 ./gradlew init --type java-library
 ./gradlew init --type java-application
 ```
+Put the code under `src/main/java`.
 
 You can include a remote Gradle build script by doing:
 ```
