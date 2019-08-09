@@ -511,7 +511,7 @@ To upgrade to Gradle 5:
       buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
      * Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
      * Remove `buildScan` line from `build.gradle`
- * Upgrade to gradle 5:  ./gradlew wrapper --gradle-version 5.3.1
+ * Upgrade to gradle 5:  ./gradlew wrapper --gradle-version 5.5.1
  * Ensure that build passes, look for warnings: ./gradlew build
 
 To solve
