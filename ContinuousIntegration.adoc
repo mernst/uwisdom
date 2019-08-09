@@ -31,6 +31,9 @@ Azure's mechanism for sharing files/directories between stages or jobs within a 
 "Subdirectories of the specified path will not be published. Wildcards in the path are not supported."
 I could zip up a directory and then unzip after downloading.
 
+Azure Pipelines runs a Docker image in a container with a weird user and
+permissions -- different than just running the docker image normally.
+
 
 == CircleCI
 
