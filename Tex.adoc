@@ -1979,6 +1979,9 @@ In ACM style, to make acknowledgments smaller:
 }
 ```
 
+To find the git URL for an Overleaf project, click on the word "menu" in
+the upper left corner, then "sync", then "git".
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
