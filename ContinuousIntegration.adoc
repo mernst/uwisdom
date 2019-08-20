@@ -34,6 +34,10 @@ I could zip up a directory and then unzip after downloading.
 Azure Pipelines runs a Docker image in a container with a weird user and
 permissions -- different than just running the docker image normally.
 
+Azure pipelines skips the whole CI job if any message in any commit (even
+in a merge) contains "[ci skip]".  This can cause many jobs to be skipped
+that should not be.
+
 
 == CircleCI
 
