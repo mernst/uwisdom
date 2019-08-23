@@ -1461,9 +1461,9 @@ My ideas about using version control (VC) vs. rsync vs. Unison:
 
 To mirror one directory to another (including deletions), you can use:
 ```
-  rsync --omit-dir-times --recursive --quiet --delete DIR1 DIR2
+  rsync --omit-dir-times --recursive --quiet --delete DIR1/ DIR2/
   # This one sets directory times too, which can be a problem
-  rsync -Cavz --quiet --delete DIR1 DIR2
+  rsync -Cav --quiet --delete DIR1/ DIR2/
 ```
 
 
