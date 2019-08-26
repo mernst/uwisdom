@@ -2712,5 +2712,8 @@ Right-click and do "Install with Linux".  (Might need to move from "Downloads" t
 Chromebook:
  * the "terminal" application runs Linux
 
+To increase font size in an xterm terminal on Ubuntu Linux:
+Ctrl-rightmouse.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
