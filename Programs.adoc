@@ -1500,11 +1500,10 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 ```
 
-If a Docker container has no Internet, run (in the host):
+If a Docker container has no Internet (example message: "Temporary failure in name resolution"), run (in the host):
 ```
 sudo service docker restart
 ```
-
 
 
 == AsciiDoc format
