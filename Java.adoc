@@ -336,6 +336,14 @@ and then, in the result:
 ----
 and finally look for instances of `[<>]`.
 
+The error message
+```
+com.sun.tools.javac.code.Type$AnnotatedType cannot be cast to com.sun.tools.javac.code.Type$ClassType
+```
+is due to this JDK bug:
+https://bugs.openjdk.java.net/browse/JDK-8215542.
+It is fixed in JDK 9 ea b14 onwards.
+
 
 == Everything else
 
