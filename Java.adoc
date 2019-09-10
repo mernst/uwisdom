@@ -561,15 +561,29 @@ Or, you can use utilMDE.EntryReader which supports the new-style for loop.
 
 Don't use Runtime.exec(); instead, use ProcessBuilder.start().
 
+Here is how to set JAVA_HOME portably (including on Linux and Mac OS X).
+```
+In a sh script:
+```
+if [ "$(uname)" = "Darwin" ] ; then
+  export JAVA_HOME=${JAVA_HOME:-$(/usr/libexec/java_home)}
+else
+  export JAVA_HOME=${JAVA_HOME:-$(dirname $(dirname $(readlink -f $(which javac))))}
+fi
+```
+In a Makefile:
+```
+ifeq ($(shell uname), Darwin)
+  JAVA_HOME ?= $(/usr/libexec/java_home)
+else
+  JAVA_HOME ?= $(shell readlink -f /usr/bin/javac | sed "s:bin/javac::")
+endif
+```
+
 "Could not reserve enough space for object heap" means that the
 "-Xmx" argument on the java command line was too large.
 
 `JAVA_HOME` is the JDK install directory, e.g., ...jdk1.7.0 .
-  Two ways way to set it:
-```
-export JAVA_HOME=`dirname $(dirname $(readlink -f $(which javac)))`
-export JAVA_HOME=$(readlink -f $(which javac) | sed "s:/bin/javac::")
-```
 `java.home` is the JRE install directory, e.g., ...jre .
 (See http://javahowto.blogspot.com/2006/05/javahome-vs-javahome.html .)
 

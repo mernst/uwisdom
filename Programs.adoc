@@ -2602,6 +2602,19 @@ To resolve a symbolic link to its true name (truename):
  * in a program, use the `readlink` system call
  * from the command line, use `realpath` or `readlink -f` or `readlink -e`
    `readlink` seems to be preferred.
+HOWEVER, Mac OS X's `readlink` behaves differently than `readlink` on Linux
+(it has no `-f` command-line argument, for example), and `realpath` is not
+installed.  Thus, portable scripts should not use them.
+If the directory exists (like `readlink -f`), use this instead:
+```
+SCRIPTDIR="$(cd "$(dirname "$0")" && pwd -P)"
+```
+where -P resolves symbolic links
+Other common uses:
+```
+echo Entering "$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")"
+echo Exiting "$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")"
+```
 
 The `curl` program displays an annoying progress meter.  To disable it
 without also suppressing errors, use `curl -s -S`.
