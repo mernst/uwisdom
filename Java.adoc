@@ -428,6 +428,24 @@ or, less frequently,
   boolean b = Pattern.matches("a*b", "aaaaab");
 ```
 
+Here are ways to parse arrays without loops and repeatedly taking substrings:
+```
+  private static Pattern arrayBracketsPattern = Pattern.compile("(\\[\\])+$");
+  ...
+    Matcher m = arrayBracketsPattern.matcher(typename);
+    String classname = m.replaceFirst("");
+    int dimensions = (typename.length() - classname.length()) / 2;
+```
+.
+```
+  private static Pattern fdArrayBracketsPattern = Pattern.compile("^\\[+");
+   ...
+    Matcher m = arrayBracketsPattern.matcher(typename);
+    String basename = m.replaceFirst("");
+    int dimensions = typename.length() - classname.length();
+```
+
+
 Java issues (bug reports, RFEs, etc.):  http://bugs.sun.com/bugdatabase/
 
 LVTT - Local Variable Type Table
