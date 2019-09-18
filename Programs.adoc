@@ -2416,6 +2416,11 @@ Here is how to create a PDF that shows the annotation text:
    I like the numbered, separate page style.
  * Foxit Reader can also export just the text of all the annotations.
 
+To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
+choose Image Annotation, position the cursor on the area you want to insert
+the image, hold and drag your mouse to draw a rectangle, browse an image in
+the pop-up Add image dialog box, and click on Ok to insert it.
+
 To make a screencast video demo (i.e., screen capture/recording from a
 running program), Marat Boshernitsan recommends
 Camtasia Studio from TechSmith (http://www.techsmith.com/camtasia.asp).
