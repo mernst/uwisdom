@@ -2744,5 +2744,8 @@ Chromebook:
 To increase font size in an xterm terminal on Ubuntu Linux:
 Ctrl-rightmouse.
 
+Use middle button to paste into an xterm.
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
