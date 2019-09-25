@@ -493,6 +493,10 @@ To change an Emacs buffer from Mac or Dos to Unix line endings:
 (set-buffer-file-coding-system 'utf-8-unix)
 ```
 
+Using Emacs as an External Editor in IntelliJ IDEA:
+https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html
+
+
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
 

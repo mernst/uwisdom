@@ -2746,6 +2746,7 @@ Ctrl-rightmouse.
 
 Use middle button to paste into an xterm.
 
+For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this is a default purple in PowerPoint, but LibreOffice does not have an equally nice purple in its standard color set.
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
