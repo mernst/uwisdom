@@ -2399,7 +2399,7 @@ view the annotation text one-by-one in a PDF reader, or you can create a PDF
 file that contains the annotations visibly.  Different people prefer the
 two approaches, and some PDF readers such as Evince don't seem to provide
 any way to view the annotations.
-Here is how to create a PDF that shows the annotation text:
+Here is how to create a PDF that shows the annotation/comment text:
 //nobreak
 
  * Using Acrobat Reader or Foxit Reader: start Print, then select "Summarize
@@ -2421,6 +2421,13 @@ Here is how to create a PDF that shows the annotation text:
    the comments, or format in other ways such as the way that printing does.
    I like the numbered, separate page style.
  * Foxit Reader can also export just the text of all the annotations.
+ * I cannot find a way to print PDF annotations on Ubuntu.
+    * No answer at https://askubuntu.com/questions/1092169/is-there-a-pdf-software-that-allows-printing-a-comment-summary
+    * xournal doesn't do it
+    * Foxit Reader doesn't do it.  I don't see a button "Summarize Comments" in the print dialog box as claimed by https://help.foxitsoftware.com/kb/how-to-print-a-pdf-file-with-the-comment-notes-contents-showing.php
+    * Acrobat Reader doesn't exist except for Windows, Mac, and Android.
+    * LibreOffice/OpenOffice doesn't display PDF well.
+
 
 To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
 choose Image Annotation, position the cursor on the area you want to insert
