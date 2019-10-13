@@ -49,6 +49,12 @@ It uses "error" to mean the magnitude or characterization of the
 discrepancy.
 
 
+ACM's ideosyncratic terminology:
+Repeat = same team, same artifacts.
+Replicate = new team, same artifacts.
+Reproduce = same research question, but new experiment.
+
+
 Threats to the validity of research.
 Most often these are clumped into just
 //nobreak
