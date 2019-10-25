@@ -355,6 +355,9 @@ then do:
  emacs --font Monospace
 ```
 since that font is generally defined.
+(You can install the Inconsolata font by clicking at
+http://www.levien.com/type/myfonts/Inconsolata.otf .)
+
 
 To recompile my emacs directory:
 ```
