@@ -192,18 +192,6 @@ sudo: required
 dist: precise
 ```
 
-Current branch in a Travis-CI job:
-```
-  BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-  echo "BRANCH=$BRANCH"
-  (cd ../checker-framework-inference && git show-branch remotes/origin/$BRANCH > /dev/null 2>&1)
-  if [ "$?" -eq 0 ]; then
-    echo "Running:  (cd ../checker-framework-inference && git checkout $BRANCH)"
-    (cd ../checker-framework-inference && git checkout $BRANCH)
-    echo "... done: (cd ../checker-framework-inference && git checkout $BRANCH)"
-  fi
-```
-
 Typical invocation of trigger-travis:
 ```
 ~/bin/src/trigger-travis/trigger-travis.sh --branch master typetools commons-bcel `cat ~/private/.travis-access-token`
