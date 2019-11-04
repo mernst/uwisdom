@@ -540,7 +540,7 @@ task printTestClasspath {
   description = 'Print the runtime classpath'
   doLast {
     println "Runtime classpath:"
-    sourseSets.main.runtimeClasspath.each { println it }
+    sourceSets.main.runtimeClasspath.each { println it }
   }
 }
 ```
