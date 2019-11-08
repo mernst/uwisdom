@@ -1650,7 +1650,8 @@ The fancyvrb package is preferable to:
  * the moreverb package.  (The moreverb documentation recommends fancyvrb!)
  * \alltt, which is built into LaTeX (except possibly for very simple tasks
    or use with Hevea)
- * listings (which breaks fancyvrb if both are loaded).
+ * listings (which breaks fancyvrb if both are loaded, and breaks wrapfigure
+   if the lstlisting happens to be laid out across two pages).
    listings provides the lstlisting command, and inserts too much space
    between characters, which looks bad in any font (fixed- or variable-width).
    An advantage of listings is that it provides multi-character escapes to
