@@ -321,7 +321,12 @@ In a Maven buildfiel pom.xml, here is where to put <plugins>:
   ...
 ```
 
-I give up on using Maven to upload artifacts to Maven Central.  There are several different plugins that are intended to do this, but their documentation is uniformly bad (or at least it assumes great familiarity with Maven) and I couldn't get any of them to work despite significant effort.  Their error messages are extremely obscure, too.
+Uploading artifacts to Maven Central:
+I give up on using Maven to upload artifacts to Maven Central.  There are
+several different plugins that are intended to do this, but their
+documentation is uniformly bad (or at least it assumes great familiarity
+with Maven) and I couldn't get any of them to work despite significant
+effort.  Their error messages are extremely obscure, too.
 By contrast, Gradle has fewer plugins and I got one to work.
 
 To ignore test sounces altogether and not compile them:
