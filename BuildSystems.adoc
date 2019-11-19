@@ -480,13 +480,6 @@ dependencies {
 }
 ```
 
-To see which files Gradle's shadowJar plugin/task will put in a fat jarfile:
-```
-    doFirst {
-      println sourceSets.main.runtimeClasspath.asPath
-    }
-```
-
 To exclude a file from Gradle's shadowJar plugin/task:
 ```
 shadowJar {
@@ -532,13 +525,24 @@ Alternately, to blow away *all* gradle caches, run:
 rm -rf ~/.gradle/caches
 ```
 
-To print/show the classpath tha Gradle uses:
+
+=== displaying dependencies
+
+To print/show the classpath that Gradle uses:
+From within the `build.gradle` file:
 ```
 task printCompileClasspath {
   description = 'Print the compile-time classpath'
   doFirst {
     println "Compile classpath:"
     sourceSets.main.compileClasspath.each { println it}
+  }
+}
+task printTestCompileClasspath {
+  description = 'Print the compile-time test classpath'
+  doFirst {
+    println "Compile classpath:"
+    println sourceSets.test.compileClasspath.asPath
   }
 }
 task printTestClasspath {
@@ -549,6 +553,16 @@ task printTestClasspath {
   }
 }
 ```
+Another way (this shows which files Gradle's shadowJar plugin/task will put in a fat jarfile):
+```
+    doFirst {
+      println sourceSets.main.runtimeClasspath.asPath
+    }
+```
+From the command line, do this (but it includes .jar files with Gradle's implementation):
+```./gradlew clean assemble --debug | grep "Using implementation classpath"```
+From the command line, this only lists the dependency names and version numbers, not their .jar files.
+```gradle dependencies --configuration=testCompileClasspath```
 
 
 == Testing local version of Checker Framework by overwriting local caches
