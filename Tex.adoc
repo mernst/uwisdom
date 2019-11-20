@@ -199,8 +199,11 @@ to reduce the width of columns in a table or tabular environment.
 To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
 \mathbin, \mathrel, \mathopen, \mathclose, \mathpunct, \mathinner.
 These give "class" 1..8 to the math character or formula.
-(Maybe operator has less surrounding space, binary more and relation most?)
-(There is no \binop or \binrel.)
+ * mathbin: for binary operators like "+"
+ * mathrel: for binary relations like "=" (slightly more space)
+ * mathop: for things like \sum, \cos, \ln, etc.
+(There is no \binop or \binrel; I mention them here in case someone
+searches for them.)
 
 When you have a multi-character variable name in LaTeX, please use
 \mathit{...} or \|...|.  If you write $myvar$, then LaTeX typesets that as
