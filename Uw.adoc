@@ -450,6 +450,7 @@ https://feedback.cs.washington.edu/
 Options for short-term Seattle housing/rentals/apartments/sublets:
 //nobreak
 
+ * Sabbatical Homes: https://www.sabbaticalhomes.com/
  * Craigslist: http://seattle.craigslist.org/sub/
  * AirBnB: https://www.airbnb.com/
  * UW Visiting Personnel and Visiting Students: stay in a dorm
@@ -480,6 +481,18 @@ university.  Sites include
 
 I am happy to help with logistics in Seattle (such as visiting an
 apartment or helping with signing contracts).
+//nobreak
+
+Wait lists for preschool or daycare can be very long.  If you want that,
+get on waiting lists as soon as possible, though most places require an
+in-person visit before you can get on the waiting list.
+// nobreak
+
+All children in the US, regardless of nationality, are entitled to free
+public school.  Schools are assigned based on your home address.  As a
+general rule, any school north of the Montlake Cut and the Ship Canal will
+be good to very good.  South of that waterway, there are both good and bad
+schools.
 
 Visitors should get on the plse, 590n, and 590p mailing lists.
 //nobreak
