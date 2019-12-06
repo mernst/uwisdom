@@ -2764,5 +2764,31 @@ For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this 
 A replacement for the lines-between program is:
 ```sed -e '1,/abc/d' -e '/mno/,$d' <FILE>```
 
+Typical gradle setup for using the Error Prone linter:
+```
+plugins {
+  // Error Prone linter
+  id("net.ltgt.errorprone") version "1.1.1"
+}
+...
+/// Error Prone linter
+dependencies {
+  errorprone("com.google.errorprone:error_prone_core:2.3.4")
+  // JDK 8 support for Error Prone:
+  errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
+}
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs << "-Xlint:all,-processing" << "-Werror"
+  options.errorprone {
+    disable("ReferenceEquality") // Use Interning Checker instead.
+    disable("StringSplitter") // obscure case isn't likely
+    disable("AnnotateFormatMethod") // Error Prone doesn't know about Checker Framework @FormatMethod
+    disable("UseCorrectAssertInTests") // Java's `assert` statument is so much more readable
+    // Code copied from BCEL that we don't want to change gratuitously.
+    excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
+  }
+}
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
