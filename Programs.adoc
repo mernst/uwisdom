@@ -2781,9 +2781,8 @@ tasks.withType(JavaCompile).configureEach {
   options.compilerArgs << "-Xlint:all,-processing" << "-Werror"
   options.errorprone {
     disable("ReferenceEquality") // Use Interning Checker instead.
-    disable("StringSplitter") // obscure case isn't likely
-    disable("AnnotateFormatMethod") // Error Prone doesn't know about Checker Framework @FormatMethod
-    disable("UseCorrectAssertInTests") // Java's `assert` statument is so much more readable
+    disable("StringSplitter") // Obscure case isn't likely.
+    disable("AnnotateFormatMethod") // Error Prone doesn't use Checker Framework @FormatMethod.
     // Code copied from BCEL that we don't want to change gratuitously.
     excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
   }
