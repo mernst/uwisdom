@@ -356,6 +356,9 @@ To get a copy of the JDK 7 source:
 
 Major version number for the Java class file format (JVM version number):
 ----
+  J2SE 14.0 = 58 (0x3a hex)
+  J2SE 13.0 = 57 (0x39 hex)
+  J2SE 12.0 = 56 (0x38 hex)
   J2SE 11.0 = 55 (0x37 hex)   [scheduled for release September 2018; LTS version]
   J2SE 10.0 = 54 (0x36 hex)   [released March 2018]
   J2SE 9.0 = 53 (0x35 hex)    [released September 2017]
