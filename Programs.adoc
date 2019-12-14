@@ -1543,8 +1543,12 @@ the "Index:" lines and it will ask for the filename for each patch.
 moss:  a software plagiarism detector by Alex Aiken.
 http://www.cs.berkeley.edu/~aiken/moss.html
 
-Use the `-N` command-line option to make diff show the full contents of a new file (a file that did not exist), rather than displaying "Only in ...".
-
+Use the `-N` or `--new-file` command-line option to make diff show the full contents of a new or deleted file (a file that did not exist), rather than displaying "Only in ...".
+Use
+```
+--unidirectional-new-file
+```
+to only show the contents of a new file, not one that has been deleted.
 
 
 == General wisdom (that is, everything without its own section above)
