@@ -1551,6 +1551,48 @@ Use
 to only show the contents of a new file, not one that has been deleted.
 
 
+== Python
+
+In Python, by default variables have function (not block) scope.  To refer
+to (really, to change) a global variable, use the "global" declaration in
+the class/function/whatever.
+
+To test whether a file exists in Python, do os.path.exists('/file/name').
+In Python, to reimport module foo, do reload(foo).
+
+Python debugger:  pdb ~/python/test.py
+You need to "s"tep a few times before "n"ext, which would jump over the
+entire program.  Or just do "continue" to the error.
+
+For time-critical Python runs, disable assertions via -O command-line
+option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
+You can be sure that the optimized version is running if a .pyo instead of
+a .pyc file is created after you do "import".
+To make Python run optimized, do:
+```
+  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
+```
+To make Python run unoptimized, do:
+```
+  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
+```
+To evaluate these in Emacs, put the cursor at the end of the line and type
+C-x C-e.
+After you change py-which-args, kill the `*Python*` buffer and restart
+(it's not enough to kill the Python process and restart).
+
+As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
+even if it is faster...
+
+Typical Makefile rules to enforce Python style rules:
+```
+PYTHON_FILES=myfile1.py myfile2.py
+python-style:
+	yapf -i --style='{column_limit: 100}' ${PYTHON_FILES}
+	pylint -f parseable --disable=W,line-too-long,invalid-name ${PYTHON_FILES}
+```
+
+
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
@@ -1889,37 +1931,6 @@ architecture, operating system, and much more.
 The "top" program also tells the machine's amount of memory and swap space.
 Also see "uname -a" and "cat /proc/cpuinfo" (as 
 well as some of the other kernel pseudo-files under /proc).
-
-In Python, by default variables have function (not block) scope.  To refer
-to (really, to change) a global variable, use the "global" declaration in
-the class/function/whatever.
-
-To test whether a file exists in Python, do os.path.exists('/file/name').
-In Python, to reimport module foo, do reload(foo).
-
-Python debugger:  pdb ~/python/test.py
-You need to "s"tep a few times before "n"ext, which would jump over the
-entire program.  Or just do "continue" to the error.
-
-For time-critical Python runs, disable assertions via -O command-line
-option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
-You can be sure that the optimized version is running if a .pyo instead of
-a .pyc file is created after you do "import".
-To make Python run optimized, do:
-```
-  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
-```
-To make Python run unoptimized, do:
-```
-  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
-```
-To evaluate these in Emacs, put the cursor at the end of the line and type
-C-x C-e.
-After you change py-which-args, kill the `*Python*` buffer and restart
-(it's not enough to kill the Python process and restart).
-
-As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
-even if it is faster...
 
 The ispell program will merge personal dictionaries (.ispell_english) found
 in the current directory and the home directory.
