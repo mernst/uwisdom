@@ -1035,6 +1035,11 @@ In Unix/Linux, owner permissions take precedence over group permissions.
 Suppose a file has o-w and g+w permissions, and suppose that the owner is
 in the group.  Then the owner cannot write the file.
 
+A portable way to obtain the absolute path of a directory:
+```
+dir="$(unset CDPATH && cd "$dir" && pwd)"
+```
+
 
 == ssh (secure shell)
 
