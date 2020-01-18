@@ -5,6 +5,18 @@
 toc::[]
 
 
+Travis CI and CircleCI allocate resources per GitHub organization/account.
+(Azure Pipelines allocates resources depending on the Microsoft user ID
+that created the Azure Pipeline.)  They provide only a certain number of
+CPUs, and they additionally throttle work based on CPU usage per day.
+Thus, an efficient way to work is to create a branch on your own fork,
+iterate until it passes CI, and only then open a pull request.  Working on
+the master fork, or creating a pull request too early, causes all the
+branches and pull requests to compete with one another for the same CI
+resources.  This effect goes double for Travis CI, which runs CI twice for
+each pull request, but only once for each branch.
+
+
 == Azure Pipelines
 
 Azure Pipelines terminology:
