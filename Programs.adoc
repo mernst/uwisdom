@@ -2659,10 +2659,6 @@ On Mac OS X if the directory does not exist, I don't have a good solution.
 If the directory ends in ../, you can call dirname twice (and hope that
 there is no symbolic link across directories).
 
-
-The `curl` program displays an annoying progress meter.  To disable it
-without also suppressing errors, use `curl -s -S`.
-
 If running `dropbox.py start -i` yields
 ```
   To link this computer to a dropbox account, visit the following url: ...
@@ -2736,16 +2732,23 @@ Choose Mail > Preferences, click Composing, then select "plain text".
 This is an issue with Apple Mail on a Mac laptop.
 Replies sent from an iPhone look fine, with a quotation marker.
 
-To retrieve a file from a remote URL, the following two commands are similar:
-```
-  wget URL
-  curl -s -O URL
-```
-Differences:
-\nobreak
-
- * `wget` preserves the remote timestamp and `curl` does not.
- * `wget` automatically retries, `curl` does not (use `--retry 3`)
+curl vs wget:
+ * `wget` is easier to use (better command-line flags, and more needed ones enabled by default), but
+   `curl` is more reliable (gives error message instead of hanging) and has more functionality.
+ * `wget` (by default use same local as remote file name)
+   ```curl -O```
+ * `wget` (automatically redirect)
+   ```curl -L```
+ * `wget` (preserve timestamp of remote file)
+   ```curl -R```
+ * `wget` (automatically retry)
+   ```curl --retry 2```
+ * `wget -nv` (non-verbose output)
+   ```curl -s -S```
+ * `wget -O local-filename` (specify a local filename)
+   ```curl -o local-filename```
+ * `wget -N` (only download if newer)
+   ```curl -L -R -o "$file" -z "$file" "$serverurl"```
 
 If rg matches files within the `.git` directory, then add this to the `.gitignore` file:
 ```
@@ -2808,20 +2811,6 @@ tasks.withType(JavaCompile).configureEach {
   }
 }
 ```
-
-curl vs wget:
- * `wget` is easier to use (better command-line flags, and more enabled by default), but
-   `curl` is more reliable (gives error message instead of hanging) and has more functionality.
- * `wget` (by default use same local as remote file name)
-   ```curl -O```
- * `wget` (automatically retry)
-   ```curl --retry 2```
- * `wget -nv` (non-verbose output)
-   ```curl -s -S```
- * `wget -O local-filename` (specify a local filename)
-   ```curl -o local-filename```
- * `wget -N` (only download if newer)
-   ```curl -L -R -o "$file" -z "$file" "$serverurl"```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
