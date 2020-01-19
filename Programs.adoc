@@ -2809,5 +2809,17 @@ tasks.withType(JavaCompile).configureEach {
 }
 ```
 
+curl vs wget:
+ * `wget` is easier to use (better command-line flags), but
+   `curl` is more reliable (gives error message instead of hanging) and has more functionality.
+ * `wget` (use same local as remote file name)
+   ```curl -O```
+ * `wget -nv` (non-verbose output)
+   ```curl -s -S```
+ * `wget -O local-filename` (specify a local filename)
+   ```curl -o local-filename```
+ * `wget -N` (only download if newer)
+   ```curl -L -R -o "$file" -z "$file" "$serverurl"```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
