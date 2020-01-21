@@ -1996,6 +1996,20 @@ the upper left corner, then "sync", then "git".
      }
  ```
 
+LaTeX font sizes:
+```
+\tiny
+\scriptsize	
+\footnotesize
+\small	
+\normalsize	
+\large
+\Large
+\LARGE
+\huge
+\Huge
+```
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
