@@ -2519,8 +2519,11 @@ instead of
   \rm -f /tmp/mailbody-$$
 ```
 
-mkpasswd: generate one random password (CentOS)
-echo "$(pwgen -N1)$(pwgen -N1)": generate one random password (Ubuntu)
+Generate a random password:
+ * CentOS:
+   mkpasswd
+ * Ubuntu:
+   echo "$(pwgen -N1)$(pwgen -N1)"
 
 Server-side includes (SSI) for web pages:
 ```
