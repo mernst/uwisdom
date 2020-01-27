@@ -314,7 +314,7 @@ To pass the -Xlint argument to javac when running from Ant, do:
 
 == Maven and pom.xml
 
-In a Maven buildfiel pom.xml, here is where to put <plugins>:
+In a Maven buildfile pom.xml, here is where to put <plugins>:
 ```
 <build>
   <plugins>
@@ -339,6 +339,15 @@ mvn install -Dmaven.test.skip=true
 mvn -DskipTests compile
 ```
 
+To see a project's Maven dependencies:
+```
+mvn dependency:tree
+```
+To update a project's Maven dependencies:
+```
+mvn versions:use-latest-releases
+mvn dependency:resolve-plugins
+```
 
 == Gradle and build.gradle
 
