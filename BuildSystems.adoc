@@ -343,10 +343,13 @@ To see a project's Maven dependencies:
 ```
 mvn dependency:tree
 ```
+To see the dependencies of its buildfile (compilation-time dependencies):
+```
+mvn dependency:resolve-plugins
+```
 To update a project's Maven dependencies:
 ```
 mvn versions:use-latest-releases
-mvn dependency:resolve-plugins
 ```
 
 == Gradle and build.gradle
