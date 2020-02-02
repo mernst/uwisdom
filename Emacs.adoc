@@ -502,6 +502,11 @@ https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html
 Mail reading in Emacs:
 One possibility is mu4e with offlineimap on Ubuntu.
 
+To update all installed Emacs packages:
+```
+M-x package-list-packages RET U x
+```
+
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
 
