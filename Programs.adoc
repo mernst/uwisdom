@@ -2817,13 +2817,18 @@ tasks.withType(JavaCompile).configureEach {
 
 A shell function that works around `wget` or `curl` hanging for very slow
 connections.  (`curl`'s timeouts don't seem to work in this case.)
+MacOS version of curl reportedly doesn't permit `-z` if the file doesn't already exist.
 ```
 # Download the remote resource to a local file of the same name, if the
 # remote resource is newer.  Works around connections that hang.  Takes a
 # single command-line argument, a URL.
-curl_with_retry() {
+download_url() {
     BASENAME=`basename ${@: -1}`
-    timeout 5m curl -s -S -R -L -O -z "$BASENAME" "$@" || (echo "retrying curl $@" && rm -f "$BASENAME" && curl -R -L -O -z "$BASENAME" "$@")
+    if [ "$(uname)" = "Darwin" ] ; then
+        wget -nv -N "$@"
+    else
+	timeout 5m curl -s -S -R -L -O -z "$BASENAME" "$@" || (echo "retrying curl $@" && rm -f "$BASENAME" && curl -R -L -O -z "$BASENAME" "$@")
+    fi
 }
 ```
 
