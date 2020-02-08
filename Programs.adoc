@@ -2837,5 +2837,11 @@ download_url() {
 }
 ```
 
+Three ways to retry a command repeatedly a limited number of times, with a delay between:
+(This retries the command if it fails, until it succeeds or the retry limit is reached.)
+ * timeout 300 COMMAND || COMMAND
+ * https://github.com/kadwanev/retry
+ * parallel --retries 5 --delay 15s ::: ./do_thing.sh
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
