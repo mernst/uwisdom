@@ -412,3 +412,6 @@ Charlie Garrett's perferred C++ references:
 The C++ Standard Library by Josuttis
 C++ Templates by Vandevoorde, Josuttis and Gregor
 C++ for the Impatient by Overland
+
+Cloud credits for research from AWS and EC2, for experiments:
+https://aws.amazon.com/research-credits/
