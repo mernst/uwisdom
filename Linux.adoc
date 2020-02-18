@@ -32,7 +32,7 @@ Download source code ("-b" auto-builds) into *current directory*:
 ```
   apt-get [-b] source PACKAGENAME
 ```
-Search through the available packages:
+Search through the available packages to find a package name:
 ```
   apt-cache search <string>
 ```
