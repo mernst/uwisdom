@@ -53,10 +53,10 @@ that should not be.
 
 == CircleCI
 
-CircleCI gives 4GB of memory (to its free users).
-This does not seem to be enough to run the Checker Framework tests.
+CircleCI's `docker` executor gives 4GB of memory to its free users (a paid plan is required to access more)
+CircleCI's `machine` executor gives 7.5GB of memory, though it may require payment in the future.  You specify a VM image rather than a Docker image.
 By contrast, Travis-CI gives 7.5 GB.
-So, I must stick with Travis-CI, or buy a paid plan.
+The Checker Framework tests do not run in 4GB of memory.
 
 Grant CircleCI access to your organization at:
 https://github.com/settings/connections/applications/78a2ba87f071c28e65bb

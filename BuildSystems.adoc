@@ -360,10 +360,14 @@ The standard gradle target, which builds all artifacts and runs all tests, is
 ```
 
 When debugging gradle, use `--info` (less verbose) or `--debug` (more verbose).
-
+There are also Java properties; start the JVM with `-Dorg.gradle.logging.level=debug`.
+.
 `gradle --debug` outputs the full javac command, which can be given on the
 command line to reproduce the effects of the gradle build.  It's painful to
 find it in the voluminous debug output, though.
+.
+Gradle's `--dry-run` only shows the tasks that would have run, not their
+actions/commands like make's `--dry-run` does.
 
 Gradle task to create a TAGS table:
 ```
@@ -399,7 +403,7 @@ To test a new version of a Gradle dependency locally, you have several options:
 In Travis CI, it's a good idea to enable Gradle caching of downloaded
 artifacts.  It reduces bandwidth and time usage, and more importantly it
 reduces transient failures that happen due to loss/reduction of network
-connectivity.
+connectivity.  But, the cache periodically gets corrupted.
 ```
 ## If the cache gets corrupted, clean it at https://travis-ci.com/ORG/REPO/caches .
 before_cache:
@@ -449,7 +453,7 @@ They will show up at search.maven.org in 2 hours.
 
 
 To set up a Java project to build with Gradle (to create a build.gradle file):
-1. `gradle wrapper --gradle-version 5.5.1`
+1. `gradle wrapper --gradle-version 6.1.1`
 2. Run one of the following lines:
 ```
 ./gradlew init --type java-library
@@ -467,7 +471,7 @@ And maybe it doesn't work offline?
 To visualize the task dependencies in a Gradle buildfile:
 ```
 plugins {
-    id "com.dorongold.task-tree" version "1.3"
+    id "com.dorongold.task-tree" version "1.5"
 }
 ```
 Then run
@@ -478,17 +482,14 @@ When one of the tasks given to the gradle command is `taskTree`, execution
 of all the other tasks on that line is skipped. Instead, their task
 dependency tree is printed.
 
-Gradle's `--dry-run` only shows the tasks that would have run, not their
-actions/commands like make's `--dry-run` does.
-
 Gradle buildfile rules to run Error Prone linter on each compilation:
+https://plugins.gradle.org/plugin/net.ltgt.errorprone
 ```
 plugins {
-  // Run the Error Prone linter.
-  id "net.ltgt.errorprone-base" version "0.0.16"
+  id "net.ltgt.errorprone" version "1.1.1"
 }
 dependencies {
-  errorprone 'com.google.errorprone:error_prone_core:2.3.1'
+  errorprone 'com.google.errorprone:error_prone_core:2.3.4'
 }
 ```
 
