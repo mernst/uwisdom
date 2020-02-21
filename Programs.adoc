@@ -1040,6 +1040,24 @@ A portable way to obtain the absolute path of a directory:
 dir="$(unset CDPATH && cd "$dir" && pwd)"
 ```
 
+Diagnostics for shell scripts (`set -o pipefail` is only for bash):
+```
+set -eux
+set -o pipefail
+```
+In more detail:
+```
+# Print each command before executing it
+set -x
+# Exit the script if any statement returns a non-true value.
+# Can temporarily disable within `set +e ... set -e`.
+# There are exceptions; for example, commands a pipeline, other than the last one, are immune.
+set -e
+set -o pipefail
+# Warn about unset variables
+set -u
+```
+
 
 == ssh (secure shell)
 
