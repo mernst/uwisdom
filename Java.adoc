@@ -650,8 +650,6 @@ jdeps --generate-module-info . mylib.jar
 javac --patch-module SOME.MODULE.NAME=mylib.jar module-info.java
 ```
 
-===========================================================================
-
 Here is a formula to make a jar file into a modular jar file.
 ```
 usejdk11
@@ -661,6 +659,14 @@ jdeps --generate-module-info . $JARPATH
 javac --patch-module $MODULENAME=$JARPATH $MODULENAME/module-info.java
 jar uf $JARPATH -C $MODULENAME module-info.class
 ```
+
+`com.sun.javadoc` is deprecated and superseded by `jdk.javadoc.doclet`.
+`jdk.javadoc.doclet` only exists in Java 9 and later, so switching to it means losing support for Java 8.
+Another difference is that Javadoc in JDK 8 supports this option:
+```
+  -d <directory>                   Destination directory for output files
+```
+but Javodoc in JDK 11+ does not.
 
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
