@@ -1058,6 +1058,10 @@ set -o pipefail
 set -u
 ```
 
+The `shellcheck` program is a linter for sh and bash scripts.  Run like:
+```shellcheck --format=gcc```
+There is also `checkbashisms`.
+
 
 == ssh (secure shell)
 
