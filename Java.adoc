@@ -666,7 +666,10 @@ Another difference is that Javadoc in JDK 8 supports this option:
 ```
   -d <directory>                   Destination directory for output files
 ```
-but Javodoc in JDK 11+ does not.
+but in JDK9+, only the standard doclet supports it.
+Since Gradle always passes the -d command-line argument, any doclet
+intended for running on JDK 9+ should support the `-d` command-line
+argument, even if it ignores it.
 
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
