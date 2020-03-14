@@ -205,11 +205,11 @@ These give "class" 1..8 to the math character or formula.
 (There is no \binop or \binrel; I mention them here in case someone
 searches for them.)
 
-When you have a multi-character variable name in LaTeX, please use
-\mathit{...} or \|...|.  If you write $myvar$, then LaTeX typesets that as
-"m times y times v times a times r", putting extra space between the
-letters.  That which looks different (and worse) than typesetting it as a
-single multi-character variable name with proper inter-letter kerning.
+To typeset a multi-character identifier in LaTeX math mode, use
+\mathit{...} (or, if you have it defined, \|...|) .  Never use $...$, which
+puts incorrect kerning between the letters.  LaTeX typesets $myvar$ as "m
+times y times v times a times r".  It looks bad, and enough people will
+notice that it is worthwhile to get the typesetting right.
 
 
 == Lists
@@ -355,11 +355,6 @@ For Verbatim environments, do this:
   \usepackage{fancyvrb}
   \RecustomVerbatimEnvironment{Verbatim}{Verbatim}{fontsize=\smaller}
 ```
-
-Use \mathit{...} (or, simpler, \|...|), not $...$, to typeset a
-multi-character identifier in LaTeX math mode.  $...$ puts incorrect
-kerning between the letters.  (It looks bad, and enough people will notice
-that it is worthwhile to get the typesetting right.)
 
 // Can't unindent the LaTeX comments or the doc program will respect those
 // comments.  That's unfortunate, because I typically unindent when inserting
