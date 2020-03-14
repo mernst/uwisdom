@@ -1917,7 +1917,7 @@ canonical way to run LaTeX until a fixed point
 (as opposed to non-canonical ways, like the `rubber` program).
 Here is a standard command line:
 ```
-latexmk -pdf -interaction=nonstopmode myfile.tex
+latexmk -bibtex -pdf -interaction=nonstopmode myfile.tex
 ```
 latexmk's dependency tracking depends on file contents, not timestamps,
 so you cannot make it re-run by `touch`ing a file, but you can do
