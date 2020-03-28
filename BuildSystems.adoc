@@ -428,6 +428,7 @@ Set up directory:
 2. Add gradle.properties to .gitignore file.
 3. Gradle buildfile rules:
 http://central.sonatype.org/pages/gradle.html
+(It's better to use the "maven-publish" plugin; does it now suport signing?)
 Here are alternate, but worse, sources of Gradle buildfile rules:
  * This doesn't give instructions about Maven Central in particular:
    https://docs.gradle.org/current/userguide/maven_plugin.html
@@ -514,16 +515,36 @@ due to a corrupted Gradle cache.  Blow away the cache (on Travis, comment
 out the line, do a build, then re-enable; or leave it uncommented since the
 problem may recur at any time).
 
-To upgrade to Gradle 5:
- * First upgrade to gradle 4.10:  gradle wrapper --gradle-version 4.10
- * Ensure that build passes, look for warnings: ./gradlew build
- * Look for deprecations:
-    * Add to `build.gradle`:
-      buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
-     * Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
-     * Remove `buildScan` line from `build.gradle`
- * Upgrade to gradle 5:  ./gradlew wrapper --gradle-version 5.5.1
- * Ensure that build passes, look for warnings: ./gradlew build
+To upgrade Gradle:
+ * gradle wrapper --gradle-version 4.10.3 && ./gradlew build
+ * Look for warnings
+ * Look for deprecations (see below)
+ * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build
+ * Look for warnings
+ * Look for deprecations (see below)
+ * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build
+ * Look for warnings
+ * Look for deprecations (see below)
+.
+To look for deprecations:
+1. Add to `build.gradle`:
+For Gradle 6:
+Add to `settings.gradle`:
+```
+plugins { id "com.gradle.enterprise" version "3.2" }
+gradleEnterprise {
+  buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
+}
+```
+For Gradle 2-5: Add to `settings.gradle`:
+```
+plugins { id "com.gradle.build-scan" version "3.2" }
+gradleEnterprise {
+  buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
+}
+```
+2. Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
+
 
 To solve
 ```
