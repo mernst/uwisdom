@@ -516,13 +516,12 @@ out the line, do a build, then re-enable; or leave it uncommented since the
 problem may recur at any time).
 
 To upgrade Gradle:
- * gradle wrapper --gradle-version 4.10.3 && ./gradlew build
+ * gradle wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
+ * Look for warnings
+ * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build --warning-mode=all
  * Look for warnings
  * Look for deprecations (see below)
- * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build
- * Look for warnings
- * Look for deprecations (see below)
- * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build
+ * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build --warning-mode=all
  * Look for warnings
  * Look for deprecations (see below)
 .
@@ -536,7 +535,7 @@ gradleEnterprise {
   buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
 }
 ```
-For Gradle 2-5: Add to `settings.gradle`:
+For Gradle 5: Add to `build.gradle`:
 ```
 plugins { id "com.gradle.build-scan" version "3.2" }
 gradleEnterprise {
