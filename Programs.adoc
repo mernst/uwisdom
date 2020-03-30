@@ -2028,7 +2028,7 @@ executable (including debugging format), etc).
 On a Kinesis Advantage contoured keyboard:
 //nobreak
 
- * Soft reset: Press Progrm + Shift + F10. 
+ * Soft reset: Press Progm + Shift + F10.
  * Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
  * Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
  * Toggle the tone: progrm+hyphen
