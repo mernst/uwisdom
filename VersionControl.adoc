@@ -363,6 +363,16 @@ Equivalently:
 ```git diff `git merge-base master branch`..branch```
 Merge base is the point where branch diverged from master.
 
+If you get an error when running `git commit`:
+```
+error: invalid object 100644 13da...8114 for 'FILENAME'
+error: Error building trees
+```
+then run
+```
+git hash-object -w FILENAME
+```
+
 
 == GitHub (Git-specific items go above)
 
