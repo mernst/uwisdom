@@ -558,6 +558,14 @@ Alternately, to blow away *all* gradle caches, run:
 rm -rf ~/.gradle/caches
 ```
 
+To fix the Gradle error
+```
+Could not create service of type DefaultGeneralCompileCaches using GradleScopeCompileServices.createGeneralCompileCaches().
+```
+here are two possibilities:
+ * run `gradle --stop` to stop all daemons
+ * delete the project's `.gradle` directory
+
 
 === displaying dependencies
 
