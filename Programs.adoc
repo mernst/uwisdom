@@ -1083,6 +1083,12 @@ python-style:
 	pylint -f parseable --disable=W,invalid-name ${PYTHON_FILES}
 ```
 
+To create a "here document"
+```
+cat > myfile.txt <<END
+... Contents of myfile.txt ...
+END
+```
 
 == ssh (secure shell)
 
