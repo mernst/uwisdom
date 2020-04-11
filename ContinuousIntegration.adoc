@@ -17,7 +17,6 @@ resources.  This effect goes double for Travis CI, which runs CI twice for
 each pull request, but only once for each branch.
 
 
-== Azure Pipelines
 
 Azure Pipelines terminology:
  * A pipeline is one or more stages.
@@ -218,6 +217,17 @@ This is usually because Travis performed more tests than you ran locally.
 First, examine the error logs, which contain diagnostic output from the failing command.
 You can determine which command was run from the logs, or from the .travis.yml file.  (It might itself call some other file, such as .travis-build.sh.)
 When there are multiple Travis jobs in a single Travis build, each job runs different commands, or they run the same command with different arguments.  You can determine those commands from the .travis.yml file and run them locally.
+
+
+== GitHub Actions
+
+GitHub Actions offers free 2000 Linux minutes per month for public repositories.
+  At 1 hour per build, that's one build per day.
+  A macOS minutes costs 10 Linux minutes.
+  A Windows minute costs 2 Linux minutes.
+  Details at https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages .
+Each virtual machine has a 2-core CPU with 7 GB of RAM
+  Details at https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners .
 
 
 == GitLab CI runners
