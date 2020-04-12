@@ -2892,5 +2892,10 @@ Three ways to retry a command repeatedly a limited number of times, with a delay
  * https://github.com/kadwanev/retry
  * parallel --retries 5 --delay 15s ::: ./do_thing.sh
 
+To use GraphViz to convert a .dot file to a .pdf file:
+```
+dot -T pdf -O filename.dot
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

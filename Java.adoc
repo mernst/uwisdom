@@ -675,6 +675,32 @@ argument, even if it ignores it.  But if the doclet is run together with the
 standard doclet, I'm not sure that is the right thing.
 You can use `title = ""` to prevent gradle from passing other command-line arguments.
 
+Many Java `equals` methods should look like this:
+```
+  public boolean equals(Object o) {
+    return (o != null)
+        && super.equals(o)
+        && field1.equals(o.field1)
+        && field2.equals(o.field2)
+        && field3.equals(o.field3);
+  }
+```
+Every Java `hashCode` method should look like one of these:
+```
+  // If superclass has any fields.
+  @Override
+  public int hashCode() {
+    return super.hashCode() + Objects.hash(field1, field2, field3);
+  }
+```
+```
+  // If superclass has no fields (e.g., the superclass is java.lang.Object).
+  @Override
+  public int hashCode() {
+    return Objects.hash(field1, field2, field3);
+  }
+```
+
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
