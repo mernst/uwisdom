@@ -5,10 +5,15 @@
 toc::[]
 
 
+To avoid unnecessary CI slowdowns, work on a branch in your own fork, and
+don't create a pull request until you think the code is ready.
+.
 Travis CI and CircleCI allocate resources per GitHub organization/account.
 (Azure Pipelines allocates resources depending on the Microsoft user ID
-that created the Azure Pipeline.)  They provide only a certain number of
-CPUs, and they additionally throttle work based on CPU usage per day.
+that created the Azure Pipeline.)  All of these provide only a certain
+number of CPUs, and they additionally throttle work based on CPU usage per
+day.
+.
 Thus, an efficient way to work is to create a branch on your own fork,
 iterate until it passes CI, and only then open a pull request.  Working on
 the master fork, or creating a pull request too early, causes all the
@@ -17,6 +22,7 @@ resources.  This effect goes double for Travis CI, which runs CI twice for
 each pull request, but only once for each branch.
 
 
+== Azure Pipelines
 
 Azure Pipelines terminology:
  * A pipeline is one or more stages.
@@ -38,8 +44,10 @@ In Azure Pipelines, to run CI for a new GitHub project, do:
 Travis vs. Azure environment variables:
 https://docs.microsoft.com/en-us/azure/devops/pipelines/migrate/from-travis?view=azure-devops
 
-Azure's mechanism for sharing files/directories between stages or jobs within a pipeline is to use "artifacts".  They are somewhat limited: 
-"Subdirectories of the specified path will not be published. Wildcards in the path are not supported."
+Azure's mechanism for sharing files/directories between stages or jobs
+within a pipeline is to use "artifacts".  They are somewhat limited:
+"Subdirectories of the specified path will not be published. Wildcards
+in the path are not supported."
 I could zip up a directory and then unzip after downloading.
 
 Azure Pipelines runs a Docker image in a container with a weird user and
@@ -48,6 +56,25 @@ permissions -- different than just running the docker image normally.
 Azure pipelines skips the whole CI job if any message in any commit (even
 in a merge) contains "[ci skip]".  This can cause many jobs to be skipped
 that should not be.
+
+Azure Pipelines allocates resources depending on the Microsoft user ID that
+created the Azure Pipeline.  Therefore, to avoid having many unrelated
+projects (Checker Framework, Daikon, Randoop) competing for the same CI
+resources, I created an account for each of them, then created their Azure
+Pipelines in that account.
+.
+For each project, I need to
+ * create a Gmail address such as "mernstrandoop"
+    * forward all mail from the new Gmail address to me
+ * create a GitHub account
+    * In my real account, make the GitHub account an owner for the organization (use the "people" tab).
+ * create an Azure account
+    * Be sure to click "Sign in with GitHub"
+    * Create a project named randoop (not mernstrandoop)
+    * add my regular email address (eg, mernst@alum.mit.edu) to the team
+ * Create the pipelines
+    * delete old project from my personal Azure account, where they were competing for the same small resources.
+
 
 
 == CircleCI
