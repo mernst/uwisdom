@@ -1004,7 +1004,7 @@ time, virtual memory, etc.
 
 In general, a bash script should contain this at the top:
 ```
-  set -o errexit -o nounset -o xtrace
+  set -o errexit -o nounset -o pipefail -o xtrace
 ```
 
 To get a shell in which none of your personal customizations (environment
