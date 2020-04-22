@@ -2897,5 +2897,12 @@ To use GraphViz to convert a .dot file to a .pdf file:
 dot -T pdf -O filename.dot
 ```
 
+To find all files that contain one string (stringA) but not another (stringB):
+```
+grep -L stringB $(grep -l stringA FILENAMES)
+```
+In all files in the directory or subdirectories:
+grep -L stringB $(grep -l -R stringA .)
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

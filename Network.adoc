@@ -415,3 +415,6 @@ C++ for the Impatient by Overland
 
 Cloud credits for research from AWS and EC2, for experiments:
 https://aws.amazon.com/research-credits/
+
+To import an ical file into Google Calendar:
+https://support.google.com/calendar/answer/37118?co=GENIE.Platform%3DDesktop&hl=en&oco=0
