@@ -1883,6 +1883,11 @@ Ways to convert LaTeX to plaintext:
  * convert to PDF (disabling hyphenation), then use pdftotext
  * use pandoc
 
+To make cleveref use a serial comma (sometimes called an Oxford comma):
+```
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+```
+
 To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
 `\newcommand{\crefrangeconjunction}{--}`
 to the preamble of the document.
@@ -1894,6 +1899,7 @@ Alternately, do this:
 \crefrangelabelformat{equation}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
 \crefrangelabelformat{figure}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
 ```
+
 
 When using the cleveref package, use \Cref at the beginning of a sentence,
 where you would capitalize a word.  Use \cref elsewhere, where you would
@@ -2004,6 +2010,17 @@ LaTeX font sizes:
 \huge
 \Huge
 ```
+
+In LaTeX, `~' is a non-breaking space.  It should never be adjacent to
+another space.  For example, do not write `text ~\cite{ref}` because that
+will put two spaces between "text" and the citation, which looks bad.
+Instead, write `text~\cite{ref}`.  Similarly, do not write `Figure
+~\ref{fig:beautiful}` but write `Figure~\ref{fig:beautiful}`.
+
+In LaTeX, always jam `\footnote` against the preceding text.  If you write
+`text \footnote{...}`, then there is an ugly space between the text and the
+footnote mark, and LaTeX might even put a line break or a page break
+between them.
 
 
 // Please put new content in the appropriate section above, don't just

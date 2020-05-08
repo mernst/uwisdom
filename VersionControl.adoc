@@ -5,6 +5,12 @@
 toc::[]
 
 
+Please don't write very long lines in projects that are under version
+control.  The long lines make no difference to LaTeX, but putting an entire
+paragraph in one line guarantees a merge conflict if two people make
+unrelated changes in different sentences of the paragraph.
+
+
 == Git
 
 In git,
