@@ -708,6 +708,7 @@ computations into a local variable before doing the string concatenation.
 (Or just use a StringBuilder directly, rather than repeated string
 concatation.
 
+`jshell` is a Java interpreter or REPL (read-eval-print loop).
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
