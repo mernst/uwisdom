@@ -232,6 +232,19 @@ gitlab.cs.washington.edu does not support adding collaborators by email
 address (even though that is an option in the webpage UI, as of August
 2019).  You need to give each collaborator a CSE research guest account.
 
+At UW CSE, preparation for a general exam proceeds like this:
+ * 8 weeks before: committee provides the charge (the instructions to the candidate)
+ * 2 weeks before: candidate distributes document
+ * committee members read the document and give feedback
+ * candidate prepares and practices a talk
+The general exam itself proceeds like this:
+ * Candidate presents a 30-40 minute talk.  Questions are common and accepted, so the talk often runs as much as 90 minutes.  This is a reason that the candidate should not prepare a longer talk.
+ * Open questions from anyone in the room.
+ * Everyone except the candidate and the committee leaves the room.
+ * The committee may ask more questions.  These can sometimes be pointed, such as pressing the candidate on incomplete or unclear presentation or understanding.  The goal is never to be malicious, but to identify how to improve the work.
+ * The candidate leaves the room.  The committee discusses what feedback to give (including whether the work should be expanded, contracted, or changed in other ways) and how to help the candidate successfully complete a high-quality PhD.
+ * It is exceptionally rare for a candidate not to pass the general exam.  The focus is on improving the work and setting up the candidate for success, not on being a gating function.
+
 
 == CSE sysadmin
 
