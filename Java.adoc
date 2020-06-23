@@ -49,29 +49,25 @@ For example:
   run
 ----
 
-Here are Emacs commands for replacing JUnit assertions with Hamcrest
-versions that produce more readable output.  The Hamcrest code can be
-harder to read, but the error messages can be clearer.  Depending on
-the use case, this may be a worthwhile tradeoff.
-----
-(tags-query-replace "assertFalse(\\(\".*\",\\)
-\\([ 	]*\\) \\(.*\\)\\.equals(\\(.*\\)));
-" "assertThat(\\1
-\\2\\3, not(\\4));
-")
-(tags-query-replace "assertTrue(!\\(.*\\)\\.equals(\\(.*\\)));" "assertThat(\\1, not(\\2));")
-(tags-query-replace "assertFalse(\\([^\"].*\\)\\.equals(\\(.*\\)));" "assertThat(\\1, not(\\2));")
-(tags-query-replace "assertTrue(\\([^\"].*\\)\\.equals(\\(.*\\)));" "assertEquals(\\1, \\2);")
-(tags-query-replace "assertTrue(\\([^\"].*\\) == \\(.*\\));" "assertEquals(\\1, \\2);")
-(tags-query-replace "assertTrue(\\(\".*\"\\), !\\(.*\\)\\.equals(\\(.*\\)));" "assertThat(\\1, \\2, not(\\3));")
-(tags-query-replace "assertTrue\\( ?\\)(\\(\".*\"\\),\\( \\|
- *\\)!\\(.*\\)\\.equals ?(\\(.*\\)));" "assertThat\\1(\\2,\\3\\4, not(\\5));")
-(tags-query-replace "assertTrue\\( ?\\)(\\(\".*\"\\),\\( \\|
- *\\)\\(.*\\)\\.equals ?(\\(.*\\)));" "assertEquals\\1(\\2,\\3\\4, \\5);")
-(tags-query-replace "assertTrue\\( ?\\)(\\(\".*\"\\),\\( \\|
- *\\)\\(.*\\) == \\(.*\\));" "assertEquals\\1(\\2,\\3\\4, \\5);")
-----
-
+Upgrading from JUnit 4 to JUnit 5:
+Gradle buildfile logic:
+```
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter'
+        excludeEngines 'junit-vintage'
+    }
+}
+```
+Updating imports, using Emacs:
+```
+(tags-query-replace "import \\(static \\)?org.junit.Assert\\(\\..*\\);" "import \\1org.junit.jupiter.api.Assertions\\2;")
+(tags-query-replace "import \\(static \\)?org.junit.\\([A-Za-z]*\\);" "import \\1org.junit.jupiter.api.\\2;")
+```
 
 == Debugging
 
