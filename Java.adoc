@@ -29,11 +29,11 @@ used "invokestatic".
 == JUnit
 
 JUnit:  helps in writing Java test suites.  www.junit.org
-To run JUnit 4:
+To run JUnit 4 tests from the command line:
 ```
   java -cp .:junit.jar org.junit.runner.JUnitCore ps1.PublicTest
 ```
-To run JUnit 3:
+To run JUnit 3 tests from the command line:
 ```
   java -cp .:junit.jar junit.textui.TestRunner ps1.PublicTest
 ```
