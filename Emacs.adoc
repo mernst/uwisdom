@@ -94,6 +94,7 @@ way, but this works fine.)
 
 In gnus, "S o m" to forward/resend article via mail.
 
+In Mew: to copy a message from one account to another, run:  l i
 
 
 == Uncategorized Emacs wisdom
