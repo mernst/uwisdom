@@ -330,7 +330,20 @@ To convert a 1-page PDF to good-quality .gif:
   convert -density 300 -quality 100 file.pdf file.gif
 ```
 
-To create a multi-page set of tiles (each tile is letter size) that can be tiled together to make a poster:
+To create a multi-page set of tiles (each tile is letter size) that can be
+tiled together to make a poster, use `pdfposter`.
+...
+To print a USGS topographical quad map on 8 sheets of letter paper:
+```
+  BASENAME=foo
+  pdfcrop --margins '-20 -40 -40 -200' ${BASENAME}.pdf
+  pdfposter -p3x3Let ${BASENAME}-crop.pdf ${BASENAME}-crop-poster.pdf
+```
+A problem is that this doesn't respect the printable area of the printer.
+See http://leolca.blogspot.com/2010/06/pdfposter.html .
+.
+Here are older commands that use `poster`, from when I wasn't able to get the
+pdfposter program to work, so I converted to PostScript and used poster instead:
 ```
   pdftops madrid-transport-center-2009.pdf
   poster -v -mA4 -s1.3 madrid-transport-center-2009.ps > madrid-transport-center-2009-tiled-scaled1.3.ps
@@ -344,8 +357,6 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
   poster -v -mletter -s1.2 ${BASENAME}-crop.ps > ${BASENAME}-scaled1.2.ps
   ps2pdf ${BASENAME}-scaled1.2.ps
 ```
-(I wasn't able to get the pdfposter program to work, so I converted to
-PostScript and used poster instead.)
 
 To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
 to the end of the link's URL.
