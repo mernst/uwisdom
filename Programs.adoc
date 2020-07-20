@@ -331,7 +331,7 @@ To convert a 1-page PDF to good-quality .gif:
 ```
 
 To create a multi-page set of tiles (each tile is letter size) that can be
-tiled together to make a poster, use `pdfposter`.
+tiled together to make a poster, use `pdfposter`, eg `pdfposter -p3x3Let in.pdf out.pdf`.
 ...
 To print a USGS topographical quad map on 8 sheets of letter paper:
 ```
