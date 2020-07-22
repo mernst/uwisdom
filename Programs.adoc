@@ -1094,6 +1094,14 @@ python-style:
 	pylint -f parseable --disable=W,invalid-name ${PYTHON_FILES}
 ```
 
+Use a directive to disable a certain instance of a shellcheck warning/error:
+```
+hexToAscii() {
+  # shellcheck disable=SC2059
+  printf "\x$1"
+}
+```
+
 To create a "here document"
 ```
 cat > myfile.txt <<END
