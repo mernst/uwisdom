@@ -2821,7 +2821,12 @@ curl vs wget:
  * `wget -N` (only download if newer)
    ```curl -L -R -o "$file" -z "$file" "$serverurl"```
 
-If rg matches files within the `.git` directory, then add this to the `.gitignore` file:
+To restrict ripgrep to searching only files with given names:
+```
+rg --iglob ControlFlowGraph.java "void checkRep"
+```
+
+If ripgrep matches files within the `.git` directory, then add this to the `.gitignore` file:
 ```
 # rg needs this:  https://github.com/BurntSushi/ripgrep/issues/1040
 .git/
