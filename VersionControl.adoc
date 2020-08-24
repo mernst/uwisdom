@@ -542,6 +542,8 @@ git commit --author "Real Author <ra@email.com>"
 To view a GitHub pull request as a diff/patch file, just add `.diff` or `.patch`
 to the end of the URL.
 
+If you enable “Automatically delete head branches” in the repository settings of your GitHub fork, then you don't have to manually delete the branch after your pull request is merged.
+
 
 == GitLab (Git-specific and GitHub-specific items go above)
 
