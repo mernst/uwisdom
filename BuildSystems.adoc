@@ -379,7 +379,7 @@ task tags(type: Exec, dependsOn: 'clone') {
 }
 ```
 
-To replace a remote dependency by a local one in Gradle, do:
+To replace a remote dependency (e.g., in Maven Central) by a local one (a file) in Gradle, do:
 ```
 implementation files('libs/options-0.2.2-all.jar')
 ```
