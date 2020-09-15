@@ -2022,6 +2022,27 @@ In LaTeX, always jam `\footnote` against the preceding text.  If you write
 footnote mark, and LaTeX might even put a line break or a page break
 between them.
 
+This change prevents an "underfull hbox" warning.
+I need to see whether it is still needed with the latest acmart.cls:
+~/tex/acmart-fork-mernst-branch-linenumbers-underfull-hbox/
+diff --git a/pldi18/acmart.cls b/pldi18/acmart.cls
+index b97409f..17ec5fb 100644
+--- a/pldi18/acmart.cls
++++ b/pldi18/acmart.cls
+@@ -1829,10 +1829,10 @@ Computing Machinery]
+   \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{%
+       \newlength\ACM@linecount@bxht\setlength{\ACM@linecount@bxht}{-\baselineskip}
+       \@tempcnta\@ne\relax
+-      \loop{\color{ACMRed}\scriptsize\the\@tempcnta}\\
++      \loop{\color{ACMRed}\scriptsize\the\@tempcnta}
+       \advance\@tempcnta by \@ne
+       \addtolength{\ACM@linecount@bxht}{\baselineskip}
+-      \ifdim\ACM@linecount@bxht<\textheight\repeat}}
++      \ifdim\ACM@linecount@bxht<\textheight\\\repeat}}
+ \fi
+ \def\ACM@linecount{%
+   \if@ACM@review
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
