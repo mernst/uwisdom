@@ -304,25 +304,6 @@ editor, etc.), working offline, etc.
 Coveralls (https://coveralls.io/) reports test coverage.
 For Java, it requires Maven.
 
-Code review tools:
-GitHub pull requests: not terrible
-RBCommons (OK, but not enough better than GitHub pull requests that it is worth money)
-Phabricator: some people rave about it.
-  It can integrate with shipshape, the open-source version of tricorder.
-  Code Reviews with Phabricator: 
-   * The tool to create and review patches in Phabricator is called Differential.
-   * Phabricator has a tool called Arcanist to upload patches from the command line. To get you set up, follow the Arcanist Quick Start instructions.
-  Phabricator hosting:
-   * paid hosting, from the creators: phacility.com
-   * Free Phabricator hosting (for open source, cheap otherwise): phoreplay.com
-   * Cloudpipes: Integrate GitHub with Phabricator (in invite-only beta as of
-     5/2015 and 7/6/2015).  https://www.cloudpipes.com/invite
-Gerrit (https://www.gerritcodereview.com/) doesn't seem like as good a choice:
-  some people say it has an UI, and it isn't as widely used.  There is GitHub integration:  http://gerrithub.io/
-Reviewable: https://reviewable.io.  Gives me the creeps because they put
-  people's quotes on their webpage as if they are endorsements, when those
-  quotes are from people who never used Reviewable.
-
 To search for source code (in approximate order of preference):
  * SearchCode
  * GitHub search
