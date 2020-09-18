@@ -544,6 +544,8 @@ to the end of the URL.
 
 If you enable “Automatically delete head branches” in the repository settings of your GitHub fork, then you don't have to manually delete the branch after your pull request is merged.
 
+When making a GitHub pull request, if you do work in your own GitHub fork, then continuous integration will complete faster.  The reason is that the "branch" continuous integration job will run against your personal CI quota, and the "pull request" continuous integration job will run against the upstream project's CI quota.
+
 
 == GitLab (Git-specific and GitHub-specific items go above)
 
