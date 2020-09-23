@@ -1094,7 +1094,7 @@ python-style:
 	pylint -f parseable --disable=W,invalid-name ${PYTHON_FILES}
 ```
 
-Use a directive to disable a certain instance of a shellcheck warning/error:
+Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
 ```
 hexToAscii() {
   # shellcheck disable=SC2059
