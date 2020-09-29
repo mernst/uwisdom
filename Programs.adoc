@@ -2926,7 +2926,18 @@ To find all files that contain one string (stringA) but not another (stringB):
 grep -L stringB $(grep -l stringA FILENAMES)
 ```
 In all files in the directory or subdirectories:
+```
 grep -L stringB $(grep -l -R stringA .)
+```
+
+Screen recording:
+* kazam always gives me a black screen
+* recordmydesktop: creates .ogv files that fail in subsequent conversion with "Broken file, keyframe not correctly marked.".
+```
+recordmydesktop --fps 15 --delay 10 -o myfile.ogv
+```
+* simplescreenrecorder: I haven't tried it yet.
+  To install: `sudo apt install simplescreenrecorder`
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
