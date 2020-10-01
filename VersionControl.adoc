@@ -549,6 +549,9 @@ When making a GitHub pull request, if you do work in your own GitHub fork, then 
 
 == GitLab (Git-specific and GitHub-specific items go above)
 
+To enable Gitlab commit/push notifications by email:
+Settings >> integrations >> emails on push
+
 In GitLab, only users with the Master role are allowed to push a merge to a "protected branch".
 The master branch is protected by default.
 If you get this error:
