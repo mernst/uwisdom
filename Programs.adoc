@@ -2253,13 +2253,13 @@ Concrete example:
   openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
 ```
 
-To encrypt/decrypt a file symmetrically with GPG:
+To encrypt/decrypt a file symmetrically with GPG (but I have had trouble with it):
 ```
   gpg --output encrypted.data --symmetric --cipher-algo AES256 un_encrypted.data
   gpg --output un_encrypted.data --decrypt encrypted.data
 ``
 
-To encrypt a file symmetrically with openssl (but GPG may be a better choice):
+To encrypt a file symmetrically with openssl:
 ```
   openssl enc -aes256 -pbkdf2 -e -in lastpass.csv-`date +\%Y\%m\%d` -out lastpass.csv-`date +\%Y\%m\%d`.aes256
 ```
