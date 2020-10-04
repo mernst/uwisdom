@@ -566,6 +566,8 @@ here are two possibilities:
  * run `gradle --stop` to stop all daemons
  * delete the project's `.gradle` directory
 
+```./gradlew PublishToMavenLocal``` publishes a snapshot release.
+
 
 === displaying dependencies
 
