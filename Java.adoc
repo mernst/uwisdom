@@ -352,8 +352,8 @@ To get a copy of the JDK 7 source:
 
 Major version number for the Java class file format (JVM version number):
 ----
-  J2SE 17.0 = 61 (0x3d hex)   [to be released September 2020; likely LTS version]
-  J2SE 16.0 = 60 (0x3c hex)   [to be released March 2020]
+  J2SE 17.0 = 61 (0x3d hex)   [to be released September 2021; likely LTS version]
+  J2SE 16.0 = 60 (0x3c hex)   [to be released March 2021]
   J2SE 15.0 = 59 (0x3b hex)   [to be released September 2020]
   J2SE 14.0 = 58 (0x3a hex)   [to be released March 2020]
   J2SE 13.0 = 57 (0x39 hex)   [released September 2019]
