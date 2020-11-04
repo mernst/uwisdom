@@ -379,15 +379,30 @@ task tags(type: Exec, dependsOn: 'clone') {
 }
 ```
 
+How to publish a snapshot release to a local repository.
+If your project uses the 'maven-publish' plugin:
+```
+./gradlew PublishToMavenLocal
+```
+(For the Checker Framework, the command is `./gradlew deployArtifactsToLocalRepo`.)
+Projects that use the snapshot need:
+```
+  repositories {
+    mavenLocal()
+  }
+```
+
 To replace a remote dependency (e.g., in Maven Central) by a local one (a file) in Gradle, do:
 ```
 implementation files('libs/options-0.2.2-all.jar')
 ```
+But, it is usually better to install a snapshot version in a local Gradle
+repository, then use that snapshot version number in your Gradle build file.
 
 To test a new version of a Gradle dependency locally, you have several options:
 \nobreak
 
- * create a local Gradle repository
+ * install a version (maybe a snapshot version) in a local Gradle repository
  * Edit the build.gradle file, for instance by changing
    ```implementation 'org.plumelib:bcel-util:1.1.3'```
    to 
@@ -565,8 +580,6 @@ Could not create service of type DefaultGeneralCompileCaches using GradleScopeCo
 here are two possibilities:
  * run `gradle --stop` to stop all daemons
  * delete the project's `.gradle` directory
-
-```./gradlew PublishToMavenLocal``` publishes a snapshot release.
 
 
 === displaying dependencies
