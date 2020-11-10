@@ -240,11 +240,11 @@ Perhaps it only works under NetBeans.
 == Pretty-printers/decompilers for .class files
 
 Java decompiler CFR:
-cd ~/tmp
-wget https://github.com/leibnitz27/cfr/releases/download/0.148/cfr-0.148.jar
+(cd ~/tmp && wget https://github.com/leibnitz27/cfr/releases/download/0.148/cfr-0.148.jar)
 java -jar ~/tmp/cfr-0.148.jar ...
 
 As of 2019, IntelliJ uses Fernflower
+A clone is at https://github.com/fesh0r/fernflower
 
 As of 9/2009, a survey paper "An evaluation of current Java bytecode
 decompilers", by Hamilton and Danicic (appears in SCAM 2009), recommends:
