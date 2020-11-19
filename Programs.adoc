@@ -921,11 +921,6 @@ https://gist.github.com/deshion/10d3cb5f88a21671e17a
 Redirecting output in command shells:
 //nobreak
 
-* In csh/tcsh:
-   ** To overwrite an existing file, redirect via ">!" instead of ">".
-   ** To redirect both standard error and standard output to a file,
-      use ">&" (">" redirects just standard output to the file).
-   ** To redirect standard error and output through the pipe, use "|&".
 * In sh/bash:
    ** To redirect standard error to standard output, use "2>&1".
       Warning:  this must come after any file redirection:  "cmd > file 2>&1".
@@ -937,11 +932,16 @@ Redirecting output in command shells:
      There are simpler commands in bash, but they don't work in sh.
    ** To redirect standard error to a file, use "2>filename".
      For more details, see http://tomecat.com/jeffy/tttt/shredir.html
+* In csh/tcsh:
+   ** To overwrite an existing file, redirect via ">!" instead of ">".
+   ** To redirect both standard error and standard output to a file,
+      use ">&" (">" redirects just standard output to the file).
+   ** To redirect standard error and output through the pipe, use "|&".
 
-In csh shell scripts, `$*` means all the arguments.
-In bash shell scripts, `"$@"` is preferred, because it quotes each argument
+In bash shell scripts, `"$@"` mans all the arguments, and it quotes each argument
 individually before concatenating them (separated by spaces).
 In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".
+In csh shell scripts, `$*` means all the arguments.
 
 In bash, interactive shells call `.bashrc`; noninteractive shells call
 `.bash_profile`.
