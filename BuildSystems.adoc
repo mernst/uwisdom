@@ -369,6 +369,8 @@ find it in the voluminous debug output, though.
 Gradle's `--dry-run` only shows the tasks that would have run, not their
 actions/commands like make's `--dry-run` does.
 
+If Gradle crashes, try deleting the project's .gradle/ directory.
+
 Gradle task to create a TAGS table:
 ```
 /* Make Emacs TAGS table */
