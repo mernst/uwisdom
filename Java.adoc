@@ -710,6 +710,13 @@ In Java, an array's component type is the type of values retrieved directly from
 An array's element type is a non-array type, obtained by taking component types as long as possible.
 For example, the component type of `int[][]` is `int[]`, but its element type is `int`.
 
+The `map` function over a list is implemented in Java as:
+`
+Collection<E> c = ...
+Object[] mapped = c.stream().map(e -> doMap(e)).toArray();
+List<E> mapped = c.stream().map(e -> doMap(e)).collect(Collectors.toList());
+`
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
