@@ -583,6 +583,18 @@ here are two possibilities:
  * run `gradle --stop` to stop all daemons
  * delete the project's `.gradle` directory
 
+In gradle, to debug exec tasks:
+```
+// Print the command line of each exec task before executing, for debugging.
+allprojects {
+  tasks.withType(Exec) {
+    doFirst {
+      println commandLine
+    }
+  }
+}
+```
+
 
 === displaying dependencies
 
