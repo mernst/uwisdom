@@ -2939,5 +2939,11 @@ recordmydesktop --fps 15 --delay 10 -o myfile.ogv
 * simplescreenrecorder: I haven't tried it yet.
   To install: `sudo apt install simplescreenrecorder`
 
+Printing all lines after a match in sed:
+```
+sed -ne '/pattern/,$ p'
+```
+This is similar to my old `lines-after` script.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
