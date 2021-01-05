@@ -259,6 +259,12 @@ GitHub Actions offers free 2000 Linux minutes per month for public repositories.
 Each virtual machine has a 2-core CPU with 7 GB of RAM
   Details at https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners .
 
+A problem with GitHub Actions is that it offers only a "Re-run all jobs" option,
+but no "Re-run failing jobs" option.  That means that if a job is flaky, it is
+expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
+time can *cause* flakiness as they all attempt to retrieve the same network
+resource, so on the re-run, the same or a different job may fail.
+
 == GitLab CI runners
 
 GitLab CI coordinates runners, farms out work to them, and keeps track build histories and whatnot, but doesn't do the build itself.
