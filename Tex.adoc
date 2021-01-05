@@ -146,6 +146,10 @@ the *inside* of the multicolumn, as in:
 ```
    \multicolumn{3}{l}{\hskip-\tabcolsep...}
 ```
+Here is a "MultiColumn, One, Centered" macro:
+```
+  \newcommand{\mcoc}[1]{\multicolumn{1}{c|}{#1}}
+```
 To span multiple rows (as with the HTML "rowspan" attribute), use
 \multirow:
 ```
