@@ -595,6 +595,13 @@ allprojects {
 }
 ```
 
+In Checker Framework Gradle plugin, can set max heap space (max memory usage) via:
+```
+compile.options.forkOptions.jvmArgs += [
+            "-Xmx1g"
+          ]
+```
+
 
 === displaying dependencies
 
