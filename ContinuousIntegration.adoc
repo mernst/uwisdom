@@ -115,6 +115,8 @@ Advanced Settings >>
 Can also enable auto-cancel for pushes:
 https://circleci.com/docs/2.0/skip-build/
 
+I can't figure out how to get CircleCI's matrix feature to work, and I
+cannot find any examples on the Web.
 
 
 == Travis CI
@@ -252,18 +254,21 @@ GitHub Workflows CI is easy to set up: just commit a file to `.github/workflows/
 Beware that the default/suggested setup file only does CI on the master branch!
 
 GitHub Actions offers free 2000 Linux minutes per month for public repositories.
-  At 1 hour per build, that's one build per day.  (In other words, it's very little!)
+  That's 1 hour per day.
   A macOS minutes costs 10 Linux minutes.
   A Windows minute costs 2 Linux minutes.
   Details at https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages .
 Each virtual machine has a 2-core CPU with 7 GB of RAM
   Details at https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners .
 
-A problem with GitHub Actions is that it offers only a "Re-run all jobs" option,
-but no "Re-run failing jobs" option.  That means that if a job is flaky, it is
-expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
-time can *cause* flakiness as they all attempt to retrieve the same network
-resource, so on the re-run, the same or a different job may fail.
+GitHub Actions is problematic if you have flaky jobs.
+ * GitHub Actions halts all jobs if any job fails.
+ * GitHub Actions offers only a "Re-run all jobs" option,
+   but no "Re-run failing jobs" option.  That means that if a job is flaky, it is
+   expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
+   time can *cause* flakiness as they all attempt to retrieve the same network
+   resource, so on the re-run, the same or a different job may fail.
+
 
 == GitLab CI runners
 

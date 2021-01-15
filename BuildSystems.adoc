@@ -603,16 +603,21 @@ compile.options.forkOptions.jvmArgs += [
 ```
 
 To provide more memory to Java processes started by Gradle such as Checker
-Framework runs (but this has an effect only if Gradle provides provides no
-`-Xmx` argument when greating the forked process):
+Framework runs:
 ```
-JAVA_TOOL_OPTS="-Xmx2g" ./gradlew build javadoc
+tasks.withType(JavaCompile).configureEach {
+  options.forkOptions.jvmArgs += "-Xmx2g"
+}
 ```
 To provide more memory (maximum heap size) to Gradle itself from the command
 line (`GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle):
 ```
 GRADLE_OPTS="-Xmx2g" ./gradlew build javadoc
 ```
+There is also `JAVA_TOOL_OPTS` which works for all Java processes (java, jar,
+javac, but it has no effect if (command-line) arguments are passed.
+```
+JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
 
 
 === Displaying Gradle dependencies
