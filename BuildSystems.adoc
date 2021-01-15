@@ -602,13 +602,20 @@ compile.options.forkOptions.jvmArgs += [
           ]
 ```
 
-To provide more memory (maximum heap size) to Gradle from the command line:
+To provide more memory to Java processes started by Gradle such as Checker
+Framework runs (but this has an effect only if Gradle provides provides no
+`-Xmx` argument when greating the forked process):
+```
+JAVA_TOOL_OPTS="-Xmx2g" ./gradlew build javadoc
+```
+To provide more memory (maximum heap size) to Gradle itself from the command
+line (`GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle):
 ```
 GRADLE_OPTS="-Xmx2g" ./gradlew build javadoc
 ```
 
 
-=== displaying dependencies
+=== Displaying Gradle dependencies
 
 To print/show the classpath that Gradle uses:
 From within the `build.gradle` file:
