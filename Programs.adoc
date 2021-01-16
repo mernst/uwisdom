@@ -2628,7 +2628,7 @@ directly:
   eval other-program "${my_variable}"
 ```
 
-To determine which version of RedHat/Fedora I am running:
+To determine which version of RedHat/Fedora/CentOS I am running:
 ```
   cat /etc/redhat-release 
 ```
