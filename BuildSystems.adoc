@@ -615,7 +615,8 @@ line (`GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle):
 GRADLE_OPTS="-Xmx2g" ./gradlew build javadoc
 ```
 There is also `JAVA_TOOL_OPTS` which works for all Java processes (java, jar,
-javac, but it has no effect if (command-line) arguments are passed.
+javac, but it is overridden by any command-line arguments that are passed by
+Gradle when calling the subprocess:
 ```
 JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
 
