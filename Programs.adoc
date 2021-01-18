@@ -983,6 +983,17 @@ It's also possible to set these when running the script:
   sh -xv myscript.sh
 ```
 
+By default, a shell script continues if a command within it fails.  This is
+highly error-prone.  Therefore, almost all shell scripts should start with
+```
+set -e 
+```
+If it's a bash script (bash 3.0 or later), it should also contain
+```
+set -o pipefail
+```
+If there is a command that is allowed to fail, add `|| true` at its end.
+
 To get bash 3.0 to fail if any command in a pipeline fails, do
 ```
   set -o pipefail
