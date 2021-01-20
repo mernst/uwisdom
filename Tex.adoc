@@ -956,6 +956,14 @@ Testing whether a file exists, for both LaTeX and Hevea:
 
 == Fonts
 
+The default LaTeX fonts look bad on-screen.  Consider this alternative; the
+"bitstream-charter" font family was designed to be good on screen.
+```
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+```
+
 In LaTeX, rather than
 ```
   \usepackage{times}
