@@ -75,6 +75,7 @@ For each project, I need to
  * Create the pipelines
     * delete old project from my personal Azure account, where they were competing for the same small resources.
 
+Azure Container Registry costs money.
 
 
 == CircleCI
