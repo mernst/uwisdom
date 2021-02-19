@@ -665,24 +665,21 @@ From the command line, this only lists the dependency names and version numbers,
 To copy a locally-built Checker Framework to the Gradle and Maven local caches:
 (Must update gradle directory names when updating $VER!)
 ```
-VER=2.8.1 && \
+VER=3.10.0 && \
 (cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/8b9453fbd9a1dff5aa1cad2c2ea4d0a8434b1db1/checker-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/eb2e8ab75598548cc8acf9a1ca227e480e01881e/checker-qual-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/99c6219b7688d0e01f3d6eab920392d4c1ce8d2d/jdk8-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.m2/repository/org/checkerframework/checker/${VER}/checker-${VER}.jar && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker-qual.jar ~/.m2/repository/org/checkerframework/checker-qual/${VER}/checker-qual-${VER}.jar && \
-\cp -pf $CHECKERFRAMEWORK/checker/dist/jdk8.jar ~/.m2/repository/org/checkerframework/jdk8/${VER}/jdk8-${VER}.jar
+true
 ```
 .
 To clean the Gradle and Maven local caches (rarely needed):
 ```
-VER=2.8.1 && \
+VER=3.10.0 && \
 rm -rf \
   ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/ \
   ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker-qual/${VER}/ \
-  ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/jdk8/${VER}/ \
   ~/.m2/repository/org/checkerframework/checker/${VER}/ \
   ~/.m2/repository/org/checkerframework/checker-qual/${VER}/ \
-  ~/.m2/repository/org/checkerframework/jdk8/${VER}/
 ```
