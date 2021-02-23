@@ -593,7 +593,7 @@ or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
 == Hyphenization; word, line, and page breaking
 
 raymond@sunkist.berkeley.edu (Raymond Chen) says:
-To prevent word breaking (hyphenation) in (La)TeX, \hypenpenalty=10000
+To prevent word breaking (hyphenation) in (La)TeX, \hyphenpenalty=10000
 Note, however, that although it'll work, it ain't exactly the nicest
 thing to do to your CPU :-) +
 Reason:  TeX will go ahead and hyphenate all the words in your
