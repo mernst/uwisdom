@@ -1781,7 +1781,12 @@ rather than
 ```
 because the latter would leave a space before the period when todo comments
 are disabled.
-(An alternate definition would be
+Another way to say this is to always jam \todo against surrounding text
+(either before or after, it doesn't matter).  If there is space both before
+and after \todo, then when \todo is turned off, there are two spaces rather
+than one at that location.
+.
+(An alternate definition of \todo would be
 `\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`
 but that executes \leavevmode and so it cannot span paragraphs.)
 
