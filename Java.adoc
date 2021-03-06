@@ -174,9 +174,10 @@ from the declaration.
 
 == javac
 
-javac is a java class that runs on a JVM, and you can pass parameters to
-that JVM using the -J argument.  In particular, you can pass -J-Xmx1024M to
-give the JVM a gigabyte of memory for the heap.
+javac is a script that runs a Java program that runs on a JVM, and you can
+pass command-line arguments to that JVM using the `-J` command-line
+argument.  In particular, you can pass `-J-Xmx1024M` to give the JVM a
+gigabyte of memory for the heap.
 
 The command
 ----
