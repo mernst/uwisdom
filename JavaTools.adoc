@@ -695,7 +695,7 @@ Other profiling tools in the JDK are jconsole (time and space), jmap
 The Java Hotspot profiler is very fast but doesn't do attribution (only
 local counts of time spent, not transitive for all calls within the method).
 
-VisualVM for heap debugging.
+VisualVM is a well-regarded GUI for heap debugging.
 
 Eclipse's Memory Analyzer (MAT) is well-regarded for analyzing .hprof heap dumps.
 It can be run as a standalone application.  To install:
