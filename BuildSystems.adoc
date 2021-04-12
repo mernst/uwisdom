@@ -624,6 +624,9 @@ Gradle when calling the subprocess:
 ```
 JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
 
+For a task to show up in the output of `gradle tasks` or `gradlew tasks`,
+it must have a "group".
+
 
 === Displaying Gradle dependencies
 
