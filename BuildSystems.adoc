@@ -329,7 +329,7 @@ with Maven) and I couldn't get any of them to work despite significant
 effort.  Their error messages are extremely obscure, too.
 By contrast, Gradle has fewer plugins and I got one to work.
 
-To ignore test sounces altogether and not compile them:
+To ignore test sounrces altogether and not compile them:
 ```
 mvn -Dmaven.test.skip package
 ```
