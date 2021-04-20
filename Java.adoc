@@ -724,6 +724,10 @@ List<URI> classpath = new ClassGraph().getClasspathURIs();
 This is more reliable (works across JDK vernions) than 
 `((URLClassLoader) ClassLoader.getSystemClassLoader()).getURLs()`.
 
+From a shell or bash script, to determine or test the Java version number:
+```
+java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1
+```
 
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
