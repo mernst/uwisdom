@@ -363,9 +363,9 @@ directory, which will get reaped eventually when you graduate or leave UW.
 An undergrad (such as a TA) who wants to change such files must log in
 through vole.cs.washington.edu.
 
-If Google Chrome (chromium-browser) hangs, then complains about
-unresponsive pages, try:  `rm -rf ~/.cache`.
-Alternately, clear the relevant cookies from within Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
+If Google Chrome (proviously `chromium-browser`, now `google-chrome`) hangs,
+then complains about unresponsive pages, try:  `rm -rf ~/.cache`.
+Alternately, clear the relevant cookies from within Chrome/Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
 
 Cycle servers for UW CSE are:
 bam, boom, bicycle, tricycle, recycle
