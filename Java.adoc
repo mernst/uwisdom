@@ -28,6 +28,9 @@ used "invokestatic".
 
 == JUnit
 
+To migrate from JUnit 4 to JUnit 5:
+https://junit.org/junit5/docs/current/user-guide/#migrating-from-junit4
+
 JUnit:  helps in writing Java test suites.  www.junit.org
 To run JUnit 4 tests from the command line:
 ```
