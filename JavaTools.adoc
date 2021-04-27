@@ -677,6 +677,10 @@ jcmd can print a stack trace of a running Java program, at the current
 moment.
 This gives a poor man's version of profiling.
 
+Baeldung's 2018 overview:
+https://www.baeldung.com/java-profilers
+It mentions JProfiler, YourKit, VisualVM, and others with smaller market share.
+
 === Profilers in the JDK
 
 java -prof
@@ -715,8 +719,7 @@ Cost:
    in return for referencing them on the project web-page; see the "Open
    Source" tab at: http://www.yourkit.com/purchase/index.jsp
 
-Oracle's VisualVM (http://visualvm.java.net/); is built on NetBeans (but
-does not require it, I think).
+Oracle's VisualVM (http://visualvm.java.net/).
 
 jvmtop: https://github.com/patric-r/jvmtop
 

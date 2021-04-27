@@ -627,6 +627,11 @@ JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
 For a task to show up in the output of `gradle tasks` or `gradlew tasks`,
 it must have a "group".
 
+To run just some JUnit tests using Gradle:
+```
+./gradlew :systemTest --tests '*runCollectionsTest'
+```
+
 
 === Displaying Gradle dependencies
 
