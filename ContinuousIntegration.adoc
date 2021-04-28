@@ -119,6 +119,8 @@ https://circleci.com/docs/2.0/skip-build/
 I can't figure out how to get CircleCI's matrix feature to work, and I
 cannot find any examples on the Web.
 
+CircleCI: be sure to set "Build forked pull requests"
+
 
 == Travis CI
 

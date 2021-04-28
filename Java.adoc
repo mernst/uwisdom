@@ -348,6 +348,9 @@ is due to this JDK bug:
 https://bugs.openjdk.java.net/browse/JDK-8215542.
 It is fixed in JDK 9 ea b14 onwards.
 
+Always run Javadoc with -notimestamp, to minimize gratuitous diffs.
+A problem is that -notimestamp may get passed to doclets, so they need to be able to handle it.
+
 
 == Everything else
 
