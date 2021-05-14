@@ -417,6 +417,9 @@ A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be u
 Anonymous feedback for CSE courses:
 https://feedback.cs.washington.edu/
 
+A CSE lab-supported Linux machine running CentOS 8 is cremosa.cs.washington.edu.
+You can only log into it from another CSE machine, not from outside.
+
 
 %% Obsolete entries go here
 
