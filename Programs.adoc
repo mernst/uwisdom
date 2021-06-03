@@ -2961,5 +2961,10 @@ To uncolorize a file:
 sed -i.bak -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
 ```
 
+To turn a Docker image into a tarball:
+ * Build the Docker image locally; for example, `docker build -t <image-name>:latest .;
+ * Save it as a .tar.gz with `docker save <image-name> | gzip > foo.tar.gz`
+ * You can run that `.tar.gz` via `gunzip -c foo.tar.gz > foo.tar` followed by `docker load < foo.tar`
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
