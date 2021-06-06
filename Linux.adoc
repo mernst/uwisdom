@@ -111,11 +111,21 @@ To remove a user's account, do
 
 
 To figure out the version of Ubuntu you are running, do
+```
   System Settings >> System Information >> Overview
+```
 In previous versions of Ubuntu:
+```
   System >> About Ubuntu
+```
 From the command line:
+```
   lsb_release -a
+```
+If the `lsb_release` command is not installed, run
+```
+apt-get update && apt-get install -y lsb-release && apt-get clean all
+```
 
 Firefox 3.0 on etch requires gtk2-10.  A version of this exists
 at: peanut:/usr/local/firefox3.0/gtk2-10/usr/lib.  To enable
