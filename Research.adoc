@@ -49,7 +49,7 @@ It uses "error" to mean the magnitude or characterization of the
 discrepancy.
 
 
-ACM's ideosyncratic terminology:
+ACM's ideosyncratic terminology (this might have changed??):
 Repeat = same team, same artifacts.
 Replicate = new team, same artifacts.
 Reproduce = same research question, but new experiment.
