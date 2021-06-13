@@ -5,7 +5,12 @@
 // toc::[]
 
 
-Adapted from http://en.wikipedia.org/wiki/Dependability:
+The term "bug" has no established meaning, and different people use it to
+mean different things.  Therefore, it should not be used in technical
+writing.  (There are a very few exceptions, such as compound words with clear
+meaning: "bug report", "bug-finding tool", sometimes "bug fix".)
+.
+Here is terminology adapted from http://en.wikipedia.org/wiki/Dependability:
 //nobreak
 
 Defect::
