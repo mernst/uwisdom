@@ -540,6 +540,10 @@ To upgrade Gradle:
  * Look for deprecations (see below)
  * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build --warning-mode=all
  * Look for warnings
+ * ./gradlew wrapper --gradle-version 6.9 && ./gradlew build --warning-mode=all
+ * Look for warnings
+ * ./gradlew wrapper --gradle-version 7.1 && ./gradlew build --warning-mode=all
+ * Look for warnings
  * Look for deprecations (see below)
 .
 To look for deprecations:
