@@ -386,13 +386,13 @@ If your project uses the 'maven-publish' plugin:
 ```
 ./gradlew PublishToMavenLocal
 ```
-(For the Checker Framework, the command is `./gradlew deployArtifactsToLocalRepo`.)
 Projects that use the snapshot need:
 ```
   repositories {
     mavenLocal()
   }
 ```
+and may need to adjust the version number too.
 
 To replace a remote dependency (e.g., in Maven Central) by a local one (a file) in Gradle, do:
 ```
