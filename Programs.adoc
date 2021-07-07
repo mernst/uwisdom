@@ -1108,7 +1108,7 @@ python-style:
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
 ```
 hexToAscii() {
-  # shellcheck disable=SC2059
+  # shellcheck disable=SC2059 # Justification goes here.
   printf "\x$1"
 }
 ```
