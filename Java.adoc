@@ -716,10 +716,10 @@ Object[] mapped = c.stream().map(e -> doMap(e)).toArray();
 List<E> mapped = c.stream().map(e -> doMap(e)).collect(Collectors.toList());
 `
 
-To obtain the classpath at run time, on JDK 8 or JDK 11:
+To obtain the classpath at run time, on any JDK:
 ```
 dependencies {
-  implementation 'io.github.classgraph:classgraph:4.8.75'
+  implementation 'io.github.classgraph:classgraph:4.8.110'
 }
 ...
 import io.github.classgraph.ClassGraph;
