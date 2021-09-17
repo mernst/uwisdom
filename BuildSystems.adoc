@@ -311,6 +311,12 @@ To pass the -Xlint argument to javac when running from Ant, do:
       <compilerarg value="-Xlint"/>
 ```
 
+To run ant without parallelism, to avoid bugs like 
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=738789 :
+```
+ant -Doutgen.job.ant.opts=-XX:ActiveProcessorCount=1
+```
+
 
 == Maven and pom.xml
 
