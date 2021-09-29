@@ -736,6 +736,7 @@ List<E> mapped = c.stream().map(e -> doMap(e)).collect(Collectors.toList());
 
 To obtain the classpath at run time, on any JDK:
 ```
+# Get latest release number from https://github.com/classgraph/classgraph
 dependencies {
   implementation 'io.github.classgraph:classgraph:4.8.110'
 }
