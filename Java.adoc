@@ -242,6 +242,12 @@ warning: [options] bootstrap class path not set in conjunction with -source 1.7
 that results from command-line arguments `-source 7 -target 7`,
 supply the additional command-line argument: `-Xlint:-options`
 
+To resolve
+```warning: [classfile] MethodParameters attribute introduced in version 52.0 class files is ignored in version 51.0 class files```
+run javac with `-Xlint:-classfile`.
+This is only needed in Java 8, because the bug is fixed in Java 11:
+https://bugs.openjdk.java.net/browse/JDK-8190452
+
 
 == javadoc
 
