@@ -1589,6 +1589,21 @@ If a Docker container has no Internet (example message: "Temporary failure in na
 sudo service docker restart
 ```
 
+To turn a Docker image into a tarball:
+ * Build the Docker image locally; for example, `docker build -t <image-name>:latest .;
+ * Save it as a .tar.gz with `docker save <image-name> | gzip > foo.tar.gz`
+ * You can run that `.tar.gz` via `gunzip -c foo.tar.gz > foo.tar` followed by `docker load < foo.tar`
+
+If docker fails with
+```
+docker: Error response from daemon: cgroups: cgroup mountpoint does not exist: unknown.
+```
+then run:
+```
+sudo mkdir /sys/fs/cgroup/systemd
+sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+```
+
 
 == AsciiDoc format
 
@@ -2960,11 +2975,6 @@ To uncolorize a file:
 ```
 sed -i.bak -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
 ```
-
-To turn a Docker image into a tarball:
- * Build the Docker image locally; for example, `docker build -t <image-name>:latest .;
- * Save it as a .tar.gz with `docker save <image-name> | gzip > foo.tar.gz`
- * You can run that `.tar.gz` via `gunzip -c foo.tar.gz > foo.tar` followed by `docker load < foo.tar`
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
