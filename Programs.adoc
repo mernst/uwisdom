@@ -361,6 +361,12 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
 To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
 to the end of the link's URL.
 
+To combine/interleave two PDF files, one containing add pages scanned and the
+other containing even pages scanned in reverse order:
+```
+pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf
+```
+
 
 == Perl
 
