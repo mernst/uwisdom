@@ -1107,7 +1107,7 @@ Also consider adding:
 ```
 PYTHON_FILES=$(wildcard **/*.py)
 python-style:
-	yapf -i --style='{column_limit: 100}' ${PYTHON_FILES}
+	black ${PYTHON_FILES}
 	pylint -f parseable --disable=W,invalid-name ${PYTHON_FILES}
 ```
 
@@ -1693,7 +1693,7 @@ Typical Makefile rules to enforce Python style rules:
 ```
 PYTHON_FILES=myfile1.py myfile2.py
 python-style:
-	yapf -i --style='{column_limit: 100}' ${PYTHON_FILES}
+	black ${PYTHON_FILES}
 	pylint -f parseable --disable=W,line-too-long,invalid-name ${PYTHON_FILES}
 ```
 
