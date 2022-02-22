@@ -358,6 +358,12 @@ To update a project's Maven dependencies:
 mvn versions:use-latest-releases
 ```
 
+
+== Buck
+
+Pass `--version 8` to see the javac command line that buck issues.
+
+
 == Gradle and build.gradle
 
 The standard gradle target, which builds all artifacts and runs all tests, is
