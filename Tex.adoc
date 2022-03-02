@@ -2061,6 +2061,30 @@ index b97409f..17ec5fb 100644
    \if@ACM@review
 
 
+To typeset exercises and solutions in a LaTeX document:
+exercise package. -- last changed 2014
+  Seems good, documentation doesn't give concrete examples.
+answers package. -- last changed 2014
+  Does what I want, but the documentation is a bit lacking.
+  Section 4 of the documentation contains a MWE.
+  Often recommended.
+ans.sty -- last changed 1994
+  Supports only a subsection of exercises at the end of each section/chapter,
+  not exercises interspersed throughout the document.
+  Handles book document class.  A bit fiddly wrt carriage returns.
+ExSol package -- last changed 2018
+  Documentation gives examples.  Can be used with book class.
+  The MWEs at https://tex.stackexchange.com/questions/510760/how-to-sync-the-exsol-counter-with-the-section-value
+  both yield LaTeX errors for me.
+exercises package. -- last changed 2020
+  Does not permit answers at end of document.
+exam document class. -- last changed 2021
+  Not really for my use case, might not put answers at end.
+xsim package
+  Doesn't allow for printing at end of document, it seems.
+probsoln
+  For selecting problems from a database or bank of problems.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
 
