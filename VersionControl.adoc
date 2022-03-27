@@ -5,10 +5,12 @@
 toc::[]
 
 
-Please don't write very long lines in projects that are under version
-control.  The long lines make no difference to LaTeX, but putting an entire
-paragraph in one line guarantees a merge conflict if two people make
-unrelated changes in different sentences of the paragraph.
+When working with a line-based version control system such as Git, please don't
+write very long lines, such as one line containing the content of an entire
+paragraph.  Instead, insert line breaks within each paragraph to keep the file's
+lines to a limited length, by convention 80 columns.  These line breaks serve no
+purpose in organizing the text or in editing it, but they do help to prevent
+merge conflicts when multiple people edit different parts of a paragraph.
 
 
 == Git
