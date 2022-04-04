@@ -14,17 +14,22 @@ Here is terminology adapted from http://en.wikipedia.org/wiki/Dependability:
 //nobreak
 
 Defect::
-      A flaw, failing, or imperfection in a system, such as an incorrect design,
-      algorithm, or implementation.  Typically caused by a human mistake.
-      Sometimes known as a fault or bug, but those terms are ambiguous and
+      A defect is a flaw, failing, or imperfection in a system, such as an
+      incorrect design, algorithm, or implementation.  Typically caused by
+      a human mistake.  It is also known as a fault, and this is the most
+      common meaning for the term "bug", but those terms are ambiguous and
       should be avoided.
 Error::
-      An error is a discrepancy between the intended behavior of a system and
-      its actual behavior inside the system boundary, such as an incorrect
-      program state.  Not detectable without assert statements and the like.
+      An error is a discrepancy between the intended behavior of a system
+      and its actual behavior within the system, such as an incorrect
+      program state or an invocation of a procedure that is contrary to the
+      procedure's specification or contract.  Not detectable without assert
+      statements and the like.
 Failure::
       A failure is an instance in time when a system displays
-      behavior that is contrary to its specification.
+      behavior that is contrary to its specification.  It is a user-visible
+      error.  A non-user-visible error frequently leads to a failure later
+      in the execution.
 //nobreak
 
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
