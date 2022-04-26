@@ -77,6 +77,11 @@ For each project, I need to
 
 Azure Container Registry costs money.
 
+To enable the "run next" button in Azure Pipelines:
+1. Navigate to Organization Settings => Agent Pools to manage security for Org-Level agent pools.
+2. Set specific users as Admins for all agent pools or specific pools depending our needs.
+After doing this, it may take a few minutes for users to see the "run next" button.
+
 
 == CircleCI
 
