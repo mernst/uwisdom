@@ -294,6 +294,7 @@ http://www.cs.washington.edu/lab/www/MediaWiki.shtml
 To apply for a new UW CSE computer account at cs.washington.edu,
 the sponsor fills out a form at
   https://password.cs.washington.edu/account/csenetid/
+(I think the user gets to choose a preferred username.)
 A guest account is only permitted to use 25 MB of space, so:
 //nobreak
 
