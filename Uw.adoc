@@ -193,7 +193,8 @@ Instructions for maintaining UW CSE Drupal webpages/website:
 https://wasp.cs.washington.edu/Internal/plse-webpages.html
 
 If you want to send a message to UW CSE undergrads, send it to
-cs-ugrads@cs.  It will be posted to the blog within 24 hours.
+cs-ugrads@cs.  It will be posted to the EdStem (previously, to
+the blog) within 24 hours.
 If you have a time-sensitive message, you should send that to 
 cs-ugrads-urgent@cs.
 
