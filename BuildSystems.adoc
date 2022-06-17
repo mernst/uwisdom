@@ -648,6 +648,12 @@ To run just some JUnit tests using Gradle:
 ./gradlew :systemTest --tests '*runCollectionsTest'
 ```
 
+To use a locally-built version of a project:
+1. Set the version number to end with "-SNAPSHOT".
+2. Run `./gradlew publishToMavenLocal`
+3. In the client, update the version number
+   and add `mavenLocal()` to the `repositories {...}` block.
+
 
 === Displaying Gradle dependencies
 
