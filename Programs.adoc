@@ -1094,10 +1094,10 @@ The `shellcheck` program is a linter for sh and bash scripts.  Run like:
 There is also `checkbashisms`.
 Here are Makefile rules to run them:
 ```
-SH_SCRIPTS = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)sh' * | grep -v .git | grep -v "~" | grep -v addrfilter | grep -v mail-stackoverflow.sh)
+SH_SCRIPTS = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)sh' * | grep -v .git | grep -v "~" | grep -v addrfilter | grep -v cronic-orig | grep -v gradlew | grep -v mail-stackoverflow.sh)
 BASH_SCRIPTS = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)bash' * | grep -v .git | grep -v "~")
 shell-script-style:
-	shellcheck --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
 	checkbashisms ${SH_SCRIPTS}
 showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
