@@ -1490,7 +1490,7 @@ as the first set of commands after \documentclass.
 
 The TeX FAQ is searchable:
     http://www.tex.ac.uk/cgi-bin/texfaq2html
-or printable, available from from CTAN, in
+or printable, available from CTAN, in
 //nobreak
 
  * usergrps/uktug/faq/newfaq.ps     (for A4 paper)
@@ -1923,7 +1923,7 @@ where you would capitalize a word.  Use \cref elsewhere, where you would
 not capitalize a word.  If you want the words "Section", "Figure",
 etc. capitalized throughout (this is personal preference, not a requirement
 of English or of style guides), then do "\usepackage[capitalize]{cleveref}"
-rather than than mis-using \Cref where \cref belongs.
+rather than mis-using \Cref where \cref belongs.
 
 If you get an error
 ```

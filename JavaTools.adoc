@@ -402,7 +402,7 @@ JOIE: The Java Object Instrumentation Environment
     * its supposed to handle instrumentation of System classes, but
       its a bit murky as to what that actually means in practice.
       I had to muck with the JOIE code to try and resolve some loading
-      problems (the method were sitting there but not hooked in in
+      problems (the method were sitting there but not hooked in
       the framework I would have thought).
     * the transformers must be stack neutral
     * you can't necessary determine the procedure exits easily. Probably

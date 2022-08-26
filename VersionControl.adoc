@@ -35,7 +35,7 @@ To display a stash as a diff/patch:
   git stash show -p stash@{0}
 ```
 
-`git merge` always writes a a file with merge conflict markers (if there
+`git merge` always writes a file with merge conflict markers (if there
 is a conflict); it never asks the user to resolve the conflict.
 The user is expected to run "git mergetool" to resolve the conflict.
 

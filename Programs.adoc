@@ -1877,7 +1877,7 @@ unpack or pcat to view), NOT gzip.
 
 ppanel program: control printing from a GUI
 
-"polite" is like "nice"; it runs runs a program at lower priority.
+"polite" is like "nice"; it runs a program at lower priority.
 It allows other users to 'nap' the 'polite' program for an interval.
 ```
   % polite big-cache-simulator -assoc 2 -size 8192 -other flags
@@ -2060,7 +2060,7 @@ To find all the executables on my path with a particular name, use
 /uns/share/bin/ps2img converts PostScript to gif (or other image format?)
 files.  It will handle multipage postscript files fairly gracefully without
 filling up your disk, and it will look for and pay attention to the
-BoundingBox of EPS files if you give the the -e option.  Run it with no
+BoundingBox of EPS files if you give the -e option.  Run it with no
 arguments to see the options.
 
 To convert a directory from DOS to Unix conventions:

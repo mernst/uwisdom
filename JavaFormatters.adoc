@@ -7,7 +7,7 @@ https://github.com/diffplug/spotless
     See https://github.com/diffplug/spotless/blob/main/CONTRIBUTING.md
     It has an "Integration testing" section too.
   It would be analogous to "GoogleJavaFormatStep.java".
-  Spotless supports only some configuration options, but I could add more more in file "GoogleJavaFormatStep.java".
+  Spotless supports only some configuration options, but I could add more in file "GoogleJavaFormatStep.java".
 
 https://github.com/jhipster/prettier-java
 
