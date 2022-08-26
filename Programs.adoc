@@ -2984,5 +2984,12 @@ To uncolorize a file:
 sed -i.bak -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
 ```
 
+To find duplicated/repeated/doubled words:
+```
+rg '\bthe the\b|\band and\b|\bor or\b|\ba a\b|\bto to\b|\bit it\b|@return return\b|\bis is\b|\bare are\b|\bif if\b|\bto to\b|\bas as\b|\bof of\b'
+search -n '\b([A-Za-z]+)[ \t]+\1\b'
+```
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
