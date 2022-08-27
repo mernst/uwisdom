@@ -381,6 +381,21 @@ then run
 git hash-object -w FILENAME
 ```
 
+It is a good practice to keep the `master` or `main` branch of a fork
+identical to the corresponding branch upstream.  If the fork's branch has
+become different (say, there are a lot of extraneous merges in it), hese is
+how to correct that problem.
+ * Find some commit that is before the two branches diverged, by running
+   `git log --graph`.  The very first commit is an acceptable choice, but
+   causes some extra network traffic.
+ * Check out that commit: `git checkout def11847c05324c26dda93ac59b4f3d6aca245f5`
+ * `git pull --ff-only THE_UPSTREAM_REPO`
+ * `git push -f origin HEAD:master`
+   (or use some other branch name such as `main`)
+ * Now, the repository is correct, but clones/checkouts/enlistments may
+   still retain the extraneous commits.  For *every* clone, either delete
+   it and re-clone (easiest) or follow the above instructions.
+
 
 == GitHub (Git-specific items go above)
 
