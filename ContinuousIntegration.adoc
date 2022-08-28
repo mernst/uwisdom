@@ -114,12 +114,11 @@ mv test-output.txt nonsystem-931.txt
 ```
 
 When setting up a new CircleCI repository, go to its settings:
+(Find the project at https://app.circleci.com/projects/project-dashboard/github/USER/.)
 Advanced Settings >>
  * Build forked pull requests: on
  * Auto-cancel redundant builds: on
- * Enable pipelines: on
-Can also enable auto-cancel for pushes:
-https://circleci.com/docs/2.0/skip-build/
+ * Enable pipelines: on   [I can't find this setting any more.]
 
 I can't figure out how to get CircleCI's matrix feature to work, and I
 cannot find any examples on the Web.
