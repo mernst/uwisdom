@@ -2990,6 +2990,12 @@ rg '\bthe the\b|\band and\b|\bor or\b|\ba a\b|\bto to\b|\bit it\b|@return return
 search -n '\b([A-Za-z]+)[ \t]+\1\b'
 ```
 
+Here is my program for handling multiple repositories, in case you want to try it:
+Homepage: https://github.com/plume-lib/multi-version-control
+Documentation: https://plumelib.org/multi-version-control/api/org/plumelib/multiversioncontrol/MultiVersionControl.html
+From my dotfiles:
+alias mvc='java -ea -cp ${HOME}/java/plume-lib/multi-version-control/build/libs/multi-version-control-all.jar org.plumelib.multiversioncontrol.MultiVersionControl'
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
