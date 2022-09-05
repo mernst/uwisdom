@@ -679,6 +679,19 @@ javac --patch-module $MODULENAME=$JARPATH $MODULENAME/module-info.java
 jar uf $JARPATH -C $MODULENAME module-info.class
 ```
 
+Command-line options for the Java module system:
+ * `--patch-module`
+    It adds classes into a module.
+    The replacement of 
+    -Xbootclasspath/p is the option --patch-module to override classes in a module. It can also be used to augment the contents of module. The --patch-module option is also supported by javac to compile code "as if" part of the module.
+    You need to supply it *both* to `javac` and to `java`.
+ * `--add-exports` (use ALL-UNNAMED to give access from the *classpath*; is anything else required for modules?
+   --add-exports <exporter-module>/<package>=<accessor-module>(,<accessor-module>)*
+ * `--add-opens` enables reflection
+ * `--add-modules`
+   add modules (and their dependencies) to the module graph that would otherwise not show up because the initial module does not depend on them (directly or indirectly).
+ * `--add-reads $module=$targets` adds readability edges from $module to all modules in the comma-separated list $targets. This allows $module to access all public types in packages exported by those modules even though $module has no requires clauses mentioning them. If $targets is set to ALL-UNNAMED, $module can even read the unnamed module.
+
 `com.sun.javadoc` is deprecated and superseded by `jdk.javadoc.doclet`.
 `jdk.javadoc.doclet` only exists in Java 9 and later, so switching to it means losing support for Java 8.
 Another difference is that Javadoc in JDK 8 supports this option:
