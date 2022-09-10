@@ -1657,6 +1657,16 @@ Use
 ```
 to only show the contents of a new file, not one that has been deleted.
 
+To use difftastic with git:
+```
+GIT_EXTERNAL_DIFF=difft git diff
+GIT_EXTERNAL_DIFF=difft git --ext-diff log -p
+GIT_EXTERNAL_DIFF=difft git --ext-diff show e96a7241760319
+# For current changes only:
+git difftool
+git dft
+```
+
 
 == Python
 
