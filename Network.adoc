@@ -405,3 +405,6 @@ dl-team@hq.acm.org
 
 Why shouldn't we use words such as 'here' and 'this' in textlinks?
 https://ux.stackexchange.com/questions/12100/why-shouldnt-we-use-words-such-as-here-and-this-in-textlinks
+
+To download files from scribd without joining:
+https://docdownloader.com/
