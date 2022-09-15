@@ -399,6 +399,19 @@ how to correct that problem.
     * delete it and re-clone (easiest), or
     * follow the above instructions.
 
+To format all files before committing, put this in the pre-commit hook:
+(BUT, I don't trust this.  I expect it would stage all changes in the files,
+including those I had intentionally not staged.)
+```
+stagedFiles=$(git diff --staged --name-only)
+./gradlew spotlessApply -q
+for file in $stagedFiles; do
+  if test -f "$file"; then
+    git add "$file"
+  fi
+done
+```
+
 
 == GitHub (Git-specific items go above)
 
