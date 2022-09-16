@@ -1037,6 +1037,11 @@ I prefer google-java-format (https://github.com/google/google-java-format) for J
 http://www.peterfriese.de/formatting-your-code-using-the-eclipse-code-formatter/
 left a space at the end of a line
 
+The com.github.sherter.google-java-format plugin is not maintained, per this discussion:
+https://github.com/sherter/google-java-format-gradle-plugin/issues/57#issuecomment-782886280 .
+So, use Spotless (https://github.com/diffplug/spotless) to run google-java-format.
+
+
 == Continuous integration
 
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
