@@ -383,8 +383,9 @@ git hash-object -w FILENAME
 
 It is a good practice to keep the `master` or `main` branch of a fork
 identical to the corresponding branch upstream.  If the fork's branch has
-become different (say, there are a lot of extraneous merges in it), hese is
-how to correct that problem.
+become different (say, there are a lot of extraneous merges in it), here is
+how to correct that problem.  (This affects only your `master` or `main`
+branch, not any other branch in your repository:  you will not lose any work.)
  * Find some commit that is before the two branches diverged, by running
    `git log --graph`.  The very first commit is an acceptable choice, but
    causes some extra network traffic.
@@ -393,11 +394,10 @@ how to correct that problem.
    where THE_UPSTREAM_REPO is something like "https://github.com/codespecs/daikon.git".
  * `git push -f origin HEAD:master`
    (or use some other branch name such as `main`)
- * Now, the master branch of the repository is correct (on GitHub and locally), but
-   other clones/checkouts/enlistments may still retain the extraneous commits.
-   For *every* clone on every machine, either:
-    * delete it and re-clone (easiest), or
-    * follow the above instructions.
+ * Now, the master branch of the repository is correct on GitHub), but
+   this and other clones/checkouts/enlistments may still retain the extraneous commits.
+   For *every* clone on every machine (regardless of what branch it has checked out):
+    * delete it and re-clone (easiest), after ensuring it has no uncommitted or unpushed work
 
 To format all files before committing, put this in the pre-commit hook:
 (BUT, I don't trust this.  I expect it would stage all changes in the files,
