@@ -2028,6 +2028,14 @@ LaTeX font sizes:
 \Huge
 ```
 
+In Latex, there should be a space before a citation, for example:
+  one plus one is two \cite{authority}
+It is conventional to use a non-breaking space (~) so the citation
+doesn't start a line in the generated document:
+  one plus one is two~\cite{authority}
+Don't put a regular space before the non-breaking space:
+  WRONG one plus one is two ~\cite{authority}
+
 In LaTeX, `~' is a non-breaking space.  It should never be adjacent to
 another space.  For example, do not write `text ~\cite{ref}` because that
 will put two spaces between "text" and the citation, which looks bad.
