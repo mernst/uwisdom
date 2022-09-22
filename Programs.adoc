@@ -3006,6 +3006,11 @@ Documentation: https://plumelib.org/multi-version-control/api/org/plumelib/multi
 From my dotfiles:
 alias mvc='java -ea -cp ${HOME}/java/plume-lib/multi-version-control/build/libs/multi-version-control-all.jar org.plumelib.multiversioncontrol.MultiVersionControl'
 
+To resolve Ubuntu popup "please update the application snap-store":
+```
+snap-store --quit
+sudo snap refresh
+```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
