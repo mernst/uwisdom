@@ -924,6 +924,10 @@ Second approach (better style, possibly more robust):
 
 == Hevea
 
+As an alternative to hevea: pandoc or tex4ht or tth
+  tex4ht is bundled with LaTeX distributions (use its make4ht build system instead of the htlatex command)
+All 4 of these are actively maintained as of 2022.
+
 Conditional compilation with LaTeX and Hevea:
 To avoid problems with the imagen program, it's usually best to not
 redefine macros with %HEVEA, but to use the \ifhevea conditional.
