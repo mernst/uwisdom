@@ -236,6 +236,14 @@ http://jackpot.netbeans.org/
 Perhaps it only works under NetBeans.
 
 
+== Parsers
+
+Parsers:
+ * JavaParser
+ * Eclipse JDTParser and symbol resolver
+
+
+
 
 == Pretty-printers/decompilers for .class files
 
