@@ -408,3 +408,6 @@ https://ux.stackexchange.com/questions/12100/why-shouldnt-we-use-words-such-as-h
 
 To download files from scribd without joining:
 https://docdownloader.com/
+
+http://cacycle.altervista.org/wikEd-diff-tool.html
+An online diff tool with block move highlighting.
