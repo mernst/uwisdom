@@ -122,6 +122,19 @@ table itself.  Thus, using a value other than -1 can leave additional space
 at the right side of the column, or let extra digits after the decimal
 point lap into the next column.
 
+In LaTeX, to define new column types L, C, and R:  Note that a width is REQUIRED
+as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
+```
+  % Define new column types L, C, and R that are paragraphs with automatic line
+  % breaking (though \newline is still permitted) but no hyphenation and lines
+  % aligned left, center, or right, and the paragraph centered vertically
+  % because of `m` columns (can use `p` or `b` columns instead):
+  \usepackage{array}
+  \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+  \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+  \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+```
+
 To put a footnote within a table in LaTeX, surround the table with a minipage:
 ```
   \begin{minipage}{\textwidth}
