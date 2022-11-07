@@ -241,8 +241,12 @@ Perhaps it only works under NetBeans.
 Parsers:
  * JavaParser
  * Eclipse JDTParser and symbol resolver
-
-
+   It's harder to use than JavaParser but probably more capable and better maintained.
+ * Spoon uses Eclipse's JDT parser plus some custom code.  Easier to use than JDT.
+   "Spoon is an open-source library to analyze, rewrite, transform, transpile Java source code."
+ * javac's parse tree -- not intended for external users
+ * EDG's JFE front end (commercial): https://edg.com/java
+   As of Nov 2022, it mentions Java 7, but not more recent versions of Java.
 
 
 == Pretty-printers/decompilers for .class files
