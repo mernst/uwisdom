@@ -449,6 +449,10 @@ the OOM killer sends.  http://tldp.org/LDP/abs/html/exitcodes.html
 Ubuntu's equivalent of /usr/bin/dict is
 /usr/share/dict/american-english
 
+Red Hat Enterprise Linux or RHEL, is the most popular commercially supported Linux distribution.
+Rocky Linux is downstream of Red Hat, and is nearly identical to it.
+Fedora Linux is upstream of Red Hat, and tends to be more up-to-date.
+
 
 == long entries below
 
