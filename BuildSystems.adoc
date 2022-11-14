@@ -657,6 +657,12 @@ To use a locally-built version of a project:
    and add `mavenLocal()` to the `repositories {...}` block.
 
 
+To force resolving and downloading all Gradle dependencies:
+```
+./gradlew --write-verification-metadata sha256 help --dry-run
+```
+
+
 === Displaying Gradle dependencies
 
 To print/show the classpath that Gradle uses:
