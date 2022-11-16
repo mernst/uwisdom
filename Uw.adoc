@@ -370,8 +370,9 @@ then complains about unresponsive pages, try:  `rm -rf ~/.cache`.
 Alternately, clear the relevant cookies from within Chrome/Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
 
 Cycle servers for UW CSE are:
-bam, boom, bicycle, tricycle, recycle
-eel is a self-managed Ubuntu machine.
+bam, boom, bicycle, tricycle, recycle, each with 72 3GHz i9 cores.
+tern.cs.washington.edu has 36 CPUs (i9-10980XE CPU @ 3.00GHz)
+and an NVIDIA GeForce RTX 3090.
 
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
