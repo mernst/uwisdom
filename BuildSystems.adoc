@@ -558,6 +558,8 @@ To upgrade Gradle from one version to a newer version:
  * Look for warnings
  * ./gradlew wrapper --gradle-version 7.5.1 && ./gradlew build --warning-mode=all
  * Look for warnings
+ * ./gradlew wrapper --gradle-version 7.6 && ./gradlew build --warning-mode=all
+ * Look for warnings
  * Look for deprecations (see below)
 .
 To look for deprecations:
