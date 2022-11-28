@@ -564,8 +564,8 @@ To upgrade Gradle from one version to a newer version:
 .
 To look for deprecations:
 1. Add to `build.gradle`:
-For Gradle 6:
-Add to `settings.gradle`:
+For Gradle 6 or 7:
+Add at beginning `settings.gradle`:
 ```
 plugins { id "com.gradle.enterprise" version "3.2" }
 gradleEnterprise {
