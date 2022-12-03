@@ -412,6 +412,15 @@ for file in $stagedFiles; do
 done
 ```
 
+In the `.gitattributes` file, using
+```
+*.bat text eol=crlf
+```
+means that `.bat` files are stored with line feeds in the repository, but
+crlf in the working tree.  I find this a bit messy and typically just
+make sure the file has the right line endings when I create and edit it.
+Local settings like `core.autocrlf` are an anti-pattern, best left to false.
+
 
 == GitHub (Git-specific items go above)
 
