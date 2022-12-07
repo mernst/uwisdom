@@ -3012,5 +3012,33 @@ snap-store --quit
 sudo snap refresh
 ```
 
+As of Dec 2022, the checkstyle Gradle plugin does not support specifying a
+suppression filter, as the Maven plugin does with `<SuppressionFilter>`.
+
+Here is how to apply the Google Style with the checkstyle linter, in a Gradle
+`build.gradle` file, without downloading the `google_checks.xml` file.
+Unfortunately, the checkstyle Gradle plugin does not support a way to
+suppress/disable some rules, so it rejects any program that uses the Options
+package.
+```
+/// Checkstyle linter
+// Run by `gradle check`, which is run by `gradle build`
+apply plugin: 'checkstyle'
+ext.checkstyleVersion = '10.5.0'
+configurations {
+  checkstyleConfig
+}
+dependencies {
+  checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
+}
+checkstyle {
+  toolVersion "${checkstyleVersion}"
+  config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+  ignoreFailures = false
+}
+```
+
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

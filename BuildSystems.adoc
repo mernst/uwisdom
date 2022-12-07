@@ -664,6 +664,9 @@ To force resolving and downloading all Gradle dependencies:
 ./gradlew --write-verification-metadata sha256 help --dry-run
 ```
 
+Gradle's `implementation` dependency is found on compile classpath
+of this component and consumers.
+
 
 === Displaying Gradle dependencies
 
