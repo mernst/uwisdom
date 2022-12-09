@@ -3038,6 +3038,10 @@ checkstyle {
 }
 ```
 
+To address an Ubuntu warning "Pending update of snap store":
+```
+sudo snap-store --quit && sudo snap refresh
+```
 
 
 // Please put new content in the appropriate section above, don't just

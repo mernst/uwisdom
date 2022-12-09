@@ -667,35 +667,39 @@ To force resolving and downloading all Gradle dependencies:
 Gradle's `implementation` dependency is found on compile classpath
 of this component and consumers.
 
+The Checkstyle linter isn't worth running.  It finds mostly shallow and formatting
+issues, and its required configuration is voluminous and hard to understand.
+
 It is possible to run the Checkstyle linter from Gradle, without having to write a configuration `.xml` file.  Here is an example:
 ```
 /// Checkstyle linter
-// Run by `gradle check`, which is run by `gradle build`
-apply plugin: 'checkstyle'
-ext.checkstyleVersion = '10.5.0'
-configurations {
-  checkstyleConfig
-}
-dependencies {
-  checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
-}
-checkstyle {
-  toolVersion "${checkstyleVersion}"
-  ignoreFailures = false
-  config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+// Run by `gradle check`, which is run by `gradle build`.
+// 1. Note that the line length check may fail due to workarounds for
+// https://github.com/google/google-java-format/issues/5, though that issue could
+// be resolved by merging https://github.com/google/google-java-format/pull/802 .
+// 2. I do not see how to disable/suppress a particular check, from the `build.gradle` file.
+// 3. I don't see how to get the effect of <module name="SuppressionCommentFilter"/>, also
+// without creating a separate `checkstyle.xml` or `checkstyle-suppressions.xml file`.
+if (JavaVersion.current() != JavaVersion.VERSION_1_8) {
+  apply plugin: 'checkstyle'
+  ext.checkstyleVersion = '10.5.0'
+  configurations {
+    checkstyleConfig
+  }
+  dependencies {
+    checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
+  }
+  checkstyle {
+    toolVersion "${checkstyleVersion}"
+    config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+    ignoreFailures = false
+  }
 }
 ```
 However, I do not see how to disable/suppress a particular check, still from the `build.gradle` file.
-For example, suppose that I want to disable the LineLength check.  None of these works:
-```
-checkstyle {
-  ...
-  configProperties += ['LineLength.max': 140]
-  configProperties += ['LineLength.enabled': false]
-  configProperties += ['suppressions.suppress': 'LineLength']
-}
-```
-What is the right invocation, if there is one?
+The type of `config` is org.gradle.api.internal.resources.FileCollectionBackedArchiveTextResource,
+and the value of `configProperties` is `[:]`, an empty map.
+When is `configProperties` set?
 
 
 === Displaying Gradle dependencies
