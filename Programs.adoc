@@ -82,16 +82,14 @@ the "L" or "R" or "U" modifiers.  For instance:
   pstops -pletter '0L(8.5in,0)' orig.ps rotated-counterclockwise.ps
 ```
 
-Two sets of tools for transforming PDF files are pdftk and PDFjam.
-//nobreak
-
- * pdftk is a single program with many command-line options.  Installed on Ubuntu.  Depends on gcj which is in maintenance mode since 2013.  Does not
-   install easily on Red Hat/Fedora/RHEL/CentOS.
- * PDFjam is a single program, along with 10 wrappers, each with a single purpose (e.g., pdf90 to rotate by 90 degrees).  Used to be installed on
-   Red Hat and Fedora, but no longer.
+Tools for transforming PDF files:
+ * PDFjam is a single program, along with 10 wrappers, each with
+   a single purpose (e.g., pdf90 to rotate by 90 degrees).
+ * pdftk is a single program with many command-line options.
+   Depends on gcj which is in maintenance mode since 2013.
+   Does not install easily on Red Hat/Fedora/RHEL/CentOS.
  * cpdf is an alternative to both; but is free only for personal use.
    "Charities and educational institutions still require a license."
-//nobreak
 
 Separate/split a file into individual pages:
 ```
