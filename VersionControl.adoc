@@ -15,6 +15,17 @@ merge conflicts when multiple people edit different parts of a paragraph.
 
 == Git
 
+Here is my strategy for preventing my fork's master branch from getting out of sync, and in general to avoid branch confusion.
+.
+1. Never run any git commands in the master branch, including "git pull" and "git commit".  (Note:  I sometimes carefully violate this rule.)
+To update the master branch in my fork, run `mdevcupdate`, which will fail if the fork diverges from upstream.
+2. Never change branches in any working copy; that is, never run `git checkout`.
+3. To create a new branch, run command `gnb`, which creates a new branch and working copy in a new directory.  Run it from the fork's master branch.
+4. To edit an existing branch, run command `gcb`, which creates a new directory and checks out the branch there.  Run it from the fork's master branch.
+.
+The definitions of `gnb` and `gcb` appear in ~mernst/.aliases .
+The definition of `mdevcupdate` appears in ~mernst/bin/src/mdedots/share/ .
+
 In git,
 ```
   git commit
