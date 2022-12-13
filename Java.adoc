@@ -375,6 +375,10 @@ add to javadoc task in `build.gradle`:
     options.addStringOption('source', '8')
 ```
 
+Javadoc links:
+ * under JDK <= 17, use JDK 8 links
+ * under JDK > 17 (i.e., JDK >= 18), use JDK 17 links, and "--link-modularity-mismatch info"
+
 
 == Everything else
 
