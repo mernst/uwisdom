@@ -385,7 +385,7 @@ Here are definitions for identifiers in LaTeX math mode formulas:
   % \<name> or \codeid{name} denotes computer code identifiers
   \def\<#1>{\codeid{#1}}
   \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
-  % Alternate definitions for \codeid
+  % Alternate definitions for \codeid, using typewriter font instead of sans-serif.
   % \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
   % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ----
