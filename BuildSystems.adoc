@@ -701,6 +701,16 @@ The type of `config` is org.gradle.api.internal.resources.FileCollectionBackedAr
 and the value of `configProperties` is `[:]`, an empty map.
 When is `configProperties` set?
 
+A hacky way to work around this problem:
+```
+Execution failed for task ':signMavenPublication'.
+> Cannot perform signing task ':signMavenPublication' because it has no configured signatory
+```
+is to run
+```
+./gradlew PublishToMavenLocal -x signMavenPublication
+```
+
 
 === Displaying Gradle dependencies
 
