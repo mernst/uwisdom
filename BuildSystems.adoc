@@ -358,6 +358,16 @@ To update a project's Maven dependencies:
 mvn versions:use-latest-releases
 ```
 
+If you get a Maven error like
+```
+Could not resolve dependencies for project <project-name>.
+The following artifacts could not be resolved: <artifact>:
+Failure to find <artifact> in ... was cached in the local repository,
+resolution will not be reattempted until the update interval of central has elapsed or updates are forced
+```
+Then Maven will not retry for 1 day (!).
+To force a retry, delete the offending directory under `~/.m2/` (or at least its *.repositories) file, or pass `-U` to Maven.
+
 
 == Buck
 
