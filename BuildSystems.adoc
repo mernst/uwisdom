@@ -408,13 +408,13 @@ If your project uses the 'maven-publish' plugin:
 ```
 ./gradlew PublishToMavenLocal
 ```
-Projects that use the snapshot need:
+In gradle, to make a projects use the snapshot:  adjust the version number and add to `build.gradle`:
 ```
   repositories {
     mavenLocal()
   }
 ```
-and may need to adjust the version number too.
+In Maven, projects automatically use the local repository, so just adjust the version number.
 
 To replace a remote dependency (e.g., in Maven Central) by a local one (a file) in Gradle, do:
 ```
