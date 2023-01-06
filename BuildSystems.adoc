@@ -555,7 +555,7 @@ out the line, do a build, then re-enable; or leave it uncommented since the
 problem may recur at any time).
 
 To upgrade Gradle from one version to a newer version:
- * gradle wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
+ * ./gradlew wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
  * Look for warnings
  * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build --warning-mode=all
  * Look for warnings
