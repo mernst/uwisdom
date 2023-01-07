@@ -2930,6 +2930,15 @@ tasks.withType(JavaCompile).configureEach {
 }
 ```
 
+Do not use Error Prone's `@InlineMe` annotation.  It's defined in error_prone_core rather than in error_prone_annotations.  Adding this dependency:
+```
+dependency {
+  implementation "com.google.errorprone:error_prone_core:${errorproneVersion}" // For @InlineMe.
+}
+```
+can break javac in clients.  For example, adding that to plume-util breaks javac in the Checker
+Framework, which uses plume-util.
+
 A shell function that works around `wget` or `curl` hanging for very slow
 connections.  (`curl`'s timeouts don't seem to work in this case.)
 curl's `-z` option requires that the file exists.
