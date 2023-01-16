@@ -240,13 +240,28 @@ Perhaps it only works under NetBeans.
 
 Parsers:
  * JavaParser
+   Widely used, but buggy in corner cases.
  * Eclipse JDTParser and symbol resolver
-   It's harder to use than JavaParser but probably more capable and better maintained.
+   It's harder to use than JavaParser but more capable and better maintained.
+    * Per wikipedia, "The EPL 1.0 is not compatible with the GPL, and a work created by combining a work licensed under the GPL with a work licensed under the EPL cannot be lawfully distributed".
+    * EPL 2 is compatible with GPL.  See https://www.eclipse.org/legal/epl-2.0/faq.php.  Also, Wikipedia claims (this seems a bit inaccurate): "In terms of GPL compatibility, the new license [EPL 2] allows the initial contributor to a new project to opt in to a secondary license that provides explicit compatibility with the GNU General Public License version 2.0, or any later version. If this optional designation is absent, then the Eclipse license remains source incompatible with the GPL (any version)."
+    * There is a grammar in ~/java/eclipse.jdt.core/org.eclipse.jdt.core.compiler.batch/grammar/java.g
+    * I cannot compile Eclipse.  The setup suggests importing into the Eclipse IDE, which I don't want to use.  My attempts to compile with maven from the command line failed.  (Maybe this is because they have recently restructured their codebase?)
  * Spoon uses Eclipse's JDT parser plus some custom code.  Easier to use than JDT.
    "Spoon is an open-source library to analyze, rewrite, transform, transpile Java source code."
- * javac's parse tree -- not intended for external users
+   It is somewhat buggy.
+ * javac's parse tree -- not intended for external users (but Openrewrite uses it...)
+   It uses a hand-written recursive descent parser:
+   ~/java/jdk-openjdk/src/jdk.compiler/share/classes/com/sun/tools/javac/parser/JavacParser.java
+ * Openrewrite: https://github.com/openrewrite/rewrite
+   This provides an AST that is built from the javac compiler's.
+   Therefore, it is correct but may be harder to customize, unless I change javac too!
+   In its source code, look for
+    import com.sun.tools.javac.main.JavaCompiler;
+    import com.sun.tools.javac.tree.JCTree;
  * EDG's JFE front end (commercial): https://edg.com/java
    As of Nov 2022, it mentions Java 7, but not more recent versions of Java.
+
 
 
 == Pretty-printers/decompilers for .class files
