@@ -243,16 +243,19 @@ Parsers:
    Widely used, but buggy in corner cases.
  * Eclipse JDTParser and symbol resolver
    It's harder to use than JavaParser but more capable and better maintained.
-    * Per wikipedia, "The EPL 1.0 is not compatible with the GPL, and a work created by combining a work licensed under the GPL with a work licensed under the EPL cannot be lawfully distributed".
     * EPL 2 is compatible with GPL.  See https://www.eclipse.org/legal/epl-2.0/faq.php.  Also, Wikipedia claims (this seems a bit inaccurate): "In terms of GPL compatibility, the new license [EPL 2] allows the initial contributor to a new project to opt in to a secondary license that provides explicit compatibility with the GNU General Public License version 2.0, or any later version. If this optional designation is absent, then the Eclipse license remains source incompatible with the GPL (any version)."
     * There is a grammar in ~/java/eclipse.jdt.core/org.eclipse.jdt.core.compiler.batch/grammar/java.g
     * I cannot compile Eclipse.  The setup suggests importing into the Eclipse IDE, which I don't want to use.  My attempts to compile with maven from the command line failed.  (Maybe this is because they have recently restructured their codebase?)
  * Spoon uses Eclipse's JDT parser plus some custom code.  Easier to use than JDT.
    "Spoon is an open-source library to analyze, rewrite, transform, transpile Java source code."
-   It is somewhat buggy.
+   It is somewhat buggy.  (Maybe more so than JavaParser?)
  * javac's parse tree -- not intended for external users (but Openrewrite uses it...)
    It uses a hand-written recursive descent parser:
    ~/java/jdk-openjdk/src/jdk.compiler/share/classes/com/sun/tools/javac/parser/JavacParser.java
+   google-java-format uses the javac parser directly and it is quite a
+   small amount of code, so using javac directly may not be so difficult.
+   Maybe it is near here: https://github.com/google/google-java-format/blob/4a22aab7b19a41d6267ea70c76f137a6fd49bc76/core/src/main/java/com/google/googlejavaformat/java/Formatter.java#L142
+   https://github.com/google/google-java-format/blob/4a22aab7b19a41d6267ea70c76f137a6fd49bc76/core/src/main/java/com/google/googlejavaformat/java/JavaInput.java#L353
  * Openrewrite: https://github.com/openrewrite/rewrite
    This provides an AST that is built from the javac compiler's.
    Therefore, it is correct but may be harder to customize, unless I change javac too!
