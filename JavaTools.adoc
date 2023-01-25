@@ -264,7 +264,10 @@ Parsers:
     import com.sun.tools.javac.tree.JCTree;
  * EDG's JFE front end (commercial): https://edg.com/java
    As of Nov 2022, it mentions Java 7, but not more recent versions of Java.
-
+ * Java parser written in Python:
+   https://github.com/c2nes/javalang
+ * Java parser written in JavaScript:
+   https://www.npmjs.com/package/java-parser/v/2.0.0
 
 
 == Pretty-printers/decompilers for .class files
