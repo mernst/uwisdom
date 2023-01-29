@@ -262,6 +262,8 @@ Parsers:
    In its source code, look for
     import com.sun.tools.javac.main.JavaCompiler;
     import com.sun.tools.javac.tree.JCTree;
+ * xtext uses ANTLR under the hood, and Java grammars for ANTLR exist; I
+   don't know if any are up to date.
  * EDG's JFE front end (commercial): https://edg.com/java
    As of Nov 2022, it mentions Java 7, but not more recent versions of Java.
  * Java parser written in Python:
