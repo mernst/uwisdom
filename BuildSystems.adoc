@@ -721,6 +721,10 @@ is to run
 ./gradlew PublishToMavenLocal -x signMavenPublication
 ```
 
+The solution to the Gradle problem
+"Cannot lock execution history cache as it has already been locked by this process."
+is `./gradlew --stop`
+
 
 === Displaying Gradle dependencies
 
