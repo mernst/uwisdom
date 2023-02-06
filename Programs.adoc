@@ -988,7 +988,7 @@ It's also possible to set these when running the script:
 ```
 
 By default, a shell script continues if a command within it fails.  This is
-highly error-prone.  Therefore, almost all shell scripts should start with
+highly error-prone.  To halt/stop on error, almost all shell scripts should start with
 ```
 set -e 
 ```
