@@ -554,25 +554,28 @@ due to a corrupted Gradle cache.  Blow away the cache (on Travis, comment
 out the line, do a build, then re-enable; or leave it uncommented since the
 problem may recur at any time).
 
-To upgrade Gradle from one version to a newer version:
+To upgrade/update Gradle from one version to a newer version:
+(Find projects to upgrade via `locate gradlew`
+then `(progn (delete-matching-lines "-fork-[^m]" nil nil t)
+(delete-matching-lines "branch-[^m]" nil nil t))`.)
  * ./gradlew wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
- * Look for warnings
+ * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build --warning-mode=all
- * Look for warnings
- * Look for deprecations (see below)
+ * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build --warning-mode=all
- * Look for warnings
+ * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 6.9 && ./gradlew build --warning-mode=all
- * Look for warnings
+ * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 7.1 && ./gradlew build --warning-mode=all
- * Look for warnings
+ * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 7.5.1 && ./gradlew build --warning-mode=all
- * Look for warnings
- * ./gradlew wrapper --gradle-version 7.6 && ./gradlew build --warning-mode=all
- * Look for warnings
- * Look for deprecations (see below)
+ * Look for warnings and deprecations
+ * ./gradlew wrapper --gradle-version 7.6.1 && ./gradlew build --warning-mode=all
+ * Look for warnings and deprecations
+ * ./gradlew wrapper --gradle-version 8.0.1 && ./gradlew build --warning-mode=all
+ * Look for warnings and deprecations
 .
-To look for deprecations:
+To determine details for deprecations:
 1. Add to `build.gradle`:
 For Gradle 6 or 7:
 Add at beginning `settings.gradle`:
