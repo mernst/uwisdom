@@ -3051,6 +3051,8 @@ To address an Ubuntu warning "Pending update of snap store":
 sudo snap-store --quit && sudo snap refresh
 ```
 
+To pretty-print a JSON file:  `jq . FILENAME`
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
