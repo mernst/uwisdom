@@ -976,11 +976,11 @@ error handling and debug options (exit on error, unset variable detection
 and execution tracing) to make sure problems are caught early:
 ```
   #!/bin/bash
-  set -o errexit -o nounset -o xtrace
+  set -o errexit -o nounset
   ...
 ```
 Also consider:
-  set -x : Display commands and their arguments as they are executed.
+  set -x (or set -o xtrace): Display commands and their arguments as they are executed.
   set -v : Display shell input lines as they are read.
 It's also possible to set these when running the script:
 ```
@@ -1030,7 +1030,11 @@ time, virtual memory, etc.
 
 In general, a bash script should contain this at the top:
 ```
-  set -o errexit -o nounset -o pipefail -o xtrace
+  set -o errexit -o nounset -o pipefail
+```
+and optionally
+```
+  set -o xtrace
 ```
 
 To get a shell in which none of your personal customizations (environment
@@ -1071,7 +1075,7 @@ dir="$(unset CDPATH && cd "$dir" && pwd)"
 
 Diagnostics for shell scripts (`set -o pipefail` is only for bash):
 ```
-set -eux
+set -eu
 set -o pipefail
 ```
 In more detail:
