@@ -490,6 +490,7 @@ Options for short-term Seattle housing/rentals/apartments/sublets:
  * UW Daily: http://dailyuw.com/classifieds/
     (UW Daily mostly has offers of sharing with students, which is probably
     too much of a risk, but it has some furnished apartments/houses too.)
+ * The #housing channel at https://uw-cse.slack.com/
 //nobreak
 
 Be sure to check where the apartment or house is in relation to the
