@@ -2019,7 +2019,7 @@ In ACM style, to make acknowledgments smaller:
 ```
 
 To find the git URL for an Overleaf project, click on the word "menu" in
-the upper left corner, then "sync", then "git".
+the upper left corner, then (in section "sync") "git".
 
  ```
  % Set em dashes (LaTeX ---) with thin spaces surrounding them.
