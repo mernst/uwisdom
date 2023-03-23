@@ -298,7 +298,7 @@ To apply for a new UW CSE computer account at cs.washington.edu,
 the sponsor fills out a form at
   https://password.cs.washington.edu/account/csenetid/
 (I think the user gets to choose a preferred username.)
-A guest account is only permitted to use 25 MB of space, so:
+A guest account ("research" account type) is only permitted to use 25 MB of space, so:
 //nobreak
 
  * Always log into the same machine.
@@ -470,17 +470,12 @@ You can only log into it from another CSE machine, not from outside.
 Options for short-term Seattle housing/rentals/apartments/sublets:
 //nobreak
 
- * Sabbatical Homes: https://www.sabbaticalhomes.com/
  * Craigslist: http://seattle.craigslist.org/sub/
  * AirBnB: https://www.airbnb.com/
    You can negotiate a lower long-term rental contract than the nightly rate.
+   It has shared rooms available.
  * UW Visiting Personnel and Visiting Students: stay in a dorm
    http://www.hfs.washington.edu/conferences/planners.aspx?id=141
- * Visiting Faculty Housing Service (VFHS): http://www.washington.edu/uwfa/visiting-faculty-housing/
-   They are stuck in the 20th century with all materials available only in
-   hardcopy, but can sometimes be convinced to fax or scan, or to talk someone
-   through what is available by phone.
-   (Or I can go there in person and surreptitiously photograph pages.)
  * J-1 Scholar Guide (see Housing, and also the complete guide):
    http://iso.uw.edu/jfirst.html#Arrival_in_Seattle 
  * Seattle Times: http://marketplace.nwsource.com/realestate/rentals/
@@ -488,9 +483,15 @@ Options for short-term Seattle housing/rentals/apartments/sublets:
     (Fausto Spoto says it is very nice, but a touch more expensive than other options.)
  * Radford Court: http://radfordcourt.com/
  * UW Daily: http://dailyuw.com/classifieds/
-    (UW Daily mostly has offers of sharing with students, which is probably
-    too much of a risk, but it has some furnished apartments/houses too.)
+    (UW Daily mostly has offers of sharing with students,
+    but it has some furnished apartments/houses too.)
  * The #housing channel at https://uw-cse.slack.com/
+ * Sabbatical Homes: https://www.sabbaticalhomes.com/
+ * Visiting Faculty Housing Service (VFHS): http://www.washington.edu/uwfa/visiting-faculty-housing/
+   They are stuck in the 20th century with all materials available only in
+   hardcopy, but can sometimes be convinced to fax or scan, or to talk someone
+   through what is available by phone.
+   (Or I can go there in person and surreptitiously photograph pages.)
 //nobreak
 
 Be sure to check where the apartment or house is in relation to the
