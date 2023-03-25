@@ -432,6 +432,14 @@ crlf in the working tree.  I find this a bit messy and typically just
 make sure the file has the right line endings when I create and edit it.
 Local settings like `core.autocrlf` are an anti-pattern, best left to false.
 
+If a .git directroy is taking too much hard disk space:
+This will make a git repository smaller, quickly:
+  git gc --aggressive --prune=now
+To see the gains:
+  du -c | tail -1 && git gc --aggressive --prune=now && du -c | tail -1
+This does it the right way, but may need to be run overnight:
+  git repack -a -d --depth=250 --window=250
+
 
 == GitHub (Git-specific items go above)
 
