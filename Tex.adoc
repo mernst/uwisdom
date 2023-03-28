@@ -1713,7 +1713,7 @@ Or, use underlining for emphasis.
 Or, try a different font than Computer Modern.  For example, try
 ```
   \usepackage[T1]{fontenc}
-  \usepackage{lmodern} % "latin modern", which has a boldface typewriter font
+  \usepackage{lmodern} % "latin modern", which has a (too subtle) boldface typewriter font
   \usepackage[lighttt]{lmodern} % lighter non-bold version (looks better)
   %\usepackage{luximono}
   %\usepackage[scaled=0.85]{beramono}
