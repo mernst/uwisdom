@@ -498,6 +498,10 @@ for each page (above, `3`).
 
 If you reply to GitHub comments using your email client, don't quote the message you are replying to, or it will clutter the conversation history.
 
+To disable dependabot on a fork, either:
+ * delete and re-create the fork, or
+ * click "Disable" on the forked repo's /settings/security_analysis page.
+
 
 === GitHub pull requests
 

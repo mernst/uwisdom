@@ -1492,12 +1492,12 @@ To make Eclipse use spaces instead of tabs for indentation:
 //nobreak
 
  * Go to menu:Window[Preferences > Java > Code Formatter]:
-   ** In the "Style" tab:
-     *** Uncheck "Insert tabs for indentation, not spaces."
-     *** Set "Number of spaces representing an indentation level" to 2.
+    * In the "Style" tab:
+       * Uncheck "Insert tabs for indentation, not spaces."
+       * Set "Number of spaces representing an indentation level" to 2 (2 is standard; but choose whatever value)
  * Go to menu:Window[Preferences > Java > Editor]:
-   ** In the "Typing" tab:
-     *** Check "Insert space for tabs"
+    * In the "Typing" tab:
+       * Check "Insert space for tabs"
 
 Changing the font size in Eclipse:
   Window > Preferences > General > Appearance > Colors and Fonts > Basic >
