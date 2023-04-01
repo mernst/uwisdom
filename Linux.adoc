@@ -457,6 +457,13 @@ Red Hat Enterprise Linux or RHEL, is the most popular commercially supported Lin
 Rocky Linux is downstream of Red Hat, and is nearly identical to it.
 Fedora Linux is upstream of Red Hat, and tends to be more up-to-date.
 
+To print a PDF document one-sided (single-sided, non-duplex):
+```
+lpr -o sides=one-sided
+```
+This didn't work for me at UW CSE, though.
+So instead I could extract each page individually and print them all.
+
 
 == long entries below
 
