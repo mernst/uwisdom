@@ -470,6 +470,7 @@ You can only log into it from another CSE machine, not from outside.
 Options for short-term Seattle housing/rentals/apartments/sublets:
 //nobreak
 
+ * https://housing.cs.washington.edu/
  * Craigslist: http://seattle.craigslist.org/sub/
  * AirBnB: https://www.airbnb.com/
    You can negotiate a lower long-term rental contract than the nightly rate.
