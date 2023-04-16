@@ -504,15 +504,17 @@ To disable dependabot on a fork, either:
 
 # How to set up a renovate pull request:
 DIR=~/java/plume-lib/require-javadoc
-cd $DIR
-gcb renovate/configure
-cd $DIR-branch-renovate-configure
-cp -pf ~/java/plume-lib/html-pretty-print/.github/renovate.json .github/renovate.json
-git add .github/renovate.json
-rm -f .github/dependabot.yml
-rm -f renovate.json
-git commit -a -m "Move renovate configuration file"
-git push
+(cd $DIR && \
+git pull && \
+gcb renovate/configure && \
+cd $DIR-branch-renovate-configure && \
+mkdir -p .github && \
+cp -pf ~/java/plume-lib/html-pretty-print/.github/renovate.json .github/renovate.json && \
+git add .github/renovate.json && \
+rm -f .github/dependabot.yml && \
+rm -f renovate.json && \
+git commit -a -m "Move renovate configuration file" && \
+git push)
 
 
 === GitHub pull requests
