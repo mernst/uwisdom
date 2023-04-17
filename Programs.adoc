@@ -925,7 +925,7 @@ https://gist.github.com/deshion/10d3cb5f88a21671e17a
 Redirecting output in command shells:
 //nobreak
 
-* In sh/bash:
+* In sh/bash (in a shell script):
    ** To redirect standard error to standard output, use "2>&1".
       Warning:  this must come after any file redirection:  "cmd > file 2>&1".
       This is because "2>&1" means to make stderr a copy of stdout.  If you
@@ -3057,6 +3057,10 @@ sudo snap-store --quit && sudo snap refresh
 
 To pretty-print a JSON file:  `jq . FILENAME`
 
+An example scp invocation:
+```
+scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tmp/
+```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

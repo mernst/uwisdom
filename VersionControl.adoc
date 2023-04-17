@@ -502,8 +502,14 @@ To disable dependabot on a fork, either:
  * delete and re-create the fork, or
  * click "Disable" on the forked repo's /settings/security_analysis page.
 
-To install Mend Renovate on a GitHub organization: https://github.com/apps/renovate
-# How to set up a Renovate pull request:
+To install Mend Renovate on a GitHub organization: https://github.com/apps/renovate .
+I like to put the configuration file in .github/renovate.json
+rather than a the top level of the repository, to reduce clutter.
+You can find an example configuration file at
+https://github.com/typetools/checker-framework/pull/5776/files
+but you probably don't need the "packageRules" section.
+.
+# How I edit a Renovate pull request to make the configuration changes I prefer:
 DIR=~/java/plume-lib/require-javadoc
 (cd $DIR && \
 git pull && \
