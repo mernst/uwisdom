@@ -507,6 +507,7 @@ DIR=~/java/plume-lib/require-javadoc
 cd $DIR
 gcb renovate/configure
 cd $DIR-branch-renovate-configure
+mkdir -p .github
 cp -pf ~/java/plume-lib/html-pretty-print/.github/renovate.json .github/renovate.json
 git add .github/renovate.json
 rm -f .github/dependabot.yml
