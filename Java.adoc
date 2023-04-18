@@ -778,13 +778,13 @@ This is more reliable (works across JDK vernions) than
 
 From a shell or bash script, to determine or test the Java version number:
 ```
-java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1
+java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1 | sed 's/-ea//'
 ```
 
 To test the Java or JDK version number from a Unix shell command line
 (from https://stackoverflow.com/a/56243046/173852):
 ```
-JAVA_VER=$(java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1) && \
+JAVA_VER=$(java -version 2>&1 | head -1 | cut -d'"' -f2 | sed '/^1\./s///' | cut -d'.' -f1 | sed 's/-ea//') && \
 [ "$JAVA_VER" = "8" ] && make || echo "Use Java 8"
 ```
 
