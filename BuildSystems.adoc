@@ -730,6 +730,7 @@ The solution to the Gradle problem
 "Cannot lock execution history cache as it has already been locked by this process."
 is `./gradlew --stop`
 
+Gradle only checks for new SNAPSHOT versions (also called "changing versions") every 24 hours by default.  To get new snapshot releases, run Gradle with `--refresh-dependencies`
 
 === Displaying Gradle dependencies
 
