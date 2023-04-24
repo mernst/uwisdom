@@ -503,6 +503,9 @@ To disable dependabot on a fork, either:
  * click "Disable" on the forked repo's /settings/security_analysis page.
 
 To install Mend Renovate on a GitHub organization: https://github.com/apps/renovate .
+To configure Renovate for a repository:
+  https://github.com/apps/renovate , then the organization, then "Repository Access",
+  select a repository, "Save", and wait for the pull request.
 I like to put the configuration file in .github/renovate.json
 rather than a the top level of the repository, to reduce clutter.
 You can find an example configuration file at
