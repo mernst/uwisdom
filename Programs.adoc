@@ -3062,5 +3062,13 @@ An example scp invocation:
 scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tmp/
 ```
 
+On Ubuntu, to resolve the messange
+  "Pending Update of Snap-Store, Close the App to Avoid Disruption"
+do
+```
+sudo killall snap-store
+sudo snap refresh 
+```
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
