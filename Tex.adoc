@@ -249,8 +249,9 @@ To remove the vertical space from between two LaTeX trivlist environments:
   No combination of only two of these does the trick.
   (Why don't I have -\parskip here too?)
 
-To reduce the indentation of a LaTeX list environment (itemize, enumerate,
-description), do this *outside* the env.  It needs to come after `\begin{document}`.  (It's especially needed in the acmart style.)
+To reduce the indentation of bullets/numbers/items a LaTeX list environment
+(itemize, enumerate, description), do this *outside* the env.  It needs to come
+after `\begin{document}`.  (It's especially needed in the acmart style.)
 ```
   % Reduce indentation in lists.
   \setlength{\leftmargini}{.75\leftmargini}
