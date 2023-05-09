@@ -1765,7 +1765,7 @@ The PGF package for LaTeX makes drawings, much like LaTeX picture mode or
 the pstricks package, but works with PDF and is much more powerful than
 LaTeX picture mode.
 
-To generate foo.sty (or foo.cls) from foo.dtx, run
+To install a LaTeX package; to generate foo.sty (or foo.cls) from foo.dtx, run
 ```
   latex foo.ins
 ```
