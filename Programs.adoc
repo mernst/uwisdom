@@ -3018,12 +3018,6 @@ Documentation: https://plumelib.org/multi-version-control/api/org/plumelib/multi
 From my dotfiles:
 alias mvc='java -ea -cp ${HOME}/java/plume-lib/multi-version-control/build/libs/multi-version-control-all.jar org.plumelib.multiversioncontrol.MultiVersionControl'
 
-To resolve Ubuntu popup "please update the application snap-store":
-```
-snap-store --quit
-sudo snap refresh
-```
-
 As of Dec 2022, the checkstyle Gradle plugin does not support specifying a
 suppression filter, as the Maven plugin does with `<SuppressionFilter>`.
 
@@ -3050,10 +3044,6 @@ checkstyle {
 }
 ```
 
-To address an Ubuntu warning "Pending update of snap store":
-```
-sudo snap-store --quit && sudo snap refresh
-```
 
 To pretty-print a JSON file:  `jq . FILENAME`
 
@@ -3062,12 +3052,14 @@ An example scp invocation:
 scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tmp/
 ```
 
-On Ubuntu, to resolve the messange
-  "Pending Update of Snap-Store, Close the App to Avoid Disruption"
-do
+To resolve Ubuntu popup
+"please update the application snap-store"
+or
+"Pending Update of Snap-Store, Close the App to Avoid Disruption"
+do one of these:
 ```
-sudo killall snap-store
-sudo snap refresh 
+sudo snap-store --quit && sudo snap refresh
+sudo killall snap-store && sudo snap refresh 
 ```
 
 // Please put new content in the appropriate section above, don't just
