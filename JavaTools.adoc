@@ -691,7 +691,7 @@ findbugs:
 findbugs.sourceforge.net
 (From Bill Pugh at the University of Maryland.)
 
-Checkstyle (download from Sourceforge, or "apt-get install checkstyle")
+Checkstyle (download from Sourceforge, or "apt install checkstyle")
 checks Java code, for instance indicating unused imports.
 
 JLint:
