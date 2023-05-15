@@ -1567,16 +1567,6 @@ the following in an empty directory.
   # Browse to https://hub.docker.com/ to verify that it exists
 ```
 
-To stop and remove/delete/clean all docker containers (leaves the static images):
-```
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-```
-To remove all non-running containers:
-```
-docker rm $(docker ps -q -f status=exited)
-```
-
 To list docker images (static files, that would be instantiated as containers):
 ```
 docker images
@@ -1584,6 +1574,15 @@ docker images
 To remove/delete a docker image:
 ```
 docker rmi ID
+```
+To remove all non-running containers:
+```
+docker rm $(docker ps -q -f status=exited)
+```
+To stop and remove/delete/clean all docker containers (leaves the static images):
+```
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
 ```
 To stop all docker containers, then remove/delete/clean all docker images:
 ```
