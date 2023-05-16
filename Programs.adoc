@@ -1537,7 +1537,8 @@ In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 A Docker container image is simply a root filesystem (snapshot) for a given process. This snapshot only encapsulates the userspace pieces (specifically, the filesystem).  Containers use the kernel of the host where they are running, but they do not share libraries such as libc.  Each Docker container has its own set of libraries since each container has its own, unique root filesystem.
 
-To run an interactive bash shell in a docker container (image is an inert file):
+To run an interactive bash shell in a docker container
+(a docker image is an inert file):
 ```
   docker run -it OWNER/NAME /bin/bash
 ```
