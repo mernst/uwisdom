@@ -2827,7 +2827,7 @@ where nn is between 1 and 100.  1 is the lowest quality (highest
 compression).
 
 For converting (GitHub-style) markdown format (.md file) to HTML:
- * `pandoc --standalone < file.md > file.html`
+ * `basename=myfile && pandoc --standalone < ${basename}.md > ${basename}.html`
  * `markdown` produces poor output, doesn't handle triple-backtick, etc.
  * `grip --export` exports to `<path>.html`.
 Markdown format is idiosyncratic and has many variants, so it may be better
