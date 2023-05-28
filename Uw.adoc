@@ -374,7 +374,8 @@ Alternately, clear the relevant cookies from within Chrome/Chromium (Wrench icon
 Cycle servers for UW CSE are:
 bam, boom, bicycle, tricycle, recycle, each with 72 3GHz i9 cores.
 tern has 36 CPUs (i9-10980XE CPU @ 3.00GHz), 128GB of memory, and an NVIDIA GeForce RTX 3090.
-honu has 40 CPUs and 96GB of memory.  It is owned by Rene Just.
+honu has 40 CPUs (Xeon Silver 4114 CPU @ 2.20GHz), 96GB of memory.  It is owned by Rene Just.
+buffalo has 8 CPUs (i7-2600 CPU @ 3.40GHz), 16GB of memory.
 
 To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
