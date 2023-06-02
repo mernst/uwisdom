@@ -206,6 +206,12 @@ For undergraduates, need:
  * student ID
  * rooms to be given access to
  * end date (I always make it December 31)
+For visitors, need:
+ * name
+ * email address
+ * end date
+ * whether to give access to "amenity" spaces like the kitchens and printer/copier rooms
+The PLSE Lab is room Gates 253.
 
 How to order lunches / snack carts at UW CSE:
 https://www.cs.washington.edu/internal/food
