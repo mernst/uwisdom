@@ -85,9 +85,14 @@ After doing this, it may take a few minutes for users to see the "run next" butt
 
 == CircleCI
 
-CircleCI's `docker` executor gives 4GB of memory to its free users (a paid plan is required to access more)
-CircleCI's `machine` executor gives 7.5GB of memory, though it may require payment in the future.  You specify a VM image rather than a Docker image.
-By contrast, Travis-CI gives 7.5 GB.
+CircleCI's `docker` executor:
+ * The `large` resource class gives 8GB of memory and is the largest available to free users as of 2023-06-03.
+   (sources: https://circleci.com/pricing/ https://circleci.com/docs/using-docker/#available-docker-resource-classes)
+CircleCI's `machine` executor is for a Linux machine not running a Docker image.
+ * The `medium` resource class gives 7.5GB of memory.
+   (source: https://circleci.com/docs/using-linuxvm/#available-linuxvm-resource-classes)
+   It may require payment in the future.  You specify a VM image rather than a Docker image.
+Travis-CI:  "The default one is ‘medium’, which is ... usually ... 2vCPU and around 4 or 8 GB of RAM".
 The Checker Framework tests do not run in 4GB of memory.
 
 Grant CircleCI access to your organization at:

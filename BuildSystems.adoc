@@ -455,7 +455,7 @@ cache:
     - $HOME/.m2/
 ```
 
-To enable it within a Docker container:
+To enable Gradle caching within a Docker container:
 ```
 docker run -v $HOME/.gradle:/root/.gradle -v $HOME/.m2:/root/.m2 USER/IMAGE-NAME /bin/bash -c "..."
 ```
