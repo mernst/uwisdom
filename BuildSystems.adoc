@@ -575,10 +575,11 @@ Then:
  * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 7.6.1 && ./gradlew build --warning-mode=all
  * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 8.1 && ./gradlew build --warning-mode=all
+ * ./gradlew wrapper --gradle-version 8.1.1 && ./gradlew build --warning-mode=all
  * Look for warnings and deprecations
 .
-To determine details for deprecations:
+The latest Gradle release version number is at https://gradle.org/releases/ .
+.
 1. Add to `build.gradle`:
 For Gradle 6 or 7:
 Add at beginning `settings.gradle`:
