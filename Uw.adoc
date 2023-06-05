@@ -253,6 +253,11 @@ The general exam itself proceeds like this:
  * The candidate leaves the room.  The committee discusses what feedback to give (including whether the work should be expanded, contracted, or changed in other ways) and how to help the candidate successfully complete a high-quality PhD.
  * It is exceptionally rare for a candidate not to pass the general exam.  The focus is on improving the work and setting up the candidate for success, not on being a gating function.
 
+The Allen Center bike room is room 030.  Click on "basement" here:
+https://norfolk.cs.washington.edu/public-directory/ .  You get to it by going
+down the driveway from Stevens Way.  Go through the man door next to the loading
+dock door, and it's the first door on your right.
+
 
 == CSE sysadmin
 

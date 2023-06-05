@@ -23,7 +23,7 @@ https://clang.llvm.org/docs/ClangFormat.html
   It would be better to have a space between an annotation and a set of array brackets:
     -    ListOrArray(T @Nullable [] theArray) {
     +    ListOrArray(T @Nullable[] theArray) {
-  Formats type annotatios wrong:
+  Formats type annotations wrong:
     -    @NonNegative int size() {
     +    @NonNegative
     +    int size() {
@@ -31,10 +31,10 @@ https://clang.llvm.org/docs/ClangFormat.html
   clang-format is more concise, e.g. it puts multiple formal parameters on the same line.
 
 palantir-java-format
-  A fork of google-java-format.
+  A fork of google-java-format, but apparently abandoned.
   Maybe they would take a pull request with names of other type annotations...
   Looks like it might default to 4-space indentation?
-  They seem to be a fair distance behind google-java-format; for example, as of August 2022 they do not have this 1-year-old commit about type annotations:
+  They seem to be a fair distance behind google-java-format; for example, as of August 2022 they do not have this old commit about type annotations:
   865cff01 (Liam Miller-Cushon     2021-08-25 2409)
 
 Eclipse:

@@ -11,8 +11,6 @@ writing.  (There are a very few exceptions, such as compound words with clear
 meaning: "bug report", "bug-finding tool", sometimes "bug fix".)
 .
 Here is terminology adapted from http://en.wikipedia.org/wiki/Dependability:
-//nobreak
-
 Defect::
       A defect is a flaw, failing, or imperfection in a system, such as an
       incorrect design, algorithm, or implementation.  Typically caused by
@@ -30,8 +28,6 @@ Failure::
       behavior that is contrary to its specification.  It is a user-visible
       error.  A non-user-visible error frequently leads to a failure later
       in the execution.
-//nobreak
-
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
 Terminology says:
 ____
@@ -67,20 +63,14 @@ Reproduce = same research question, but new experiment.
 
 Threats to the validity of research.
 Most often these are clumped into just
-//nobreak
-
  * Internal validity
    refers specifically to whether an experimental
    treatment/condition makes a difference or not, and whether there is
    sufficient evidence to support the claim.
  * External validity
    refers to the generalizibility of the treatment/condition outcomes.
-//nobreak
-
 But sometimes the threats are more finely broken down.  Example from 
 http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm
-//nobreak
-
  1. Threats to construct validity.
     The measured variables may not actually measure the conceptual variable.
  2. Threats to statistical conclusion validity.
@@ -95,12 +85,8 @@ http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm
  4. Threats to external validity.
     Results may only apply to limited set of
     circumstances (e.g., specific groups of people or only some typefaces...)
-//nobreak
-
 Another list of types of threats (used in Yin's case study book and maybe
 elsewhere?) is:
-//nobreak
-
  * construct (relevant measurements)
  * internal (alternative explanations)
  * external (generalize beyond subjects)
@@ -113,12 +99,8 @@ Item #2 of Strunk & White's _The Elements of Style_ states,
 For example, don't write
   I bought milk, macaroni and cheese and crackers.
 but instead write one of these:
-//nobreak
-
  * I bought milk, macaroni, and cheese and crackers.
  * I bought milk, macaroni and cheese, and crackers.
-//nobreak
-
 Using commas everywhere is better style, it is easier to read, and in cases
 like this one it also resolves ambiguity.
 
@@ -126,22 +108,16 @@ We have a sample of some data.  We have calculated the sample mean and
 the sample standard deviation.  We want to know that the sample mean
 is within +-E of the population mean, with 95% confidence.  How large
 of a sample must we take?
-//nobreak
-
  * n = necessary sample size
  * z = z_(u/2) = 1.96 for 95% confidence
  * sigma = population standard deviation
  * E = error tolerance, in the same units as original measurement
  * n = ((z `*` sigma) / E)^2
-//nobreak
-
 If the original sample size is 30 or more, you can safely replace the
 population standard deviation with the sample standard deviation.
 Taken from: http://www.isixsigma.com/library/content/c000709ex.asp
 
 In statistics:
-//nobreak
-
  * a type I error is a false alarm
  * a type II error is a failed alarm:  you miss the effect
 
@@ -151,8 +127,6 @@ run time -- noun -- a moment in time ("occurs at run time"), or an amount of tim
 runtime -- noun -- a program that runs/supports another program ("the runtime handles memory allocation"); a synonym for "runtime system"
 
 Heilmeier's catechism:
-//nobreak
-
  * What are you trying to do? Articulate your objectives using absolutely no jargon.
  * How is it done today, and what are the limits of current practice?
  * What's new in your approach and why do you think it will be successful?
@@ -161,3 +135,7 @@ Heilmeier's catechism:
  * What are the risks and the payoffs?
  * How much will it cost? How long will it take?
  * What are the midterm and final "exams" to check for success?
+
+Generally, "bi-" means two (biweekly means every two weeks),
+while "semi-" means half (semiweekly means twice a week).
+These are the same:  biweekly, semimonthly
