@@ -1716,6 +1716,11 @@ python-style:
 	pylint -f parseable --disable=W,line-too-long,invalid-name ${PYTHON_FILES}
 ```
 
+To activate conda:
+```
+source activate <yourenvironmentname> 
+```
+
 
 == General wisdom (that is, everything without its own section above)
 
