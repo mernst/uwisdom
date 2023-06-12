@@ -611,6 +611,11 @@ add "?w=1" at the end of the URL.
 In GitHub, adding a CONTRIBUTING file to the root of your repository will add a
 link to your file when a contributor creates an Issue or opens a Pull Request.
 
+I suggest that you use GitHub's squash-and-merge feature when committing pull
+requests.  It leads to a cleaner version control history.  A pull request
+usually represents one concept, so it can be represented as a single commit.
+There is no need to record all the iterations from debugging or code review.
+
 In GitHub, you can squash a pull request into a single commit and then merge the
 single commit (https://github.com/blog/2141-squash-your-commits).
 To do so:
