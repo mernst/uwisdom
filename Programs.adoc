@@ -109,10 +109,12 @@ To concatenate PDF files:
   pdftk ${ALL_PDFS} cat output singlefile.pdf 
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
 ```
+
 To rotate a PDF file:
 ```
-  cpdf -rotate-contents 180 in.pdf -o out.pdf
+  cpdf -rotate 180 in.pdf -o out.pdf
 ```
+(This worked better than -rotate-contents for me, but see https://www.coherentpdf.com/cpdfmanual/indexse22.html .)
 Gradescope has a "rotate submission" feature, but it requires a lot of clicks.
 
 Use psnup to place multiple logical pages of a PostScript document on a single
@@ -1720,6 +1722,16 @@ To activate conda:
 ```
 source activate <yourenvironmentname> 
 ```
+
+To disable tqdm output:
+```python
+from functools import partialmethod
+if os.getenv("TERM", "dumb") == "dumb":
+    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
+```
+More info at:
+https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
+https://stackoverflow.com/a/67238486/173852
 
 
 == General wisdom (that is, everything without its own section above)
