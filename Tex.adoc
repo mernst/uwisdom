@@ -1069,6 +1069,12 @@ different font like Times.
 If the line spacing is too large/big in a paragraph typeset in a smaller
 font, then be sure to end the paragraph with \par.
 
+From an NSF proposal that made it through research.gov:
+  \documentclass[10pt,letterpaper]{article} 
+  % Palatino settings
+  \usepackage{palatino}
+  \linespread{1.005}
+
 
 == Everything else
 
