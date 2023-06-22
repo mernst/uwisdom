@@ -86,7 +86,7 @@ Tools for transforming PDF files:
  * PDFjam is a single program, along with 10 wrappers, each with
    a single purpose (e.g., pdf90 to rotate by 90 degrees).
  * pdftk is a single program with many command-line options.
-   Depends on gcj which is in maintenance mode since 2013.
+   As of 2023, there has been no release since 2013.
    Does not install easily on Red Hat/Fedora/RHEL/CentOS.
  * cpdf is an alternative to both; but is free only for personal use.
    "Charities and educational institutions still require a license."
@@ -98,16 +98,16 @@ Separate/split a file into individual pages:
 ```
 Select pages from a file:
 ```
-  pdftk infile.pdf cat 2-3 output outfile.pdf
-  pdftk infile.pdf cat 3-end output outfile.pdf
   pdfjam -o outfile.pdf infile.pdf 2-3
   pdfjam -o outfile.pdf infile.pdf 3-
+  pdftk infile.pdf cat 2-3 output outfile.pdf
+  pdftk infile.pdf cat 3-end output outfile.pdf
 ```
 To concatenate PDF files:
 ```
   cpdf -merge ${ALL_PDFS} -o singlegfile.pdf
-  pdftk ${ALL_PDFS} cat output singlefile.pdf 
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
+  pdftk ${ALL_PDFS} cat output singlefile.pdf 
 ```
 
 To rotate a PDF file:
@@ -133,7 +133,7 @@ One can also use pdfnup:
   pdfnup --frame true --nup 2x2 file.pdf    # 4-up slides
   pdfnup --frame true --nup 2x3 file.pdf    6-up slides
 ```
-pdfnup is part of PDFjam.  Also see pdftk, an alternative to PDFjam.
+pdfnup is part of PDFjam.
 Maybe I can just do
 ```
   lpr -o number-up=2 filename
@@ -361,11 +361,11 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
 To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
 to the end of the link's URL.
 
-To combine/interleave two PDF files, one containing add pages scanned and the
+To combine/interleave two PDF files, one containing odd pages scanned and the
 other containing even pages scanned in reverse order:
-```
-pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf
-```
+ * To use `pdfjam`, see https://unix.stackexchange.com/a/53316/14002 .
+ * To use `pdftk`: `pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf`
+ * Online: https://www.sejda.com/alternate-mix-pdf
 
 
 == Perl
