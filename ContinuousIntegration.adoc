@@ -8,18 +8,31 @@ toc::[]
 To avoid unnecessary CI slowdowns, work on a branch in your own fork, and
 don't create a pull request until you think the code is ready.
 .
-Travis CI and CircleCI allocate resources per GitHub organization/account.
-(Azure Pipelines allocates resources depending on the Microsoft user ID
-that created the Azure Pipeline.)  All of these provide only a certain
-number of CPUs, and they additionally throttle work based on CPU usage per
-day.
+CircleCI, GitHub Actions, and Travis-CI allocate resources per GitHub
+organization/account.  (Azure Pipelines allocates resources depending on the
+Microsoft user ID that created the Azure Pipeline.)  All of these provide only a
+certain number of CPUs, and they additionally throttle work based on CPU usage
+per day/month/whatever.
 .
-Thus, an efficient way to work is to create a branch on your own fork,
-iterate until it passes CI, and only then open a pull request.  Working on
-the master fork, or creating a pull request too early, causes all the
-branches and pull requests to compete with one another for the same CI
-resources.  This effect goes double for Travis CI, which runs CI twice for
-each pull request, but only once for each branch.
+Thus, an efficient way to work is to create a branch on your own fork, iterate
+until it passes CI, and only then open a pull request.  Working on the master
+fork, or creating a pull request too early, causes all the branches and pull
+requests to compete with one another for the same CI resources.  This effect
+goes double for some CI systesm, which run CI twice for each pull request, but
+only once for each branch.
+
+Comparison of CI systems:
+ * Azure Pipelines gives the largest number of concurrent runners and therefore
+   its throughput is highest.  Its documentation is also probably the best.
+ * CircleCI has the fastest throughput -- it starts jobs running very quickly
+   after being  triggered.
+ * GitHub Actions is easiest to set up:  just commit a file to your GitHub
+   repository.  It has very low monthly usage limits.  It does not permit
+   rerunning only failing jobs:  you have to rerun them all, which is bad if you
+   have flaky tests, and all tests are sometimes flaky due to network problems.
+ * Travis-CI was once the state of the art, but it doesn't seem well maintained
+   any more.  The last time I checked, its infrastructure was rather old, and
+   other systems now have more features.
 
 
 == Azure Pipelines
@@ -326,3 +339,4 @@ To give a new user permissions/privileges in Jenkins:
 
 Dependabot runs on forks, which is irritating.
 The workaround for now is to delete the fork and re-create it without enabling Dependabot security updates.
+Or, use Renovate instead.
