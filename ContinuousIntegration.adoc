@@ -24,7 +24,7 @@ only once for each branch.
 Comparison of CI systems:
  * Azure Pipelines gives the largest number of concurrent runners and therefore
    its throughput is highest.  Its documentation is also probably the best.
- * CircleCI has the fastest throughput -- it starts jobs running very quickly
+ * CircleCI has the lowest latency -- it starts jobs running very quickly
    after being  triggered.
  * GitHub Actions is easiest to set up:  just commit a file to your GitHub
    repository.  It has very low monthly usage limits.  It does not permit
