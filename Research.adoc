@@ -64,9 +64,8 @@ Reproduce = same research question, but new experiment.
 Threats to the validity of research.
 Most often these are clumped into just
  * Internal validity
-   refers specifically to whether an experimental
-   treatment/condition makes a difference or not, and whether there is
-   sufficient evidence to support the claim.
+   refers specifically to whether an experimental treatment/condition makes a
+   difference or not, and whether there is sufficient evidence to support the claim.
  * External validity
    refers to the generalizibility of the treatment/condition outcomes.
 But sometimes the threats are more finely broken down.  Example from 
