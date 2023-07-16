@@ -803,6 +803,15 @@ f.setAccessible(true);
 value = f.get(obj); // possible IllegalAccessException
 ```
 
+Here is Oracle's migration guide from java.io.File to java.nio.file.Path:
+https://docs.oracle.com/javase/tutorial/essential/io/legacy.html
+
+If you are targeting Java 17, then you should not use types like `Pair` and
+`Triplet` (say, from the `org.javatuples` package).  A record is very little
+code to define, is type-safe, and is much more readable at uses.
+
+
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
