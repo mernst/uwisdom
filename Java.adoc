@@ -807,10 +807,11 @@ Here is Oracle's migration guide from java.io.File to java.nio.file.Path:
 https://docs.oracle.com/javase/tutorial/essential/io/legacy.html
 
 If you are targeting Java 17, then you should not use types like `Pair` and
-`Triplet` (say, from the `org.javatuples` package).  A record is very little
-code to define, is type-safe, and is much more readable at uses.
-
-
+`Triplet` (say, from the `org.javatuples` package).  A record:
+ * is very little code to define (thus, little code clutter),
+ * has a shorter name than an instantiated tuple (thus, less code clutter),
+ * is type-safe (you can't accidentally use one in the wrong context, as you can for a `Pair<String, String>`),
+ * is much more readable at uses (`mySextet.getValue3()` is inscrutible.  When using the `org.javatuples` package, it is also misleading.  When not indexing into a list or array, one starts counting at one rather than zero.  However, `getValue3()` is the *fourth* element of the sextet, which is rather surprising!)
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
