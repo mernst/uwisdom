@@ -2908,7 +2908,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ```
 sh:
 ```
-SCRIPTDIR="$( cd "$(dirname "$0")" ; pwd -P )"
+SCRIPTDIR="$(cd "$(dirname "$0")" && pwd -P)"
 ```
 
 To install Minecraft on a Chromebook (after enabling Linux):
