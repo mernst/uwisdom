@@ -1779,6 +1779,7 @@ Programs for drawing figures under X Windows (from best to worst in ease of use)
  * OpenOffice/LibreOffice draw
  * inkscape -- can't attach text to an object easily (could group them to
      fix the position, but then scalng doesn't work right)
+ * drawio -- not processable by LaTeX, `convert`, etc.
  * xfig (abandoned in 2005)
  * idraw (abandoned in 2002)
  * skencil (formerly called sketch) (Skencil 0.6.17 released 2005-06-19)
