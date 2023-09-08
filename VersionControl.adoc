@@ -687,6 +687,13 @@ For email notifications of issue tracker changes, use Admin >> Issue
 Tracker Settings >> Notifications.
 I'm not sure whether all this works for the wiki repository...
 
+== Pull requests
+
+When you address a code review comment, you don't need to reply within the pull
+request or describe what you did.  You can just click "resolve conversation".
+The next iteration of the code review will examine your new code or comments.
+On the other hand, if you disagree with a suggestion or more discussion is
+needed, then continuing the conversation in the pull request thread is great.
 
 
 // Please put new content in the appropriate section above, don't just
