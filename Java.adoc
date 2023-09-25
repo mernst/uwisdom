@@ -83,7 +83,7 @@ To run it:
 To get a traceback (stack trace) from each Java thread (but keep running):
 //nobreak
 
- * `jstack _pid_`  (just `jcmd` gives a list of pids)
+ * `jstack _pid_`
  * `jcmd _pid_ Thread.print`  (just `jcmd` gives a list of pids)
  * `kill -QUIT _pid_`
  * `ctrl-\` if Java is running in a shell.
