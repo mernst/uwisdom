@@ -416,3 +416,7 @@ To test a website for mobile usability issues, according to Google Search:
 https://search.google.com/test/mobile-friendly/
 To make sure your site is indexed:
 https://support.google.com/webmasters/answer/7474347
+
+To change the default guest permissions in Google Calendar:
+In the Settings menu, click Settings.
+Under General > Event Settings, choose Default guest permissions.
