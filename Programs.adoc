@@ -105,6 +105,7 @@ Select pages from a file:
 ```
 To concatenate PDF files:
 ```
+  pdfunite file1.pdf file2.pdf singlefile.pdf
   cpdf -merge ${ALL_PDFS} -o singlegfile.pdf
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
   pdftk ${ALL_PDFS} cat output singlefile.pdf 
