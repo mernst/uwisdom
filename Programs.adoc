@@ -161,7 +161,7 @@ This replaces the obsolete bbfig program.
 To compute a correct MediaBox and/or CropBox (the PDF equivalents of a
 bounding box):
 ```
-  FILE=myfilename
+  FILE=myfilebasename
   pdftops -eps ${FILE}.pdf
   epstool --copy --bbox ${FILE}.eps --output ${FILE}-cropped.eps
   epstopdf ${FILE}-cropped.eps  
