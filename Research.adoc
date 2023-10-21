@@ -9,8 +9,9 @@ The term "bug" has no established meaning, and different people use it to
 mean different things.  Therefore, it should not be used in technical
 writing.  (There are a very few exceptions, such as compound words with clear
 meaning: "bug report", "bug-finding tool", sometimes "bug fix".)
-.
-Here is terminology adapted from http://en.wikipedia.org/wiki/Dependability:
+Here is terminology adapted from
+http://en.wikipedia.org/wiki/Dependability:
+
 Defect::
       A defect is a flaw, failing, or imperfection in a system, such as an
       incorrect design, algorithm, or implementation.  Typically caused by
@@ -28,6 +29,7 @@ Failure::
       behavior that is contrary to its specification.  It is a user-visible
       error.  A non-user-visible error frequently leads to a failure later
       in the execution.
+
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
 Terminology says:
 ____
