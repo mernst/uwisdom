@@ -1790,8 +1790,10 @@ Programs for drawing figures under X Windows (from best to worst in ease of use)
 
 The mayura draw program for Windows takes Windows Metafiles (such as produced by
 PowerPoint) and creates PostScript.
-It may be best just to create figures using PowerPoint (but that is
-crashing for me when I try to create PDF...).
+It may be best just to create figures using PowerPoint
+
+The Ipe extensible drawing editor edits PDF files directly:
+https://ipe.otfried.org/
 
 split:
 Use
