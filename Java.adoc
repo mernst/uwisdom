@@ -389,7 +389,7 @@ Or, at http://java.sun.com/javase/downloads/, click on "Previous Releases".
 To get a copy of the JDK 7 source:
   hg clone http://hg.openjdk.java.net/jdk7/jdk7/jdk
 
-Major version number for the Java class file format (JVM version number):
+Major version number for the Java class file format (JVM version numbers):
 ----
   J2SE 21.0 = 65 (0x41 hex)   [released September 2023; LTS version]
   J2SE 20.0 = 64 (0x40 hex)   [released March 2023]
