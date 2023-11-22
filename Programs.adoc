@@ -1094,6 +1094,11 @@ set -o pipefail
 set -u
 ```
 
+To suppress a pylint warning, write inline:
+```
+# pylint: disable=too-many-locals
+```
+
 The `shellcheck` program is a linter for sh and bash scripts.  Run like:
 ```shellcheck --format=gcc```
 There is also `checkbashisms`.

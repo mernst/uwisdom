@@ -440,6 +440,16 @@ To see the gains:
 This does it the right way, but may need to be run overnight:
   git repack -a -d --depth=250 --window=250
 
+To reduce the time spent cloning a repository, and to reduce its disk space, use
+```
+git clone --filter=blob:none
+```
+The disadvantage is that some git commands may be a bit slower because they will
+retrieve information from the remote repo (once ever per piece of information).
+.
+GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
+CI when the clone will be immediately discarded.
+
 
 == GitHub (Git-specific items go above)
 
