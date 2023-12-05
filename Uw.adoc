@@ -311,16 +311,16 @@ To apply for a new UW CSE computer account at cs.washington.edu,
 the sponsor fills out a form at
   https://password.cs.washington.edu/account/csenetid/
 (I think the user gets to choose a preferred username.)
-A guest account ("research" account type) is only permitted to use 25 MB of space, so:
+A guest account ("research" account type) is only permitted to use 25 MB (!) of space, so:
 //nobreak
 
  * Always log into the same machine.
  * On that machine, create a directory /scratch/${USER} and store your
-   bigger files there.
- * make symbolic links from your home directory so you don't even notice
+   files there.
+ * maybe make symbolic links from your home directory so you don't even notice
    the disk quota limitation.
- * periodically check whether your jobs have created new files -- say,
-   under ${HOME}/.m2
+ * periodically check whether your jobs have created new files in your home
+   directory -- say, under ${HOME}/.m2
 
 What files in the file system contain the content served at webpages/URLs?
 https://types.cs.washington.edu/ : /cse/www2/types/
