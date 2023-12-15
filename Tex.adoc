@@ -2119,6 +2119,13 @@ xsim package
 probsoln
   For selecting problems from a database or bank of problems.
 
+
+Put '~' before \cite, but do not put '~' before \footnote.  '~' is a
+non-breaking space.  It formats just like a space ' ', but it prohibits line
+breaks at that location.  You don't want a space before the footnote mark (so no
+'~' or space), but you do want a space between text and a citation (so use '~').
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
 
