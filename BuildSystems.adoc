@@ -368,6 +368,9 @@ resolution will not be reattempted until the update interval of central has elap
 Then Maven will not retry for 1 day (!).
 To force a retry, delete the offending directory under `~/.m2/` (or at least its *.repositories) file, or pass `-U` to Maven.
 
+To delete Maven Central snapshots, delete this directory:
+.m2/repository/org/checkerframework:
+
 
 == Buck
 
