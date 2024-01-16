@@ -517,7 +517,7 @@ To configure Renovate for a repository (maybe I can only do this if I have permi
   https://github.com/apps/renovate , then "Install", then the organization, then "Repository Access",
   select a repository, "Save", and wait for the pull request.
 I like to put the configuration file in .github/renovate.json
-rather than a the top level of the repository, to reduce clutter.
+rather than at the top level of the repository, to reduce clutter.
 You can find an example configuration file at
 https://github.com/typetools/checker-framework/blob/master/.github/renovate.json
 but you probably don't need the "packageRules" section.
