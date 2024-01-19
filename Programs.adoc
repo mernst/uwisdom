@@ -982,6 +982,10 @@ and execution tracing) to make sure problems are caught early:
   set -o errexit -o nounset
   ...
 ```
+For a Posix shell script, use:
+```
+  set -e
+```
 Also consider:
   set -x (or set -o xtrace): Display commands and their arguments as they are executed.
   set -v : Display shell input lines as they are read.
