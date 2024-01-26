@@ -737,6 +737,22 @@ is `./gradlew --stop`
 
 Gradle only checks for new SNAPSHOT versions (also called "changing versions") every 24 hours by default.  To get new snapshot releases, run Gradle with `--refresh-dependencies`
 
+In Gradle, to see when each individual test is run (helps to determine which one is timing out):
+```
+  test {
+    testLogging {
+      // This is all the events except standardOut and standardErr.
+      events = [
+        "started",
+        "passed",
+        "failed",
+        "skipped"
+      ]
+    }
+  }
+```
+
+
 === Displaying Gradle dependencies
 
 To print/show the classpath that Gradle uses:
