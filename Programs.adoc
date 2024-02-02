@@ -2868,6 +2868,11 @@ For converting (GitHub-style) markdown format (.md file) to HTML:
 Markdown format is idiosyncratic and has many variants, so it may be better
 to use AsciiDoc format and the Asciidoctor processor, when possible.
 
+To write a comment in a Markdown file, write this with blank lines both before and after:
+```
+[comment]: # (Here is the text of the comment.)
+```
+
 To convert .svg to vector-format PDF:
 ```
   rsvg-convert -f pdf -o myfile.pdf myfile.svg
