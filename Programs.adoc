@@ -3102,5 +3102,11 @@ sudo snap-store --quit && sudo snap refresh
 sudo killall snap-store && sudo snap refresh 
 ```
 
+To output Google Slides *without* "skipped" slides:
+ * Click File in the Google Slides interface.
+ * Go to Print preview.
+ * Deselect Include skipped slides.
+ * Click Download as PDF.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
