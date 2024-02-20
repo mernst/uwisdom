@@ -446,6 +446,8 @@ git clone --filter=blob:none
 ```
 The disadvantage is that some git commands may be a bit slower because they will
 retrieve information from the remote repo (once ever per piece of information).
+For example, running `git annotate` (= `git blame`) on such a repository takes a
+very long time.
 .
 GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
 CI when the clone will be immediately discarded.
