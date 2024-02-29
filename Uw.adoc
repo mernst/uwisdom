@@ -206,7 +206,8 @@ If you have a time-sensitive message, you should send that to
 cs-ugrads-urgent@cs.
 
 Card key access to rooms and labs in CSE buildings (the Allen Center or the Gates Center):
-cardkey@cs.washington.edu
+To: cardkey@cs.washington.edu
+Please give these individuals access to the Gates Center upper floors, Gates 253, and the amenity spaces like the kitchens and printer/copier rooms:
 For undergraduates, need:
  * student ID
  * rooms to be given access to
