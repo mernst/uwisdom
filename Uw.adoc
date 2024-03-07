@@ -486,6 +486,9 @@ You can only log into it from another CSE machine, not from outside.
 % The Hg repositories served by https are listed at
 % https://wasp.cs.washington.edu/Internal/hg.html 
 
+BS/MS students do not have access to the CSE gws research computers/servers like bicycle and tricycle.
+That requires additional account sponsorship.
+
 
 == Seattle
 
