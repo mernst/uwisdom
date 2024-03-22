@@ -2875,8 +2875,10 @@ To write a comment in a Markdown file, write this with blank lines both before a
 
 To convert .svg to vector-format PDF:
 ```
-  rsvg-convert -f pdf -o myfile.pdf myfile.svg
+  BASENAME=filename
+  rsvg-convert -f pdf -o $BASENAME.pdf $BASENAME.svg
 ```
+But note that Google Slides does not allow import of SVG or PDF files.
 To edit a .svg file, use inkscape (or a variety of other tools).
 In Inkscape, to resize/crop the canvas to the size of the drawing:
  * File >> Document Properties >> Page size >> Custom size >> Resize page to content >> click "Resize Page to drawing or selection" button

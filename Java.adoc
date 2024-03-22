@@ -813,6 +813,13 @@ If you are targeting Java 17, then you should not use types like `Pair` and
  * is type-safe (you can't accidentally use one in the wrong context, as you can for a `Pair<String, String>`),
  * is much more readable at uses (`mySextet.getValue3()` is inscrutible.  When using the `org.javatuples` package, it is also misleading.  When not indexing into a list or array, one starts counting at one rather than zero.  However, `getValue3()` is the *fourth* element of the sextet, which is rather surprising!)
 
+Jacoco's "instruction coverage" is bytecode instructions.
+Jacoco's "branch coverage" is branch coverage of bytecode conditions (= bytecode decisions).  It reports each direction of a boolean condition (= boolean expression) separately.
+For example, `if (a > 0 && b > 0)` has 4 branches:  the true and false branches of `a > 0` and the true and false branches of `b > 0`.
+Jacoco cannot compute source-code-level line, decision, or MC/DC coverage.
+There are visualization tools that map Jacoco's output to source code lines, but that doesn't really give source-code-level coverage information.
+
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx

@@ -14,16 +14,17 @@ http://en.wikipedia.org/wiki/Dependability:
 
 Defect::
       A defect is a flaw, failing, or imperfection in a system, such as an
-      incorrect design, algorithm, or implementation.  Typically caused by
-      a human mistake.  It is also known as a fault, and this is the most
+      incorrect design, algorithm, or implementation.  It is typically caused
+      by a human mistake.  It is also known as a fault, and this is the most
       common meaning for the term "bug", but those terms are ambiguous and
       should be avoided.
 Error::
       An error is a discrepancy between the intended behavior of a system
-      and its actual behavior within the system, such as an incorrect
+      and its actual behavior, such as an incorrect
       program state or an invocation of a procedure that is contrary to the
-      procedure's specification or contract.  Not detectable without assert
-      statements and the like.
+      procedure's specification or contract.    Many errors are not
+      detectable without observing internal state, such as via an assert
+      statement or a debugger.
 Failure::
       A failure is an instance in time when a system displays
       behavior that is contrary to its specification.  It is a user-visible

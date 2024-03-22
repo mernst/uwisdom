@@ -265,6 +265,16 @@ https://norfolk.cs.washington.edu/public-directory/ .  You get to it by going
 down the driveway from Stevens Way.  Go through the man door next to the loading
 dock door, and it's the first door on your right.
 
+Course scheduling requests: csetimes@cs.washington.edu
+rather than to Pim Lustig or Maude Lustig.
+
+Research communications (PR):
+https://docs.google.com/forms/d/e/1FAIpQLSeZfJ42zK7aKgkaMxjVSkKilHFo70HgT1rdX3zwZ3L9QBCbrw/viewform
+Or, email to news-tips@cs rather than directly to Kristin Osborne.
+
+Examples of successful NSF grant REU supplement requests/proposals:
+https://drive.google.com/drive/folders/1rzfbCvKYWvImZGsuc7RUaYzvJTlloIaK
+
 
 == CSE sysadmin
 
