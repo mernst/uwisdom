@@ -147,8 +147,18 @@ The following will make emacs `help' windows transient:
          (fset 'help-command ehelp-map))
 ```
 
-To prevent emacs from wrapping lines, (setq truncate-lines t).
+To prevent Emacs from wrapping lines, (setq truncate-lines t).
 I have a function M-x truncate-lines that toggles this value.
+
+To prevent Emacs from truncating printed representations of values:
+```
+(setq eval-expression-print-level nil
+      eval-expression-print-length nil
+      print-level nil
+      print-length nil
+      edebug-print-level nil
+      edebug-print-length nil)
+```
 
 Use split-line (by default, bound to ESC C-o) for open-line-like behavior.
 
