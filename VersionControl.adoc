@@ -453,6 +453,28 @@ GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
 CI when the clone will be immediately discarded.
 
 
+Git merge terminology:
+ * merge strategy: called on every file that is merged; however, if two of {parent1,parent2,base} are the same, then the "low-level merge driver" (i.e., `git merge-file`) is never called.
+   The merge strategy is responsible for detecting and handling renames.
+   A merge strategy is [hard to write](https://stackoverflow.com/questions/47454227/how-to-configure-a-merge-strategy).
+   If you have a `git-merge-xyz` in your path then git will run it if you `git merge --strategy xyz`.
+   The `git-merge-xyz` programs that come with git are just links to the git executable itself.
+   You can supply multiple strategies:  git merge will take the first that succeeds (0 exit status) or will heuristically choose among the strategies whose exit status is 1.
+   When writing a merge strategy use `GIT_TRACE=1 git merge -s <strategy>` to see the command-line arguments passed to it.  There are also environment variables that have effects.
+ * merge driver:  called automatically when there is a merge conflict.
+   It is run once per file with a conflict.  It is run on temporary files, but you can get the path of the conflicting file using the %P parameter.
+   It observes the original version of the parent and base files, but it does not observe conflict markers created by the merge strategy.
+   It overwrites its input named `%A` with the merge result, which may contain conflict markers.
+   You can use Git attributes to use different merge strategies for files whose names match given patterns.
+ * merge tools (mergetools):  never run automatically.  If a user does `git mergetool`,
+   the mergetool is run on all conflicted files (one at a time) and observes the conflict markers.
+   It gets the names of the original files.
+
+A git merge driver and a git mergetool are not invoked on files that contain no merge conflict.
+They both assume that if the git merge strategy didn't output a merge conflict, then the merge was correct.
+This means that a git merge driver or a git mergetool will never reduce the number of clean-but-incorrect merges.  It will only change some conflicted merges into correct or incorrect merges.
+
+
 == GitHub (Git-specific items go above)
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
