@@ -452,29 +452,29 @@ very long time.
 GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
 CI when the clone will be immediately discarded.
 
-
 Git merge terminology:
- * merge strategy: A merge strategy is about performing three-way merge at the tree
-   level, figuring out which three variants of contents to hand to a
-   merge driver that handles the content-level three-way merge.
-   However, if two of {parent1,parent2,base} are the same, then the merge driver is never called.
-   The merge strategy is responsible for detecting and handling renames.
-   If you have a `git-merge-xyz` in your path then git will run it if you `git merge --strategy xyz`.
-   A merge strategy is [hard to write](https://stackoverflow.com/questions/47454227/how-to-configure-a-merge-strategy); the arguments are undocumented and there are also environment variables that have effects.
-   The `git-merge-xyz` programs that come with git are just links to the git executable itself.
-   You can supply multiple strategies:  git merge will take the first that succeeds on the whole merge (0 exit status) or will heuristically choose among the strategies whose exit status is 1.
- * merge driver:  called whenever no two of {base,parent1,parent2} are the same.
-   It is run on one file at a time.  It is run on temporary files, but you can get the path of the conflicting file using the %P parameter.
-   It observes the original version of the parent and base files; no conflict markers exist.
-   It overwrites its input named `%A` with the merge result, which may contain conflict markers.
-   You can use Git attributes to use different merge strategies for files whose names match given patterns.
- * merge tools (mergetools):  never run automatically.  If a user does `git mergetool`,
-   the mergetool is run on all conflicted files (one at a time) and observes the conflict markers.
-   It gets the names of the original files.
-   A git mergetool is never invoked on a files that contains no merge conflict.
-   It assumes that if the merge driver didn't output a merge conflict, then the merge was correct.
-   This means that a git mergetool will never reduce the number of clean-but-incorrect merges.
-   It will only change some conflicted merges into correct or incorrect merges.
+ * merge strategy: A merge strategy is about performing three-way merge at the
+   tree level, figuring out which three variants of contents to hand to a merge
+   driver that handles the content-level three-way merge.  However, if two of
+   {parent1,parent2,base} are the same, then the merge driver is never called.
+   The merge strategy is responsible for detecting and handling renames.  You
+   rarely have to write a new merge strategy.
+ * merge driver: A merge driver is called whenever no two of
+   {base,parent1,parent2} are the same.  It is run on one file at a time.  It is
+   run on temporary files, but you can get the path of the conflicting file
+   using the %P parameter.  It observes the original version of the parent and
+   base files; no conflict markers exist.  It overwrites its input named `%A`
+   with the merge result, which may contain conflict markers.  You can use Git
+   attributes to use different merge strategies for files whose names match
+   given patterns.
+ * merge tools (mergetools):  A merge tool never runs automatically.  If a user
+   issues the command `git mergetool`, then the mergetool is run on all
+   conflicted files (one at a time) and observes the conflict markers.  It gets
+   the names of the original files.  A git mergetool is never invoked on a file
+   that contains no merge conflict.  It assumes that if the merge driver didn't
+   output a merge conflict, then the merge was correct.  This means that a git
+   mergetool will never reduce the number of clean-but-incorrect merges.  It
+   will only change some conflicted merges into correct or incorrect merges.
 
 
 == GitHub (Git-specific items go above)

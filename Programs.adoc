@@ -1657,10 +1657,12 @@ To make a diff file good for patching old-file to produce new-file,
 ```
 In GNU diff, specify lines of context using -C # (not -c #).
 
-There is no standalone `diff` program that incorporates the patience diff algorithm, but instead you can use
+There is no standalone `diff` program that incorporates the patience diff
+algorithm, but instead you can use
 ```
   git diff --no-index --patience ...
 ```
+This does a two-way, not a three-way, diff.
 
 With patch version 2.4 or 2.5 (and maybe other versions), you must set the
 environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
@@ -1669,7 +1671,9 @@ the "Index:" lines and it will ask for the filename for each patch.
 moss:  a software plagiarism detector by Alex Aiken.
 http://www.cs.berkeley.edu/~aiken/moss.html
 
-Use the `-N` or `--new-file` command-line option to make diff show the full contents of a new or deleted file (a file that did not exist), rather than displaying "Only in ...".
+Use the `-N` or `--new-file` command-line option to make diff show the full
+contents of a new or deleted file (a file that did not exist), rather than
+displaying "Only in ...".
 Use
 ```
 --unidirectional-new-file
@@ -1685,6 +1689,10 @@ GIT_EXTERNAL_DIFF=difft git --ext-diff show e96a7241760319
 git difftool
 git dft
 ```
+
+I cannot figure out how to see all differences (even mergeable ones) among 3
+files, using the "<<<<<<", "||||||", and ">>>>>>" conflict markers/brackets.
+See my question at  https://stackoverflow.com/questions/78252587 .
 
 
 == Python
