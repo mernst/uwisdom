@@ -160,3 +160,11 @@ Heilmeier's catechism:
 Generally, "bi-" means two (biweekly means every two weeks),
 while "semi-" means half (semiweekly means twice a week).
 These are the same:  biweekly, semimonthly.
+
+Card sorting is a technique in user experience design. The person
+conducting the test (usability analyst, user experience designer, etc.)
+first identifies key concepts and writes them on index cards or Post-it
+notes. Test subjects, individually or sometimes as a group, then arrange
+the cards to represent how they see the structure and relationships of the
+information.
+(From Wikipedia.)
