@@ -2985,14 +2985,16 @@ tasks.withType(JavaCompile).configureEach {
 }
 ```
 
-Do not use Error Prone's `@InlineMe` annotation.  It's defined in error_prone_core rather than in error_prone_annotations.  Adding this dependency:
-```
-dependency {
-  implementation "com.google.errorprone:error_prone_core:${errorproneVersion}" // For @InlineMe.
-}
-```
-can break javac in clients.  For example, adding that to plume-util breaks javac in the Checker
-Framework, which uses plume-util.
+Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
+clients (of the project containing the `@InlineMe` annotation) to declare a
+dependency on error_prone_annotations.
+
+When Error Prone's suggested replacement is `UTF_8`, that is
+`StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
+`StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
+Example:
+`Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
+
 
 A shell function that works around `wget` or `curl` hanging for very slow
 connections.  (`curl`'s timeouts don't seem to work in this case.)
