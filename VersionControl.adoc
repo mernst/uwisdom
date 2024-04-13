@@ -469,12 +469,15 @@ Git merge terminology:
    given patterns.
  * merge tools (mergetools):  A merge tool never runs automatically.  If a user
    issues the command `git mergetool`, then the mergetool is run on all
-   conflicted files (one at a time) and observes the conflict markers.  It gets
-   the names of the original files.  A git mergetool is never invoked on a file
+   conflicted files (one at a time), getting a chance to redo the merge.  The
+   merge tool is invoked with $BASE, $LOCAL, and $REMOTE set to temporary files,
+   and $MERGED set to the file with the conflict markers (which is also where to
+   write the merge tool's result).  A git mergetool is never invoked on a file
    that contains no merge conflict.  It assumes that if the merge driver didn't
    output a merge conflict, then the merge was correct.  This means that a git
-   mergetool will never reduce the number of clean-but-incorrect merges.  It
-   will only change some conflicted merges into correct or incorrect merges.
+   mergetool will never reduce the number of clean-but-incorrect merged files.
+   It might change some conflicted files into correct or incorrect merges (or
+   leave them conflicted, possibly changing their conflict markers).
 
 
 == GitHub (Git-specific items go above)
