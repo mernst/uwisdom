@@ -480,6 +480,14 @@ Git merge terminology:
    leave them conflicted, possibly changing their conflict markers).
 
 
+The user-level (aka "global") git attributes are by default read from
+`$XDG_CONFIG_HOME/git/attributes`, or (if (`$XDG_CONFIG_HOME` is either not set
+or empty) `$HOME/.config/git/attributes`.  This behavior can be overridden by
+setting the `core.attributesfile` configuration option to a file, which is used
+instead.  To set it to `~/.gitattributes':
+`git config --global core.attributesfile '~/.gitattributes'`
+
+
 == GitHub (Git-specific items go above)
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
