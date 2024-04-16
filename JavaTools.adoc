@@ -706,6 +706,7 @@ for download any longer.
 
 lgtm.com issues false positive warnings, and I don't see how to suppress them.
 
+
 == Profilers
 
 jcmd can print a stack trace of a running Java program, at the current
@@ -714,21 +715,19 @@ This gives a poor man's version of profiling.
 
 Baeldung's 2018 overview:
 https://www.baeldung.com/java-profilers
-It mentions JProfiler, YourKit, VisualVM, and others with smaller market share.
+It mentions JProfiler, YourKit, VisualVM, and others with smaller market
+share.  It shows screenshots but gives no usage instructions.
+
 
 === Profilers in the JDK
 
-java -prof
-  puts output in java.prof
+Flight Recorder:
+...
 
-java -Xrunhprof:cpu=samples ...
-java -Xrunhprof:cpu=samples,heap=all ...
-  Ignore all the "HPROF ERROR" output at the beginning of the run.
-  Output appears in file java.hprof.txt .
-  For command-line options, do
-    java -Xrunhprof:help
+jcmd views a running Java process.  I'm not sure whether it can profile a
+Java application end-to-end.
 
-Other profiling tools in the JDK are jconsole (time and space), jmap
+Other profiling tools in the JDK are jconsole (time and space, by gui), jmap
 (space), and jhat (space).
 
 The Java Hotspot profiler is very fast but doesn't do attribution (only
@@ -772,6 +771,18 @@ http://www.ej-technologies.com/products/jprofiler/overview.html
 
 ProfileViewer helps in interpreting Java profiling output.
 http://www.ulfdittmer.com/profileviewer/index.html
+
+OLD, no longer works in JDK 17:
+java -prof
+  puts output in java.prof
+
+OLD, removed somewhere around OpenJDK 9:
+java -Xrunhprof:cpu=samples ...
+java -Xrunhprof:cpu=samples,heap=all ...
+  Ignore all the "HPROF ERROR" output at the beginning of the run.
+  Output appears in file java.hprof.txt .
+  For command-line options, do
+    java -Xrunhprof:help
 
 
 == Java code coverage
