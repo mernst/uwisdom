@@ -947,6 +947,67 @@ Semantic Designs (www.semanticdesigns.com) offers Java/C++ front ends
 It's $5000 for an academic license ($50,000 for a commercial one).
 
 
+== Improving startup time
+
+GraalVM Native Image
+This creates an ahead-of-time compiled binary that doesn't require any VM,
+runtime, interpreter, etc.
+```
+javac HelloWorld.java
+native-image HelloWorld
+```
+It is better if none of the code uses reflection, as the binary can be
+faster.
+It can be a bit difficult to adapt code for GraalVM (such as identifying
+uses of reflection and other features).
+The general consensus on Reddit is that it's not ready for prime time as of
+mid-2024; that probably just means it is hard to use.
+
+The ahead-of-time `jaotc` compiler was removed in JDK 16.  It's now only in GraalVM.
+
+jlink creates a self-contained executable.  It runs just like the regular
+JVM (no new optimizations are enabled), but is smaller and thus loads
+faster (the JVM starts up faster).
+The executable includes a subset of the JRE, omitting features not needed for a particular program.
+It might require modularization (Java modules).
+jlink has command-line options for optimization.
+jlink is quite solid and easy-to-use.
+Figuring out what modules you need to ship can be done with the jdeps tool.
+JLink can replace JARs with an optimized file format called "jimage".
+
+The CRaC (Coordinated Restore at Checkpoint) Project checkpoints (makes an
+image of, snapshots) a Java instance while it is executing. Restoring from
+the image leads to faster start-up and warm-up times.
+Some documentation is at: https://github.com/CRaC/docs/blob/master/STEP-BY-STEP.md
+It seems a bit involved, but might work well.
+It's built into Azul Zulu builds of OpenJDK.
+Given that warm-up is required, this might be more appropriate for servers
+(which warm up and continue running, servicing new requests) than for an
+end-to-end program.
+
+Azul Platform Prime's "ReadyNow" caches JIT work so an app starts running
+optimized compiled code as soon as it reaches main().
+
+AppCDS (Application Class Data Sharing).
+It preloads (parses, verifies, etc.) certain classes and stores them in a
+file in a binary form that allows direct mapping the image into the address
+space of JVM.  This can be done for JVM classes, but also for application
+classes.  The JDK already does this for JVM classses, automatically.  The
+biggest benefits come when multiple apps are running and share the AppCDS
+information; for one application running, it isn't much of a win.
+
+Write the Java program as a server that services requests, to avoid the
+cost of JVM startup and to make CRaC applicable.
+This may greatly complicate the application in question.
+
+micronaut is a framework for microservices.  I doubt that I want to add
+another framework.  It supports CRaC.
+
+Quarkus is a framework for kubernetes.  It supports CRaC.
+
+Nailgun is no longer maintained.
+
+
 == Slicers
 
 Many papers claim results from a slicing tool (for example, there is a long
