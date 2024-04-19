@@ -965,6 +965,11 @@ mid-2024; that probably just means it is hard to use.
 
 The ahead-of-time `jaotc` compiler was removed in JDK 16.  It's now only in GraalVM.
 
+The jpackage tool takes as input a Java application and a Java run-time
+image, and produces a Java application image that includes all the necessary
+dependencies.
+Maybe this obviates jlink?
+
 jlink creates a self-contained executable.  It runs just like the regular
 JVM (no new optimizations are enabled), but is smaller and thus loads
 faster (the JVM starts up faster).
@@ -972,7 +977,8 @@ The executable includes a subset of the JRE, omitting features not needed for a 
 It might require modularization (Java modules).
 jlink has command-line options for optimization.
 jlink is quite solid and easy-to-use.
-Figuring out what modules you need to ship can be done with the jdeps tool.
+Figuring out what modules you need to ship can be done with the jdeps tool:
+`jdeps --list-deps my.jar`.
 JLink can replace JARs with an optimized file format called "jimage".
 
 The CRaC (Coordinated Restore at Checkpoint) Project checkpoints (makes an
@@ -981,9 +987,11 @@ the image leads to faster start-up and warm-up times.
 Some documentation is at: https://github.com/CRaC/docs/blob/master/STEP-BY-STEP.md
 It seems a bit involved, but might work well.
 It's built into Azul Zulu builds of OpenJDK.
+Also there are releases at https://github.com/CRaC/openjdk-builds/releases .
 Given that warm-up is required, this might be more appropriate for servers
 (which warm up and continue running, servicing new requests) than for an
-end-to-end program.
+end-to-end program.  Or for one that can be warmed up by running on a
+particular workload, and then takes input (maybe on standard in?).
 
 Azul Platform Prime's "ReadyNow" caches JIT work so an app starts running
 optimized compiled code as soon as it reaches main().
