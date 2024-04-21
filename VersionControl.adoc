@@ -476,9 +476,10 @@ Git merge terminology:
    that contains no merge conflict.  It assumes that if the merge driver didn't
    output a merge conflict, then the merge was correct.  This means that a git
    mergetool will never reduce the number of clean-but-incorrect merged files.
-   It might change some conflicted files into correct or incorrect merges (or
-   leave them conflicted, possibly changing their conflict markers).
-
+   By default, if a mergetool returns a non-zero status, git discards any edits
+   done by the mergetool, reverting to the state before the mergetool was run
+   from a backup file.  To work around this, such a tool can write partial
+   results to a *_BACKUP_* file (named analogously to *_LOCAL_*, *_BASE_*, etc.). 
 
 The user-level (aka "global") git attributes are by default read from
 `$XDG_CONFIG_HOME/git/attributes`, or (if (`$XDG_CONFIG_HOME` is either not set
