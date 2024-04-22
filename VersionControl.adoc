@@ -488,6 +488,11 @@ setting the `core.attributesfile` configuration option to a file, which is used
 instead.  To set it to `~/.gitattributes':
 `git config --global core.attributesfile '~/.gitattributes'`
 
+List unmerged files:
+```git diff --name-only --diff-filter=U --relative```
+This might also stage files with no conflict markers, which is handy:
+```git diff --check```
+
 
 == GitHub (Git-specific items go above)
 
