@@ -829,8 +829,11 @@ import name.fraser.neil.plaintext.diff_match_patch;
 import name.fraser.neil.plaintext.diff_match_patch.Diff;
 ```
 
-In Java, no non-LTS version has ever passed 1% of market share.
+This talk says that in Java, no non-LTS version has ever passed 1% of market share:
 https://www.youtube.com/watch?v=SYO-LmA647E&t=186s
+However, this chart shows that developers are using non-LTS versions at considerable
+rates (along with LTS versions too, which are more widely used):
+https://www.jetbrains.com/lp/devecosystem-2023/java/
 
 
 The Java diff_match_patch program creates Patch objects that have a leading and
