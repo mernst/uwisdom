@@ -840,6 +840,12 @@ The Java diff_match_patch program creates Patch objects that have a leading and
 a trailing EQUAL component, even with `Match_Threshold` and
 `Patch_DeleteThreshold` set to 0.
 
+Using Guava in a build.gradle file:
+```
+// Using Guava also requires this, unfortunately, to avoid "class file for javax.annotation.meta.TypeQualifierDefault not found".
+annotatedGuava 'com.google.code.findbugs:jsr305:3.0.2'
+```
+
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
