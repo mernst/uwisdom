@@ -493,6 +493,15 @@ List unmerged files:
 This might also stage files with no conflict markers, which is handy:
 ```git diff --check```
 
+To clone submodules:
+```
+git submodule update --init --recursive
+```
+To update submodules:
+```
+git submodule update --recursive --remote
+```
+
 
 == GitHub (Git-specific items go above)
 
