@@ -752,6 +752,12 @@ In Gradle, to see when each individual test is run (helps to determine which one
   }
 ```
 
+Gradle:
+  mustRunAfter
+  shouldRunAfter
+In each case, the directive has no effect unless both tasks would run anyway.
+mustRunAfter is strict.  Gradle may violate shouldRunAfter to increase parallelism.
+
 
 === Displaying Gradle dependencies
 
