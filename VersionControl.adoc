@@ -502,6 +502,11 @@ To update submodules:
 git submodule update --recursive --remote
 ```
 
+To obtain all pull request branchs from a GitHub repository:
+```
+git pull origin 'refs/pull/*/head:refs/remotes/origin/pull/*'
+```
+
 
 == GitHub (Git-specific items go above)
 
