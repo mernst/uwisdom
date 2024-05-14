@@ -148,6 +148,12 @@ cannot find any examples on the Web.
 
 CircleCI: be sure to set "Build forked pull requests"
 
+On CircleCI, to get the number of vCPUs available to me:
+```
+echo $(($(cat /sys/fs/cgroup/cpu/cpu.shares) / 1024))
+```
+(CircleCI sometimes gives more than the promised number of CPUs.  There is no way to know whether it will, for a given job.)
+
 
 == Travis CI
 
