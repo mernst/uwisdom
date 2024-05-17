@@ -372,6 +372,10 @@ git checkout -b mynamefortheirbranch theirusername/theirbranch
 
 To abandon/abort a git merge:
 ```
+git merge --abort
+```
+Older command:
+```
 git reset --hard HEAD
 ```
 
@@ -467,7 +471,7 @@ Git merge terminology:
    with the merge result, which may contain conflict markers.  You can use Git
    attributes to use different merge strategies for files whose names match
    given patterns.
- * merge tools (mergetools):  A merge tool never runs automatically.  If a user
+ * merge tool (mergetool):  A merge tool never runs automatically.  If a user
    issues the command `git mergetool`, then the mergetool is run on all
    conflicted files (one at a time), getting a chance to redo the merge.  The
    merge tool is invoked with $BASE, $LOCAL, and $REMOTE set to temporary files,
@@ -505,6 +509,16 @@ git submodule update --recursive --remote
 To obtain all pull request branchs from a GitHub repository:
 ```
 git pull origin 'refs/pull/*/head:refs/remotes/origin/pull/*'
+```
+
+These are the files that git thinks have a conflict (are they the same?)
+```
+git diff --name-only --diff-filter=U
+git ls-files -u
+```
+These are the files that contain a conflict marker:
+```
+git diff --check | cut -f 1 -d: | sort -u
 ```
 
 
