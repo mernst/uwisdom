@@ -1476,7 +1476,7 @@ I want the trash label and no others; the way seems to be to list every label!
 ----
  -in:sent -in:chat -in:draft -in:inbox -in:...
 ----
-Here is also has:nouserlabels; is that useful?
+There is also has:nouserlabels; is that useful?
 Also see the tips here:
 https://support.google.com/mail/answer/78892?hl=en
 
