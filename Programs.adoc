@@ -1121,8 +1121,8 @@ Also consider adding:
 ```
 PYTHON_FILES=$(wildcard **/*.py)
 python-style:
-	black ${PYTHON_FILES}
-	pylint -f parseable --disable=W,invalid-name ${PYTHON_FILES}
+	ruff format ${PYTHON_FILES}
+	ruff check ${PYTHON_FILES} --fix
 ```
 
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
@@ -1732,8 +1732,8 @@ Typical Makefile rules to enforce Python style rules:
 ```
 PYTHON_FILES=myfile1.py myfile2.py
 python-style:
-	black ${PYTHON_FILES}
-	pylint -f parseable --disable=W,line-too-long,invalid-name ${PYTHON_FILES}
+	ruff format ${PYTHON_FILES}
+	ruff check ${PYTHON_FILES} --fix
 ```
 
 To activate conda:
