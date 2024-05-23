@@ -484,6 +484,8 @@ Git merge terminology:
    done by the mergetool, reverting to the state before the mergetool was run
    from a backup file.  To work around this, such a tool can write partial
    results to a *_BACKUP_* file (named analogously to *_LOCAL_*, *_BASE_*, etc.). 
+   A merge tool can be run explicitly on files: `git mergetool file file...`.
+   However, the merge tool does nothing if the file has no conflict markers.
 
 The user-level (aka "global") git attributes are by default read from
 `$XDG_CONFIG_HOME/git/attributes`, or (if (`$XDG_CONFIG_HOME` is either not set
