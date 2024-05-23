@@ -3120,5 +3120,12 @@ To output Google Slides *without* "skipped" slides:
  * Deselect Include skipped slides.
  * Click Download as PDF.
 
+`lsof` lists open files.  If you run
+```
+lsof | grep deleted | grep ' /tmp'
+```
+then you will see deleted files that are kept open by (possibly zombie) processes.
+This can help in reclaiming space from a full partition, where you cannot figure out which files are making it full.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
