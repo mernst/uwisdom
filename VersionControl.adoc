@@ -523,7 +523,7 @@ These are the files that contain a conflict marker:
 git diff --check | cut -f 1 -d: | sort -u
 ```
 
-To remove all non-committed files (like `clean`):
+To remove all non-committed files (like `make clean` or `./gradlew clean`):
 ```
 git clean -fdx
 ```
