@@ -513,6 +513,15 @@ use FindBin ();
 use lib "$FindBin::Bin";
 ```
 
+To lint Perl:
+```
+perl -Mstrict -Mdiagnostics -cw <file>
+```
+(Maybe: `perl -I /path/to/dependency/lib -c /path/to/file/to/check` .)
+For Perl coding standards:
+ * Perl::Lint
+ * Perl::Critic: run with: `perlcritic --brutal --verbose 9 file.pl`
+
 
 == WWW and HTML
 
