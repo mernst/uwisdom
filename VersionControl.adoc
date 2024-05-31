@@ -528,6 +528,27 @@ To remove all non-committed files (like `make clean` or `./gradlew clean`):
 git clean -fdx
 ```
 
+In `git diff`, to see the containing Java method names along with each hunk,
+add this line to a git attributes file:
+```
+*.java diff=java
+```
+
+A repository's git attributes file is top-level `.gitattributes`.  You can also
+use `.git/info/attributes file, in which case it won't be committed with the
+project -- that is, it will affect only you, not other people using the repository.
+.
+The user-level git attributes file file is by default
+`$XDG_CONFIG_HOME/git/attributes`. You can change the user-level file to be
+`~/.gitattributes` by running the following command, once ever per computer:
+`git config --global core.attributesfile '~/.gitattributes`
+
+To use `git diff` on arbitrary files, use:
+```
+git diff --no-index ...
+```
+`git diff` is recursive by default.
+
 
 == GitHub (Git-specific items go above)
 
@@ -643,25 +664,6 @@ d) Incorporate code review feedback by pushing new commits to your repo.
 e) Owner merges the pull request
 f) Optionally delete your fork
 The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
-
-(Is this still true?)
-In a GitHub pull request, if the upstream has changed, don't just do `git pull master` because then the pull request shows all those pulled changes in the code diffs.  This seems to be a bug in GitHub pull requests.  Instead, do `git merge master`.  Or, in more detail:
-```
-  git checkout master
-  git pull
-  git checkout mybranch
-  git merge master
-```
-Another way to see the changes against the most recent version of upstream, is the following unnecessarily complex version:
- * create and save the diffs for your changes, as a .patch file
- * if using a branch, create a new branch
- * if using a fork, then:
-     * carefully aside your current clone
-     * remove your GitHub fork
-     * create a new GitHub fork
- * apply the diffs to your new branch or fork
- * create a new pull request
- * discard the old pull request
 
 Here is how to create a GitHub pull request for a single git commit, if I
 have already committed more than 1 commit to my local repository.  I do

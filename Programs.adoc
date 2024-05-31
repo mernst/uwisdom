@@ -3136,5 +3136,8 @@ lsof | grep deleted | grep ' /tmp'
 then you will see deleted files that are kept open by (possibly zombie) processes.
 This can help in reclaiming space from a full partition, where you cannot figure out which files are making it full.
 
+File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
