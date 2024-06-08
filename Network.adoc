@@ -420,3 +420,6 @@ https://support.google.com/webmasters/answer/7474347
 To change the default guest permissions in Google Calendar:
 In the Settings menu, click Settings.
 Under General > Event Settings, choose Default guest permissions.
+
+Anonymize a GitHub repo, for example for double-blind submission:
+https://anonymous.4open.science/
