@@ -958,13 +958,23 @@ native-image HelloWorld
 ```
 It is better if none of the code uses reflection, as the binary can be
 faster.
+It is especially good for very short-lived applications, as it eliminates
+startup time.
+It loses JIT compilation (except in the paid version), so it can be slower
+for long-running applications (even 5 seconds).
 It can be a bit difficult to adapt code for GraalVM (such as identifying
 uses of reflection and other features).
 The general consensus on Reddit is that it's not ready for prime time as of
 mid-2024; that probably just means it is hard to use.
 
+
+
 The ahead-of-time `jaotc` compiler was removed in JDK 16.  It's now only in GraalVM.
 
+jpackage is a command-line tool to create native installers and packages
+for Java applications.
+The user doesn't have to install Java in order to run the application.
+I don't think it does any optimization.
 The jpackage tool takes as input a Java application and a Java run-time
 image, and produces a Java application image that includes all the necessary
 dependencies.
