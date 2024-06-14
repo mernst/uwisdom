@@ -849,6 +849,13 @@ annotatedGuava 'com.google.code.findbugs:jsr305:3.0.2'
 There is no longer a maintained (or even functional) version of Jar Jar Links (aka JarJar Links).
 It just uses ASM for renaming, so use that directly.
 
+Typical commands for Java native compilation with GraalVM:
+```
+./gradlew -Pagent test
+./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
+./gradlew -Pagent nativeTest
+./gradlew nativeCompile
+```
 
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp

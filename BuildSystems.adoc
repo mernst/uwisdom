@@ -515,7 +515,7 @@ And maybe it doesn't work offline?
 To visualize the task dependencies in a Gradle buildfile:
 ```
 plugins {
-    id "com.dorongold.task-tree" version "1.5"
+    id "com.dorongold.task-tree" version "4.0.0"
 }
 ```
 Then run
