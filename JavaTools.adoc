@@ -248,7 +248,7 @@ Parsers:
     * I cannot compile Eclipse.  The setup suggests importing into the Eclipse IDE, which I don't want to use.  My attempts to compile with maven from the command line failed.  (Maybe this is because they have recently restructured their codebase?)
  * Spoon uses Eclipse's JDT parser plus some custom code.  Easier to use than JDT.
    "Spoon is an open-source library to analyze, rewrite, transform, transpile Java source code."
-   It is somewhat buggy.  (Maybe more so than JavaParser?)
+   It is somewhat buggy.  (More so than JavaParser.)
  * javac's parse tree -- not intended for external users (but Openrewrite uses it...)
    It uses a hand-written recursive descent parser:
    ~/java/jdk-openjdk/src/jdk.compiler/share/classes/com/sun/tools/javac/parser/JavacParser.java
@@ -256,18 +256,22 @@ Parsers:
    small amount of code, so using javac directly may not be so difficult.
    Maybe it is near here: https://github.com/google/google-java-format/blob/4a22aab7b19a41d6267ea70c76f137a6fd49bc76/core/src/main/java/com/google/googlejavaformat/java/Formatter.java#L142
    https://github.com/google/google-java-format/blob/4a22aab7b19a41d6267ea70c76f137a6fd49bc76/core/src/main/java/com/google/googlejavaformat/java/JavaInput.java#L353
+   It does not retain comments, except for Javadoc comments.
  * Openrewrite: https://github.com/openrewrite/rewrite
    This provides an AST that is built from the javac compiler's.
    Therefore, it is correct but may be harder to customize, unless I change javac too!
    In its source code, look for
     import com.sun.tools.javac.main.JavaCompiler;
     import com.sun.tools.javac.tree.JCTree;
+   Essential parts are closed-source, such as serialization.  A user would
+   have to re-create those from scratch.
  * xtext uses ANTLR under the hood, and Java grammars for ANTLR exist; I
    don't know if any are up to date.
  * EDG's JFE front end (commercial): https://edg.com/java
    As of Nov 2022, it mentions Java 7, but not more recent versions of Java.
  * Java parser written in Python:
    https://github.com/c2nes/javalang
+   As of June 2024, the most recent commit was Oct 2021.
  * Java parser written in JavaScript:
    https://www.npmjs.com/package/java-parser/v/2.0.0
 
