@@ -1791,9 +1791,14 @@ the text.
 Here is a definition of a \todo macro for LaTeX:
 ```
  \usepackage{color}
- %% Comment out one of these two definitions.
- % \newcommand{\todo}[1]{\relax}
+ %%% Todo comments
  \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+ %% Comment or uncomment this line.
+ %\renewcommand{\todo}[1]{\relax}
+ % Don't show todo commands if the \notodocomments macro is defined.
+ \ifdefined\notodocomments
+   \renewcommand{\todo}[1]{\relax}
+ \fi
 ```
 When using the \todo macro, don't leave space around it.  For example, write
 ```
