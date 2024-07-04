@@ -455,6 +455,9 @@ very long time.
 .
 GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
 CI when the clone will be immediately discarded.
+.
+A problem with a clone created with `--filter=blob:none` is that it is
+impossible to pull from that clone.  Therefore, I do not use it.
 
 Git merge terminology:
  * merge strategy: A merge strategy is about performing three-way merge at the
