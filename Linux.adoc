@@ -464,6 +464,11 @@ lpr -o sides=one-sided
 This didn't work for me at UW CSE, though.
 So instead I could extract each page individually and print them all.
 
+Here is a typical use of `tee`:
+```
+java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
+```
+
 
 == long entries below
 
