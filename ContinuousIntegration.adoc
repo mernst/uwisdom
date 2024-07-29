@@ -59,6 +59,9 @@ In Azure Pipelines, to run CI for a new GitHub project, do:
  * >> New pipeline
  *  GitHub
 
+Azure Pipelines no longer gives generous quota to new users (explanation at https://devblogs.microsoft.com/devops/change-in-azure-pipelines-grant-for-public-projects/).  To ask for an increase, browse to https://aka.ms/azpipelines-parallelism-request .
+This requires that you have already created an Azure Pipelines free account.
+
 Travis vs. Azure environment variables:
 https://docs.microsoft.com/en-us/azure/devops/pipelines/migrate/from-travis?view=azure-devops
 
