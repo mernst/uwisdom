@@ -371,6 +371,11 @@ other containing even pages scanned in reverse order:
 
 == Perl
 
+To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
+```
+sudo cpanm --installdeps .
+```
+
 Perl5:
 //nobreak
 
