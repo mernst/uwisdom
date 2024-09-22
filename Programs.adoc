@@ -949,6 +949,8 @@ Redirecting output in command shells:
       redirect to a file with "> file" after doing so, then stdout is
       reopened as the file, but stderr (a copy of the original stdout) is
       not affected.
+   ** To redirect standard output to standard error, use ">&2".
+      For example, `echo "to stderr" >&2`.
    ** To send both standard error and standard output through a pipe: "2>&1 |".
      There are simpler commands in bash, but they don't work in sh.
    ** To redirect standard error to a file, use "2>filename".
@@ -996,7 +998,7 @@ and execution tracing) to make sure problems are caught early:
   set -o errexit -o nounset
   ...
 ```
-For a Posix shell script, use:
+For a Posix shell script to halt on error, use:
 ```
   set -e
 ```
