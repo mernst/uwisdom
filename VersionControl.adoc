@@ -502,11 +502,11 @@ List unmerged files:
 This might also stage files with no conflict markers, which is handy:
 ```git diff --check```
 
-To clone submodules:
+To clone submodules or set them to the version in the latest commit:
 ```
 git submodule update --init --recursive
 ```
-To update submodules:
+To update submodules to their latest version from their own upstream:
 ```
 git submodule update --recursive --remote
 ```
