@@ -343,7 +343,7 @@ To apply for a new UW NetID, the sponsor fills out a form at
   https://itconnect.uw.edu/tools-services-support/networks-connectivity/husky-onnet/husky-onnet-for-sponsored-uw-netids/
 
 What files in the file system contain the content served at webpages/URLs
-(for instance, for UW CSE classes/courses?
+(for instance, for UW CSE classes/courses)?
 https://types.cs.washington.edu/ : /cse/www2/types/
 https://checkerframework.org/ : /cse/www2/types/checker-framework/
 http://fault-localization.cs.washington.edu/ : /cse/web/research/fault-localization/

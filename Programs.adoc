@@ -776,6 +776,10 @@ Here are two fixes:
    and edit the .html file to reference the local version of the .css file.
 
 
+=== Chrome
+
+For the URLs of all (recently-used) tabs, browse to:
+chrome://inspect/#pages
 
 == Kerberos
 
