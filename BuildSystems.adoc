@@ -761,6 +761,11 @@ mustRunAfter is strict.  Gradle may violate shouldRunAfter to increase paralleli
 
 === Displaying Gradle dependencies
 
+To see the source of the dependencies that end up in a fat/uber/shadow jar:
+```
+/gradlew :checker:dependencies
+```
+
 To print/show the classpath that Gradle uses:
 From within the `build.gradle` file:
 ```
