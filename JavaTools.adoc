@@ -690,6 +690,11 @@ assembly. Right now it reads in Java byte codes and builds an intermediate
 representation based on a variant of SSA form.  See www.flexc.lcs.mit.edu.
 
 
+== Pointer analysis
+
+The GraalVM pointer analysis is fast and precise.
+
+
 == Lightweight static checkers
 
 findbugs:
