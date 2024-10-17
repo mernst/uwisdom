@@ -391,6 +391,9 @@ To get a copy of the JDK 7 source:
 
 Major version number for the Java class file format (JVM version numbers):
 ----
+  J2SE 24.0 = 68 (0x44 hex)   [released March 2025]
+  J2SE 23.0 = 67 (0x43 hex)   [released September 2024]
+  J2SE 22.0 = 66 (0x42 hex)   [released March 2024]
   J2SE 21.0 = 65 (0x41 hex)   [released September 2023; LTS version]
   J2SE 20.0 = 64 (0x40 hex)   [released March 2023]
   J2SE 19.0 = 63 (0x3f hex)   [released September 2022]
