@@ -348,6 +348,10 @@ actually a disassembler, not a decompiler, it seems.
 
 == Bytecode/classfile instrumenters/processing/rewriters
 
+Java class-file API:
+https://openjdk.org/jeps/484
+Objects are immutable, but there are builders (so one can build new class files) and transformers.  There is both a streaming and a materialized view of a classfile.
+
 Comparison of "Open Source ByteCode Libraries in Java" 
 (really just a list of them with a paragraph taken from each one's website,
 and in no order (example: obsolete BCEL, last released in 2/2006) is still
