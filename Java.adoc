@@ -860,6 +860,20 @@ Typical commands for Java native compilation with GraalVM:
 ./gradlew nativeCompile
 ```
 
+Java collection libraries:
+For caching, use Caffeine (https://github.com/ben-manes/caffeine) rather than Google Guava.
+Prefer Eclipse Collections over Guava?  Faster, less memory, smaller package.
+There is little need for multimap and multisets with computeIfAbsent.
+
+native compilation with picocli:
+.
+./gradlew -Pagent test
+./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
+./gradlew -Pagent nativeTest
+./gradlew nativeCompile
+.
+# Binary at: build/native/nativeCompile/plumelib-merge-tool
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
