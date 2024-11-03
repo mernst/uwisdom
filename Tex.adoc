@@ -1874,6 +1874,8 @@ To adjust section numbering in LaTeX (e.g., make subsubsections be numbered):
 There is no `\subsubsubsection` command, but you can make `\paragraph` be numbered:
 ```
   \setcounter{secnumdepth}{4}
+  \Crefname{subsection}{Section}{Sections}%
+  \crefname{paragraph}{section}{sections}
 ```
 
 If a paragraph has only a word or two on its last line, try adding
