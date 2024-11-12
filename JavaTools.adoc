@@ -276,6 +276,22 @@ Parsers:
  * Java parser written in JavaScript:
    https://www.npmjs.com/package/java-parser/v/2.0.0
 
+I recommend you to investigate how com.sun.tools.javac.main.JavaCompiler do symbol resolving. I think it is inside #enterTrees(List)
+Also you may be interested in projectlombok.org
+.
+com.sun.tools.javac.comp.Resolve
+Attr, Check, Infer and Resolve analyze all names and expressions within the program.
+Flow performs static program flow analysis. It checks the following:
+ * Reachability: can a statement be executed?
+ * Definite Assignment: has a variable been initialized?
+ * Definite Unassignment: has a variable not been initialized?
+.
+attribute: Attributes the Syntax trees. This step includes name
+resolution, type checking and constant folding.
+.
+Useful (but isn't deep):
+https://scg.unibe.ch/archive/projects/Erni08b.pdf
+
 
 == Pretty-printers/decompilers for .class files
 
