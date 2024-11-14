@@ -3131,6 +3131,11 @@ An example scp invocation:
 scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tmp/
 ```
 
+To update all snaps (all snap packages) on an Ubuntu system:
+```
+sudo snap update
+```
+
 To resolve Ubuntu popup
 "please update the application snap-store"
 or
