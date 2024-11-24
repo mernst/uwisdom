@@ -17,9 +17,9 @@ To install a new package on debian:
   sudo apt-get build-dep <package-name>
 ```
 (and also install anything reasonable that the latter suggests).
-To upgrade all packages on debian (first command updates list of packages):
+To upgrade all packages on Debian or Ubuntu (first command updates list of packages):
 ```
-  sudo apt-get update && sudo apt-get -u dist-upgrade && echo "Success: upgraded"
+  sudo apt-get update && sudo apt-get -u -y dist-upgrade && echo "Success: upgraded"
   # Or "apt-get -u upgrade" to not automatically resolve dependencies, which
   # might *remove* a package -- this is better if running "Debian unstable".
 ```
