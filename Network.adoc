@@ -423,3 +423,5 @@ Under General > Event Settings, choose Default guest permissions.
 
 Anonymize a GitHub repo, for example for double-blind submission:
 https://anonymous.4open.science/
+
+12ft.io alternative:  https://archive.is 
