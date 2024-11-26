@@ -3161,6 +3161,7 @@ This can help in reclaiming space from a full partition, where you cannot figure
 
 File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
 
+The `bear` program is for clang what do-like-javac is for Java.
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
