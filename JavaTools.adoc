@@ -743,7 +743,7 @@ jcmd can print a stack trace of a running Java program, at the current
 moment.
 This gives a poor man's version of profiling.
 
-Baeldung's 2018 overview:
+Baeldung's overview:
 https://www.baeldung.com/java-profilers
 It mentions JProfiler, YourKit, VisualVM, and others with smaller market
 share.  It shows screenshots but gives no usage instructions.
@@ -765,6 +765,7 @@ local counts of time spent, not transitive for all calls within the method).
 Without attribution, counts of time spent may not be very useful.
 
 VisualVM is a well-regarded GUI for heap debugging.
+It's free, from Oracle.
 
 Eclipse's Memory Analyzer (MAT) is well-regarded for analyzing .hprof heap dumps.
 It can be run as a standalone application.  To install:
@@ -807,6 +808,7 @@ java -prof
   puts output in java.prof
 
 OLD, removed somewhere around OpenJDK 9:
+But still available in VisualVM which Oracle still distributes.
 java -Xrunhprof:cpu=samples ...
 java -Xrunhprof:cpu=samples,heap=all ...
   Ignore all the "HPROF ERROR" output at the beginning of the run.
