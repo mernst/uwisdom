@@ -874,6 +874,25 @@ native compilation with picocli:
 .
 # Binary at: build/native/nativeCompile/plumelib-merge-tool
 
+To determine the default character set of the Java JVM, run these commands:
+```
+echo "public class DefaultCharset {
+ public static void main(String args[]) throws Exception{
+  // not crossplatform safe
+  System.out.println(System.getProperty(\"file.encoding\"));
+  // jdk1.4
+  System.out.println(
+     new java.io.OutputStreamWriter(
+        new java.io.ByteArrayOutputStream()).getEncoding()
+     );
+  // jdk1.5
+  System.out.println(java.nio.charset.Charset.defaultCharset().name());
+  }
+}" > DefaultCharset.java
+javac DefaultCharset.java
+java DefaultCharset
+```
+
 //  LocalWords:  decompile jdecomp jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 //  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
 //  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
