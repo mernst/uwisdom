@@ -338,7 +338,7 @@ Lists of decompilers:
 
  * As of 2008, http://stackoverflow.com/questions/272535/
     * top recommendation: https://github.com/java-decompiler, still actively developed as of April 2015, but only has a GUI, no command-line tool.  Blech.
- * http://dmoz.org/Computers/Programming/Languages/Java/Development_Tools/Translators/Decompilers_and_Disassemblers/
+      As of 2024-12-14, last commit was 2020-02-26
  * Sep 2002: http://www.faqs.org/docs/Linux-HOWTO/Java-Decompiler-HOWTO.html
    Has links to other resources
  * July 1997 (two URLs for same article):
