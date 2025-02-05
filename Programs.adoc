@@ -1779,6 +1779,16 @@ https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
 https://stackoverflow.com/a/67238486/173852
 
 
+== make
+
+For a list of all makefile targets:
+```
+make -qp |
+    awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |
+    sort -u
+```
+
+
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
