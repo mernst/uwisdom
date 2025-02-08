@@ -505,6 +505,9 @@ You can only log into it from another CSE machine, not from outside.
 BS/MS students do not have access to the CSE gws research computers/servers like bicycle and tricycle.
 That requires additional account sponsorship.
 
+Email for the UW CSE website:
+web-content@cs.washington.edu
+
 
 == Seattle
 
