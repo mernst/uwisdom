@@ -569,6 +569,21 @@ Visitors should get on the plse, 590n, and 590p mailing lists.
  * 590n (software engineering): https://mailman.cs.washington.edu/mailman/listinfo/cse590n
  * 590p (programming languages): https://mailman.cs.washington.edu/mailman/listinfo/cse590p
 
+ * Restaurants near CSE:
+ * U Village (18-minute walk)
+    * Dough Zone
+    * Ba Bar 
+ * Portage Bay (12-minute walk)
+    * https://www.saintbread.com/ (long lines tho)
+    * Agua Verde (sometimes long line, on Boat street)
+ * Montlake
+    * Oxbow Bakery (24-minute walk)
+ * The Ave or close by
+    * Jai Tai (15-minute walk)
+    * Shultzy's
+    * Korean Tofu house (15-minute walk)
+ * Far
+    * Araya's (29 minute walk but quite good)
 
 
 // Please put new content in the appropriate section above, don't just
