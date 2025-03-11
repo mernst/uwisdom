@@ -280,6 +280,9 @@ https://drive.google.com/drive/folders/1rzfbCvKYWvImZGsuc7RUaYzvJTlloIaK
 For large courses that require grading sessions of 4 hours or more, faculty may purchase food and be reimbursed by UW CSE's discretionary budget.
 https://www.cs.washington.edu/chair/misc/grading_sessions
 
+UW CSE prospective faculty interview feedback/reviews:
+https://betterfolio.cs.washington.edu/app/candidates
+
 
 == CSE sysadmin
 
