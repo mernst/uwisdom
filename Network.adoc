@@ -267,6 +267,7 @@ For scheduling a meeting:
    takes multiple clicks to create and to answer.  WhenIsGood/When2Meet just lets you
    quickly paint over the relevant times.
  * WhenIsGood has accounts.  When2Meet does not.
+ * When2Meet can do days of the week, WhenIsGood does not.
 //nobreak
 
 (Tungle.me combined the best of both, but it is no longer supported as of
