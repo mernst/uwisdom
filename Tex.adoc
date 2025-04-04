@@ -2037,7 +2037,13 @@ In ACM style, to make acknowledgments smaller:
 To find the git URL for an Overleaf project, click on the word "menu" in
 the upper left corner, then (in section "sync") "git".
 
- ```
+To get your Git credential helper to remember an Overleaf password, clone a repository like this:
+git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
+where olp_XXXXX is a Git authentication token (https://www.overleaf.com/user/settings).
+Then, delete the clone to prevent storing your token in its .git/config file,
+and you can clone any overleaf repository without providing the authentication token.  
+
+```
  % Set em dashes (LaTeX ---) with thin spaces surrounding them.
  \usepackage[kerning=true]{microtype}
  \SetExtraKerning
@@ -2045,7 +2051,7 @@ the upper left corner, then (in section "sync") "git".
      {
 	 \textemdash  = {167,167} % thinspace = 1/6 em
      }
- ```
+```
 
 LaTeX font sizes:
 ```
