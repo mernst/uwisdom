@@ -26,16 +26,17 @@ Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
 //nobreak
 
  * enscript: doesn't handle 8-bit by default
- * a2ps: doesn't handle 8-bit by default
+ * a2ps: probably handles 8-bit
  * mpage: doesn't handle 8-bit by default
  * u2ps: Internet chatter says it is not as good as paps?
  * h2ps and bg5ps: intended specifically for Asian fonts
 //nobreak
 
-Enscript is a standby, since it has so many options and is widely
-installed, but it doesn't handle UTF-8.
-
-If you care about UTF-8, use cedilla or paps.
+Enscript is a standby, since it has so many options and is widely installed,
+but it doesn't handle UTF-8, and GNU enscript has not been updated since
+2012 (version 1.6.6).  a2ps has, though, and it does syntax highlighting.
+If you care about UTF-8 or Unicode, use cedilla or paps (neither one does
+syntax highlighting).
 Otherwise, to convert a text file to PostScript (86 characters per line):
 ```
   enscript -pout.ps in.txt
@@ -43,6 +44,7 @@ Otherwise, to convert a text file to PostScript (86 characters per line):
   enscript -o OUTFILE.ps -f Courier7 -r INFILE     # 132 columns, landscape
 ```
 Can add "-H 2" for highlight bars (good for tabular data).
+a2ps is maintained!  But it's a bit of a pain to install.
 The equivalent a2ps line is:
 ```
   a2ps -r -f 7 -E --highlight-level=normal --columns=1 -o OUTFILE.ps INFILE
