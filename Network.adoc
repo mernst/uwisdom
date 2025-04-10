@@ -434,3 +434,17 @@ allkidsnetwork.com
 worksheetworks.com
 
 To report malicious/abusive Bitbucket repositories: abuse@atlassian.com 
+
+Gradescope for exams is well worthwhile. 
+.
+You should scan the exams exam by exam. That is, staple the exam together for the students and then unstaple them for scanning without any reordering. Don't make the piles of scanned exams too big, because sometimes the students have mangled them and they will get stuck in the feeder. It is very easy to upload many separate files of scanned exams.
+.
+If your exam is one-sided (which I recommend for ease of students taking the exam and also for ease of scanning), do not under any circumstances permit students to write on the back of pages.
+.
+You will also scan, separately, a single example exam. Then you will choose, with a mouse, the area of the page that is related to each "Question". You want each Gradescope question to be as small as possible. For instance, if you have question 22 on the exam that is "select all of the following four that apply", then you almost certainly want to split it into separate Gradescope questions, each one treated like a true false question by gradescope. Don't make the tas do any mental arithmetic in their heads. I made this mistake.
+.
+There is a specific graphical format that you want to use for true false questions. It is shown on some Gradescope web pages, and I can also help you with it. For multiple choice, I think it isn't as important. That is, I think that circling a letter or filling in a Scantron style are both acceptable. I would need to double check that.
+.
+One nice thing about Gradescope grading is that it will cluster answers. For example, it will show you one example of all the students who marked question 22.B, and one example of all the students who didn't mark it. Thus, it is not necessary to look at each m exam individually. Except for written answers, that is.
+.
+One advantage of gradescope is that it reduces cheating. You have a photocopy of the exam before it was graded. Students can't change it and then come to you saying, isn't it odd how the TA marked this question as incorrect even though it is actually correct (now, in the version the student is showing you)?
