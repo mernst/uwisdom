@@ -552,6 +552,10 @@ git diff --no-index ...
 ```
 `git diff` is recursive by default.
 
+Please do not force-push to GitHub.  Force-pushing has no benefit, since we
+squash-and-merge pull requests.  Force-pushing has negative consequences, such
+as removing code review comments on any deleted commits.
+
 
 == GitHub (Git-specific items go above)
 
