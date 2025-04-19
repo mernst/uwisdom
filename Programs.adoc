@@ -1791,6 +1791,44 @@ make -qp |
 ```
 
 
+== Error Prone linter
+
+Gradle buildfile rules to run Error Prone linter on each compilation:
+https://plugins.gradle.org/plugin/net.ltgt.errorprone
+
+Typical gradle setup for using the Error Prone linter:
+```
+plugins {
+  id('net.ltgt.errorprone') version '4.2.0'
+}
+dependencies {
+  errorprone("com.google.errorprone:error_prone_core:2.38.0")
+}
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs << "-Xlint:all,-processing" << "-Werror"
+  options.errorprone {
+    disable('ReferenceEquality') // Use Interning Checker instead.
+    disable('AnnotateFormatMethod') // Error Prone doesn't know about Checker Framework @FormatMethod
+    disable('StatementSwitchToExpressionSwitch') // requires Java 12 or later
+    disable('StringConcatToTextBlock') // requires Java 15 or later
+    disable('PatternMatchingInstanceof') // requires Java 16 or later
+    // Code copied from BCEL that we don't want to change gratuitously.
+    excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
+  }
+}
+```
+
+Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
+clients (of the project containing the `@InlineMe` annotation) to declare a
+dependency on error_prone_annotations.
+
+When Error Prone's suggested replacement is `UTF_8`, that is
+`StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
+`StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
+Example:
+`Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
+
+
 == General wisdom (that is, everything without its own section above)
 
 Information about a variety of Java tools can be found in the wisdom
@@ -2998,41 +3036,6 @@ For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this 
 
 A replacement for the lines-between program is:
 ```sed -e '1,/abc/d' -e '/mno/,$d' <FILE>```
-
-Typical gradle setup for using the Error Prone linter:
-```
-plugins {
-  // Error Prone linter
-  id("net.ltgt.errorprone") version "1.1.1"
-}
-...
-/// Error Prone linter
-dependencies {
-  errorprone("com.google.errorprone:error_prone_core:2.3.4")
-  // JDK 8 support for Error Prone:
-  errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
-}
-tasks.withType(JavaCompile).configureEach {
-  options.compilerArgs << "-Xlint:all,-processing" << "-Werror"
-  options.errorprone {
-    disable("ReferenceEquality") // Use Interning Checker instead.
-    disable("StringSplitter") // Obscure case isn't likely.
-    disable("AnnotateFormatMethod") // Error Prone doesn't use Checker Framework @FormatMethod.
-    // Code copied from BCEL that we don't want to change gratuitously.
-    excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
-  }
-}
-```
-
-Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
-clients (of the project containing the `@InlineMe` annotation) to declare a
-dependency on error_prone_annotations.
-
-When Error Prone's suggested replacement is `UTF_8`, that is
-`StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
-`StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
-Example:
-`Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
 
 
 A shell function that works around `wget` or `curl` hanging for very slow
