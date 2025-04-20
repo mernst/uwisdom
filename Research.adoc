@@ -137,7 +137,7 @@ Taken from: http://www.isixsigma.com/library/content/c000709ex.asp
 
 In statistics:
 
- * a type I error is a false alarm
+ * a type I error is a false alarm:  you report an effect, but in reality there is none
  * a type II error is a failed alarm:  you miss the effect
 
 Here are three variants of the word "run time" in computer science:

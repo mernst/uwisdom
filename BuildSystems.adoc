@@ -526,17 +526,6 @@ When one of the tasks given to the gradle command is `taskTree`, execution
 of all the other tasks on that line is skipped. Instead, their task
 dependency tree is printed.
 
-Gradle buildfile rules to run Error Prone linter on each compilation:
-https://plugins.gradle.org/plugin/net.ltgt.errorprone
-```
-plugins {
-  id('net.ltgt.errorprone') version '4.2.0'
-}
-dependencies {
-  errorprone("com.google.errorprone:error_prone_core:2.38.0")
-}
-```
-
 To exclude a file from Gradle's shadowJar plugin/task:
 ```
 shadowJar {
