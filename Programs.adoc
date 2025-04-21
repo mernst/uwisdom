@@ -3178,5 +3178,16 @@ File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
 
 The `bear` program is for clang what do-like-javac is for Java.
 
+From the command line, use
+```sh
+  eval $(ssh-agent)
+```
+instead of
+```sh
+  ssh-agent bash
+```
+where the latter is intended for X sessions.
+
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
