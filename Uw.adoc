@@ -511,6 +511,12 @@ That requires additional account sponsorship.
 Email for the UW CSE website:
 web-content@cs.washington.edu
 
+Coriander Server Usage Rules:
+1. All long-running GPU tasks must be scheduled before execution, and any task running longer than 30 minutes without a reservation may be terminated.
+2. Do not use the /home/username directory; instead, store all files under /m-coriander/coriander/username.
+3. /m-coriander/coriander/hf is used for storing models and datasets, and /m-coriander/coriander/trace is used for storing shared traces.
+4. Always assign meaningful names to Docker containers and label them with the owner's name.
+
 
 == Seattle
 
