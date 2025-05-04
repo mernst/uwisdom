@@ -1,5 +1,8 @@
 sudo apt install npm -y
 
+# This didn't work on Ubuntu 24.10 because (I think) the above didn't install a
+# recent enough version of npm to run `nmp install -g npm` which updates npm.
+
 npm install -g npm
 npm install @axe-core/cli -g
 npm install -g browser-driver-manager
