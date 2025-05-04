@@ -1167,15 +1167,16 @@ END
 To use ssh (and other tools like CVS, SVN, git, Hg, ...) with RSA public keys, 
 do this at the beginning of each development session (say, immediately
 after logging in):
+```sh
+  eval `ssh-agent`
+  ssh-add
 ```
+Do not use the following, which is intended for X sessions.
+```sh
   ssh-agent bash
   ssh-add
 ```
 or, alternately:
-```
-  eval `ssh-agent`
-  ssh-add
-```
 To run an entire X-session underneath ssh-agent:
 //nobreak
 
@@ -3177,16 +3178,6 @@ This can help in reclaiming space from a full partition, where you cannot figure
 File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
 
 The `bear` program is for clang what do-like-javac is for Java.
-
-From the command line, use
-```sh
-  eval $(ssh-agent)
-```
-instead of
-```sh
-  ssh-agent bash
-```
-where the latter is intended for X sessions.
 
 
 // Please put new content in the appropriate section above, don't just
