@@ -518,6 +518,17 @@ To update all installed Emacs packages:
 M-x package-list-packages RET U x
 ```
 
+;; Setting face attributes:
+(defface my-boxed-face 
+  '((default))
+  "A face that highlights text with a red box.")
+(set-face-attribute 'my-boxed-face nil :box t)
+(let ((current-string "text to insert"))
+  (put-text-property 0 (length current-string) 'face 'my-boxed-face
+                     current-string)
+  (insert current-string))
+
+
 // This last  is to prevent emacs from thinking the local variables above
 // are for real; there are no local variables mentioned on the last page now.
 
