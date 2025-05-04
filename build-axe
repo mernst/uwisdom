@@ -1,0 +1,13 @@
+sudo apt install npm -y
+
+npm install -g npm
+npm install @axe-core/cli -g
+npm install -g browser-driver-manager
+npx browser-driver-manager install chrome
+
+===========================================================================
+
+axe --stdout --exit URL
+
+To interpret the results:
+https://docs.deque.com/devtools-for-web/4/en/cli-upload-axe-reports
