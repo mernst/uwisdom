@@ -640,8 +640,7 @@ Run like this:
 (Linkchecker (from http://linkchecker.sourceforge.net/?) seems to spawn
 lots of threads and never return.)
 Probably best to run these in the background with output sent to a file.
-"tidy" cleans/formats HTML (and does error checking); but not so good on
-HTML that's already decent, it seems.
+`tidy` checks HTML.
 
 /uns/share/bin/wwwis is a Perl script which adds image size tags to
 HTML documents.  It's a nifty way to speed page rendering and avoid
