@@ -1139,13 +1139,7 @@ showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
 	@echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
 ```
-Also consider adding:
-```
-PYTHON_FILES=$(wildcard **/*.py)
-python-style:
-	ruff format ${PYTHON_FILES}
-	ruff check ${PYTHON_FILES} --fix
-```
+Also consider adding rules to enforce Python style.
 
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
 ```
@@ -1760,7 +1754,7 @@ even if it is faster...
 
 Typical Makefile rules to enforce Python style rules:
 ```
-PYTHON_FILES=myfile1.py myfile2.py
+PYTHON_FILES=$(wildcard **/*.py)
 python-style:
 	ruff format ${PYTHON_FILES}
 	ruff check ${PYTHON_FILES} --fix
