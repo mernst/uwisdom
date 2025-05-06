@@ -3133,7 +3133,28 @@ checkstyle {
 ```
 
 
-To pretty-print a JSON file:  `jq . FILENAME`
+To pretty-print (reformat) a JSON file, either of these commands:
+```
+# outputs to standard out; also works on `.jsonl` files
+jq . FILENAME
+# reformats file in place; also works on `.jsonl` files ; order of operations retains original file's metadata
+json-pp () {
+  cp   "$1"      "$1".tmp && \
+  jq . "$1".tmp >"$1"     && \
+  rm   "$1".tmp
+}
+json-pp FILENAME
+json-compact () {
+  cp     "$1"      "$1".tmp && \
+  jq -c . "$1".tmp >"$1"     && \
+  rm     "$1".tmp
+}
+json-compact FILENAME
+# reformats file in place; also works on `.jsonl` files ; data loss if jq fails
+JQFILE="myfilename" && jq . "${FILENAME}" | sponge "${FILENAME}"
+# not sure where output goes; does not work on `.jsonl` files
+python -m json.tool FILENAME
+```
 
 An example scp invocation:
 ```
