@@ -1131,9 +1131,25 @@ Here are Makefile rules to run them:
 ```
 SH_SCRIPTS   = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)sh'   * | grep -v /.git/ | grep -v '~$$' | grep -v '\.tar$$' | grep -v addrfilter | grep -v cronic-orig | grep -v gradlew | grep -v mail-stackoverflow.sh)
 BASH_SCRIPTS = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)bash' * | grep -v /.git/ | grep -v '~$$' | grep -v '\.tar$$' | grep -v addrfilter | grep -v cronic-orig | grep -v gradlew | grep -v mail-stackoverflow.sh)
-shell-script-style:
-	shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
-	checkbashisms -l ${SH_SCRIPTS} /dev/null
+CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
+	  echo "checkbashisms" ; \
+	else \
+	  wget -q -N https://homes.cs.washington.edu/~mernst/software/checkbashisms && \
+	  mv checkbashisms .checkbashisms && \
+	  chmod +x ./.checkbashisms && \
+	  echo "./.checkbashisms" ; \
+	fi)
+shell-style-fix:
+ifneq ($(TEST_FLAG)$(DEBUG_FLAG),)
+        shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
+endif
+shell-style-check:
+ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
+	shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS}
+endif
+ifneq ($(SH_SCRIPTS),)
+	${CHECKBASHISMS} -l ${SH_SCRIPTS} /dev/null
+endif
 showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
 	@echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
@@ -1753,10 +1769,17 @@ even if it is faster...
 
 Typical Makefile rules to enforce Python style rules:
 ```
+install-ruff:
+	@if ! command -v ruff ; then pipx install ruff ; fi
 PYTHON_FILES=$(wildcard **/*.py)
-python-style:
+python-style-fix: install-ruff
+	ruff --version
 	ruff format ${PYTHON_FILES}
 	ruff check ${PYTHON_FILES} --fix
+python-style-check: install-ruff
+	ruff --version
+	ruff format --check ${PYTHON_FILES}
+	ruff check ${PYTHON_FILES}
 ```
 
 To activate conda:
