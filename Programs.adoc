@@ -939,6 +939,70 @@ such problems.)
 
 
 
+== Python
+
+In Python, by default variables have function (not block) scope.  To refer
+to (really, to change) a global variable, use the "global" declaration in
+the class/function/whatever.
+
+To test whether a file exists in Python, do os.path.exists('/file/name').
+In Python, to reimport module foo, do reload(foo).
+
+Python debugger:  pdb ~/python/test.py
+You need to "s"tep a few times before "n"ext, which would jump over the
+entire program.  Or just do "continue" to the error.
+
+For time-critical Python runs, disable assertions via -O command-line
+option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
+You can be sure that the optimized version is running if a .pyo instead of
+a .pyc file is created after you do "import".
+To make Python run optimized, do:
+```
+  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
+```
+To make Python run unoptimized, do:
+```
+  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
+```
+To evaluate these in Emacs, put the cursor at the end of the line and type
+C-x C-e.
+After you change py-which-args, kill the `*Python*` buffer and restart
+(it's not enough to kill the Python process and restart).
+
+As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
+even if it is faster...
+
+Typical Makefile rules to enforce Python style rules:
+```
+PYTHON_FILES=$(wildcard **/*.py)
+install-ruff:
+	@if ! command -v ruff ; then pipx install ruff ; fi
+python-style-fix: install-ruff
+	ruff --version
+	ruff format ${PYTHON_FILES}
+	ruff check ${PYTHON_FILES} --fix
+python-style-check: install-ruff
+	ruff --version
+	ruff format --check ${PYTHON_FILES}
+	ruff check ${PYTHON_FILES}
+```
+
+To activate conda:
+```
+source activate <yourenvironmentname> 
+```
+
+To disable tqdm output:
+```python
+from functools import partialmethod
+if os.getenv("TERM", "dumb") == "dumb":
+    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
+```
+More info at:
+https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
+https://stackoverflow.com/a/67238486/173852
+
+
 == Shells
 
 Parsing command-line arguments in a Posix shell script:
@@ -1129,8 +1193,8 @@ The `shellcheck` program is a linter for sh and bash scripts.  Run like:
 There is also `checkbashisms`.
 Here are Makefile rules to run them:
 ```
-SH_SCRIPTS   = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)sh'   * | grep -v /.git/ | grep -v '~$$' | grep -v '\.tar$$' | grep -v addrfilter | grep -v cronic-orig | grep -v gradlew | grep -v mail-stackoverflow.sh)
-BASH_SCRIPTS = $(shell grep -r -l '^\#! \?\(/bin/\|/usr/bin/env \)bash' * | grep -v /.git/ | grep -v '~$$' | grep -v '\.tar$$' | grep -v addrfilter | grep -v cronic-orig | grep -v gradlew | grep -v mail-stackoverflow.sh)
+SH_SCRIPTS   = $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+BASH_SCRIPTS = $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
 	  echo "checkbashisms" ; \
 	else \
@@ -1140,15 +1204,17 @@ CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
 	  echo "./.checkbashisms" ; \
 	fi)
 shell-style-fix:
-ifneq ($(TEST_FLAG)$(DEBUG_FLAG),)
+ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
+	shfmt -w -i 2 -ci -bn ${SH_SCRIPTS} ${BASH_SCRIPTS}
         shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
 endif
 shell-style-check:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
-	shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	shfmt -d -i 2 -ci -bn ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
 endif
 ifneq ($(SH_SCRIPTS),)
-	${CHECKBASHISMS} -l ${SH_SCRIPTS} /dev/null
+	${CHECKBASHISMS} -l ${SH_SCRIPTS}
 endif
 showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
@@ -1169,6 +1235,16 @@ To create a "here document"
 cat > myfile.txt <<END
 ... Contents of myfile.txt ...
 END
+```
+
+To determine the directory containing the currently-executing shell script:
+bash:
+```
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+```
+sh:
+```
+SCRIPTDIR="$(cd "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 ```
 
 == ssh (secure shell)
@@ -1732,70 +1808,6 @@ git dft
 I cannot figure out how to see all differences (even mergeable ones) among 3
 files, using the "<<<<<<", "||||||", and ">>>>>>" conflict markers/brackets.
 See my question at  https://stackoverflow.com/questions/78252587 .
-
-
-== Python
-
-In Python, by default variables have function (not block) scope.  To refer
-to (really, to change) a global variable, use the "global" declaration in
-the class/function/whatever.
-
-To test whether a file exists in Python, do os.path.exists('/file/name').
-In Python, to reimport module foo, do reload(foo).
-
-Python debugger:  pdb ~/python/test.py
-You need to "s"tep a few times before "n"ext, which would jump over the
-entire program.  Or just do "continue" to the error.
-
-For time-critical Python runs, disable assertions via -O command-line
-option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
-You can be sure that the optimized version is running if a .pyo instead of
-a .pyc file is created after you do "import".
-To make Python run optimized, do:
-```
-  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
-```
-To make Python run unoptimized, do:
-```
-  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
-```
-To evaluate these in Emacs, put the cursor at the end of the line and type
-C-x C-e.
-After you change py-which-args, kill the `*Python*` buffer and restart
-(it's not enough to kill the Python process and restart).
-
-As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
-even if it is faster...
-
-Typical Makefile rules to enforce Python style rules:
-```
-install-ruff:
-	@if ! command -v ruff ; then pipx install ruff ; fi
-PYTHON_FILES=$(wildcard **/*.py)
-python-style-fix: install-ruff
-	ruff --version
-	ruff format ${PYTHON_FILES}
-	ruff check ${PYTHON_FILES} --fix
-python-style-check: install-ruff
-	ruff --version
-	ruff format --check ${PYTHON_FILES}
-	ruff check ${PYTHON_FILES}
-```
-
-To activate conda:
-```
-source activate <yourenvironmentname> 
-```
-
-To disable tqdm output:
-```python
-from functools import partialmethod
-if os.getenv("TERM", "dumb") == "dumb":
-    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
-```
-More info at:
-https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
-https://stackoverflow.com/a/67238486/173852
 
 
 == make
@@ -3023,15 +3035,6 @@ If ripgrep matches files within the `.git` directory, then add this to the `.git
 .git/
 ```
 
-To determine the directory containing the currently-executing shell script:
-bash:
-```
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-```
-sh:
-```
-SCRIPTDIR="$(cd "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
-```
 
 To install Minecraft on a Chromebook (after enabling Linux):
 ```
