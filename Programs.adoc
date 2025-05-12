@@ -371,165 +371,6 @@ other containing even pages scanned in reverse order:
  * Online: https://www.sejda.com/alternate-mix-pdf
 
 
-== Perl
-
-To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
-```
-sudo cpanm --installdeps .
-```
-
-Perl5:
-//nobreak
-
- * arguments are in `@_`, that is `$_[0]`, `$_[1]`, etc.
- * "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
- * Forward jumps screw up containing for loops, it seems.
- * foreach implicitly localizes the argument inside the for body.
- * `wantarray` (no parens) returns true if current sub called in list context
-
-Perl5 regexps:
-//nobreak
-
- * To match end of line without newline, `\Z(?!\n)`.
- * Add `?` after a repetition operator to render it stingy instead of greedy: `foo(.*?)bar`
- * To quote regexp metacharacters, use `\Q...\E` or `quotemeta()`.
- * `(?:REGEXP)` is like `(REGEXP)` but doesn't make backreferences.
-//nobreak
-
-Perl5 data structures:
-```
-  @foo[$bar] => my @foo; returns one-element slice of foo = ($foo[$bar])
-  @{$foo[$bar]} => my @foo = list of references to arrays; @{...} converts
-    such a reference into the referred-to array
-  @{$foo}[$bar] => foo = reference to array; take that array's bar'th element
-```
-Don't assign result from splice; use `splice(@foo, $i, 0)`, not `@foo = splice(...)`
-
-Perl to consider:
-```
- @_ => @ARG; $_ => $ARG
- Packages: class::template, alias
- -d:DProf flag to profile
- -I to add include path (do this as an alias??)
- -u  (faster startup; why?)
- Compiler: do  "perl -MO=C foo.pl > foo.c"
-```
-
-Perl 5 uses $PERLLIB environment variable as include path for libraries
-
-In awk, perl, and C, output format "%2.1f" rounds, does not truncate.
-
-Perl regular expression to match a string:
-```
-  /"([^"\\]|\\[\000-\377])*"/
-```
-
-In Perl, to read (slurp) a whole file into a string, do
-```
-          undef $/;
-          $_ = <FH>;              # whole file now here
-```
-To read an entire file in perl:
-```
-open(FILE, "data.txt") or die("Unable to open file");
-@data = <FILE>;
-close(FILE);
-```
-
-To run Perl interactively, invoke the Perl debugger on an empty program:
-```
-   perl -de 42
-```
-
-In Perl, to count the number of newlines (or any other character) in a
-string, use tr/\n// (or tr/\n/\n/).
-
-To make a script use perl without specifying an explicit #!path, adjust the
-"-n" flag as appropriate, then put this at the top instead of #!/usr/bin/perl:
-```
-#!/usr/bin/env perl
-```
-or, alternately:
-```
-: # Use -*- Perl -*- without knowing its path
-  eval 'exec perl -S -w -n $0 "$@"'
-  if 0;
-```
-Using `#!/usr/bin/perl` is faster but requires knowing perl's path.
-
-To install/build a perl module, do the following as root:
-```
-  perl -MCPAN -e shell
-  install MIME::Base64
-```
-For more details, see ~mernst/wisdom/building/build-perl-module
-
-In Perl, to determine whether file named $foo exists, use "if (-e $foo) ...".
-
-Perl scripts should start this way, for portability and error checking:
-```
-#!/usr/bin/env perl
-use strict;
-use English;
-$WARNING = 1;
-```
-
-In perl:
-//nobreak
-
- * To read a whole file:  $/ = undef.
- * To read by paragraphs:  $/ = "\n\n".
- * To read by paragraphs, eliminating empty paragraphs: $/ = "".
- * $/ is also known as `$RS` or `$INPUT_RECORD_SEPARATOR`.
-       
-In perl, to properly open a file, check like this:
-```
-  open(FILE, $filename) or die "Can't open '$filename': $!";
-```
-
-In Perl, Date::Manip seems a touch nicer than Date::Calc.
-(There's also Date::Format and Date::Parse, but Date::Manip does it all.)
-
-In perl, write
-```
-  use filetest 'access';  # for AFS
-```
-to make the file access test operators (-r, -w, etc) work better for AFS.
-
-To disable Perl's "deep recursion" warnings (they're not errors), use
-```
-  no warnings 'recursion';
-```
-
-In Perl, here is a way to extract the unique elements from a list.
-```
-  # Return the argument list with duplicates removed (eliminated).
-  sub uniq () {
-    my @uniq = ();
-    my %seen = ();
-    foreach my $item (@_) {
-      push(@uniq, $item) unless $seen{$item}++;
-    }
-    return @uniq;
-  }
-```
-
-Perl trick:
-```
-use FindBin ();
-use lib "$FindBin::Bin";
-```
-
-To lint Perl:
-```
-perl -Mstrict -Mdiagnostics -cw <file>
-```
-(Maybe: `perl -I /path/to/dependency/lib -c /path/to/file/to/check` .)
-For Perl coding standards:
- * Perl::Lint
- * Perl::Critic: run with: `perlcritic --brutal --verbose 9 file.pl`
-
-
 == WWW and HTML
 
 To make a webpage automatically forward/redirect, see
@@ -938,6 +779,173 @@ To test AFS latency performance (when the file system is sluggish), run
 such problems.)
 
 
+== Perl
+
+To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
+```
+sudo cpanm --installdeps .
+```
+
+Perl5:
+//nobreak
+
+ * arguments are in `@_`, that is `$_[0]`, `$_[1]`, etc.
+ * "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
+ * Forward jumps screw up containing for loops, it seems.
+ * foreach implicitly localizes the argument inside the for body.
+ * `wantarray` (no parens) returns true if current sub called in list context
+
+Perl5 regexps:
+//nobreak
+
+ * To match end of line without newline, `\Z(?!\n)`.
+ * Add `?` after a repetition operator to render it stingy instead of greedy: `foo(.*?)bar`
+ * To quote regexp metacharacters, use `\Q...\E` or `quotemeta()`.
+ * `(?:REGEXP)` is like `(REGEXP)` but doesn't make backreferences.
+//nobreak
+
+Perl5 data structures:
+```
+  @foo[$bar] => my @foo; returns one-element slice of foo = ($foo[$bar])
+  @{$foo[$bar]} => my @foo = list of references to arrays; @{...} converts
+    such a reference into the referred-to array
+  @{$foo}[$bar] => foo = reference to array; take that array's bar'th element
+```
+Don't assign result from splice; use `splice(@foo, $i, 0)`, not `@foo = splice(...)`
+
+Perl to consider:
+```
+ @_ => @ARG; $_ => $ARG
+ Packages: class::template, alias
+ -d:DProf flag to profile
+ -I to add include path (do this as an alias??)
+ -u  (faster startup; why?)
+ Compiler: do  "perl -MO=C foo.pl > foo.c"
+```
+
+Perl 5 uses $PERLLIB environment variable as include path for libraries
+
+In awk, perl, and C, output format "%2.1f" rounds, does not truncate.
+
+Perl regular expression to match a string:
+```
+  /"([^"\\]|\\[\000-\377])*"/
+```
+
+In Perl, to read (slurp) a whole file into a string, do
+```
+          undef $/;
+          $_ = <FH>;              # whole file now here
+```
+To read an entire file in perl:
+```
+open(FILE, "data.txt") or die("Unable to open file");
+@data = <FILE>;
+close(FILE);
+```
+
+To run Perl interactively, invoke the Perl debugger on an empty program:
+```
+   perl -de 42
+```
+
+In Perl, to count the number of newlines (or any other character) in a
+string, use tr/\n// (or tr/\n/\n/).
+
+To make a script use perl without specifying an explicit #!path, adjust the
+"-n" flag as appropriate, then put this at the top instead of #!/usr/bin/perl:
+```
+#!/usr/bin/env perl
+```
+or, alternately:
+```
+: # Use -*- Perl -*- without knowing its path
+  eval 'exec perl -S -w -n $0 "$@"'
+  if 0;
+```
+Using `#!/usr/bin/perl` is faster but requires knowing perl's path.
+
+To install/build a perl module, do the following as root:
+```
+  perl -MCPAN -e shell
+  install MIME::Base64
+```
+For more details, see ~mernst/wisdom/building/build-perl-module
+
+In Perl, to determine whether file named $foo exists, use "if (-e $foo) ...".
+
+Perl scripts should start this way, for portability and error checking:
+```
+#!/usr/bin/env perl
+use strict;
+use English;
+$WARNING = 1;
+```
+
+In perl:
+//nobreak
+
+ * To read a whole file:  $/ = undef.
+ * To read by paragraphs:  $/ = "\n\n".
+ * To read by paragraphs, eliminating empty paragraphs: $/ = "".
+ * $/ is also known as `$RS` or `$INPUT_RECORD_SEPARATOR`.
+       
+In perl, to properly open a file, check like this:
+```
+  open(FILE, $filename) or die "Can't open '$filename': $!";
+```
+
+In Perl, Date::Manip seems a touch nicer than Date::Calc.
+(There's also Date::Format and Date::Parse, but Date::Manip does it all.)
+
+In perl, write
+```
+  use filetest 'access';  # for AFS
+```
+to make the file access test operators (-r, -w, etc) work better for AFS.
+
+To disable Perl's "deep recursion" warnings (they're not errors), use
+```
+  no warnings 'recursion';
+```
+
+In Perl, here is a way to extract the unique elements from a list.
+```
+  # Return the argument list with duplicates removed (eliminated).
+  sub uniq () {
+    my @uniq = ();
+    my %seen = ();
+    foreach my $item (@_) {
+      push(@uniq, $item) unless $seen{$item}++;
+    }
+    return @uniq;
+  }
+```
+
+Perl trick:
+```
+use FindBin ();
+use lib "$FindBin::Bin";
+```
+
+To lint Perl:
+```
+perl -Mstrict -Mdiagnostics -cw <file>
+```
+(Maybe: `perl -I /path/to/dependency/lib -c /path/to/file/to/check` .)
+For Perl coding standards:
+ * Perl::Lint
+ * Perl::Critic: run with: `perlcritic --brutal --verbose 9 file.pl`
+
+To lint/format/pretty-print perl files, put this in the Makefile:
+```
+PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+perl-style-fix: install-ruff
+	perltidy -b ${PERL_FILES}
+perl-style-check: install-ruff
+	perltidy -w ${PERL_FILES}
+```
+
 
 == Python
 
@@ -1122,7 +1130,7 @@ time, virtual memory, etc.
 
 In general, a bash script should contain this at the top:
 ```
-  set -o errexit -o nounset -o pipefail
+  set -euo pipefail
 ```
 and optionally
 ```
