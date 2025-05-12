@@ -983,13 +983,11 @@ even if it is faster...
 Typical Makefile rules to enforce Python style rules:
 ```
 PYTHON_FILES=$(wildcard **/*.py)
-install-ruff:
-	@if ! command -v ruff ; then pipx install ruff ; fi
-python-style-fix: install-ruff
+python-style-fix:
 	ruff --version
 	ruff format ${PYTHON_FILES}
 	ruff check ${PYTHON_FILES} --fix
-python-style-check: install-ruff
+python-style-check:
 	ruff --version
 	ruff format --check ${PYTHON_FILES}
 	ruff check ${PYTHON_FILES}
