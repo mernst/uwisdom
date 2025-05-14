@@ -940,9 +940,9 @@ For Perl coding standards:
 To lint/format/pretty-print perl files, put this in the Makefile:
 ```
 PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-perl-style-fix: install-ruff
+perl-style-fix:
 	perltidy -b ${PERL_FILES}
-perl-style-check: install-ruff
+perl-style-check:
 	perltidy -w ${PERL_FILES}
 ```
 
@@ -984,13 +984,11 @@ Typical Makefile rules to enforce Python style rules:
 ```
 PYTHON_FILES=$(wildcard **/*.py)
 python-style-fix:
-	ruff --version
-	ruff format ${PYTHON_FILES}
-	ruff check ${PYTHON_FILES} --fix
+	ruff -q format ${PYTHON_FILES}
+	ruff -q check ${PYTHON_FILES} --fix
 python-style-check:
-	ruff --version
-	ruff format --check ${PYTHON_FILES}
-	ruff check ${PYTHON_FILES}
+	ruff -q format --check ${PYTHON_FILES}
+	ruff -q check ${PYTHON_FILES}
 ```
 
 To activate conda:
@@ -1199,8 +1197,8 @@ The `shellcheck` program is a linter for sh and bash scripts.  Run like:
 There is also `checkbashisms`.
 Here are Makefile rules to run them:
 ```
-SH_SCRIPTS   := $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-BASH_SCRIPTS := $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
 	  echo "checkbashisms" ; \
 	else \
@@ -1211,16 +1209,16 @@ CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
 	fi)
 shell-style-fix:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
-	shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
-	shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
+	@shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
 endif
 shell-style-check:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
-	shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
-	shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
 endif
 ifneq ($(SH_SCRIPTS),)
-	${CHECKBASHISMS} -l ${SH_SCRIPTS}
+	@${CHECKBASHISMS} -l ${SH_SCRIPTS}
 endif
 showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
