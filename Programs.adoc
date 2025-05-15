@@ -1729,7 +1729,7 @@ docker rmi -f $(docker images -q)
 ```
 To remove even more files, including (large) build cache objects:
 ```
-docker system prune -a -y
+docker system prune -a -f
 ```
 
 If a Docker container has no Internet (example message: "Temporary failure in name resolution"), run (in the host):
