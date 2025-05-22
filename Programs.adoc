@@ -1244,11 +1244,11 @@ END
 To determine the directory containing the currently-executing shell script:
 bash:
 ```
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ```
 sh:
 ```
-SCRIPTDIR="$(cd "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" >/dev/null 2>&1 && pwd -P)"
 ```
 
 == ssh (secure shell)
@@ -2920,7 +2920,7 @@ HOWEVER, Mac OS X's `readlink` behaves differently than `readlink` on Linux
 installed.  Thus, portable scripts should not use them.
 If the directory exists (like `readlink -f`), use this instead:
 ```
-SCRIPTDIR="$(cd "$(dirname "$0")" && pwd -P)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd -P)"
 ```
 where -P resolves symbolic links.
 Common uses for tracing a script (but these do *not* work for a sourced script!):
