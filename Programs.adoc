@@ -988,7 +988,7 @@ install-mypy:
 install-ruff:
 	@if ! command -v ruff ; then pipx install ruff ; fi
 python-style-fix: install-ruff
-	@ruff -q format ${PYTHON_FILES}
+	@ruff format ${PYTHON_FILES}
 	@ruff -q check ${PYTHON_FILES} --fix
 python-style-check: install-ruff
 	@ruff -q format --check ${PYTHON_FILES}
