@@ -1014,6 +1014,9 @@ More info at:
 https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
 https://stackoverflow.com/a/67238486/173852
 
+Write Python docstrings as a command ("Do this", "Return that"), not as a description ("Does this", "Returns that").
+Write `@override` on an overriding method; this requires `from typing import override`.
+
 
 == Shells
 
