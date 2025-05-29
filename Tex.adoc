@@ -394,6 +394,14 @@ This alternate definition of `\codeid` does not work inside an array environment
 ----
   \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
 ----
+To switch from "\texttt{...}" to "\<...>":
+  (tags-query-replace "\\\\texttt{\\(.*?\\)}" "\\\\<\\1>")
+To switch from "$...$" to "\|...|":
+  (tags-query-replace "\\\\|" "\\\\parallel")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.]+\\)+\\$" "\\\\|\\1|")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+ " "$\\\\|\\1| ")
+  (tags-query-replace " \\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" " \\\\|\\1|$")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" "\\\\|\\1|")
 
 To permit hyphenation in tt font globally throughout a document, see
 http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt
