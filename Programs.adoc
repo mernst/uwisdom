@@ -1765,7 +1765,24 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 
-== AsciiDoc format
+== Markdown and AsciiDoc
+
+Convert Markdown to AsciiDoc: https://github.com/asciidoctor/kramdown-asciidoc .
+Some people say don't use pandoc, but for simple documents it seems fine and
+https://pandoc.org/try/?from=markdown&to=asciidoc doesn't require any software
+installation.
+
+For converting (GitHub-style) markdown format (.md file) to HTML:
+ * `basename=myfile && pandoc --standalone < ${basename}.md > ${basename}.html`
+ * `markdown` produces poor output, doesn't handle triple-backtick, etc.
+ * `grip --export` exports to `<path>.html`.
+Markdown format is idiosyncratic and has many variants, so it may be better
+to use AsciiDoc format and the Asciidoctor processor, when possible.
+
+To write a comment in a Markdown file, write this with blank lines both before and after:
+```
+[comment]: # (Here is the text of the comment.)
+```
 
 An example of an AsciiDoc document that has both HTML and PDF is https://junit.org/junit5/docs/current/user-guide/ .
 
@@ -2994,18 +3011,6 @@ To compress a JPEG file:
 ```
 where nn is between 1 and 100.  1 is the lowest quality (highest 
 compression).
-
-For converting (GitHub-style) markdown format (.md file) to HTML:
- * `basename=myfile && pandoc --standalone < ${basename}.md > ${basename}.html`
- * `markdown` produces poor output, doesn't handle triple-backtick, etc.
- * `grip --export` exports to `<path>.html`.
-Markdown format is idiosyncratic and has many variants, so it may be better
-to use AsciiDoc format and the Asciidoctor processor, when possible.
-
-To write a comment in a Markdown file, write this with blank lines both before and after:
-```
-[comment]: # (Here is the text of the comment.)
-```
 
 To convert .svg to vector-format PDF:
 ```
