@@ -517,6 +517,13 @@ To update all installed Emacs packages:
 ```
 M-x package-list-packages RET U x
 ```
+or:
+```
+(progn
+  (package-list-packages)
+  (package-menu-mark-upgrades)
+  (package-menu-execute t))
+```
 
 ;; Setting face attributes:
 (defface my-boxed-face 
