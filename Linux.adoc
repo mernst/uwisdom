@@ -13,14 +13,14 @@ On a Linux/Debian/Ubuntu VMware guest, may need to reinstall VMware tools
 after an update/upgrade that requires a reboot, lest guest has no network.)
 To install a new package on debian:
 ```
-  sudo apt-get install <package-name>
-  sudo apt-get build-dep <package-name>
+  sudo apt install <package-name>
+  sudo apt build-dep <package-name>
 ```
 (and also install anything reasonable that the latter suggests).
 To upgrade all packages on Debian or Ubuntu (first command updates list of packages):
 ```
-  sudo apt-get update && sudo apt-get -u -y dist-upgrade && echo "Success: upgraded"
-  # Or "apt-get -u upgrade" to not automatically resolve dependencies, which
+  sudo apt update && sudo apt -u -y dist-upgrade && echo "Success: upgraded"
+  # Or "apt -u upgrade" to not automatically resolve dependencies, which
   # might *remove* a package -- this is better if running "Debian unstable".
 ```
 or just
@@ -29,7 +29,7 @@ or just
 ```
 Download source code ("-b" auto-builds) into *current directory*:
 ```
-  apt-get [-b] source PACKAGENAME
+  apt [-b] source PACKAGENAME
 ```
 Search through the available packages to find a package name:
 ```
@@ -71,7 +71,7 @@ for your subarchitecture.  A list of kernels can be found with:
 ```
 Install as usual with
 ```
-  apt-get install ...
+  apt install ...
 ```
 The new kernel will be run by default after the next reboot.
 
@@ -123,7 +123,7 @@ From the command line:
 ```
 If the `lsb_release` command is not installed, run
 ```
-apt-get update && apt-get install -y lsb-release && apt-get clean all && lsb_release -a
+apt update && apt install -y lsb-release && apt clean all && lsb_release -a
 ```
 
 Firefox 3.0 on etch requires gtk2-10.  A version of this exists
@@ -318,9 +318,9 @@ because "dmesg" said:
 To recompile the Debian package "foobar" from source code:
 ```
   # Install any packages needed for the compile
-  sudo apt-get build-dep foobar
+  sudo apt build-dep foobar
   # Download the source code
-  apt-get source foobar
+  apt source foobar
   cd foobar-1.42
   # Compile:
   debian/rules build
@@ -329,7 +329,7 @@ To recompile the Debian package "foobar" from source code:
 ```
 You'll then have a foobar_1.42-12_i386.deb file in the directory you
 *started in*, which you can install with "dpkg -i". The version of the
-source that apt-get gets is controlled by the /etc/apt/sources.list
+source that `apt` gets is controlled by the /etc/apt/sources.list
 file.  You can often "backport" an updated package from a newer
 release to an older release by fetching the newer source and compiling
 it on a machine running the older release. This tends to work well for

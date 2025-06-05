@@ -3060,15 +3060,6 @@ If ripgrep matches files within the `.git` directory, then add this to the `.git
 .git/
 ```
 
-
-To install Minecraft on a Chromebook (after enabling Linux):
-```
-sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get install -y openjdk-8-jdk
-```
-Download Minecraft.deb from https://minecraft.net/en-us/download/alternative/.
-Right-click and do "Install with Linux".  (Might need to move from "Downloads" to "Linux files" first?)
-
 Chromebook:
  * the "terminal" application runs Linux
 

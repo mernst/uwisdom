@@ -57,7 +57,7 @@ the help topics in a new Emacs buffer), do this:
 ```
 Or, to see them in a web browser:
 ```
-  apt-get install git-doc
+  apt install git-doc
   git config --global man.viewer firefox
   git config --global man.firefox.cmd firefox
   git config --global help.format web
