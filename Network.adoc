@@ -463,3 +463,4 @@ Please perform light copy-editing of the attached document.  Output a slightly c
 I HAVE NOT TRIED THIS:
 I have attached a draft of feedback to writers.  Please perform light copy-editing.  Do not make major changes, and do not remove details. Process the whole document without asking for confirmation of each portion of the document.
 
+Tailscale is a way to get a public IP address within the Allen School.
