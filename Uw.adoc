@@ -517,6 +517,9 @@ Coriander Server Usage Rules:
 3. /m-coriander/coriander/hf is used for storing models and datasets, and /m-coriander/coriander/trace is used for storing shared traces.
 4. Always assign meaningful names to Docker containers and label them with the owner's name.
 
+To open a support ticket for UW CSE Support:
+https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketMessage                    
+
 
 == Seattle
 
