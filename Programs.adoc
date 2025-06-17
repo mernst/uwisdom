@@ -107,6 +107,7 @@ Select pages from a file:
 ```
 To concatenate PDF files:
 ```
+  pdfjam -o outfile.pdf infile1.pdf infile2.pdf
   pdfunite file1.pdf file2.pdf singlefile.pdf
   cpdf -merge ${ALL_PDFS} -o singlegfile.pdf
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
