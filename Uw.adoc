@@ -521,7 +521,9 @@ Coriander Server Usage Rules:
 4. Always assign meaningful names to Docker containers and label them with the owner's name.
 
 To open a support ticket for UW CSE Support:
-https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketMessage                    
+https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketMessage
+My tickets:
+https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketOverview;Subaction=MyTickets
 
 
 == Seattle
