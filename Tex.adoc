@@ -395,7 +395,9 @@ This alternate definition of `\codeid` does not work inside an array environment
   \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
 ----
 To switch from "\texttt{...}" to "\<...>":
-  (tags-query-replace "\\\\texttt{\\(.*?\\)}" "\\\\<\\1>")
+  (tags-query-replace "\\\\texttt{\\([^{}<>]+\\)}" "\\\\<\\1>")
+  (tags-query-replace "\\\\texttt{\\([^{}]+\\)}" "\\\\codeid{\\1}")
+  (tags-search "texttt")
 To switch from "$...$" to "\|...|":
   (tags-query-replace "\\\\|" "\\\\parallel")
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.]+\\)+\\$" "\\\\|\\1|")
