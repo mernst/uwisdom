@@ -1032,6 +1032,11 @@ module named '__main__'".  To fix it, pass `--scripts-are-modules` to `mypy`.
 
 In Python, instead of `datetime.date.today()`, use `datetime.now().astimezone()`.
 
+To suppress a Ruff error or warning message on one line of code:
+```
+.... # noqa: F401
+```
+
 
 == Shells
 
