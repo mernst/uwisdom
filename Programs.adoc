@@ -1030,6 +1030,8 @@ Write `@override` on an overriding method; this requires `from typing import ove
 Running `mypy` on a script without a `.py` extension yields "error:  Duplicate
 module named '__main__'".  To fix it, pass `--scripts-are-modules` to `mypy`.
 
+In Python, instead of `datetime.date.today()`, use `datetime.now().astimezone()`.
+
 
 == Shells
 
