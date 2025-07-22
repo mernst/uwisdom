@@ -286,6 +286,9 @@ https://betterfolio.cs.washington.edu/app/candidates
 To pay an undergraduate researcher an hourly wage:
 https://internal.cs.washington.edu/hrp/about-payroll-contact-us/undergrad-ra-appointment/
 
+To reimburse an expense such as travel or equipment:
+https://internal.cs.washington.edu/research-admin/research-finance-team/
+
 
 == CSE sysadmin
 
