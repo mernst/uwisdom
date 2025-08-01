@@ -709,11 +709,6 @@ Examples:
   \discretionary{f-}{fi}{ffi}cult    % kerning
 ```
 
-Redhat 6's (RH6's) LaTeX hyphenation is totally broken
-because it uses all the different lanaguages hyphenation rules.
-\usepackage[english]{babel}
-fixes the problem by forcing it to use only English.
-
 
 To permit more space between words, in order to prevent bad breaks in
 narrow columns (like in a newspaper):
@@ -797,6 +792,14 @@ Instead, use
   \usepackage{soul}
   ...
   \ul{...}
+```
+
+This ought to permit more hyphenization in LaTeX:
+```
+\hyphenpenalty=100
+\exhyphenpenalty=100
+\lefthyphenmin=2
+\righthyphenmin=2
 ```
 
 
