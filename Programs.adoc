@@ -983,7 +983,7 @@ even if it is faster...
 
 Typical Makefile rules to enforce Python style rules:
 ```
-PYTHON_FILES:=$(wildcard *.py) $(wildcard **/*.py) $(shell grep -r -l --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)python')
+PYTHON_FILES:=$(wildcard somedir/*.py) $(wildcard otherdir/*.py) $(shell grep -r -l --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)python')
 PYTHON_FILES_TO_CHECK:=$(filter-out ${lcb_runner},${PYTHON_FILES})
 python-style-fix:
 ifneq (${PYTHON_FILES},)
