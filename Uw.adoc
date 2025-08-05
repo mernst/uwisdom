@@ -289,6 +289,9 @@ https://internal.cs.washington.edu/hrp/about-payroll-contact-us/undergrad-ra-app
 To reimburse an expense such as travel or equipment:
 https://internal.cs.washington.edu/research-admin/research-finance-team/
 
+Allen Schoel event request form:
+https://docs.google.com/forms/d/e/1FAIpQLSdiiC7fMVgkpUwCT-S9IGbU0RHnHlBBkKKuUKnfl-Ebw4itNA/viewform
+
 
 == CSE sysadmin
 
