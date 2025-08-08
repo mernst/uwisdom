@@ -1033,6 +1033,13 @@ To suppress a Ruff error or warning message on one line of code:
 .... # noqa: F401
 ```
 
+== Rust
+
+Rust code should have, in its main file (such as `main.rs`):
+```rust
+#![warn(missing_docs)]
+```
+
 
 == Shells
 

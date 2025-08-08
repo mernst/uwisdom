@@ -476,11 +476,24 @@ produced by
   \cite[p.~86]{Horn86},\cite[p.~516]{PressFTV88}
 ```
 
-In LaTeX, to remove vertical spacing (space) between bibliography items, use:
+In LaTeX, to remove vertical spacing (space) between bibliography items when using natbib (which defines \bibsep), use:
 ```
    \setlength{\bibsep}{0pt}
 ```
 before the `\biblography` command.
+For other bibliography styles, do
+```
+\let\oldthebibliography\thebibliography
+\let\endoldthebibliography\endthebibliography
+\renewenvironment{thebibliography}[1]{
+  \begin{oldthebibliography}{#1}
+    \setlength{\itemsep}{0em}
+    \setlength{\parskip}{0em}
+}
+{
+  \end{oldthebibliography}
+}
+```
 
 In LaTeX 2e, to adjust bibliography formatting:
 (For IEEE styles, just do `\def\IEEEbibitemsep{0pt plus .5pt}`.)
