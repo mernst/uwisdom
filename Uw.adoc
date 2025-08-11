@@ -225,12 +225,6 @@ The PLSE Lab is room Gates 253.
 How to order lunches / snack carts at UW CSE:
 https://www.cs.washington.edu/internal/food
 
-Sandy Kaplan <sandy@cs.washington.edu> is a technical editor who can help
-with grant proposals, technical papers, helping grad students improve their
-writing, etc.  She sits in CSE 462 and works Monday mornings and all day
-Thursday and Friday.  Her feedback is often very low-level and you need to
-ensure that the suggested edits do not change the technical content.
-
 UW CSE course web template:
 https://gitlab.cs.washington.edu/lab/simple-courseweb-template
 To use:
