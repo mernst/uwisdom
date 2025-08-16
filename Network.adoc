@@ -214,9 +214,8 @@ To get a printable version of a blogger webblog, apply these diffs:
 
 The plume-bib README instructions are available at
 ```
-  http://rawgit.com/mernst/plume-bib/master/README
-  https://rawgit.com/mernst/plume-bib/master/README
-  https://raw.githubusercontent.com/mernst/plume-bib/master/README
+  https://github.com/mernst/plume-bib
+  https://raw.githubusercontent.com/mernst/plume-bib/master/README.md
 ```
 the latter two of which are identical.
 
