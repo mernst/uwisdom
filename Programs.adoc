@@ -90,6 +90,8 @@ Tools for transforming PDF files:
  * pdftk is a single program with many command-line options.
    As of 2023, there has been no release since 2013.
    Does not install easily on Red Hat/Fedora/RHEL/CentOS.
+   A newer version pdftk-java is aliased to pdftk on Ubuntu (& Debian?).
+   Maybe it can be installed more easily?
  * cpdf is an alternative to both; but is free only for personal use.
    "Charities and educational institutions still require a license."
 
