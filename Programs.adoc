@@ -3259,6 +3259,11 @@ File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
 
 The `bear` program is for clang what do-like-javac is for Java.
 
+A better way to do `lsb_release -si` or `lsb_release -sr` is:
+```sh
+sed -n -e 's/^ID="\(.*\)"/\1/p' /etc/os-release)
+sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
+```
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
