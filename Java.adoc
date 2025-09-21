@@ -380,6 +380,45 @@ Javadoc links:
  * under JDK > 17 (i.e., JDK >= 18), use JDK 17 links, and "--link-modularity-mismatch info"
 
 
+== Command-line options
+
+To run Java with a maximum of 4GB of memory:
+```
+  java -Xmx4g ...
+```
+To see the defaults:
+```
+java -XX:+PrintFlagsFinal -version | grep HeapSize
+```
+To see some environment variables that may affect the max size of the Java heap:
+```
+echo JAVA_TOOL_OPTIONS="$JAVA_TOOL_OPTIONS"
+echo JDK_JAVA_OPTIONS="$JDK_JAVA_OPTIONS"
+echo _JAVA_OPTIONS="$_JAVA_OPTIONS"
+echo DEFAULT_JVM_OPTS="$DEFAULT_JVM_OPTS"
+echo GRADLE_OPTS="$GRADLE_OPTS"
+echo JAVA_OPTS="$JAVA_OPTS"
+```
+
+Setting Java command-line options, such as for max memory (RAM) size of the heap:
+Precedence:
+```
+  JAVA_TOOL_OPTIONS (weakest)
+  JDK_JAVA_OPTIONS (JDK 9+, only applies to `java`, not `javac`, `jar`, etc.)
+  Command line parameters
+  _JAVA_OPTIONS (strongest)
+```
+Used by Gradle (I don't know what the precedence is)
+```
+  DEFAULT_JVM_OPTS='-Xmx4g'
+  GRADLE_OPTS='-Xmx4g'
+  JAVA_OPTS='-Xmx4g' (also used by some other programs, maybe)
+```
+
+"Could not reserve enough space for object heap" means that the
+"-Xmx" argument on the java command line was too large.
+
+
 == Everything else
 
 JDK 1.4 is still distributed, but at an obscure URL:
@@ -422,11 +461,6 @@ Major version number for the Java class file format (JVM version numbers):
 To pretty-print or indent a Java program, do "java JavaPP filename.java".
 Or, use my shell script "javapp file1.java file2.java file3.java ...",
 which overwrites the original file.
-
-To run Java with a maximum of 900 Mbytes of memory (default 64 Mbytes):
-```
-  java -Xmx900m ...
-```
 
 java.lang.Class.forName requires different versions of the string
 representation of a class as its argument depending on whether you want to
@@ -635,9 +669,6 @@ else
   JAVA_HOME ?= $(shell readlink -f /usr/bin/javac | sed "s:bin/javac::")
 endif
 ```
-
-"Could not reserve enough space for object heap" means that the
-"-Xmx" argument on the java command line was too large.
 
 `JAVA_HOME` is the JDK install directory, e.g., ...jdk1.7.0 .
 `java.home` is the JRE install directory, e.g., ...jre .

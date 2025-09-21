@@ -644,16 +644,21 @@ To provide more memory (maximum heap size) to Gradle itself, add to file `settin
 ```
 org.gradle.jvmargs=-Xmx2g
 ```
-To provide more memory to Gradle itself from the command
-line (`GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle):
+To provide more memory to Gradle itself from the command line:
 ```
 GRADLE_OPTS="-Xmx2g" ./gradlew build javadoc
 ```
+Note that `GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle.
+Also note that `GRADLE_OPTS` is *not* about options to Gradle such as `--console=plain`, but about JVM options such as `-Xmx2g`.  And, it doesn't affect the Gradle daemon, which is what you really care about.  That is controlled by `org.gradle.jvmargs` in file `gradle.properties` (in your project's root directory or in your Gradle user home directory (typically ~/.gradle/gradle.properties).
+.
 There is also `JAVA_TOOL_OPTS` which works for all Java processes (java, jar,
 javac, but it is overridden by any command-line arguments that are passed by
 Gradle when calling the subprocess:
 ```
 JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
+```
+GitLab uses environment variable `GRADLE_CLI_OPTS`.
+
 
 For a task to show up in the output of `gradle tasks` or `gradlew tasks`,
 it must have a "group".
