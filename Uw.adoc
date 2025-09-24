@@ -286,6 +286,9 @@ https://internal.cs.washington.edu/research-admin/research-finance-team/
 Allen Schoel event request form:
 https://docs.google.com/forms/d/e/1FAIpQLSdiiC7fMVgkpUwCT-S9IGbU0RHnHlBBkKKuUKnfl-Ebw4itNA/viewform
 
+Purchase request:
+https://internal.cs.washington.edu/research-admin/research-finance-team/
+
 
 == CSE sysadmin
 
@@ -424,10 +427,11 @@ To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
 (no activation key, KMS):
 http://www.cs.washington.edu/lab/sw/windows/office2010/
 
-Set UW CSE Unix file permissions and access using the GrpAdmin group management tool.
+Set UW CSE Unix file permissions and access using the GrpAdmin group management
+tool (https://intranet.cs.washington.edu/grpadmin).
 
 After a user has been added to a group using the GrpAdmin tool
-(https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi), it is generally
+(https://intranet.cs.washington.edu/grpadmin), it is generally
 necessary for the user to do one of the following:
 //nobreak
 
@@ -440,7 +444,7 @@ after which the user will have access to the group.
 Another potential complication is that each user can have only 20 login
 groups -- those are the ones that are active at any time.  To change login
 groups permanently, use
-https://weblogin.cs.washington.edu/cgi-bin/grpadmin.cgi?screen=logingroups
+https://intranet.cs.washington.edu/grpadmin?screen=logingroups
 .  To change effective groups temporarily, use chgrpsh.
 
 Files of the form
