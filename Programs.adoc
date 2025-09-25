@@ -1797,6 +1797,7 @@ https://pandoc.org/try/?from=markdown&to=asciidoc doesn't require any software
 installation.
 
 For converting (GitHub-style) markdown format (.md file) to HTML:
+ * `quarto render INPUT.MD --output-dir OUTDIR` where OUTDIR may be the same for multiple files.
  * `basename=myfile && pandoc --standalone < ${basename}.md > ${basename}.html`
  * `markdown` produces poor output, doesn't handle triple-backtick, etc.
  * `grip --export` exports to `<path>.html`.
