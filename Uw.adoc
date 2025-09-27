@@ -529,6 +529,19 @@ https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketMessage
 My tickets:
 https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketOverview;Subaction=MyTickets
 
+To invite undergrads to Slack:
+ * Choose the Paul G. Allen workspace
+ * click the down-caret to its right
+ * choose "invite people" from the dropdown
+    * can batch multiple people if they should have access to the same channels
+ * Must select Guest (not Member)
+But, don't do this for course staff, only for research.
+
+For course staff communication:
+ * A private Ed board, which Bekah can setup (or may already exist)
+ * Google Chat within CSE Google
+ * Un-officially a free 'retail' Slack workspacesuffices too, as 90 day retention cleans up after itself.
+
 
 == Seattle
 
