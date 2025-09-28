@@ -2338,7 +2338,10 @@ ImageMagick is a replacement for (part of) xv:  three of its programs are:
  * convert old.gif new.jpg lets you easily change image formats.
 
 "locate" finds a file of a given name anywhere on the system.
-Database is updated nightly or so.
+Its database is updated nightly or so.  To update it manually:
+```sh
+sudo updatedb
+```
 
 To use "crypt" to encrypt a string, like in the password file `/etc/passwd`,
 use "openssl passwd".
