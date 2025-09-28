@@ -357,11 +357,17 @@ git log --oneline --format=%B -n 1 HEAD | head -n 1
 ```
 
 To see the dates that annotated tags were created:
-```git for-each-ref --format="%(refname:short) | %(taggerdate)" refs/tags/*```
+```sh
+git for-each-ref --format="%(refname:short) | %(taggerdate)" refs/tags/*
+```
 To see the dates of the annotated commits:
-```git for-each-ref --format="%(refname:short) | %(creatordate)" refs/tags/*```
+```sh
+git for-each-ref --format="%(refname:short) | %(creatordate)" refs/tags/*
+```
 To determine whether a tag is annotated (printed as "tag") or lightweight (printed as "commit"):
-```git for-each-ref refs/tags```
+```sh
+git for-each-ref refs/tags
+```
 
 To fetch a branch on someone else's fork:
 ```
@@ -380,10 +386,14 @@ git reset --hard HEAD
 ```
 
 To get a diff between a branch and master, but not including unmerged master commits:
-```git diff master...branch```
+```sh
+git diff master...branch
+```
 (don't switch the order of the arguments).
 Equivalently:
-```git diff `git merge-base master branch`..branch```
+```sh
+git diff `git merge-base master branch`..branch
+```
 Merge base is the point where branch diverged from master.
 
 If you get an error when running `git commit`:
@@ -498,9 +508,13 @@ instead.  To set it to `~/.gitattributes':
 `git config --global core.attributesfile '~/.gitattributes'`
 
 List unmerged files:
-```git diff --name-only --diff-filter=U --relative```
+```sh
+git diff --name-only --diff-filter=U --relative
+```
 This might also stage files with no conflict markers, which is handy:
-```git diff --check```
+```sh
+git diff --check
+```
 
 To clone submodules or set them to the version in the latest commit:
 ```
@@ -678,7 +692,7 @@ that because it is more convenient during development to put all commits in
 a single working copy; then I make a sequence of commits, all in a single
 branch.  But I seem to need one commit per branch to submit a proper GitHub pull
 request.
-```
+```sh
   ## <mybranchname> is by convention "upstream"
   ## <git repository> is, for example, git@github.com:mernst/asciidoctor.org.git
   git remote add <mybranchname> <git repository>
@@ -693,7 +707,7 @@ request.
   git cherry-pick <mycommithash>
   ## endif
   git push origin <mybranchname>
-}}
+```
 Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
 
 GitHub doesn't support pull requests for the wiki repository, only the main repository, according to http://stackoverflow.com/questions/10642928/ .
@@ -746,7 +760,7 @@ Settings >> integrations >> emails on push
 In GitLab, only users with the Master role are allowed to push a merge to a "protected branch".
 The master branch is protected by default.
 If you get this error:
-```
+```output
   remote: GitLab: You are not allowed to push code to protected branches on this project.        
    ! [remote rejected] master -> master (pre-receive hook declined)
 ```

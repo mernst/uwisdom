@@ -243,7 +243,9 @@ that results from command-line arguments `-source 7 -target 7`,
 supply the additional command-line argument: `-Xlint:-options`
 
 To resolve
-```warning: [classfile] MethodParameters attribute introduced in version 52.0 class files is ignored in version 51.0 class files```
+```output
+warning: [classfile] MethodParameters attribute introduced in version 52.0 class files is ignored in version 51.0 class files
+```
 run javac with `-Xlint:-classfile`.
 This is only needed in Java 8, because the bug is fixed in Java 11:
 https://bugs.openjdk.java.net/browse/JDK-8190452
@@ -686,7 +688,7 @@ for (String line; (line = br.readLine()) != null; ) {
 ```
 
 This command lists all supertypes of all .class files in the current directory or below.
-```
+```sh
 javap -v `find . -name '*.class'` | egrep '^(public |protected |private |abstract |default |static |final |transient |volatile |synchronized |native |strictfp )*(class|interface) .*(extends|implements)' | perl -p -e 's/<[^<>]*>//g' | perl -p -e 's/<[^<>]*>//g' | perl -p -e 's/(^.*?\b(class|interface) | extends | implements |, *)/\n/g' | perl -p -e 's/\$.*//g' | sort | uniq
 ```
 

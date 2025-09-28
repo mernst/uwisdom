@@ -431,9 +431,13 @@ To test a new version of a Gradle dependency locally, you have several options:
 
  * install a version (maybe a snapshot version) in a local Gradle repository
  * Edit the build.gradle file, for instance by changing
-   ```implementation 'org.plumelib:bcel-util:1.1.3'```
+   ```gradle
+   implementation 'org.plumelib:bcel-util:1.1.3'
+   ```
    to 
-   ```implementation files("${rootDir}/libs/bcel-util-all.jar")```
+   ```gradle
+   implementation files("${rootDir}/libs/bcel-util-all.jar")
+   ```
  * Overwrite the `.jar` file in a subdirectory of
    `~/.gradle/caches/modules-2/files-2.1/` .
    This does not require changing your build.gradle file.
@@ -482,14 +486,14 @@ To make a release to Maven Central using Gradle:
 0. Create Gradle files using http://central.sonatype.org/pages/gradle.html
 1. Increment the version number in buildfiles, documentation (README files), etc.
 2. Run one of these:
-```
-./gradlew uploadArchives
-./gradlew -b mavencentral.gradle uploadArchives
-```
+   ```
+   ./gradlew uploadArchives
+   ./gradlew -b mavencentral.gradle uploadArchives
+   ```
 3. Manually release the deployment:
-3a.  Browse to https://oss.sonatype.org/#stagingRepositories
-3b.  Search for and select this repository, by group name.
-3c.  At the top, click "close" then "refresh" then "release".
+  a. Browse to https://oss.sonatype.org/#stagingRepositories
+  b. Search for and select this repository, by group name.
+  c. At the top, click "close" then "refresh" then "release".
      You might have to wait a little while between the clicks.
      Use the release message "Plume-lib Options X.Y.Z" (w/version number).
 Artifacts should be available in 10+ minutes.
@@ -575,21 +579,21 @@ Then:
 The latest Gradle release version number is at https://gradle.org/releases/ .
 .
 1. Add to `build.gradle`:
-For Gradle 6 or 7:
-Add at beginning `settings.gradle`:
-```
-plugins { id "com.gradle.enterprise" version "3.2" }
-gradleEnterprise {
-  buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
-}
-```
-For Gradle 5: Add to `build.gradle`:
-```
-plugins { id "com.gradle.build-scan" version "3.2" }
-gradleEnterprise {
-  buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
-}
-```
+   For Gradle 6 or 7:
+   Add at beginning `settings.gradle`:
+   ```
+   plugins { id "com.gradle.enterprise" version "3.2" }
+   gradleEnterprise {
+     buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
+   }
+   ```
+   For Gradle 5: Add to `build.gradle`:
+   ```
+   plugins { id "com.gradle.build-scan" version "3.2" }
+   gradleEnterprise {
+     buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
+   }
+   ```
 2. Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
 
 
@@ -794,16 +798,20 @@ Another way (this shows which files Gradle's shadowJar plugin/task will put in a
     }
 ```
 From the command line, do this (but it includes .jar files with Gradle's implementation):
-```./gradlew clean assemble --debug | grep "Using implementation classpath"```
+```sh
+./gradlew clean assemble --debug | grep "Using implementation classpath"
+```
 From the command line, this only lists the dependency names and version numbers, not their .jar files.
-```gradle dependencies --configuration=testCompileClasspath```
+```sh
+gradle dependencies --configuration=testCompileClasspath
+```
 
 
 == Testing local version of Checker Framework by overwriting local caches
 
 To copy a locally-built Checker Framework to the Gradle and Maven local caches:
 (Must update gradle directory names when updating $VER!)
-```
+```sh
 VER=3.10.0 && \
 (cd $CHECKERFRAMEWORK && ./gradlew copyJarsToDist) && \
 \cp -pf $CHECKERFRAMEWORK/checker/dist/checker.jar ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/2c93f826fd862139bba9ac98b9822f19fb55060e/checker-${VER}.jar && \
@@ -814,7 +822,7 @@ true
 ```
 .
 To clean the Gradle and Maven local caches (rarely needed):
-```
+```sh
 VER=3.10.0 && \
 rm -rf \
   ~/.gradle/caches/modules-2/files-2.1/org.checkerframework/checker/${VER}/ \

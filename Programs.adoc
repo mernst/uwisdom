@@ -792,7 +792,7 @@ sudo cpanm --installdeps .
 Perl5:
 //nobreak
 
- * arguments are in `@_`, that is `$_[0]`, `$_[1]`, etc.
+ * arguments are in `+@_+`, that is `+$_[0]+`, `+$_[1]+`, etc.
  * "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
  * Forward jumps screw up containing for loops, it seems.
  * foreach implicitly localizes the argument inside the for body.
@@ -1229,7 +1229,9 @@ To suppress a pylint warning, write inline:
 ```
 
 The `shellcheck` program is a linter for sh and bash scripts.  Run like:
-```shellcheck --format=gcc```
+```sh
+shellcheck --format=gcc
+```
 There is also `checkbashisms`.
 Here are Makefile rules to run them:
 ```
@@ -2245,9 +2247,9 @@ Regular expressions (regexps):
    efficiency, put most likely match (or most likely to fail fast) first.
  * `(ab)?(abcd)?` matches "ab" in "abcde"; does not match the longer "abcd"
  * character class `[abc]` is more efficient than alternation `(a|b|c)`
- * unrolling the loop:     `opening normal* (special normal*)* closing`
-    eg, for a quoted string:   `/L?"[^"\\]*(?:\\.[^"\\]*)*"/`
-    or `$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';`
+ * unrolling the loop:     `+opening normal* (special normal*)* closing+`
+    eg, for a quoted string:   `+/L?"[^"\\]*(?:\\.[^"\\]*)*"/+`
+    or `+$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';+`
     ** start of normal and special must never intersect
     ** special must not match nothingness
     ** text matched by one application of special must not be matched by
@@ -3063,19 +3065,33 @@ curl vs wget:
  * `wget` is easier to use (better command-line flags, and more needed ones enabled by default), but
    `curl` is more reliable (gives error message instead of hanging) and has more functionality.
  * `wget` (by default use same local as remote file name)
-   ```curl -O```
+   ```sh
+   curl -O
+   ```
  * `wget` (automatically redirect)
-   ```curl -L```
+   ```sh
+   curl -L
+   ```
  * `wget` (preserve timestamp of remote file)
-   ```curl -R```
+   ```sh
+   curl -R
+   ```
  * `wget` (automatically retry)
-   ```curl --retry 2```
+   ```sh
+   curl --retry 2
+   ```
  * `wget -nv` (non-verbose output)
-   ```curl -s -S```
+   ```sh
+   curl -s -S
+   ```
  * `wget -O local-filename` (specify a local filename)
-   ```curl -o local-filename```
+   ```sh
+   curl -o local-filename
+   ```
  * `wget -N` (only download if newer)
-   ```curl -L -R -o "$file" -z "$file" "$serverurl"```
+   ```sh
+   curl -L -R -o "$file" -z "$file" "$serverurl"
+   ```
 
 To restrict ripgrep to searching only files with given names:
 ```
@@ -3099,7 +3115,9 @@ Use middle button to paste into an xterm.
 For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this is a default purple in PowerPoint, but LibreOffice does not have an equally nice purple in its standard color set.
 
 A replacement for the lines-between program is:
-```sed -e '1,/abc/d' -e '/mno/,$d' <FILE>```
+```sh
+sed -e '1,/abc/d' -e '/mno/,$d' <FILE>
+```
 
 
 A shell function that works around `wget` or `curl` hanging for very slow

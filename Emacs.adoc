@@ -35,10 +35,10 @@ specifier.
 
 Emacs's tags facility allows you to easily find a definition (of a
 function, variable, class, etc.) or search a collection of related files.
-To create a tags table, run `etags _files_`; for instance, `etags *.h *.c`
-To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
-To search all files in the tags table, type  M-x tags-search RET
-To select a different tags table, type  M-x visit-tags-table RET
+ * To create a tags table, run `etags _files_`; for instance, `+etags *.h *.c+`.
+ * To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
+ * To search all files in the tags table, type  M-x tags-search RET
+ * To select a different tags table, type  M-x visit-tags-table RET
 
 etags returns the best matches in a TAGS table first; however, it examines
 entire TAGS tables at a time, so it is advantageous to use a single TAGS

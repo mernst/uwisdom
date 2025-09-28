@@ -379,7 +379,7 @@ For Verbatim environments, do this:
 // in a LaTeX document.
 
 Here are definitions for identifiers in LaTeX math mode formulas:
-----
+```latex
   % \|name| or \mathid{name} denotes identifiers and slots in formulas
   \def\|#1|{\mathid{#1}}
   \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
@@ -389,21 +389,25 @@ Here are definitions for identifiers in LaTeX math mode formulas:
   \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
   % \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
   % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
-----
+```
 This alternate definition of `\codeid` does not work inside an array environments (see http://tex.stackexchange.com/questions/27592/ ):
-----
+```latex
   \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
-----
+```
 To switch from "\texttt{...}" to "\<...>":
+```elisp
   (tags-query-replace "\\\\texttt{\\([^{}<>]+\\)}" "\\\\<\\1>")
   (tags-query-replace "\\\\texttt{\\([^{}]+\\)}" "\\\\codeid{\\1}")
   (tags-search "texttt")
+```
 To switch from "$...$" to "\|...|":
+```elisp
   (tags-query-replace "\\\\|" "\\\\parallel")
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.]+\\)+\\$" "\\\\|\\1|")
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+ " "$\\\\|\\1| ")
   (tags-query-replace " \\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" " \\\\|\\1|$")
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" "\\\\|\\1|")
+```
 
 To permit hyphenation in tt font globally throughout a document, see
 http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt

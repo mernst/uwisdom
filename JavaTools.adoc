@@ -378,7 +378,7 @@ ASM:  http://asm.objectweb.org/
   As of June 2006 and August 2013, ASM is clearly the best tool.
   It is being maintained, it handles recent JVM classfiles, it is easy to use.
   Here is a comparison with BCEL and Javassist:
-    http://mail-archives.apache.org/mod_mbox/jakarta-bcel-dev/200505.mbox/%3C9aface8705050312074a895525@mail.gmail.com%3E
+    `+http://mail-archives.apache.org/mod_mbox/jakarta-bcel-dev/200505.mbox/%3C9aface8705050312074a895525@mail.gmail.com%3E+`
   It says that ASM has no classloader related utilities.
   Many people say ASM is better than BCEL, but it doesn't look so much
   better that it's worth changing existing code, even if ASM is better for
@@ -575,7 +575,7 @@ Rivet is an extensible tool platform structured as a Java virtual
 machine. The goal is to make advanced debugging and analysis tools
 available to Java programmers. Rivet has a modular internal structure that
 makes it easy to add new tools.
-[Abandoned by 1999 or so.]
+(Abandoned by 1999 or so.)
 
 
 == Java test suites
