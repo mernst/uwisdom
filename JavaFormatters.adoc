@@ -81,13 +81,13 @@ OpenRewrite
   "OpenRewrite recipes make minimally invasive changes to your source code that honor the original formatting."
 
 No longer maintained:
-http://jalopy.sourceforge.net/
-http://astyle.sourceforge.net/ -- last release 2018, no changes since 2019
-https://sourceforge.net/projects/jastyle/ -- last updated 2015
-http://www.semanticdesigns.com/Products/Formatters/JavaFormatter.html
-  "Handles Java 1.1-1.6 and Java version 7"
-http://jrefactory.sourceforge.net/
-http://universalindent.sourceforge.net/
+ * http://jalopy.sourceforge.net/
+ * http://astyle.sourceforge.net/ -- last release 2018, no changes since 2019
+ * https://sourceforge.net/projects/jastyle/ -- last updated 2015
+ * http://www.semanticdesigns.com/Products/Formatters/JavaFormatter.html
+   "Handles Java 1.1-1.6 and Java version 7"
+ * http://jrefactory.sourceforge.net/
+ * http://universalindent.sourceforge.net/
 
 Only for C:
 https://www.gnu.org/software/indent/manual/indent.html

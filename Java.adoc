@@ -793,11 +793,11 @@ An array's element type is a non-array type, obtained by taking component types 
 For example, the component type of `int[][]` is `int[]`, but its element type is `int`.
 
 The `map` function over a list is implemented in Java as:
-`
+```
 Collection<E> c = ...
 Object[] mapped = c.stream().map(e -> doMap(e)).toArray();
 List<E> mapped = c.stream().map(e -> doMap(e)).collect(Collectors.toList());
-`
+```
 
 To obtain the classpath at run time, on any JDK:
 ```

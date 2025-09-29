@@ -157,7 +157,7 @@ Heilmeier's catechism:
  * How much will it cost? How long will it take?
  * What are the midterm and final "exams" to check for success?
 
-Generally, "bi-" means two (biweekly means every two weeks),
+Most commonly, "bi-" means two (biweekly means every two weeks),
 while "semi-" means half (semiweekly means twice a week).
 These are the same:  biweekly, semimonthly.
 

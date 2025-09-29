@@ -223,7 +223,7 @@ To compare two branches in Git:
   git diff branch1...branch2
   git diff `git merge-base branch1 branch2`..branch2
 ```
- * With two dots, `git diff shows what is in branch1 XOR branch2 (either b1
+ * With two dots, `git diff` shows what is in branch1 XOR branch2 (either b1
    or b2 but not both), so `git diff b1...b2` is the opposite patch as
    `git diff b2...b1`.
 
@@ -552,7 +552,7 @@ add this line to a git attributes file:
 ```
 
 A repository's git attributes file is top-level `.gitattributes`.  You can also
-use `.git/info/attributes file, in which case it won't be committed with the
+use `.git/info/attributes` file, in which case it won't be committed with the
 project -- that is, it will affect only you, not other people using the repository.
 .
 The user-level git attributes file file is by default
@@ -655,7 +655,7 @@ rm -f .github/dependabot.yml && \
 rm -f renovate.json && \
 git commit -a -m "Move renovate configuration file" && \
 git push)
-
+```
 
 === GitHub pull requests
 

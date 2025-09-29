@@ -1678,6 +1678,7 @@ Eclipse Javadoc:  .html files get written to working directory.
 So be sure to save changes to these before you start testing javadoc.
 
 Eclipse has two compilers.
+
  * The model reconciler operates on buffers and runs on every keystroke to
    create red squigglies.  (It's called that because it reconciles the internal
    representation or model of the program with the visual representation in the
@@ -2005,10 +2006,10 @@ to split files into parts.
 du:  disk usage.
 //nobreak
 
- * du -s *     only display grand total for each file and subdirectory in this dir
- * du -S       not sum child directories in count for parent
- * du | sort -r -n   sort directories, with most usage first.
- * du | xdu -- only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
+ * `du -s *`     only display grand total for each file and subdirectory in this dir
+ * `du -S`       not sum child directories in count for parent
+ * `du | sort -r -n`   sort directories, with most usage first.
+ * `du | xdu`    only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
 //nobreak
 
 Also see Alan Donovan's program "prune"
@@ -2020,8 +2021,8 @@ For example,
 Looking at files within a single directory, rather than a whole directory tree:
 //nobreak
 
- * ls -l | sort -n +4 -- sorts files in size order, good for finding big files in a directory
- * du -s * | sort -n -- similar to above, find the biggest files & subdirectories of the current dir
+ * `ls -l | sort -n +4` sorts files in size order, good for finding big files in a directory
+ * `du -s * | sort -n` similar to above, find the biggest files & subdirectories of the current dir
 
 `.DESKTOP` file:  Macintosh info about my files.  Safe to delete.
 
