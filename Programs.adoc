@@ -263,7 +263,7 @@ Alternately, Mike Perkowitz says:
     - my file, at the end, after showpage, had a line "Page SV restore" which
       seemed to cause a gratuitous page advance. i removed it
  3. rotate the document properly.
-      on june: "psfix -r 270 file.ps > file-r.ps"
+      on june: `psfix -r 270 file.ps > file-r.ps`
       or just remove the *whole* line that contains the word "rotate"
  4. convert to EPS. on june: "ps2epsi file-r.ps file-r.eps"
  5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
@@ -1052,23 +1052,23 @@ Redirecting output in command shells:
 //nobreak
 
 * In sh/bash (in a shell script):
-   ** To redirect standard error to standard output, use "2>&1".
-      Warning:  this must come after any file redirection:  "cmd > file 2>&1".
-      This is because "2>&1" means to make stderr a copy of stdout.  If you
-      redirect to a file with "> file" after doing so, then stdout is
+   ** To redirect standard error to standard output, use `2>&1`.
+      Warning:  this must come after any file redirection:  `cmd > file 2>&1`.
+      This is because `2>&1` means to make stderr a copy of stdout.  If you
+      redirect to a file with `> file` after doing so, then stdout is
       reopened as the file, but stderr (a copy of the original stdout) is
       not affected.
-   ** To redirect standard output to standard error, use ">&2".
+   ** To redirect standard output to standard error, use `>&2`.
       For example, `echo "to stderr" >&2`.
-   ** To send both standard error and standard output through a pipe: "2>&1 |".
+   ** To send both standard error and standard output through a pipe: `2>&1 |`.
      There are simpler commands in bash, but they don't work in sh.
-   ** To redirect standard error to a file, use "2>filename".
+   ** To redirect standard error to a file, use `2>filename`.
      For more details, see http://tomecat.com/jeffy/tttt/shredir.html
 * In csh/tcsh:
-   ** To overwrite an existing file, redirect via ">!" instead of ">".
+   ** To overwrite an existing file, redirect via `>!` instead of `>`.
    ** To redirect both standard error and standard output to a file,
-      use ">&" (">" redirects just standard output to the file).
-   ** To redirect standard error and output through the pipe, use "|&".
+      use `>&` (`>` redirects just standard output to the file).
+   ** To redirect standard error and output through the pipe, use `|&`.
 
 In bash shell scripts, `"$@"` mans all the arguments, and it quotes each argument
 individually before concatenating them (separated by spaces).
@@ -1216,7 +1216,8 @@ In more detail:
 set -x
 # Exit the script if any statement returns a non-true value.
 # Can temporarily disable within `set +e ... set -e`.
-# There are exceptions; for example, commands a pipeline, other than the last one, are immune.
+# There are exceptions; for example, commands in a
+# pipeline, other than the last one, are immune.
 set -e
 set -o pipefail
 # Warn about unset variables
@@ -1677,8 +1678,16 @@ Eclipse Javadoc:  .html files get written to working directory.
 So be sure to save changes to these before you start testing javadoc.
 
 Eclipse has two compilers.
- * The model reconciler operates on buffers and runs on every keystroke to create red squigglies.  (It's called that because it reconciles the internal representation or model of the program with the visual representation in the editor.)
- * The incremental project builder (for short, "builder") operates on files and runs whenever the user saves the file.  It can do a full build (by clearing out resources such as .class files first) as well as an incremental build.  The implementation for java invokes the eclipsec compiler.  (Occasionally people use the term "reconciler" incorrectly to refer to incremental project building.)
+ * The model reconciler operates on buffers and runs on every keystroke to
+   create red squigglies.  (It's called that because it reconciles the internal
+   representation or model of the program with the visual representation in the
+   editor.)
+ * The incremental project builder (for short, "builder") operates on files and
+   runs whenever the user saves the file.  It can do a full build (by clearing
+   out resources such as .class files first) as well as an incremental build.
+   The implementation for java invokes the eclipsec compiler.  (Occasionally
+   people use the term "reconciler" incorrectly to refer to incremental project
+   building.)
 
 
 == IntelliJ
