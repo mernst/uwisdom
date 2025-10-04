@@ -3297,5 +3297,7 @@ sed -n -e 's/^ID="\(.*\)"/\1/p' /etc/os-release)
 sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 ```
 
+Installing Renovate would prevent the need for pull requests like this.  To onboard Renovate, browse to https://github.com/apps/renovate, click "Install" or "Configure" (whichever button appears in the upper right corner), choose a GitHub org, and select specific repositories.
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
