@@ -985,7 +985,9 @@ even if it is faster...
 
 Typical Makefile rules to enforce Python style rules:
 ```
-PYTHON_FILES:=$(shell find . -name '*.py') $(shell grep -r -l --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)python')
+style-fix: python-style-fix
+style-check: python-style-fix
+PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git --exclude-dir=.venv '^\#! \?\(/bin/\|/usr/bin/env \)python')
 PYTHON_FILES_TO_CHECK:=$(filter-out ${lcb_runner},${PYTHON_FILES})
 python-style-fix:
 ifneq (${PYTHON_FILES},)
@@ -1005,6 +1007,8 @@ ifneq (${PYTHON_FILES_TO_CHECK},)
 	@mypy --strict --install-types --non-interactive ${PYTHON_FILES_TO_CHECK} > /dev/null 2>&1 || true
 	mypy --strict --ignore-missing-imports ${PYTHON_FILES_TO_CHECK}
 endif
+showvars:
+	@echo "PYTHON_FILES_TO_CHECK=${PYTHON_FILES_TO_CHECK}"
 ```
 
 To activate conda:
@@ -1801,12 +1805,7 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 
-== Markdown and AsciiDoc
-
-Convert Markdown to AsciiDoc: https://github.com/asciidoctor/kramdown-asciidoc .
-Some people say don't use pandoc, but for simple documents it seems fine and
-https://pandoc.org/try/?from=markdown&to=asciidoc doesn't require any software
-installation.
+== Markdown
 
 For converting (GitHub-style) markdown format (.md file) to HTML:
  * `quarto render INPUT.MD --output-dir OUTDIR` where OUTDIR may be the same for multiple files.
@@ -1821,9 +1820,33 @@ To write a comment in a Markdown file, write this with blank lines both before a
 [comment]: # (Here is the text of the comment.)
 ```
 
+List of fenced code block identifiers (programming languages) for Markdown:
+ * https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml
+ * https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
+ * https://pygments.org/docs/lexers/
+
+Markdown parsers:
+ * https://github.com/kivikakk/comrak
+   "Comrak's design goal is to model the upstream cmark-gfm as closely as possible in terms of code structure."
+ * https://github.com/github/cmark-gfm
+
+
+== AsciiDoc
+
+AsciiDoc has various advantages over Markdown, especially for complex documents
+and books, but Markdown handles simple cases and it is widely known by
+programmers and supported by tools.
+
+Convert Markdown to AsciiDoc: https://github.com/asciidoctor/kramdown-asciidoc .
+Some people say don't use pandoc, but for simple documents it seems fine and
+https://pandoc.org/try/?from=markdown&to=asciidoc doesn't require any software
+installation.
+
 An example of an AsciiDoc document that has both HTML and PDF is https://junit.org/junit5/docs/current/user-guide/ .
 
 On GitHub, AsciiDoc comments (lines starting with //) seem to be rendered rather than ignored.
+
+In AsciiDoc, ` +` (space followed by plus) is a hard line break (newline).
 
 In AsciiDoc, to put a callout within a list item (ie, indented rather than at the top level), add unindented "+" on a line by itself immediately before the callout, as in:
 ----
@@ -1834,8 +1857,6 @@ In AsciiDoc, to put a callout within a list item (ie, indented rather than at th
 ----
 Then after the callout use unindented `{empty}` if the following text is indented.
 `{empty}` can take the place of `+` elsewhere.
-
-In AsciiDoc, ` +` (space followed by plus) is a hard line break (newline).
 
 
 == Diff
@@ -1930,6 +1951,18 @@ When Error Prone's suggested replacement is `UTF_8`, that is
 `StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
 Example:
 `Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
+
+
+== AI tools
+
+AI code review, free for open source:
+ * Codacity code review: https://www.codacy.com/pricing
+ * CodeAnt code review: https://www.codeant.ai/pricing
+ * Aikido.dev: https://www.aikido.dev/code-quality/free-open-source-ai-code-review
+AI code review tools to investigate:
+ * https://www.qodo.ai/
+ * https://www.greptile.com/
+ * https://devlo.ai/
 
 
 == General wisdom (that is, everything without its own section above)
