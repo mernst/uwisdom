@@ -1956,6 +1956,7 @@ Example:
 == AI tools
 
 AI code review, free for open source:
+ * CodeRabbit
  * Codacity code review: https://www.codacy.com/pricing
  * CodeAnt code review: https://www.codeant.ai/pricing
  * Aikido.dev: https://www.aikido.dev/code-quality/free-open-source-ai-code-review
