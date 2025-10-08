@@ -566,7 +566,7 @@ Options for short-term Seattle housing/rentals/apartments/sublets:
     but it has some furnished apartments/houses too.)
  * The #housing channel at https://uw-cse.slack.com/
  * Sabbatical Homes: https://www.sabbaticalhomes.com/
- * Visiting Faculty Housing Service (VFHS): http://www.washington.edu/uwfa/visiting-faculty-housing/
+ * This no longer seems to exist: Visiting Faculty Housing Service (VFHS): http://www.washington.edu/uwfa/visiting-faculty-housing/
    They are stuck in the 20th century with all materials available only in
    hardcopy, but can sometimes be convinced to fax or scan, or to talk someone
    through what is available by phone.
