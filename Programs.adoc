@@ -987,28 +987,27 @@ Typical Makefile rules to enforce Python style rules:
 ```
 style-fix: python-style-fix
 style-check: python-style-fix
-PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git --exclude-dir=.venv '^\#! \?\(/bin/\|/usr/bin/env \)python')
-PYTHON_FILES_TO_CHECK:=$(filter-out ${lcb_runner},${PYTHON_FILES})
+PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/env \)python')
 python-style-fix:
 ifneq (${PYTHON_FILES},)
 	@ruff --version
-	@ruff format ${PYTHON_FILES_TO_CHECK}
-	@ruff -q check ${PYTHON_FILES_TO_CHECK} --fix
+	@ruff format ${PYTHON_FILES}
+	@ruff -q check ${PYTHON_FILES} --fix
 endif
 python-style-check:
-ifneq (${PYTHON_FILES_TO_CHECK},)
+ifneq (${PYTHON_FILES},)
 	@ruff --version
-	@ruff -q format --check ${PYTHON_FILES_TO_CHECK}
-	@ruff -q check ${PYTHON_FILES_TO_CHECK}
+	@ruff -q format --check ${PYTHON_FILES}
+	@ruff -q check ${PYTHON_FILES}
 endif
 python-typecheck:
-ifneq (${PYTHON_FILES_TO_CHECK},)
+ifneq (${PYTHON_FILES},)
 	@mypy --version
-	@mypy --strict --install-types --non-interactive ${PYTHON_FILES_TO_CHECK} > /dev/null 2>&1 || true
-	mypy --strict --ignore-missing-imports ${PYTHON_FILES_TO_CHECK}
+	@mypy --strict --install-types --non-interactive ${PYTHON_FILES} > /dev/null 2>&1 || true
+	mypy --strict --ignore-missing-imports ${PYTHON_FILES}
 endif
 showvars:
-	@echo "PYTHON_FILES_TO_CHECK=${PYTHON_FILES_TO_CHECK}"
+	@echo "PYTHON_FILES=${PYTHON_FILES}"
 ```
 
 To activate conda:
@@ -1267,7 +1266,7 @@ showvars:
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
 	@echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
 ```
-Also consider adding rules to enforce Python style.
+Also consider adding rules to enforce Python style, which appear elsewhere in this file.
 
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
 ```
