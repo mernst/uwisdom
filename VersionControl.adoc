@@ -566,9 +566,7 @@ git diff --no-index ...
 ```
 `git diff` is recursive by default.
 
-Please do not force-push to GitHub.  Force-pushing has no benefit, since we
-squash-and-merge pull requests.  Force-pushing has negative consequences, such
-as removing code review comments on any deleted commits.
+Please do not force-push to GitHub.  Force-pushing has no benefit, since we squash-and-merge pull requests.  Force-pushing has negative consequences, such as removing code review comments on any deleted commits.
 
 
 == GitHub (Git-specific items go above)
@@ -722,10 +720,8 @@ add "?w=1" at the end of the URL.
 In GitHub, adding a CONTRIBUTING file to the root of your repository will add a
 link to your file when a contributor creates an Issue or opens a Pull Request.
 
-I suggest that you use GitHub's squash-and-merge feature when committing pull
-requests.  It leads to a cleaner version control history.  A pull request
-usually represents one concept, so it can be represented as a single commit.
-There is no need to record all the iterations from debugging or code review.
+I suggest that you use GitHub's squash-and-merge feature when committing pull requests.  It leads to a cleaner version control history.  A pull request usually represents one concept, so it can be represented as a single commit.  There is no need to record all the iterations from debugging or code review.
+In the repository's settings, you can unselect "Allow merge commits" and "Allow rebase merging", and change the default commit message for squash merging to "Pull request title".
 
 In GitHub, you can squash a pull request into a single commit and then merge the
 single commit (https://github.com/blog/2141-squash-your-commits).
