@@ -568,6 +568,8 @@ git diff --no-index ...
 
 Please do not force-push to GitHub.  Force-pushing has no benefit, since we squash-and-merge pull requests.  Force-pushing has negative consequences, such as removing code review comments on any deleted commits.
 
+Rebasing is evil because it modifies the history and can lead to unnecessary merge conflicts.  The history of the branch in a pull request should never matter.  The pull request should be squash-and-merged, which results in a single commit on the mainline, corresponding to the pull request which should contain a single logical change (no matter how many iterations of bug fixes and code reviews it has gone through).
+
 
 == GitHub (Git-specific items go above)
 
