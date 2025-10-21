@@ -1960,10 +1960,10 @@ AI code review, free for open source:
  * CodeAnt code review: https://www.codeant.ai/pricing
  * Aikido.dev: https://www.aikido.dev/code-quality/free-open-source-ai-code-review
 AI code review tools to investigate:
+ * https://zeropath.com/ -- highly praised by a detailed blog for security vulnerabilities
  * https://www.qodo.ai/
  * https://www.greptile.com/
  * https://devlo.ai/
-
 
 == General wisdom (that is, everything without its own section above)
 
