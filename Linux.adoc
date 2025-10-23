@@ -195,7 +195,7 @@ Ubuntu 16.04 LTS (Xenial Xerus)
 
 == Devices
 
-To mount a USB stick drive or CD-ROM on Ubuntu,
+To mount a USB stick drive or CD-ROM on Ubuntu or Rocky Linux,
 just insert it, and it appears under `/media/${USER}/` or `/run/media/${USER}/'.
 When using a USB stick under Linux, give it plenty of time to finish
 writing a file.
