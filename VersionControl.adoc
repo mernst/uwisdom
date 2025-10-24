@@ -796,6 +796,11 @@ For email notifications of issue tracker changes, use Admin >> Issue
 Tracker Settings >> Notifications.
 I'm not sure whether all this works for the wiki repository...
 
+I can't seem to use SSH authentication to bitbucket.org any more.  Instead, use
+an API token.  Must create "api token WITH SCOPES", with permissions
+"read:repository:bitbucket" and "write:repository:bitbucket".
+
+
 == Pull requests
 
 When you address a code review comment, you don't need to reply within the pull
