@@ -466,3 +466,5 @@ Tailscale is a way to get a public IP address within the Allen School.
 
 To create a favicon from text:
 https://onlinetools.com/image/generate-image-from-text
+
+Installing Renovate would prevent the need for pull requests like this.  To onboard Renovate, browse to https://github.com/apps/renovate, click "Install" or "Configure" (whichever button appears in the upper right corner), choose a GitHub org, and select specific repositories.
