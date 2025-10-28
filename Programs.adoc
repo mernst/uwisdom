@@ -1038,6 +1038,14 @@ To suppress a Ruff error or warning message on one line of code:
 .... # noqa: F401
 ```
 
+The simplest way to read or write a a whole file into a string in Python is:
+```python
+from pathlib import Path
+file_content = Path('filename.txt').read_text()
+Path('filename.txt').write_text(new_file_content)
+```
+
+
 == Rust
 
 Rust code should have, in its main file (such as `main.rs`):
@@ -1747,7 +1755,7 @@ the following in an empty directory.
 ```
   docker login
   # No tag number; we'll just depend on the "latest" tag.
-  docker build -t mdernst/ubuntu-for-cf .
+  docker -l warn build -t mdernst/ubuntu-for-cf .
   # List the available images
   docker images
   # Upload to Docker Hub
@@ -1789,7 +1797,7 @@ sudo service docker restart
 ```
 
 To turn a Docker image into a tarball:
- * Build the Docker image locally; for example, `docker build -t <image-name>:latest .;
+ * Build the Docker image locally; for example, `docker -l warn build -t <image-name>:latest .;
  * Save it as a .tar.gz with `docker save <image-name> | gzip > foo.tar.gz`
  * You can run that `.tar.gz` via `gunzip -c foo.tar.gz > foo.tar` followed by `docker load < foo.tar`
 
