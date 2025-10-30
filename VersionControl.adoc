@@ -570,6 +570,11 @@ Please do not force-push to GitHub.  Force-pushing has no benefit, since we squa
 
 Rebasing is evil because it modifies the history and can lead to unnecessary merge conflicts.  The history of the branch in a pull request should never matter.  The pull request should be squash-and-merged, which results in a single commit on the mainline, corresponding to the pull request which should contain a single logical change (no matter how many iterations of bug fixes and code reviews it has gone through).
 
+To make a squashed commit out of all the differences on a branch, run this in a *different* branch.
+```sh
+git merge --squash origin/BRANCHNAME
+```
+
 
 == GitHub (Git-specific items go above)
 
