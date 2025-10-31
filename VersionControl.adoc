@@ -824,6 +824,8 @@ PR branch but with a different history.  You can do this by:
 # In a new branch (created from main/master, not from the PR branch):
 git merge --squash PR-BRANCH
 git commit
+git push
+# Browse to the URL to create a new pull request.
 ```
 Now, you have a choice:
  * Replace the original PR by the new one, or
