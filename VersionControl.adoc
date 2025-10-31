@@ -814,6 +814,22 @@ The next iteration of the code review will examine your new code or comments.
 On the other hand, if you disagree with a suggestion or more discussion is
 needed, then continuing the conversation in the pull request thread is great.
 
+CodeRabbit comments on every push to a pull request.  CodeRabbit only comments
+on new changes in the pull request If you want a fresh review of an entire pull
+request (for example, if you have lost track of the CodeRabbit comments or you
+didn't want to address them as you made incremental commits), then you should
+make a new branch and a new pull request, with the same contents as the original
+PR branch but with a different history.  You can do this by:
+```sh
+# In a new branch (created from main/master, not from the PR branch):
+git merge --squash PR-BRANCH
+git commit
+```
+Now, you have a choice:
+ * Replace the original PR by the new one, or
+ * Continue to use the original PR.  Address the comments on the new PR in
+   either of the two branches and pull changes into the other branch.  Repeat
+   this until there are no more CodeRabbit comments on the new PR.
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
