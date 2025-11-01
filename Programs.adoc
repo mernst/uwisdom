@@ -1277,15 +1277,37 @@ showvars:
 Also consider adding rules to enforce Python style, which appear elsewhere in this file.
 
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
-```
+```sh
 hexToAscii() {
   # shellcheck disable=SC2059 # Justification goes here.
   printf "\x$1"
 }
 ```
 
-To create a "here document"
+Typical Makefile rules for markdownlint-cli2:
+```make
+style-fix: markdownlint-fix
+markdownlint-fix:
+	markdownlint-cli2 --fix .
+style-check: markdownlint-check
+markdownlint-check:
+	markdownlint-cli2 .
 ```
+
+Typical gradle buildfile rules for markdownlint-cli2:
+```gradle
+/* Validate Markdown files. */
+tasks.register("markdownlint", Exec) {
+  group = "Verification"
+  description = "Run markdownlint-cli2 linter on Markdown files"
+  executable = "markdownlint-cli2"
+  args(".")
+}
+check.dependsOn("markdownlint")
+```
+
+To create a "here document"
+```sh
 cat > myfile.txt <<END
 ... Contents of myfile.txt ...
 END
