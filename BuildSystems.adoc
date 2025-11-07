@@ -726,7 +726,7 @@ Then:
  * Look for warnings and deprecations
  * ./gradlew wrapper --gradle-version 8.14.3 && ./gradlew build --warning-mode=all
  * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 9.0.0 && ./gradlew build --warning-mode=all
+ * ./gradlew wrapper --gradle-version 9.2.0 && ./gradlew build --warning-mode=all
  * Look for warnings and deprecations
 
 The latest Gradle release version number is at https://gradle.org/releases/ .
