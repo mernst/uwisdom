@@ -697,7 +697,7 @@ https://www.slf4j.org/apidocs/index.html
 The 5 error levels are:
 ERROR, WARN, INFO, DEBUG, TRACE
 
-# To validate a class file (from https://asm.ow2.io/faq.html):
+To validate a class file (from https://asm.ow2.io/faq.html):
 ```
 cd ~/tmp
 VER=6.2.1

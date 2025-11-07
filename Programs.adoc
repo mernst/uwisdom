@@ -3173,7 +3173,7 @@ rg --iglob ControlFlowGraph.java "void checkRep"
 
 If ripgrep matches files within the `.git` directory, then add this to the `.gitignore` file:
 ```
-# rg needs this:  https://github.com/BurntSushi/ripgrep/issues/1040
+\# rg needs this:  https://github.com/BurntSushi/ripgrep/issues/1040
 .git/
 ```
 
