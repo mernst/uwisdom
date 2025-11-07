@@ -16,6 +16,8 @@ clean:
 very-clean:
 	for f in *.adoc ; do echo $$f ; b=$$(basename $$f .adoc) ; rm -f $$b.html $$b.md-downdoc $$b.md-pandoc $$b.xml ; done
 
+# Both pandoc and downdoc have their limitations.  I will probably need to run and diff both. :-(
+
 md-pandoc: ${MD_PANDOC_FILES}
 
 md-downdoc: ${MD_DOWNDOC_FILES}
