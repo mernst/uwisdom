@@ -9,7 +9,9 @@ https://github.com/diffplug/spotless
   It would be analogous to "GoogleJavaFormatStep.java".
   Spotless supports only some configuration options, but I could add more in file "GoogleJavaFormatStep.java".
 
+
 https://github.com/jhipster/prettier-java
+
 
 https://clang.llvm.org/docs/ClangFormat.html
   To install: sudo apt install clang-format -y
@@ -30,6 +32,7 @@ https://clang.llvm.org/docs/ClangFormat.html
   Overall, google-java-format makes better choices for line breaks, e.g., in assertions.
   clang-format is more concise, e.g. it puts multiple formal parameters on the same line.
 
+
 palantir-java-format
   A fork of google-java-format, but apparently abandoned.
   Maybe they would take a pull request with names of other type annotations...
@@ -37,9 +40,11 @@ palantir-java-format
   They seem to be a fair distance behind google-java-format; for example, as of August 2022 they do not have this old commit about type annotations:
   865cff01 (Liam Miller-Cushon     2021-08-25 2409)
 
+
 Eclipse:
   https://www.beyondjava.net/run-eclipse-formatter-command-line
   https://stackoverflow.com/questions/32599714/running-the-eclipse-java-formatter-on-the-command-line-with-eclipse-4-4
+
 
 spring-javaformat: https://github.com/spring-io/spring-javaformat
   "It is effectively limited to adding or removing whitespace and line feeds."
@@ -50,6 +55,7 @@ Vim: vim MyClass.java <<< gg=G:wq
   echo -e "G=gg\n:wq\n" | vim ./myfile.php
   "Unfortunately this doesn't work nicely when you have several java annotations before a method (e.g. @Override, @Deprecated)"
 
+
 Not free:
 IntelliJ IDEA: https://www.jetbrains.com/help/idea/command-line-formatter.html#5b357a2d
   Not free
@@ -57,9 +63,12 @@ Jindent: http://www.newforms-tech.com/products/jindent/components/console
   $40 for academic use.
   I sent mail asking whether it handles type annotations.
 
+
 Not good enough:
 
+
 google-java-format: The authors refuse to build in names of well-known type annotations.
+
 
 OpenRewrite
   https://github.com/openrewrite/rewrite
@@ -80,6 +89,7 @@ OpenRewrite
       indentSize: 2
   "OpenRewrite recipes make minimally invasive changes to your source code that honor the original formatting."
 
+
 No longer maintained:
  * http://jalopy.sourceforge.net/
  * http://astyle.sourceforge.net/ -- last release 2018, no changes since 2019
@@ -89,8 +99,10 @@ No longer maintained:
  * http://jrefactory.sourceforge.net/
  * http://universalindent.sourceforge.net/
 
+
 Only for C:
 https://www.gnu.org/software/indent/manual/indent.html
+
 
 Not a code formatter:
 https://www.ibm.com/docs/en/i/7.4?topic=classes-running-format-as-standalone-program

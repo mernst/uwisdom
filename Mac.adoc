@@ -2,7 +2,9 @@
 :toc:
 :toc-placement: manual
 
+
 toc::[]
+
 
 Force quit a mac program with option-command-esc.  You can use this
 to get out of the full screen mode of Chicken of the VNC.

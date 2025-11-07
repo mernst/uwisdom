@@ -2,11 +2,15 @@
 :toc:
 :toc-placement: manual
 
+
 toc::[]
 
 
 
+
+
 One advantage of ASTs is that they give information about variable scope.
+
 
 
 In javac, the best place is probably just after a ClassDeclaration is set
@@ -21,7 +25,9 @@ do this immediately before SourceClass.check (though is that too late?).
 src/share/sun/sun/tools/debug/FlowTracer.java
 
 
+
 (Email I sent (long ago) looking for additional suggestions.)
+
 
 I want to instrument Java code, primarily to add instructions for writing
 out the run-time values of certain variables.  Ideally, I would locate a
@@ -31,15 +37,18 @@ form (such as .class, Java, or C files).  The intermediate representation
 should permit me to
 //nobreak
 
+
  * locate all uses/updates of a particular variable
  * determine all variables in scope at a particular program point
  * locate all procedure exits
  * add instrumentation code, including new (class, member, and local) variables
  * perhaps write other analyses
 
+
 I've found a dozen or two systems which show some promise, but none of them
 is perfect.  There seem to be four different tacks I could take:
 //nobreak
+
 
  * source-to-source with a grammar and AST
    examples: JavaCC (with JJTree or JTB), SableCC, ANTLR, JavaCUP
@@ -50,13 +59,16 @@ is perfect.  There seem to be four different tacks I could take:
  * decompiler or other tool to read .class files
    examples: Jasmine, some compilers (Toba, Harissa, Vortex); also see below
 
+
 Each of these has its own advantages and disadvantages; I am leaning toward
 modifying an existing Java compiler.  If you have any advice or
 suggestions, I would be grateful to hear it.
 
+
 Spoon Java analysis tool
 http://spoon.gforge.inria.fr/
 It seems to mostly be a wrapper around the AST, permitting analysis and transformation via Java code.
+
 
 Gail Murphy says:
   The JavaCC approach has worked out fine, but does require writing a *ton*
@@ -67,23 +79,29 @@ Gail Murphy says:
   cruft than I really want.]  This also includes dealing with anonymous and
   inner classes, etc.
 
+
 Questions:
 //nobreak
+
 
  * Includes Java grammar?
  * Creates AST?
  * Includes pretty-printer?
 
+
 java_cup:
 //nobreak
+
 
  * grammar
  * no ast
  * no pp
 
+
 JavaCC (http://www.suntest.com/JavaCC/) has JJTree which creates an AST
 FAQ at http://www.suntest.com/JavaCC/FAQ/faq.html or http://www.metamata.com/javacc/Faq/faq.html
 //nobreak
+
 
  * grammar
  * ast: JJTree (distributed with JavaCC) will create one.
@@ -96,13 +114,16 @@ FAQ at http://www.suntest.com/JavaCC/FAQ/faq.html or http://www.metamata.com/jav
    1.0.1 ALPHA, updated Tue 23-Mar-99
    Pretty relies on JJTree.
 
+
 SableCC creates an AST.  http://www.sable.mcgill.ca/sablecc/
 //nobreak
+
 
  * grammar; but the names of the elements are unusably long, must be changed
  * ast
  * tree walkers, but no unparsers
 //nobreak
+
 
 Apparently no analyses are provided.
 They have a mailing list archive and seem decently active, but I don't know
@@ -113,6 +134,7 @@ Marius Nita says (4/2009):
   combination. Because it keeps concrete syntax details, writing a  
   deparser is pretty easy.
 
+
 Soot is a Java bytecode analysis and transformation framework from McGill.
 As of September 2003, Greg Kapfhammer recommends Soot:  he finds it easy to
 use and understand, and it is very well-supported by a community of
@@ -120,8 +142,10 @@ developers and users on its mailing list.
 Soot provides a three-address intermediate representation ("Jimple") that
 frees you from having to think about JVM bytecodes or the stack.
 
+
 JTB. http://www.cs.purdue.edu/jtb/
 //nobreak
+
 
  * grammar
  * ast
@@ -131,6 +155,7 @@ JTB. http://www.cs.purdue.edu/jtb/
      distribution; how do they differ  from TreeDumper and TreePrinter?
      (The distribution's  visitor/Printer.java is for JTB grammars.)
 //nobreak
+
 
 requires no change to the grammar.
 children are accessed by position, not name.
@@ -142,17 +167,21 @@ reports that JTB 1.3.2 seems to be incompatible with the latest JavaCC
 So, JJTree, which builds on JavaCC in much the same way that JTB does, may
 be a better approach.
 
+
 ANTLR.  http://www.ANTLR.org/
 //nobreak
+
 
  * grammar
  * ast
  * tree walker, but no pretty-printer
 
+
 Eclipse.  http://www.eclipse.org/
  Integrated IDE, AST, symbol table.  No unparser.
  As of August 2001, is still very rough, probably not worth using.  But
  Manos Renieris's opinion is that eventually it will be unstoppable.
+
 
 "Barat is a front-end for Java. It parses source and byte-code, and
 performs name and type analysis on demand."
@@ -164,20 +193,27 @@ Parses the Java 1.1 language.
 
 
 
+
+
 == Java compilers
 
+
 http://dir.yahoo.com/Computers_and_Internet/Programming_Languages/Java/Compilers/
+
 
 Most don't seem to do real optimizations or even create CFGs.  I would
 probably have to do this myself.  The user interface could be most
 convenient if we used this.
 
+
 toba: http://www.cs.arizona.edu/sumatra/toba/
   reads .class files; outputs C; written in Java
+
 
 Harissa: written in C; reads .class files; outputs C
   first major public release in January 1999; probably not stable enough
   1.0.2 JDK, I think
+
 
 jikes: http://www.research.ibm.com/jikes/
   outputs .class files
@@ -192,9 +228,12 @@ jikes: http://www.research.ibm.com/jikes/
   It is no longer maintained, and was never well-documented nor had
     community support.
 
+
 J Accellerator: in Japanese
 
+
 ElectricalFire: team disbanded
+
 
 javac:  I have (physical) mailed my request for source code
   Gun has a copy of the 1.1.5 source.
@@ -202,9 +241,12 @@ javac:  I have (physical) mailed my request for source code
   1.1.5 is in ~/se/javasrc
   I didn't find "cfg" or "control.*flow" in the 1.0.2 source.
 
+
 Vortex:  written in Cecil
 
+
 AspectJ:  runs only on Windows
+
 
 pizza: http://www.cs.bell-labs.com/who/wadler/pizza/
   Craig Chambers says to ask them for source and they'll probably provide
@@ -213,7 +255,9 @@ pizza: http://www.cs.bell-labs.com/who/wadler/pizza/
     .class files, and I didn't get any response from my query (not using
     Craig's name or my record, but polite) to pizza@cis.unisa.edu.au.
 
+
 espresso: old version of pizza, now subsumed by it
+
 
 Barat:  http://www.inf.fu-berlin.de/~bokowski/javabarat/index.html
   A Java front end that builds a complete abstract syntax tree from Java
@@ -222,13 +266,16 @@ Barat:  http://www.inf.fu-berlin.de/~bokowski/javabarat/index.html
   Comes with a 38-page manual.
   Must send email to get the full version, which uses Poor Man's Genericity.
 
+
 guavac: ftp://ftp.yggdrasil.com/pub/dist/devel/compilers/guavac/
   Written in C++, GPL'ed.
   This hasn't been updated since May 1998, apparently.
   Used by the PolyJ people at MIT.
 
+
 KOPI a Completely Open Source Java Compiler
 http://www.dms.at/kopi
+
 
 Jackpot: a Java source code transformation framework.  Seems to be like
 Eclipse refactorings.
@@ -236,7 +283,9 @@ http://jackpot.netbeans.org/
 Perhaps it only works under NetBeans.
 
 
+
 == Parsers
+
 
 Parsers:
  * JavaParser
@@ -276,40 +325,47 @@ Parsers:
  * Java parser written in JavaScript:
    https://www.npmjs.com/package/java-parser/v/2.0.0
 
+
 I recommend you to investigate how com.sun.tools.javac.main.JavaCompiler do symbol resolving. I think it is inside #enterTrees(List)
 Also you may be interested in projectlombok.org
-.
+
 com.sun.tools.javac.comp.Resolve
 Attr, Check, Infer and Resolve analyze all names and expressions within the program.
 Flow performs static program flow analysis. It checks the following:
  * Reachability: can a statement be executed?
  * Definite Assignment: has a variable been initialized?
  * Definite Unassignment: has a variable not been initialized?
-.
+
 attribute: Attributes the Syntax trees. This step includes name
 resolution, type checking and constant folding.
-.
+
 Useful (but isn't deep):
 https://scg.unibe.ch/archive/projects/Erni08b.pdf
 
 
+
 == Pretty-printers/decompilers for .class files
+
 
 Java decompiler CFR:
 (cd ~/tmp && wget https://github.com/leibnitz27/cfr/releases/download/0.148/cfr-0.148.jar)
 java -jar ~/tmp/cfr-0.148.jar ...
 
+
 As of 2019, IntelliJ uses Fernflower
 A clone is at https://github.com/fesh0r/fernflower
+
 
 As of 9/2009, a survey paper "An evaluation of current Java bytecode
 decompilers", by Hamilton and Danicic (appears in SCAM 2009), recommends:
 //nobreak
 
+
  * for javac-generated bytecodes, one of these:
     ** Java Decompiler (http://java.decompiler.free.fr/)
     ** JODE (http://jode.sourceforge.net/)
  * for arbitrary bytecode: Dava (http://www.sable.mcgill.ca/dava/)
+
 
 David Saff recommends JAD.  Jeff Hoye does, too, as of 6/16/2008.
   http://www.varaneckas.com/jad
@@ -318,23 +374,31 @@ David Saff recommends JAD.  Jeff Hoye does, too, as of 6/16/2008.
 Jad is no longer supported.  You can use JadRetro to enable it to work on
 newer class files.
 
+
 JD: http://java.decompiler.free.fr/
   A successor to JAD.  No command-line functionality:  only GUI and Eclipse.
+
 
 DJ: http://members.fortunecity.com/neshkov/dj.html
   Windows only?
 
+
 IceBreaker
+
 
 WingDis: $40.  http://www.wingsoft.com/wingdis.html
   Was a Javaworld 1998 Editor's Choice finalist.
 
+
 SourceAgain: $300.
+
 
 ClassCracker:  about $55, doesn't work with Java 2.
 
+
 Lists of decompilers:
 //nobreak
+
 
  * As of 2008, http://stackoverflow.com/questions/272535/
     * top recommendation: https://github.com/java-decompiler, still actively developed as of April 2015, but only has a GUI, no command-line tool.  Blech.
@@ -345,9 +409,12 @@ Lists of decompilers:
    http://www.andromeda.com/people/ddyer/java/decompiler-table.html
    http://www.javaworld.com/javaworld/jw-07-1997/jw-07-decompilers.html
 
+
 jtrek's dump.  Leaves some "?" in file, so it isn't compilable...
 
+
 Mocha: out of date
+
 
 Jasmine:  http://members.tripod.com/~SourceTec/jasmine.htm
   An update to Mocha.
@@ -357,22 +424,28 @@ Jasmine:  http://members.tripod.com/~SourceTec/jasmine.htm
   Shareware: $30.
   Non-registered version asks a question every time I run it.
 
+
 "Java Decompiler Workshop 1.0", http://www.megatrend.hu/jdw.htm, is
 actually a disassembler, not a decompiler, it seems.
 
 
 
+
+
 == Bytecode/classfile instrumenters/processing/rewriters
+
 
 Java class-file API:
 https://openjdk.org/jeps/484
 Objects are immutable, but there are builders (so one can build new class files) and transformers.  There is both a streaming and a materialized view of a classfile.
+
 
 Comparison of "Open Source ByteCode Libraries in Java" 
 (really just a list of them with a paragraph taken from each one's website,
 and in no order (example: obsolete BCEL, last released in 2/2006) is still
 2nd in the list as of 8/2013)):
 http://java-source.net/open-source/bytecode-libraries
+
 
 ASM:  http://asm.objectweb.org/
   As of June 2006 and August 2013, ASM is clearly the best tool.
@@ -383,6 +456,7 @@ ASM:  http://asm.objectweb.org/
   Many people say ASM is better than BCEL, but it doesn't look so much
   better that it's worth changing existing code, even if ASM is better for
   new projects.
+
 
 WALA: http://wala.sourceforge.net
   IBM "T.J. Watson Libraries for Analysis" of bytecode.
@@ -410,16 +484,19 @@ WALA: http://wala.sourceforge.net
   https://groups.google.com/forum/#!search/asm$20vs$20wala/wala-sourceforge-net/l1G-1xdrZgw/V49k407sDysJ
   WALA is really intended more for code analysis.
 
+
 Javassist: http://www.csg.is.titech.ac.jp/~chiba/javassist/
   Like BCEL, but includes both a high-level (source code) and a low-level
   (bytecode) interface.
   As of 8/2013, the last release is version 3.12.0.GA, dated 7/2011.
   As of 3/2016, the latest release is verssion 3.20.0-G, dated 6/2015.
 
+
 The "Java SE Development Kit (7u45) Demos and Samples" contains
 java_crw_demo.[c,h].  This is a byte code rewriter that is used in hprof
 (and other applications).  It allows you to inject code, but does not
 appear to allow you to create new variables.
+
 
 Serp:  http://serp.sourceforge.net/
   As of 8/2013, the download links at http://serp.sourceforge.net/#download
@@ -427,8 +504,10 @@ Serp:  http://serp.sourceforge.net/
   http://sourceforge.net/p/serp/code/?source=navbar seems to have been
   cleaned out.
 
+
 Jrat: Java runtime analysis toolkit
 jrat.sourceforge.net
+
 
 BCEL:  http://jakarta.apache.org/bcel/
   An API to class files; permits modification of them.
@@ -443,6 +522,7 @@ BCEL:  http://jakarta.apache.org/bcel/
   Code analysis (but WALA is better for bytecode analysis):
    * bcel.verifier.structurals framework for code analysis
    * jDFA: dataflow analysis framework, using BCEL:  http://jdfa.sourceforge.net/
+
 
 JOIE: The Java Object Instrumentation Environment
   http://www.cs.duke.edu/ari/joie/  (Duke and IBM)
@@ -473,13 +553,16 @@ JOIE: The Java Object Instrumentation Environment
     small ones).  He also appears not to have a test suite, so this isn't
     worth the pain to me.
 
+
 BIT: Bytecode Instrumenting Tool
   http://www.cs.colorado.edu/~hanlee/BIT/
   Requires physically signing a license
   May only permit adding instructions, not fields
 
+
 BCA: http://www.cs.ucsb.edu/oocsb/papers/TRCS97-20.html
   Requires modified JVM, rather specific delta files.
+
 
 Digital JTrek: http://www.digital.com/java/download/jtrek/index.html
   (or directly: http://www.digital.com/java/download/jtrek/download.html)
@@ -489,6 +572,7 @@ Digital JTrek: http://www.digital.com/java/download/jtrek/index.html
   Includes a decompiler ("dump")
   It looks like this only permits inserting calls, not (say) adding variables.
 
+
 ClassFilters:  http://www.cs.uni-bonn.de/~costanza/ClassFilters/
   Looks just like JOIE; modifies class files at load time.
   "A description about how to write a ClassFilter is not yet available. 
@@ -497,14 +581,17 @@ ClassFilters:  http://www.cs.uni-bonn.de/~costanza/ClassFilters/
     experimental try, nothing else!"
   Requires JDK 1.2.  (I'm not sure why it requires the extensions framework.)
 
+
 Cider: http://tochna.technion.ac.il/project/CIDER/html/CIDER.html
   Interactive tool
+
 
 Kimera: Gun Sirer and Brian Bershad
   Must sign a nondisclosure agreement of some sort.
   Is supposedly industrial strength.
   Only supports what they have needed so far.
   Ignores all debugging info. 
+
 
 gnu.bytecode:  A package to create, read, write, and print .class files.
 It's part of the Kawa Scheme interpreter.
@@ -514,9 +601,13 @@ Also see http://www.gnu.org/software/java/java-software.html
 
 
 
+
+
 == Bytecode instrumenters and other tools
 
+
 From David Saff, October 3, 2004:
+
 
 One note of general use to the group, I guess most specifically people 
 considering packages for utilities for Java bytecode instrumentation.  
@@ -528,11 +619,13 @@ not, why not), and decompilation (determining the meaning of the
 generated Java classes, most usefully by recreating source code that 
 corresponds to it)
 
+
 JDK:
 * Bytecode instrumentation: you're on your own to edit bytes.
 * Verification: The only verifier that matters, but diagnostic 
 information is severely lacking.
 * Decompilation: Only disassembly.
+
 
 BCEL:
 * Bytecode instrumentation: very nice package
@@ -542,12 +635,14 @@ expected to fail, the diagnostic information is excellent.
 * Decompilation: contains a "BCELifier" which, given a class, generates 
 BCEL code that would have generated that class file.
 
+
 jad:
 * Bytecode instrumentation: n/a
 * Verification: n/a
 * Decompilation: Very decent decompilation.  It does have an Eclipse 
 integration plug-in, which only works about half the time.  It's 
 closed-source and written in C.
+
 
 JODE:
 * Bytecode instrumentation: n/a
@@ -560,15 +655,20 @@ This makes it easy to plug in a call to the decompiler wherever I want
 during my class file's transformation, which is nice.  No Eclipse 
 plug-in, but the jad one wasn't that good anyway.
 
+
 In summary, I find that using BCEL for instrumentation and JODE for 
 verification/decompilation is currently the best working environment for 
 me.  Your mileage may vary.
 
 
 
+
+
 Kaffe: free Java VM, http://www.transvirtual.com/
 
+
 Japhar: free Java VM
+
 
 Rivet: http://sdg.lcs.mit.edu/rivet.html
 Rivet is an extensible tool platform structured as a Java virtual
@@ -578,7 +678,9 @@ makes it easy to add new tools.
 (Abandoned by 1999 or so.)
 
 
+
 == Java test suites
+
 
 TCK: Java Technology Compatibility Kits.  There is one for each JSR.  The
 one for J2SE (Java language and VM) is called JCK, Java Compatibility Kit.
@@ -595,8 +697,10 @@ also provide basic support.  For more details on the TCK scholarship program see
   (application form: http://java.sun.com/scholarship/application_form.txt )
 That appears to only apply to specific JSRs.
 
+
 For the Java class libraries:
 //nobreak
+
 
  * Mauve: http://sources.redhat.com/mauve/
      The Mauve Project is a collaborative effort to write a free test suite
@@ -613,13 +717,16 @@ For the Java class libraries:
 For Java compilers:
 //nobreak
 
+
  * Jacks
    http://sources.redhat.com/mauve/
    (I think that this is only Java 1.4 as of May 2005?)
 Performance-oriented:
 //nobreak
 
+
  * JavaSPEC
+
 
 
 javacheck, javadis:  Gun's Java bytecode verifier and disassembler
@@ -630,12 +737,15 @@ you should invoke javacheck with `javacheck java/io/Reader`.
 option to print out the constant pool entries. Javadis does not care
 whether or not the .class suffix is at the end of the filename.
 
+
 BCEL bytecode verifier: Diagnostics an order of magnitude better than
 Java's built-in complaints.  However, it also gripes about some javac
 quirks, which you have to work around or ignore.
 
 
+
 == Java interpreter
+
 
 http://www.beanshell.org/
 Version 0.96 was released in January 1999.
@@ -645,16 +755,21 @@ to put out a new release in the next few weeks."
 A beta, Version bsh-2.0b4, was released May 2005, but no official release 2
 has been made as of 10/12.
 
+
 Java Expressions Library (JEL): http://galaxy.fzu.cz/JEL/
 It's under GPL, so any program using it must be under GPL as well.
 Fatally, it only seems to deal with numbers (and strings).
 Instead, use BeanShell's eval().
 
+
 Groovy console
+
 
 Eclipse's "Scrapbook page"
 
+
 DrJava
+
 
 
 Metamata has a commercial product for semantic analysis of Java:
@@ -663,7 +778,9 @@ It is not free but they do have an educational license program.
 If you are intersted, send email to: contact@metamata.com.
 
 
+
 == Java debuggers
+
 
  * NetBeans Developer
    http://www.netbeans.com/ 
@@ -677,11 +794,14 @@ If you are intersted, send email to: contact@metamata.com.
  * Java Workshop: http://www.sun.com/workshop/java/download.html
    See ~/wisdom/building/build-jws
 
+
 http://jswat.sourceforge.net/ -- a standalone GUI debugger
+
 
 To run java so that a debugger can be attached, add the following to your commandline:
  -Xdebug -Djava.compiler=NONE -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
 You can use any port for address, but 8000 seems to be the standard one. 
+
 
 Jeff Perkins likes jdebugtool.com (http://www.debugtools.com/)
 A script to start it is ~jhp/bin/jd:
@@ -690,16 +810,21 @@ A script to start it is ~jhp/bin/jd:
   #set jdir = "/usr/local/pkg/java/java-1.4.1/j2sdk1.4.1_01"
   $jdir/bin/java -jar ~/jdebugtool/jdebugtool_jdk13.jar $*
 
+
 "Omniscient debugger" lets you go backwards in time, heavy marketing hype:
 http://www.lambdacs.com/debugger/debugger.html
+
 
 JPDA is Java Platform Debugger Architecture, which is infrastructure for
 building debuggers and such.
 
+
 List of debuggers at http://www.daimi.au.dk/~beta/ooli/Compare.html
 As of 6/2017, not updated since 8/2011.
 
+
 == Compilers
+
 
 The Flex compiler system built by Martin Rinard's group, over 100,000 lines
 of Java for compilation and analysis. We've used it for doing our
@@ -710,19 +835,25 @@ assembly. Right now it reads in Java byte codes and builds an intermediate
 representation based on a variant of SSA form.  See www.flexc.lcs.mit.edu.
 
 
+
 == Pointer analysis
+
 
 The GraalVM pointer analysis is fast and precise.
 
 
+
 == Lightweight static checkers
+
 
 findbugs:
 findbugs.sourceforge.net
 (From Bill Pugh at the University of Maryland.)
 
+
 Checkstyle (download from Sourceforge, or "apt install checkstyle")
 checks Java code, for instance indicating unused imports.
+
 
 JLint:
 http://artho.com/jlint/
@@ -730,18 +861,23 @@ Jlint 1.21 (since superseded):
 http://www.garret.ru/~knizhnik/
 The latest JLint crashed when I tried to run it (June 2004).
 
+
 maudit (from metamata)
 Metamata no longer exists (as a company), and I can't find this software
 for download any longer.
 
+
 lgtm.com issues false positive warnings, and I don't see how to suppress them.
+
 
 
 == Profilers
 
+
 jcmd can print a stack trace of a running Java program, at the current
 moment.
 This gives a poor man's version of profiling.
+
 
 Baeldung's overview:
 https://www.baeldung.com/java-profilers
@@ -749,29 +885,38 @@ It mentions JProfiler, YourKit, VisualVM, and others with smaller market
 share.  It shows screenshots but gives no usage instructions.
 
 
+
 === Profilers in the JDK
+
 
 Flight Recorder:
 ...
 
+
 jcmd views a running Java process.  I'm not sure whether it can profile a
 Java application end-to-end.
 
+
 Other profiling tools in the JDK are jconsole (time and space, by gui), jmap
 (space), and jhat (space).
+
 
 The Java Hotspot profiler is very fast but doesn't do attribution (only
 local counts of time spent, not transitive for all calls within the method).
 Without attribution, counts of time spent may not be very useful.
 
+
 VisualVM is a well-regarded GUI for heap debugging.
 It's free, from Oracle.
+
 
 Eclipse's Memory Analyzer (MAT) is well-regarded for analyzing .hprof heap dumps.
 It can be run as a standalone application.  To install:
 https://www.eclipse.org/mat/downloads.php
 
+
 == Other Java profilers
+
 
 Yourkit, or YJP, is a Java profiler.
 (Ilya Sergey of Jetbrains, Ivan Beschastnikh, and others say it is nice.)
@@ -779,33 +924,43 @@ http://www.yourkit.com/
 Cost:
 //nobreak
 
+
  * Has an academic license for $99, via the Academic tab at: http://www.yourkit.com/purchase/index.jsp
  * Free to open source projects "with an established and active community"
    in return for referencing them on the project web-page; see the "Open
    Source" tab at: http://www.yourkit.com/purchase/index.jsp
 
+
 Oracle's VisualVM (http://visualvm.java.net/).
 
+
 jvmtop: https://github.com/patric-r/jvmtop
+
 
 Commercial products are sometimes superior for profiling, e.g. Borland
 OptimizeIt or IBM/Rational Quantify or Yourkit.
 
+
 http://www.khelekore.org/jmp/tijmp/ -- works on Java 6 and later
   http://www.khelekore.org/jmp/ -- only works on Java 1.2 to 1.5
+
 
 JProfiler
 http://www.ej-technologies.com/products/jprofiler/overview.html
 
+
 // J-Sprint (shareware) was once good, but http://www.j-sprint.com/ no longer
 // exists as of May 2007.
+
 
 ProfileViewer helps in interpreting Java profiling output.
 http://www.ulfdittmer.com/profileviewer/index.html
 
+
 OLD, no longer works in JDK 17:
 java -prof
   puts output in java.prof
+
 
 OLD, removed somewhere around OpenJDK 9:
 But still available in VisualVM which Oracle still distributes.
@@ -817,7 +972,9 @@ java -Xrunhprof:cpu=samples,heap=all ...
     java -Xrunhprof:help
 
 
+
 == Java code coverage
+
 
   * JaCoCo: http://www.eclemma.org/jacoco/
      (previously named Emma, http://emma.sourceforge.net/)
@@ -845,6 +1002,7 @@ java -Xrunhprof:cpu=samples,heap=all ...
      trial version available
   * JIE does branch coverage
 
+
 //// Tools that no longer exist:
 // * glassjartoolkit.com: Java branch code coverage, Jeremy Nimmer says
 //    "it seems to be a well-engineered tool with good reporting"; academic
@@ -854,10 +1012,13 @@ java -Xrunhprof:cpu=samples,heap=all ...
 // * SilkScope:  http://www.tngsoft.com/dextera/s_ds_silk_scope.htm
 
 
+
 == Mutation coverage ("mutation testing") tools
+
 
 For a much more complete survey, see Gareth Snow's report of June 2010.
 //nobreak
+
 
  * muJava
     Version 3 was released in November 2008.  It supports all of Java 1.5
@@ -892,6 +1053,7 @@ For a much more complete survey, see Gareth Snow's report of June 2010.
     Recommended at JavaOne 2009.
 
 
+
 On Oct 15, 2001, IBM released the Jikes Research Virtual Machine (formerly
 Jalapeno) under an open-source license.
   Jikes RVM homepage: http://www-124.ibm.com/developerworks/oss/jikesrvm/
@@ -900,18 +1062,23 @@ Jalapeno) under an open-source license.
   http://www-124.ibm.com/developerworks/forum/forum.php?forum_id=362
 
 
+
 Branch coverage for Java:
   http://glassjartoolkit.com/gjtk.html
 As of April 2002, it is in beta.  They will sell it to us (academic price)
 for $99; we should buy it when it comes out.
 
 
+
 == JVMs
+
 
 
 Supporting Java 5.0:
 
+
 Sun (obviously)
+
 
 BEA has a free server-side JVM called JRockit:
     http://dev2dev.bea.com/products/wljrockit/index.jsp
@@ -920,21 +1087,27 @@ A friend of mine has had some good experiences with it for highly multi-
 threaded I/O intensive programs.  They claim to scale almost linearly with 
 multiple processors.
 
+
 Eclipse 3.1
 
 
+
 Not supporting Java 5.0 (as of early 2005):
+
 
 IBM
 http://www-128.ibm.com/developerworks/java/jdk/index.html
 JDK 1.4.2
 
+
 Joeq (http://sourceforge.net/projects/joeq): JDK 1.4
+
 
 Jikes RVM:
 http://jikesrvm.sourceforge.net/
 As of 3/24/2005, I can find no indication regarding whether it supports
 Java 5.0.
+
 
 VMs available as Debian packages (filtered output of "apt-cache search jvm"):
 jamvm - Java Virtual Machine which conforms to JVM specification 2
@@ -947,11 +1120,14 @@ sablevm - Free implementation of Java Virtual Machine (JVM) second edition
   Does not appear to support Java 5.0
 
 
+
 summer 2002:  KaffeOS Java (from Wilson Hsieh at the University of Utah)
 virtual machine provides precise accounting of memory by applications.
 
+
 Also see JMP, http://www.khelekore.org/jmp/.  Actively developed as of July
 2003.
+
 
 
 Sameer Ajmani says (10/2002):
@@ -960,13 +1136,16 @@ Andrew Meyers's "Polyglot" framework permits easy construction of tools for
 far.
 
 
+
 Kopi is a Java compiler that both Chandra Boyapati and Bill Thies have used
 as a framework for Java language extensions (10/2002).
 Patrick Lam abandoned it for Polyglot.
 
+
 Polyglot only supports Java 1.4.  There is an extension for Java 5, but it
 only supports a subset of the Java 5 features.  As of 4/2009, the latest
 release is 3/2007.
+
 
 
 JTest creates random unit tests based on the types of the arguments.
@@ -974,12 +1153,15 @@ If pre- and post-conditions are present, then it additionally uses them.
 (Gary Sevitsky and Tao Xie used it at IBM during summer 2002.)
 
 
+
 Semantic Designs (www.semanticdesigns.com) offers Java/C++ front ends
 (parser and unparser), designed for source-to-source transformation tools.
 It's $5000 for an academic license ($50,000 for a commercial one).
 
 
+
 == Improving startup time
+
 
 GraalVM Native Image
 This creates an ahead-of-time compiled binary that doesn't require any VM,
@@ -1001,7 +1183,10 @@ mid-2024; that probably just means it is hard to use.
 
 
 
+
+
 The ahead-of-time `jaotc` compiler was removed in JDK 16.  It's now only in GraalVM.
+
 
 jpackage is a command-line tool to create native installers and packages
 for Java applications.
@@ -1011,6 +1196,7 @@ The jpackage tool takes as input a Java application and a Java run-time
 image, and produces a Java application image that includes all the necessary
 dependencies.
 Maybe this obviates jlink?
+
 
 jlink creates a self-contained executable.  It runs just like the regular
 JVM (no new optimizations are enabled), but is smaller and thus loads
@@ -1022,6 +1208,7 @@ jlink is quite solid and easy-to-use.
 Figuring out what modules you need to ship can be done with the jdeps tool:
 `jdeps --list-deps my.jar`.
 JLink can replace JARs with an optimized file format called "jimage".
+
 
 The CRaC (Coordinated Restore at Checkpoint) Project checkpoints (makes an
 image of, snapshots) a Java instance while it is executing. Restoring from
@@ -1035,8 +1222,10 @@ Given that warm-up is required, this might be more appropriate for servers
 end-to-end program.  Or for one that can be warmed up by running on a
 particular workload, and then takes input (maybe on standard in?).
 
+
 Azul Platform Prime's "ReadyNow" caches JIT work so an app starts running
 optimized compiled code as soon as it reaches main().
+
 
 AppCDS (Application Class Data Sharing).
 It preloads (parses, verifies, etc.) certain classes and stores them in a
@@ -1046,31 +1235,41 @@ classes.  The JDK already does this for JVM classses, automatically.  The
 biggest benefits come when multiple apps are running and share the AppCDS
 information; for one application running, it isn't much of a win.
 
+
 Write the Java program as a server that services requests, to avoid the
 cost of JVM startup and to make CRaC applicable.
 This may greatly complicate the application in question.
 
+
 micronaut is a framework for microservices.  I doubt that I want to add
 another framework.  It supports CRaC.
 
+
 Quarkus is a framework for kubernetes.  It supports CRaC.
+
 
 Nailgun is no longer maintained.
 
 
+
 == Slicers
+
 
 Many papers claim results from a slicing tool (for example, there is a long
 series of papers from Georgia Tech), but in January 2006 the only publicly
 available slicer for Java appears to be Indus.
 
+
 Nate (http://progtools.comlab.ox.ac.uk/projects/nate/) does not seem to be
 available.
+
 
 Several publicly available slicing tools exist for C, however.
 
 
+
 More details, mostly taken from papers that claim to have a Java slicer:
+
 
 Indus Java Program Slicer (Kansas State, John Hatcliff)
   Available for download.
@@ -1087,19 +1286,23 @@ Georgia Tech:
   Much of the slicing work was in the 90s and thus probably not for Java
 Mark Harman: nothing
 
+
 Slicing concurrent java programs
 Zhenqiang Chen, Baowen Xu
 Slicing object-oriented java programs
 Zhenqiang Chen, Baowen Xu
 
 
+
 Context-sensitive slicing of concurrent programs
 Jens Krinke
+
 
 An improved slicer for Java
 Christian Hammer, Gregor Snelting
 Implemented in Flex/Harpoon infrastructure
 There is no tool download from his webpage, or from the webpage about this paper.
+
 
 Dynamic slicing:
 Tao Wang, Abhik Roychoudhury (NUS)
@@ -1107,11 +1310,14 @@ Tao Wang, Abhik Roychoudhury (NUS)
 "Using Program Slicing to Analyze Aspect Oriented Composition", in FOAL
   2004, claims to use Soot, but provides no experimental results.
 
+
 Probes to extract runtime data without source code:
 Aspectwerks, TPTP
 
 
+
 Jass: Java extended assertions (pre-and post-conditions, class invariants).
+
 
 
 Non-Java tools:
@@ -1119,7 +1325,9 @@ For C, see http://saturn.stanford.edu (and it links to related projects on
 its webpage).
 
 
+
 XStream: quick-and-dirty, human-legible, easy-to-use object serialization.
+
 
 
 Java HTML parsing:  There are two fundamental models
@@ -1132,7 +1340,9 @@ Java HTML parsing:  There are two fundamental models
    tree if memory is not a concern.)
 Some packages claim to support both models.
 
+
 A newer one I have not tried is jsoup.
+
 
 Tree-based:
   XOM http://www.cafeconleche.org/XOM/ tree-based API for processing XML,
@@ -1144,15 +1354,18 @@ Tree-based:
   http://www.cafeconleche.org/XOM/tutorial.xhtml#d0e532 .
   (Running the "tidy" program first does *not* work; XOM rejects tidy's output.)
 
+
 Event-based (such as SAX):
   http://xerces.apache.org/xerces2-j/
   javax.xml.parsers.SAXParser
   tagsoup http://mercury.ccil.org/~cowan/XML/tagsoup/
   http://ws.apache.org/commons/axiom/  Uses pull parsing.  Superseded by xerces2?
 
+
 This one has decent documentation:
 http://jerichohtml.sourceforge.net/doc/index.html 
 "It is neither an event nor tree based parser"; tries to handle invalid HTML.
+
 
 Some advice:
   First use something like HTMLTidy or JTidy to convert the HTML to XHTML.
@@ -1160,8 +1373,10 @@ Some advice:
 But some parsers claim to deal with bad HTML.
 
 
+
 Java call graph (dependences) extraction:
 //nobreak
+
 
  * Understand: http://www.scitools.com/products/understand/
  * Doxygen generates class diagrams, call trees, dependency graphs, and
@@ -1188,20 +1403,26 @@ Java call graph (dependences) extraction:
  * Dynamic call graphs: AspectJ makes it trivial to weave into call sites
 
 
+
 == Formatters
+
 
 I prefer google-java-format (https://github.com/google/google-java-format) for Java formatting.
 http://www.peterfriese.de/formatting-your-code-using-the-eclipse-code-formatter/
 left a space at the end of a line
+
 
 The com.github.sherter.google-java-format plugin is not maintained, per this discussion:
 https://github.com/sherter/google-java-format-gradle-plugin/issues/57#issuecomment-782886280 .
 So, use Spotless (https://github.com/diffplug/spotless) to run google-java-format.
 
 
+
 == Continuous integration
 
+
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
+
 
 Gradle
   Has O'Reilly books (none of the others do).  This is a measure of popularity.
@@ -1248,11 +1469,14 @@ scons
   Limited Java support
 
 
+
 == C# tools
+
 
 Static rewriting:
   CCI
     On-disk only.  Doesn't even work for rewriting at load time.
+
 
 Dynamic rewriting:
   ER, for "Extended Reflection" (though it's really dynamic monitoring)
@@ -1269,4 +1493,5 @@ Dynamic rewriting:
     Open source projects that use/extend Pex (e.g., DySy, REX for regexps):
       http://research.microsoft.com/en-us/projects/pex/community.aspx
   CHESS
+
 

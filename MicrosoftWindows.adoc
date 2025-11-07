@@ -2,19 +2,25 @@
 :toc:
 :toc-placement: manual
 
+
 toc::[]
 
 
+
 == VMware
+
 
 Do not switch between VMware regular and virtual console while the mouse is
 moving, because the switch might occur between packets that the mouse is
 sending, throwing off synchronization.
 
+
 Ctrl-Alt-Space is the VMware escape:  the next key (such as Ctrl-Alt-ESC)
 goes to the guest, rather than being interpreted by VMware.
 
+
 In VMware, press Ctrl-Alt to take mouse/keyboard focus away from the guest.
+
 
 MAC address of VMware (discovered via "/usr/sbin/arp"): 00:0C:29:C1:70:EF
 Spoof MAC address under Linux:
@@ -25,7 +31,9 @@ Spoof MAC address under Linux:
 ```
 
 
+
 == Windows Subsystem for Linux (WSL)
+
 
 WSL:
 In WSL, access Windows files at /mnt/c/ .
@@ -33,23 +41,30 @@ In Windows, access Linux files for a running WSL distro \\wsl$\<distro_name> .
 Never access WSL files at via C:\Users\mernst\AppData\Local\Packages\... !
 
 
+
 == Microsoft Windows
+
 
 Ctrl-ESC opens the "Start" menu.
 
+
 VPN (virtual private networking) is like ssh, but for Windows.
+
 
 The current version of SSH wants to use an authentication
 mechanism called "keyboard interactive" rather than "password". 
 To configure SecureCRT 3.4.8 to use this type of authentication:
+
 
  1. Select "Connect..." from the File menu. The Connect Dialog will appear.
  2. Right-click on the session and select "Properties" from the context menu. The Session Options dialog will appear.
  3. Select the "Connection" Category
  4. Select "Keyboard Interactive" as the primary authentication type.
 
+
 Vandyke (the makers of secureCRT) makes a secure ftp (sftp)
 implementation.  It costs money.
+
 
 If you exited Microsoft Word without saving your file, it probably puts a file
 in 
@@ -62,6 +77,7 @@ or
 You can also go to your C: (or whatever) drive, and change folder options
 to "Show Hidden Files" (and turn off "hide file extensions").  Then Search
 for all files modified recently.
+
 
 To print a chart from Excel:
 ----
@@ -76,9 +92,11 @@ To print a chart from Excel:
 ----
 To fix it up:
 
+
  1. Remove HPLJ stuff.
  2. Fix bounding box.
  3. Run excel-ps-to-eps.
+
 
 To get rid of excel's tendency to put a white background in eps files, change
 ```
@@ -96,6 +114,7 @@ to
 ```
 The zeroes seem to make everyhing happy.
 
+
 // To produce Encapsulated PostScript (.eps) from Visio, pre-2007:
 //  1. Select the desired elements on a page.
 //  2. File >> Save As
@@ -107,12 +126,14 @@ The zeroes seem to make everyhing happy.
 //     (Yuriy says just ps2epsi will work here.)
 // (There's no need to use bbfig.)
 
+
 To crop whitespace while converting from PostScript to Encapsulated PostScript:
 ```
   ps2eps -B -C < infile.ps > outfile.eps
 ```
 -B ignores original bounding box
 -C inserts postscript code to clip white space
+
 
 To get kinit and other Kerberos programs for Cygwin:
   http://people.csail.mit.edu/rahimi/csail-cygwin-krb.tgz
@@ -130,7 +151,9 @@ In Dec 2006, after all that, I am getting "preauthentication failed while
   getting initial credentials", which may indicate clock skew (?).  Anyway,
   this seems not to work for me.
 
+
 To create labels in Microsoft Word using a Microsoft Excel file of adresses:
+
 
  * create a .xls file (not merely .csv, though you will probably go through that format first)
     ** the first line of the .xls file should be column headings, or else be careful when getting addresses from that file.
@@ -138,25 +161,31 @@ To create labels in Microsoft Word using a Microsoft Excel file of adresses:
     ** Tools >> Letters >> Mail Merge
     ** Follow the instructions, but don't insert "address block" lest the first line be slightly indented.  Instead, insert fields F1 through F5 with line breaks between.
 
+
 If someone sends you ms-tnef attachments with a file named `winmail.dat`,
 then ask them to:
 Please
 // nobreak
 
+
  1. open your address book
  2. look at the properties for my name
  3. ensure that "Rich Text" is *not* selected for me.  "Plain text" is better, or failing that "HTML".
 
+
 To run a Windows program from cygwin, use $inv/scripts/java-cygwin.sh (for
 javac) or $inv/scripts/cygwin-runner.pl .
+
 
 This webpage explains the "unable to access jarfile" error that you may get
 from attempting to run a Java program under Cygwin:
   http://www.cygwin.com/ml/cygwin/2008-01/msg00083.html
 
+
 To convert PostScript created by PowerPoint to good PostScript (probably
 works in general):
 // nobreak
+
 
  1. from powerpoint, print to file.
  2. run distiller on the resulting ".prn" file, giving a ".pdf" file.
@@ -166,10 +195,12 @@ works in general):
     postscript, which can be psnup'd.
 An alternative is to use OpenOffice and its export-to-PDF feature.
 
+
 To merge or split cells in a table in Microsoft Powerpoint (e.g., for a
 column header that spans multiple rows):
 Click "tables and borders" (icon looks like 4 squares) in the standard
 toolbar to display the Tables and Borders Toolbar.
+
 
 To put a shortcut on the start menu, first navigate via Windows Explorer to
 one of these:
@@ -178,14 +209,17 @@ one of these:
   C:\Documents and Settings\YOURUSERNAME\Start Menu\Programs .
 ```
 
+
 To select the Dvorak keyboard layout in Microsoft Windows:
  Control Panel >> Regional & Language >> Languages >> Text services and input languages
  >> Installed Services >> Keyboard >> Add >> Keyboard layout/IME
+
 
 Under Microsoft Windows, if your hard drive is full, try emptying the trash
 before removing applications.  And don't remove SQL, because some system
 services seem to rely on it.  (It is a bug in Windows that you can remove
 it in that case.)
+
 
 Windows 7 shortcut keys:
   Again right-click on the shortcut and select Properties, Shortcut key.
@@ -196,9 +230,11 @@ Nice comprehensive list of existing Windows hotkeys (including those new to
 Win7, near the  bottom):
 http://www.justusleeg.com/2009/10/27/hot-key-haven-for-windows-7/
 
+
 To get a bigger font for notes in Powerpoint presentation dual-screen mode,
 use the "zoom" button at the bottom of the notes, to the right of the
 current time.
+
 
 When a USB device is not recognized, you can try uninstalling the USB
 device maanger and it will be automatically reinstalled when you plug it in

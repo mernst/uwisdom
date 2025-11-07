@@ -2,9 +2,12 @@
 :toc:
 :toc-placement: manual
 
+
 toc::[]
 
+
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
+
 
 // PROBLEM with this file is that TeX comments starting in column 1 will be
 // ignored by the database searching program!  Therefore, put a space before
@@ -13,9 +16,13 @@ toc::[]
 
 
 
+
+
 == Figures (floats)
 
+
 In LaTeX, always put a \protect in front of a \ref in a \caption.
+
 
 In LaTeX, to get a line between floats (figures, tables, etc.) and text, do
 something like (these must take up zero vertical space):
@@ -39,6 +46,7 @@ additionally do
  \nocaptionrule
 ```
 
+
 // Can't unindent the LaTeX comments or the doc program will respect those
 // comments.  That's unfortunate, because I typically unindent when inserting
 // in a LaTeX document.
@@ -54,9 +62,11 @@ page produced by LaTeX, do the following.  Also consider making it 90%.
  \def\textfraction{.2}
 ```
 
+
 To fix "too many unprocessed floats" error, do one of the following:
   * spread your figures further apart in your document, or
   * put in a \clearpage or \cleardoublepage command to allow a page full of figures to be generated.
+
 
 To change the font and line spacing for LaTeX figure captions in acmart.cls (eg, prevent captions from being bold or reduce their font size), do:
 ```
@@ -64,6 +74,7 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
  \usepackage{setspace,caption}
  \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
 ```
+
 
 % The change in font size of a LaTeX figure caption won't take unless you give
 % `\caption` an empty optional argument, like so:
@@ -96,13 +107,16 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
 % ```
 
 
+
 == Tables
+
 
 To reduce intercolumn space in tables:
 ```
   \addtolength{\tabcolsep}{-.5\tabcolsep}
   \setlength{\tabcolsep}{0pt}
 ```
+
 
 Aligning decimal points (periods) in tables in TeX/LaTeX:
 use dcolumn package (described in the LaTeX Companion).
@@ -122,6 +136,7 @@ table itself.  Thus, using a value other than -1 can leave additional space
 at the right side of the column, or let extra digits after the decimal
 point lap into the next column.
 
+
 In LaTeX, to define new column types L, C, and R:  Note that a width is REQUIRED
 as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
 ```
@@ -135,6 +150,7 @@ as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
   \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 ```
 
+
 To put a footnote within a table in LaTeX, surround the table with a minipage:
 ```
   \begin{minipage}{\textwidth}
@@ -144,6 +160,7 @@ To put a footnote within a table in LaTeX, surround the table with a minipage:
   \end{tabular}
   \end{minipage}
 ```
+
 
 To make entries in a LaTeX "tabular" table that span multiple columns,
 as with the HTML "colspan" attribute, use an entry like
@@ -179,7 +196,10 @@ You can nest \multirow in \multicolumn but not vice versa.
 
 
 
+
+
 == Displays
+
 
 To intersperse left-justified text with aligned equations, use the TeX
 \noalign primitive. For example, 
@@ -197,6 +217,7 @@ produces results like the following:
             test  3  4       (2)
 ```
 
+
 Use
 ```
   \setlength{\arraycolsep}{.25em}
@@ -211,7 +232,10 @@ to reduce the width of columns in a table or tabular environment.
 
 
 
+
+
 == Math mode
+
 
 To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
 \mathbin, \mathrel, \mathopen, \mathclose, \mathpunct, \mathinner.
@@ -222,6 +246,7 @@ These give "class" 1..8 to the math character or formula.
 (There is no \binop or \binrel; I mention them here in case someone
 searches for them.)
 
+
 To typeset a multi-character identifier in LaTeX math mode, use
 \mathit{...} (or, if you have it defined, \|...|) .  Never use $...$, which
 puts incorrect kerning between the letters.  LaTeX typesets $myvar$ as "m
@@ -229,12 +254,15 @@ times y times v times a times r".  It looks bad, and enough people will
 notice that it is worthwhile to get the typesetting right.
 
 
+
 == Lists
+
 
 To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
 setting \itemsep and \parskip), use
 `\itemsep 0pt \parskip 0pt`.
 This is necessary even if using `\usepackage{enumitem}`.
+
 
 [Is this still the best approach with `\usepackage{enumitem}`?]
 To control pre-list space, set \partopsep (or insert an explicit negative
@@ -249,6 +277,7 @@ To remove the vertical space from between two LaTeX trivlist environments:
   No combination of only two of these does the trick.
   (Why don't I have -\parskip here too?)
 
+
 To reduce the indentation of bullets/numbers/items a LaTeX list environment
 (itemize, enumerate, description), do this *outside* the env.  It needs to come
 after `\begin{document}`.  (It's especially needed in the acmart style.)
@@ -258,6 +287,7 @@ after `\begin{document}`.  (It's especially needed in the acmart style.)
   \setlength{\leftmarginii}{.75\leftmarginii}
   \setlength{\leftmarginiii}{.75\leftmarginiii}
 ```
+
 
 In a LaTeX enumerate list environment, to insert an ordinary
 (left-justified) paragraph of text without interrupting the item numbering,
@@ -269,6 +299,7 @@ do the following:
   \begin{enumerate}
   \setcounter{enumi}{\ref{item:pre-break}}
 ```
+
 
 To interrupt an enumerate environment, then continue the numbering later:
 ```
@@ -287,6 +318,7 @@ To interrupt an enumerate environment, then continue the numbering later:
     \end{enumerate}
 ```
 
+
 To change the margins similarly to what the quote (`\begin{quote}`)
 environment does:
 ```
@@ -299,7 +331,10 @@ environment does:
 
 
 
+
+
 == Defining macros
+
 
 Here are ways to test wither a macro argument is empty/null:
  1. The following macro definition will test whether a macro argument is empty:
@@ -331,6 +366,7 @@ Here are ways to test wither a macro argument is empty/null:
     with, then you're away.  (It also dies if #2 contains unbalanced \if,
     \else or \fi's, but that should be pretty rare.  Touch wood.)
 
+
 LaTeX macros gobble space after them.  If you wish to insert space
 (except before punctuation or other places where it shouldn't be
 inserted) after a macro expansion, then add "\xspace" at the end of the
@@ -344,6 +380,7 @@ macro body.
   ...
   ... and we find \restenergy available to us ...
 ```
+
 
 Here is a LaTeX command that typesets its argument in a smaller \tt font.  It
 permits line breaks at spaces within the argument (but not within words),
@@ -374,11 +411,14 @@ For Verbatim environments, do this:
   \RecustomVerbatimEnvironment{Verbatim}{Verbatim}{fontsize=\smaller}
 ```
 
+
 // Can't unindent the LaTeX comments or the doc program will respect those
 // comments.  That's unfortunate, because I typically unindent when inserting
 // in a LaTeX document.
 
+
 Here are definitions for identifiers in LaTeX math mode formulas:
+
 ```latex
   % \|name| or \mathid{name} denotes identifiers and slots in formulas
   \def\|#1|{\mathid{#1}}
@@ -391,16 +431,19 @@ Here are definitions for identifiers in LaTeX math mode formulas:
   % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ```
 This alternate definition of `\codeid` does not work inside an array environments (see http://tex.stackexchange.com/questions/27592/ ):
+
 ```latex
   \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
 ```
 To switch from "\texttt{...}" to "\<...>":
+
 ```elisp
   (tags-query-replace "\\\\texttt{\\([^{}<>]+\\)}" "\\\\<\\1>")
   (tags-query-replace "\\\\texttt{\\([^{}]+\\)}" "\\\\codeid{\\1}")
   (tags-search "texttt")
 ```
 To switch from "$...$" to "\|...|":
+
 ```elisp
   (tags-query-replace "\\\\|" "\\\\parallel")
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.]+\\)+\\$" "\\\\|\\1|")
@@ -409,6 +452,7 @@ To switch from "$...$" to "\|...|":
   (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" "\\\\|\\1|")
 ```
 
+
 To permit hyphenation in tt font globally throughout a document, see
 http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt
 However, all of those solutions give me a Roman font that differs from the text font, whereas I want a typewriter font.
@@ -416,7 +460,10 @@ However, all of those solutions give me a Roman font that differs from the text 
 
 
 
+
+
 == Bibliographies and citations
+
 
 Very simple BibTeX usage:
  * See ~mernst/bib for bibliographies (but you should get your own copy).
@@ -428,15 +475,19 @@ Very simple BibTeX usage:
    \bibliography{bibstring-unabbrev,invariants,dispatch,generals,alias}
  * Run latex, then bibtex, then latex again.
 
+
 Typical LaTeX commands for bibliography:
 ```
   \bibliographystyle{alpha}
   \bibliography{bibstring-unabbrev,ernst,invariants,dispatch,generals,alias}
 ```
 
+
 \thebibliography is defined in the main document style (article.sty, etc.).
 
+
 For multiple bibliographies (say, one per chapter), use chapterbib.sty.
+
 
 How can I permit line breaks in a citation?
 I'm not sure if this is good style or not, but this is how to do it:
@@ -452,12 +503,15 @@ I'm not sure if this is good style or not, but this is how to do it:
  \makeatother
 ----
 
+
 BibTeX journal abbreviations are in /usr/local/lib/tex/bib/abbreviations,
 which is pointed to by ~/tex/abbreviations.
+
 
 The problem with BibTeX's cross referencing feature is that it puts the
 book, proceedings, etc. in the bibliography as an entry of its own.
 However, supplying argument -min-crossrefs=10000 disables this feature.
+
 
 For mix-n-match BibTeX citations,
 ```
@@ -480,6 +534,7 @@ produced by
   \cite[p.~86]{Horn86},\cite[p.~516]{PressFTV88}
 ```
 
+
 In LaTeX, to remove vertical spacing (space) between bibliography items when using natbib (which defines \bibsep), use:
 ```
    \setlength{\bibsep}{0pt}
@@ -499,6 +554,7 @@ For other bibliography styles, do
 }
 ```
 
+
 In LaTeX 2e, to adjust bibliography formatting:
 (For IEEE styles, just do `\def\IEEEbibitemsep{0pt plus .5pt}`.)
   First, copy from article.cls the definition of
@@ -514,6 +570,7 @@ In LaTeX 2e, to adjust bibliography formatting:
 and change the "newenvironment" to "renewenvironment".
 To make bibliography items less indented, do one or both of the these:
 //nobreak
+
 
   1. Comment out
 +
@@ -541,9 +598,11 @@ To remove all vertical spacing (space) between bibliography items, add:
   \setlength{\parsep}{0pt}
 ```
 
+
 To use only first initials (not whole first name) in BibTeX, change "ff" to
 "f." in the .bst file, on the line containing "format.name".
 Or just use abbrv.bst, which does this.
+
 
 To omit the month in BibTeX, change 
 `{ month " " * year * }`
@@ -551,6 +610,7 @@ to
 `'year`
 in the .bst file.
 This is rarely worthwhile, though:  the savings tend to be very small.
+
 
 So that BibTeX does not require the publisher field in ACM conference
 proceedings, make this change:
@@ -581,10 +641,13 @@ proceedings, make this change:
 ```
 
 
+
 == Texinfo
+
 
 In Texinfo, to prevent the last index pages from being numbered i, ii,
 etc., add an @page before @summarycontents or @contents.
+
 
 To format a texinfo file (ie, to produce a .dvi file from a .texi file), do
 ```
@@ -593,12 +656,14 @@ To format a texinfo file (ie, to produce a .dvi file from a .texi file), do
     tex foo.texi
 ```
 
+
 Texinfo definitions can be done like this:
 ```
  @iftex @def@foo ...
 ```
 Make sure that any usages of the macro are also put inside @iftex, and
 make sure that you provide an equivalent construction inside @ifinfo.
+
 
 Help for texinfo:
 You might want to check out texinfo, a system for preparing both
@@ -608,13 +673,16 @@ prep.ai.mit.edu:/pub/gnu/texinfo-2.??.tar.Z.  There's also a latexinfo
 system available from
 tut.cis.ohio-state.edu:pub/gnu/emacs/elisp-archive/packages/LaTeXinfo.shar.*.Z.
 
+
 LaTeXinfo takes a different input format than LaTeX -- for instance, there
 are only three special characters (\{}), so comments are introduced by \c,
 and so forth.  Thus, it could be a lot of work to convert a document into
 LaTeXinfo.
 
+
 Texinfo summary of cross reference commands (@xref @ref @pxref @inforef):
 http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands
+
 
 In Texinfo, to insert literal HTML, do
 ```
@@ -627,11 +695,14 @@ to appear within the HTML.
 By contrast to `@html`, `@ifhtml` is a conditional but its body is regular
 Texinfo.
 
+
 Texinfo does not let you change the margins without changing 'texinfo.tex'
 or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
 
 
+
 == Hyphenization; word, line, and page breaking
+
 
 raymond@sunkist.berkeley.edu (Raymond Chen) says:
 To prevent word breaking (hyphenation) in (La)TeX, \hyphenpenalty=10000
@@ -672,6 +743,7 @@ and, if you get complaints about overfull hboxes, also add
 ```
 or some bigger value.
 
+
 piet@cs.ruu.nl (Piet van Oostrum) says:
 To hyphenate words with imbedded hyphens, you must disable the hyphenchar
 while reading the word and enable it while TeX hyphenates (i.e. at the end
@@ -688,6 +760,7 @@ or
   \hyphenchar\the\font=\savehyphenchar} 
 ```
 
+
 To have LaTeX hyphenate words with imbedded hyphens, you may use the
 `breakable hyphen' command:
 ```
@@ -695,6 +768,7 @@ To have LaTeX hyphenate words with imbedded hyphens, you may use the
 ```
 You could play tricks mapping it to a character that's made active for 
 the purpose, but `-'?
+
 
 LaTeX doesn't hyphenate (line-break) automatically when in font \tt because
 in the customary uses for \tt fonts, one does not want TeX to insert any
@@ -711,6 +785,7 @@ or to enable it just for one family:
 \DeclareFontFamily{T1}{cmtt}{\hyphenchar \font=45}
 ```
 
+
 In LaTeX, \discretionary is a way to do custom hyphenization (without
 necessarily using the hyphen character).  Use it like
 ```
@@ -725,6 +800,7 @@ Examples:
   \discretionary{}{.}{.}             % permit break before period (e.g., in URL)
   \discretionary{f-}{fi}{ffi}cult    % kerning
 ```
+
 
 
 To permit more space between words, in order to prevent bad breaks in
@@ -747,13 +823,16 @@ as a space is better than a hyphenation for TeX ... even one of these nasty
 big ones - TeX can't tell the difference. \fontdimen2\the\font is the space
 factor of the current font and 0.5em is the extra space factor.
 
+
 ----
 \def\nopgbrk{\@nobreaktrue}
 ----
 appears to prevent LaTeX page breaks, even just before lists.
 
+
 To break a multi-line display math mode equation, use \begin{multline} or
 the breqn package or the split environment provided by the amsmath package.
+
 
 LaTeX can break an inline math mode formula at a \discretionary{}{}{} command.
 It can automatically break the formula only when a relation symbol
@@ -803,6 +882,7 @@ Another solution, from http://tex.stackexchange.com/questions/19094/allowing-lin
 }
 ----
 
+
 LaTeX's \underline{...} macro does not permit hyphenization (line breaking).
 Instead, use
 ```
@@ -810,6 +890,7 @@ Instead, use
   ...
   \ul{...}
 ```
+
 
 This ought to permit more hyphenization in LaTeX:
 ```
@@ -820,16 +901,20 @@ This ought to permit more hyphenization in LaTeX:
 ```
 
 
+
 == PDF and pdflatex
+
 
 Regular TeX uses bitmap based fonts by default, so PDF looks bad for them.
 To, use "pdflatex" on your tex documents, to use outline fonts instead (and
 to generate PDF instead of .dvi.
 
+
 When using the graphicx package to include figures in a LaTeX document:
 The latex command requires all graphics/images/pictures to be in EPS format.
 The pdflatex command requires all graphics to be in JPEG/JPG, TIFF, PNG, or PDF.
 Therefore, all figures must appear in at least two different formats.
+
 
 To convert .eps to .pdf, either of the following:
 ```
@@ -861,6 +946,7 @@ To include the pdf file:
   \includegraphics[width=\columnwidth]{picture}
 ```
 
+
 To check whether fonts are embedded, run
 ```
   pdffonts myfile.pdf
@@ -869,8 +955,10 @@ or alternately use Adobe Acrobat Reader: go to "File --> Document
 Properties --> Fonts".
 This might tell you a font isn't embedded, but no output can also be a bad sign.
 
+
 pdflatex creates a document with fonts embedded, so long as all your images
 are bitmaps or are .pdf or .ps images with all their fonts embedded.
+
 
 To embed fonts in a PDF document:
 ```
@@ -878,6 +966,7 @@ To embed fonts in a PDF document:
 ```
 This creates tmp.pdf with as many fonts embedded as are available on the
 computer where you ran the command.
+
 
 To embed the 14 base fonts (make them embedded fonts) in a PDF document,
 when starting from a PostScript document:
@@ -888,6 +977,7 @@ Be sure to do this on PostScript that is generated by dvips, not on
 PostScript that is generated by pdf2ps or similar programs.
 (The instructions at http://users.rsise.anu.edu.au/~luke/embedded_fonts.html
 that are supposed to make pdflatex embed the fonts did not work for me.)
+
 
 You can set the compatibility level (e.g., PDF 1.7) in LaTex as follows:
 ```
@@ -906,7 +996,9 @@ geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
 ```
 
 
+
 == URLs
+
 
 To make hyperlinks (e.g., to URLs) in a LaTeX document:
 ```
@@ -926,6 +1018,7 @@ More on LaTeX HEVEA URLs (\ahref, etc.):
 but perhaps I want to ignore that and focus on using standard 
 
 
+
 URLs in HTML and PDF documents:
 ```
  % Make a URL visible in PDF the but just be attached to anchor text in HTML:
@@ -934,6 +1027,7 @@ URLs in HTML and PDF documents:
  %END LATEX
  %HEVEA \newcommand{\ahreforurl}[2]{\ahref{#1}{#2}}
 ```
+
 
 The url package for LaTeX linebreaks a URL appropriately.
 For a moving argument (or a URL containing characters like %), use
@@ -947,6 +1041,7 @@ However, the hyperref package forbids URL line breaks; the workaround is
   \usepackage{hyperref}
   \usepackage{breakurl}
 ```
+
 
 To typeset URLs in a smaller font in LaTeX, using \package{url}:
 First approach (shorter, usually works):
@@ -966,21 +1061,27 @@ Second approach (better style, possibly more robust):
 
 
 
+
+
 == Hevea
+
 
 As an alternative to hevea: pandoc or tex4ht or tth
   tex4ht is bundled with LaTeX distributions (use its make4ht build system instead of the htlatex command)
 All 4 of these are actively maintained as of 2022.
 
+
 Conditional compilation with LaTeX and Hevea:
 To avoid problems with the imagen program, it's usually best to not
 redefine macros with %HEVEA, but to use the \ifhevea conditional.
+
 
 In LaTeX files, to avoid the "This document was translated from LaTeX to
 Hevea" advertisement, write:
 ```
   %HEVEA \footerfalse    % Disable hevea advertisement in footer
 ```
+
 
 Adding info to HTML header in Hevea (this must come after \begin{document}):
 ```
@@ -992,6 +1093,7 @@ Adding info to HTML header in Hevea (this must come after \begin{document}):
 \end{rawhtml}}
 ```
 
+
 Testing whether a file exists, for both LaTeX and Hevea:
 (Note that you need to test for a file, not a directory.)
 ```
@@ -1002,7 +1104,9 @@ Testing whether a file exists, for both LaTeX and Hevea:
  %END LATEX
 ```
 
+
 == Fonts
+
 
 The default LaTeX fonts look bad on-screen.  Consider this alternative; the
 "bitstream-charter" font family was designed to be good on screen.
@@ -1011,6 +1115,7 @@ The default LaTeX fonts look bad on-screen.  Consider this alternative; the
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 ```
+
 
 In LaTeX, rather than
 ```
@@ -1024,6 +1129,7 @@ which differs in that it uses a specially narrowed Courier font.
 (Also consider `\usepackage{palatino}`?
 `\usepackage{times}` is narrower than `\usepackage{gentium}`.  \usepackage{venturis2} is even narrower, but it looks unnatural and makes it clear that you are cheating on space limits.)
 
+
 Do not use
 ```
   \documentclass[sigconf,anonymous]{acmart}
@@ -1031,6 +1137,7 @@ Do not use
 ```
 because it causes math-mode parentheses not to print.
 `\usepackage{times}` doesn't work either.
+
 
 To change fonts temporarily in LaTeX, use comands like the following
 ```
@@ -1041,9 +1148,11 @@ and
   {\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.
 ```
 
+
 The following six TeX document style options exist for using PostScript
 fonts.
 //nobreak
+
 
 1. avantgarde, for using the Avant Garde family.
 2. bookman, for using the Bookman family.
@@ -1052,6 +1161,7 @@ fonts.
 5. ncs, for using the New Century Schoolbook Roman family.
 6. times, for using the Times Roman family
 
+
 To use a thinner (narrower) version of a font in a LaTeX document, run the
 following before running pdflatex:
 ```
@@ -1059,6 +1169,7 @@ following before running pdflatex:
   #	/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
 	  -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
 ```
+
 
 More attractive monospaced (typewriter, courier) fonts:
 ```
@@ -1071,6 +1182,7 @@ More attractive monospaced (typewriter, courier) fonts:
   \usepackage[T1]{fontenc}
   \usepackage[scaled=0.88]{luximono}
 ```
+
 
 Your LaTeX documents should always use
 ```
@@ -1085,6 +1197,7 @@ It particular, it solves the problem
   Font shape `OMS/cmss/m/n' undefined using `OMS/cmsy/m/n' instead for symbol `textbraceleft'
 ```
 
+
 The default Computer Modern fonts are Type 3 (bitmap).  Here is how to use
 "Latin Modern" fonts, which are a Type 1 reimplementation of the Computer
 Modern fonts, and ensure you only get Type 1 fonts:
@@ -1096,8 +1209,10 @@ However, it is easier and better to just use pdflatex, which will use the
 good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a
 different font like Times.
 
+
 If the line spacing is too large/big in a paragraph typeset in a smaller
 font, then be sure to end the paragraph with \par.
+
 
 From an NSF proposal that made it through research.gov:
   \documentclass[10pt,letterpaper]{article} 
@@ -1106,19 +1221,26 @@ From an NSF proposal that made it through research.gov:
   \linespread{1.005}
 
 
+
 == Everything else
+
 
 LaTeX style files are found in the directories listed in the TEXINPUTS
 environment variable.
 
+
 Don't forget to check ~/tex/sty/ when looking for TeX files.
+
 
 LATEX directory: see /usr/share/texmf/tex/latex/misc, among others
 
+
 LaTeX form letter:  use "merge" documentstyle option
+
 
 Ragged right text in LaTeX:  use flushleft environment without explicit \\'s.
 Another possibility is \pretolerance=10000 and \raggedright.
+
 
 Use the \jobname command to get the name of the file that TeX is working on.
  +
@@ -1127,6 +1249,7 @@ Summary of UNIX-based methods for "portably" getting FILEID information of
 does not identify itself; at processing time, its location is obtained from
 the system and encoded in the resulting output file.)
 //nobreak
+
 
 1. Use the ability of tex/latex to take information from the invocation.
   Here is a script that does this for a latex document, so that the variable
@@ -1145,11 +1268,13 @@ the system and encoded in the resulting output file.)
   with dynamically obtained environment information.
   From: vjcarey@sphunix.sph.jhu.edu ("Vincent J. Carey")
 
+
 How can I make the pagestyle of the first page be empty (no page number)?
 Put \pagestyle{empty} in the preamble (before \begin{document}).  This
 works as long as you don't use \maketitle, which resets the pagestyle.  If
 you use \maketitle, you have to place a \thispagestyle{empty} after the
 \maketitle command, as well.
+
 
 You can use MakeIndex to process a glossary (.glo file).  Here's an example
 of a MakeIndex style-file you'd need:
@@ -1171,6 +1296,7 @@ Use it with the command:
   makeindex -s glossary.ist -o your-file.gls your-file.glo
 ```
 
+
 For alphabetic enumeration, do:
 ```
 \newcounter{alphaenum@count}
@@ -1180,6 +1306,7 @@ For alphabetic enumeration, do:
 {\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph}}}%
 {\end{list}}
 ```
+
 
 In LaTeX, to make the first line of all sections etc be indented by the
 usual paragraph indentation:
@@ -1198,10 +1325,12 @@ to
    +.2ex}{2.3ex plus .2ex}{\Large\bf}}
 ```
 
+
 To remove some of the extra whitespace around section headers:
 ```
   \usepackage[compact]{titlesec}
 ```
+
 
 A simple LaTeX environment that keeps everything within it
 on the same page:
@@ -1218,6 +1347,7 @@ on the same page:
 ```
 This works fine, except that if the \vbox is higher than textheight, it
 overflows the page. So it needs to be broken up somehow.
+
 
 TeX primitive \time is the number of minutes since midnight this morning.
 Use it via \number\time.  For a timestamp, use it with \today (which
@@ -1246,14 +1376,17 @@ Another version by Nelson Beebe, U. of Utah., is:
  \def\hhmm{\number\hh:\ifnum\mm<10{}0\fi\number\mm}
 ```
 
+
 I once had to set
 ```
   \topskip = 0pt
 ```
 to remove extra space before the first paragraph of a LaTeX document.
 
+
 Marcel van der Goot's midnight macros (.tex and .doc files):
 //nobreak
+
 
  * quire  Macros for making booklets, printing double pages, and printing outlines and crop marks.
  * gloss:  Macros for vertically aligning words in consecutive sentences.
@@ -1263,8 +1396,10 @@ Marcel van der Goot's midnight macros (.tex and .doc files):
    Do `tex make-labels' and then supply the label file name.
    There are other packages for labels, as well.
 
+
 sober.sty reduces the spacing around section headings in the
 default document styles.
+
 
 In text with explicit line breaks, we can make a box just wide enough to
 hold the widest one via (see LaTeX manual under tabbing for explanation):
@@ -1276,10 +1411,12 @@ Another alternative would be to use \begin{tabular}{l} ...
 \end{tabular} rather than a tabbing environment, in which case
 the minipage environment could be omitted entirely.
 
+
 To capitalize (the first letter only of) a string in TeX, use
 \caps{string}.  The string may contain macros and even embedded macros.
 \def\caps#1{{\edef\tempa{#1}\expandafter\Caps\tempa}}
 \def\Caps#1{\uppercase{#1}}
+
 
 To number tables, figures, footnotes, consecutively through the entire
 report (not by chapters) in LaTeX:
@@ -1319,6 +1456,7 @@ and then the solution to the original problem becomes:
         \def\theequation{\arabic{equation}}
 ```
 
+
 From the ``Golden Rules of Macro Coding'' (for TeX)
   If a macro starts with \if..., put a \relax in front of it.
   \if... is not evaluated during the syntactic/semantic analysis, but
@@ -1326,6 +1464,7 @@ From the ``Golden Rules of Macro Coding'' (for TeX)
   ahead, and where the scan must be stopped, to allow a change to math
   mode before the test is done. An example where this may occur is
   within \halign's.
+
 
 TeX code for definitions including multiple alternatives:
 ```
@@ -1335,11 +1474,13 @@ TeX code for definitions including multiple alternatives:
   \end{array} \right.}
 ```
 
+
 To run TeX or LaTeX in batch mode on file foo.tex, do
 ```
   [la]tex \\batchmode \\input foo.tex
 ```
 The doubled backslashes are for the shell; TeX will see just one of each pair.
+
 
 6) How can I get TeX to see LaTeX \ref{...} as a _number_?
 ```
@@ -1347,16 +1488,20 @@ The doubled backslashes are for the shell; TeX will see just one of each pair.
     \expandafter\expandafter\@alph\expandafter\@car\@tempa \@nil\null}}
 ```
 
+
 LaTeX's \raisebox is like TeX's \smash:  change the apparent height of a
 piece of text.
+
 
 \negphantom is like phantom, but the space is negative, not positive.
 ----
 \newcommand{\negphantom}[1]{\settowidth{\nplength}{#1}\hspace*{-\nplength}}
 ----
 
+
 The useful LaTeX macro \ensuremath lets macros appear in either math or
 horizontal mode; if the latter, it automatically switches to math mode.
+
 
 To save space in a paper using the acmart style:
 ```
@@ -1373,14 +1518,17 @@ To add page numbers (useful during review):
 \fancyfoot[C]{\thepage}
 ```
 
+
 ACM LaTeX styles FAQ:
   http://www.acm.org/sigs/publications/sigfaq
+
 
 To solve the problem
 ```
 ! pdfTeX warning (ext4): destination with the same identifier ... has been already used, duplicate ignored
 ```
 add page numbers to the document.
+
 
 To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove
 the copyright box):
@@ -1401,6 +1549,7 @@ In acmlarge.cls, remove the copyright info by doing:
 ```
 Fixes to ACM SIG style (sig-alternate.cls):
 //nobreak
+
 
  * Uncapitalize section titles: 
     ** Delete all instances of "\@ucheadtrue"
@@ -1449,6 +1598,7 @@ Maybe:
 To reduce whitespace in the titlebox (near the title and authors):
 //nobreak
 
+
  * Comment out:
 +
 ```
@@ -1466,12 +1616,15 @@ To reduce whitespace in the titlebox (near the title and authors):
   {\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi
 ```
 
+
 Fixes to IEEETran style file, to save space and improve appearance:
 //nobreak
+
 
  * \usepackage{microtype}
  * pass "nofonttune" option to the class (in \documentclass[...]); IEEETran's font metric tuning is very bad, and microtype is better
  * After \begin{document}: `\nonfrenchspacing\hyphenpenalty=50\hbadness=1000` (IEEETran inexplicably tells TeX to hyphenate *far* less frequently than normal, wasting space and making things ugly)
+
 
 To remove the extra vertical space from around \begin{definition}, make the
 following change to sig-alternate.cls.
@@ -1491,8 +1644,10 @@ following change to sig-alternate.cls.
  \def\@defthm#1#2{%
 ```
 
+
 Make these fixes to figures and captions when writing a paper using IEEE latex8.sty:
 //nobreak
+
 
  * Remove all references to \tenhv
  * Edit the setting of \@figindent as follows:
@@ -1505,6 +1660,7 @@ Make these fixes to figures and captions when writing a paper using IEEE latex8.
       {\parbox{\hsize}{#1: #2\strut}}\par
 ```
 
+
 To permit underfull hboxes in LaTeX, use 
 ```
 \begin{sloppypar} ... \end{sloppypar}
@@ -1513,8 +1669,10 @@ I can't get `\sloppy` or `\begin{sloppy} ... \end{sloppy}` to work.
 To disable the warnings globally, say `\hbadness=10000`, which
 disables overfull hbox warnings too.
 
+
 In LaTeX, 
 to typeset text in a superscript or subscript, use A_{\mathit{pred}}
+
 
 To produce a footnote without a footnote mark (as for a copyright notice in
 the lower left-hand corner of a conference paper) in LaTeX, do this:
@@ -1525,10 +1683,12 @@ the lower left-hand corner of a conference paper) in LaTeX, do this:
   \renewcommand{\thefootnote}{\arabic{footnote}}
 ```
 
+
 The Harvard bib style for LaTeX
         http://www.arch.su.edu.au/~peterw/latex/harvard/
 supports a "URL" field.  It even works with LaTeX2html so the
 appropriate links are generated.
+
 
 LaTeX2HTML CVS repository:
   http://cdc-server.cdc.informatik.th-darmstadt.de/~latex2html/
@@ -1536,27 +1696,33 @@ though the source recommends
   http://www-dsed.llnl.gov/files/programs/unix/latex2html/manual/
   http://www.cbl.leeds.ac.uk/nikos/tex2html/doc/latex2html/
 
+
 To use a smaller (9-point) font in a LaTeX document, use
 ```
   \makeatletter\input{size09.clo}\makeatother
 ```
 as the first set of commands after \documentclass.
 
+
 The TeX FAQ is searchable:
     http://www.tex.ac.uk/cgi-bin/texfaq2html
 or printable, available from CTAN, in
 //nobreak
+
 
  * usergrps/uktug/faq/newfaq.ps     (for A4 paper)
  * usergrps/uktug/faq/newfaq.pdf    (likewise)
  * usergrps/uktug/faq/letterfaq.ps  (for U.S. letter-size paper)
  * usergrps/uktug/faq/letterfaq.pdf (likewise)
 
+
 Environment for formatting pseudocode
 http://homes.cs.washington.edu/~zasha/latex.html
 
+
 To get a plain tilde character in LaTeX, do:  \textasciitilde.
 This works even in \tt font.
+
 
 In LaTeX, any character can be obtained by giving its ASCII code.
 The left and right braces are, respectively, \char"7B and \char"7D.
@@ -1568,17 +1734,22 @@ Using \{ in \tt yields a Roman "{", it seems.  Here are macros that use the
   \newcommand{\ttrcb}{\texttt{\char "7D}}
 ```
 
+
 To set the page number in LaTeX:  \setcounter{page}{98}
+
 
 One way to number LaTeX figures by chaper/section, 1.1, 1.2, ..., 2.1, ...:
   http://www-compiler.csa.iisc.ernet.in/~janaki/tex/numbering.html
 
+
 Three LaTeX references, all published by Addison-Wesley:
 //nobreak
+
 
  * LaTeX:  A Document Preparation System, by Leslie Lamport, 1994
  * The LaTeX Companion, by Goossens, Mittelbach, and Samarin, 1994
  * A Guide to LaTeX, by Helmut Kopka and Patrick Daly, 1999
+
 
 Do not use math mode (such as $define$) for italics.  Instead, use
 \emph{define} or \mathem{define}.  Math mode does not use ligatures and gets
@@ -1594,9 +1765,11 @@ other good ways to get the same output.)  This small point will improve
 readability and will build confidence that you have been careful throughout
 your work.
 
+
 The "beamer" package permits making nice slides with LaTeX.
 (It's better than the "prosper" package, according to Stephen McCamant.)
 "t" class option puts slide content at top rather than vertically centered.
+
 
 Any LaTeX-Beamer slide containing a verbatim environment must start out:
 ```
@@ -1604,17 +1777,20 @@ Any LaTeX-Beamer slide containing a verbatim environment must start out:
 ```
 (or [containsverbatim], though that's more typing)
 
+
 In LaTeX-Beamer:
 ```
   \begin{frame}[shrink=5]   permits change of font size
   \begin{frame}[squeeze]    reduces vertical space
 ```
 
+
 In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no
 larger in display mode than in any other math mode), do something like
 ```
   \newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}
 ```
+
 
 For a paragraph in a smaller font, on the smaller font's baseline
 inter-line spacing (but it isn't permitted to be broken across columns), do
@@ -1623,6 +1799,7 @@ inter-line spacing (but it isn't permitted to be broken across columns), do
   ...
   }
 ```
+
 
 This defines a \Hline macro that is like \hline, but it has an independent
 thickness.
@@ -1635,8 +1812,10 @@ thickness.
 \makeatother
 ```
 
+
 LLNCS (LaTeX LNCS) style:
 wget ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip
+
 
 Derek Rayside says:
 I wrote a little latex macro that lets one write things such as:
@@ -1654,8 +1833,10 @@ The macro file is available at:
 and a bit more documentation is at:
    http://web.mit.edu/~drayside/www/graphviz.tex/main.pdf
 
+
 In LaTeX, use \enlargethispage to expand a page or column, fitting slightly
 more text on it.
+
 
 Tell TeX programs (from the teTeX distribution, which is standard on modern
 Unix systems) to default to US-Letter-sized paper:
@@ -1671,6 +1852,7 @@ To make dvips produce lettersize output by default, edit config.ps (maybe in
 /g2/local/lib/texmf/texmf/dvips/config/config.ps) to make sure the "letter"
 pagesize block comes first; the first "@" block is the default.
 (Otherwise, one must invoke dvips with the "-t letter" switch.)
+
 
 Emacs "Local variables" section of a LaTeX file looks like one of the following:
 ```
@@ -1689,6 +1871,7 @@ Emacs "Local variables" section of a LaTeX file looks like one of the following:
  %%% TeX-master: "daikon-ioa-2002"
  %%% End: 
 ```
+
 
 LaTeX Verbatim environment with embedded commands:
 ```
@@ -1711,6 +1894,7 @@ Or set parameters globally:
 The fancyvrb package is preferable to:
 //nobreak
 
+
  * the moreverb package.  (The moreverb documentation recommends fancyvrb!)
  * \alltt, which is built into LaTeX (except possibly for very simple tasks
    or use with Hevea)
@@ -1725,6 +1909,7 @@ The fancyvrb package is preferable to:
    it's best to emphasize what is most important, which is never the keywords.
 //nobreak
 
+
 A disadvantage of fancyvrb is that Hevea only partially supports it; for
 example, Hevea does not support the commandchars functionality nor its
 `\VerbatimInput` command.  The Hevea manual (section B.17.12) recommends the
@@ -1732,11 +1917,13 @@ moreverb package.
 Note that Computer Modern font has no bold fixed width font.
 (See elsewhere in this file for solutions.)
 
+
 The lstlisting package by default puts its line numbers in the column gutter.
 To fix this, use:
 ```
   \begin{lstlisting}[xleftmargin=5.0ex]
 ```
+
 
 To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here are some options.
 When using Computer Modern fonts), use
@@ -1760,6 +1947,7 @@ but if you use Lucida Bright, you probably want to scope the Lucida Bright to
 only the verbatim text.
 Courier also has regular and bold options, but it's considered very ugly.
 
+
 To include a literal backslash (or other special characters) in a LaTeX
 Verbatim (fancyverb) environment, use \SaveVerb and \UseVerb.
 ```
@@ -1775,6 +1963,7 @@ Even simpler is the verbdef package:
   \mymacroname
 ```
 
+
 In LaTeX, as a general rule, backslashing punctuation characters inside
 \code{} won't give you the right tt-font ones:  you need to either replace
 \code with \verb or use \char and an ASCII code for the symbol, such as
@@ -1785,6 +1974,7 @@ or, to get a backslash
 ```
   \newcommand{\bs}{\char"5C}
 ```
+
 
 The llncs.cls style (class) file (and also sig-alternate.cls) does
 ```
@@ -1797,9 +1987,11 @@ that size font in the program.  To fix this, find the "\newcommand" for
 or in `/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo`)
 and copy it to the document after the "\documentclass" directive.
 
+
 The PGF package for LaTeX makes drawings, much like LaTeX picture mode or
 the pstricks package, but works with PDF and is much more powerful than
 LaTeX picture mode.
+
 
 To install a LaTeX package; to generate foo.sty (or foo.cls) from foo.dtx, run
 ```
@@ -1807,7 +1999,9 @@ To install a LaTeX package; to generate foo.sty (or foo.cls) from foo.dtx, run
 ```
 and then copy the resulting file somewhere appropriate.
 
+
 TeX fonts are in /usr/local/lib/tex/fonts/tfm.
+
 
 Aim to make your figure captions self-explanatory.  A short caption ("graph
 of the results") forces readers to hunt through the text in order to
@@ -1817,6 +2011,7 @@ elements) in the caption itself; they take up no more space there, but are
 easily located either by a careful reader or by someone flipping through
 the document.  This also makes the figures more likely to draw readers into
 the text.
+
 
 Here is a definition of a \todo macro for LaTeX:
 ```
@@ -1844,22 +2039,26 @@ Another way to say this is to always jam \todo against surrounding text
 (either before or after, it doesn't matter).  If there is space both before
 and after \todo, then when \todo is turned off, there are two spaces rather
 than one at that location.
-.
+
 (An alternate definition of \todo would be
 `\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`
 but that executes \leavevmode and so it cannot span paragraphs.)
+
 
 Absolute value in LaTeX:
 ```
   \left| \frac{A+B}{3} \right|
 ```
 
+
 "such that" vertical bar in LaTeX, such as in a set comprehension: \mid
+
 
 Typesetting pseudocode in LaTeX:
 http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms
 Possible choices seem like
 //nobreak
+
 
  * algorithmicx bundle, which includes the algpseudocode package and is compatible with the algorithm package, offers several environments.
    It's more flexible than algorithmic and is probably the best choice.
@@ -1870,15 +2069,19 @@ Possible choices seem like
     distracting); I've had trouble wrestling with it in the past.
 //nobreak
 
+
 The algorithmic LaTeX environment uses \STATE, \IF, \WHILE, \ENDWHILE...
 The algpseudocode LaTeX environment uses \State, \If, \While, \EndWhile...
 
+
 To undo LaTeX's \frenchspacing: \nonfrenchspacing
+
 
 In a two column (or at least twocolumn) document, \newpage doesn't give
 you a new page; it just gives you a new column. An alternative that works
 is \clearpage. (I think the other difference is that it also acts as a
 fence for floats, but you often want that too anyway.)
+
 
 To get extra space in a document:
 ```
@@ -1897,6 +2100,7 @@ after which only pdflatex, not regular latex, works.
 The `makethin` program of the savetrees package creates thinner versions of
 fonts.
 
+
 To adjust section numbering in LaTeX (e.g., make subsubsections be numbered):
 ```
   \setcounter{secnumdepth}{3}
@@ -1909,6 +2113,7 @@ There is no `\subsubsubsection` command, but you can make `\paragraph` be number
   \crefname{paragraph}{section}{sections}
 ```
 
+
 If a paragraph has only a word or two on its last line, try adding
 ----
 \looseness=-1
@@ -1918,16 +2123,20 @@ reduce/shorten the length of the paragraph by a line. This won't always
 work because there is a limit to how close TeX will move words. The longer
 the paragraph, the more likely this trick is successful.
 
+
 PGF/TikZ, is a declarative graphics package and relatively-friendly front end syntax
 //nobreak
+
 
  * http://sourceforge.net/projects/pgf/ -- to download
  * http://www.fauskes.net/pgftikzexamples/ -- examples
 //nobreak
 
+
 Ben Lerner says: TikZ is a bit  tricky to figure out at first (like most of
 LaTeX), but it's the most consistent and convenient graphics package I've
 found yet.
+
 
 To use color in LaTeX:
 ```
@@ -1935,9 +2144,11 @@ To use color in LaTeX:
 \textcolor{color}{words to be in color}
 ```
 
+
 To find LaTeX special command that matches a given character shape,
 scribble the shape here:
 http://detexify.kirelabs.org/classify.html
+
 
 Ways to get a circled number in LaTeX with better formatting than \textcircled:
 ```
@@ -1953,9 +2164,11 @@ Ways to get a circled number in LaTeX with better formatting than \textcircled:
  \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
 ```
 
+
 Use `-O .` To make the latexrun script put auxiliary files in the standard
 locations.  This means that standard commands such as `latex` and
 `pdflatex` can find them, without having to run latexrun every time.
+
 
 Ways to convert LaTeX to plaintext:
  * detex program (comes with LaTeX distributions):  `detex yourfile > yourfile.txt`
@@ -1964,10 +2177,12 @@ Ways to convert LaTeX to plaintext:
  * convert to PDF (disabling hyphenation), then use pdftotext
  * use pandoc
 
+
 To make cleveref use a serial comma (sometimes called an Oxford comma):
 ```
 \newcommand{\creflastconjunction}{, and\nobreakspace}
 ```
+
 
 To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
 `\newcommand{\crefrangeconjunction}{--}`
@@ -1981,12 +2196,14 @@ Alternately, do this:
 \crefrangelabelformat{figure}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
 ```
 
+
 When using the cleveref package, use \Cref at the beginning of a sentence,
 where you would capitalize a word.  Use \cref elsewhere, where you would
 not capitalize a word.  If you want the words "Section", "Figure",
 etc. capitalized throughout (this is personal preference, not a requirement
 of English or of style guides), then do "\usepackage[capitalize]{cleveref}"
 rather than mis-using \Cref where \cref belongs.
+
 
 When using hyperref and cleveref together:
 ```
@@ -2000,6 +2217,7 @@ When using hyperref and cleveref together:
 Otherwise, line numbers in the text are correct but the hyper link goes to that
 line number in the very first algorithm of the paper.
 
+
 If you get an error
 ```
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
@@ -2009,6 +2227,7 @@ and your document does not have an index, then add the `pageanchor=false` option
 ```
 \usepackage[pageanchor=false]{hyperref}
 ```
+
 
 The `latexmk` program is distributed with LaTeX and so is a fairly
 canonical way to run LaTeX until a fixed point
@@ -2022,6 +2241,7 @@ so you cannot make it re-run by `touch`ing a file, but you can do
 `latexmk -C` to clean up all output or
 `latexmk -gg ...` to clean then run.
 
+
 To get less verbose LaTeX output:
 ```
 latexmk -silent ...
@@ -2031,11 +2251,13 @@ However, this suppresses some error messages, so use:
 latexmk -silent -pdf -interaction=nonstopmode myfile.tex || latexmk -gg -pdf -interaction=nonstopmode myfile.tex
 ```
 
+
 For a single-colum, double-spaced version of an ACM LaTeX paper, for review:
 ```
 \documentclass[acmlarge,anonymous,]{acmart}
 \usepackage[doublespacing]{setspace}
 ```
+
 
 To control formatting of a LaTeX paper from the command line, add to the paper:
 ```
@@ -2055,10 +2277,12 @@ paper-notodos.pdf: paper.pdf
 	cp -pf $< $@
 ```
 
+
 Here is a way to get a LaTeX section caption to fit on one line:
 ```
 \section{\fontsize{10.3pt}{13pt}\selectfont\mbox{Quantitative and Qualitative Analysis}}
 ```
+
 
 In ACM style, to make acknowledgments smaller:
 ```
@@ -2076,8 +2300,10 @@ In ACM style, to make acknowledgments smaller:
 }
 ```
 
+
 To find the git URL for an Overleaf project, click on the word "menu" in
 the upper left corner, then (in section "sync") "git".
+
 
 To get your Git credential helper to remember an Overleaf password, clone a repository like this:
 ```
@@ -2088,6 +2314,7 @@ Then, delete the clone to prevent storing your token in its .git/config file,
 and you can clone any overleaf repository without providing the authentication token.  
 The Git authentication token expires every 6 months or so. :-(
 
+
 ```
  % Set em dashes (LaTeX ---) with thin spaces surrounding them.
  \usepackage[kerning=true]{microtype}
@@ -2097,6 +2324,7 @@ The Git authentication token expires every 6 months or so. :-(
 	 \textemdash  = {167,167} % thinspace = 1/6 em
      }
 ```
+
 
 LaTeX font sizes:
 ```
@@ -2112,6 +2340,7 @@ LaTeX font sizes:
 \Huge
 ```
 
+
 In Latex, there should be a space before a citation, for example:
   one plus one is two \cite{authority}
 It is conventional to use a non-breaking space (~) so the citation
@@ -2120,16 +2349,19 @@ doesn't start a line in the generated document:
 Don't put a regular space before the non-breaking space:
   WRONG one plus one is two ~\cite{authority}
 
+
 In LaTeX, `~' is a non-breaking space.  It should never be adjacent to
 another space.  For example, do not write `text ~\cite{ref}` because that
 will put two spaces between "text" and the citation, which looks bad.
 Instead, write `text~\cite{ref}`.  Similarly, do not write `Figure
 ~\ref{fig:beautiful}` but write `Figure~\ref{fig:beautiful}`.
 
+
 In LaTeX, always jam `\footnote` against the preceding text.  If you write
 `text \footnote{...}`, then there is an ugly space between the text and the
 footnote mark, and LaTeX might even put a line break or a page break
 between them.
+
 
 This change prevents an "underfull hbox" warning.
 I need to see whether it is still needed with the latest acmart.cls:
@@ -2151,6 +2383,7 @@ index b97409f..17ec5fb 100644
  \fi
  \def\ACM@linecount{%
    \if@ACM@review
+
 
 
 To typeset exercises and solutions in a LaTeX document:
@@ -2178,19 +2411,23 @@ probsoln
   For selecting problems from a database or bank of problems.
 
 
+
 Put '~' before \cite, but do not put '~' before \footnote.  '~' is a
 non-breaking space.  It formats just like a space ' ', but it prohibits line
 breaks at that location.  You don't want a space before the footnote mark (so no
 '~' or space), but you do want a space between text and a citation (so use '~').
 
 
+
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+
 
 // This entry is to avoid having the ones earlier in this file be interpreted.
 // Local Variables: 
 // major-mode: text-mode
 // End: 
+
 
 // LocalWords:  Hevea wiki makeatletter topfigrule kern hrule botfigrule floatsep
 // LocalWords:  dblfigrule makeatother nocaptionrule textfloatsep dbltextfloatsep

@@ -4,17 +4,22 @@
 :experimental:
 
 
+
 This file is a bit of a catch-all, for everything that does not have a
 dedicated wiki page.
+
 
 toc::[]
 
 
+
 == PostScript and PDF
+
 
 To convert a text file to PostScript or PDF, here are possibilities.
 Reasonable choices:
 //nobreak
+
 
  * paps: is packaged for Unix distributions (Ubuntu, Red Hat), so perhaps
    it is widely used, even though the last release was in 2007
@@ -22,8 +27,10 @@ Reasonable choices:
    install because you have to install clisp first.
 //nobreak
 
+
 Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
 //nobreak
+
 
  * enscript: doesn't handle 8-bit by default
  * a2ps: probably handles 8-bit
@@ -31,6 +38,7 @@ Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
  * u2ps: Internet chatter says it is not as good as paps?
  * h2ps and bg5ps: intended specifically for Asian fonts
 //nobreak
+
 
 Enscript is a standby, since it has so many options and is widely installed,
 but it doesn't handle UTF-8, and GNU enscript has not been updated since
@@ -61,8 +69,10 @@ for twoup output use
 enscript common options:
 //nobreak
 
+
  * -h: no burst/header page
  * -B: no page headings
+
 
 To convert a PostScript file for A4 paper for printing on letter
 size paper (that is, to shift the text down on the page), use
@@ -78,11 +88,13 @@ To create Encapsulated PostScript, can also run
   pdftops -eps
 ```
 
+
 To rotate a PostScript document (landscape to portrait to seascape), use
 the "L" or "R" or "U" modifiers.  For instance:
 ```
   pstops -pletter '0L(8.5in,0)' orig.ps rotated-counterclockwise.ps
 ```
+
 
 Tools for transforming PDF files:
  * PDFjam is a single program, along with 10 wrappers, each with
@@ -94,6 +106,7 @@ Tools for transforming PDF files:
    Maybe it can be installed more easily?
  * cpdf is an alternative to both; but is free only for personal use.
    "Charities and educational institutions still require a license."
+
 
 Separate/split a file into individual pages:
 ```
@@ -116,12 +129,14 @@ To concatenate PDF files:
   pdftk ${ALL_PDFS} cat output singlefile.pdf 
 ```
 
+
 To rotate a PDF file:
 ```
   cpdf -rotate 180 in.pdf -o out.pdf
 ```
 (This worked better than -rotate-contents for me, but see https://www.coherentpdf.com/cpdfmanual/indexse22.html .)
 Gradescope has a "rotate submission" feature, but it requires a lot of clicks.
+
 
 Use psnup to place multiple logical pages of a PostScript document on a single
 physical page (say, to print two-up), try psnup.
@@ -151,17 +166,20 @@ evince's print dialog does not seem available from the command line.
  +
 psnup or pdfnup seem better than mpage.
 
+
 Sample use of mpage (-o suppresses lines between pages):
 ```
   mpage -2 file.ps > file-2up.ps
 ```
 but don't use it; psnup seems better.
 
+
 To compute a correct bounding box for an Encapsulated PostScript file:
 ```
   epstool --copy --bbox bad.eps --output good.eps
 ```
 This replaces the obsolete bbfig program.
+
 
 To compute a correct MediaBox and/or CropBox (the PDF equivalents of a
 bounding box):
@@ -177,10 +195,12 @@ PDF file, and "save as EPS" is no longer supported.  I cropped it by hand
 in Acrobat Professional.  Or, do this:
 //nobreak
 
+
  * save as PDF
  * pdftops -eps file.pdf
  * bbfig -o file.eps | gv -
    and add the %%BoundingBox line to the header of the ps file.
+
 
 
 // bbfig computes the bounding boxes of PostScript figures.
@@ -190,10 +210,13 @@ in Acrobat Professional.  Or, do this:
 //   bbfig -o file.ps | gv -
 // ```
 
+
 ghostview:  view PostScript on an X windows display.
+
 
 Conversions between PostScript and PDF:
 //nobreak
+
 
  * PS -> PDF:
 ```
@@ -213,9 +236,11 @@ When using acroread to manually do the conversion, selecting the option
 "Download Fonts Once" in the Print menu may cause math fonts to be messed
 up; in case of that trouble, deselect this option.
 
+
 If you are having trouble printing from Acrobat Reader (such as mising
 characters on some pages):
 Printer Properties >> Advanced >> Postscript Options >> PS Output : Optimize for Portability
+
 
 If ghostview can't view a document correctly, then perhaps the PostScript
 file starts with something like
@@ -229,6 +254,7 @@ Try changing the first line to
 ```
 and the ghostview will turn off looking for ADSC comments.
 Or, use gs (ghostscript), which gives a plain X window, no ghostview buttons.
+
 
 To convert an Excel PostScript file into Encapsulated PostScript (for
 inclusion in a LaTeX document, for instance), use Greg Badros's
@@ -252,6 +278,7 @@ put it in a LaTeX document.
 Alternately, Mike Perkowitz says:
 //nobreak
 
+
  1. print chart to a postscript file in excel.
  2. edit the postscript:
     - the file is full of little blocks that are, i assume, the PC representation
@@ -269,10 +296,12 @@ Alternately, Mike Perkowitz says:
  5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
 //nobreak
 
+
 Note that the ghostscript viewer on the PCs can also convert from PS to EPS,
 but i had trouble getting it to rotate and save that rotation. and if you do
 psfix after the EPS conversion, i think your bounding box gets made full page
 size again or something. 
+
 
 To print the word DRAFT diagonally on every page of a PostScript document,
 insert this at the second line of a postscript file (immediately after the
@@ -285,21 +314,27 @@ insert this at the second line of a postscript file (immediately after the
 It assumes letter-size paper.
 Or, if you're using LaTeX2e, use the draftcopy package.
 
+
 Converting PostScript to text (ASCII), and other PostScript FAQs:
 http://www.geocities.com/SiliconValley/5682/postscript.html
 Just using gs (ghostscript; see "ps2ascii" alias) works better than the pstotext program.
 
+
 To add page numbers to a PostScript document (does not work for PDF):  pspage
+
 
 PrimoPDF.com is a free PDF converter for most Windows applications.
 
+
 sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
+
 
 To turn off screensavers in Gnome:
  1. Click on the little foot in the lower left
     Programs->Settings->Desktop->Screensaver
  2. Select 'No Screensaver' in the list in the upper left
  3. Click 'OK'
+
 
 Do 
 ```
@@ -309,32 +344,40 @@ to work around this bug with right Meta (Alt) Tab not working:
   http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=258003
 It's supposed to be fixed now.
 
+
 To convert a paper formatted for LNCS into two-column, use
 ```
   lncs2up file.ps
 ```
 
+
 To convert a Microsoft Word .doc file to PDF:
 //nobreak
+
 
  * open it in OpenOffice and export as PDF
  * wvPDF file.doc file.pdf
 //nobreak
 
+
 Neither technique dominates the other, and each is sometimes bad
+
 
 To convert PDF to ASCII text (txt) format, use the pdftotext program, which is
 part of the xpdf package.
+
 
 To compress a PDF file:
 ```
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
 ```
 
+
 To convert a 1-page PDF to good-quality .gif:
 ```
   convert -density 300 -quality 100 file.pdf file.gif
 ```
+
 
 To create a multi-page set of tiles (each tile is letter size) that can be
 tiled together to make a poster, use `pdfposter`, eg `pdfposter -p3x3Let in.pdf out.pdf`.
@@ -347,7 +390,7 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
 ```
 A problem is that this doesn't respect the printable area of the printer.
 See http://leolca.blogspot.com/2010/06/pdfposter.html .
-.
+
 Here are older commands that use `poster`, from when I wasn't able to get the
 pdfposter program to work, so I converted to PostScript and used poster instead:
 ```
@@ -364,8 +407,10 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
   ps2pdf ${BASENAME}-scaled1.2.ps
 ```
 
+
 To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
 to the end of the link's URL.
+
 
 To combine/interleave two PDF files, one containing odd pages scanned and the
 other containing even pages scanned in reverse order:
@@ -374,7 +419,9 @@ other containing even pages scanned in reverse order:
  * Online: https://www.sejda.com/alternate-mix-pdf
 
 
+
 == WWW and HTML
+
 
 To make a webpage automatically forward/redirect, see
   http://www.cs.washington.edu/info/faq/homefaq.html#else
@@ -384,6 +431,7 @@ More simply, do:
 ```
 This belongs in the `<head>` section, along with `<title>`.
 The number "0" can be set to a delay in seconds.
+
 
 To restart the httpd server:
 ```
@@ -396,6 +444,7 @@ or else
 ```
 Another possible problem that could lead to failure to server webpages is
 that I failed to start Guidescope; do "myxapps".
+
 
 To allow use of "order", "allow", and "deny" in .htaccess, I had to add the
 following to /etc/httpd/conf/httpd.conf:
@@ -410,8 +459,10 @@ following to /etc/httpd/conf/httpd.conf:
 ```
 (Then I stopped and restarted the http server.)
 
+
 HTML checking:
 //nobreak
+
 
  * htmlchek is quite picky (not necessarily a problem) and hasn't been
    updated since February 20, 1995
@@ -420,9 +471,11 @@ HTML checking:
  * weblint is basic but functional:  http://www.weblint.org
  * Try W3C HTML Validation Service, http://validator.w3.org/
 
+
 "flatten" program converts hierarchies of WWW (World Wide Web) pages into a
 single page, for easier browsing.  The pages are concatenated in
 depth-first order.
+
 
 In HTML and CSS, to set font color and style, you can do one of the following:
 ```
@@ -457,14 +510,17 @@ In HTML and CSS, to set font color and style, you can do one of the following:
   </div>
 ```
 
+
 For horizontal and vertical alignment in HTML:
 ```
     <img src="version-control-fig1.png" alt="Basic version control" style="float:right" />
     <img src="version-control-fig2.png" alt="Centralized version control" style="vertical-align:middle" />
 ```
 
+
 HTML em dash: &mdash; or &#8212;
 HTML en dash: &ndash; or &#8211;
+
 
 To use the html-update-toc script to maintain a table of contents in a
 webpage, insert the following near the top of the file:
@@ -474,6 +530,7 @@ webpage, insert the following near the top of the file:
 <!-- end toc -->
 ```
 Also consider running, in Emacs, M-x html-add-heading-anchors .
+
 
 The checklink program (from W3C) tells about broken links in HTML documents.
 Run like this:
@@ -486,9 +543,11 @@ lots of threads and never return.)
 Probably best to run these in the background with output sent to a file.
 `tidy` checks HTML.
 
+
 /uns/share/bin/wwwis is a Perl script which adds image size tags to
 HTML documents.  It's a nifty way to speed page rendering and avoid
 ugly incremental reflows.
+
 
 To convert HTML to a printable form (PostScript):
 I sometimes have trouble with html2ps, and find that htmldoc is better:
@@ -501,6 +560,7 @@ html2ps converts a HTML file to PostScript, potentially recursively.
 ```
 //nobreak
 
+
  * "-n" means number pages
  * "-u" means underline links
  * "-C bh" means generate a table of contents.
@@ -508,6 +568,7 @@ html2ps converts a HTML file to PostScript, potentially recursively.
    means prompt for remote documents).  Watch out:  using -W b might seem
    reasonable, but it will try to print some binary files!
  * "-2L" means two-column landscape
+
 
 Apache 1.3.33 recognizes only the last "Options" directive, it seems.
 So put all the arguments in one directive:
@@ -521,8 +582,10 @@ A caveat about FollowSymLinks:  if any directory along the path is not
 accessible to the web server, then the symbolic link will appear not to
 exist.
 
+
 If guidescope isn't working, try "guidescope &".  I'm not sure exactly how
 to make this start up automatically every time.
+
 
 Here is a template/boilerplate for the start/beginning of a typical HTML file:
 ```
@@ -542,15 +605,18 @@ Here is a template/boilerplate for the start/beginning of a typical HTML file:
 </html>
 ```
 
+
 To find out the location of the apache/httpd config files and other
 information about the server, execute `httpd -V`.  This works on all
 systems that support apache (macos, windows, linux)
+
 
 To add a "favicon.ico" image to the address bar, do this in the
 `<head>...</head>` section of the HTML document:
 ```
   <link rel="icon" type="image/png" href="my-favicon.png" />
 ```
+
 
 Do not use the `<tt>` tag, which is not supported in HTML5.
 Instead, use one of
@@ -560,7 +626,9 @@ Instead, use one of
  * `<samp>` for computer output
 
 
+
 === Firefox
+
 
 Firefox extensions (.xpi files): to install, open them in Firefox.
 Adblock: http://adblock.mozdev.org/
@@ -568,6 +636,7 @@ Firefox Adblock filter list: http://www.geocities.com/pierceive/adblock/
 (Must update by hand via "Tools > Adblock > Preferences > Adblock Options
 >> Import filters".)
 Also get the Adblock filter updater extension.
+
 
 In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in
 about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &
@@ -577,17 +646,21 @@ necessarily desirable:  sans serif is easier to read on screen, but serif
 is easier to read on paper.  I wish there was an easy way to get both of
 those features.
 
+
 If Firefox or Thunderbird says that a copy is already running, but that
 doesn't seem to be the case, then find and delete the file .parentlock
 somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .
+
 
 In Firefox, to make searches ("find") default to case-insensitive:
 Press Ctrl+F , the quick find appears at taskbar.
 Uncheck the Match case check box
 
+
 If Firefox behaves badly (doesn't go to homepage, address bar doesn't
 update, back button doesn't work), try moving your ~/.mozilla directory
 aside, because one of your plugins may be corrupting Firefox.
+
 
 When printing a blog (or some other types of webpages) from Firefox, often
 only the first page is printed:  each blog post is one box, but overflowed
@@ -621,12 +694,16 @@ Here are two fixes:
    and edit the .html file to reference the local version of the .css file.
 
 
+
 === Chrome
+
 
 For the URLs of all (recently-used) tabs, browse to:
 chrome://inspect/#pages
 
+
 == Kerberos
+
 
 For jobs running longer than 8 days that need Kerberos tickets, see
   /afs/csail/group/lis/bin/lislongjob
@@ -636,6 +713,7 @@ Finally, see the "longjob" command.  The syntax for this one is
   longjob <your job>
 ```
 longjob -h shows other options.
+
 
 To renew a Kerberos ticket (without having to type a password):
 ```
@@ -657,8 +735,10 @@ To run a detached long job, you can do
 ```
 but "longjob" may be more convenient.  
 
+
 kpasswd:  change Kerberos password
 (I may need to do `kinit` before `kpasswd`.)
+
 
 Cross-realm Kerberos authentication:
 To get athena tickets:
@@ -683,15 +763,20 @@ Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 
 
 
+
+
 == AFS
+
 
 To modify AFS directory/file permissions/acls/access control lists, see
 //nobreak
+
 
  * http://www-2.cs.cmu.edu/~help/afs/afs_quickref.html
  * http://openafs.org/
  * http://web.mit.edu/answers/unix/unix_chmod.html
 //nobreak
+
 
 To view AFS permissions:
 ```
@@ -712,10 +797,12 @@ To make a directory and all subdirectories world-readable:
   find . -type d -exec fs sa {} mernst.cron rlidw \;
 ```
 
+
 Seven rights/permissions are predefined by AFS: four control access to
 a directory and three to all of the files in a directory.
 The four directory rights are:
 //nobreak
+
 
     * lookup (l) -- list the contents of a directory
     * insert (i) -- add files or subdirectories to a directory
@@ -723,24 +810,30 @@ The four directory rights are:
     * administer (a) -- modify the ACL
 //nobreak
 
+
 The three rights that affect all of the files in a directory are:
 //nobreak
+
 
     * read (r) -- read file content and query file status
     * write (w) -- write file content and change the Unix permission modes
     * lock (k) -- use full-file advisory locks
 //nobreak
 
+
 The following are shortcuts:
 //nobreak
+
 
     * all : gives all rights - rlidwka
     * write : gives rlidwk rights
     * read : gives rl rights
     * none : removes all rights
 
+
 In AFS, (only) the user mode bits of regular files retain their function;
 they are applied to anyone who can access the file.
+
 
 AFS groups:
 (On Athena, don't use these commands.
@@ -762,9 +855,11 @@ Create a group:
 (If you belong to a group, you can add members if its fourth privacy flag
 is the lowercase letter a.)
 
+
 To determine how much AFS (e.g., Athena) quota is available/free and used
 (i.e., to determine disk space usage), do
 fs lq /mit/6.170
+
 
 The command 
 ```
@@ -772,6 +867,7 @@ The command
 ```
 on a CSAIL Debian box will show you all the times in the last month that
 your machine noticed the AFS servers being down.
+
 
 To test AFS latency performance (when the file system is sluggish), run
 (bash syntax):
@@ -782,15 +878,19 @@ To test AFS latency performance (when the file system is sluggish), run
 such problems.)
 
 
+
 == Perl
+
 
 To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
 ```
 sudo cpanm --installdeps .
 ```
 
+
 Perl5:
 //nobreak
+
 
  * arguments are in `+@_+`, that is `+$_[0]+`, `+$_[1]+`, etc.
  * "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
@@ -798,14 +898,17 @@ Perl5:
  * foreach implicitly localizes the argument inside the for body.
  * `wantarray` (no parens) returns true if current sub called in list context
 
+
 Perl5 regexps:
 //nobreak
+
 
  * To match end of line without newline, `\Z(?!\n)`.
  * Add `?` after a repetition operator to render it stingy instead of greedy: `foo(.*?)bar`
  * To quote regexp metacharacters, use `\Q...\E` or `quotemeta()`.
  * `(?:REGEXP)` is like `(REGEXP)` but doesn't make backreferences.
 //nobreak
+
 
 Perl5 data structures:
 ```
@@ -815,6 +918,7 @@ Perl5 data structures:
   @{$foo}[$bar] => foo = reference to array; take that array's bar'th element
 ```
 Don't assign result from splice; use `splice(@foo, $i, 0)`, not `@foo = splice(...)`
+
 
 Perl to consider:
 ```
@@ -826,14 +930,18 @@ Perl to consider:
  Compiler: do  "perl -MO=C foo.pl > foo.c"
 ```
 
+
 Perl 5 uses $PERLLIB environment variable as include path for libraries
 
+
 In awk, perl, and C, output format "%2.1f" rounds, does not truncate.
+
 
 Perl regular expression to match a string:
 ```
   /"([^"\\]|\\[\000-\377])*"/
 ```
+
 
 In Perl, to read (slurp) a whole file into a string, do
 ```
@@ -847,13 +955,16 @@ open(FILE, "data.txt") or die("Unable to open file");
 close(FILE);
 ```
 
+
 To run Perl interactively, invoke the Perl debugger on an empty program:
 ```
    perl -de 42
 ```
 
+
 In Perl, to count the number of newlines (or any other character) in a
 string, use tr/\n// (or tr/\n/\n/).
+
 
 To make a script use perl without specifying an explicit #!path, adjust the
 "-n" flag as appropriate, then put this at the top instead of #!/usr/bin/perl:
@@ -868,6 +979,7 @@ or, alternately:
 ```
 Using `#!/usr/bin/perl` is faster but requires knowing perl's path.
 
+
 To install/build a perl module, do the following as root:
 ```
   perl -MCPAN -e shell
@@ -875,7 +987,9 @@ To install/build a perl module, do the following as root:
 ```
 For more details, see ~mernst/wisdom/building/build-perl-module
 
+
 In Perl, to determine whether file named $foo exists, use "if (-e $foo) ...".
+
 
 Perl scripts should start this way, for portability and error checking:
 ```
@@ -885,8 +999,10 @@ use English;
 $WARNING = 1;
 ```
 
+
 In perl:
 //nobreak
+
 
  * To read a whole file:  $/ = undef.
  * To read by paragraphs:  $/ = "\n\n".
@@ -898,8 +1014,10 @@ In perl, to properly open a file, check like this:
   open(FILE, $filename) or die "Can't open '$filename': $!";
 ```
 
+
 In Perl, Date::Manip seems a touch nicer than Date::Calc.
 (There's also Date::Format and Date::Parse, but Date::Manip does it all.)
+
 
 In perl, write
 ```
@@ -907,10 +1025,12 @@ In perl, write
 ```
 to make the file access test operators (-r, -w, etc) work better for AFS.
 
+
 To disable Perl's "deep recursion" warnings (they're not errors), use
 ```
   no warnings 'recursion';
 ```
+
 
 In Perl, here is a way to extract the unique elements from a list.
 ```
@@ -925,11 +1045,13 @@ In Perl, here is a way to extract the unique elements from a list.
   }
 ```
 
+
 Perl trick:
 ```
 use FindBin ();
 use lib "$FindBin::Bin";
 ```
+
 
 To lint Perl:
 ```
@@ -939,6 +1061,7 @@ perl -Mstrict -Mdiagnostics -cw <file>
 For Perl coding standards:
  * Perl::Lint
  * Perl::Critic: run with: `perlcritic --brutal --verbose 9 file.pl`
+
 
 To lint/format/pretty-print perl files, put this in the Makefile:
 ```
@@ -950,18 +1073,23 @@ perl-style-check:
 ```
 
 
+
 == Python
+
 
 In Python, by default variables have function (not block) scope.  To refer
 to (really, to change) a global variable, use the "global" declaration in
 the class/function/whatever.
 
+
 To test whether a file exists in Python, do os.path.exists('/file/name').
 In Python, to reimport module foo, do reload(foo).
+
 
 Python debugger:  pdb ~/python/test.py
 You need to "s"tep a few times before "n"ext, which would jump over the
 entire program.  Or just do "continue" to the error.
+
 
 For time-critical Python runs, disable assertions via -O command-line
 option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
@@ -980,8 +1108,10 @@ C-x C-e.
 After you change py-which-args, kill the `*Python*` buffer and restart
 (it's not enough to kill the Python process and restart).
 
+
 As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
 even if it is faster...
+
 
 Typical Makefile rules to enforce Python style rules:
 ```
@@ -1010,12 +1140,15 @@ showvars:
 	@echo "PYTHON_FILES=${PYTHON_FILES}"
 ```
 
+
 To activate conda:
 ```
 source activate <yourenvironmentname> 
 ```
 
+
 To disable tqdm output:
+
 ```python
 from functools import partialmethod
 if os.getenv("TERM", "dumb") == "dumb":
@@ -1025,20 +1158,26 @@ More info at:
 https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504
 https://stackoverflow.com/a/67238486/173852
 
+
 Write Python docstrings as a command ("Do this", "Return that"), not as a description ("Does this", "Returns that").
 Write `@override` on an overriding method; this requires `from typing import override`.
+
 
 Running `mypy` on a script without a `.py` extension yields "error:  Duplicate
 module named '__main__'".  To fix it, pass `--scripts-are-modules` to `mypy`.
 
+
 In Python, instead of `datetime.date.today()`, use `datetime.now().astimezone()`.
+
 
 To suppress a Ruff error or warning message on one line of code:
 ```
 .... # noqa: F401
 ```
 
+
 The simplest way to read or write a a whole file into a string in Python is:
+
 ```python
 from pathlib import Path
 file_content = Path('filename.txt').read_text()
@@ -1046,21 +1185,28 @@ Path('filename.txt').write_text(new_file_content)
 ```
 
 
+
 == Rust
 
+
 Rust code should have, in its main file (such as `main.rs`):
+
 ```rust
 #![warn(missing_docs)]
 ```
 
 
+
 == Shells
+
 
 Parsing command-line arguments in a Posix shell script:
 https://gist.github.com/deshion/10d3cb5f88a21671e17a
 
+
 Redirecting output in command shells:
 //nobreak
+
 
 * In sh/bash (in a shell script):
    ** To redirect standard error to standard output, use `2>&1`.
@@ -1081,13 +1227,16 @@ Redirecting output in command shells:
       use `>&` (`>` redirects just standard output to the file).
    ** To redirect standard error and output through the pipe, use `|&`.
 
+
 In bash shell scripts, `"$@"` mans all the arguments, and it quotes each argument
 individually before concatenating them (separated by spaces).
 In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".
 In csh shell scripts, `$*` means all the arguments.
 
+
 In bash, interactive shells call `.bashrc`; noninteractive shells call
 `.bash_profile`.
+
 
 In tcsh, a for loop looks like
 ```
@@ -1100,15 +1249,19 @@ In bash, a for loop looks like
   for name [ in word ] ; do list ; done
 ```
 
+
 In bash, the exit status ("exit code") of a command is stored in variable "$?".
 In csh, it is stored in variable "$status".
 Zero means success, non-zero means failure.
+
 
 Command substitution, performed by a subshell, in csh/bash:
 enclose in backquotes/backticks (+\`...`+).
 In sh, it's better style to use +$(...)+ than +\`...`+, but both have the same effect.
 
+
 Bash's `hash -r` command is equivalent to csh's `rehash`.
+
 
 When debugging a bash script, it can be helpful to turn on Bash's strict
 error handling and debug options (exit on error, unset variable detection
@@ -1130,6 +1283,7 @@ It's also possible to set these when running the script:
   sh -xv myscript.sh
 ```
 
+
 By default, a shell script continues if a command within it fails.  This is
 highly error-prone.  To halt/stop on error, almost all shell scripts should start with
 ```
@@ -1140,6 +1294,7 @@ If it's a bash script (bash 3.0 or later), it should also contain
 set -o pipefail
 ```
 If there is a command that is allowed to fail, add `|| true` at its end.
+
 
 To get bash 3.0 to fail if any command in a pipeline fails, do
 ```
@@ -1166,10 +1321,12 @@ or the following simple bash script that preserves exit status
   exit $result
 ```
 
+
 The Unix program "timeout" seems to subsume `exec_cpu_limited` (and perhaps
 more).
 The shell builtin "ulimit" can be used to limit a processes stack size, CPU
 time, virtual memory, etc.
+
 
 In general, a bash script should contain this at the top:
 ```
@@ -1179,6 +1336,7 @@ and optionally
 ```
   set -o xtrace
 ```
+
 
 To get a shell in which none of your personal customizations (environment
 variables) are set, do:
@@ -1202,19 +1360,23 @@ but this did not work; I still got
   X11 connection rejected because of wrong authentication.
 ```
 
+
 To create a shell with no environment variables set:
 ```
  /usr/bin/bash --noprofile --norc
 ```
 
+
 In Unix/Linux, owner permissions take precedence over group permissions.
 Suppose a file has o-w and g+w permissions, and suppose that the owner is
 in the group.  Then the owner cannot write the file.
+
 
 A portable way to obtain the absolute path of a directory:
 ```
 dir="$(unset CDPATH && cd "$dir" && pwd)"
 ```
+
 
 Diagnostics for shell scripts (`set -o pipefail` is only for bash):
 ```
@@ -1235,12 +1397,15 @@ set -o pipefail
 set -u
 ```
 
+
 To suppress a pylint warning, write inline:
 ```
 # pylint: disable=too-many-locals
 ```
 
+
 The `shellcheck` program is a linter for sh and bash scripts.  Run like:
+
 ```sh
 shellcheck --format=gcc
 ```
@@ -1276,7 +1441,9 @@ showvars:
 ```
 Also consider adding rules to enforce Python style, which appear elsewhere in this file.
 
+
 Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
+
 ```sh
 hexToAscii() {
   # shellcheck disable=SC2059 # Justification goes here.
@@ -1284,7 +1451,9 @@ hexToAscii() {
 }
 ```
 
+
 Typical Makefile rules for markdownlint-cli2:
+
 ```make
 style-fix: markdownlint-fix
 markdownlint-fix:
@@ -1294,7 +1463,9 @@ markdownlint-check:
 	markdownlint-cli2 .
 ```
 
+
 Typical gradle buildfile rules for markdownlint-cli2:
+
 ```gradle
 /* Validate Markdown files. */
 tasks.register("markdownlint", Exec) {
@@ -1306,12 +1477,15 @@ tasks.register("markdownlint", Exec) {
 check.dependsOn("markdownlint")
 ```
 
+
 To create a "here document"
+
 ```sh
 cat > myfile.txt <<END
 ... Contents of myfile.txt ...
 END
 ```
+
 
 To determine the directory containing the currently-executing shell script:
 bash:
@@ -1323,16 +1497,20 @@ sh:
 SCRIPT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)"
 ```
 
+
 == ssh (secure shell)
+
 
 To use ssh (and other tools like CVS, SVN, git, Hg, ...) with RSA public keys, 
 do this at the beginning of each development session (say, immediately
 after logging in):
+
 ```sh
   eval `ssh-agent`
   ssh-add
 ```
 Do not use the following, which is intended for X sessions.
+
 ```sh
   ssh-agent bash
   ssh-add
@@ -1341,10 +1519,12 @@ or, alternately:
 To run an entire X-session underneath ssh-agent:
 //nobreak
 
+
   1. move `.xinitrc` file (other X client startup script) to `.xinitrc-real`.
   2. add the command "ssh-add" to the beginning of that script.
   3. create a new `.xinitrc` script containing the sole command:
 //nobreak
+
 
 [source]
 .~/.xinitrc
@@ -1352,8 +1532,10 @@ To run an entire X-session underneath ssh-agent:
 exec ssh-agent $HOME/.xinitrc-real
 ----
 
+
 To set up public keys for ssh-agent and similar programs:
 //nobreak
+
 
  1. On client machine (from which I will login), do `ssh-keygen`
  2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
@@ -1367,11 +1549,14 @@ The `authorized_keys*` files must not be group-writeable; do this:
   chmod 600 ~/.ssh/authorized_keys2
 ```
 
+
 ssh: secure remote login.  Need to copy contents of identify.pub on client
 machine into `authorized_keys` on server machine.
 
+
 ssh2 supports sftp, an ftp client.  It does not seem to be free for
 research use.  OpenSSH does not seem to have sftp.
+
 
 SSH timeouts seem to be controlled in a variety of ways.  The
 file `/etc/ssh/sshd_config` contains a number of setups.  It
@@ -1379,6 +1564,7 @@ was suggested to set KeepAlive (possibly TCPKeepAlive) to
 avoid the firewall dropping an inactive connection.  Also
 ClientAliveInterval which causes the daemon to periodically
 poll the client to see if it is still alive.
+
 
 The single bracket `[` is an alias for the `test` command.
 `[` is specified by Posix and works in any implementation of sh.
@@ -1388,19 +1574,26 @@ portable; it works in bash, ksh, and zsh.
 For more on the difference between `[` and `[[`, see http://mywiki.wooledge.org/BashFAQ/031
 
 
+
 == X Windows
+
 
 X Windows initialization depends on .Xdefaults and .xsession files, among others.
 (.Xdefaults, aka .Xresources, is used by xrdb.)
 
+
 xmodmap:  modify keymaps in X
+
 
 xlock:  screen-locking + screen-saving program
 
+
 xterm windows:  use control + mouse to get VT/VT100 menus.
+
 
 X fonts are in /usr/local/lib/X11/fonts, aka /usr/lib/X11/fonts, among
 other places; xlsfonts lists all available X fonts.
+
 
 Linux:
 ```
@@ -1411,11 +1604,15 @@ Linux:
   F1 instead of enter = safe login
 ```
 
+
 editres lets you inspect and modify X application resources.
+
 
 xwininfo: gives information about an X Window (eg size, location, etc.)
 
+
 xev: x event tester (report to stdout all X events sent to it)
+
 
 Ctrl-Alt-"+" and Ctrl-Alt-"-" switch between resolutions on debian;
 and see /etc/X11/XF86Config.  Or run "anXious" to reset X configuration
@@ -1425,13 +1622,17 @@ To turn that off, in /etc/X11/XF86Config-4 (or /etc/X11/xorg.conf) add to "Serve
   Option "DontZap"  "true"
 (Also do "man XF86Config")
 
+
 LeftAlt-Fn switches to a new "virtual console", where "Fn" is F1 for the
 main one, F3 for the third one, etc.
 
+
 /usr/lib/X11/ is directory with rgb.txt, which is names of X11 colors.
+
 
 Sawfish window manager themes (list of problems with them)
 //nobreak
+
 
  * brushed-metal
     slightly goofly looking window title bar
@@ -1443,8 +1644,10 @@ Sawfish window manager themes (list of problems with them)
     can't drag border to resize
     doesn't have all the standard buttons at the top of the window
 
+
 "xlock -mode blank" locks the screen without running a compute-intensive
 screensaver.
+
 
 // gnomecc:  adjust properties of window manager
 // Especially:
@@ -1453,14 +1656,19 @@ screensaver.
 //  * Sawfish window manager >> Meta >> Advanced
 // (But I think I now use metacity under Gnome.)
 
+
 Debian Linux screen resolution:
 Applications >> Desktop Preferences >> Screen Resolution
 
 
 
+
+
 == C and C++
 
+
 In C++, an auto_ptr is automatically deleted at the end of its scope.
+
 
 In C++,
 char * const s;   declares a constant pointer to possibly varying data
@@ -1470,16 +1678,21 @@ In other words, const modifies the type-element to its left.
 Put another way:  "const" and "int" are declaration specifiers which may
 occur in any order; "* [const]" is a type modifier.
 
+
 Do not use dbmalloc; use dmalloc instead.
 
+
 The GNU program checker (gccchecker) detects memory use errors in a program.
+
 
 To run just the GNU C preprocessor (analogous to cpp), do gcc -E.
 To suppress line markers (line numbers) in the output, use gcc -E -P.
 To retain comments (/* ... */) in the output, use gcc -E -C.
 
+
 When compiling a C program with cc, put the -lLIBNAME flag at the end of
 the line, after the cfile name (the order matters).
+
 
 Debugging C memory (pointer) corruption problems:
 //nobreak
@@ -1500,8 +1713,10 @@ Debugging C memory (pointer) corruption problems:
  * Also consider dmalloc (debug malloc); don't use dbmalloc.
    (dmalloc is somewhat distributed with Linux; I had trouble making it work.)
 
+
 The `c++filt` program demangles (unmangles) mangled overloaded C++
 method/function names.
+
 
 To write a cpp macro which takes a variable number of arguments:
 One popular trick is to define the macro with a single argument,
@@ -1511,6 +1726,7 @@ the preprocessor to indicate a single argument:
   #define DEBUG(args) {printf("DEBUG: "); printf args;}
   if(n != 0) DEBUG(("n is %d\n", n));
 ----
+
 
 To strip all comments and blank lines from a (Java or C) file, use
 ```
@@ -1531,14 +1747,17 @@ This error:
 means I should add more "-lsocket" and such flags to my link command.  Do
 "man _undefinedsymbol_" to see where the symbol is defined.
 
+
 Insight:  GUI front end to gdb.
 http://sources.redhat.com/insight/
 Also see DDD.
+
 
 gdb:
   * For wide strings, just print with wstring2string.
   * "x/20s wstr" gives characters one per line; look at every third element.
   * "print wstr@20" gives characters on one line, but in ASCII.
+
 
 If having trouble with gdb not being able to step over inlined functions,,
 add these arguments to gcc:
@@ -1546,9 +1765,11 @@ add these arguments to gcc:
  -O0 -fno-default-inline -fno-inline
 ```
 
+
 Why g\++ 3.2 doesn't like uses of vector that g++ does:
 Two things to check:
 //nobreak
+
 
  * you must `#include <vector>`, not `<vector.h>`
  * you must either say "using namespace std;" or say "std::vector", the
@@ -1556,7 +1777,10 @@ Two things to check:
 
 
 
+
+
 == Email
+
 
 Websieve (sieve) RFC is rfc3028, with Sieve grammar and rules.
 There is a sieve email filter script tester (and syntax checker) at
@@ -1564,8 +1788,10 @@ There is a sieve email filter script tester (and syntax checker) at
 (websieve itself only creates scripts, doesn't validate them.)
 Be sure to remove any "From VM" rule before running sievetest!
 
+
 To have mailing list errors reflected to the list administrator:
 //nobreak
+
 
  * If you are using sendmail, the first thing to do is create the alias:
       owner-edb-list: edb-list-request
@@ -1577,6 +1803,7 @@ To have mailing list errors reflected to the list administrator:
     real-edb-list: :include:/usr/lib/edb-list.alias
 ```
 
+
 To expand a mailing list (alias), to learn its members:
 ```
   telnet gh 25
@@ -1587,9 +1814,11 @@ Another technique is "finger -a list@host"; at UW this works for me from
 Solaris (eg hoh), but not from Linux (eg nishin).
 If you get a 503 error, try doing "helo HOSTNAME" and then doing expn.
 
+
 Rich Salz's newsgate/mail2news program can inject all mailing list mail
 into a similarly named (local only) newsgroup, and vice versa.
 ftp.uu.net:/usenet/comp.sources.unix/volume24/newsgate/part0[1-4].Z
+
 
 To decode a MIME file (actually just one component of a mime message), use
 ```
@@ -1601,12 +1830,15 @@ For quoted-printable, use -q flag as well.
 Also see the script (stolen from Greg Badros) "decode_mime", which 
 //nobreak
 
+
  * strips off headers
  * chooses a filename intelligently
+
 
 Mime unpacking:  use ftp://ftp.andrew.cmu.edu/pub/mpack/
 Options:
 //nobreak
+
 
  * -f
           Forces the overwriting of existing files.  If a message
@@ -1624,6 +1856,7 @@ Options:
           any files.  This is useful when invoking munpack
           from a mail or news reader.
 
+
 To send a single file as a MIME email (attachment), do (be sure to copy myself):
 ```
   mpack -s "Subject line" -d descriptionfile filename address@host address2@host2
@@ -1639,11 +1872,14 @@ To add some ASCII text at the beginning:
 ```
 mpack can only encode one file, not multiple files.  For that, try pine.
 
+
 Mailing lists are in /etc/aliases on pag.
 To redirect to a file, it must be in a non-group-writeable directory.
 
+
 In Horde, to "bulk delete" or "delete all", go to the folders view, mark
 the desired folder, and then "Choose Action:  Empty Folder(s)".
+
 
 To upload mbox files to Gmail IMAP, use:  http://imap-upload.sourceforge.net/
 Typical invocation (for hosted apps at cs.washington.edu):
@@ -1653,6 +1889,7 @@ Typical invocation (for hosted apps at cs.washington.edu):
 It may be necessary to convert a BABYL file to mbox format.
 Don't use b2m for that; instead, use:  M-x unrmail
 (No need to read the file in as an RMAIL file; just run M-x unrmail.)
+
 
 If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.
 You only want to do this for Google Mail that is in [Imap]/trash and has no other user or system labels.  (I can't use -has:userlabels, unfortunately.)
@@ -1666,10 +1903,14 @@ https://support.google.com/mail/answer/78892?hl=en
 
 
 
+
+
 == Eclipse
+
 
 Useful keystrokes in Eclipse:
 //nobreak
+
 
  * kbd:[C-S-t]  lookup type (like kbd:[M-.] in Emacs, but only for classes, not methods)
  * kbd:[F3] open definition, also like kbd:[M-.]
@@ -1684,8 +1925,10 @@ Useful keystrokes in Eclipse:
  * kbd:[F4] class hierarchy (also available from a context menu)
   Eclipse Debugger:  kbd:[F6] goes to next line
 
+
 To make Eclipse use spaces instead of tabs for indentation:
 //nobreak
+
 
  * Go to menu:Window[Preferences > Java > Code Formatter]:
     * In the "Style" tab:
@@ -1695,22 +1938,28 @@ To make Eclipse use spaces instead of tabs for indentation:
     * In the "Typing" tab:
        * Check "Insert space for tabs"
 
+
 Changing the font size in Eclipse:
   Window > Preferences > General > Appearance > Colors and Fonts > Basic >
   Text Font > Change : select and apply the new font size
 To go back to the old font size, click the Reset button.
 Or, use this plugin: http://smallwiki.unibe.ch/fontsizebuttons
 
+
 Under Eclipse "Run configurations", a useful VM argument is "-ea".
+
 
 When compiling Daikon, may be simpler to add daikon.jar to "User Entries"
 section of Eclipse classpath.
 You can define your own variables.
 
+
 Eclipse Javadoc:  .html files get written to working directory.
 So be sure to save changes to these before you start testing javadoc.
 
+
 Eclipse has two compilers.
+
 
  * The model reconciler operates on buffers and runs on every keystroke to
    create red squigglies.  (It's called that because it reconciles the internal
@@ -1724,14 +1973,18 @@ Eclipse has two compilers.
    building.)
 
 
+
 == IntelliJ
+
 
 To prevent IntelliJ from using wildcard imports, you must do *both* of the following:
  * Click on the Settings "wrench" icon on the toolbar, open "Imports" under "Code Style", and check the "Use single class import" selection.
  * go to Preferences (⌘ + , on macOS / Ctrl + Alt + S on Windows and Linux) > Editor > Code Style > Java > Imports tab set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
 
 
+
 == VMware
+
 
 To run VMware tools:
 ```
@@ -1739,19 +1992,24 @@ To run VMware tools:
 ```
 To install VMware tools, see ~mernst/wisdom/building/build-vmware
 
+
 // Information on how to configure our ESX VMware servers is available
 // in PAG logistics at:  http://groups.csail.mit.edu/pag/pag/esx.html
+
 
 In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 
+
 == Docker
+
 
 A Docker container image is simply a root filesystem (snapshot) for a given
 process. This snapshot only encapsulates the userspace pieces (specifically, the
 filesystem).  Containers use the kernel of the host where they are running, but
 they do not share libraries such as libc.  Each Docker container has its own set
 of libraries since each container has its own, unique root filesystem.
+
 
 To run an interactive bash shell in a docker container
 (a docker image is an inert file):
@@ -1764,11 +2022,13 @@ or
   docker run -it <image> /bin/bash
 ```
 
+
 To copy files out of a docker image:
 ```
   docker cp <containerId>:/path/to/file /path/on/host
   docker cp -r <containerId>:/path/to/directory /path/on/host
 ```
+
 
 To create a docker image (which is a static template that can be
 instantiated into a running container), good instructions appear at
@@ -1784,6 +2044,7 @@ the following in an empty directory.
   docker push mdernst/ubuntu-for-cf
   # Browse to https://hub.docker.com/ to verify that it exists
 ```
+
 
 To list docker images (static files, that would be instantiated as containers):
 ```
@@ -1813,15 +2074,18 @@ To remove even more files, including (large) build cache objects:
 docker system prune -a -f
 ```
 
+
 If a Docker container has no Internet (example message: "Temporary failure in name resolution"), run (in the host):
 ```
 sudo service docker restart
 ```
 
+
 To turn a Docker image into a tarball:
  * Build the Docker image locally; for example, `docker -l warn build -t <image-name>:latest .;
  * Save it as a .tar.gz with `docker save <image-name> | gzip > foo.tar.gz`
  * You can run that `.tar.gz` via `gunzip -c foo.tar.gz > foo.tar` followed by `docker load < foo.tar`
+
 
 If docker fails with
 ```
@@ -1834,7 +2098,9 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 
+
 == Markdown
+
 
 For converting (GitHub-style) markdown format (.md file) to HTML:
  * `quarto render INPUT.MD --output-dir OUTDIR` where OUTDIR may be the same for multiple files.
@@ -1844,15 +2110,18 @@ For converting (GitHub-style) markdown format (.md file) to HTML:
 Markdown format is idiosyncratic and has many variants, so it may be better
 to use AsciiDoc format and the Asciidoctor processor, when possible.
 
+
 To write a comment in a Markdown file, write this with blank lines both before and after:
 ```
 [comment]: # (Here is the text of the comment.)
 ```
 
+
 List of fenced code block identifiers (programming languages) for Markdown:
  * https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml
  * https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md
  * https://pygments.org/docs/lexers/
+
 
 Markdown parsers:
  * https://github.com/kivikakk/comrak
@@ -1860,22 +2129,36 @@ Markdown parsers:
  * https://github.com/github/cmark-gfm
 
 
+
 == AsciiDoc
+
 
 AsciiDoc has various advantages over Markdown, especially for complex documents
 and books, but Markdown handles simple cases and it is widely known by
 programmers and supported by tools.
+
 
 Convert Markdown to AsciiDoc: https://github.com/asciidoctor/kramdown-asciidoc .
 Some people say don't use pandoc, but for simple documents it seems fine and
 https://pandoc.org/try/?from=markdown&to=asciidoc doesn't require any software
 installation.
 
+
+Convert AsciiDoc to Markdown:
+* `basename=MYBASENAME; asciidoctor -b docbook $basename.adoc; pandoc -f docbook -t commonmark_x -o $basename.md $basename.xml --wrap=none`
+  Problem: code fences are turned into indentation, which I don not like.
+* https://github.com/opendevise/downdoc
+* https://gitlab.com/bburt/convert-asciidoc-to-markdown (all commits are on one day)
+
+
 An example of an AsciiDoc document that has both HTML and PDF is https://junit.org/junit5/docs/current/user-guide/ .
+
 
 On GitHub, AsciiDoc comments (lines starting with //) seem to be rendered rather than ignored.
 
+
 In AsciiDoc, ` +` (space followed by plus) is a hard line break (newline).
+
 
 In AsciiDoc, to put a callout within a list item (ie, indented rather than at the top level), add unindented "+" on a line by itself immediately before the callout, as in:
 ----
@@ -1888,13 +2171,16 @@ Then after the callout use unindented `{empty}` if the following text is indente
 `{empty}` can take the place of `+` elsewhere.
 
 
+
 == Diff
+
 
 To make a diff file good for patching old-file to produce new-file,
 ```
   diff -c old-file new-file
 ```
 In GNU diff, specify lines of context using -C # (not -c #).
+
 
 There is no standalone `diff` program that incorporates the patience diff
 algorithm, but instead you can use
@@ -1903,12 +2189,15 @@ algorithm, but instead you can use
 ```
 This does a two-way, not a three-way, diff.
 
+
 With patch version 2.4 or 2.5 (and maybe other versions), you must set the
 environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
 the "Index:" lines and it will ask for the filename for each patch.
 
+
 moss:  a software plagiarism detector by Alex Aiken.
 http://www.cs.berkeley.edu/~aiken/moss.html
+
 
 Use the `-N` or `--new-file` command-line option to make diff show the full
 contents of a new or deleted file (a file that did not exist), rather than
@@ -1918,6 +2207,7 @@ Use
 --unidirectional-new-file
 ```
 to only show the contents of a new file, not one that has been deleted.
+
 
 To use difftastic with git:
 ```
@@ -1929,12 +2219,15 @@ git difftool
 git dft
 ```
 
+
 I cannot figure out how to see all differences (even mergeable ones) among 3
 files, using the "<<<<<<", "||||||", and ">>>>>>" conflict markers/brackets.
 See my question at  https://stackoverflow.com/questions/78252587 .
 
 
+
 == make
+
 
 For a list of all makefile targets:
 ```
@@ -1944,10 +2237,13 @@ make -qp |
 ```
 
 
+
 == Error Prone linter
+
 
 Gradle buildfile rules to run Error Prone linter on each compilation:
 https://plugins.gradle.org/plugin/net.ltgt.errorprone
+
 
 Typical gradle setup for using the Error Prone linter:
 ```
@@ -1971,9 +2267,11 @@ tasks.withType(JavaCompile).configureEach {
 }
 ```
 
+
 Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
 clients (of the project containing the `@InlineMe` annotation) to declare a
 dependency on error_prone_annotations.
+
 
 When Error Prone's suggested replacement is `UTF_8`, that is
 `StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
@@ -1982,7 +2280,9 @@ Example:
 `Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
 
 
+
 == AI tools
+
 
 AI code review, free for open source:
  * CodeRabbit
@@ -1995,17 +2295,23 @@ AI code review tools to investigate:
  * https://www.greptile.com/
  * https://devlo.ai/
 
+
 == General wisdom (that is, everything without its own section above)
+
 
 Information about a variety of Java tools can be found in the wisdom
 repository, in file JavaTools.adoc.
 
+
 expand, unexpand:  change TABs to SPACEs and vice versa.
+
 
 rehash:  If my path seems messed up, or I've added programs, do rehash.
 (Perhaps this only works under csh.)
 
+
 sed:  for example, sed -e '/^SED/ s|SED|SOGGY|' man-sed | more
+
 
 ps:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,
 ps -lf gives a long full listing (use -e or -d to see more processes).
@@ -2013,29 +2319,38 @@ ps -lf gives a long full listing (use -e or -d to see more processes).
 ps options:
 //nobreak
 
+
  * -l long format, shows priorities (set by nice or renice)
  * -u user-oriented format
 //nobreak
 
+
 also:
 //nobreak
+
 
  * -a show all processes
  * -x show even processes with no controlling terminal
  * -w use wide display
 
+
 xterm:  give -ut flag to prevent appearing in finger.
+
 
 system, eval evaluate their argument.
 exec replaces the current shell with its argument.  Be careful!
 
+
 sleep:  delays execution; waits that many seconds.
+
 
 expr:  Bourne shell way to do lots of stuff (ex regular expressions,
 arithmetic, comparisons); see also TEST
 
+
 Programs for drawing figures under X Windows (from best to worst in ease of use):
 //nobreak
+
 
  * OpenOffice/LibreOffice draw
  * inkscape -- can't attach text to an object easily (could group them to
@@ -2048,12 +2363,15 @@ Programs for drawing figures under X Windows (from best to worst in ease of use)
  * tgif -- (version 4.1.45 released 6/2006)
 //nobreak
 
+
 The mayura draw program for Windows takes Windows Metafiles (such as produced by
 PowerPoint) and creates PostScript.
 It may be best just to create figures using PowerPoint
 
+
 The Ipe extensible drawing editor edits PDF files directly:
 https://ipe.otfried.org/
+
 
 split:
 Use
@@ -2066,14 +2384,17 @@ then
 ```
 to split files into parts.
 
+
 du:  disk usage.
 //nobreak
+
 
  * `du -s *`     only display grand total for each file and subdirectory in this dir
  * `du -S`       not sum child directories in count for parent
  * `du | sort -r -n`   sort directories, with most usage first.
  * `du | xdu`    only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
 //nobreak
+
 
 Also see Alan Donovan's program "prune"
 (executable: ~adonovan/bin/Linux-i686/prune; sources: ~/work/c/prune/)
@@ -2084,18 +2405,23 @@ For example,
 Looking at files within a single directory, rather than a whole directory tree:
 //nobreak
 
+
  * `ls -l | sort -n +4` sorts files in size order, good for finding big files in a directory
  * `du -s * | sort -n` similar to above, find the biggest files & subdirectories of the current dir
 
+
 `.DESKTOP` file:  Macintosh info about my files.  Safe to delete.
+
 
 To make a soft link, do
 ```
   ln -s filename linkname
 ```
 
+
 expect:  controls interactive programs to permit them to be used in a batch
 fashion via send/expect sequences, job control, user interaction, etc.
+
 
 To create a script file that will respond to any prompt, not just a
 top-level one:
@@ -2109,31 +2435,41 @@ top-level one:
   END
 ```
 
+
 crontab:  batch sorts of programs run repeatedly (say, each night)
+
 
 Format manual pages:  nroff -man foo.1 | more
 Print roff files:     troff -t filename | lpr -t
 .ms => PostScript:    groff -pte -ms file.ms > file.ps
 man pages => PS:      groff -pte -man foo.1 > file.ps
 
+
 nslookup converts domain names into ip numbers.
 "host" and "dig" also query the same DNS information.
 
+
 ftp:  do "prompt off" to turn off confirmation requests on multiple commands
+
 
 David Wilson says about running background jobs:
 The simplest thing to do is a shell script that does `rsh <nice command>` on
 the various machines, and then run the shell script on a machine that
 doesn't get rebooted very often.
 
+
 If there is no password specified in the netrc file, then the macdef init
 seems not to take.
 
+
 To permit arbitrary-size core dumps:  unlimit corelimit
+
 
 Undo the setuid bit of a file with chmod -s.
 
+
 df:  Report free disk space and which filesystems are mounted.
+
 
 tar:  tape archive program.  Usual extraction from files is
 ```
@@ -2150,10 +2486,12 @@ directory by doing
   tar cf tarfile.tar dir
 ```
 
+
 To extract a rar archive:
 ```
   unrar e archive.rar
 ```
+
 
 To see and manipulate your junk files which are taking up precious
 space on the computer, use the program junk.  Typing
@@ -2161,8 +2499,10 @@ just "junk" will show you the names of all the junk files subordinate
 to your current directory.  Typing "junk -c rm" will remove them
 (CAREFUL!).  For more information, see /a/aviary/unix/junk.doc.
 
+
 Converting binhex files:
   "hexbin foo" creates "foo.bin".  Also consider "-u" or "-U" option.
+
 
 In /usr/local/man, manX subdirectories contain raw man pages.
 catX subdirectories contain formatted man pages preprocessed by
@@ -2173,7 +2513,9 @@ catX subdirectories contain formatted man pages preprocessed by
 The .z suffix on these files indicates that they were created by pack (use
 unpack or pcat to view), NOT gzip.
 
+
 ppanel program: control printing from a GUI
+
 
 "polite" is like "nice"; it runs a program at lower priority.
 It allows other users to 'nap' the 'polite' program for an interval.
@@ -2188,15 +2530,20 @@ putting the cache simulator to sleep for 15 minutes.
 See the man pages for more information.
 Child jobs spawned by the polited process aren't run under polite, however.
 
+
 renice causes a running program to acquire only idle resources
+
 
 truss, strace tell all systems calls made by a process (a program run from
 the command line).  It's truss on Solaris, strace everywhere else.
 
+
 ldd _executablename_ tells which shared libraries a program uses.
+
 
 /etc/groups on some systems is "ypcat group" on others.
 The "id" program also lists the groups for each user.
+
 
 jgraph - filter for graph plotting to postscript.
 Also see ~jdean/graph, which is a preprocessor for it by Eric Brewer.
@@ -2205,25 +2552,31 @@ Sample invocation:
 graph -e -g -p -c <sample-input.graph | jgraph -P | gv -
 ```
 
+
 gnuplot: with the "eps" terminal, has only six symbols available.  The
 "latex" terminal has more symbols (and the output is more customizable),
 though the output isn't as pretty.
 
+
 An alternative to gnuplot/jgraph is xmgr; supposedly nice but has steep
 learning curve.
 
+
 xdvi: use "s" to set shrink (image/font size); 3 is a reasonable prefix
 argument
+
 
 The "search" program is like a combination of 'find' and 'grep' (but using
 Perl regular expressions, and more powerful and efficient).
 Files:
 //nobreak
 
+
  * the program: ~mernst/bin/share/search
  * its manpage: ~mernst/bin/share/search.manpage
  * example dotfile: ~mernst/.search
 //nobreak
+
 
 I find `search' easier to use than `grep`, but `grep` can often replace
 it.  For example, these give identical results (except for order):
@@ -2231,6 +2584,7 @@ it.  For example, these give identical results (except for order):
 search -dir lucene -n 'SuppressWarnings.*interning'
 grep -r -n -e 'SuppressWarnings.*interning' lucene
 ```
+
 
 To find/search and replace in multiple files (say, an entire directory)
 use 
@@ -2273,6 +2627,7 @@ which retargets a checkout, or for many repositories:
 Problems with the first invocation, fixed by the others:
 //nobreak
 
+
  * The first invocation will search/replace in compressed, binary, PostScript,
    etc. files.  (a few examples: .tar .gz .gif .pdf .ps .Z)
  * The first invocation will update all the files' modification dates, even if
@@ -2286,10 +2641,12 @@ An alternate way to fix CVS repositories is
   find . -name Root | xargs -n1 cp ~/research/invariants/new-root
 ```
 
+
 To find/replace a multi-line string, use perl:
 ```
 perl -0777 -i.original -pe 's/input containing\nmultiple lines/Output can also have multiple\nlines/igs' myfile.txt
 ```
+
 
 
 In CMU Common Lisp (cmucl), smaller applications can result from
@@ -2300,6 +2657,7 @@ An apparently reasonable development setting:
 ```
     (declaim (optimize (safety 3) (speed 2) (debug 2) (compilation-speed 0)))
 ```
+
 
 To copy a (local) directory recursively:  cp -pR source target-parent
 To copy a (remote) directory structure from one machine to another:
@@ -2313,8 +2671,10 @@ This is like
 ```
 except that the latter doesn't preserve symbolic links.
 
+
 Regular expressions (regexps):
 //nobreak
+
 
  * In alternation, first match is chosen, not longest match.  For
    efficiency, put most likely match (or most likely to fail fast) first.
@@ -2328,7 +2688,9 @@ Regular expressions (regexps):
     ** text matched by one application of special must not be matched by
       multiple applications of special
 
+
 uname gives operating system (uname -a gives more info).
+
 
 sysinfo:  information about this hardware, like amount of memory,
 architecture, operating system, and much more.
@@ -2337,8 +2699,10 @@ The "top" program also tells the machine's amount of memory and swap space.
 Also see "uname -a" and "cat /proc/cpuinfo" (as 
 well as some of the other kernel pseudo-files under /proc).
 
+
 The ispell program will merge personal dictionaries (.ispell_english) found
 in the current directory and the home directory.
+
 
 To run a program disowned (so that exiting the shell doesn't exit the
 program), precede it by "nohup".  Programs run in the background also
@@ -2347,19 +2711,23 @@ others seem to be exceptions to this rule; or maybe the rule about
 background jobs continuing only applies for programs that ignore the hangup
 (hup) signal).
 
+
 To add Frostbyte's public key to my PGP keyring:
 ```
   pgpk -a http://sub-zero.mit.edu/fbyte/pgp.html
 ```
 
+
 To find all the executables on my path with a particular name, use
 /usr/local/bin/which -a
+
 
 /uns/share/bin/ps2img converts PostScript to gif (or other image format?)
 files.  It will handle multipage postscript files fairly gracefully without
 filling up your disk, and it will look for and pay attention to the
 BoundingBox of EPS files if you give the -e option.  Run it with no
 arguments to see the options.
+
 
 To convert a directory from DOS to Unix conventions:
 ```
@@ -2369,6 +2737,7 @@ foreach f ( `find . -type f` )
 end
 ```
 
+
 LAOLA converts Microsoft Word .doc documents to plain text.  It is
 superseded by the Perl OLE::Storage module
 (http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/ or
@@ -2376,14 +2745,18 @@ http://www.cs.tu-berlin.de/~schwartz/perl/), which gives access to
 "structured storage", the binary data format of standard Microsoft Windows
 OLE documents.
 
+
 mkid (part of GNU's id-utils) is something like tags, but records all uses
 of all tokens and permits lookup.  There's an Emacs interface, too.
+
 
 The `file` command gives information about the file format (type of file,
 executable (including debugging format), etc).
 
+
 On a Kinesis Advantage contoured keyboard:
 //nobreak
+
 
  * Soft reset: Press Progm + Shift + F10.
  * Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
@@ -2397,6 +2770,7 @@ On a Kinesis Advantage contoured keyboard:
   mode by holding down = then tapping p; now holding down = and tapping s may
   produce "v3.2[SL K H x e ]".
 
+
 There's no perfectly reliable way to determine the version of Red Hat Linux
 is being run, but you can try:
 ```
@@ -2404,28 +2778,36 @@ is being run, but you can try:
   cat /etc/redhat-release  # the single file that the above package installs
 ```
 
+
 ImageMagick is a replacement for (part of) xv:  three of its programs are:
 //nobreak
+
 
  * display will view images in a great many different file formats.
  * import grabs screen shots, either that you select with the mouse, that
    you specify by window ID, or the root window.  
  * convert old.gif new.jpg lets you easily change image formats.
 
+
 "locate" finds a file of a given name anywhere on the system.
 Its database is updated nightly or so.  To update it manually:
+
 ```sh
 sudo updatedb
 ```
+
 
 To use "crypt" to encrypt a string, like in the password file `/etc/passwd`,
 use "openssl passwd".
 (Note that "crypt" is known to be insecure; only use it for `/etc/passwd`.)
 
+
 Use "chsh" to set/change your shell.
+
 
 make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
 is a segfault (http://www.bitwizard.nl/sig11/).
+
 
 If using YP for password (yppasswd) and other files, don't edit /etc/group;
 instead, as root, edit, then rebuild the NIS database:
@@ -2440,6 +2822,7 @@ To restart the daemons, do (as root)
   /etc/rc.d/init.d/ypbind restart
   /etc/rc.d/init.d/yppasswdd restart
 ```
+
 
 Find all subdirectories:
 ```
@@ -2459,7 +2842,9 @@ Find all group-writeable files:
   find . -type l -prune -o -perm -020 -print
 ```
 
+
 To install an RPM, do  rpm -Uvh foo.rpm
+
 
 If machines come up before the ntpd server (and as a result their time
 and date are not synchronized/synched), run this command on each machine:
@@ -2467,7 +2852,9 @@ and date are not synchronized/synched), run this command on each machine:
   /etc/rc.d/init.d/xntpd restart
 ```
 
+
 On pag, use "yppasswd" instead of "passwd".
+
 
 // SAS:
 //  * Avoid all comments.  Comments in random places cause bizarre behavior
@@ -2530,31 +2917,39 @@ On pag, use "yppasswd" instead of "passwd".
 //  * proc freq;
 //      tables infilt*score;   /* two-way table */
 
+
 `zip -r foo foo`
 makes a zip archive named foo.zip, which contains directory foo and all its
 contents.
 The first argument is the zipfile base name, and the rest of the arguments
 are its contents.
 
+
 To uuencode a file:   uuencode filename filename > filename.UUE
 
+
 Use unzip to extract files from zip/pkzip archives.
+
 
 finger crashes on NIS clients when the GECOS field of the NIS-entry is
 blank and the user home directories is chmod'd to 700.  (as of 1/2002)
 
+
 To compute a file's checksum, use "sum" or "cksum" or "md5sum".
 For an entire directory, "md5deep" works.
+
 
 A way to find typos and grammar errors in papers:  run ps2ascii on a
 (one-column) PostScript file, then paste the result into Microsoft Word and
 run its grammar checker.
+
 
 If the crontab log says "bad user", that typically means that the password
 is expired.  On marjoram, we fixed this (maybe) by adding an entry (with an
 in-the-future expiration time) to /etc/shadow, though it really should have
 been in /etc/shadow.local.  Other possibilities:
 //nobreak
+
 
  * account is not locked
  * password is not expired
@@ -2563,17 +2958,21 @@ been in /etc/shadow.local.  Other possibilities:
  * or maybe (probably not) that the command was run and exited with a
    return status of 1 (maybe the command wasn't in the path when cron ran?)
 
+
 Sometimes a single NFS client cannot see a directory when other clients of
 the same server can see the directory.  A workaround is to run 'rmdir' on
 the troublesome directory; this seems to fix the problem.
+
 
 Valgrind is a free, good Purify-like detector of memory errors (for x86
 Linux only).  It's better than what is built into gcc.
 http://developer.kde.org/~sewardj/
 
+
 To see the equivalent of a yppasswd entry for user foo, do
 "ypmatch foo passwd" or "ypcat passwd | grep -i foo" or "~/bin/getpwent foo".
 Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
+
 
 To encrypt/decrypt:
 ```
@@ -2588,11 +2987,13 @@ Concrete example:
   openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
 ```
 
+
 To encrypt/decrypt a file symmetrically with GPG (but I have had trouble with it):
 ```
   gpg --output encrypted.data --symmetric --cipher-algo AES256 un_encrypted.data
   gpg --output un_encrypted.data --decrypt encrypted.data
 ``
+
 
 To encrypt a file symmetrically with openssl:
 ```
@@ -2602,6 +3003,7 @@ To decrypt:
 ```
   openssl enc -aes256 -pbkdf2 -d -in FILE.aes256 -out FILE.decrypted
 ```
+
 
 Greg Shomo recommends that one use RPM to install anything that was
 included in the original (Red Hat) Linux distribution:  bugfixes and
@@ -2613,13 +3015,16 @@ He recommends installing package foo-1.2 with
 then using gnu stow (ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz) to make
 the proper symlinks into that subdirectory.
 
+
 Don't use the "follow" option in Unison, which can delete the real file
 behind a symbolic link in ~/.synchronized -- see my Unison files for details.
+
 
 After adding a script to /etc/rc.d/init.d, add two symbolic links to
 /etc/rc.d/rcN.d/.
 The one starting with "S" (start) is invoked when runlevel N is entered.
 The one starting with "K" (kill) is invoked when runlevel N is exited.
+
 
 // At LCS, to upgrade a Red Hat Linux machine with the latest security (or
 // other) patches:
@@ -2641,18 +3046,22 @@ The one starting with "K" (kill) is invoked when runlevel N is exited.
 //   umount /mnt
 // ```
 
+
 "chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created
 in that directory will have their group set to the directory's group.
 Directories created in that directory also have their SGID bit set.
 (The SGID bit has nothing to do with the sticky bit.)
 
+
 lpr can assign "classes" or priorities to jobs.  For instance, to bypass
 all other jobs in the queue, do "lpr -C Z _filename_" (Z is the highest
 priority/class).
 
+
 If trying to print results in the error
   lpr: error - scheduler not responding!
 then make sure that your PRINTER environment variable is properly set.
+
 
 ispell that requires only one argument at a time:
 ```
@@ -2661,21 +3070,26 @@ foreach file (*.tex)
 end
 ```
 
+
 To run VNC:
 ```
   vncviewer `cat ~/.vncip`
 ```
 
+
 Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,
 AIX), eg:
 smbclient '\\rfilesrv1\students' -W cseresearch
 
+
 Run smbpasswd to set samba passwords (there is a separate password file for
 them).
+
 
 To make Samba work from certain locations, I must first edit
 /etc/samba/smb.conf to add those IP addresses in the "hosts allow" section.
 Also edit /etc/hosts.allow similarly.
+
 
 To execute a command on all the PAG clients:
 ```
@@ -2689,6 +3103,7 @@ To make this easier, we could add a /root/.ssh/authorized_keys file to each
 client which includes (y)our public key and use "root@" in the ssh command
 in pagdo.
 
+
 /etc/sudoers says
 ```
   # This file MUST be edited with the 'visudo' command as root.
@@ -2696,8 +3111,10 @@ in pagdo.
 But the visudo command just does file-locking and checks for syntax errors;
 it's fine to edit the file with another editor.
 
+
 Combinatorial games suite (supersedes David Wolfe's package):
 http://cgsuite.sourceforge.net/
+
 
 To have a mount re-done at each reboot:
 Put in /etc/fstab
@@ -2711,9 +3128,11 @@ This particular mount requires that the following appear in /etc/hosts.allow:
   ALL: 128.52.0.0/255.255.0.0
 ```
 
+
 Delta debugging application:
  * http://delta.tigris.org/
  * https://www.st.cs.uni-saarland.de/dd/ddusage.php3
+
 
 To exit the vi or vim editor:
 ```
@@ -2728,8 +3147,10 @@ For help:
  :help
 ```
 
+
 Parallel/distributed jobs across many machines:
 //nobreak
+
 
  * The distcc compiler permits compilation jobs to be distributed (in
    parallel) across many machines.  See http://distcc.samba.org/.
@@ -2745,11 +3166,13 @@ Parallel/distributed jobs across many machines:
        More about PVM: http://www.epm.ornl.gov/pvm/
  * OpenPBS: http://www-unix.mcs.anl.gov/openpbs/
 
+
 vi commands:
 :q quits vi after a file has been saved
 :q! quits vi without saving the file
 :x saves the file and quits vi
 :wq saves the file and quits vi
+
 
 To start up network on Linux laptop (for NIC; not necessary for PCMCIA):
 Debian:
@@ -2761,6 +3184,7 @@ Red Hat:
   /etc/sysconfig/network-scripts/ifup eth0
 ```
 
+
 To set wireless card SSID and key, run (as root):
 ```
   /sbin/iwconfig eth1 essid "Chaos"
@@ -2771,6 +3195,7 @@ To see your current settings:
 ```
   /sbin/iwconfig eth1
 ```
+
 
 
 Use the rss2email program as follows:
@@ -2791,8 +3216,10 @@ and finally, nothing happens unless I run
 ```
 periodically -- say, every minute or hour in a cron job.
 
+
 To print a reasonable map from google maps do the following:
 //nobreak
+
 
   * execute 'import map.jpg'
   * Draw a rectangle over the part of the map you want.  The result will
@@ -2801,8 +3228,10 @@ To print a reasonable map from google maps do the following:
   * print from gimp.  Gimp does a nice job of laying the jpeg out on
     the screen and allows you to scale it and the like.
 
+
 To create a transparent signature stamp:
 //nobreak
+
 
  * scan a hardcopy of my signature
  * clean it up (in Paint or in the Gimp)
@@ -2817,6 +3246,7 @@ To create a transparent signature stamp:
  * Convert the PDF to EPS via imagemagick's "convert" program (other
    techniques might work, too)
 
+
 When you have a PDF file that is marked up with annotations, you can either
 view the annotation text one-by-one in a PDF reader, or you can create a PDF
 file that contains the annotations visibly.  Different people prefer the
@@ -2824,6 +3254,7 @@ two approaches, and some PDF readers such as Evince don't seem to provide
 any way to view the annotations.
 Here is how to create a PDF that shows the annotation/comment text:
 //nobreak
+
 
  * Using Acrobat Reader or Foxit Reader: start Print, then select "Summarize
    Comments" in the print dialog (sometimes in the upper right).  That pops
@@ -2852,10 +3283,12 @@ Here is how to create a PDF that shows the annotation/comment text:
     * LibreOffice/OpenOffice doesn't display PDF well.
 
 
+
 To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
 choose Image Annotation, position the cursor on the area you want to insert
 the image, hold and drag your mouse to draw a rectangle, browse an image in
 the pop-up Add image dialog box, and click on Ok to insert it.
+
 
 To make a screencast video demo (i.e., screen capture/recording from a
 running program), Marat Boshernitsan recommends
@@ -2874,8 +3307,10 @@ Marat Boshernitsan says,
   http://nitsan.org/~maratb/blog/2007/05/01/aligning-development-tools-with-the-way-programmers-think-about-code-changes/
   It is a bit time-compressed to fit into the 5 minute limit imposed by CHI.
 
+
 If OpenOffice or LibreOffice is trying to restore a file that no longer
 exists, press 'escape' at the Recovery window.
+
 
 // // More manual, less desirable solution:
 // If OpenOffice is trying to restore a file that no longer exists, delete a
@@ -2885,15 +3320,18 @@ exists, press 'escape' at the Recovery window.
 //   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu
 // ```
 
+
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
 Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
  +
 Alternately:
 Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on page{s}: 1
 
+
 In LibreOffice/OpenOffice, to freeze rows/columns so that they do not
 scroll but are always visible, select the row (or cell) BELOW (and to the
 right of) the one you want to freeze, then do Window > Freeze.
+
 
 Setting up a new USB microphone/headset:  run
 ```
@@ -2906,9 +3344,11 @@ For Skype, under Linux, see
 Under Fedora, I had to unset "allow skype to automatically adjust my mixer
 levels" lest the recording level was much too low.
 
+
 On Linux, after plugging in headphones, you have to tell the application
 (e.g., Skype) you are trying to use with the headset to use the second
 soundcard (card1) in order to get audio over the headphones.
+
 
 The "-e" argument to mail means send no mail if the body is empty.  So use
 (in csh)
@@ -2922,11 +3362,13 @@ instead of
   \rm -f /tmp/mailbody-$$
 ```
 
+
 Generate a random password:
  * CentOS:
    mkpasswd
  * Ubuntu:
    echo "$(pwgen -N1)$(pwgen -N1)"
+
 
 Server-side includes (SSI) for web pages:
 ```
@@ -2941,17 +3383,21 @@ UW CSE lets us tweak our `.htaccess` file such that we can have
 all regular .html files get this behavior, not just .shtml files.  See the
 WASP webpages for an example.
 
+
 The "rev" program reverses the order of characters in every line of input.
 It's the way to reverse all lines of a file.
 To sort lines, with the sort key being the reverse of each line:
   cat myfile | rev | sort -r | rev
 
+
 "cd -" connects to your previous directory.
+
 
 The canonical @sys directory for your path is
 ```
   $HOME/bin/`uname`-`uname -m`
 ```
+
 
 When a sh/bash script wishes to pass one of its arguments to another
 program, it's necessary to quote those arguments so they are not
@@ -2963,10 +3409,12 @@ directly:
   eval other-program "${my_variable}"
 ```
 
+
 To determine which version of RedHat/Fedora/CentOS I am running:
 ```
   cat /etc/redhat-release 
 ```
+
 
 To make the history command show times, do this:
 ----
@@ -2976,17 +3424,21 @@ To make the history command show times, do this:
 That can be useful for seeing how long a command took to run, if another
 command is issued immediately afterward.
 
+
 In Acrobat (not reader), to fill in a form, either:
 //nobreak
 
+
  * use the typewriter tool, or
  * ctrl-left-click (this is easier from a unability point of view)
+
 
 To give up and uninstall a package installed by encap/epkg:
 ```
     cd /uns/encap
     epkg -i $pkg
 ```
+
 
 "ack" is like "grep -r" or "search", but claims to be more flexible.
   I've given up using it, though; I find `search` more featureful and less buggy.
@@ -3003,21 +3455,27 @@ their other file type.
   ack -f
 ```
 
+
 To perform an advanced search of messages in thunderbird, goto
 edit->find->search-messages
+
 
 Pidgin (previously GAIM) is a Linux IM client that can interoperate with
 Google Talk.
 
+
 An uninterrupted Hudson build has one of the following statuses:
 //nobreak
+
 
  * Failed - it doesn't compile
  * Unstable - compiles without errors, but tests fail
  * Stable - compiles without errors and all the tests are passing
 //nobreak
 
+
 A manually interrupted Hudson job gives a message like "SCM check out aborted".
+
 
 To make your slow regular expressions (regexps) faster, restrict the number of
 different ways the regexp could match the same text.  For example, if
@@ -3036,17 +3494,19 @@ Although this regexp matches exactly the same set of strings, there is
 now only one way to match:  the "\\s-" matches the first whitespace
 character, and ".*" matches the rest.  This runs faster.
 
+
 To convert a Perl program with POD ("plain old documentation") embedded
 documentation into a man page, run pod2man.  For example:
 ```
   pod2man my-script.pl | nroff -man 
 ```
 
+
 To resolve a symbolic link to its true name (truename):
  * in a program, use the `readlink` system call
  * from the command line, use `realpath` or `readlink -f` or `readlink -e`
    `readlink` seems to be preferred.
-.
+
 HOWEVER, Mac OS X's `readlink` behaves differently than `readlink` on Linux
 (it has no `-f` command-line argument, for example), and `realpath` is not
 installed.  Thus, portable scripts should not use them.
@@ -3060,10 +3520,11 @@ Common uses for tracing a script (but these do *not* work for a sourced script!)
 echo Entering "$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")"
 echo Exiting "$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")"
 ```
-.
+
 On Mac OS X if the directory does not exist, I don't have a good solution.
 If the directory ends in ../, you can call dirname twice (and hope that
 there is no symbolic link across directories).
+
 
 If running `dropbox.py start -i` yields
 ```
@@ -3074,6 +3535,7 @@ then run:
   dropbox.py stop
   dropbox.py start -i
 ```
+
 
 To get the current date in a sortable numeric format:
 ```
@@ -3091,22 +3553,28 @@ To rename a file to its creation or modification date:
   mv -f $FILE $FILE-$(date +%Y%m%d -r $FILE)
 ```
 
+
 To recover a closed tab in Chrome:  Ctrl-Shift-t
+
 
 To open Task Manager in Google Chrome:
  * right-click the title bar, or
  * press "Shift-Esc"
 This helps to debug high CPU usage by Chrome.
 
+
 To replace the dictionary in the Android Kindle app:
 //nobreak
+
 
  * A Spanish-to-Spanish dictionary is already installed with the app
  * Adding new dictionaries is finally supported in 2015, but I don't see how to change the default dictionary and it's a pain to always have to click to a new dictionary to see definitions.  So, follow these directions:
    http://learnoutlive.com/add-german-english-dictionary-android-kindle-app/
  * if you have an Internet connection: http://ebookfriendly.com/translate-words-in-kindle-app/
 
+
 For RBCommons, you can submit a review by either downloading their command-line tools, http://www.reviewboard.org/downloads/rbtools/, or by uploading a diff on their webpage.
+
 
 To compress a JPEG file:
 ```
@@ -3114,6 +3582,7 @@ To compress a JPEG file:
 ```
 where nn is between 1 and 100.  1 is the lowest quality (highest 
 compression).
+
 
 To convert .svg to vector-format PDF:
 ```
@@ -3125,6 +3594,7 @@ To edit a .svg file, use inkscape (or a variety of other tools).
 In Inkscape, to resize/crop the canvas to the size of the drawing:
  * File >> Document Properties >> Page size >> Custom size >> Resize page to content >> click "Resize Page to drawing or selection" button
 
+
 Apple Mail, when configured to send mail as "rich text", mangles quoted text.
 The quoted text shows up to the recipient colored, but 
 without a quotation marker such as a vertical bar or ">" in the left column.
@@ -3133,6 +3603,7 @@ The solution is to use plain text format.
 Choose Mail > Preferences, click Composing, then select "plain text".
 This is an issue with Apple Mail on a Mac laptop.
 Replies sent from an iPhone look fine, with a quotation marker.
+
 
 curl vs wget:
  * `wget` is easier to use (better command-line flags, and more needed ones enabled by default), but
@@ -3166,10 +3637,12 @@ curl vs wget:
    curl -L -R -o "$file" -z "$file" "$serverurl"
    ```
 
+
 To restrict ripgrep to searching only files with given names:
 ```
 rg --iglob ControlFlowGraph.java "void checkRep"
 ```
+
 
 If ripgrep matches files within the `.git` directory, then add this to the `.gitignore` file:
 ```
@@ -3177,20 +3650,27 @@ If ripgrep matches files within the `.git` directory, then add this to the `.git
 .git/
 ```
 
+
 Chromebook:
  * the "terminal" application runs Linux
+
 
 To increase font size in an xterm terminal on Ubuntu Linux:
 Ctrl-rightmouse.
 
+
 Use middle button to paste into an xterm.
+
 
 For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this is a default purple in PowerPoint, but LibreOffice does not have an equally nice purple in its standard color set.
 
+
 A replacement for the lines-between program is:
+
 ```sh
 sed -e '1,/abc/d' -e '/mno/,$d' <FILE>
 ```
+
 
 
 A shell function that works around `wget` or `curl` hanging for very slow
@@ -3215,16 +3695,19 @@ download_url() {
 }
 ```
 
+
 Three ways to retry a command repeatedly a limited number of times, with a delay between:
 (This retries the command if it fails, until it succeeds or the retry limit is reached.)
  * timeout 300 COMMAND || COMMAND
  * https://github.com/kadwanev/retry
  * parallel --retries 5 --delay 15s ::: ./do_thing.sh
 
+
 To use GraphViz to convert a .dot file to a .pdf file:
 ```
 dot -T pdf -O filename.dot
 ```
+
 
 To find all files that contain one string (stringA) but not another (stringB):
 ```
@@ -3235,6 +3718,7 @@ In all files in the directory or subdirectories:
 grep -L stringB $(grep -l -R stringA .)
 ```
 
+
 Screen recording:
 * kazam always gives me a black screen
 * recordmydesktop: creates .ogv files that fail in subsequent conversion with "Broken file, keyframe not correctly marked.".
@@ -3244,16 +3728,19 @@ recordmydesktop --fps 15 --delay 10 -o myfile.ogv
 * simplescreenrecorder: I haven't tried it yet.
   To install: `sudo apt install simplescreenrecorder`
 
+
 Printing all lines after a match in sed:
 ```
 sed -ne '/pattern/,$ p'
 ```
 This is similar to my old `lines-after` script.
 
+
 To uncolorize a file:
 ```
 sed -i.bak -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"
 ```
+
 
 To find duplicated/repeated/doubled words:
 ```
@@ -3261,14 +3748,17 @@ rg '\bthe the\b|\band and\b|\bor or\b|\ba a\b|\bto to\b|\bit it\b|@return return
 search -n '\b([A-Za-z]+)[ \t]+\1\b'
 ```
 
+
 Here is my program for handling multiple repositories, in case you want to try it:
 Homepage: https://github.com/plume-lib/multi-version-control
 Documentation: https://plumelib.org/multi-version-control/api/org/plumelib/multiversioncontrol/MultiVersionControl.html
 From my dotfiles:
 alias mvc='java -ea -cp ${HOME}/java/plume-lib/multi-version-control/build/libs/multi-version-control-all.jar org.plumelib.multiversioncontrol.MultiVersionControl'
 
+
 As of Dec 2022, the checkstyle Gradle plugin does not support specifying a
 suppression filter, as the Maven plugin does with `<SuppressionFilter>`.
+
 
 Here is how to apply the Google Style with the checkstyle linter, in a Gradle
 `build.gradle` file, without downloading the `google_checks.xml` file.
@@ -3294,6 +3784,7 @@ checkstyle {
 ```
 
 
+
 To pretty-print (reformat) a JSON file, either of these commands:
 ```
 # outputs to standard out; also works on `.jsonl` files
@@ -3317,15 +3808,18 @@ JQFILE="myfilename" && jq . "${FILENAME}" | sponge "${FILENAME}"
 python -m json.tool FILENAME
 ```
 
+
 An example scp invocation:
 ```
 scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tmp/
 ```
 
+
 To update all snaps (all snap packages) on an Ubuntu system:
 ```
 sudo snap update
 ```
+
 
 To resolve Ubuntu popup
 "please update the application snap-store"
@@ -3337,11 +3831,13 @@ sudo snap-store --quit && sudo snap refresh
 sudo killall snap-store && sudo snap refresh 
 ```
 
+
 To output Google Slides *without* "skipped" slides:
  * Click File in the Google Slides interface.
  * Go to Print preview.
  * Deselect Include skipped slides.
  * Click Download as PDF.
+
 
 `lsof` lists open files.  If you run
 ```
@@ -3350,19 +3846,25 @@ lsof | grep deleted | grep ' /tmp'
 then you will see deleted files that are kept open by (possibly zombie) processes.
 This can help in reclaiming space from a full partition, where you cannot figure out which files are making it full.
 
+
 File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
+
 
 The `bear` program is for clang what do-like-javac is for Java.
 
+
 A better way to do `lsb_release -si` or `lsb_release -sr` is:
+
 ```sh
 sed -n -e 's/^ID="\(.*\)"/\1/p' /etc/os-release)
 sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 ```
 
+
 To find all files not containing a string: "-L foo".
 This works with grep and ag, etc.
 For rg: --files-without-matches
+
 
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

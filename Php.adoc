@@ -2,18 +2,22 @@
 :toc:
 :toc-placement: manual
 
+
 toc::[]
+
 
 To change the memory
 available to PHP, use `ini_set ("memory_limit", "32M")`.
 There are similar settings for the time limit.
 Look at 'php ini' for the full list of settings.
 
+
 To open a stream (file resource) that corresponds to stdout (output to the
 browser) in non-cli php (webserver app) use:
 ```
    $stdout = fopen ("php://output", "w"); 
 ```
+
 
 To get the values of variables use the php superglobal variable $_REQUEST
 (superglobals do not need to be declared with the global keyword).
