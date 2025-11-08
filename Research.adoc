@@ -12,7 +12,7 @@ mean different things.  Therefore, it should not be used in technical
 writing.  (There are a very few exceptions, such as compound words with clear
 meaning: "bug report", "bug-finding tool", sometimes "bug fix".)
 Here is terminology adapted from
-http://en.wikipedia.org/wiki/Dependability:
+<http://en.wikipedia.org/wiki/Dependability>:
 
 
 Defect::
@@ -74,15 +74,15 @@ Threats to the validity of research.
 Most often these are clumped into just
 
 
- * Internal validity
+* Internal validity
    refers specifically to whether an experimental treatment/condition makes a
    difference or not, and whether there is sufficient evidence to support the claim.
- * External validity
+* External validity
    refers to the generalizibility of the treatment/condition outcomes.
 
 
-But sometimes the threats are more finely broken down.  Example from 
-http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm :a
+But sometimes the threats are more finely broken down.  Example from
+<http://www.psych.sjsu.edu/~mvselst/courses/psyc18/lecture/validity/validity.htm> :a
 
 
  1. Threats to construct validity.
@@ -105,30 +105,26 @@ Another list of types of threats (used in Yin's case study book and maybe
 elsewhere?) is:
 
 
- * construct (relevant measurements)
- * internal (alternative explanations)
- * external (generalize beyond subjects)
- * reliability (reproduce)
+* construct (relevant measurements)
+* internal (alternative explanations)
+* external (generalize beyond subjects)
+* reliability (reproduce)
 
 
 
-Item #2 of Strunk & White's _The Elements of Style_ states,
-----
-  In a series of three or more terms with a single conjunction, use a
-  comma after each term except the last.
-----
+Item #2 of Strunk & White's _The Elements of Style_ states
+  "In a series of three or more terms with a single conjunction, use a
+  comma after each term except the last."
 This is sometimes called the "serial comma" or the "Oxford comma", and it
 is better style than omitting the comma after the penultimate item (before
 "and" or "or").
-For example, *don't* write
-----
-  I bought milk, macaroni and cheese and crackers.
-----
-but instead write one of these:
-----
- * I bought milk, macaroni, and cheese and crackers.
- * I bought milk, macaroni and cheese, and crackers.
-----
+For example, _don't_ write
+  "I bought milk, macaroni and cheese and crackers"
+but instead write one of these
+
+* I bought milk, macaroni, and cheese and crackers.
+* I bought milk, macaroni and cheese, and crackers.
+
 Using commas everywhere is better style, it is easier to read, and in cases
 like this one it also resolves ambiguity.
 
@@ -138,24 +134,23 @@ the sample standard deviation.  We want to know that the sample mean
 is within +-E of the population mean, with 95% confidence.  How large
 of a sample must we take?
 
-
- * n = necessary sample size
- * z = z_(u/2) = 1.96 for 95% confidence
- * sigma = population standard deviation
- * E = error tolerance, in the same units as original measurement
- * n = ((z `*` sigma) / E)^2
+* n = necessary sample size
+* z = z_(u/2) = 1.96 for 95% confidence
+* sigma = population standard deviation
+* E = error tolerance, in the same units as original measurement
+* n = ((z `*` sigma) / E)^2
 
 
 If the original sample size is 30 or more, you can safely replace the
 population standard deviation with the sample standard deviation.
-Taken from: http://www.isixsigma.com/library/content/c000709ex.asp
+Taken from: <http://www.isixsigma.com/library/content/c000709ex.asp>
 
 
 In statistics:
 
 
- * a type I error is a false alarm:  you report an effect, but in reality there is none
- * a type II error is a failed alarm:  you miss the effect
+* a type I error is a false alarm:  you report an effect, but in reality there is none
+* a type II error is a failed alarm:  you miss the effect
 
 
 Here are three variants of the word "run time" in computer science:
@@ -169,14 +164,14 @@ runtime:: noun -- a program that runs/supports another program ("the runtime han
 Heilmeier's catechism:
 
 
- * What are you trying to do? Articulate your objectives using absolutely no jargon.
- * How is it done today, and what are the limits of current practice?
- * What's new in your approach and why do you think it will be successful?
- * Who cares?
- * If you're successful, what difference will it make?
- * What are the risks and the payoffs?
- * How much will it cost? How long will it take?
- * What are the midterm and final "exams" to check for success?
+* What are you trying to do? Articulate your objectives using absolutely no jargon.
+* How is it done today, and what are the limits of current practice?
+* What's new in your approach and why do you think it will be successful?
+* Who cares?
+* If you're successful, what difference will it make?
+* What are the risks and the payoffs?
+* How much will it cost? How long will it take?
+* What are the midterm and final "exams" to check for success?
 
 
 Most commonly, "bi-" means two (biweekly means every two weeks),

@@ -1,5 +1,6 @@
 Wisdom about Emacs
 ==================
+
 :toc:
 :toc-placement: manual
 
@@ -44,10 +45,10 @@ specifier.
 Emacs's tags facility allows you to easily find a definition (of a
 function, variable, class, etc.) or search a collection of related files.
 
- * To create a tags table, run `etags _files_`; for instance, `+etags *.h *.c+`.
- * To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
- * To search all files in the tags table, type  M-x tags-search RET
- * To select a different tags table, type  M-x visit-tags-table RET
+* To create a tags table, run `etags _files_`; for instance, `+etags *.h *.c+`.
+* To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
+* To search all files in the tags table, type  M-x tags-search RET
+* To select a different tags table, type  M-x visit-tags-table RET
 
 
 etags returns the best matches in a TAGS table first; however, it examines
@@ -62,8 +63,8 @@ To make an Emacs TAGS table using the ctags program, run:
 ```
 
 
-Francesco Potorti` (pot@CNUCE.CNR.IT) says:
-To make a single tags file for all the source files in your tree, 
+Francesco Potorti` (<pot@CNUCE.CNR.IT>) says:
+To make a single tags file for all the source files in your tree,
 
 ```sh
     find . -name '*.[chCH]' -print | etags [options] -
@@ -271,8 +272,9 @@ The gnuserv program lets you force a running Emacs to edit a file or
 evaluate Lisp code.
 
 
-In Emacs, to show only those unindented lines that are *not* preceded by _N_
+In Emacs, to show only those unindented lines that are *not* preceded by *N*
 spaces, do
+
 ```keys
   C-u _N_ C-x $
 ```
@@ -363,7 +365,7 @@ Version control keystrokes:
 ```
 
 
-In an Emacs shell, if tabs are expanded into an (incorrect) number of 
+In an Emacs shell, if tabs are expanded into an (incorrect) number of
 spaces, do `stty tabs' -- probably in one of your dotfiles.
 
 
@@ -438,8 +440,8 @@ To change the font while emacs is running,
 To list available fonts:
 
 
- * use program xlsfonts.
-   Any font with `m' or `c' in the SPACING field of
+* use program xlsfonts.
+   Any font with `m' or`c' in the SPACING field of
    the long name is a fixed-width font.  Here's how to use the `xlsfonts'
    program to list all the fixed-width fonts available on your system:
 
@@ -449,8 +451,8 @@ To list available fonts:
      xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
 ```
 
- * see variable x-fixed-font-alist
- * run `(x-list-fonts "*")`
+* see variable x-fixed-font-alist
+* run `(x-list-fonts "*")`
 
 To see what a particular font looks like, use the `xfd' command, eg
 
@@ -468,7 +470,7 @@ emacs --font Monospace
 
 since that font is generally defined.
 (You can install the Inconsolata font by clicking at
-http://www.levien.com/type/myfonts/Inconsolata.otf .)
+<http://www.levien.com/type/myfonts/Inconsolata.otf> .)
 
 
 
@@ -553,8 +555,8 @@ when you read it back in, though Emacs can't tell among the various latin-X
 variants.)
 
 
-crypt.el : 
-http://cvs.xemacs.org/viewcvs.cgi/XEmacs/packages/xemacs-packages/os-utils/crypt.el
+crypt.el :
+<http://cvs.xemacs.org/viewcvs.cgi/XEmacs/packages/xemacs-packages/os-utils/crypt.el>
 It's best, I think, to encrypt the file via the command line rather than
 trying to create an encrypted file within Emacs.
 Example:
@@ -567,12 +569,10 @@ Example:
 
 
 To do incremental search (isearch) across multiple files or buffers:
-//nobreak
 
-
- * In dired, `M-s a C-s` for isearch across marked files.
- * In dired, `Q` does query-replace-regexp on all marked files.
- * In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
+* In dired, `M-s a C-s` for isearch across marked files.
+* In dired, `Q` does query-replace-regexp on all marked files.
+* In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
 
 
 To override dtrt-indent (which guesses indentation), do:
@@ -586,15 +586,13 @@ them in this entry because someone searching for this entry might use them.
 
 
 In Mew, use the following for searching:
-//nobreak
 
-
- * `C-cC-s`
+* `C-cC-s`
     Incremental search forward in Message mode, only within the
     current message.
- * `C-cC-r` Incremental search backward in Message mode, only within the
+* `C-cC-r` Incremental search backward in Message mode, only within the
     current message.
- * `?`
+* `?`
      Put the `*` mark onto messages in this folder, which are matched
      to a specified pattern. Either `mewl` or `grep` is called according to
      the specified pattern.
@@ -605,14 +603,10 @@ To keep the original Subject line, use dcc: instead of bcc:.
 
 
 In Emacs, to find/search/grep and replace a regex across multiple files:
-//nobreak
 
-
- * M-x find-grep-dired RET my-regex RET
- * mark files of interest: `% m`
- * invoke search and replace: `Q`
-//nobreak
-
+* M-x find-grep-dired RET my-regex RET
+* mark files of interest: `% m`
+* invoke search and replace: `Q`
 
 To search through symbolic links, first do
   (setq find-program "find -L")
@@ -646,7 +640,7 @@ To change an Emacs buffer from Mac or Dos to Unix line endings:
 
 
 Using Emacs as an External Editor in IntelliJ IDEA:
-https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html
+<https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html>
 
 
 Mail reading in Emacs:
@@ -679,7 +673,7 @@ or the following ought to work, but it does not:
 
 
 ;; Setting face attributes:
-(defface my-boxed-face 
+(defface my-boxed-face
   '((default))
   "A face that highlights text with a red box.")
 (set-face-attribute 'my-boxed-face nil :box t)

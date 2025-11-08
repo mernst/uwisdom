@@ -51,7 +51,7 @@ Comparison of CI systems:
 Azure Pipelines terminology:
 
 * A pipeline is one or more stages.
-* A stage consists of one or more jobs, which are units of work assignable to a particular machine. 
+* A stage consists of one or more jobs, which are units of work assignable to a particular machine.
   Examples of stages are "build this app", "run these tests", and "deploy to pre-production".
   By default, stages run sequentially.
   Stages may be arranged into a dependency graph: "run this stage before that one".
@@ -66,15 +66,15 @@ In Azure Pipelines, to run CI for a new GitHub project, do:
 * New project.
 * Pipelines
 * >> New pipeline
-*  GitHub
+* GitHub
 
 
-Azure Pipelines no longer gives generous quota to new users (explanation at https://devblogs.microsoft.com/devops/change-in-azure-pipelines-grant-for-public-projects/).  To ask for an increase in *parallelism* (does not increase CPU quota), browse to https://aka.ms/azpipelines-parallelism-request .
+Azure Pipelines no longer gives generous quota to new users (explanation at <https://devblogs.microsoft.com/devops/change-in-azure-pipelines-grant-for-public-projects/>).  To ask for an increase in *parallelism* (does not increase CPU quota), browse to <https://aka.ms/azpipelines-parallelism-request> .
 This requires that you have already created an Azure Pipelines free account.
 
 
 Travis vs. Azure environment variables:
-https://docs.microsoft.com/en-us/azure/devops/pipelines/migrate/from-travis?view=azure-devops
+<https://docs.microsoft.com/en-us/azure/devops/pipelines/migrate/from-travis?view=azure-devops>
 
 
 Azure's mechanism for sharing files/directories between stages or jobs
@@ -101,16 +101,16 @@ Pipelines in that account.
 
 For each project, I need to
 
- * create a Gmail address such as "mernstrandoop"
-    * forward all mail from the new Gmail address to me
- * create a GitHub account
-    * In my real account, make the GitHub account an owner for the organization (use the "people" tab).
- * create an Azure account
-    * Be sure to click "Sign in with GitHub"
-    * Create a project named randoop (not mernstrandoop)
-    * add my regular email address (eg, mernst@alum.mit.edu) to the team
- * Create the pipelines
-    * delete old project from my personal Azure account, where they were competing for the same small resources.
+* create a Gmail address such as "mernstrandoop"
+  * forward all mail from the new Gmail address to me
+* create a GitHub account
+  * In my real account, make the GitHub account an owner for the organization (use the "people" tab).
+* create an Azure account
+  * Be sure to click "Sign in with GitHub"
+  * Create a project named randoop (not mernstrandoop)
+  * add my regular email address (eg, <mernst@alum.mit.edu>) to the team
+* Create the pipelines
+  * delete old project from my personal Azure account, where they were competing for the same small resources.
 
 
 Azure Container Registry costs money.
@@ -130,13 +130,13 @@ After doing this, it may take a few minutes for users to see the "run next" butt
 
 CircleCI's `docker` executor:
 
- * The `large` resource class gives 8GB of memory and is the largest available to free users as of 2023-06-03.
-   (sources: https://circleci.com/pricing/ https://circleci.com/docs/using-docker/#available-docker-resource-classes)
+* The `large` resource class gives 8GB of memory and is the largest available to free users as of 2023-06-03.
+   (sources: <https://circleci.com/pricing/> <https://circleci.com/docs/using-docker/#available-docker-resource-classes>)
 
 CircleCI's `machine` executor is for a Linux machine not running a Docker image.
 
- * The `medium` resource class gives 7.5GB of memory.
-   (source: https://circleci.com/docs/using-linuxvm/#available-linuxvm-resource-classes)
+* The `medium` resource class gives 7.5GB of memory.
+   (source: <https://circleci.com/docs/using-linuxvm/#available-linuxvm-resource-classes>)
    It may require payment in the future.  You specify a VM image rather than a Docker image.
 
 Travis-CI:  "The default one is ‘medium’, which is ... usually ... 2vCPU and around 4 or 8 GB of RAM".
@@ -144,17 +144,17 @@ The Checker Framework tests do not run in 4GB of memory.
 
 
 Grant CircleCI access to your organization at:
-https://github.com/settings/connections/applications/78a2ba87f071c28e65bb
+<https://github.com/settings/connections/applications/78a2ba87f071c28e65bb>
 
 
 CircleCI 2.1:
 
- * New features:  orbs, commands, and executors are new faces in the config.yml party. Also, workflows no longer have a version number. Make sure to take the version key out of your workflows section or bad things will happen. The only version key in 2.1 is the top-level key.
-    * also jobs with parameters
- * CircleCI 2.1 pipelines disable the CIRCLE_COMPARE_URL environment variable.
-   https://github.com/iynere/compare-url#examples re-enables it, but crashes sometimes.
- * Triggering a build after a build succeeds (https://discuss.circleci.com/t/if-a-build-completes-in-one-project-is-there-a-way-to-trigger-build-on-another-project/23941/4) apparently doesn't work any longer in v2.1:
-   https://discuss.circleci.com/t/circleci-2-1-is-it-possible-to-trigger-a-job-through-api/26294/8
+* New features:  orbs, commands, and executors are new faces in the config.yml party. Also, workflows no longer have a version number. Make sure to take the version key out of your workflows section or bad things will happen. The only version key in 2.1 is the top-level key.
+  * also jobs with parameters
+* CircleCI 2.1 pipelines disable the CIRCLE_COMPARE_URL environment variable.
+   <https://github.com/iynere/compare-url#examples> re-enables it, but crashes sometimes.
+* Triggering a build after a build succeeds (<https://discuss.circleci.com/t/if-a-build-completes-in-one-project-is-there-a-way-to-trigger-build-on-another-project/23941/4>) apparently doesn't work any longer in v2.1:
+   <https://discuss.circleci.com/t/circleci-2-1-is-it-possible-to-trigger-a-job-through-api/26294/8>
 
 
 To download CircleCI output logs to a local file:
@@ -172,12 +172,12 @@ mv test-output.txt nonsystem-931.txt
 
 
 When setting up a new CircleCI repository, go to its settings:
-(Find the project at https://app.circleci.com/projects/project-dashboard/github/USER/.)
+(Find the project at <https://app.circleci.com/projects/project-dashboard/github/USER/>.)
 Advanced Settings >>
 
- * Build forked pull requests: on
- * Auto-cancel redundant builds: on
- * Enable pipelines: on   [I can't find this setting any more.]
+* Build forked pull requests: on
+* Auto-cancel redundant builds: on
+* Enable pipelines: on   [I can't find this setting any more.]
 
 
 I can't figure out how to get CircleCI's matrix feature to work, and I
@@ -202,31 +202,31 @@ echo $(($(cat /sys/fs/cgroup/cpu/cpu.shares) / 1024))
 
 Whitelist of Ubuntu packages that can be installed on container-based
 Travis-CI infrastructure using the APT addon mechanism:
-https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
-(which is linked from https://github.com/travis-ci/apt-package-whitelist)
+<https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise>
+(which is linked from <https://github.com/travis-ci/apt-package-whitelist>)
 
 
 Travis-CI advantages:
 
- * no local sysadmin
- * setup is checked into the version control repository
- * builds pull requests and branches as well as the mainline
- * every user can enable it for their repositories and forks
+* no local sysadmin
+* setup is checked into the version control repository
+* builds pull requests and branches as well as the mainline
+* every user can enable it for their repositories and forks
 
 Travis-CI disadvantages:
 
- * old OS:
-    * default build infrastructure is Ubuntu 12.04
-    * no OS more recent than Ubuntu 14.04 is available
-    * these OS limitations are shared by other cloud CI infrastructure
- * time limits:
-    * jobs are limited to less than 2 hours
-    * for Ubuntu 14.04, jobs are limited to about 50 minutes
-    * if a repository has been tested a lot recently, new builds may be delayed
- * memory limits:
-    * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
+* old OS:
+  * default build infrastructure is Ubuntu 12.04
+  * no OS more recent than Ubuntu 14.04 is available
+  * these OS limitations are shared by other cloud CI infrastructure
+* time limits:
+  * jobs are limited to less than 2 hours
+  * for Ubuntu 14.04, jobs are limited to about 50 minutes
+  * if a repository has been tested a lot recently, new builds may be delayed
+* memory limits:
+  * machines have only 3-7 GB of memory; Java only uses 1/4 of this for its
       maximum heap size; so I sometimes need -Xmx2500M command-line argument
- * no way to ssh in to virtual machines, which complicates debugging
+* no way to ssh in to virtual machines, which complicates debugging
 
 
 A commit that has `[ci skip]` anywhere in the commit message is ignored by
@@ -266,10 +266,10 @@ Note that Travis seems to give more time on container-based than legacy infrastr
 
 To enable Travis on your fork:
 
- * Go to travis-ci.org
- * Log in using GitHub
- * You might need to click "refresh"
- * turn on the toggle next to your fork's name
+* Go to travis-ci.org
+* Log in using GitHub
+* You might need to click "refresh"
+* turn on the toggle next to your fork's name
 
 Now, the next time you push, the tests will run.
 
@@ -278,14 +278,14 @@ Travis debug VM:
 
 1. Add
 
-```
+```yaml
 - travis_debug
 ```
 
 as one of the commands in the script block.
 
 1. Send a POST request to /job/:job_id/debug using:
-   TOKEN = your API token; see https://github.com/travis-ci/travis.rb#token
+   TOKEN = your API token; see <https://github.com/travis-ci/travis.rb#token>
    JOB_ID = displayed in the build log after expanding "Build system information"
 
    ```sh
@@ -348,7 +348,7 @@ Typical invocation of trigger-travis:
 
 
 Sometimes, the Travis Gradle cache becomes corrupted and must be reset.
-Clean the cache at the repository's settings page at https://travis-ci.com/ORG/REPO/caches
+Clean the cache at the repository's settings page at <https://travis-ci.com/ORG/REPO/caches>
 
 
 What to do if a Travis pull request fails:
@@ -371,15 +371,15 @@ GitHub Actions offers free 2000 Linux minutes per month for public repositories.
   That's 1 hour per day.
   A macOS minutes costs 10 Linux minutes.
   A Windows minute costs 2 Linux minutes.
-  Details at https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages .
+  Details at <https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages> .
 Each virtual machine has a 2-core CPU with 7 GB of RAM
-  Details at https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners .
+  Details at <https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners> .
 
 
 GitHub Actions is problematic if you have flaky jobs.
 
- * GitHub Actions halts all jobs if any job fails.
- * GitHub Actions offers only a "Re-run all jobs" option,
+* GitHub Actions halts all jobs if any job fails.
+* GitHub Actions offers only a "Re-run all jobs" option,
    but no "Re-run failing jobs" option.  That means that if a job is flaky, it is
    expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
    time can *cause* flakiness as they all attempt to retrieve the same network
@@ -393,10 +393,10 @@ GitHub Actions is problematic if you have flaky jobs.
 GitLab CI coordinates runners, farms out work to them, and keeps track build histories and whatnot, but doesn't do the build itself.
 To use GitLab CI (continuous integration):
 
- * In your project settings, enable the "Builds" feature.
- * Click "Save changes"
- * The page now shows a "CI token", which you can use to register a job runner for your project.
- * Set up a runner.  If the GitLab server does not provide any shared runners, then set up a specific runner on another computer.  Navigate to "Settings >> Runners", and also see https://gitlab.com/gitlab-org/gitlab-ci-multi-runner
+* In your project settings, enable the "Builds" feature.
+* Click "Save changes"
+* The page now shows a "CI token", which you can use to register a job runner for your project.
+* Set up a runner.  If the GitLab server does not provide any shared runners, then set up a specific runner on another computer.  Navigate to "Settings >> Runners", and also see <https://gitlab.com/gitlab-org/gitlab-ci-multi-runner>
 
 
 To register a GitLab CI multi-runner:
@@ -424,11 +424,11 @@ To unregister a multi-runner:
 To give a new user permissions/privileges in Jenkins:
 
 1. Find the Jenkins user name for the user:
-  Go to (e.g.) http://tern.cs.washington.edu:8080/
+  Go to (e.g.) <http://tern.cs.washington.edu:8080/>
   -> Manage Jenkins
   -> Manage Users (second to last option)
   We should request everybody from CSE to use their CSE account name.
-2. Go to http://tern.cs.washington.edu:8080/
+2. Go to <http://tern.cs.washington.edu:8080/>
   -> Manage Jenkins
   -> Configure Global Security (second option)
   Now either look for whether that user is already present and adjust the

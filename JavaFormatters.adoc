@@ -1,19 +1,19 @@
-https://github.com/diffplug/spotless
+<https://github.com/diffplug/spotless>
   Can do any of: Java (google-java-format, eclipse jdt, clang-format, prettier, palantir-java-format)
   Configuration:
-    https://github.com/diffplug/spotless/tree/main/plugin-gradle#java
-    https://github.com/apache/beam/blob/1d9daf1aca101fa5a194cbbba969886734e08902/buildSrc/src/main/groovy/org/apache/beam/gradle/BeamModulePlugin.groovy#L776-L789
+    <https://github.com/diffplug/spotless/tree/main/plugin-gradle#java>
+    <https://github.com/apache/beam/blob/1d9daf1aca101fa5a194cbbba969886734e08902/buildSrc/src/main/groovy/org/apache/beam/gradle/BeamModulePlugin.groovy#L776-L789>
   I should create a `typeAnnotations()` filter within `java` that is a postprocessing step, just like run-google-java-format does now.
-    See https://github.com/diffplug/spotless/blob/main/CONTRIBUTING.md
+    See <https://github.com/diffplug/spotless/blob/main/CONTRIBUTING.md>
     It has an "Integration testing" section too.
   It would be analogous to "GoogleJavaFormatStep.java".
   Spotless supports only some configuration options, but I could add more in file "GoogleJavaFormatStep.java".
 
 
-https://github.com/jhipster/prettier-java
+<https://github.com/jhipster/prettier-java>
 
 
-https://clang.llvm.org/docs/ClangFormat.html
+<https://clang.llvm.org/docs/ClangFormat.html>
   To install: sudo apt install clang-format -y
   To run: clang-format --style=Google -i
   "--qualifier-alignment=<string> - If set, overrides the qualifier alignment style
@@ -42,11 +42,11 @@ palantir-java-format
 
 
 Eclipse:
-  https://www.beyondjava.net/run-eclipse-formatter-command-line
-  https://stackoverflow.com/questions/32599714/running-the-eclipse-java-formatter-on-the-command-line-with-eclipse-4-4
+  <https://www.beyondjava.net/run-eclipse-formatter-command-line>
+  <https://stackoverflow.com/questions/32599714/running-the-eclipse-java-formatter-on-the-command-line-with-eclipse-4-4>
 
 
-spring-javaformat: https://github.com/spring-io/spring-javaformat
+spring-javaformat: <https://github.com/spring-io/spring-javaformat>
   "It is effectively limited to adding or removing whitespace and line feeds."
   "switching to spaces is the one configuration option that we do support."
   120 character width.  What is indentation: 4 spaces?
@@ -57,9 +57,9 @@ Vim: vim MyClass.java <<< gg=G:wq
 
 
 Not free:
-IntelliJ IDEA: https://www.jetbrains.com/help/idea/command-line-formatter.html#5b357a2d
+IntelliJ IDEA: <https://www.jetbrains.com/help/idea/command-line-formatter.html#5b357a2d>
   Not free
-Jindent: http://www.newforms-tech.com/products/jindent/components/console
+Jindent: <http://www.newforms-tech.com/products/jindent/components/console>
   $40 for academic use.
   I sent mail asking whether it handles type annotations.
 
@@ -71,13 +71,13 @@ google-java-format: The authors refuse to build in names of well-known type anno
 
 
 OpenRewrite
-  https://github.com/openrewrite/rewrite
+  <https://github.com/openrewrite/rewrite>
   Add to `build.gradle` file:
     plugins {
-	id("org.openrewrite.rewrite") version("5.26.3")
+ id("org.openrewrite.rewrite") version("5.26.3")
     }
     rewrite {
-	activeRecipe("org.openrewrite.java.format.AutoFormat")
+ activeRecipe("org.openrewrite.java.format.AutoFormat")
     }
   Then run: ./gradlew rewriteRun
     This compiles the project -- I'm not sure why.
@@ -85,24 +85,26 @@ OpenRewrite
   Removes annotated receiver parameters!  But leaves in the colon, which results in illegal Java files.
   By default uses 4-character indentation.
   Put this in a file named rewrite.yml:
-  - org.openrewrite.java.style.TabsAndIndentsStyle:
+
+- org.openrewrite.java.style.TabsAndIndentsStyle:
       indentSize: 2
   "OpenRewrite recipes make minimally invasive changes to your source code that honor the original formatting."
 
 
 No longer maintained:
- * http://jalopy.sourceforge.net/
- * http://astyle.sourceforge.net/ -- last release 2018, no changes since 2019
- * https://sourceforge.net/projects/jastyle/ -- last updated 2015
- * http://www.semanticdesigns.com/Products/Formatters/JavaFormatter.html
+
+- <http://jalopy.sourceforge.net/>
+- <http://astyle.sourceforge.net/> -- last release 2018, no changes since 2019
+- <https://sourceforge.net/projects/jastyle/> -- last updated 2015
+- <http://www.semanticdesigns.com/Products/Formatters/JavaFormatter.html>
    "Handles Java 1.1-1.6 and Java version 7"
- * http://jrefactory.sourceforge.net/
- * http://universalindent.sourceforge.net/
+- <http://jrefactory.sourceforge.net/>
+- <http://universalindent.sourceforge.net/>
 
 
 Only for C:
-https://www.gnu.org/software/indent/manual/indent.html
+<https://www.gnu.org/software/indent/manual/indent.html>
 
 
 Not a code formatter:
-https://www.ibm.com/docs/en/i/7.4?topic=classes-running-format-as-standalone-program
+<https://www.ibm.com/docs/en/i/7.4?topic=classes-running-format-as-standalone-program>

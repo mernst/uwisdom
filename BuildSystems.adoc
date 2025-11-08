@@ -2,7 +2,7 @@
 
 
 make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
-is a segfault (http://www.bitwizard.nl/sig11/).
+is a segfault (<http://www.bitwizard.nl/sig11/>).
 
 
 Make has two flavors of variables that may appear in a Makefile.
@@ -51,7 +51,7 @@ up to date, add an extra rule of the form
 ```
 
 Once this is done, `make clean' will run the commands regardless of
-whether there is a file named `clean'.
+whether there is a file named`clean'.
 
 
 After Makefile.in is changed, it is necessary to rerun "config.status" and
@@ -59,13 +59,11 @@ then rerun "make".
 
 
 Particularly useful special "automatic variables" used by make (in Makefile rules):
-//nobreak
 
-
- * $@   the target of the rule
- * $<   the first prerequisite
- * $^   all the prerequisites
- * $*   the stem with which an implicit rule matches, including directory name
+* $@   the target of the rule
+* $<   the first prerequisite
+* $^   all the prerequisites
+* $*   the stem with which an implicit rule matches, including directory name
 Example use of special automatic variables used by make:
 `cp -p $< $@`
 
@@ -108,26 +106,26 @@ the Makefile I would like to write:
 ```make
 .PHONY: maybe-update-file1
 maybe-update-file1:
-	Command A:  may or may not update file1.txt
+ Command A:  may or may not update file1.txt
 file2.txt:  maybe-update-file1 file1.txt
-	Command B:  computes file2.txt from file1.txt
+ Command B:  computes file2.txt from file1.txt
 ```
 
 Problem: because the maybe-update-file1 target always executes, Command B
 always executes.  That wastes the time to execute Command B, and because it
 unconditionally updates file2.txt, any command that depends on file2.txt
 also executes unnecessarily.
- +
+
 Here is an approach that works:
 
 ```make
 file2.txt: maybe-update-file1 .timestamp-file2
 .PHONY: maybe-update-file1
 maybe-update-file1:
-	@if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
+ @if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
 .timestamp-file2: file1.txt
-	cp file1.txt file2.txt
-	touch .timestamp-file2
+ cp file1.txt file2.txt
+ touch .timestamp-file2
 ```
 
 
@@ -145,7 +143,7 @@ THIS_MAKEFILE:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
 
 
 An Ant guide (documentation) for beginners:
-http://wiki.apache.org/ant/TheElementsOfAntStyle
+<http://wiki.apache.org/ant/TheElementsOfAntStyle>
 
 
 To permit user-specific setting of variables in a Makefile, add this at the
@@ -215,16 +213,16 @@ To print a fileset in Ant:
 
 ```ant
     <macrodef name="echo-fileset">
-		    <attribute name="filesetref" />
-		    <sequential>
-		    <pathconvert pathsep="\n " property="@{filesetref}.echopath">
-				    <path>
-					    <fileset refid="@{filesetref}" />
-				    </path>
-			    </pathconvert>
-		    <echo>   ------- echoing fileset @{filesetref} -------</echo>
-		    <echo>${@{filesetref}.echopath}</echo>
-		    </sequential>
+      <attribute name="filesetref" />
+      <sequential>
+      <pathconvert pathsep="\n " property="@{filesetref}.echopath">
+        <path>
+         <fileset refid="@{filesetref}" />
+        </path>
+       </pathconvert>
+      <echo>   ------- echoing fileset @{filesetref} -------</echo>
+      <echo>${@{filesetref}.echopath}</echo>
+      </sequential>
     </macrodef>
 ...
     <echo-fileset filesetref="src.files"/>
@@ -294,11 +292,9 @@ Ant permits you to specify that one target depends on another, but by
 default every prerequisite is always rebuilt, even if it is already up to
 date.  (This is a key difference between Ant and make:  by default, make
 only re-builds a target if some prerequisite is newer.)
- +
+
 To make Ant re-build prerequisites only if necessary, there are two general
 approaches.
-//nobreak
-
 
  1. Use the uptodate task to set a property.  Then, your task can test the
    property and build only if the property is (not) set.
@@ -342,7 +338,7 @@ downloading subprojects from the Internet rather than avoiding wasted work
 by staging the parts of a single project.
 
 
-In Ant, the path to the current ant build file (typically build.xml) is 
+In Ant, the path to the current ant build file (typically build.xml) is
 available as property `ant.file`.  You can get its directory in this way:
 
 ```ant
@@ -354,16 +350,16 @@ In Ant, to jar up the contents of a set of existing .jar files:
 
 ```ant
     <zip destfile="out.jar">
-	<zipgroupfileset dir="lib" includes="*.jar"/>
+ <zipgroupfileset dir="lib" includes="*.jar"/>
     </zip>
 ```
 
 
-Vizant (http://vizant.sourceforge.net/) is an ant build visualization tool.
+Vizant (<http://vizant.sourceforge.net/>) is an ant build visualization tool.
 
 
 To make the junit task work in Ant without setting classpath, use the hack from:
-http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes
+<http://wiki.osuosl.org/display/howto/Running+JUnit+Tests+from+Ant+without+making+classpath+changes>
 
 
 To list the projects (top-level targets) in an Ant build.xml file, do either of:
@@ -388,8 +384,8 @@ To pass the -Xlint argument to javac when running from Ant, do:
 ```
 
 
-To run ant without parallelism, to avoid bugs like 
-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=738789 :
+To run ant without parallelism, to avoid bugs like
+<https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=738789> :
 
 ```sh
 ant -Doutgen.job.ant.opts=-XX:ActiveProcessorCount=1
@@ -541,23 +537,21 @@ repository, then use that snapshot version number in your Gradle build file.
 
 
 To test a new version of a Gradle dependency locally, you have several options:
-\nobreak
 
-
- * install a version (maybe a snapshot version) in a local Gradle repository
- * Edit the build.gradle file, for instance by changing
+* install a version (maybe a snapshot version) in a local Gradle repository
+* Edit the build.gradle file, for instance by changing
 
    ```gradle
    implementation 'org.plumelib:bcel-util:1.1.3'
    ```
 
-   to 
+   to
 
    ```gradle
    implementation files("${rootDir}/libs/bcel-util-all.jar")
    ```
 
- * Overwrite the `.jar` file in a subdirectory of
+* Overwrite the `.jar` file in a subdirectory of
    `~/.gradle/caches/modules-2/files-2.1/` .
    This does not require changing your build.gradle file.
    Since you now have locally cached a different version than is in Maven
@@ -591,7 +585,7 @@ docker run -v $HOME/.gradle:/root/.gradle -v $HOME/.m2:/root/.m2 USER/IMAGE-NAME
 ```
 
 Travis says not to cache Docker images:
-https://docs.travis-ci.com/user/caching/#things-not-to-cache
+<https://docs.travis-ci.com/user/caching/#things-not-to-cache>
 
 
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
@@ -600,20 +594,20 @@ Set up directory:
 1. Run once ever: ln -s ../../../gradle.properties gradle.properties
 2. Add gradle.properties to .gitignore file.
 3. Gradle buildfile rules:
-   http://central.sonatype.org/pages/gradle.html
+   <http://central.sonatype.org/pages/gradle.html>
    (It's better to use the "maven-publish" plugin; does it now suport signing?)
 
 Here are alternate, but worse, sources of Gradle buildfile rules:
 
- * This doesn't give instructions about Maven Central in particular:
-   https://docs.gradle.org/current/userguide/maven_plugin.html
- * The "maven-publish" plugin doesn't support signing which Maven Central requires:
-   https://docs.gradle.org/current/userguide/publishing_maven.html
+* This doesn't give instructions about Maven Central in particular:
+   <https://docs.gradle.org/current/userguide/maven_plugin.html>
+* The "maven-publish" plugin doesn't support signing which Maven Central requires:
+   <https://docs.gradle.org/current/userguide/publishing_maven.html>
 
 
 To make a release to Maven Central using Gradle:
 
-1. Create Gradle files using http://central.sonatype.org/pages/gradle.html
+1. Create Gradle files using <http://central.sonatype.org/pages/gradle.html>
 2. Increment the version number in buildfiles, documentation (README files), etc.
 3. Run one of these:
 
@@ -623,7 +617,7 @@ To make a release to Maven Central using Gradle:
    ```
 
 4. Manually release the deployment:
-  a. Browse to https://oss.sonatype.org/#stagingRepositories
+  a. Browse to <https://oss.sonatype.org/#stagingRepositories>
   b. Search for and select this repository, by group name.
   c. At the top, click "close" then "refresh" then "release".
      You might have to wait a little while between the clicks.
@@ -710,26 +704,26 @@ First, find the projects:
      (delete-matching-lines "branch-[^m]" nil nil t))`
 Then:
 
- * ./gradlew wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 6.3 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 6.9 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 7.1 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 7.5.1 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 7.6.1 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 8.14.3 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
- * ./gradlew wrapper --gradle-version 9.2.0 && ./gradlew build --warning-mode=all
- * Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 5.6.4 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 6.3 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 6.9 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 7.1 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 7.5.1 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 7.6.1 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 8.14.3 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
+* ./gradlew wrapper --gradle-version 9.2.0 && ./gradlew build --warning-mode=all
+* Look for warnings and deprecations
 
-The latest Gradle release version number is at https://gradle.org/releases/ .
+The latest Gradle release version number is at <https://gradle.org/releases/> .
 
 1. Add to `build.gradle`:
    For Gradle 6 or 7:
@@ -782,8 +776,8 @@ Could not create service of type DefaultGeneralCompileCaches using GradleScopeCo
 
 here are two possibilities:
 
- * run `gradle --stop` to stop all daemons
- * delete the project's `.gradle` directory
+* run `gradle --stop` to stop all daemons
+* delete the project's `.gradle` directory
 
 
 In gradle, to debug exec tasks:
