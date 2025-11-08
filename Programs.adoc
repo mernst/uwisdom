@@ -1171,7 +1171,7 @@ For Perl coding standards:
 To lint/format/pretty-print perl files, put this in the Makefile:
 
 ```make
-PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 perl-style-fix:
  perltidy -b ${PERL_FILES}
 perl-style-check:
@@ -1228,7 +1228,7 @@ Typical Makefile rules to enforce Python style rules:
 ```make
 style-fix: python-style-fix
 style-check: python-style-fix
-PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/env \)python')
+PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/env \)python')
 python-style-fix:
 ifneq (${PYTHON_FILES},)
  @ruff --version
@@ -1561,8 +1561,8 @@ There is also `checkbashisms`.
 Here are Makefile rules to run them:
 
 ```make
-SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
    echo "checkbashisms" ; \
  else \
