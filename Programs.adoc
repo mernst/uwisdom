@@ -1607,10 +1607,10 @@ Typical Makefile rules for markdownlint-cli2:
 ```make
 style-fix: markdownlint-fix
 markdownlint-fix:
- markdownlint-cli2 --fix .
+	markdownlint-cli2 --fix "**/*.md" "#node_modules"
 style-check: markdownlint-check
 markdownlint-check:
- markdownlint-cli2 .
+	markdownlint-cli2 "**/*.md" "#node_modules"
 ```
 
 
@@ -2336,9 +2336,12 @@ installation.
 Convert AsciiDoc to Markdown:
 
 * `basename=MYBASENAME; asciidoctor -b docbook $basename.adoc; pandoc -f docbook -t commonmark_x -o $basename.md $basename.xml --wrap=none`
-  Problem: code fences are turned into indentation, which I don not like.
+  Problem: code fences are turned into indentation, which I do not like.
 * <https://github.com/opendevise/downdoc>
-* <https://gitlab.com/bburt/convert-asciidoc-to-markdown> (all commits are on one day)
+  Does not handle backtick fenced code blocks, which are an *extension* to
+  AsciiDoc rather than part of the base specification.
+* <https://gitlab.com/bburt/convert-asciidoc-to-markdown>
+  I don't trust this repo because all its commits are on one day.
 
 
 An example of an AsciiDoc document that has both HTML and PDF is <https://junit.org/junit5/docs/current/user-guide/> .

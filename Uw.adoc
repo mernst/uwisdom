@@ -626,6 +626,19 @@ For course staff communication:
 * Un-officially a free 'retail' Slack workspacesuffices too, as 90 day retention cleans up after itself.
 
 
+You must be a member of the CSE unix group "smtp-users" to send mail
+from a script using `attumail.cs.washington.edu`. To check if you are a member:
+
+1. Go to https://intranet.cs.washington.edu/grpadmin
+2. Click "Query or change group members"
+3. Click the radio button "user name" next to the Query By button.
+4. Then click the "Query By" button.
+5. You will be presented with a table of all groups you are in. Check
+  if "smtp-users" is in the table.
+6. If it is, you're good to go. If not, submit a ticket to support@cs
+  saying that you need to be added to the group in order to send
+  email.
+
 
 == Seattle
 
