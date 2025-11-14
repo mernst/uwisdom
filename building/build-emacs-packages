@@ -1,0 +1,155 @@
+===========================================================================
+
+;; To install my standard packages:
+;; (Sometimes one needs to be installed manually instead of programmatically.)
+(progn
+  (require 'package)
+  ;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+  (package-refresh-contents)
+  (package-install 'aidermacs)
+  (package-install 'apheleia)
+  (package-install 'cargo)
+  (package-install 'company)
+  (package-install 'dtrt-indent)
+  (package-install 'flycheck)
+  (package-install 'gptel)
+  (package-install 'groovy-mode)
+  (package-install 'lsp-java)
+  (package-install 'lsp-ui)
+  (package-install 'magit)
+  (package-install 'python-mode)
+  (package-install 'rg)
+  (package-install 'string-inflection)
+  (package-install 'treesit-auto)
+  (package-install 'yaml-mode)
+  (package-install 'yasnippet)
+  ;; I think this is no longer needed, because of apheleia: (package-install 'shfmt)
+  ;; (package-install 'helm)
+  ;; (package-install 'helm-lsp)
+  ;; (package-install 'projectile)
+)
+(progn
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+  (package-install 'vterm))
+
+vterm requires:
+  sudo apt install -qyy libtool libtool-bin cmake
+  cd ~/.emacs.d/elpa/vterm-*
+  cmake .
+  make
+
+----------------
+
+To upgrade packages installed by ELPA (no good programmatic way to do it):
+M-x list-packages RET U x
+
+----------------
+
+;; not yet done; can I live without them?
+
+  (package-install 'benchmark-init)
+  (package-install 'jdee)
+  (package-install 's)
+  (package-install 'with-editor)
+
+;; This is only necessary for this package, I think.
+;; On home machine:
+;;   (package-install 'ggtags)
+;; At CSE and Amazon:
+;;   (let ((package-check-signature nil)) (package-install 'ggtags))
+
+===========================================================================
+
+Eclipse jdtls (for LSP)
+
+cd ~/.emacs.d/.cache/lsp
+rm -rf eclipse.jdt.ls
+mkdir eclipse.jdt.ls
+cd eclipse.jdt.ls
+# wget didn't work, I had to download manually.
+wget https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.46.1/jdt-language-server-1.46.1-202504011455.tar.gz
+tar xzf jdt-language-server-1.46.1-202504011455.tar.gz
+
+
+cd ~/tmp
+
+===========================================================================
+
+cd ~/emacs
+wget https://github.com/radian-software/apheleia/archive/refs/tags/v4.3.zip
+unzip v4.3.zip
+rm -f apheleia
+ln -s apheleia-4.3 apheleia
+
+===========================================================================
+
+For jdee, also see file build-jdee to build jdee-server
+
+In Emacs 24 and later, to list and manually install packages, use
+  M-x list-packages
+then 'i' to mark for installation, 'x' to install.
+
+In early Jan 2019, magit was consistently corrupting repositories.
+Updating to a more recent version helped, but this suggests I might
+want to be cautious about updating magit in general.
+
+===========================================================================
+
+Magit:
+
+[This is NOT needed any more.  The above installs magit.]
+
+As of 9/3/2015, magit cannot be run from a directory that is a symbolic link.
+This is true for both the ELPA installation and the git repository.
+It's true for both release 2.2.1 and 2.2.2.
+
+----------------
+
+Install from ELPA:
+
+Or, just do:
+  M-x package-refresh-contents RET
+  M-x package-install RET magit RET
+(Don't do this programmatcally from Emacs Lisp commands -- do the above instead.)
+
+----------------
+
+Install from git:
+
+cd ~/emacs
+wget -N https://raw.githubusercontent.com/magnars/dash.el/master/dash.el
+wget -N https://raw.githubusercontent.com/magnars/s.el/master/s.el
+cd ~/emacs
+git clone git://github.com/magit/with-editor.git with-editor
+cd ~/emacs
+git clone git://github.com/magit/magit.git magit
+cd magit
+make
+
+===========================================================================
+
+Python mode:
+
+[This is NOT needed any more.  The above installs python-mode.]
+
+cd ~/emacs
+wget https://launchpad.net/python-mode/trunk/6.0.8/+download/python-mode.el-6.0.8.tar.gz
+tar xzf python-mode.el-6.0.8.tar.gz
+
+===========================================================================
+
+deadgrep:
+
+DON'T INSTALL.
+Use rg.el instead.
+
+On Emacs 25.1 or later: M-x package-install RET deadgrep RET
+
+Otherwise, give up, because this gave me fits:
+(package-install 'spinner)
+(package-install 'projectile) ;; Also requires Emacs 25.1 or later
+
+===========================================================================

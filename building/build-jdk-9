@@ -1,0 +1,440 @@
+===========================================================================
+
+Early release binaries for Oracle's JDK 9:
+https://jdk9.java.net/download/
+See below for how to install from there.
+It sometimes takes a while for releases to show up at http://openjdk.java.net/install/
+
+===========================================================================
+
+Installing Java 8 JDK from Amazon Coretto
+(Not necessary on Ubuntu which has up-to-date JDK 8 installed.)
+
+# Get version number from https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html
+MAJORVER=8
+VER=8.222.10.1
+cd ~/java
+wget https://d3pxv6yz143wms.cloudfront.net/$VER/amazon-corretto-$VER-linux-x64.tar.gz
+tar xf amazon-corretto-$VER-linux-x64.tar.gz
+ln -sf amazon-corretto-$VER-linux-x64 amazon-corretto-$MAJORVER
+
+...
+
+===========================================================================
+
+Source code via Mercurial:
+
+# Java 8:
+mkdir -p ~/java
+cd ~/java/
+hg clone http://hg.openjdk.java.net/jdk8/jdk8 openjdk8
+cd openjdk8 && sh ./get_source.sh
+
+# Java 9:
+mkdir -p ~/java
+cd ~/java/
+hg clone http://hg.openjdk.java.net/jdk9/jdk9 openjdk9
+# This gets all the parts of the JDK, which I probably don't need:
+cd openjdk9 && sh ./get_source.sh
+
+# Now, compile it (why do I want/need to do that?):
+#if Ubuntu:
+sudo apt install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev ccache
+#endif
+bash ./configure
+make all
+
+===========================================================================
+
+JDK 7 problems:
+ * With recent JDK (eg, b104):
+    * Randoop tests fail (in crontab only, not from the shell)
+    * Javarifier tests fail on godwit but not on laptop.
+ * With older JDK (eg, b92):
+    * Hudson job jsr308-langtools-basic fails
+
+===========================================================================
+
+Ubuntu:
+
+Nothing to do, because apt seems to have already installed it.
+(Still Java 7 as of 8/2014.)
+
+===========================================================================
+
+JDK 9 (OpenJDK):
+
+Two techniques: mercurial or download
+
+----------------
+
+## Mercurial (for source code):
+# No need to do this; my other instructions made a ~/java/jdk-openjdk/.
+
+----------------
+
+## Note that this may intermittently fail, especially on a Thursday when
+## Oracle is updating the weekly build.
+
+## Download:
+# See https://jdk.java.net/9/ to set these environment variables.
+export OJDKMAJORVER="9"
+# export OJDKBUILDNO="135"
+export OJDKBUILDNO="167"
+## "fcs" before official release, "ea" afterward (and the build number resets)
+export EA="ea"
+# export EA="fcs"
+export OJDKVERSION=${OJDKBUILDNO}-linux-x64-${OJDKDATE}
+
+export JDKPARENTDIR=$HOME/java/
+mkdir -p $JDKPARENTDIR
+cd $JDKPARENTDIR
+rm -f jdk1.9.0
+rm -f jdk-9
+
+wget http://www.java.net/download/java/jdk${OJDKMAJORVER}/archive/${OJDKBUILDNO}/binaries/jdk-${OJDKMAJORVER}-${EA}+${OJDKBUILDNO}_linux-x64_bin.tar.gz
+tar xzf jdk-${OJDKMAJORVER}-${EA}+${OJDKBUILDNO}_linux-x64_bin.tar.gz
+mv jdk-${OJDKMAJORVER} jdk-${OJDKMAJORVER}-${EA}+${OJDKBUILDNO} 
+ln -s jdk-${OJDKMAJORVER}-${EA}+${OJDKBUILDNO} jdk-${OJDKMAJORVER}
+ln -s jdk-${OJDKMAJORVER} jdk${OJDKMAJORVER}
+## Optional:
+# rm -f jdk
+# ln -s jdk1.${OJDKMAJORVER}.0 jdk
+mkdir jdk-${OJDKMAJORVER}/src
+# This src.zip file contains files that are not in the source bundle nor in
+# the repository at http://hg.openjdk.java.net/jdk9/jdk9, for example
+# java.io.FileDescriptor.  (Why?)
+(cd jdk-${OJDKMAJORVER}/src; unzip -q ../src.zip)
+
+### JDK docs (the date might be a day off!)
+export JDKDOCDIR=$HOME/java/jdk-${OJDKMAJORVER}
+mkdir -p $JDKDOCDIR
+cd $JDKDOCDIR
+# wget http://www.java.net/download/jdk${OJDKMAJORVER}/archive/${OJDKBUILDNO}/binaries/jdk-${OJDKMAJORVER}-docs-all.zip
+# unzip -q jdk-${OJDKMAJORVER}-docs-all.zip
+wget http://www.java.net/download/java/jdk${OJDKMAJORVER}/archive/${OJDKBUILDNO}/binaries/jdk-${OJDKMAJORVER}_doc-api-spec.tar.gz
+tar xzf jdk-${OJDKMAJORVER}_doc-api-spec.tar.gz
+# Only necessary once ever: cd ~/java; ln -s jdk/docs jdk-docs; ln -s jdk-${OJDKMAJORVER} jdk${OJDKMAJORVER}; ln -s jdk${OJDKMAJORVER} jdk
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+===========================================================================
+
+JDK 8 (OpenJDK):
+
+For compilation, I should just install the JSR 308 compiler instead.
+(But, that's just the compiler, not all of OpenJDK.)
+
+Two techniques: mercurial or download
+
+----------------
+
+## Mercurial (for source code):
+# No need to do this; my other instructions made a ~/java/jdk-openjdk/.
+
+----------------
+
+## Note that this may intermittently fail, especially on a Thursday when
+## Oracle is updating the weekly build.
+
+# On 1/8/2009 at CSE, running this yielded an installation that didn't seem
+# to work for me.  In particular, running
+#   java -jar $inv/java/lookup.jar
+# yielded
+#   Exception in thread "main" java.lang.NoClassDefFoundError: com/sun/javadoc/RootDoc
+# even though tools.jar was on the classpath.  Switching the symbolic link
+# back to JDK6 permitted me to run the program.
+
+## Newer:
+# See https://www.oracle.com/technetwork/java/javase/downloads/index.html
+mkdir $HOME/java/jdk1.8.0_212
+cd $HOME/java
+wget https://d3pxv6yz143wms.cloudfront.net/8.212.04.2/amazon-corretto-8.212.04.2-linux-x64.tar.gz
+
+
+## Download:
+# See http://jdk.java.net/8/ to set these environment variables.
+export OJDKMAJORVER="8"
+export OJDKUPDATEVER="152"
+export OJDKVER=${OJDKMAJORVER}u${OJDKUPDATEVER}
+export OJDKBUILDNO="b03"
+export OJDKDATE="19_apr_2017"
+## "fcs" before official release, "ea" afterward (and the build number resets)
+export EA="ea"
+# export EA="fcs"
+export OJDKVERSION=${OJDKBUILDNO}-linux-x64-${OJDKDATE}
+export JDKPARENTDIR=$HOME/java/
+mkdir -p $JDKPARENTDIR
+cd $JDKPARENTDIR
+wget http://www.java.net/download/java/jdk$OJDKVER/archive/${OJDKBUILDNO}/binaries/jdk-$OJDKVER-${EA}-bin-${OJDKVERSION}.tar.gz
+tar xzf jdk-$OJDKVER-${EA}-bin-${OJDKVERSION}.tar.gz
+mv jdk1.8.0_${OJDKUPDATEVER} jdk1.8.0_${OJDKUPDATEVER}-${OJDKBUILDNO}
+ln -s jdk1.8.0_${OJDKUPDATEVER}-${OJDKBUILDNO} jdk1.8.0_${OJDKUPDATEVER}
+rm -f jdk1.8.0
+ln -s jdk1.8.0_${OJDKUPDATEVER} jdk1.8.0
+ln -s jdk1.8.0 jdk8
+## Optional:
+# rm -f jdk
+# ln -s jdk1.8.0 jdk
+mkdir jdk1.8.0/src
+# This src.zip file contains files that are not in the source bundle nor in
+# the repository at http://hg.openjdk.java.net/jdk8/jdk8, for example
+# java.io.FileDescriptor.  (Why?)
+(cd jdk1.8.0/src; unzip -q ../src.zip)
+
+### JDK 8 docs (the date might be a day off!)
+export JDKDOCDIR=$HOME/java/jdk1.8.0
+cd $JDKDOCDIR
+## This does not seem to exist for JDK 8 builds
+## Download the file by going to
+## http://www.oracle.com/technetwork/java/javase/downloads/index.html
+## and following links at "Java SE 8 Documentation".
+mv ~/tmp/jdk-8u*-docs-all.zip .
+unzip -q jdk-8u*-docs-all.zip
+# Only necessary once ever: cd ~/java; ln -s jdk/docs jdk-docs; ln -s jdk1.8.0 jdk8; ln -s jdk8 jdk
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+---------------------------------------------------------------------------
+
+For MacOS X:
+
+JDK 8 at:
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Execute
+/usr/libexec/java_home
+and link that to ~/java/jdk[XXX],
+then link that to ~/java/jdk
+
+I also need the documentation from:
+http://www.oracle.com/technetwork/java/javase/documentation/jdk8-doc-downloads-2133158.html
+mv ~/tmp/jdk-8u25-docs-all.zip ~/java/
+cd ~/java
+unzip jdk-8u25-docs-all.zip
+ln -s docs jdk-docs
+
+-----
+
+Older:
+
+# Need Mac OS X 10.5 to compile (Mac OS X 10.4 doesn't work), so get binary
+# distribution:
+
+OpenJDK Darwin i386 binaries (linked from http://landonf.bikemonkey.org/):
+wget http://landonf.bikemonkey.org/static/soylatte/openjdk/openjdk8-darwin-i386-20080820.tar.bz2
+
+
+===========================================================================
+
+JDK 7 (OpenJDK):
+
+Note that this is for pre-release builds.
+For post-release updates, see https://jdk7.java.net/source.html
+
+For compilation, I should just install the JSR 308 compiler instead.
+(But, that's just the compiler, not all of OpenJDK.)
+
+Two techniques: mercurial or download
+
+----------------
+
+## Mercurial (for source code):
+# No need to do this; my other instructions made a ~/java/openjdk8/.
+
+----------------
+
+## Note that this may intermittently fail, especially on a Thursday when
+## Oracle is updating the weekly build.
+
+# On 1/8/2009 at CSE, running this yielded an installation that didn't seem
+# to work for me.  In particular, running
+#   java -jar $inv/java/lookup.jar
+# yielded
+#   Exception in thread "main" java.lang.NoClassDefFoundError: com/sun/javadoc/RootDoc
+# even though tools.jar was on the classpath.  Switching the symbolic link
+# back to JDK6 permitted me to run the program.
+
+## Download:
+# See http://download.java.net/openjdk/jdk7/ to set these environment variables.
+export OJDKBUILDNO="b147"
+export OJDKDATE="27_jun_2011"
+# export EA="ea"
+export EA="fcs"
+export OJDKVERSION=${OJDKBUILDNO}-linux-i586-${OJDKDATE}
+export JDKPARENTDIR=$HOME/java/
+mkdir -p $JDKPARENTDIR
+cd $JDKPARENTDIR
+rm -f jdk1.7.0
+# wget http://www.java.net/download/jdk7/archive/${OJDKBUILDNO}/binaries/jdk-7-${EA}-bin-b137-linux-i586-07_apr_2011.tar.gz
+# chmod +x jdk-7-${EA}-bin-${OJDKVERSION}.bin
+# # "yes |" mostly works, but one bit of user interaction is required by "more".
+# yes | ./jdk-7-${EA}-bin-${OJDKVERSION}.bin
+# wget http://download.java.net/jdk7/binaries/jdk-7-ea-bin-${OJDKVERSION}.tar.gz
+wget http://www.java.net/download/jdk7/archive/${OJDKBUILDNO}/binaries/jdk-7-${EA}-bin-${OJDKVERSION}.tar.gz
+tar xzf jdk-7-${EA}-bin-${OJDKVERSION}.tar.gz
+mv jdk1.7.0 jdk1.7.0-${OJDKBUILDNO}
+ln -s jdk1.7.0-${OJDKBUILDNO} jdk1.7.0
+rm -f jdk
+ln -s jdk1.7.0 jdk
+mkdir jdk/src
+# This src.zip file contains files that are not in the source bundle nor in
+# the repository at http://hg.openjdk.java.net/jdk7/jdk7, for example
+# java.io.FileDescriptor.  (Why?)
+(cd jdk/src; unzip ../src.zip)
+
+### JDK 7 docs
+export JDKDOCDIR=$HOME/java/jdk1.7.0
+cd $JDKDOCDIR
+# wget http://www.java.net/download/jdk7/jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.jar
+# # This java command pops up a GUI.  Answer question: install in $HOME/java/jdk1.7.0
+# java -jar jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.jar
+wget http://www.java.net/download/jdk7/archive/$OJDKBUILDNO/jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.zip
+unzip jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.zip
+# Only necessary once ever: cd ~/java; ln -s jdk/docs_www jdk-docs; ln -s jdk1.7.0 jdk7
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+### JDK 7 docs
+export JDKDOCDIR=$HOME/java/jdk1.7.0
+cd $JDKDOCDIR
+# wget http://www.java.net/download/jdk7/jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.jar
+# # This java command pops up a GUI.  Answer question: install in $HOME/java/jdk1.7.0
+# java -jar jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.jar
+wget http://www.java.net/download/jdk7/archive/$OJDKBUILDNO/jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.zip
+unzip jdk-7-${EA}-bin-$OJDKBUILDNO-apidocs-$OJDKDATE.zip
+# Only necessary once ever: cd ~/java; ln -s jdk/docs_www jdk-docs; ln -s jdk1.7.0 jdk7
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+---------------------------------------------------------------------------
+
+For MacOS X:
+
+# Need Mac OS X 10.5 to compile (Mac OS X 10.4 doesn't work), so get binary
+# distribution:
+
+OpenJDK Darwin i386 binaries (linked from http://landonf.bikemonkey.org/):
+wget http://landonf.bikemonkey.org/static/soylatte/openjdk/openjdk7-darwin-i386-20080820.tar.bz2
+
+===========================================================================
+
+JDK 6:
+
+From 
+  http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html#jdk-6u43-oth-JPR
+download
+  jdk-6u43-linux-x64.bin
+mv ~/tmp/jdk-6u43-linux-x64.bin ~/java
+cd ~/java
+chmod +x jdk-6u43-linux-x64.bin
+./jdk-6u43-linux-x64.bin
+ln -s jdk1.6.0_43 jdk6
+
+===========================================================================
+
+JDK 6 for Linux:
+
+----------------
+
+# Follow the instructions at
+#   http://ubuntuguide.org/wiki/Ubuntu_Edgy#How_to_install_Java_Development_Kit_.28JDK.29_v5.0
+# but modify for Java 6 as follows.
+
+# 1. First, download jdk-6-doc.zip from http://java.sun.com/javase/downloads/
+# and put it in /tmp, owned by root.root.
+
+# 2. Run the following commands.
+sudo apt install sun-java6-bin sun-java6-demo sun-java6-doc sun-java6-fonts sun-java6-jdk sun-java6-jre sun-java6-plugin sun-java6-source
+sudo update-java-alternatives -s java-6-sun
+# Add /usr/lib/jvm/java-6-sun to the top of /etc/jvm
+sudo emacs /etc/jvm
+# I didn't do the fonts_backup fix yet, though.
+
+# The source (from sun-java6-source) is in
+#   /usr/lib/jvm/java-6-sun-1.6.0.05/src.zip
+# and documentation only in
+#   /usr/share/doc/sun-java6-source
+
+
+===========================================================================
+
+# My personal setup:
+
+# Java 6 (on Ubuntu)
+mkdir -p ~/java
+cd ~/java
+rm -f jdk6
+ln -s /usr/lib/jvm/java-6-sun jdk6
+rm -f jdk1.6
+ln -s /usr/lib/jvm/java-6-sun jdk1.6
+
+## Watch out!  This is too many levels of symbolic links...
+# mkdir -p ~/java
+# ln -s /usr/lib/jvm/java-6-sun jdk1.6.0
+# rm -f jdk1.6
+# ln -s jdk1.6.0 jdk1.6
+# rm -f jdk6
+# ln -s jdk1.6 jdk6
+# rm -f jdk
+# ln -s jdk6 jdk
+
+
+----------------
+
+Docs:
+
+# Ubuntu:
+# Everything should already be installed in the right place by the
+# "sudo apt install sun-java6-doc" command.  (But that package no
+# longer exists...)
+# (That place is /usr/share/doc/sun-java6-jdk/html.)
+# Already set up:
+# cd ~/java; ln -s jdk/docs jdk-docs
+
+# Non-ubuntu
+
+
+# Now, fix links.
+# (Is this still necessary in Java 6 and recent Emacses?) (I'll try skipping it...)
+# ## For paranoia, I can try the javadoc-escape-anchors command first:
+# ## cp -rp /usr/share/doc/sun-java6-jdk/html ~/java/jdk-docs-java6-play
+# ## find ~/java/jdk-docs-java6-play/api -name '*.html' -print | sudo xargs ~/research/invariants/scripts/javadoc-escape-anchors
+# find ~mernst/java/jdk-docs/api -name '*.html' -print | sudo xargs ~mernst/research/invariants/scripts/javadoc-escape-anchors
+# javadoc-index-to-alist > ~/.javadoc-index.el
+
+
+===========================================================================
+
+Debian package for Sun's Java JDK: java-package
+  apt install java-package
+  fakeroot make-jpkg jre-1_5_0_06-linux-i586.bin
+  dpkg -i sun-j2re1.5_1.5.0+update06_i386.deb
+More info here:
+http://wiki.serios.net/wiki/Debian_Java_JRE/JDK_installation_with_java-package
+
+===========================================================================
+
+OpenJDK on Cygwin:
+  http://hg.openjdk.java.net/jdk7/build/raw-file/tip/README-builds.html#cygwin
+  http://wikis.sun.com/display/OpenJdkBuilds/OpenJDK+Builds+Home+Page
+  http://wikis.sun.com/display/OpenJdkBuilds/Known+OpenJDK+Build+Problems
+  http://bugs.sun.com/view_bug.do;jsessionid=3a3fae9e6d5b119fe874c1ad9119?bug_id=6704973
+  ?? http://java4ever.blogspot.com/2007/12/openjdk-build-on-netbeans-with-windows_01.html
+  http://mail.openjdk.java.net/pipermail/build-dev/2007-August/000210.html
+    Aug 16, 2007:
+    The biggest pain is to use Visual Studio.net 2003 and not Visual
+    Studio.2005Express edition or GCC for windows or MingW or some other
+    free Compiler for windows.  The idea of buying software to work on open
+    source development is not very encouraging.
+  http://mail.openjdk.java.net/pipermail/build-dev/2007-August/000182.html
+
+===========================================================================
+
+JDK 5:
+
+http://java.sun.com/javase/downloads/5u22/jdk 
+
+# Or, just click through at the above URL.
+wget http://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_Developer-Site/en_US/-/USD/VerifyItem-Start/jdk-1_5_0_22-linux-i586.bin?BundledLineItemUUID=bkSJ_hCxDmkAAAEsOqgF_IUi&OrderID=LPuJ_hCx0YYAAAEsIqgF_IUi&ProductID=EW5IBe.nXqsAAAEk2Q5UGl.X&FileName=/jdk-1_5_0_22-linux-i586.bin
+cd ~/tmp
+chmod +x jdk-1_5_0_22-linux-i586.bin
+jdk-1_5_0_22-linux-i586.bin
+
+===========================================================================

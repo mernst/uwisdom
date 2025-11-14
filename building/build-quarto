@@ -1,0 +1,29 @@
+Get version number from https://github.com/quarto-dev/quarto-cli/releases .
+
+On Ubuntu:
+
+VER=1.9.8
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v${VER}/quarto-${VER}-linux-amd64.deb
+sudo dpkg -i quarto-${VER}-linux-amd64.deb
+
+
+At CSE:
+
+VER=1.9.8
+mkdir -p ~/bin/install
+cd ~/bin/install
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v${VER}/quarto-${VER}-linux-amd64.tar.gz
+tar xzf quarto-${VER}-linux-amd64.tar.gz
+mkdir -p ~/bin/$(uname)-$(uname -m)
+cd ~/bin/$(uname)-$(uname -m)
+ln -sf ~/bin/install/quarto-${VER}/bin/quarto .
+
+
+On a Mac:
+Browse to https://github.com/quarto-dev/quarto-cli/releases/, expand "assets".
+
+===========================================================================
+
+Quarto requires an empty file
+_quarto.yml
+in the project root directory, so it knows where the project root is.

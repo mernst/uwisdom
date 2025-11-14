@@ -1,0 +1,33 @@
+===========================================================================
+
+For extensions to install, see file ../setup/setup-preferences .
+
+===========================================================================
+
+To install, or to update, as non-root at UW CSE:
+
+Adapted from
+https://unix.stackexchange.com/questions/8926/installing-chrome-on-linux-without-needing-to-be-root
+
+# First, archive the old installation.
+mv -f ~/bin/install/chrome ~/bin/install/chrome-$(date +%Y%m%d)
+mkdir -p ~/bin/install/chrome
+cd ~/bin/install/chrome
+# Download rpm file from https://www.google.com/chrome/
+rpm2cpio google-chrome-stable_current_x86_64.rpm | cpio -id
+cd ~/bin/Linux-x86_64 && ln -s ../install/chrome/opt/google/chrome/google-chrome .
+
+===========================================================================
+
+Ubuntu:
+
+Download the 64-bit .deb and double-click it.
+Or:
+sudo dpkg -i ~/tmp/google-chrome-stable_current_amd64.deb
+
+===========================================================================
+
+To fix certain problems, uninstall and reinstall.  To uninstall:
+sudo dpkg -r google-chrome-stable
+
+===========================================================================

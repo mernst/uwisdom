@@ -1,0 +1,39 @@
+PHP: http://www.php.net/downloads.php
+
+# In installation notes, "make install-cli" permits php scripts to run
+# (from the command line) and read their arguments.
+
+Anonymous CVS access instructions:
+http://www.php.net/anoncvs.php
+Mirroring the CVS repository locally (actually, I'm not sure this does that
+-- I just use CVS normally?)
+http://www.php.net/cvsup.php
+
+===========================================================================
+
+4.3.9:
+
+cd ~/tmp
+# wget 'http://us3.php.net/get/php-4.3.9.tar.bz2/from/this/mirror?PHPSESSID=5236c21e795f14e0efab676cfaf8085e'
+# tar xjf php-4.3.9.tar.bz2
+tar xzf php-4.3.9.tar.gz
+cd php-4.3.9
+./configure
+make
+sudo make install
+sudo make install-cli
+
+===========================================================================
+
+4.3.6:
+
+cd ~/tmp
+wget 'http://us3.php.net/get/php-4.3.6.tar.bz2/from/this/mirror?PHPSESSID=5236c21e795f14e0efab676cfaf8085e'
+tar xjf php-4.3.6.tar.bz2
+cd php-4.3.6
+./configure
+make
+sudo make install
+sudo make install-cli
+
+===========================================================================

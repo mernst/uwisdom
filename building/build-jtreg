@@ -1,0 +1,27 @@
+# On Ubuntu:
+sudo apt install jtreg
+
+# Not on Ubuntu, or if desiring a newer version:
+# Set version by browsing to https://builds.shipilev.net/jtreg/
+VER=7.4+1
+cd ~/bin/install
+wget https://builds.shipilev.net/jtreg/jtreg-$VER.zip
+rm -rf jtreg
+unzip jtreg-$VER.zip
+mv jtreg jtreg-$VER
+ln -s jtreg-$VER jtreg
+# Optionally set JT_HOME to $HOME/bin/install/jtreg and use that for jtreg.home too.
+# When configuring the JDK to build it locally, use (is this necessary if JT_HOME is set?):
+#   bash configure --with-jtreg=$HOME/bin/install/jtreg
+
+===========================================================================
+
+jtreg version 5:
+
+# Note: building JDK 17 requires version 6.1.
+# Problem:  Installs in /usr/share/java/jtreg.jar, and there is no
+# directory I can set to jtreg.home that has a lib/jtreg.jar in it.
+# Question: what problem does that cause?
+sudo apt install jtreg
+
+===========================================================================

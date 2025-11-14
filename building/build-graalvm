@@ -1,0 +1,23 @@
+See downloads at https://www.graalvm.org/downloads/ .
+As of 2024-08-21, no JDK 23 is available.
+
+
+GRAAL_VERSION=24
+GRAAL_ARCHITECTURE=linux-x64
+
+cd ~/java
+rm -f graalvm-jdk-${GRAAL_VERSION}_${GRAAL_ARCHITECTURE}_bin.tar.gz
+wget https://download.oracle.com/graalvm/${GRAAL_VERSION}/latest/graalvm-jdk-${GRAAL_VERSION}_${GRAAL_ARCHITECTURE}_bin.tar.gz
+tar xzvf graalvm-jdk-${GRAAL_VERSION}_${GRAAL_ARCHITECTURE}_bin.tar.gz
+
+ln -s graalvm-jdk-24.0.1+9.1 graaljdk24
+rm -f jdk24
+ln -s graaljdk24 jdk24
+
+rm -f graaljdk21
+ln -s graalvm-jdk-21.0.7+8.1 graaljdk21
+rm -f jdk21
+ln -s graaljdk21 jdk21
+
+ln -s graalvm-community-openjdk-17.0.9+9.1 graaljdk17
+ln -s graalvm-ce-java11-22.3.3 graaljdk11

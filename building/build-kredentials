@@ -1,0 +1,5 @@
+wget http://freshmeat.net/urls/ae3a36506f97f1ecd76e1831a8e10e35
+tar xzf kredentials_0.9.5.tar.gz
+cd kredentials-0.9.5
+./configure
+make

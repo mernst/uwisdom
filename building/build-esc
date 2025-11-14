@@ -1,0 +1,130 @@
+OpenJML supersedes ESC/Java2, which is no longer maintained.
+
+The paper "OpenJML: JML for Java 7 by extending OpenJDK" by David R. Cok says:
+"OpenJML is a re-implementation, on a completely new code-base, of tools such as the JML2 tools for JML on Java 1.4 (including jmldoc and jmlrac) and ESC/Java2 and ESC/Java for static checking."
+
+There is an assignment about using ESC/Java from 2008 here:
+https://www.cs.cmu.edu/~aldrich/courses/654-sp08/homework/asst5.pdf
+
+===========================================================================
+
+ESC/Java2
+
+http://sort.ucd.ie/frs/?group_id=97
+
+Installation instructions in README.release
+Less helpful installation instructions are way down in
+  http://secure.ucd.ie/products/opensource/ESCJava2/escjava2_readme_first.html
+
+Submit bugs at: http://sort.ucd.ie/tracker/index.php?group_id=97
+
+----------------
+
+## Choose one of the following (and put the three lines in a startup script?)
+# LAPTOP: setenv ESC $HOME/bin/ESCJava
+# PAG: setenv ESC $pag/software/pkg/ESCJava
+# TESTING: setenv ESC $HOME/tmp/ESCJava
+
+setenv ESCPARENT `dirname $ESC`
+# Make $ESC a symbolic link to the release-specific directory
+mkdir -p $ESCPARENT/ESCJava-2.0a8
+cd $ESCPARENT
+rm -f ESCJava
+ln -s ESCJava-2.0a8 ESCJava
+# Install
+cd $ESC
+wget http://sort.ucd.ie/frs/download.php/28/ESCJava-2.0a8-31-03-05-binary.tbz
+tar xjf ESCJava-2.0a8-31-03-05-binary.tbz
+
+# Create the wrapper script, below, if necessary.
+
+# ESC/Java2 itself:
+escj
+
+# Test the distributon:
+quicktest
+
+----------------
+
+# Wrapper script
+# Only need to do this once ever.
+
+# Create, on your path, script escjava2-wrapper of the following form:
+# LAPTOP: ~/bin/share/escjava2-wrapper
+# PAG: $pag/software/bin/escjava2-wrapper
+# (Adjust the environment variables appropriately.)
+
+  #! /bin/sh
+  # Wrapper for ESC/Java2 scripts.
+
+  # Set ESC/Java2 environment variables.
+  export ESCTOOLS_RELEASE=$HOME/tmp/ESCJava
+  export SIMPLIFY=Simplify-1.5.4.linux
+
+  # ESC/Java2 requires the use of Java version 4.
+  JDK14=/afs/csail/group/pag/software/pkg/jdk-1.4
+
+  # Run the real (wrapped) script.
+  JAVA=$JDK14/bin/java CLASSPATH=$JDK14/jre/lib/rt.jar:$JDK14/lib/tools.jar:$CLASSPATH $ESCTOOLS_RELEASE/`basename $0` "$@"
+
+# Then symlink to it, in the same directory:
+ln -s escjava2-wrapper escj
+ln -s escjava2-wrapper escjava2
+ln -s escjava2-wrapper quicktest
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Below is for the original ESC/Java, not ESC/Java2
+
+===========================================================================
+
+"Java Programming Toolkit" (ESC/Java source release):
+  http://crl.research.compaq.com/downloads/download.cgi/mernst@lcs.mit.edu/java+toolkit+source/
+Download 5 files to /g4/projects/invariants/tools/escjava/downloads/:
+  Houdini.tar.Z
+  README.txt
+  Rcc.tar.Z
+  Javafe.tar.Z
+  Escjava.tar.Z
+See the README.txt for installation instructions.
+
+===========================================================================
+
+ESC/Java version 1.2:
+
+Download escjava-1.2.4-linux.tar.Z and escjava-specs-1.2.4-unix.tar.Z from
+  http://crl.research.compaq.com/downloads/download.cgi/mernst@lcs.mit.edu/Compaq+ESC+for+Java/
+(Follow, don't right-click on, the ".Z" file links.  Also, cookies must be
+enabled.)
+
+Installation instructions at http://research.compaq.com/SRC/esc/download.html
+
+mv escjava-1.2.4-linux.tar.Z escjava-specs-1.2.4-unix.tar.Z ~/java/esc
+cd ~/java/esc
+tar zxf escjava-1.2.4-linux.tar.Z
+(cd escjava; tar zxf ../escjava-specs-1.2.4-unix.tar.Z)
+# Compare previous version of specs to new version of specs, and copy over
+# any changes.  In particular, copy over Arrays.spec.
+ln -s ~/java/esc/escjava/bin/* ~/bin/Linux-i686
+# Change top of escjava/bin/escjava to the following:
+#   setenv ESCJAVA_ROOT /g2/users/mernst/java/esc/escjava
+#   setenv JAVA /g2/users/mernst/java/jdk/bin/java
+#   setenv JAVA_STDLIB /g2/users/mernst/java/jdk/jre/lib/rt.jar
+# Just below that, make this edit:
+#   setenv ESCJ_STDARGS "-suggest -nowarn Deadlock"
+
+# Try it out (should see 5 warnings, I think?):
+cd escjava/examples/0.0
+escjava Bag.java
+
+===========================================================================
+
+ESC/Java notes:
+ * also_requires may be used only on a method implenting an interface
+ * requires and ensures only go on the first implementation of a
+   method; they are prohibited if overriding a method (whether
+   that method is ESC-specified or not)
+ * also_modifies may be used on any (overriding) method
+ * also_ensures may be used on any (overriding) method

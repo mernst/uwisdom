@@ -1,0 +1,62 @@
+TCL/TK:
+
+http://dev.scriptics.com/software/tcltk
+http://dev.scriptics.com/doc/howto/compile.html
+Also see unix/README
+
+Download both tcl and tk.
+
+(I couldn't get the RPM file to work, and it was older than the source
+distribution anyway.)
+
+# (Run all this on geyer, not a client??)
+mkdir tmp/build-tcl
+mv tcl8.3.3.tar.gz tmp/build-tcl
+mv tk8.3.3.tar.gz tmp/build-tcl
+cd tmp/build-tcl
+tar zxf tcl8.3.3.tar.gz
+tar zxf tk8.3.3.tar.gz
+
+cd tcl8.3.3/unix
+# Or, try: ./configure --enable-gcc --enable-threads
+# Maybe add --enable-shared as well, but .so files seem to be made regardless.
+./configure
+make
+make test
+# As root, on geyer:
+make install
+
+cd ../../tk8.3.3/unix
+./configure
+make
+# make test
+# As root, on geyer:
+make install
+
+===========================================================================
+
+TCL 8.0.5 (required for ical):
+http://dev.scriptics.com/software/tcltk/8.0.tml#Download Source
+
+mkdir tmp/build-tcl
+mv tcl8.0.5.tar.gz tmp/build-tcl
+mv tk8.0.5.tar.gz tmp/build-tcl
+cd build-tcl
+tar zxf tcl8.0.5.tar.gz
+tar zxf tk8.0.5.tar.gz
+
+cd tcl8.0.5/unix
+# Or, try: ./configure --enable-gcc --enable-threads
+# --enable-shared is necessary in order to build .so files
+./configure --enable-shared
+make
+make test
+# As root, on geyer:
+make install
+
+cd ../../tk8.0.5/unix
+./configure
+make
+# make test
+# As root, on geyer:
+make install

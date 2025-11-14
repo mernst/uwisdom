@@ -1,0 +1,143 @@
+===========================================================================
+
+Here are good programs for counting lines of code (loc or sloc or NCNB loc):
+ * scc (recommended by cgag who wrote loc) -- use this
+     Run as: scc --no-cocomo
+     Or as: scc --no-cocomo $project/src | grep Java | tr -s ' ' | cut -d ' ' -f 6
+ * cloc -- also good, from https://github.com/AlDanial/cloc
+
+Here are not-good programs for counting lines of code:
+ * loc (from cgag) -- I was happy using this for a while, but it is no longer maintained
+ * sloccount -- requires path hacking
+ * sclc -- numbers don't add up
+
+This file describes how to build all of them.
+
+===========================================================================
+
+To install scc program:
+
+# DO NOT USE snap installation which doesn't have access to files outside homedir
+
+# Get version number from https://github.com/boyter/scc/releases/
+# 2.13.0 is latest as of 12/30/2020
+VER=3.1.0
+cd $HOME/bin/`uname`-`uname -m`
+wget https://github.com/boyter/scc/releases/download/v${VER}/scc_${VER}_Linux_x86_64.tar.gz
+tar xzf scc_${VER}_Linux_x86_64.tar.gz
+hash -r
+
+===========================================================================
+
+To install cloc:
+
+# Ubuntu
+sudo apt install cloc
+
+# Otherwise:
+cd $HOME/bin/install
+wget https://github.com/AlDanial/cloc/releases/download/v2.00/cloc-2.00.tar.gz
+tar zxvf cloc-2.00.tar.gz
+cd $HOME/bin/$(uname)-$(uname -m)
+ln -s ../install/cloc-2.00/cloc .
+
+===========================================================================
+
+# To install "cgag/loc" program:
+# (Get version number at https://github.com/cgag/loc/releases/ .  0.4.1, released 10/2017,
+# is latest as of 3/2018.)
+cd $HOME/bin/`uname`-`uname -m`
+wget https://github.com/cgag/loc/releases/download/v0.4.1/trust-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
+tar xzf trust-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
+rm -f trust-v0.4.1-x86_64-unknown-linux-gnu.tar.gz
+hash -r
+
+To run it, run
+  loc
+in a directory.  Or, use
+  loc -u
+to include files listed in .gitignore.
+
+===========================================================================
+
+Pass sloccount a directory WITH NO TRAILING SLASH like
+
+sloccount ~/research/invariants/daikon/java/daikon
+
+First, run:
+export PATH=$HOME/bin/install/sloccount-2.26:$PATH
+
+===========================================================================
+
+Personal, single-user installation:
+(Version 2.26, dated august 2004, was the latest version as of 10/2017.)
+
+cd ~/bin/install
+PKG=sloccount-2.26
+wget http://www.dwheeler.com/sloccount/$PKG.tar.gz
+tar xzf $PKG.tar.gz
+cd $PKG
+make
+# This does not work; running sloccount gives "make_filelists: command not found"
+# (cd $HOME/bin/`uname`-`uname -m` && ln -s ../install/sloccount-2.26/sloccount .)
+# I cannot run it, even from the directory containing it, without doing:
+export PATH=$HOME/bin/install/sloccount-2.26:$PATH
+
+===========================================================================
+
+Too much trouble to install on lab machines; don't bother.
+
+# source /uns/src/generic-builder.sh
+cd /uns/src
+PKG=sloccount-2.26
+wget http://www.dwheeler.com/sloccount/$PKG.tar.gz
+tar xzf $PKG.tar.gz
+cd $PKG
+# Apply the below patch
+make PREFIX=/uns/encap/$PKG 
+
+
+
+--- /uns/src/sloccount-2.26/makefile	2004-08-01 11:52:06.000000000 -0700
++++ -	2010-10-08 14:40:08.717828215 -0700
+@@ -28,7 +28,7 @@
+ # Set this for where to store the man pages and executables.
+ # If you want to store this as part of an official distribution,
+ # change this to "/usr":
+-PREFIX=/usr/local
++PREFIX?=/usr/local
+ 
+ # Set "EXE_SUFFIX" to ".exe" if you're running on Windows, like this:
+ # EXE_SUFFIX=.exe
+
+===========================================================================
+
+Run sclc like this:
+
+~/bin/install/sclc-cdiff/sclc `findfile '*.java'`
+~/bin/install/sclc-cdiff/sclc -counts ncsl `findfile '*.java'`
+~/bin/install/sclc-cdiff/sclc -counts 'ncsl+lines' `findfile '*.java'`
+
+
+Where sclc says "NCSL", it really means non-comment non-blank.
+"AESL" is "assembly equivalent source lines".
+
+Problem:  the totals don't always add up perfectly.  Problem with newline
+at end of file?  Other problems?
+
+===========================================================================
+
+Install sclc:
+
+cd ~/bin/install
+PKG=sclc-cdiff
+mkdir $PKG
+cd $PKG
+wget http://www.bradapp.com/clearperl/sclc-cdiff.tar.gz
+tar xzf $PKG.tar.gz
+preplace /usr/misc/bin/perl5 '/usr/bin/env perl'
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/sclc-cdiff/sclc .
+ln -s ../install/sclc-cdiff/cdiff .
+
+===========================================================================

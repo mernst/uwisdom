@@ -1,0 +1,60 @@
+Shipshape is the open-source version of Tricorder.
+https://github.com/google/shipshape
+To make it invoke the Checker Framework, I need to create Docker wrappers around the Checker Framework.  For an example of how to make a Docker wrapper, see the "androidlint" example.
+But, as of 2015-05-22, I can't even get it to run... (see below).
+As of 2016-04-18, it doesn't analyze Java because error-prone isn't integrated: https://github.com/google/shipshape/issues/104
+
+
+===========================================================================
+
+
+# First:
+cd $HOME/bin/`uname`-`uname -m`
+wget -N http://storage.googleapis.com/shipshape-cli/shipshape
+chmod +x shipshape
+
+# To run normally (with cloud connection?)
+sudo apt install docker.io
+sudo usermod -G docker $USER
+sudo service docker.io restart
+# It might be necessary to reboot as well.
+
+
+## To run entirely locally (probably don't bother to do this):
+# Once ever, do this:
+sudo sh -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list" && sudo apt update
+sudo apt install lxc-docker clang flex golang openjdk-8-jdk
+# Now do I need to build?  The instructions are ambiguous.
+
+
+When I did the above on 2015-05-22 and tried to run it, with either the regular or the "run entirely localally" rules, I got:
+
+% shipshape $cf
+E0522 20:45:34.909219   20738 shipshape.go:327] Error from pull: exit status 1
+[run -p=127.0.0.1:10007:10007 -v=/home/mernst/research/types/checker-framework:/shipshape-workspace -v=/tmp:/shipshape-output -e="ANALYZERS=localhost:10005,localhost:10006" -e="START_SERVICE=true" --name=shipping_container -d gcr.io/shipshape_releases/service:prod]E0522 20:45:34.989757   20738 shipshape.go:213] HTTP client did not become healthy: exit status 1
+
+
+% shipshape $cf
+E0522 21:17:42.811581   29227 shipshape.go:327] Error from pull: exit status 1
+[run -p=127.0.0.1:10007:10007 -v=/home/mernst/research/types/checker-framework:/shipshape-workspace -v=/tmp:/shipshape-output -e="ANALYZERS=localhost:10005,localhost:10006" -e="START_SERVICE=true" --name=shipping_container -d gcr.io/shipshape_releases/service:prod]E0522 21:17:42.885301   29227 shipshape.go:213] HTTP client did not become healthy: exit status 1
+
+===========================================================================
+
+2015-05-22:
+At https://github.com/google/shipshape in section "Building/running CLI entirely locally" it would be nice to say the tradeoffs and why a person might choose to run entirely locally.
+
+===========================================================================
+
+To get source code:
+cd ~/bin/install
+git clone https://github.com/google/shipshape.git
+
+===========================================================================
+
+I can't figure out how to run it.  None of these works:
+shipshape --alsologtostderr=true --analyzer_images=error-prone:local $pl/java
+shipshape --alsologtostderr=true --analyzer_images=error-prone $pl/java
+
+# Trying this now; it hung a very long time.
+# I got the idea from ~/bin/install/shipshape/shipshape/proto/shipshape_config.proto
+shipshape --alsologtostderr=true --analyzer_images=gcr.io/shipshape_releases/android_lint:prod $pl/java

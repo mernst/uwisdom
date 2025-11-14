@@ -1,0 +1,37 @@
+===========================================================================
+
+Stable version:
+
+cd ~/tmp
+wget http://darcs.net/releases/darcs-2.4.4_1.tar.gz
+tar xzf darcs-2.4.4_1.tar.gz
+cd darcs-2.4.4_1.tar.gz
+
+===========================================================================
+
+Development version:
+
+cd ~/tmp
+darcs get --lazy http://darcs.net
+
+===========================================================================
+
+Now this says developers should see
+  * http://wiki.darcs.net/Development/GettingStarted
+  * http://wiki.darcs.net/Development/FAQ
+
+===========================================================================
+
+To make the manual (I guessed this from the GNUMakefile):
+
+# First, build darcs
+ghc --make Setup && ./Setup configure && ./Setup build
+# Only then can I make the manual
+make doc/manual/darcs.pdf
+
+But this gave the output:
+make: *** No rule to make target `dist/build/darcs/darcs', needed by `doc/manual/darcs_print.tex'.  Stop.
+
+(This is turning into a pain, just to report bugs in the manual.)
+
+===========================================================================

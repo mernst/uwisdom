@@ -1,0 +1,32 @@
+Get version number from:
+https://code-industry.net/free-pdf-editor/#get
+
+The demo version of "Master PDF Editor 5" adds a watermark on the output file.
+
+===========================================================================
+
+From .deb package file:
+
+cd ~/tmp
+# This URL no longer exists.
+wget http://get.code-industry.net/public/master-pdf-editor-4.2.70_qt5.amd64.deb
+sudo dpkg -i master-pdf-editor-*.deb
+\rm -f master-pdf-editor-*.deb
+
+Now run: masterpdfeditor4 
+
+===========================================================================
+
+From tar distribution
+
+cd ~/bin/install
+# Get version number from https://code-industry.net/free-pdf-editor/
+VER=4.0.60
+wget http://get.code-industry.net/public/master-pdf-editor-${VER}_qt4.amd64.tar.gz
+tar xzf master-pdf-editor-${VER}_qt4.amd64.tar.gz
+
+Now run:  ~/bin/install/master-pdf-editor-4/masterpdfeditor4
+# but it crashes as of 4.0.60
+
+===========================================================================
+

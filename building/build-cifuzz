@@ -1,0 +1,8 @@
+The maintainers have taken the cifuzz tool repository private.  Maybe it's no longer generally available?
+
+All the installation instructions are broken (dead links), so I cannot figure out how to install cifuzz/ci-fuzz.
+
+https://www.code-intelligence.com/cli-tool
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/CodeIntelligenceTesting/cifuzz/main/install.sh)"
+

@@ -1,0 +1,147 @@
+http://www.eclipse.org/downloads/
+
+To install eclipse, just put the untarred/unzipped "eclipse" directory
+somewhere and use its "eclipse" executable.
+
+On Ubuntu, use apt package manager, but:
+ * on Ubuntu 8.10 this still gives Eclipse 3.2.
+ * on Ubuntu 11.4 this still gives Eclipse 3.5.
+
+===========================================================================
+
+Eclipse 3.3.2 and Ganymede (= 3.4).
+
+The pre-installed Eclipse 3.2 failed for me at MPI.
+
+# Download (wget doesn't work) "Eclipse classic" from http://www.eclipse.org/downloads/
+cd ~/bin/install
+rm eclipse
+# tar zxf ~/tmp/eclipse-SDK-3.3.2-linux-gtk.tar.gz
+tar zxf ~/tmp/eclipse-SDK-3.4.1-linux-gtk-x86_64.tar.gz
+mv eclipse eclipse-SDK-3.4.1
+ln -s eclipse-SDK-3.4.1 eclipse
+cd ~/bin/`uname`-`uname -m`
+# Perhaps should add version numbers to symbolic links.
+ln -s ../eclipse/eclipse .
+
+# Installing 3.4.1 had problems:  it worked for a while, then started crashing.
+# Eventually it just immediately quit.  This happened with
+# java-ganymede-SR1, also:  it immediately quit.
+
+cd ~/bin/install
+rm eclipse
+# tar zxf ~/tmp/eclipse-java-ganymede-SR1-linux-gtk-x86_64.tar.gz
+tar zxf ~/tmp/eclipse-java-ganymede-SR1-linux-gtk.tar.gz
+mv eclipse eclipse-java-ganymede-SR1
+ln -s eclipse-java-ganymede-SR1 eclipse
+cd ~/bin/`uname`-`uname -m`
+# Perhaps should add version numbers to symbolic links.
+rm eclipse
+ln -s ../install/eclipse/eclipse .
+
+===========================================================================
+
+For a printed manual, select "print" from the help menu.
+(This takes *forever*, though, because it just creates a gargantuan HTML
+document.  I didn't wait for it to finish.)
+
+To install a plugin:
+Usually just put it in the %ECLIPSE/plugins directory.
+
+===========================================================================
+
+Eclipse 3.0 M8:
+
+(Done at home, not at PAG.)
+
+# Linux GTK version
+
+mkdir ~/tmp/build-eclipse
+cd ~/tmp/build-eclipse
+wget http://download2.eclipse.org/downloads/drops/S-3.0M8-200403261517/eclipse-SDK-3.0M8-linux-gtk.zip
+unzip eclipse-SDK-3.0M8-linux-gtk.zip
+# (Execute the following on the server, e.g., on pag):
+cd ~/tmp/build-eclipse
+sudo mkdir -p /usr/local/pkg/eclipse
+sudo mv eclipse /usr/local/pkg/eclipse/eclipse-3.0M8
+cd /usr/local/bin
+sudo cp -pf eclipse212 eclipse-3.0M8
+# sudo emacs eclipse-3.0M8
+sudo rm eclipse
+sudo ln -s eclipse-3.0M8 eclipse
+
+===========================================================================
+
+Eclipse 2.1.2:
+
+http://download.eclipse.org/downloads/index.php
+
+Download (wget doesn't work) Linux GTK version from 
+http://download2.eclipse.org/downloads/drops/R-2.1.2-200311030802/download.php?dropFile=eclipse-SDK-2.1.2-linux-gtk.zip
+
+mkdir ~/tmp/build-eclipse
+cd ~/tmp/build-eclipse
+unzip eclipse-SDK-2.1.2-linux-gtk.zip
+# On PAG:
+cd ~/tmp/build-eclipse
+sudo mkdir -p /usr/local/pkg/eclipse
+sudo mv eclipse /usr/local/pkg/eclipse/eclipse-2.1.2
+cd /usr/local/bin
+sudo cp eclipse eclipse212
+sudo emacs eclipse212
+sudo rm eclipse
+sudo ln -s eclipse212 eclipse
+
+===========================================================================
+
+Download (wget doesn't work) Linux GTK version from 
+http://download.eclipse.org/downloads/drops/R-2.0.2-200211071448/download.php?dropFile=eclipse-SDK-2.0.2-linux-gtk.zip
+
+mkdir ~/tmp/build-eclipse
+cd ~/tmp/build-eclipse
+unzip eclipse-SDK-2.1.1-linux-gtk.zip
+# On PAG:
+cd ~/tmp/build-eclipse
+sudo mv eclipse /usr/local/pkg/eclipse/eclipse2.1.1
+cd /usr/local/bin
+sudo cp eclipse eclipse211
+sudo emacs eclipse211
+sudo rm eclipse
+sudo ln -s eclipse211 eclipse
+
+----------------
+
+PDF documentation (as of July 2003, documentation is for version 2.0,
+August 2002, not for version 2.1) is available at
+  http://eclipsewiki.swiki.net/239
+Use wget to obtain the actual files; Netscape tends to cut them off.
+
+===========================================================================
+
+Initial setup:
+Window >> Preferences >> Workbench >> Keys >> Active configuration >> Emacs
+Window >> Preferences >> Java >> Compiler >> Problems >> Unused imports >> Ignore
+Window >> Preferences >> Java >> Compiler >> Style >> Non-static access >> Ignore
+Window >> Preferences >> Java >> Code formatter >> Insert tabs for indentation >> unset
+Window >> Preferences >> General >> Workspace >> Refresh automatically: set
+Window >> Preferences >> General >> Workspace >> Save automatically before build: set [useful for demos] [unfortunately, doesn't apply for external tools, apparently]
+Window >> Preferences >> General >> Editors >> Startup and Shutdown >> Refresh workspace on starup: set
+
+===========================================================================
+
+The Eclipse 2.1 change notes say:
+When creating a folder or file, you can link it to an existing location in
+the file system outside of the workspace. This is done using the Advanced
+section on the New Folder and New File wizards.
+
+===========================================================================
+
+Building on Athena for user eclass3:
+
+mkdir -p /tmp/eclipse
+chmod og+rxw /tmp/eclipse
+cp -pf /mit/eclass3/eclipse-SDK-2.1.1-solaris-motif.zip /tmp/ecplise
+(cd /tmp/eclipse; unzip eclipse-SDK-2.1.1-solaris-motif.zip)
+# Then run as /tmp/eclipse/eclipse
+
+===========================================================================

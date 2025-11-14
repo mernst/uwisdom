@@ -1,0 +1,172 @@
+Don't download from Aleron; it didn't work.  ibiblio was OK.
+
+findbugs.sourceforge.net
+
+===========================================================================
+
+# Version 3.0.1 is from 2015-03-06, most recent version as of 2017-09-15
+# http://findbugs.sourceforge.net/manual/installing.html says to look here.
+# There is also https://github.com/findbugsproject/findbugs/releases
+# but it doesn't have anything since 3.0.1 except some releases marked as "pre-release".
+VER=3.0.1
+cd ~/bin/install
+wget http://prdownloads.sourceforge.net/findbugs/findbugs-${VER}.tar.gz
+gunzip -c findbugs-${VER}.tar.gz | tar xvf -
+rm -f findbugs
+ln -s findbugs-${VER} findbugs
+
+===========================================================================
+
+VER=3.0.0
+
+cd ~/bin/src
+wget http://downloads.sourceforge.net/project/findbugs/findbugs/${VER}/findbugs-${VER}.tar.gz
+tar zxf findbugs-${VER}.tar.gz
+rm -f findbugs
+ln -s findbugs-${VER} findbugs
+# Once ever: (cd ~/bin/cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# Source:
+# Only necessary once, for native2ascii task:  sudo apt install ant-doc ant-optional
+cd ~/tmp
+wget http://downloads.sourceforge.net/project/findbugs/findbugs/${VER}/findbugs-${VER}-source.zip
+unzip findbugs-${VER}-source.zip
+cd findbugs-${VER}
+ant build
+# "After building the build target, the working directory is set up just
+# like a binary distribution."
+
+# "To get started, see src/doc/index.html and src/doc/manual/index.html"
+# But, the manual doesn't exist yet, so do:
+ant docs
+# Doing so failed with this error:
+# generatemanual:
+#      [echo] Generating HTML version of manual
+#      [echo] Running saxon: ${local.software.home}/saxon-6.5.5/saxon.jar
+#      [java] Error: Could not find or load main class com.icl.saxon.StyleSheet
+# so I tried:
+#   sudo apt install libsaxon-java libsaxonb-java docbook-xsl-saxon
+# of which only the last item was probably necessary (?).
+# but that didn't work either.  So, give up.
+
+
+# To just compile Java files:
+ant classes
+
+# To run:
+findbugs options...
+
+===========================================================================
+
+cd ~/bin/src
+wget http://superb-east.dl.sourceforge.net/sourceforge/findbugs/findbugs-1.2.1.tar.gz
+tar zxf findbugs-1.2.1.tar.gz
+rm -f findbugs
+ln -s findbugs-1.2.1 findbugs
+# Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# Source:
+# Only necessary once, for native2ascii task:  sudo apt install ant-doc ant-optional
+cd ~/tmp
+wget http://superb-east.dl.sourceforge.net/sourceforge/findbugs/findbugs-1.2.1-source.zip
+unzip findbugs-1.2.1-source.zip
+ant build
+# "After building the build target, the working directory is set up just
+# like a binary distribution."
+# To just compile Java files:
+ant classes
+
+# To run:
+findbugs options...
+
+===========================================================================
+
+cd ~/bin/src
+wget http://voxel.dl.sourceforge.net/sourceforge/findbugs/findbugs-0.9.4.tar.gz
+tar zxf findbugs-0.9.4.tar.gz
+rm -f findbugs
+ln -s findbugs-0.9.4 findbugs
+# Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# To run:
+findbugs options...
+
+===========================================================================
+
+cd ~/bin/src
+wget http://unc.dl.sourceforge.net/sourceforge/findbugs/findbugs-0.9.3.tar.gz
+tar zxf findbugs-0.9.3.tar.gz
+rm -f findbugs
+ln -s findbugs-0.9.3 findbugs
+# Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# To run:
+findbugs options...
+
+===========================================================================
+
+cd ~/bin/src
+wget http://unc.dl.sourceforge.net/sourceforge/findbugs/findbugs-0.8.8.tar.gz
+tar zxf findbugs-0.8.8.tar.gz
+rm -f findbugs
+ln -s findbugs-0.8.8 findbugs
+# Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# To run:
+findbugs options...
+
+===========================================================================
+
+cd ~/bin/src
+wget http://unc.dl.sourceforge.net/sourceforge/findbugs/findbugs-0.8.5.tar.gz
+tar zxf findbugs-0.8.5.tar.gz
+rm -f findbugs
+ln -s findbugs-0.8.5 findbugs
+# Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
+
+# To run (defaults to graphical):
+findbugs options...
+findbugs -emacs -textui MyClass.class
+
+===========================================================================
+
+Documentation is in
+~/bin/src/findbugs/doc/index.html
+
+Error messages are better explained at
+~/bin/src/findbugs/doc
+~/bin/src/findbugs/doc/bugDescriptions.html
+
+===========================================================================
+
+Example usage:
+
+(Avoid my laptop, or use the -conserveSpace argument (and not -maxHeap
+argument).)
+
+cd $inv
+make daikon.jar
+
+cd $inv/java
+~/tmp/findbugs-0.7.4/bin/findbugs -emacs -textui -maxHeap 750 -outputFile findbugs-output $inv/daikon.jar
+
+For xml output, use:
+  -xml -outputFile out.xml
+
+===========================================================================
+
+Bugs to report:
+
+----------------
+
+Also see ~/java/FindbugsTest.java
+Run this command:
+cd ~/java
+javac FindbugsTest.java
+findbugs -textui -emacs FindbugsTest*.class
+
+----------------
+
+
+
+===========================================================================

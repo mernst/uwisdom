@@ -1,0 +1,125 @@
+===========================================================================
+
+OLDER NOTES (June 2001)
+
+---------------------------------------------------------------------------
+
+I can only create a 2047-MB virtual machine.  But it only has to contain
+the operating system; I can keep all data on the host and do networking.
+Do not install to raw disk; OSes keep caches and do partial writes, so this
+would lead to inconsistencies and data loss.
+Or maybe I shouldn't worry about this at all and should dual-boot
+or have a separate computer instead.
+
+---------------------------------------------------------------------------
+
+Installation on PC:
+ * Answer questions:
+    * no networking
+    * disable CD autorun
+ * Enable host-only networking
+    * subnet = 172.16.198
+ * Use configuration editor to add floppy later; this must be done with the
+   floppy in the bay.
+
+---------------------------------------------------------------------------
+
+Installation on Linux:
+
+Download from http://www.vmware.com/download/downloadlinux.html
+
+http://www.vmware.com/support/linux/doc/install_config_linux.html
+
+# Run this on the machine with the peripherals attached, not on a server.
+## This "rpm" command segfaulted on meoptiplex, 12/4/2000.
+## Instead, try from the tar file
+## rpm -Uhv bin/src/vmware/VMware-2.0.3-799.i386.rpm
+# Do this not as root
+cd ~mernst/bin/src/vmware
+tar zxf VMware-2.0.3-799.tar.gz
+su
+cd ~mernst/bin/src/vmware
+cd vmware-distrib 
+./vmware-install.pl
+
+This failed, too, with the following output:
+
+  [root@meoptiplex vmware-distrib]# ./vmware-install.pl
+  A previous installation of VMware has been detected.
+
+  The previous installation was made by the rpm installer (version 2).
+
+  Converting the rpm2 installer database format
+	  to the tar2 installer database format.
+
+  error: package VMware is not installed
+  Failure
+
+  Execution aborted.
+
+  [root@meoptiplex vmware-distrib]# 
+
+Idea:  comment out perl script check of rpm database
+
+---------------------------------------------------------------------------
+
+You can add more usernames at any time by invoking the following command as 
+root: "/usr/bin/vmware-smbpasswd vmnet1 -a <username>"
+
+Put the license file in ~/.vmware/license
+
+# run it; this must be on the local machine if I want to use the CD-ROM
+vmware
+
+
+I didn't do this; maybe I should have:
+  This system appears to have a CIFS/SMB server (Samba) configured for
+  normal use.  If this server is intended to run, you need to make sure
+  that it will not conflict with the Samba server setup on the private
+  network (the one that we use to share the host filesystem). Please check
+  your /etc/smb.conf file so that:
+  . The "interfaces" line does not contain "172.16.170.1/255.255.255.0"
+  . There is a "socket address" line that contains only your real host IP
+    address
+
+===========================================================================
+
+(Some of this is probably subsumed by the above.)
+
+VMware installation notes:
+
+At www.crs.lcs.mit.edu, create new DNS data for my VMware machine.
+
+Menu Devices >> Connect
+At one time, only host system or only guest system can use device; this
+menu decides which.
+Put boot device on /dev/fd0
+Edit floppy settings, use image instead of device.
+Installing debian:  use rescue floppy first, then use root floppy.
+(Section 5.4 of installation instruction has boot floppies.  Also a program
+to write them from DOS.)
+
+Settings >> Autofit
+
+Windows Network & Dialup Connections:  assume #2 is local (guess & check).
+Get a DNS.
+
+Use "compact" rescue/root boot floppies; non-compact crashed VMware,
+because the non-compact versions used weird drivers.
+
+===========================================================================
+
+Samba:
+
+For a linux host, run the vmware-config.pl script; it is supposed to set up
+the samba server right.
+
+On the linux client, mount a share from a windows host by doing something
+(as root) along the lines of this:
+  mount -t smbfs //windowshostname/sharename  /mnt/somewhere -o user=windowsUserName 
+after which if all goes well it'll ask for a password and mount it.  
+
+If you have a remote NFS share which you keep a lot of stuff on anyway you
+might also want to consider using that.
+
+===========================================================================

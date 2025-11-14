@@ -1,0 +1,37 @@
+I don't need dia!  Inkscape is just as good.
+
+Mac:
+http://dia-installer.de/download/macosx.html
+Problem: this doesn't seem to build a command-line version
+
+===========================================================================
+
+Dia: http://live.gnome.org/Dia
+
+Instructions for installing into /uns:
+See /uns/src/dia-0.96.1.BUILDING
+(or /projects/uns/F11/src/dia-0.97.BUILDING )
+
+===========================================================================
+
+# At CSE, without root access and not installing into /uns:
+
+# First, install intltool, glib, and xz
+
+# Get version number from http://live.gnome.org/Dia
+# Version 0.97.2, released 2011-Dec-18, is most recent as of 2016-Sep-22.
+# Version 0.97.3, released 2014-Sep-05, is most recent as of 2018-Dec-11.
+cd ~/bin/install
+export VER=0.97.2
+export PKG=dia-$VER
+# wget $PKG http://ftp.gnome.org/pub/gnome/sources/dia/0.97/$PKG.tar.bz2
+wget -o $PKG.tar.xz http://ftp.gnome.org/pub/gnome/sources/dia/0.97/$PKG.tar.xz
+xz -d $PKG.tar.xz 
+tar xf $PKG.tar
+# On Mac: do "brew sh" now.
+cd ~/bin/install/$PKG
+./configure --prefix=${HOME}/bin/install/${PKG}-install && make && make install
+${HOME}/bin/install/${PKG}-install
+(cd $HOME/bin/`uname`-`uname -m` && ln -s ${HOME}/bin/install/${PKG}-install/bin/dia .)
+
+===========================================================================

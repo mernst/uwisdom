@@ -1,0 +1,24 @@
+http://bbdb.sourceforge.net/
+
+Bugs:  see ~/emacs/bug/BUGS.to-do
+
+# BBDB 2.35 (released 1/2007) is the last release in the 2.x series.
+# As of 7/2014, BBDBv3 is alpha quality; don't be eager to upgrade.
+# Today, BBDB 3 is probably fine, but don't use it because it lacks integration with Mew.
+
+cd ~/emacs
+wget http://bbdb.sourceforge.net/bbdb-2.35.tar.gz
+tar zxf bbdb-2.35.tar.gz
+cd bbdb-2.35
+./configure
+make all
+# In Sep 2020, the above fails in "make info".  Ignore that for now.
+
+rm -f ~/emacs/.path.el
+
+[I'm experimenting with skipping the below.]
+# ??
+# It may take some additional trickery to get this into the load-path, such as:
+cd ..
+ln -s bbdb-2.35 bbdb
+

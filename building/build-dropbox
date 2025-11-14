@@ -1,0 +1,72 @@
+===========================================================================
+
+I do not need this!  It's just the Nautilus extension.  I only plan to use
+Dropbox from the command line, so do the below instead.
+# Ubuntu:
+# To install the Nautilus extension (but not dropbox proper):
+# download, then click on, the .deb at dropbox.com
+
+===========================================================================
+
+## This didn't work for me; I got infinite "Trying to reconnect..." messages.
+To install mostly from the command line, but still has to run a short GUI:
+http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-almost-text-based-linux-environment
+cd
+wget https://dl.dropbox.com/u/43645/dbcli.py
+chmod 755 dbcli.py
+python ./dbcli.py install x86_64
+
+===========================================================================
+
+To install entirely from the command line:
+http://www.dropboxwiki.com/tips-and-tricks/install-dropbox-in-an-entirely-text-based-linux-environment
+and follow the "Step-by-step version" instructions.
+They did pop up a GUI for me, prompting me to log in.
+
+
+cd ~/www/install/
+wget https://www.dropbox.com/download/?plat=lnx.x86_64 -O dropbox-lnx.x86_64-3.8.5.tar.gz
+tar xzf dropbox-lnx.x86_64-3.8.5.tar.gz
+
+===========================================================================
+
+OLDER INSTRUCTIONS:
+
+Source-based installation
+
+## Follow the instructions at 
+## http://wiki.dropbox.com/TipsAndTricks/TextBasedLinuxInstall
+
+## This should not be necessary -- it should be done automatically by
+## "dropbox.py start -i"
+# cd
+# wget -O dropbox.tar.gz "http://www.dropbox.com/download/?plat=lnx.x86"
+# # tar -tzf dropbox.tar.gz
+# tar -xvzf dropbox.tar.gz
+# ~/.dropbox-dist/dropboxd &
+
+# # To get the URL: (e.g., https://www.dropbox.com/cli_link?host_id=8863133eeaba6399b5bd47910834eba3 )
+# wget http://dl.dropbox.com/u/340607/pyDropboxValues.py
+# chmod +x pyDropboxValues.py
+# pyDropboxValues.py _linkurl
+
+mkdir -p ~/bin/share
+wget -O ~/bin/share/dropbox.py "http://www.dropbox.com/download?dl=packages/dropbox.py"
+chmod 755 ~/bin/share/dropbox.py
+~/bin/share/dropbox.py help
+dropbox.py start -i
+dropbox.py autostart y
+
+
+# ## Don't do this when installing from source; I don't need the Nautilus integration.
+# # dropbox.com
+# cd ~/bin/install
+# wget https://www.dropbox.com/download?dl=packages/nautilus-dropbox-0.6.7.tar.bz2
+# tar xjf nautilus-dropbox-0.6.7.tar.bz2
+# cd nautilus-dropbox-0.6.7
+
+Add this to your crontab:
+# Ensure that Dropbox daemon is running
+0 * * * *	if [ "`$HOME/bin/share/dropbox.py status`" = 'Dropbox isn'"'"'t running!' ] ; then $HOME/bin/share/dropbox.py start ; fi
+
+===========================================================================

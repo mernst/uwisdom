@@ -1,0 +1,45 @@
+===========================================================================
+
+# http://www.graphviz.org/Download.php
+
+===========================================================================
+
+See /uns/src/graphviz-2.26.0.BUILDING
+
+===========================================================================
+
+VER=2.26.0
+
+cd ~/bin/install
+wget http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-$VER.tar.gz
+tar xzf graphviz-$VER.tar.gz
+cd graphviz-$VER
+./configure
+make
+make install
+
+===========================================================================
+
+cd ~/tmp
+wget http://www.graphviz.org/pub/graphviz/ARCHIVE/graphviz-1.10.tar.gz
+tar zxvf graphviz-1.10.tar.gz
+cd graphviz-1.10
+./configure
+make
+# on server:
+sudo make -C ~/tmp/graphviz-1.10 install
+
+===========================================================================
+
+cd ~/tmp
+wget http://www.graphviz.org/pub/graphviz/ARCHIVE/graphviz-1.9.tar.gz
+tar zxvf graphviz-1.9.tar.gz
+cd graphviz-1.9
+# For version 1.8.5, the make died if I didn't supply the --with-tcl flag
+# ./configure --with-tcl=/usr/lib/tcl8.3
+./configure
+make
+# on server:
+sudo make -C ~/tmp/graphviz-1.9 install
+
+===========================================================================

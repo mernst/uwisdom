@@ -1,0 +1,27 @@
+Give up on installing eslint and jshint.
+Instead, paste my code into
+http://jshint.com/
+every time (!).
+
+===========================================================================
+
+# To install eslint, I need npm.
+# It should be installed along with node.js, so install node.js
+# See ~/wisdom/building/build-node.js
+
+# Then, to install eslint, just do:
+npm i -g eslint
+
+# From a terminal (not within Emacs):
+eslint --init
+
+Now, I have to run eslint like this, not using plain "eslint"!!
+~/node_modules/.bin/eslint yourfile.js
+But that doesn't work either...
+
+
+It's easier to install jshint:
+npm install -g jshint
+but it didn't find an undefined variable, which is the thing I am most interested in.
+
+

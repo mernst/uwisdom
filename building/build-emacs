@@ -1,0 +1,390 @@
+===========================================================================
+
+On Debian at MPI, I had to do (as root!) and answer the question for each.
+
+update-alternatives --config b2m
+update-alternatives --config ctags
+update-alternatives --config ebrowse
+update-alternatives --config emacs
+update-alternatives --config emacsclient
+update-alternatives --config etags
+update-alternatives --config grep-changelog
+update-alternatives --config rcs-checkin
+
+===========================================================================
+
+Source code:
+bzr branch bzr://bzr.savannah.gnu.org/emacs/trunk emacs-trunk
+
+===========================================================================
+
+Ubuntu, for Emacs 30:
+snap install emacs --classic
+# I think this is better, because it fixes display problems, per https://www.reddit.com/r/emacs/comments/1nmnv7d/weird_rendering_problem_inside_windows_on_the_gui/ :
+sudo snap install emacs --channel=pgtk/stable --classic
+
+
+===========================================================================
+
+On CentOS (i.e., at CSE):
+
+#if Ubuntu
+sudo apt -y install build-essential libgtk-3-dev libxpm-dev libgif-dev gnutls-dev
+#endif Ubuntu
+
+# Get version number from http://mirrors.kernel.org/gnu/emacs/
+VER=30.2
+cd ~/bin/install
+rm -rf emacs-${VER} emacs-${VER}-install
+# OR (though it may not work): wget -N https://ftpmirror.gnu.org/pub/gnu/emacs/emacs-${VER}.tar.gz
+# OR: wget -N http://mirror.keystealth.org/gnu/emacs/emacs-${VER}.tar.gz
+wget -N ftp://ftp.gnu.org/pub/gnu/emacs/emacs-${VER}.tar.gz
+tar xzf emacs-${VER}.tar.gz
+cd ~/bin/install/emacs-${VER}
+./autogen.sh
+# For Ubuntu, I had to install:
+# sudo apt install -qy libncurses-dev libxpm-dev gnutls-dev libgtk-3-dev libtree-sitter-dev libgif-dev libgccjit0 libgccjit-14-dev libacl1-dev
+export PKG_CONFIG_PATH=${HOME}/.local/lib/pkgconfig
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/.local/lib
+export C_INCLUDE_PATH=${C_INCLUDE_PATH}:${HOME}/.local/include
+export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:${HOME}/.local/include
+# The curly braces are critical; "$HOME" expands to "OME".
+TREE_SITTER_CFLAGS=-I${HOME}/.local/include TREE_SITTER_LIBS="-L${HOME}/.local/lib -ltree-sitter" \
+./configure --with-mailutils --with-tree-sitter --with-gif --without-compress-install --prefix=${HOME}/.local
+make -j 8
+src/emacs -Q
+make install
+
+# Now, Emacs is available as ~/.local/bin/emacs .
+
+# cd $HOME/bin/`uname`-`uname -m`
+# ln -sf ../install/emacs-${VER}/bin/emacs-${VER} .
+# ln -sf ../install/emacs-${VER}/bin/emacsclient .
+ln -sf emacs-${VER} emacs
+
+TODO: I might want to install GNU Mailutils.
+
+===========================================================================
+
+## On Ubuntu, for Emacs 23:
+## This is just a stopgap until Ubuntu distributes Emacs 23.
+# For the bleeding-edge version, see
+#   https://launchpad.net/~ubuntu-elisp/+archive/ppa
+# Essentially, just do
+sudo apt install emacs-snapshot emacs-snapshot-el
+
+
+# On Ubuntu, for Emacs 22, just:
+sudo apt install emacs22 emacs22-el
+# or for Emacs 23 (I needed to use backports):
+sudo apt install emacs23 emacs23-el
+
+
+# On Debian at MPI-SWS, in addition I have to install the manual by hand.  Yuck!
+# Don't get from http://www.gnu.org/software/emacs/manual/info/emacs.info.tar.gz
+# because I want more files than that.
+cd /usr/share/info
+tar xzf ~mernst/wisdom/building/emacs22-info.tar.gz
+
+And then edit file "dir", adding the below.  Now you're done!
+
+----------------
+
+Emacs 22
+* Ada mode (emacs22): (emacs22/ada-mode).
+					Emacs mode for editing and compiling
+					Ada code.
+* Autotype (emacs22): (emacs22/autotype).
+					Convenient features for text that you
+					enter frequently in Emacs.
+* Calc (emacs22): (emacs22/calc).	Advanced desk calculator and
+					mathematical tool.
+* CC Mode (emacs22): (emacs22/ccmode).	Emacs mode for editing C, C++,
+					Objective-C, Java, Pike, AWK, and
+					CORBA IDL code.
+* CL (emacs22): (emacs22/cl).		Partial Common Lisp support for Emacs
+					Lisp.
+* Dired-X (emacs22): (emacs22/dired-x). Dired Extra Features.
+* Ebrowse (emacs22): (emacs22/ebrowse). A C++ class browser for Emacs.
+* Ediff (emacs22): (emacs22/ediff).	A visual interface for comparing and
+					merging programs.
+* Elisp (emacs22): (emacs22/elisp).	The Emacs Lisp Reference Manual.
+* Emacs (emacs22): (emacs22/emacs).	The extensible self-documenting text
+					editor.
+* Emacs FAQ (emacs22): (emacs22/efaq).	Frequently Asked Questions about
+					Emacs.
+* Emacs Lisp Intro (emacs22): (emacs22/eintr).
+					A simple introduction to Emacs Lisp
+					programming.
+* Emacs MIME (emacs22): (emacs22/emacs-mime).
+					Emacs MIME de/composition library.
+* ERC (emacs22): (emacs22/erc). 	Powerful, modular, and extensible IRC
+					client for Emacs.
+* Eshell (emacs22): (emacs22/eshell).	A command shell implemented in Emacs
+					Lisp.
+* EUDC (emacs22): (emacs22/eudc).	An Emacs client for directory servers
+					(LDAP, PH).
+* Flymake (emacs22): (emacs22/flymake). A universal on-the-fly syntax checker.
+* Forms (emacs22): (emacs22/forms).	Emacs package for editing data bases
+					by filling in forms.
+* Gnus (emacs22): (emacs22/gnus).	The newsreader Gnus.
+* IDLWAVE (emacs22): (emacs22/idlwave). Major mode and shell for IDL files.
+* Info (emacs22): (emacs22/info).	How to use the documentation browsing
+					system.
+* Message (emacs22): (emacs22/message). Mail and news composition mode that
+					goes with Gnus.
+* MH-E (emacs22): (emacs22/mh-e).	Emacs interface to the MH mail system.
+* Newsticker (emacs22): (emacs22/newsticker).
+					A Newsticker for Emacs.
+* Org Mode (emacs22): (emacs22/org).	Outline-based notes management and
+					organizer
+* PCL-CVS (emacs22): (emacs22/pcl-cvs). Emacs front-end to CVS.
+* PGG (emacs22): (emacs22/pgg). 	Emacs interface to various PGP
+					implementations.
+* Rcirc (emacs22): (emacs22/rcirc).	Internet Relay Chat (IRC) client.
+* RefTeX (emacs22): (emacs22/reftex).	Emacs support for LaTeX
+					cross-references and citations.
+* SC (emacs22): (emacs22/sc).		Supercite lets you cite parts of
+					messages you're replying to, in
+					flexible ways.
+* SES (emacs22): (emacs22/ses). 	Simple Emacs Spreadsheet
+* Sieve (emacs22): (emacs22/sieve).	Managing Sieve scripts in Emacs.
+* SMTP (emacs22): (emacs22/smtpmail).	Emacs library for sending mail via
+					SMTP.
+* Speedbar (emacs22): (emacs22/speedbar).
+					File/Tag summarizing utility.
+* TRAMP (emacs22): (emacs22/tramp).	Transparent Remote Access, Multiple
+					Protocol GNU Emacs remote file access
+					via rsh and rcp.
+* URL (emacs22): (emacs22/url). 	URL loading package.
+* VIP (emacs22): (emacs22/vip). 	An older VI-emulation for Emacs.
+* VIPER (emacs22): (emacs22/viper).	The newest Emacs VI-emulation mode.
+					(also, A VI Plan for Emacs Rescue or
+					the VI PERil.)
+* Widget (emacs22): (emacs22/widget).	The "widget" package used by the Emacs
+					Customization facility.
+* WoMan (emacs22): (emacs22/woman).	Browse UN*X Manual Pages "W.O.
+					(without) Man".
+
+===========================================================================
+
+Emacs 23.1:
+
+# This builds from scratch and installs in the standard place, via
+# normal "sudo make install".
+
+VER=23.1
+
+cd ~/tmp
+wget https://ftp.gnu.org/pub/gnu/emacs/emacs-${VER}.tar.gz
+tar xzf emacs-${VER}.tar.gz
+cd ~/tmp/emacs-${VER}
+# For MacOS:  ./configure --with-x
+./configure
+make
+# Test it
+src/emacs -q
+# As root:
+make install
+cd /usr/local/share/emacs/${VER}/lisp/
+etags [a-zA-Z]*.el [a-zA-Z]*/[a-zA-Z]*.el
+# To avoid making it the default for all users (presumably emacsclient,
+# etc. remain compatible with older version):
+#   mv /usr/local/bin/emacs /usr/local/bin/emacs-${VER}
+
+Manual (see below for Elisp manual):
+
+cd ~/tmp
+wget ftp://ftp.gnu.org/gnu/emacs/emacs-${VER}.tar.gz
+tar xzf emacs-${VER}.tar.gz
+cd ~/tmp/emacs-${VER}
+./configure
+cd man
+make dvi
+dvips -o emacs.ps emacs.dvi
+
+===========================================================================
+
+Emacs 22.3:
+
+cd ~/tmp
+wget http://ftp.gnu.org/pub/gnu/emacs/emacs-22.3.tar.gz
+tar xzf emacs-22.3.tar.gz
+cd ~/tmp/emacs-22.3
+# For MacOS:  ./configure --with-x
+./configure
+make
+# Test it
+src/emacs -q
+# As root:
+make install
+cd /usr/local/share/emacs/21.2/lisp/
+etags [a-zA-Z]*.el [a-zA-Z]*/[a-zA-Z]*.el
+# To avoid making it the default for all users (presumably emacsclient,
+# etc. remain compatible with older version):
+#   mv /usr/local/bin/emacs /usr/local/bin/emacs-21
+
+Manual (see below for Elisp manual):
+
+cd ~/tmp
+wget ftp://ftp.gnu.org/gnu/emacs/emacs-21.2.tar.gz
+tar xzf emacs-21.2.tar.gz
+cd ~/tmp/emacs-21.2
+./configure
+cd man
+make dvi
+dvips -o emacs.ps emacs.dvi
+
+===========================================================================
+
+Emacs 21.2:
+
+cd ~/tmp
+wget ftp://ftp.gnu.org/gnu/emacs/emacs-21.2.tar.gz
+tar xzf emacs-21.2.tar.gz
+cd ~/tmp/emacs-21.2
+./configure
+make
+# Test it
+src/emacs -q
+# As root:
+make install
+cd /usr/local/share/emacs/21.2/lisp/
+etags [a-zA-Z]*.el [a-zA-Z]*/[a-zA-Z]*.el
+# To avoid making it the default for all users (presumably emacsclient,
+# etc. remain compatible with older version):
+#   mv /usr/local/bin/emacs /usr/local/bin/emacs-21
+
+Manual (see below for Elisp manual):
+
+cd ~/tmp
+wget ftp://ftp.gnu.org/gnu/emacs/emacs-21.2.tar.gz
+tar xzf emacs-21.2.tar.gz
+cd ~/tmp/emacs-21.2
+./configure
+cd man
+make dvi
+dvips -o emacs.ps emacs.dvi
+
+===========================================================================
+
+Emacs Lisp (Elisp) manual:
+
+# As of Emacs 22, it's theoretically distributed with Emacs, so no need to
+# download separately.  (But I can't find it in the Debian package...)
+
+# As of 2/25/2008, the latest standalone version is 21.2-8
+cd ~/tmp
+wget ftp://ftp.gnu.org/gnu/emacs/elisp-manual-21-2.8.tar.gz
+tar xzf elisp-manual-21-2.8.tar.gz
+cd elisp-manual-21-2.8
+# Or, on Debian: ./configure --prefix=/usr/share
+./configure
+# For Info files:
+make elisp
+sudo make install
+# For printed manual (PS and PDF), but that's also available from
+# http://www.gnu.org/software/emacs/manual/elisp.html :
+make index.texi
+make elisp.dvi
+dvips -o elisp.ps elisp.dvi
+dvipdfm elisp.dvi
+
+
+
+
+Download latest version.
+Perhaps rename old version:
+ * Rename files in /usr/local/info/
+ * Fix up the indirect table in the main file, to refer to the new
+   file names.
+ * Add entry for old version to /usr/local/info/dir
+Copy new files to /usr/local/info/
+
+===========================================================================
+
+Don't get from CVS any more (it's read-only);
+instead, get from Bazaar.
+See http://www.emacswiki.org/emacs/BzrForEmacsDevs .
+
+cd ~/bin/src
+bzr init-repo emacs/
+cd emacs/
+# bzr branch sftp://<membername>@bzr.savannah.gnu.org/srv/bzr/emacs/trunk trunk
+bzr branch http://bzr.savannah.gnu.org/r/emacs/trunk trunk
+
+
+===========================================================================
+
+Emacs 22 pretest from CVS:
+
+# Problem:  this doesn't put Emacs in its own architecture-dependent
+# directory, so the installation only works for the architecture on which
+# it was built.  (This is a particular problem when multiple architectures
+# share a single filesystem, as at CSAIL.)
+
+mkdir -p ~/bin/src/emacs-22/`uname`-`uname -m`
+cd ~/bin/src/emacs-22/`uname`-`uname -m`
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/emacs co emacs
+cd emacs
+# On laptop: ./configure --with-xpm=no --with-gif=no
+./configure
+make bootstrap
+chmod a+rx ~mernst/bin/src/emacs-22/`uname`-`uname -m`/emacs/src/emacs
+(cd ~mernst/bin/src/emacs-22/`uname`-`uname -m`/emacs/lib-src; chmod a+rx b2m cvtmail digest-doc ebrowse emacsclient fakemail grep-changelog hexl make-docfile movemail profile rcs-checkin rcs2log sorted-doc test-distrib update-game-score vcdiff)
+# The below should only be necessary once ever per architecture (but no harm in repeating)
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+rm -f emacs-22; ln -s ../src/emacs-22/`uname`-`uname -m`/emacs/src/emacs emacs-22
+rm -f emacs; ln -s emacs-22 emacs
+
+# This is for applying patches that I have reported.
+mkdir -p ~/bin/src/emacs-22/emacs-reported
+cd ~/bin/src/emacs-22-reported
+cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/sources/emacs co emacs
+
+# To update CVS:
+# (cd ~/bin/src/emacs-22/emacs-22-reported/emacs; cvsupdate)
+cd ~/bin/src/emacs-22/`uname`-`uname -m`/emacs
+cvsupdate
+./configure
+# If there's a problem in the below, do "make bootstrap" instead.
+# Or: move the directory aside and start over from directions above, making
+# sure to preserve any non-checked-in changes.  (I had to do the latter on
+# one occasion.)
+make all info
+make -C lisp recompile EMACS=../src/emacs
+make
+chmod a+rx ~mernst/bin/src/emacs-22/`uname`-`uname -m`/emacs/src/emacs
+(cd ~mernst/bin/src/emacs-22/`uname`-`uname -m`/emacs/lib-src; chmod a+rx b2m cvtmail digest-doc ebrowse emacsclient fakemail grep-changelog hexl make-docfile movemail profile rcs-checkin rcs2log sorted-doc test-distrib update-game-score vcdiff)
+
+# Old version:
+# make
+# make info
+# cd lisp
+# make recompile EMACS=../src/emacs
+# cd ..
+
+===========================================================================
+
+On Ubuntu I had to make some symbolic links (that I should probably update
+later!):
+
+cd /usr/lib
+sudo ln -s libXpm.so.4 libXpm.so
+
+===========================================================================
+
+To build ctags:
+
+cd ~/bin/install
+wget https://github.com/universal-ctags/ctags/releases/download/v6.0.0/universal-ctags-6.0.0.tar.gz
+tar xzf universal-ctags-6.0.0.tar.gz
+cd universal-ctags-6.0.0
+./autogen.sh
+./configure --prefix=$HOME/bin/install/universal-ctags-6.0.0-install
+make
+make install
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/universal-ctags-6.0.0-install/bin/ctags .

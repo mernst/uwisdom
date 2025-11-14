@@ -1,0 +1,39 @@
+# This is just the binary (for main()?)
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+wget https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.3/tree-sitter-linux-x64.gz
+gunzip tree-sitter-linux-x64.gz
+ln -s tree-sitter-linux-x64 tree-sitter
+
+# This is libtree-sitter, which I need for building Emacs.
+# (Is this neededd only where I don't have root, or on Ubuntu too?)
+cd ~/bin/install
+git clone https://github.com/tree-sitter/tree-sitter
+cd ~/bin/install/tree-sitter
+git pull --ff-only
+PREFIX=$HOME/.local make install
+sudo ldconfig
+
+# For Emacs, do something like:
+
+TREE_SITTER_CFLAGS=-I~/.local/include TREE_SITTER_LIBS="-L~/.local/lib -ltree-sitter" ./configure --with-tree-sitter ...
+
+LD_LIBRARY_PATH=$HOME/.local/lib make install
+
+===========================================================================
+
+# To add a new grammar:
+# (but, this ought to happen automatically).
+
+# In Emacs:
+# (treesit-library-abi-version)
+# For version 14, use tag: v0.23.3
+
+# It isn't happening automatically for rust.
+TSLANG=rust
+cd ~/tmp/
+git clone --branch v0.23.3 https://github.com/tree-sitter/tree-sitter-${TSLANG}
+cd ~/tmp/tree-sitter-${TSLANG}
+make
+mkdir -p ~/.emacs.d/tree-sitter/
+cp -pf libtree-sitter-${TSLANG}.so ~/.emacs.d/tree-sitter/

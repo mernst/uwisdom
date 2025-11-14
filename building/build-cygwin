@@ -1,0 +1,94 @@
+===========================================================================
+
+http://www.cygwin.com/
+
+*****
+I should install the Java JDK before Cygwin.
+*****
+
+Install Cygwin64.
+ * Disable virus protection
+ * Obtain setup program from https://www.cygwin.com/setup-x86_64.exe
+ * Run the setup program
+ * Install into c:\cygwin64  [the default]
+ * Put local packages in c:\Program Files\cygwin-local-packages
+   (Don't do this for Cat's computer, though.)
+ * Start out with a base installation:  install nothing extra
+ * Run cmd.exe, then within it run:
+    Desktop\setup-x86_64.exe -q -P wget,tar,qawk,bzip2,subversion,unzip,zip,automake,cvs,gcc-core,gcc-g++,git,make,mercurial,patch,subversion,emacs,emacs-el,m4,python3,libiconv,ca-certificates,curl,texlive-collection-latex,texlive-collection-latex-doc,texlive-collection-latexextra,texlive-collection-latexextra-doc,texlive-collection-latexrecommended,texlive-collection-latexrecommended-doc,xterm,w3m,wget,diffutils,dos2unix,ncurses,patchutils,time,unison2.48,w3m
+I need to install gradle manually, it seems.
+
+[Older; maybe integrate into the above.
+ * At the "Select Packages" window, add:
+    Editors: as an experiment, on X61s emacs-w32 but not emacs-x11
+    Editors: usually also emacs-x11
+    X11: (all)
+      [It's possible, but tedious, to isolate the parts I really need in order to run Emacs; it's easier just to install all of the X11 packages.]
+      [When Emacs segmentation-faulted, reinstalling all of X11 fixed the problem once; another time I needed a full Cygwin reinstall.]
+    [I might later expand this list...]
+ * Wait for a long time while the installation proceeds.
+   * I had problems with the download hanging when I used the gatech site
+]
+
+Re-enable virus protection
+
+[If I didn't use "mernst" as my Windows username, then probably everything
+is messed up, but I could try the following even though it's probably futile:
+Use Wordpad to edit /etc/passwd, changing my user name and home directory
+from "Michael Ernst" to "mernst".]
+
+
+Add XWin server (or Cygwin bash shell) to start menu:
+  Copy (not Right-drag) it there from the Start Menu (it's in "All Programs > Cygwin-X"), OR In start menu, right-click on cygwin xterm and then do "pin to start menu".  Don't put it on the desktop.
+  Rename it to "xterm".
+  The terminal window starts really small; I should see about fixing that.
+Add XLaunch to the desktop.  It's for use if xterm doesn't work.  XLaunch does
+  work, but requires going through multple screens rather than just clicking
+  on the icon.
+Not needed: cygwin terminal, xterm
+
+Test that openssh was downloaded:
+     ssh mernst@godwit.cs.washington.edu
+
+[Is this necessary any more?]
+# Run C:\cygwin\bin\ash.exe from Windows Command Shell:
+export TEMP=/tmp
+export TMP=/tmp
+/bin/rebaseall
+
+Follow the directions in ~/wisdom/setup/setup-linux-account
+
+Make symbolic link to ~mernst and to ~mernst/sync (they are at C:\cygwin64) from Desktop.
+It's critical to make the shortcut in place (via right-click in Windows
+Explorer), then move it afterward.
+
+Install hunspell:  ~/wisdom/building/build-hunspell
+
+===========================================================================
+
+For unistallation instructions (if I need to do a complete reinstall), see
+  http://cygwin.com/faq/faq.html#faq.setup.uninstall-all
+However, do not delete the entire Cygwin directory.  First synchronize with
+Unison, and then move my home directory aside and put it back after the
+install.  The reason is that an initial synchronization with Unison takes a
+very long time.
+
+===========================================================================
+
+[I didn't get this to work.]
+
+Kerberos:
+  http://www-cdf.fnal.gov/~cplager/kerberos.html#cygwin
+That didn't work for me; the downloaded kinit application segfaulted:
+  mernst@MDEX300 ~
+  $ kinit
+  Password for mernst@CSAIL.MIT.EDU:
+	6 [main] kinit 4468 _cygtls::handle_exceptions: Error while dumping state
+  (probably corrupted stack)
+  Segmentation fault (core dumped)
+
+===========================================================================
+
+Windows shares are available as /cygdrive/e for E:, etc.
+
+===========================================================================

@@ -1,0 +1,17 @@
+# The CLISP binary
+CLISP=/uns/bin/clisp
+
+PREFIX=/uns/encap/cedilla-0.6
+
+# Where the main Cedilla binary will be installed
+BINDIR=$PREFIX/bin
+
+# Where the cedilla-config.lisp file lives
+ETCDIR=$PREFIX/etc
+
+# Where Cedilla's FASL files will be kept
+LIBDIR=$PREFIX/lib/cedilla
+
+# Where the cedilla(1) manual page will be installed
+MANDIR=$PREFIX/share/man/man1
+

@@ -1,0 +1,7 @@
+Build binaries from http://community.coherentpdf.com/
+
+cd ~/bin/install
+wget https://github.com/coherentgraphics/cpdf-binaries/archive/master.zip
+mv master.zip cpdf-binaries-master.zip
+unzip cpdf-binaries-master.zip
+cp -p cpdf-binaries-master/Linux-Intel-64bit/cpdf ~/bin/`uname`-`uname -m`

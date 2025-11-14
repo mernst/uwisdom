@@ -1,0 +1,113 @@
+===========================================================================
+
+Bug reports: http://cran.r-project.org/doc/FAQ/R-FAQ.html#How-to-report-a-bug
+bug.report()
+R-bugs@R-project.org
+http://bugs.R-project.org/
+
+===========================================================================
+
+# Ubuntu:
+sudo apt update && sudo apt -y install r-base r-recommended ess
+# Consider RPy which lets R be called from Python??  Probably not:  it's
+# more likely just one more thing to learn than an improvement.
+
+# Mac
+sudo port install R
+# then install packages as shown below
+
+# Development version via subversion, for bug reports:
+export REPOS=https://svn.r-project.org/R
+export RTOP=~/tmp
+cd $RTOP
+svn co $REPOS/trunk r-devel/R
+
+===========================================================================
+
+# CSE: is installed already, but if I want to install a newer version myself:
+# CSE:  /uns/src/R-2.10.1.BUILDING, or to install personally:
+
+export RVERSION=R-2.15.0
+cd ~/bin/install
+wget http://cran.r-project.org/src/base/R-2/$RVERSION.tar.gz
+tar xzf $RVERSION.tar.gz
+cd $RVERSION
+./configure
+make
+make check
+make pdf
+cd $HOME/bin/share
+ln -s ~/bin/install/$RVERSION/bin/R .
+
+===========================================================================
+
+## To install extra packages (at CSE drop the `sudo` part):
+# Run one of:
+#  sudo R
+#  sudo Rscript
+
+# Paste the following lines ONE AT A TIME since there may be prompting.
+
+# These are globally installed at CSE as of 9/1/2016:
+install.packages('hash')
+
+# Not globally installed at CSE as of 9/1/2016:
+install.packages("data.table")
+install.packages('effsize')
+install.packages('ggplot2')
+install.packages('extrafont')
+install.packages('reshape2')
+
+quit()
+# Answer "n" to question "Save workspace image?".
+
+===========================================================================
+
+# R Commander (Rcmdr), is a GUI
+install.packages("Rcmdr", dependencies=TRUE)
+# Alternately: sudo apt install r-cran-rcmdr
+
+===========================================================================
+
+# ESS
+cd /homes/gws/mernst/emacs
+wget http://ess.r-project.org/downloads/ess/ess-5.7.1.tgz
+tar xzf ess-5.7.1.tgz
+cd ess-5.7.1.tgz
+make
+
+## ESS via SVN; it's not worth it because I have to add so many SVN ignore
+## properites.
+cd /homes/gws/mernst/emacs
+svn checkout https://svn.r-project.org/ESS/trunk ess
+cd /homes/gws/mernst/emacs/ess
+make
+svn propedit svn:ignore .
+#Add: 
+# NEWS
+# ONEWS
+svn propedit svn:ignore lisp
+#Add:
+# *.elc
+svn propedit svn:ignore doc
+#Add:
+# *.aux
+# *.cp
+# *.cps
+# *.dvi
+# *.fn
+# *.ky
+# *.log
+# *.pdf
+# *.pg
+# *.toc
+# *.tp
+# *.vr
+# *.vrs
+svn propedit svn:ignore doc/info
+#Add:
+# ess.info
+svn propedit svn:ignore doc/html
+#Add:
+# readme.html
+# ess.html

@@ -1,0 +1,6 @@
+# Get version number from https://stedolan.github.io/jq/download/
+
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 -O jq
+chmod +x jq

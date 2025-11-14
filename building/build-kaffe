@@ -1,0 +1,25 @@
+Obtain Kaffe from http://www.transvirtual.com/downloads.html
+
+# Is this ./configure line right??
+# Maybe add --program-suffix=-kaffe ; then I'll need to rename kaffe-kaffe to kaffe
+./configure --prefix=/uns/share --exec-prefix=/uns --libexecdir=/uns/lib/libexec --sbindir=/uns/bin
+make
+make check
+make install
+
+
+You can't run Kaffe out of the build directory (say, by doing setenv
+PATH /tmp/mernst/kaffe-1.0b4/kaffe/scripts:$PATH); you need to install.
+
+
+I can set KAFFE_DEBUG (to gdb or emacs) to start a debugging session.
+(Does that debug the Java program or Kaffe itself?  Probably the latter.)
+
+Kaffe seems to infinite-loop on Mauve test
+gnu.testlet.java.io.CharArrayReader.SimpleRead
+
+Also, this:
+  echo gnu.testlet.java.util.BitSet.jdk10 | kaffe gnu.testlet.SimpleTestHarness -verbose -debug
+produces:
+  locks.c:371: failed assertion `lk->count > 0 && lk->holder == (void*)jthread_current()'
+

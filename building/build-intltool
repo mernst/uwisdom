@@ -1,0 +1,12 @@
+Probably don't do this because then other builds don't know where to find it.
+# Mac:
+# brew install intltool
+
+# Obtain version number from https://edge.launchpad.net/intltool
+export VER=0.50.2-2
+export PKG=intltool-$VER
+cd ~/bin/install
+wget http://edge.launchpad.net/intltool/trunk/$VER/+download/$PKG.tar.gz
+tar xzf intltool-$VER.tar.gz
+cd $PKG
+./configure --prefix=${HOME}/bin/install/${PKG}-install && make && make install

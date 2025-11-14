@@ -1,0 +1,226 @@
+As of May 2001, apparently the new master site is http://www.latex2html.org/.
+Click on "download", "latest versions", "99.2beta8".
+
+Unpack into a temporary location, not the final desired location.
+
+./configure
+make
+make check
+make test
+# As root on geyer:
+make install
+
+===========================================================================
+
+Web sites:
+  http://saftsack.fs.uni-bayreuth.de/~latex2ht/
+  http://www-texdev.mpce.mq.edu.au/l2h/docs/manual/
+  ftp://ftp.rzg.mpg.de/pub/soft/latex2html/sources/
+
+I can't figure out with whom to correspond; perhaps  ross@mpce.mq.edu.au ?
+
+Note that LaTeX2HTML initialization file ~/.latex2html-init contains code I
+wrote for SLaTeX.
+
+===========================================================================
+
+latex2html-98.1b:
+
+In /uns/share/lib/:
+ * unpack latex2html98-1b.tar.gz.
+   Watch out!  It unpacks itself into latex2html/user/.  I renamed that
+   directory to latex-98.1b/.
+
+Following instructions in README:
+1. Make sure you're using Perl 5.004!  (/uns/bin/perl)
+   check via  grep -n '#!' *  or  search -n '#!'  (remember subdirs: makeseg/)
+   Don't use -w flag:  too much trouble, too many errors.
+   Had to make latex2html itself writeable by user:   chmod u+w latex2html
+2. Edit latex2html.config:
+    $ICONSERVER = "http://www.cs.washington.edu/general/latex2html_icons";
+    $PAPERSIZE = "letter";
+   I also had to add
+    $LATEX2HTMLDIR='/uns/share/lib/latex2html-98.1b';
+3. Run install-test (on a Linux machine)
+   I got a failure for texexpand, but I think it's OK.
+4. Install the binary:
+    cd /uns/share/bin
+    cp /uns/share/lib/latex2html-98.1b/latex2html ./latex2html-98.1b
+    rm latex2html
+    ln -s latex2html-98.1b latex2html
+    cd /uns/share/lib
+    rm latex2html
+    ln -s latex2html-98.1b latex2html
+
+To test, consider doing
+    cd docs/
+    make .dvi
+    make html
+
+I had to copy Override.pm to the directory with the document to be processed.
+
+===========================================================================
+
+latex2html-97.1:
+
+In /uns/share/lib/:
+ * unpack latex2html-97.1.tar.gz
+
+
+Following instructions in README:
+1. Make sure you're using Perl 5.004!  (/uns/bin/perl)
+   check via  grep -n '#!' *  or  search -n '#!'  (remember subdirs: makeseg/)
+   Don't use -w flag:  too much trouble, too many errors.
+2. Edit latex2html.config:
+    $ICONSERVER = "http://www.cs.washington.edu/general/latex2html_icons";
+    $PAPERSIZE = "letter";
+3. Run install-test
+   On uni, I got no errors.
+   On rhodes, I got these errors:
+     Netpbm/Pbmplus Configuration
+     ============================
+     Fatal Error: "ppmtogif" not found.
+		  Pstoimg won't be able to produce GIF images.
+	   Clues: Is Netpbm/Pbmplus installed on your system?
+		  Are the executables in the search path?
+		  Do You have execute permissions?
+		  If none of the above apply, get the netpbm package
+		  (source code or binary) from any major ftp site and
+		  install it on your system.
+4. Install the binary:
+    cd /uns/share/bin
+    cp /uns/share/lib/latex2html-97.1/latex2html ./latex2html-97.1
+    rm latex2html
+    ln -s latex2html-97.1 latex2html
+
+To test, consider doing
+    cd docs/
+    make .dvi
+    make html
+
+On Linux, I need to use the 
+  -html_version "2.0" 
+switch to avoid a segmentation fault.
+On Solaris, no segmentation fault, but the PPM software isn't installed
+(for images).
+
+===========================================================================
+
+latex2html-96.1h:
+
+in /uns/share/lib/:
+ * unpack latex2html-96.1.tar.gz
+ * overwrite some files by unpacking latex2html-96.1.revh.tar.gz
+
+mv latex2html-96.1 latex2html-96.1h
+
+1. Wasn't necesary to fix path to perl; do   grep -n -i '#!' *   to check.
+
+2. Edit latex2html.config:
+    $LATEX2HTMLDIR = "/uns/share/lib/latex2html-96.1h";	
+    $PBMPLUSDIR = "/usr/local/bin";
+    $GIFTRANS = "/uns/bin/giftrans";	
+    $PAPERSIZE = "letter";
+    $ICONSERVER = "http://www.cs.washington.edu/general/latex2html_icons";
+
+3. Run install-test.
+
+4. Install the binary:
+    cd /uns/share/bin
+    cp /uns/share/lib/latex2html-96.1h/latex2html ./latex2html-96.1h
+    rm latex2html
+    ln -s latex2html-96.1h latex2html
+
+In pstogif:
+    $GSquit = '-c quit';
+    # $GSquit = '';
+    # $PNMDEVICE=$ENV{'PNMDEVICE'} || 'ppmraw' ;
+    $PNMDEVICE='pnmraw';
+
+In latex2html.config, change this line as follows (patch submitted):
+-    s/(up|next_group|previous_group|next|previous)(_visible_mark)/$1_inactive$2/;
++    s/(up|next|previous|next_page|previous_page)(_visible_mark)/$1_inactive$2/;
+
+Also see other patches in ~mernst/bin/bug-mail/bug-latex2html.mail
+
+Paul says:
+  To make latex2html's invocation of ghostscript work correctly, I think
+  you need to hide (by renaming) pstoppm.ps in the latex2html tree
+  and then make sure you're not specifying any path to pstoppm.ps in the
+  appropriate latex2html config file so newer versions of gs (installed
+  on some but not all systems-grr) will use their built-in version.
+
+===========================================================================
+
+latex2html-96.1:
+
+unpack latex2html-96.1.tar.gz
+overwrite some files by unpacking latex2html-96.1.reva.tar.gz
+
+1. Wasn't necesary to fix path to perl; do   grep -n -i '#!' *   to check.
+
+2. Edit latex2html.config:
+    $LATEX2HTMLDIR = "/home/mernst/tmp/latex2html-96.1";	
+    $PBMPLUSDIR = "/usr/local/pbm/bin";
+    $GIFTRANS = "/home/mernst/bin/giftrans";	
+    $PAPERSIZE = "letter";
+   This should really be an http, not ftp, URL.
+    $ICONSERVER = 'ftp://cs.rice.edu/public/latex2html/icons';
+
+3. Run install-test.
+
+===========================================================================
+
+latex2html-96.1-beta:
+
+Follow directions in manual in "Section 7: Installing":
+
+1. Edit install-test:
+    #!/usr/local/bin/perl
+
+2. Edit latex2html.config:
+    $LATEX2HTMLDIR = "/home/mernst/tmp/latex2html-96.1.beta";	
+    $PBMPLUSDIR = "/usr/local/pbm/bin";
+    $GIFTRANS = "/home/mernst/bin/giftrans";	
+    $PAPERSIZE = "letter";
+   This should really be an http, not ftp, URL.
+    $ICONSERVER = 'ftp://cs.rice.edu/public/latex2html/icons';
+   Just before ; at end of $DONT_INCLUDE, insert
+    . ":slatex:sane"
+  
+3. Run install-test
+
+Extra:
+ * Possibly do something with $PK_GENERATION
+ * Copy the icons subdirectory to somewhere in the WWW tree
+ * Copy contents of texinputs/ to the appropriate place
+	/usr/local/lib/tex/inputs is right; I used /home/mernst/tex/sty
+ * Test by running latex, then latex2html, on docs/manual.tex
+
+ * Add .. to $TEXINPUTS environment variable (in .environment).
+ * Use .latex2html-init in $HOME and in the current directory to customize.
+
+===========================================================================
+
+latex2html-95.1:
+
+Follow directions in README:
+
+0. Not necessary to build netpbm; use pbmplus in /usr/local/pbm/bin/
+   Compile giftrans.c
+
+1. No changes to make
+
+2. Edit latex2html.config:
+    $LATEX2HTMLDIR = "/home/mernst/tmp/latex2html-95.1";
+    $PBMPLUSDIR = "/usr/local/pbm/bin";
+    $GIFTRANS = "/home/mernst/bin/giftrans";	
+    $ICONSERVER = 'ftp://cs.rice.edu/public/latex2html/icons';
+    $PAPERSIZE = "letter";
+
++ copy html.sty to the appropriate place
+	/usr/local/lib/tex/inputs is right; I did /home/mernst/tex/sty
+
+3. Run test-install
+
+===========================================================================

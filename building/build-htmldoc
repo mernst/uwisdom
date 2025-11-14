@@ -1,0 +1,18 @@
+===========================================================================
+
+Building from source (unsuccessfully):
+
+cd ~/bin/install
+wget http://www.msweet.org/files/project1/htmldoc-1.8.27-source.tar.gz
+tar -xzf htmldoc-1.8.27-source.tar.gz
+cd htmldoc-1.8.27
+./configure --prefix=${HOME}/bin/install/htmldoc-1.8.27-install
+make
+
+Then I get a lot of errors like:
+
+image.cxx:1529:11: error: invalid use of incomplete type ‘png_info {aka struct png_info_def}’
+In file included from image.cxx:58:0:
+/usr/include/png.h:722:16: error: forward declaration of ‘png_info {aka struct png_info_def}’
+
+===========================================================================

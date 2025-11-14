@@ -1,0 +1,45 @@
+===========================================================================
+
+TeamViewer 11:
+
+Install only on Windows.
+
+No luck on Ubuntu with instructions from http://askubuntu.com/questions/764228/teamviewer-11-wont-run-on-ubuntu-16-04-64-bit
+And in fact, that seemed to break the Ubuntu package system.
+
+===========================================================================
+
+Ubuntu:
+Don't try.
+
+cd ~/tmp
+## As of 2025-04-06, does not work -- I get:
+##   /opt/teamviewer/tv_bin/teamviewerd: error while loading shared libraries: libminizip.so.1: cannot open shared object file: No such file or directory
+## and furthermore then Ubuntu reports that the package manager is broken!
+## As of 2025-10-12, does not work -- aborts while launching the GUI.
+sudo apt-get install libminizip1
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+sudo dpkg -i teamviewer_amd64.deb
+
+===========================================================================
+
+CSE:
+[Do I really need this running at CSE?]
+
+Instructions at
+http://www.teamviewer.com/en/help/363-How-do-I-install-TeamViewer-on-my-Linux-distribution.aspx#other
+which just say to untar and run.
+
+# This didn't work on CSE as of Nov 2021, didn't wark on Ubuntu as of Dec 2018.
+cd ~/bin/install
+wget https://download.teamviewer.com/download/linux/teamviewer_amd64.tar.xz
+tar xf teamviewer_amd64.tar.xz
+~/bin/install/teamviewer/teamviewer
+
+# This didn't work at CSE: at run time, got "No such file or directory"
+cd ~/bin/install
+wget https://download.teamviewer.com/download/linux/teamviewer_i386.tar.xz
+tar xf teamviewer_i386.tar.xz
+~/bin/install/teamviewer/teamviewer
+
+===========================================================================

@@ -1,0 +1,118 @@
+===========================================================================
+
+ICal4j:  A Java library for reading and writing iCalendar (*.ics) files.
+
+# Github version control repository:
+cd ~/java
+git clone git@github.com:ical4j/ical4j.git
+cd ical4j
+./gradlew clean test 
+./gradlew jar
+
+The resulting jar file sort of works, but to run plume-lib's typecheck target I had to comment out all mentions of aQute and also add the slf4j .jar file to plume-lib.
+
+
+===========================================================================
+
+OLD Sourceforge pages:
+http://ical4j.sourceforge.net/
+http://sourceforge.net/projects/ical4j/
+Examples:
+  http://ical4j.sourceforge.net/introduction.html
+  http://wiki.modularity.net.au/ical4j/index.php?title=Examples
+  http://ical4j.sourceforge.net/introduction.html#usage
+CVS:
+[I couldn't get the CVS version to work as of 12/18/2013.  So try a download instead.]
+cd ~/java
+cvs -d:pserver:anonymous:@ical4j.cvs.sourceforge.net:/cvsroot/ical4j login
+cvs -z3 -q -d:pserver:anonymous@ical4j.cvs.sourceforge.net:/cvsroot/ical4j co -P iCal4j
+
+# Install from download, at old SourceForge site:
+cd ~/java 
+VER=1.0.6
+wget http://sourceforge.net/projects/ical4j/files/iCal4j/$VER/ical4j-$VER-bin.tar.gz
+tar xzf ical4j-$VER-bin.tar.gz
+mv ical4j-$VER ical4j-$VER-bin
+wget http://downloads.sourceforge.net/project/ical4j/iCal4j/$VER/ical4j-$VER-src.tar.gz
+tar xzf ical4j-$VER-src.tar.gz
+mv ical4j-$VER ical4j-$VER-src
+cd ical4j-$VER-src
+# Instructions in ~/java/ical4j-1.0.6-src/README, but I cannot figure out how to follow these vague build instructions:  http://wiki.modularity.net.au/ical4j/index.php?title=Maven2
+
+I finally gave up and copied an older installation from godwit, but the
+newer version from GitHub may work.
+
+===========================================================================
+
+Intstallation from CVS (not working as of 12/18/2013):
+
+Installation:
+
+# First, install Emma code coverage tool:
+cd ~/java
+# Released 2005/06/13, current as of 2013/12/18
+wget http://downloads.sourceforge.net/emma/emma-2.0.5312-lib.zip
+unzip emma-2.0.5312-lib.zip
+
+# Now, back to iCal4J.
+cd ~/java/iCal4j
+# Apply this patch to avoid putting bad line in MANIFEST.MF part of .jar file:
+patch < ~/wisdom/building/build-ical4j
+
+--- build.xml	22 Nov 2008 15:28:03 -0800	1.25
++++ build.xml	27 Apr 2009 08:48:45 -0700	
+@@ -26,7 +26,7 @@
+ 	<property name="dist.maven.file" value="${dist.name}-${project.version}-bundle.jar" />
+ 
+ 	<!-- Library paths -->
+-	<property name="j2se.apiurl" value="http://java.sun.com/j2se/1.4/docs/api/" />
++	<property name="j2se.apiurl" value="http://docs.oracle.com/javase/7/docs/api/" />
+ 	<property name="jakarta-commons-logging.apiurl" value="http://jakarta.apache.org/commons/logging/apidocs/" />
+ 	<property name="jakarta-commons-codec.apiurl" value="http://jakarta.apache.org/commons/codec/apidocs/" />
+ 
+@@ -36,8 +36,10 @@
+ 	<path id="project.classpath">
+ 		<pathelement location="lib/commons-logging.jar" />
+ 		<pathelement location="lib/commons-codec.jar" />
++		<pathelement location="lib/commons-io.jar" />
+ 		<pathelement location="lib/commons-lang.jar" />
+         <pathelement location="lib/backport-util-concurrent.jar" />
++		<pathelement location="lib/junit.jar" />
+ 		<!--
+ 		<pathelement location="${output.dir}"/>
+ 		-->
+@@ -120,7 +122,9 @@
+ 		description="Create the .jar file">
+ 		<manifest file="etc/manifest.mf">
+ 			<!-- Add manifest attributes here.. -->
++			<!--
+ 			<attribute name="Class-Path" value="commons-logging.jar,commons-codec.jar,commons-lang.jar" />
++			-->
+ 		</manifest>
+ 		<jar basedir="${output.dir}" compress="true" jarfile="${package.dir}/${package.file}" manifest="etc/manifest.mf">
+ 			<zipfileset dir="etc/zoneinfo" prefix="zoneinfo" excludes="zones.h,zones.tab" />
+
+
+echo "emma.dir=.." > build.properties
+ant compile package javadoc run-tests
+etags `find source -name '*.java'`
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+Debugging:
+
+I need to figure out how to turn on 
+LogFactory.getLog(VFreeBusy.class);
+
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Bug reports:
+  tracker (bugs & patches)  http://sourceforge.net/tracker/?group_id=107024
+    1. LOG IN.
+    2. Click "add new artifact".
+Alternately, though I didn't do this:
+  forums  http://sourceforge.net/forum/?group_id=107024
+
+===========================================================================

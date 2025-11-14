@@ -1,0 +1,81 @@
+===========================================================================
+
+cd ~/java/
+git clone https://gitlab.ow2.org/asm/asm.git
+cd ~/java/asm
+# Gradle must be version 4!  (4.6 works; earlier versions might too)
+gradle build
+
+# To verify a classfile:
+ASMDIR=$HOME/java/asm
+VER=6.2.1-SNAPSHOT
+java -cp "$ASMDIR/asm/build/libs/asm-$6.2.1-SNAPSHOT.jar:$ASMDIR/asm-tree/build/libs/asm-tree-${VER}.jar:$ASMDIR/asm-analysis/build/libs/asm-analysis-${VER}.jar:$ASMDIR/asm-util/build/libs/asm-util-${VER}.jar" org.objectweb.asm.util.CheckClassAdapter ~/tmp/plume-util-1.0.3-jar/org/plumelib/util/OrderedPairIterator.class
+
+
+===========================================================================
+
+# SVN checkout (use for debugging).
+mkdir ~/java/asm-svn
+cd ~/java/asm-svn
+# This is an SVN checkout, but it contains a CVSROOT directory.  Odd.
+# It's absolutely massive if you supply "." instead of "trunk".
+svn checkout svn://svn.forge.objectweb.org/svnroot/asm/trunk asm-svn
+
+# "ASM 4.0 Developer Guide" is: http://asm.ow2.org/doc/developer-guide.html
+cd ~/java/asm-svn/asm-svn/asm
+ant jdoc
+ant -Dproduct.noshrink=true compile
+ant -Dproduct.noshrink=true jar
+# leaves a jar file ~/tmp/asm-svn/asm-svn/asm/output/dist/lib/all/asm-debug-all-5.1.jar
+etags `findfile '*.java'`
+
+
+===========================================================================
+
+mkdir ~/tmp/asm-3.2-src
+cd ~/tmp/asm-3.2-src
+wget http://download.forge.objectweb.org/asm/asm-3.2.tar.gz
+tar zxf asm-3.2.tar.gz
+cd asm-3.2
+wget http://download.forge.objectweb.org/monolog/ow_util_ant_tasks_1.3.2.zip
+unzip ow_util_ant_tasks_1.3.2.zip 
+mv output/lib/ow_util_ant_tasks.jar .
+rm -rf output
+# Edit build.xml to uncomment "objectweb.ant.tasks.path" line.
+ant -Dproduct.noshrink=true clean compile-debug
+# Now, add to classpath: $HOME/tmp/asm-3.2-src/asm-3.2/output/build/tmp
+
+
+Documentation:
+User guide:  http://download.forge.objectweb.org/asm/asm-guide.pdf
+Developer guide:  http://asm.objectweb.org/doc/developer-guide.html
+
+The optimization can be skipped with
+  ant -Dproduct.noshrink=true compile
+More importantly, compile with debugging symbols using
+  ant compile-debug
+  ant -Dproduct.noshrink=true compile-debug
+
+It is possible to run the tests with the unoptimized ASM classes, with
+  ant -Ddebug=true test
+
+===========================================================================
+
+To report:
+
+http://asm.objectweb.org/download/index.html refers to the old CVS
+repository (http://forge.objectweb.org/cvs/?group_id=23); it would be
+better to update the webpage to instead point to the current SVN repository
+(http://forge.objectweb.org/plugins/scmsvn/index.php?group_id=23).
+
+Also, the SVN instructions should probably suggest
+
+  svn checkout svn://svn.forge.objectweb.org/svnroot/asm/trunk
+
+rather than just 
+
+  svn checkout svn://svn.forge.objectweb.org/svnroot/asm
+
+which is massive due to the presence of the branches and tags directories.
+
+===========================================================================

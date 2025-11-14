@@ -1,0 +1,14 @@
+Google Cloud Print
+
+go get github.com/google/cups-connector/...
+connector-init
+Follow instructions at https://github.com/google/cups-connector
+# User ... to share with: scath@alumni.duke.edu
+# Proxy name: Mike-HP-Officejet-j3860
+
+The su command in /etc/rc.local should be:
+
+su --login --command "/home/mernst/bin/install/go/bin/connector -config-filename=/home/mernst/private/cups-connector.config.json" mernst &
+
+To run it later, don't do so in the background, but start it in the
+foreground, then type my password, then put it in the background.

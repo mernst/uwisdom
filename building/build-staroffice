@@ -1,0 +1,228 @@
+===========================================================================
+
+Customizations:  see ~/wisdom/setup/setup-preferences
+
+===========================================================================
+
+On Windows:
+ * close VMware workstation & other programs first
+ * don't make OpenOffice the default, because it will change the
+   icons for programs and when you make Office the default again, they won't
+   change back.  [As of 3.2, it didn't seem to ask to make itself the default.]
+
+===========================================================================
+
+On Debian, edit /etc/openoffice/sofficerc, changing Logo=1 to Logo=0.
+
+===========================================================================
+
+OpenOffice 3.0.0 for Linux
+
+mkdir -p /scratch/mernst/oo-install
+cd /scratch/mernst/oo-install
+wget http://openoffice.cs.utah.edu/stable/3.0.0/OOo_3.0.0_LinuxIntel_install_wJRE_en-US.tar.gz
+tar xzf OOo_3.0.0_LinuxIntel_install_wJRE_en-US.tar.gz
+cd OOO300_m9_native_packed-1_en-US.9358
+./setup
+# Install into: ~/bin/install/
+# Add to my path:  ~/bin/install/opt/openoffice.org3/program/soffice
+
+# Optionally, set preferences
+
+===========================================================================
+
+OpenOffice 2.4.0 for Linux
+[Still not installed on my laptop.]
+
+(Individual installation, for MPI where I don't have root.)
+(Otherwise:
+ * use technique at http://forums.debian.net/viewtopic.php?p=139294&sid=4f3bdc19763eb061a816ef1d82df5ee9
+   [That didn't work for me on my laptop; the resulting OpenOffice was crippled.]
+   [To recover, I re-did the install, looked at the end of the output for
+   the list of installed packages, and for each installed package did "sudo
+   dpkg -r".]
+ * debs are at http://download.openoffice.org/other.html#en-US, or
+ * there are backports.)
+
+# This didn't work on my laptop; the ./setup program failed.  Dunno why.
+mkdir -p /scratch/mernst/oo-install
+cd /scratch/mernst/oo-install
+wget http://openoffice.c3sl.ufpr.br/stable/2.4.0/OOo_2.4.0_LinuxIntel_install_wJRE_en-US.tar.gz
+tar -zxf OOo_2.4.0_LinuxIntel_install_wJRE_en-US.tar.gz
+cd OOH680_m12_native_packed-1_en-US.9286
+./setup
+# Install into ~/bin/OpenOffice.org2.4
+# Add its program/ directory to my path.
+
+===========================================================================
+
+Openoffice 2 for Debian Sarge via backports.org:
+
+Add to /etc/apt/sources.list:
+  deb http://www.backports.org/debian sarge-backports main contrib non-free
+
+sudo apt update 
+sudo apt -t sarge-backports install openoffice.org
+
+===========================================================================
+
+OpenOffice 1.1.1 for Linux
+
+mkdir -p /scratch/mernst/oo-install
+cd /scratch/mernst/oo-install
+wget http://www.ibiblio.org/pub/mirrors/openoffice/stable/1.1.1/OOo_1.1.1_LinuxIntel_install.tar.gz
+tar -zxf OOo_1.1.1_LinuxIntel_install.tar.gz
+cd OOo_1.1.1_LinuxIntel_install
+sudo ./setup -net
+# Install into /usr/local/OpenOffice.org1.1.1
+## Old:
+# sudo mv /usr/local/bin/soffice /usr/local/bin/soffice-1.1.0
+# sudo ln -s /usr/local/OpenOffice.org1.1.1/program/soffice /usr/local/bin/soffice-1.1.1
+# (cd /usr/local/bin; sudo ln -s soffice-1.1.1 soffice)
+## New:
+# Edit /usr/local/bin/soffice to contain one of the following texts:
+
+#!/bin/bash
+OOFFICE_HOME=/usr/local/OpenOffice.org1.1.1/program
+exec $OOFFICE_HOME/soffice "$@"
+
+#!/bin/bash
+OOFFICE_HOME=/usr/local/pkg/openoffice/openoffice-1.1.1/program
+exec $OOFFICE_HOME/soffice "$@"
+
+----------------
+
+## Now, per-user installation.
+## Note I am not root while executing the following.
+/usr/local/OpenOffice.org1.1.1/setup &
+# Choose "workstation installation")
+# Choose ~/.OpenOffice.org1.1.1/
+
+## The following commands may be necessary in the midst of the "setup"
+## command, but otherwise do not need to be executed.
+sudo chown -R mernst ~/.kde2
+sudo chgrp -R mernst ~/.kde2
+sudo chown mernst ~/.gnome/apps/OpenOffice.org\ 1.1.1
+sudo chgrp mernst ~/.gnome/apps/OpenOffice.org\ 1.1.1
+# On older machines, use ".kde" instead of ".kde2" here.
+(cd ~/.kde2/share; mkdir -p icons/locolor/16x16/apps icons/locolor/32x32/apps icons/hicolor/32x32/apps icons/hicolor/48x48/apps)
+
+===========================================================================
+
+OpenOffice 1.1.0 for Linux
+
+mkdir /scratch/mernst/oo-install
+cd /scratch/mernst/oo-install
+wget ftp://ftp.ussg.iu.edu/pub/openoffice/stable/1.1.0/OOo_1.1.0_LinuxIntel_install.tar.gz
+tar -zxf OOo_1.1.0_LinuxIntel_install.tar.gz
+cd OOo_1.1.0_LinuxIntel_install
+sudo ./setup -net
+#  Install into /usr/local/OpenOffice.org1.1.0 (first save old version)
+sudo mv /usr/local/bin/soffice /usr/local/bin/soffice-1.0.3
+sudo ln -s /usr/local/OpenOffice.org1.1.0/program/soffice /usr/local/bin/soffice-1.1.0
+(cd /usr/local/bin; sudo ln -s soffice-1.1.0 soffice)
+
+----------------
+
+## Now, per-user installation.
+## Note I am not root while executing the following.
+/usr/local/OpenOffice.org1.1.0/setup &
+# Choose ~/.OpenOffice.org1.1.0/
+# Choose "workstation installation")
+
+## The following commands may be necessary in the midst of the "setup"
+## command, but otherwise do not need to be executed.
+sudo chown -R mernst ~/.kde2
+sudo chgrp -R mernst ~/.kde2
+sudo chown mernst ~/.gnome/apps/OpenOffice.org\ 1.1.0
+sudo chgrp mernst ~/.gnome/apps/OpenOffice.org\ 1.1.0
+# On older machines, use ".kde" instead of ".kde2" here.
+(cd ~/.kde2/share; mkdir -p icons/locolor/16x16/apps icons/locolor/32x32/apps icons/hicolor/32x32/apps icons/hicolor/48x48/apps)
+
+===========================================================================
+
+OpenOffice 1.0.3.1 for Linux
+
+Download from http://www.openoffice.org/dev_docs/source/1.0.3/#linux
+("BinaryCode" site was very slow, "Indiana U" site was fine.)
+
+Installation instructions:
+http://www.openoffice.org/dev_docs/instructions.html
+
+## First, system-wide installation
+mkdir ~mernst/tmp/oo-install
+mv OOo_1.0.3.1_LinuxIntel_install.tar.gz ~mernst/tmp/oo-install
+cd ~mernst/tmp/oo-install
+tar -zxf OOo_1.0.3.1_LinuxIntel_install.tar.gz
+cd install
+sudo ./setup -net
+#  Install into /usr/local/OpenOffice.org1.0.3
+sudo mv /usr/local/bin/soffice /usr/local/bin/soffice-1.0.2
+sudo ln -s /usr/local/OpenOffice.org1.0.3/program/soffice /usr/local/bin/soffice
+
+## Now, per-user installation.
+## Note I am not root while executing the following.
+# The following commands may be necessary in the midst of the "setup" command.
+sudo chown -R mernst ~/.kde2
+sudo chgrp -R mernst ~/.kde2
+sudo chown mernst ~/.gnome/apps/OpenOffice.org\ 1.0.3
+sudo chgrp mernst ~/.gnome/apps/OpenOffice.org\ 1.0.3
+# On older machines, use ".kde" instead of ".kde2" here.
+(cd ~/.kde2/share; mkdir -p icons/locolor/16x16/apps icons/locolor/32x32/apps icons/hicolor/32x32/apps icons/hicolor/48x48/apps)
+# Actual installation:  (choose "workstation installation"?)
+
+/usr/local/OpenOffice.org1.0.3/setup &
+# Choose ~/.OpenOffice.org1.0.3/
+
+===========================================================================
+
+OpenOffice 1.0.2 for Linux
+
+Download from http://www.openoffice.org/dev_docs/source/1.0.2/index.html#linux
+(This took 15+ minutes on 5/31/2002.)
+
+Installation instructions:
+http://www.openoffice.org/dev_docs/instructions.html
+
+## First, system-wide installation
+mkdir ~mernst/tmp/oo-install
+mv OOo_1.0.2_LinuxIntel_install.tar.gz ~mernst/tmp/oo-install
+cd ~mernst/tmp/oo-install
+tar -zxf OOo_1.0.2_LinuxIntel_install.tar.gz
+cd install
+sudo ./setup -net
+#  Install into /usr/local/OpenOffice.org1.0.2
+sudo mv /usr/local/bin/soffice /usr/local/bin/soffice-old
+sudo ln -s /usr/local/OpenOffice.org1.0.2/program/soffice /usr/local/bin/soffice
+
+## Now, per-user installation.
+## Note I am not root while executing the following.
+# The following commands may be necessary in the midst of the "setup" command.
+sudo chown -R mernst ~/.kde2
+sudo chgrp -R mernst ~/.kde2
+sudo chown mernst ~/.gnome/apps/OpenOffice.org\ 1.0.2
+sudo chgrp mernst ~/.gnome/apps/OpenOffice.org\ 1.0.2
+# On older machines, use ".kde" instead of ".kde2" here.
+(cd ~/.kde2/share; mkdir -p icons/locolor/16x16/apps icons/locolor/32x32/apps icons/hicolor/32x32/apps icons/hicolor/48x48/apps)
+# Actual installation:
+/usr/local/OpenOffice.org1.0.2/setup &
+cd /usr/local/OpenOffice.org1.0.2
+./setup &
+# Choose ~/.OpenOffice.org1.0.2/
+
+===========================================================================
+
+Star Office 5.2 for Linux, English (January, 2001)
+
+Installation instructions:
+http://www.sun.com/products/staroffice/5.2/download.html
+
+(Note that the .bin extension doesn't show up on my Emacs Dired buffers.)
+chmod +x so-5_2-ga-bin-linux-en.bin
+# Become root
+so-5_2-ga-bin-linux-en.bin /net
+
+
+Install into /g3/usr/local/office52
+
+===========================================================================

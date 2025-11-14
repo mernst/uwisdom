@@ -1,0 +1,39 @@
+http://jode.sourceforge.net/
+
+No Debian package as of 6/29/2005.
+
+# Voxel (in NYC) didn't work
+http://unc.dl.sourceforge.net/sourceforge/jode/jode-1.1.2-pre1.jar
+http://unc.dl.sourceforge.net/sourceforge/jode/jode-1.1.2-pre1.tar.gz
+
+# Binary (easiest):
+cd ~/tmp/
+wget http://unc.dl.sourceforge.net/sourceforge/jode/jode-1.1.2-pre1.jar
+# and put it on my classpath
+
+You can then decompile a class file with:
+  java jode.decompiler.Main --classpath program.jar,libfoo.jar org.package.Class
+or a complete package with
+  java jode.decompiler.Main --classpath libfoo.jar program.jar
+
+This didn't work on an enum class, though:
+  java jode.decompiler.Main 'daikon.inv.ternary.threeScalar.LinearTernaryCore$1'
+(I used javap instead, which gave me a hint about it.)
+
+
+# Source
+cd ~/tmp/
+wget http://unc.dl.sourceforge.net/sourceforge/jode/jode-1.1.2-pre1.tar.gz
+tar xzf jode-1.1.2-pre1.tar.gz
+
+===========================================================================
+
+jad:
+
+cd ~/tmp
+wget http://kpdus.tripod.com/jad/linux/jadlx158.zip
+unzip jadlx158.zip
+
+Now
+     ~/tmp/jad example1.class
+creates example1.jad in the current directory.

@@ -1,0 +1,64 @@
+gdb-5.0:
+
+./configure
+make
+# as root:
+make install
+make install-info
+
+To get the manual:
+wget http://ftp.gnu.org/gnu/gdb/gdb-5.3.tar.gz
+tar zxf gdb-5.3.tar.gz
+cd gdb-5.3
+./configure
+cd gdb/doc
+make ps pdf
+
+===========================================================================
+
+Problem with gdb-4.18:
+
+Cannot call methods except explicitly on Solaris (SPARC and x86)
+In gdb-4.17, object.print() works.
+In gdb-4.18, object.print() fails, but object.OBJECTCLASS::print() works
+(explicit method call).
+News message <374F2088.A526F56C@cs.wisc.edu> in gnu.gdb.bug also reports this.
+
+===========================================================================
+
+tar xzf gdb-4.18.tar.gz
+cd gdb-4.18
+./configure
+make
+# "make install" doesn't seem to be the way to install.  (It's not what the
+# README says to use, and doesn't see to obey some ./configure flags it ought
+# to).  Instead, do
+cp -pf gdb/doc/gdb.info* /uns/share/info
+# edit GDB version number in /uns/share/info/dir
+cp -pf gdb/gdb.1 /uns/share/man/man1/gdb.1
+cp -pf gdb/gdb /uns/bin/gdb-4.18
+(cd /uns/bin; ln -s gdb-4.18 gdb)
+
+===========================================================================
+
+cd gdb-4.14
+./configure
+make
+cp gdb/gdb.info* /usr/local/info
+cp gdb/gdb.1 /usr/local/man/man1
+cp gdb/gdb /usr/local/bin/gdb-4.14
+cd /usr/local/bin
+rm -f gdb
+ln -s gdb-4.14 gdb
+
+
+
+4.14 gave me the following warnings:
+
+	ar rc libiberty.a \
+	  argv.o basename.o concat.o cplus-dem.o fdmatch.o  getopt.o getopt1.o getruntime.o hex.o  floatformat.o obstack.o spaces.o strerror.o strsignal.o  vasprintf.o xatexit.o xexit.o xmalloc.o  vfork.o alloca.o xmalloc.o
+ar: Warning:ignoring second definition of xmalloc_set_program_name defined in archive
+
+ar: Warning:ignoring second definition of xmalloc defined in archive
+
+ar: Warning:ignoring second definition of xrealloc defined in archive

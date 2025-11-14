@@ -1,0 +1,62 @@
+## Install in a VIRTUAL MACHINE.
+## Do not install directly in the main operating system.
+## Determine version number from
+## https://www.torproject.org/projects/torbrowser.html.en#downloads
+
+# First, go to ~/wisdom/building/build-vmware
+# In the VM:
+#  * sudo apt install gnome-panel
+#    then log out and back in, selecting Gnome Flashback (Metacity) as your desktop (Metacity is faster than Compiz)
+#  * VMware tools may already be installed; to test run
+#      initctl list | grep vmw
+#    Possibly can also run
+#     sudo /usr/bin/vmware-toolbox
+#    ?
+#    To reinstall: mount the virtual CD drive in the guest, uncompress the installer, and run
+#    sudo vmware-tools-distrib/vmware-install.pl
+#  * Chrome browser (via Firefox)
+#  * sudo apt install vlc
+
+===========================================================================
+
+There is a repository for Ubuntu that I can use.
+It is only given for LTS versions of Ubuntu:  Trusty Tahr 14.04, Xenial Xerus 16.04, etc.
+Get instructions from:
+https://www.torproject.org/docs/debian
+
+Does this install Tor Browser?  It's not clear that it does, but I
+should check by running
+  hash -r
+  tor-bro<TAB>
+to see if an executable named tor-browser* exists.
+
+===========================================================================
+
+## The instructions at
+## https://www.torproject.org/docs/debian.html.en
+## are for Tor itself and are not necessary for the Tor browser, I believe.
+## So, I needn't run those instructions.
+
+# Get version number at https://dist.torproject.org/torbrowser/
+# or https://www.torproject.org/download/download-easy.html.en
+mkdir -p ~/bin/install
+cd ~/bin/install
+VER=6.5.2
+wget https://www.torproject.org/dist/torbrowser/$VER/tor-browser-linux64-${VER}_en-US.tar.xz
+\rm -rf ~/bin/install/tor-browser_en-US/
+tar xJf tor-browser-linux64-${VER}_en-US.tar.xz
+mv ~/bin/install/tor-browser_en-US/ ~/bin/install/tor-browser_en-US-$VER/
+ln -s ~/bin/install/tor-browser_en-US-$VER ~/bin/install/tor-browser_en-US
+cd ~/bin/install/tor-browser_en-US/
+~/bin/install/tor-browser_en-US/Browser/start-tor-browser.desktop &
+
+----------------
+
+also:
+apt install ...
+
+===========================================================================
+
+## https://www.torproject.org/docs/debian says:  Do not use the packages in
+## Ubuntu's universe. In the past they have not reliably been updated.
+# sudo apt install tor

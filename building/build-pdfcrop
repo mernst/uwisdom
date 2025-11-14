@@ -1,0 +1,10 @@
+There is a pdfcrop at
+http://pdfcrop.sourceforge.net/
+but the one I have installed on Ubuntu is this one:
+https://www.ctan.org/tex-archive/support/pdfcrop
+Install it with:
+
+mkdir -p $HOME/bin/`uname`-`uname -m`
+cd $HOME/bin/`uname`-`uname -m`
+wget http://mirrors.ctan.org/support/pdfcrop/pdfcrop.pl -O pdfcrop
+chmod +x pdfcrop

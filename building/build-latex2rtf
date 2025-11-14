@@ -1,0 +1,64 @@
+unpack latex2rtf_1.1.orig.tar.gz
+patch < latex2rtf_1.1-5.diff
+
+Edit Makefile:
+
+  diff -u -b /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/Makefile.\~1\~ /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/Makefile
+  --- /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/Makefile.~1~	Thu Nov 19 14:11:14 1998
+  +++ /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/Makefile	Thu Nov 19 14:13:49 1998
+  @@ -31,22 +31,22 @@
+   # Initial revision
+   #
+   CC=gcc    # C-Compiler 
+  -CFLAGS=-g $(XCFLAGS) # Use -O here if you want it optimized
+  +CFLAGS=-g $(XCFLAGS) -O # Use -O here if you want it optimized
+   COPY=cp
+   # Note: If install doesn't work for you, use simple_install instead.
+   #
+   # Where support files are searched for by the executable
+  -LIBDIR=/usr/lib/latex2rtf
+  +LIBDIR=/uns/lib/latex2rtf
+   # You can give several Directories separated by ':' for the following
+   # install targets
+   #
+   # Where supportfiles are installed should normally be the same as LIBDIR
+  -LIBINSTALL=${DESTDIR}/usr/lib/latex2rtf
+  +LIBINSTALL=${DESTDIR}/uns/lib/latex2rtf
+   #LIBINSTALL=$(LIBDIR)
+   # Where Binaries are installed
+  -BININSTALL=${DESTDIR}/usr/bin
+  -#BININSTALL=/usr/local/bin
+  -MANINSTALL=${DESTDIR}/usr/man/man1
+  +BININSTALL=${DESTDIR}/uns/bin
+  +#BININSTALL=/uns/local/bin
+  +MANINSTALL=${DESTDIR}/uns/man/man1
+
+   # The following should fix compatibility problems on some machines, you
+   # may add the following option to XCFLAGS
+
+  Diff finished at Thu Nov 19 14:16:01
+
+For Solaris, edit main.c:
+
+  diff -u -b /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/main.c.\~1\~ /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/main.c
+  --- /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/main.c.~1~	Tue Jun 21 01:15:15 1994
+  +++ /homes/fish/mernst/tmp/l2r/latex2rtf-1.1.orig/main.c	Thu Nov 19 14:14:51 1998
+  @@ -71,7 +71,7 @@
+     int c, errflag = 0;
+     char *input = NULL, *output = NULL;
+     char tmpText[PATHMAX];
+  -  extern int getopt(int, char **, char *);
+  +  extern int getopt(int, char *const *, const char *);
+     extern char *optarg;
+     extern int optind, opterr;
+
+
+  Diff finished at Thu Nov 19 14:16:27
+
+
+make
+make install
+
+And then don't use stdin and stdout, as that causes segmentation faults.
+I couldn't get Microsoft Word to accept the resulting RTF, however.
+

@@ -1,0 +1,7 @@
+Comment syntax:
+https://www.python.org/dev/peps/pep-0484/#suggested-syntax-for-python-2-7-and-straddling-code
+
+The documentation (https://mypy.readthedocs.io/en/stable/getting_started.html) says:
+  sudo pip install mypy
+but I did:
+  sudo pipx install mypy

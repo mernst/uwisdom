@@ -1,0 +1,19 @@
+http://www.openjml.org/
+
+There is a live demo available on the web at
+http://www.rise4fun.com/OpenJMLESC/, but running it on a 1672-line program gave me: 
+"OpenJML could not verify your program before the timeout elapsed. Please try again (or write a smaller program)."
+But, it shows nice examples of JML syntax.
+
+http://www.openjml.org/downloads/ says that you need to work on Windows or Mac, because OpenJML does not support any theorem provers on Linux.
+
+Using
+ -esc
+causes type-checking and static checking to be done; that's what I want, I think.
+
+
+http://www.openjml.org/documentation/checks.shtml says that ArrayIndexOutOfBoundsException is fully handled.
+http://www.openjml.org/documentation/features.shtml says:
+"Checks of assignable statements are implemented, but the appropriate havoc statements on calling a method with array index range expressions are imcomplete."
+As of April 2017, the user guide is dated Feb 2016 and the first two chapers of the user guide (http://jmlspecs.sourceforge.net/OpenJMLUserGuide.pdf), and all of Part II and Part IV, are empty, with just a chapter heading.
+

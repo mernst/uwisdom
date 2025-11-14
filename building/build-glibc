@@ -1,0 +1,13 @@
+Mac: brew install glib
+
+===========================================================================
+
+Unpack into /scratch/mernst/glibc-2.3.5
+
+rm -rf /scratch/mernst/glibc-2.3.5-build
+mkdir /scratch/mernst/glibc-2.3.5-build
+cd /scratch/mernst/glibc-2.3.5-build
+export 'CFLAGS=-g -O0'
+# This didn't work; it didn't find the linuxthreads add-on.  I'm not sure
+# what is wrong.
+../glibc-2.3.5/configure --enable-add-ons --prefix /scratch/mernst/glibc-2.3.5-install

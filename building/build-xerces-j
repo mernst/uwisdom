@@ -1,0 +1,26 @@
+Apache Xerces
+Bug tracker: https://issues.apache.org/jira/browse/XERCESJ
+
+mkdir -p /scratch/${USER}
+cd /scratch/${USER}
+
+svn co http://svn.apache.org/repos/asf/xerces/java/trunk xerces-j
+cd xerces-j
+ant -e all docs javadocs
+# Compile the tests
+ant -e tests
+# Run some tests.
+# I got 7 errors in schema.config.AllTests, as of 6/3/2010.
+# (But, Ant said "BUILD SUCCESSFUL":  apparently the
+# top-level ant target ignores failures in subtargets.)
+ant -e test
+# Or:
+ant -e all tests; ant -e test > test-output-`date +%Y%m%d%H%M`
+# Possibly faster:
+ant -e pack-bin tests; ant -e test > test-output-`date +%Y%m%d%H%M`
+
+# To do everything at once:
+ant -e all docs javadocs tests test
+
+# Make TAGS file for Emacs
+etags `find src -name "*.java" -print`

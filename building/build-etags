@@ -1,0 +1,39 @@
+Latest pot version is at /anonymous@fly.cnuce.cnr.it:/pub/
+
+Don't forget to supply -DETAGS_REGEXP switch to compiler.
+Also -DSTDC_HEADERS.
+Maybe also -DDEBUG=1
+
+On Suns, the solution is to use the very old regex-0.12 package rather than
+the newer rx-1.5 package.  These are in /uns/lib and /uns/include on Solaris.
+
+On Suns, I tried copying /usr/include/getopt.h from a Linux machine to get
+etags.c to compile; then also include -I to tell [g]cc where to find it;
+but then I got a linker error about _getopt_long being undefined.
+
+===========================================================================
+
+In the Emacs source, to just build etags, I did:
+
+ ./configure
+ make lib-src/etags
+
+which resulted (for Emacs 20.3.7) in line
+
+gcc -g -O   -L/usr/local/X11R6.1/lib  lib-src/etags.c   -o lib-src/etags
+
+but I really want to add flags
+
+-DSTDC_HEADERS -DETAGS_REGEXPS
+
+and the latter still gives Solaris fits.
+
+Even then, I'm still having problems because re_registers and other types
+aren't defined.
+
+So rename
+  <regex.h>
+to
+  <regex.h.old>
+
+But now I can't find /uns/lib/libregex.a

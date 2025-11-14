@@ -1,0 +1,11 @@
+webrev
+
+cd ~/bin/`uname`-`uname -m`
+wget http://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh
+
+Documentation:
+http://openjdk.java.net/guide/webrevHelp.html
+
+Usage:
+  ksh ./webrev.ksh -N -r <REV>
+where <REV> is the ancestor, and the comparison is against tip.

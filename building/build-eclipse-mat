@@ -1,0 +1,23 @@
+Eclipse MAT (memory analysis) is available as a standalone tool:
+https://www.eclipse.org/mat/downloads.php
+
+To install:
+ * Download by following x86_64 links from https://www.eclipse.org/mat/downloads.php .
+cp MemoryAnalyzer-1.9.0.20190605-linux.gtk.x86_64.zip ~/bin/install
+cd ~/bin/install
+unzip MemoryAnalyzer-1.9.0.20190605-linux.gtk.x86_64.zip
+
+## I cannot get the below to work, so just download directly, as explained above.
+# VER=1.9.0
+# RELEASEDATE=20190605
+# ZIPFILE=MemoryAnalyzer-$VER.$RELEASEDATE-linux.gtk.x86_64.zip
+# cd ~/bin/install
+# wget http://www.eclipse.org/downloads/download.php?file=/mat/1.9.0/rcp/$ZIPFILE&mirror_id=1264 -O $ZIPFILE
+# unzip $ZIPFILE
+
+
+To run:
+~/bin/install/mat/MemoryAnalyzer -vmargs -Xmx8g -XX:-UseGCOverheadLimit &
+I might need to provide it extra memory.
+also:
+~/bin/install/mat/ParseHeapDump.sh to create "index" files.

@@ -1,0 +1,14 @@
+PolyJ
+http://www.pmg.lcs.mit.edu/polyj/
+
+./configure
+make
+# as root
+make install
+
+# This class belongs in java/lang, not java/util
+cd /usr/local/lib/classes/java/util
+mv UnsupportedOperationException.class UnsupportedOperationException.class-orig
+
+Add to .environment (README file omits "classes"):
+  setenv CLASSPATH ${CLASSPATH}:/usr/local/lib/classes

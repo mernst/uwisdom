@@ -1,0 +1,12 @@
+https://github.com/vigna/fastutil
+
+DON'T USE fastutil:
+ * fastutil attempts compatibility with the Java Collections Framework, but that makes it error-prone:  boxing occurs in foreach loops and other places that are easy to overlook.  I started to write a Boxing Checker to detect these problems, but it's better to use an API that is less error-prone.
+ * the author claims that a priority queue can depend on the order of insertion, so use of the fastutil data structures is misleading to someone who assumes the standard definition of "priority queue".  The author doesn't understand priority queues and does not care to: See https://github.com/vigna/fastutil/issues/253
+
+hppc is more performant and less error-prone than fastutil.
+Eclipse Collections also looks reasonable, but it requires a different programming paradigm.  That might be reasonable, but I ususally don't want to commit to such a big change.
+
+
+When using fastutil, to create a smaller jarfile, use the find-deps.sh script.
+

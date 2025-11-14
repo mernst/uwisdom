@@ -1,0 +1,14 @@
+These instructions are from no later than November 1999; the URL no longer
+works as of August 2004 (the URL has been taken over by a cybersquatter).
+
+===========================================================================
+
+Weblint 1.020 (there's also 1.9.3 at that site, but it's apparently still a
+development version).
+
+http://www.weblint.org
+
+make test
+
+cp -p weblint /uns/share/bin/weblint
+cp -p weblint.1 /uns/share/man/man1/weblint.1

@@ -1,0 +1,46 @@
+sudo apt install latex-beamer
+
+The user manual is at
+/usr/share/doc/latex-beamer/beameruserguide.pdf.gz
+
+===========================================================================
+
+Test by formatting
+/usr/share/doc/latex-beamer/examples/beamerexample1.tex.gz
+
+\documentclass[compress] tries to make navigation bars as small as
+possible.
+\insertnavigation puts a navigation bar in the headline (or footline?).
+
+\setbeamersize to adjust margins
+
+table of contents:  \tableofcontents[hideallsubsections]
+There must be a way to make this the default; however, if I never have
+subsections, this isn't an issue...
+
+4 types of themes:  color, font, inner, outer (presentation theme typically
+just sets them all).
+Presentation themes:
+  \usetheme{default}
+  \usetheme{compatibility}
+
+See implementation of \usefonttheme{structurebold}.  Or just use it.
+
+===========================================================================
+
+Alternate method, if not running Debian:
+
+[There's a Debian package for beamer.  So it's not worth trying to do all
+this installation elsewhere -- too complicated.]
+
+cd ~/tex/sty
+wget http://unc.dl.sourceforge.net/sourceforge/latex-beamer/latex-beamer-2.21.tar.gz
+tar xzf latex-beamer-2.21.tar.gz 
+wget http://unc.dl.sourceforge.net/sourceforge/latex-beamer/pgf-0.62.tar.gz
+tar xzf pgf-0.62.tar.gz
+wget http://unc.dl.sourceforge.net/sourceforge/latex-beamer/xcolor-2.00.tar.gz
+tar xzf xcolor-2.00.tar.gz
+
+[All this is supposed to be in a "texmf" directory...]
+
+===========================================================================

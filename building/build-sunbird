@@ -1,0 +1,40 @@
+User data is in 
+  ~/.mozilla/sunbird
+I can export to .ics from Google (there is a link on my Google webpage for
+that).
+
+===========================================================================
+
+MPI Debian has a very old version, so build it myself.
+(Ubuntu Hardy has 0.8 as of 3/14/2009, but I must run the same version
+everywhere.)
+See:  http://www.mozilla.org/projects/calendar/sunbird/build.html
+
+Linux:
+
+# At CSE in Dec 2008, version 0.9 didn't work for me:
+#   The program 'sunbird-bin' received an X Window System error.
+#   This probably reflects a bug in the program.
+#   The error was 'BadWindow (invalid Window parameter)'.
+#     (Details: serial 303 error_code 3 request_code 20 minor_code 0)
+# but version 0.8 did work for me.
+
+#if Ubuntu
+sudo apt install libstdc++5
+#endif
+cd ~/bin/install/
+wget 'http://download.mozilla.org/?product=sunbird-0.9&os=linux&lang=en-US'
+tar xvf sunbird-0.9.en-US.linux-i686.tar.gz
+rm sunbird-0.9.en-US.linux-i686.tar.gz
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/sunbird/sunbird .
+
+Now, set the preferences in ~/wisdom/setup/setup-preferences
+
+===========================================================================
+
+There is no need to install any special software to sync with Google
+Calendar.  Just follow the instructions at
+http://www.google.com/support/calendar/bin/answer.py?hl=en&answer=99358#sunbird
+
+===========================================================================

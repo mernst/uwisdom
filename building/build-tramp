@@ -1,0 +1,2 @@
+install-info texi/tramp.info /usr/local/info/dir
+cp -p texi/tramp.info /usr/local/info

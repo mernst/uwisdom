@@ -1,0 +1,8 @@
+
+mkdir -p ~/texmf/tex/generic/pgf-2.10
+cd ~/texmf/tex/generic/pgf-2.10
+# Download from
+# http://sourceforge.net/projects/pgf/files/latest/download?source=files to
+# this directory
+unzip pgf_2.10.tds.zip
+texhash

@@ -1,0 +1,6 @@
+Download from http://www.research.ibm.com/jinsight/.
+
+As of 4/25/2000, there are only Windows NT and AIX versions, and only for
+JDK 1.1.7 and 1.1.6, respectively.  Since binaries are distributed, I don't
+have a chance of running this on other platforms.
+

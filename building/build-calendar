@@ -1,0 +1,20 @@
+# "calendar" is part of Debian package "bsdmainutils"
+# but there is no package for Rocky 9
+
+# At CSE: just copy a calendar executable from my Ubuntu box.
+# (I can't get this to build at CSE -- nor can I build older version
+# wget http://archive.debian.org/debian/pool/main/b/bsdmainutils/bsdmainutils_6.0.17.tar.gz)
+
+
+# Determine version number at
+# http://ftp.de.debian.org/debian/pool/main/b/bsdmainutils/ 
+# VER=8.0.13
+VER=9.0.3
+
+cd ~/tmp
+wget http://ftp.de.debian.org/debian/pool/main/b/bsdmainutils/bsdmainutils_$VER.tar.gz
+tar xzf bsdmainutils_$VER.tar.gz
+cd bsdmainutils
+# It's OK if this fails halfway through
+make
+cp -p usr.bin/calendar/calendar $HOME/bin/`uname`-`uname -m`

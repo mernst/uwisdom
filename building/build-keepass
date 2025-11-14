@@ -1,0 +1,29 @@
+First, install Mono.  See file build-mono
+Also install xdotool.
+#if Ubuntu
+sudo apt install xdotool
+#endif
+
+===========================================================================
+
+For KeePass itself, see:
+http://keepass.info/help/v2/setup.html#mono
+
+export PKG=KeePass-2.19
+mkdir $HOME/bin/install/${PKG}
+cd $HOME/bin/install/${PKG}
+wget http://downloads.sourceforge.net/keepass/${PKG}.zip
+unzip ${PKG}.zip
+
+# To run:
+cd bin/install/KeePass-2.19
+mono KeePass.exe
+
+===========================================================================
+
+KeePassX is a clone.
+It can't read KeePass 2.x database files.
+Thus, do not use it.
+sudo apt install keepassx
+
+===========================================================================

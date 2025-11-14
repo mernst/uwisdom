@@ -1,0 +1,54 @@
+===========================================================================
+
+Build from source (preferred)
+
+
+mkdir -p ~/bin/install
+cd ~/bin/install
+git clone https://github.com/validator/validator.git
+cd validator
+# The `git submodule update` wasn't necessary the very first time I built on a
+# specific machine, but was necessary when building elsewhere on that machine.
+git submodule update --init --recursive
+python ./checker.py build
+
+Now, `python ./checker.py run` will start a web listener.
+So, instead run:
+
+java -jar $HOME/bin/install/validator/build/dist/vnu.jar OPTIONS FILES
+
+Or use this script:
+```
+#! /bin/sh
+java -jar "$HOME/bin/install/validator/build/dist/vnu.jar" "$@"
+```
+
+===========================================================================
+
+Install via pip
+
+The Ubuntu `html5validator` program comes from https://github.com/svenkreiss/html5validator and is installed with `pip install html5validator`.  It internally uses https://github.com/validator/validator/, which is the "Nu Html Checker (v.Nu)".  As of 2025-09-20, `html5validator` uses a version of the Nu Html Checker from 2020.  That is because the Nu Html Checker hasn't been released since 2020, even though there have been about 350 commits since then.  There are multiple GitHub issues asking for a newer release, which have no comments from maintainers.
+
+[TODO: Update this, since venv is preferred over "pip3 install".]
+[Documentation at https://github.com/svenkreiss/html5validator says to install with
+`pip install` (doesn't mention `pipx install`).
+Install with one of these:
+  sudo pip install html5validator
+  sudo -H pip install html5validator
+  pip install --user html5validator
+To upgrade to a newer version, pass --upgrade (not --update)
+
+To use it, run, in a directory containing .html files, with
+  html5validator
+or
+  html5validator --ignore /checker/manual/manual.html
+
+It is just a thin wrapper around
+https://github.com/validator/validator/releases
+anyway, which I might want to use directly (but what's the benefit?).
+To do so:
+cd ~/tmp
+wget https://github.com/validator/validator/releases/download/16.3.3/vnu.jar_16.3.3.zip
+unzip vnu.jar_16.3.3.zip
+
+===========================================================================

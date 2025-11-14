@@ -1,0 +1,5 @@
+WALA depends on Eclipse; it's not clear how to run it from the command
+line.  They claim command line use is supported (though Eclipse needs to
+be on the classpath), but my searches turned up no documentation.
+
+There appear to be no downloads -- just get it from SVN.

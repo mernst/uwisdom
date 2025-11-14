@@ -1,0 +1,14 @@
+ftp://ftp.lps.u-psud.fr/pub/ltx2rtf/
+
+ltx2rft-5-0.zip
+
+The zip file extracts into its own directory; I used
+~/bin/src/ltx2rtf-5-0/
+
+# Do not try to use the executable linux/ltx2rtf; it core-dumps for me.
+
+cp -pf src-gcc/makefile.lnx src-gcc/Makefile
+make
+cd ~/bin/Linux-i686
+ln -s ../src/ltx2rtf-5-0/src-gcc/ltx2rtf .
+

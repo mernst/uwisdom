@@ -1,0 +1,33 @@
+NIT: Null-ability inference tool
+http://nit.gforge.inria.fr
+
+Documentation: http://nit.gforge.inria.fr/documentation.html
+Bug reports: http://gforge.inria.fr/tracker/?group_id=1290
+Forum: http://gforge.inria.fr/forum/?group_id=1290
+
+===========================================================================
+
+PKG=nit-0.5b
+# Note that this number changes with each release!
+DOWNLOADNUM=22543
+
+cd ~/tmp/nit/
+wget http://gforge.inria.fr/frs/download.php/${DOWNLOADNUM}/${PKG}-src.tar.gz
+tar xzf ${PKG}-src.tar.gz
+cd ${PKG}
+make
+
+## Run on JWhich:
+# ~/tmp/nit/${PKG}/nit --class-path $CLASSPATH --main JWhich --text-output ~/tmp/nit/nit-jwhich.txt
+cd ~/tmp/nit
+~/tmp/nit/${PKG}/nit --class-path $CLASSPATH --main utilMDE.JWhich --jsr308-output ~/tmp/nit/nit-jwhich.jaif
+insert-annotations-to-source ~/tmp/nit/nit-jwhich.jaif $inv/java/utilMDE/JWhich.java
+# and see ~/tmp/nit/annotated/JWhich.java
+
+TODO:  experiment with this and see how the results are.
+
+
+## Run on Daikon:
+~/tmp/nit/${PKG}/nit --class-path $CLASSPATH --main daikon.Daikon --text-output --text-output ~/tmp/nit/nit-daikon.txt
+
+===========================================================================

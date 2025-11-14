@@ -1,0 +1,74 @@
+===========================================================================
+
+URL for simplify binaries:
+
+http://kindsoftware.com/products/opensource/archives/Simplify-1.5.5-13-06-07-binary.zip
+
+As of 12/11/2014, the zip file is dated 1/2/2012
+
+cd ~/bin/install
+wget http://kindsoftware.com/products/opensource/archives/Simplify-1.5.5-13-06-07-binary.zip
+unzip Simplify-1.5.5-13-06-07-binary.zip
+chmod +x Simplify/Simplify-1.5.4.linux
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../install/Simplify/Simplify-1.5.4.linux Simplify
+
+===========================================================================
+
+At this page, click through the license:
+  http://crl.research.compaq.com/downloads/download.cgi/mernst@lcs.mit.edu/java+toolkit+source/
+
+Download:
+  http://www.hpl.hp.com/downloads/crl/jtk/README_htm.htm
+  http://www.hpl.hp.com/downloads/crl/jtk/Escjava.tar.Z
+  http://www.hpl.hp.com/downloads/crl/jtk/simplify.tar.z
+
+===========================================================================
+
+Just get the Simplify binary from the PAG Debian machines.
+It's statically linked, so it should be fairly future-proof.
+
+===========================================================================
+
+Old, now-broken link for Simplify binaries from University College Dublin:
+https://mobius.ucd.ie/repos/src/simplify/
+Rules for getting that binary:
+wget --no-check-certificate https://mobius.ucd.ie/repos/src/simplify/Simplify-1.5.4.linux
+chmod +x Simplify-1.5.4.linux
+# This produced: "Segmentation fault"
+./Simplify-1.5.4-linux
+
+===========================================================================
+
+[This didn't work.]
+
+Build SRC Modula-3:
+  http://research.compaq.com/SRC/modula-3/html/release36.html
+
+(Alternately:
+  http://research.compaq.com/SRC/modula-3/html/srcm3.html
+  Installation instructions:
+    http://research.compaq.com/SRC/modula-3/html/install-POSIX.html
+
+
+# Note the use of http instead of ftp in the wget commands below.
+cd ~/bin/src
+mkdir modula3
+cd modula3
+wget http://gatekeeper.dec.com/pub/DEC/SRC/Modula-3/release-3.6/boot-LINUXELF.tar.gz
+wget http://gatekeeper.dec.com/pub/DEC/SRC/Modula-3/release-3.6/m3cc.tar.gz
+wget http://gatekeeper.dec.com/pub/DEC/SRC/Modula-3/release-3.6/m3.tar.gz
+tar xzf boot-LINUXELF.tar.gz
+tar xzf m3cc.tar.gz
+tar xzf m3.tar.gz
+mv m3cc boot-LINUXELF
+
+# Edit file boot-LINUXELF/m3build/templates/LINUXELF
+
+perl -pi.bak -e 's:/usr/X11/lib/elf:/usr/X11R6/lib:g; s:/usr/i486-linuxelf/bin/:/usr/bin/:g; s:PLATFORM_SUPPORTS_MOTIF  = "TRUE":PLATFORM_SUPPORTS_MOTIF  = "":g;' boot-LINUXELF/m3build/templates/LINUXELF
+
+
+# http://research.compaq.com/SRC/modula-3/html/patches36.html#gcc-elf says (huh?):
+# All of these changes should be made to the template file "boot-LINUXELF/m3build/templates/LINUXELF". You should then copy that file to the file "install-dir/pkg/m3/m3build/templates/LINUXELF" (where "install-dir" is the name of your installation directory, for example, "/usr/local/m3-3.6").
+
+===========================================================================

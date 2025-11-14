@@ -1,0 +1,121 @@
+http://www.adobe.com/products/acrobat/readstep.html
+Be sure to get the version with search.
+
+=========================================================
+
+Installing Acrobat 7 on Windows:
+
+Download zip file from
+  \\afs\csail.mit.edu\group\tig\software\Windows\Adobe\AcrobatProfessional\7.0\
+Start the installation by running setup.exe.
+
+
+On Cat's computer, I had to follow the instructions at
+  http://www.adobe.com/support/techdocs/329117.html
+and in particular, only the "cacls" version worked.  (I tried the preceding
+ones in the file, but not the subsequent ones.)
+
+During "searching for related applications" step at beginning of
+installation, I get a popup window:
+
+  Error 1324.  The path My Pictures or the volume is invalid.  Please enter
+  it again.
+
+Where the only option is to click "OK", upon which the acrobat intaller.
+
+A Web posting says to log in as another user (not guest, which has
+insufficient privileges) and install it as that user.  (And that worked.)
+
+===========================================================================
+
+Installing Acrobat reader on Linux:
+
+---------------------------------------------------------------------------
+
+For preferences, see ~/wisdom/setup/setup-preferences
+
+---------------------------------------------------------------------------
+
+Ubuntu:
+
+## This didn't work!
+# sudo apt-add-repository "deb http://archive.canonical.com/ubuntu Saucy partner"
+# sudo apt update
+# sudo apt install acroread
+
+## This didn't work!
+# Download .deb from http://get.adobe.com/reader/otherversions/
+# Open it (may take a moment).
+# I had to look at the "bad quality" details and then "ignore and install".  :-(
+
+http://ubuntuforums.org/showthread.php?t=2181100 says:
+1. Download the DEB for Adobe Reader from Adobe website
+http://get.adobe.com/uk/reader/
+2. Install with following commands
+[This is very slow??]
+sudo dpkg -i --force-architecture AdbeRdr9.5.5-1_i386linux_enu.deb && sudo apt -f install
+To explain this, the switch -i --force-architecture installs 32-bit architecture and -f install installs missing libraries for Kubuntu 13.10 Saucy Salamander 64-bit
+3. Repeat the same steps as for Ubuntu plus run following command (installs missing libraries)
+sudo apt install libxml2:i386 lib32stdc++6
+4. Run Adobe Reader from you terminal first, just type
+acroread
+5. I got some errors there but after that Adobe Reader is running just fine.
+
+---------------------------------------------------------------------------
+
+CSE (FAILED):
+
+# Download, then:
+chmod +x AdbeRdr9.5.5-1_i486linux_enu.bin 
+./AdbeRdr9.5.5-1_i486linux_enu.bin
+# but this gives me:
+#    bash: ./AdbeRdr9.5.5-1_i486linux_enu.bin: /lib/ld-linux.so.2: bad ELF interpreter: No such file or directory
+
+# So try the .tar.bz2 version:
+tar xjvf AdbeRdr9.5.5-1_i486linux_enu.tar.bz2
+cd AdobeReader
+./INSTALL --install_path=$HOME/bin/install
+# On F17, running the executable gives me:
+#   error while loading shared libraries: libgtk-x11-2.0.so.0: cannot open shared object file: No such file or directory
+# On F19, running the executable gives me:
+#   /lib/ld-linux.so.2: bad ELF interpreter: No such file or directory
+
+---------------------------------------------------------------------------
+
+Debian:
+
+See http://ubuntu-tutorials.com/2007/10/28/how-to-install-adobe-acrobat-reader-on-ubuntu-710/
+
+---------------------------------------------------------------------------
+
+## This no longer works as of 6/3/2008.
+# On Debian, just:  sudo apt install acroread
+# (requires "multiverse" in /etc/apt/sources.list)
+
+---------------------------------------------------------------------------
+
+mkdir ~/tmp/acroread-70
+cd ~/tmp/acroread-70
+wget http://ardownload.adobe.com/pub/adobe/reader/unix/7x/7.0.8/enu/AdobeReader_enu-7.0.8-1.i386.tar.gz
+tar zxf AdobeReader_enu-7.0.8-1.i386.tar.gz
+sudo AdobeReader/INSTALL
+# then accept all the defaults.
+# It says:
+#   If you are facing any problem in getting the installation to work for your
+#   browser, please copy the following file to the plugin folder of the browser:
+#     /usr/local/Adobe/Acrobat7.0/Browser/intellinux/nppdf.so
+sudo ln -s /usr/local/Adobe/Acrobat7.0/bin/acroread /usr/local/bin/acroread-70
+cd /usr/local/bin
+sudo rm -f acroread
+sudo ln -s acroread-70 acroread
+
+---------------------------------------------------------------------------
+
+# For CSAIL Debian (temporarily?):
+AdobeReader/INSTALL
+# Install to: /afs/csail/u/m/mernst/bin/Acrobat7.0
+cd ~/bin/Linux-i686
+ln -s ../Acrobat7.0/bin/acroread .
+rehash
+
+===========================================================================

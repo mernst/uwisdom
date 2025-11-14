@@ -1,0 +1,6 @@
+# Don't use this because it only handles Java 1.4 files -- no annotations, even ones such as @Deprecated.
+
+cd ~/java
+wget http://horstmann.com/articles/ImportCleaner.jar
+
+java -classpath myclasses.jar:${HOME}/java/ImportCleaner.jar ImportCleaner $file

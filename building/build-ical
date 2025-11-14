@@ -1,0 +1,70 @@
+===========================================================================
+
+Debian install:
+
+[On Ubuntu, as of Jan 6, 2007, the installed ical core-dumped.  So
+  sudo apt remove ical
+and then build from sources, which is easy enough.]
+
+Add to "/etc/apt/sources.list" (don't change the "sarge" bit, even for another release):
+  deb http://www.maretmanu.org/debian sarge main
+  deb-src http://www.maretmanu.org/debian sarge main
+
+Then:
+
+apt update
+apt install ical
+
+===========================================================================
+
+tar.gz install:
+
+# (or tcl8.4-dev, tk8.4-dev)
+sudo apt install g++ tcl-dev tk-dev
+
+cd ~/tmp
+wget http://www.annexia.org/_file/ical-2.3.3.tar.gz
+tar xzf ical-2.3.3.tar.gz
+cd ical-2.3.3
+# Or change all "8.4" to "8.3"
+./configure --with-tclconfig=/usr/lib/tcl8.4 \
+            --with-tkconfig=/usr/lib/tk8.4 \
+            --with-tclhdir=/usr/include/tcl8.4 \
+            --with-tkhdir=/usr/include/tcl8.4
+make
+sudo make install
+
+---------------------------------------------------------------------------
+
+# Older instructions:
+
+cd ~/bin/src
+wget ftp://contrib.redhat.com/pub/contrib/libc6/SRPMS/ical-2.2-27.src.rpm
+cd ~/bin/src
+wget ftp://contrib.redhat.com/pub/contrib/libc6/SRPMS/ical-2.2-27.src.rpm
+alien --to-tgz ical-2.2-27.src.rpm
+mkdir ical-2.2-27.src
+mv ical-2.2.tgz ical-2.2-27.src
+cd ical-2.2-27.src
+tar xvfz ical-2.2.tgz
+rm ical-2.2.tgz
+tar xvfz ical-2.2.tar.gz
+cd ical-2.2
+...
+
+===========================================================================
+
+This URL no longer works as of 11/22/2003:
+http://www.research.digital.com/SRC/personal/Sanjay_Ghemawat/ical/home.html
+
+Maybe try:
+ftp://contrib.redhat.com/pub/contrib/libc6/SRPMS/ical-2.2-27.src.rpm
+Which I found linked from:
+http://rpmfind.net//linux/RPM/contrib/libc6/i386/ical-2.2-8.i386.html
+
+
+I can't build ical 2.2 because it requires TCL/TK 7.6 or later.
+
+See the INSTALL file.
+
+===========================================================================

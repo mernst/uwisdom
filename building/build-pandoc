@@ -1,0 +1,8 @@
+For now, just use this on my Ubuntu machine.
+Later, worry about installing at UW.
+It's a pain there because I need to install Haskell too.
+
+cd ~/tmp
+wget http://pandoc.googlecode.com/files/pandoc-1.6.tar.gz
+tar xzf pandoc-1.6.tar.gz
+cd pandoc-1.6

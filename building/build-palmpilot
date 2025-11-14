@@ -1,0 +1,10 @@
+From http://howto.pilot-link.org/ppp/ca.html:
+To test the serial port with the Palm:
+  apt install statserial
+  # Cradle your palm
+  # From a terminal, not under Emacs:
+  statserial /dev/ttyS0
+  # Both "Clear To Send" (CTS) and "Data Set Ready" (DSR) should go high
+  # (from 0 to 1); if not, the serial port is misconfigured. Check the BIOS
+  # settings, dmesg, and setserial on the port proper.
+  setserial -g /dev/ttyS[0-3]

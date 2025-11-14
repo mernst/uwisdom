@@ -1,0 +1,83 @@
+===========================================================================
+
+Boldface for tt:
+
+## Debian/Ubuntu:
+# Watch out!  If this wants to uninstall anything, you may be using texlive
+# instead of tetex.  I don't know of a Debian/Ubuntu distribution for
+# texlive (news: but as of 3/2009 there is one), so you'll have to follow
+# the by-hand instructions below.
+sudo apt install tetex-extra
+
+## By hand
+# Do this as root
+cd /usr/share/texmf-texlive/fonts/source/public
+wget http://www.ctan.org/get/fonts/cm/mf-extra/bold.zip
+unzip bold.zip
+mkdir /usr/share/texmf-texlive/tex/latex/bold-extra
+cd /usr/share/texmf-texlive/tex/latex/bold-extra
+wget ftp://cam.ctan.org/tex-archive/macros/latex/contrib/misc/bold-extra.sty
+texhash
+
+===========================================================================
+
+Something from CTAN:
+
+# acronym, https://ctan.org/tex-archive/macros/latex/contrib/acronym?lang=en
+cd ~/tex/sty
+BASENAME=acronym
+wget https://mirrors.ctan.org/macros/latex/contrib/${BASENAME}.zip
+unzip ${BASENAME}.zip
+cd ${BASENAME}
+latex ${BASENAME}.ins
+(cd ..; ln -s ${BASENAME}/${BASENAME}.sty .)
+
+# boxedminipage, https://ctan.org/pkg/boxedminipage
+cd ~/tex/sty
+BASENAME=boxedminipage
+wget https://mirrors.ctan.org/macros/latex/contrib/${BASENAME}.zip
+unzip ${BASENAME}.zip
+cd ${BASENAME}
+latex ${BASENAME}.ins
+(cd ..; ln -s ${BASENAME}/${BASENAME}.sty .)
+
+# textpos, http://www.astro.gla.ac.uk/users/norman/distrib/latex/#textpos
+cd ~/tex/sty
+wget http://www.astro.gla.ac.uk/users/norman/distrib/latex/textpos-1.4.tar.gz
+tar xzf textpos-1.4.tar.gz
+cd textpos-1.4
+latex textpos.ins
+(cd ..; ln -s textpos-1.4/textpos.sty .)
+latex textpos.dtx
+dvips -o textpos.ps textpos.dvi
+
+===========================================================================
+
+# This didn't work for hyperxmp:  I got the error:
+
+(/homes/gws/mernst/tex/sty-cse-missing/hyperxmp.sty
+! Undefined control sequence.
+l.26 \IfDocumentMetadataTF
+
+
+
+getzip() {
+  wget -N https://mirrors.ctan.org/install/macros/latex/contrib/$1.tds.zip
+  unzip -o $1.tds.zip
+}
+getsty() {
+  wget -N http://mirrors.ctan.org/macros/latex/contrib/comment/$1.sty
+}
+doctex_installation() {
+  mkdir -p $1
+  cd $1
+  wget -N http://mirrors.ctan.org/macros/latex/contrib/$1/$1.dtx
+  wget -N http://mirrors.ctan.org/macros/latex/contrib/$1/$1.ins
+  latex $1.ins
+}
+
+getzip hyperxmp
+getsty comment
+doctex_installation cleveref
+
+===========================================================================

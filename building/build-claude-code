@@ -1,0 +1,4 @@
+At CSE:
+
+npm config set prefix '~/.local/'
+npm install -g @anthropic-ai/claude-code

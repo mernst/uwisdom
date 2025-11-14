@@ -1,0 +1,51 @@
+Compariso of pt "the platinum searcher" and ag:
+Pros of pt:
+ pt is cross-platform
+ pt may be slightly faster
+ pt ignores files in .gitignore
+Cons of pt:
+ pt requires go to be installed
+ pt isn't as well documented
+ pt doesn't search compressed files (which ag does, though ag doesn't support all compression schemes and archives).
+ pt crashes sometimes: https://github.com/monochromegane/the_platinum_searcher/issues/190 (also witth version 2.1.6)
+
+
+Ubuntu:
+sudo apt -y install silversearcher-ag
+
+# From source:
+cd ~/bin/src
+git clone git@github.com:ggreer/the_silver_searcher.git the_silver_searcher
+cd the_silver_searcher
+git pull
+./build.sh
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+ln -s ../src/the_silver_searcher/ag .
+
+I have my own fork now at https://github.com/mernst/the_silver_searcher
+
+# From a distribution:
+cd ~/bin/install
+wget https://github.com/ggreer/the_silver_searcher/archive/0.31.0.tar.gz
+mv 0.31.0.tar.gz the_silver_searcher-0.31.0.tar.gz
+tar xzf the_silver_searcher-0.31.0.tar.gz
+cd the_silver_searcher-0.31.0
+./build.sh
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/the_silver_searcher-0.31.0/ag .
+
+
+## Don't do this because it defaults to literal searching.
+## To uninstall after doing this:  rm -rf ~/.emacs.d/elpa/ag-*
+# # For Emacs integration:
+# (package-refresh-contents)
+# (package-install 'ag)
+
+# Instead, do:
+(package-refresh-contents)
+(package-install 'dash)
+cd ~/emacs
+git clone git@github.com:mernst/ag.el.git ag-el-clone-mernst
+rm -r ~/emacs/.path.el

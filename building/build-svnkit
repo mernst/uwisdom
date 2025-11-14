@@ -1,0 +1,7 @@
+To make the "*complete.jar" file that is included in
+plume-lib, see file plume-lib/java/lib/README.
+
+wget http://www.svnkit.com/org.tmatesoft.svn_1.8.11.standalone.zip
+
+wget http://www.svnkit.com/org.tmatesoft.svn_1.3.0.standalone.zip
+

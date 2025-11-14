@@ -1,0 +1,7 @@
+checkbashisms:
+
+Ubuntu:
+sudo apt -y install devscripts
+
+Non-Ubuntu:
+Copy the script from an Ubuntu system.

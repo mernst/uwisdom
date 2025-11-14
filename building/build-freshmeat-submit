@@ -1,0 +1,13 @@
+http://freshmeat.net/projects/freshmeat-submit/
+
+cd $pag/software/pkg
+wget http://freshmeat.net/redir/freshmeat-submit/46284/url_tgz/freshmeat-submit-1.6.tar.gz
+tar xzf freshmeat-submit-1.6.tar.gz 
+rm -f freshmeat-submit
+ln -s freshmeat-submit-1.6 freshmeat-submit
+cd freshmeat-submit
+make -k freshmeat-submit.html
+cd $pag/software/bin
+ln -s ../pkg/freshmeat-submit/freshmeat-submit .
+cd $pag/software/man/man1
+ln -s ../../pkg/freshmeat-submit/freshmeat-submit.1

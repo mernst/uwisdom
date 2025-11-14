@@ -1,0 +1,140 @@
+http://www.st.cs.uni-saarland.de/ibugs/
+
+Documentation seems to be sparse.
+
+# Install JDK 1.4
+# I also had to:  (cd ~/java; rm jdk; ln -s jdk4 jdk)
+
+# Install Ant 1.6.5
+# (Version 1.7.1 does not seem work, though the instructions do not warn
+# about that.)
+# (If Ant 1.7.1 is already installed, then /etc/ant.conf may reset ANT_HOME.
+# Ant is hard-coded to read /etc/ant.conf, so I worked around this by
+# creating a ~/.antrc that contains:
+#   unset ANT_HOME
+export PATH=${ANT_HOME}/bin:${PATH}
+export ANT_HOME=${HOME}/bin/install/apache-ant-1.6.5
+
+unset CLASSPATH
+
+# These environment problems suggest that I may want to create a virtual
+# machine in which no other version of Ant than 1.6.5 exists.
+
+----------------
+
+cd ~/tmp
+wget http://www.st.cs.uni-saarland.de/ibugs/ibugs_aspectj-1.3.tar.gz
+tar xzf ibugs_aspectj-1.3.tar.gz
+
+# Per ~/tmp/ibugs_aspectj-1.3/README, edit
+#   ~/tmp/ibugs_aspectj-1.3/properties.xml to set JAVA_HOME.
+
+cd ~/tmp/ibugs_aspectj-1.3/
+
+wget http://www.st.cs.uni-saarland.de/ibugs/repository.xsl
+xsltproc repository.xsl repository.xml > repository.html
+
+cd ~/tmp/ibugs_aspectj-1.3/
+ant checkoutversion -DfixId=28919
+ant buildversion -DfixId=28919 -Dtag=post-fix
+ant buildtests -DfixId=28919 -Dtag=post-fix
+# Problem with "ant runjunittests", see below.
+ant runjunittests -DfixId=28919 -Dtag=post-fix
+ant runharnesstests -DfixId=28919 -Dtag=post-fix
+
+# What is the difference between JUnit tests and harness tests?  According
+# to org.aspectj/modules/tests/readme-tests-module.html:  "For compiler
+# issues/bugs, we write harness tests. For API issues/bugs, we write JUnit
+# tests."
+
+----------------
+
+Running "ant runjunittests" yields a ClassNotFoundException.
+(output is in ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/tests/bin/junitXmlOutput/ajbrowser/TEST-AjbrowserModuleTests.xml)
+
+java.lang.ClassNotFoundException: AjbrowserModuleTests
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:199)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:187)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:289)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:274)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:235)
+	at java.lang.ClassLoader.loadClassInternal(ClassLoader.java:302)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Class.java:141)
+
+The identical problem appears at
+http://dev.eclipse.org/mhonarc/lists/aspectj-users/msg07375.html
+but there was never a reply to the mailing list.
+
+The problem is that the runjunittests target eventually runs target
+run-module-junit-tests in org.aspectj/modules/tests/junitModules.xml .  The
+task can take either .java or .class files as arguments, but it expects
+.class files to be on the classpath.  The task as written uses .java files
+that have never been compiled -- no .class files exist.
+
+The source files are in
+  ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc/AjbrowserModuleTests.java
+
+The .class files should appear in 
+~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/bin
+(that's where the ant file
+~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/tests/junitModules.xml
+looks for them).
+That directory doesn't even exist, after running the above targets.
+Other directories that should exist are .../bridge/bin, etc.; see
+junitModules.xml .
+
+I can't find an ant buildfile that does the compilation.  (I don't see any
+uses of testsrc in a .xml file.  In general, searching for testsrc seemed
+fruitless; could go back and re-try such a search.)  This is mysterious.  I
+can do the compilation by hand.
+
+First, apply this patch, because elsewhere in the AspectJ codebase is a
+Test class in the unnamed (top-level) package (in
+org.aspectj/modules/aj-build/jars/testing-drivers-all.jar and possibly
+elsewhere):
+
+diff -u -b -r --exclude=CVS --exclude=.bzr --exclude=.hg --exclude=.hgtags --exclude=.svn --exclude='*.class' ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc/AjbrowserModuleTests.java.\~1\~ ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc/AjbrowserModuleTests.java
+--- ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc/AjbrowserModuleTests.java.~1~	2007-01-26 11:58:24.000000000 -0800
++++ ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc/AjbrowserModuleTests.java	2009-11-11 11:29:34.000000000 -0800
+@@ -18,7 +18,7 @@
+ 
+ public class AjbrowserModuleTests extends TestCase {
+ 
+-    public static Test suite() { 
++    public static junit.framework.Test suite() { 
+         TestSuite suite = new TestSuite(AjbrowserModuleTests.class.getName());
+         suite.addTest(org.aspectj.tools.ajbrowser.AjbrowserTests.suite()); 
+         return suite;
+
+Diff finished.  Wed Nov 11 11:32:05 2009
+
+I also made this change, but I'm not sure whether it was necessary:
+
+--- /homes/gws/mernst/tmp/ibugs_aspectj-1.3/build.xml	2006-11-09 03:23:00.000000000 -0800
+@@ -51,6 +52,8 @@
+     <copy file="${versiondirectory}/org.aspectj/modules/lib/junit/junit.jar" todir="${versiondirectory}/org.aspectj/modules/lib/ant/lib"/>
+     <property name="ANT_HOME"
+     location="${versiondirectory}/org.aspectj/modules/lib/ant" />
++    <property name="CLASSPATH"
++    location="${versiondirectory}/org.aspectj/modules/lib/ant/lib/junit.jar" />
+     <exec vmlauncher="false"
+     executable="../lib/ant/bin/${antexecutable}"
+     dir="${versiondirectory}/org.aspectj/modules/tests">
+
+
+
+Now, do the compilation by hand.  I took the classpath from ../.classpath;
+there is also a .project file in that same directory.  (Would compiling
+under Eclipse work even if Ant doesn't?  I have not tried that.)
+
+
+  cd ~/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/ajbrowser/testsrc
+  javac -source 1.5 -d ../bin -cp .:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/ajbrowser.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/ajbrowser-all.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/ajde.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/asm.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/bridge.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/org.aspectj.ajdt.core.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/org.eclipse.jdt.core.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/runtime.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/taskdefs.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/testing.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/testing-client.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/testing-drivers.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/testing-drivers-all.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/testing-util.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/util.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/aj-build/jars/weaver.jar:${HOME}/tmp/ibugs_aspectj-1.3/versions/28919/post-fix/org.aspectj/modules/lib/ant/lib/junit.jar `find -name '*.java'`
+
+Now, you can run the ajbrowser test, but the very next one fails in the
+identical way (throwing a ClassNotFoundException), so a by-hand compilation
+like the above needs to be done for each test directory.  This could be
+automated in some fashion (as it really should already be, someplace in the
+build file).

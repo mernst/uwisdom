@@ -1,0 +1,5 @@
+ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz
+
+./configure
+make
+make install

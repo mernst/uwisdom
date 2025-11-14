@@ -1,0 +1,65 @@
+Ubuntu:
+sudo apt install -y fonts-inconsolata fonts-hack
+
+----------------
+
+Or: copy .ttf files to /usr/local/share/fonts and run:
+sudo fc-cache -fv
+
+
+===========================================================================
+
+# Older:
+# sudo apt install ttf-inconsolata
+# sudo fc-cache -fv
+
+
+Inconsolata is better to get from:
+https://fonts.google.com/selection
+
+Windows:
+Click on http://levien.com/type/myfonts/Inconsolata.otf and then click on "install".
+
+
+Cygwin:
+???
+(Being installed in Windows doesn't seem to be enough for Emacs to recognize it.)
+
+;; This doesn't look as good to me:
+;; (And under Cygwin it's proportional spacing!  At least without installing more...)
+;; (set-face-attribute 'default nil :height 115 :family "Consolas")
+
+
+Older:
+
+Put Inconsolata.otf in ~/.fonts/ :
+cd ~/.fonts
+wget http://levien.com/type/myfonts/Inconsolata.otf
+
+This seems to be necessary in the account that is running the X client
+process (where the program is running) -- it doesn't help that it is
+installed in the account that is running the X server (the machine at which
+I am sitting).
+
+
+mkdir -p ~/.fonts
+cd ~/.fonts
+VER=v3.003
+fontfile=Hack-${VER}-ttf.zip
+wget https://github.com/source-foundry/Hack/releases/download/${VER}/${fontfile}
+unzip ${fontfile}
+rm -f ${fontfile}
+fc-cache
+
+mkdir -p ~/.fonts
+cd ~/.fonts
+VER=v1.200
+fontfile=monaspace-${VER}.zip
+wget https://github.com/githubnext/monaspace/releases/download/${VER}/${fontfile}
+unzip ${fontfile}
+rm -f ${fontfile}
+fc-cache
+
+
+
+https://github.com/be5invis/Iosevka

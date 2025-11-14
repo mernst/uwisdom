@@ -1,0 +1,57 @@
+===========================================================================
+
+On ubuntu:
+sudo apt install junit4 junit4-doc
+after which the jar file is
+/usr/share/java/junit4-4.11.jar
+and Javadoc is in /usr/share/doc/junit4/api
+
+===========================================================================
+
+Source code:
+cd ~/java
+git clone git@github.com:junit-team/junit.git
+cd junit
+mvn install
+# Puts javadoc HTML output in target/site/apidocs/
+mvn javadoc:javadoc
+etags `find src/main -type f -name '*.java'`
+
+===========================================================================
+
+## There doesn't seem to be a source distribution with .java and buildfiles
+## any more.  The junit-4.12-sources.jar contains nothing but .java files. :-(
+# To set version number, see
+#   http://search.maven.org/#search|gav|1|g:"junit" AND a:"junit"
+# (previously https://github.com/junit-team/junit/downloads, but it's out of date)
+VER=4.12
+cd ~/java
+wget http://search.maven.org/remotecontent?filepath=junit/junit/${VER}/junit-${VER}-sources.jar -O junit-${VER}-sources.jar
+rm -f junit
+unzip junit-${VER}-sources.jar
+mv junit junit-${VER}-sources
+
+===========================================================================
+
+## Older instructions; does not work for release 4.12 and later.
+# See https://github.com/junit-team/junit/downloads to set version number
+VER=4.11
+cd ~/java
+wget https://github.com/downloads/junit-team/junit/junit${VER}.zip
+unzip junit${VER}.zip
+rm -f junit
+ln -s junit${VER} junit
+rm -f junit.jar
+ln -s junit${VER}/junit-${VER}.jar junit.jar
+
+===========================================================================
+
+In junit4.8.2, I can't get the "ant javadoc" target to run, even with
+these commands:
+
+cd ~/java/junit
+mkdir lib
+cd lib
+wget http://hamcrest.googlecode.com/files/hamcrest-core-1.1.jar
+cd ~/java/junit
+ant -e javadoc

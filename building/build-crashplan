@@ -1,0 +1,84 @@
+===========================================================================
+
+Troubleshooting:
+ * Is /mnt/MyPassport mounted on godwit?  If not, then reboot godwit.
+ * Restart CrashPlan:
+   /homes/gws/mernst/bin/install/crashplan/crashplan/bin/CrashPlanEngine stop
+   /homes/gws/mernst/bin/install/crashplan/crashplan/bin/CrashPlanEngine start
+ * Start the Desktop UI so I can supply my password.  (Do on reboot & reinstall?)
+   /homes/gws/mernst/bin/install/crashplan/crashplan/bin/CrashPlanDesktop
+ * Uninstall and reinstall CrashPlan.
+
+===========================================================================
+
+I can install as non-root.
+All directories MUST NOT contain spaces, or the CrashPlan scripts will fail.
+
+Comment out alias for java in ~/.aliases
+Start a new shell.
+
+# Or, download by browsing to http://www.code42.com/crashplan/download/ ,
+# clicking the link, and checking the file name.
+# 4.8.2 is latest for Linux as of 4/14/2017
+VER=4.8.2
+cd ~/tmp
+wget http://download.crashplan.com/installs/linux/install/CrashPlan/CrashPlan_${VER}_Linux.tgz
+rm -rf crashplan-install
+tar xzf CrashPlan_${VER}_Linux.tgz
+cd crashplan-install/
+# Optional: ./uninstall.sh -i /homes/gws/mernst/bin/install/crashplan-${VER}/crashplan
+./install.sh
+# Install in: /homes/gws/mernst/bin/install/crashplan-${VER}
+# Store backups in: /mnt/MyPassport/CrashPlanBackups
+## The "store backups" directory seems to not permit spaces!  So I needed to rename the drive.
+(cd $HOME/bin/install && rm -f crashplan && ln -s crashplan-${VER} crashplan)
+
+cd ~/tmp
+rm -rf CrashPlan_${VER}_Linux.tgz CrashPlan-install
+
+Uncomment alias for java in ~/.aliases (if I commented it before)
+
+
+# If client closes, then ~/bin/install/crashplan/crashplan/log/ui_output.log probably shows a Java crash and you should follow the instructions at the end of
+# https://support.code42.com/CrashPlan/Latest/Troubleshooting/CrashPlan_Client_Closes_In_Some_Linux_Installations
+# Namely. edit ~/bin/install/crashplan-${VER}/bin/run.conf 
+
+On Linux systems, change so I am backing up just some trivial amount of information -- say, private and random.  (random is still 1.7GB.)
+
+Settings >> Backup >> Filename Exclusions : configure
+  .iso
+  .vmdk
+  .vmem
+  .vmss
+and don't forget to "save changes" at the bottom afterward!
+
+To run in the background:
+~/bin/install/crashplan/crashplan/bin/crashplan start
+(Do this every time I log in graphically??)
+
+===========================================================================
+
+Settings:
+
+Windows: only synchronize
+ * [I don't think I need this: Application Data]
+ * [not Documents: it contains the VMware image for Ubuntu]
+ * My Documents
+ * Pictures
+ * Videos
+
+===========================================================================
+
+CrashPlan connections:
+
+I'm not sure about these; I should double-check them.
+
+Mom inspiron-14-3000 -> godwit [double-checked]
+Yoga -> godwit
+Cat -> godwit
+Cat -> external Samsung drive
+Shirley -> Cat
+Cat -> Shirley (?)
+Shirley -> godwit [to do!]
+
+===========================================================================

@@ -1,0 +1,7 @@
+cd ~/tmp
+tar zxf tsafe.tgz
+cd tsafe
+mv tsafe.properties tsafe.properties.distributed
+mv datafiles/sample_tsafe.properties tsafe.properties
+perl -pi.distributed -e "s:/cvsroot/tsafe:"`pwd`":g" env.mk
+make run

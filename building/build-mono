@@ -1,0 +1,25 @@
+===========================================================================
+
+Ubuntu:
+
+sudo apt install mono-devel
+
+===========================================================================
+
+Fedora:
+
+http://www.mono-project.com/Compiling_Mono_From_Tarball
+
+Mono sources: http://download.mono-project.com/sources/mono
+
+export PKG=mono-2.10.9
+
+cd ~/bin/install
+wget http://download.mono-project.com/sources/mono/${PKG}.tar.bz2
+tar xj f ${PKG}.tar.bz2
+cd ${PKG}
+./configure --prefix=${HOME}/bin/install/${PKG}-install
+make
+make install
+
+===========================================================================

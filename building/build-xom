@@ -1,0 +1,94 @@
+===========================================================================
+
+XOM 1.2.7 (as of Jan 2012)
+
+# Trying to compile, or to build javadoc, leads to a StackOverflowError.
+# I can use the distributed jar, though.
+
+# get version number from http://www.xom.nu/
+VER=1.2.10
+PACKAGE=xom-${VER}
+cd ~/java
+wget http://www.cafeconleche.org/XOM/${PACKAGE}.tar.gz
+tar xzf ${PACKAGE}.tar.gz
+mv XOM XOM-${VER}
+# Add xom-*.jar to classpath (in ~/.environment)
+
+## You'll also want the TagSoup parser (1.2.1 is current as of 12/2013):
+cd ~/java
+wget http://mercury.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.1.jar
+# Add tagsoup-1.2.1.jar to classpath (in ~/.environment)
+# No need for this, probably: wget http://mercury.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.1-src.zip
+
+### This patch applies to XOM-1.2b1; is it necessary for 1.2.7??
+## Apply this patch.
+## Provide enough memory to tasks; and arrange that index-all.html file
+## exists for javadoc-index-to-alist to use.
+
+diff -u -b -r --exclude=CVS --exclude=.hg --exclude=.hgtags --exclude=.hg --exclude=.svn /home/mernst/java/XOM-1.2b1/build.xml.\~1\~ /home/mernst/java/XOM-1.2b1/build.xml
+--- /home/mernst/java/XOM-1.2b1/build.xml.~1~	2006-07-18 16:50:55.000000000 +0200
++++ /home/mernst/java/XOM-1.2b1/build.xml	2008-08-22 20:52:51.000000000 +0200
+@@ -196,6 +196,7 @@
+   <target name="compile-core" depends="prepare, compile-jaxen" 
+           description="Compile the source code">
+     <javac srcdir="${build.src}"
++           fork="true" memoryInitialSize="256m" memoryMaximumSize="800m"
+            destdir="${build.dest}"
+            debug="${debug}"
+            optimize="${optimize}"
+@@ -381,14 +382,14 @@
+     <mkdir dir="${build.javadocs}"/>
+     
+     <javadoc packagenames="nu.xom.xslt, nu.xom.canonical, nu.xom.xinclude, nu.xom, nu.xom.converters"
++             additionalparam="-J-Xss10m"
+              sourcepath="${build.src}"
+              destdir="${build.javadocs}"
+              author="true"
+              version="true"
+              overview="overview.html"
+              use="true"
+-             splitindex="true"
+-             noindex="false"
++             splitindex="false"
+              windowtitle="${Name} ${version}  API"
+              docencoding="UTF-8"
+              charset="UTF-8"
+
+Diff finished.  Fri Aug 22 20:52:54 2008
+
+
+cd ~/java/XOM-1.2b1
+ant compile compile15 javadoc
+
+===========================================================================
+
+## Don't use XOM 1.1.  Use XOM 1.2 instead, as it fixes build problems with
+## Jaxen.
+
+XOM 1.1
+
+# In XOM 1.1, the "ant compile" target to compile XOM 1.1 doesn't work for
+# me:  it tries to use host cvs.jaxen.codehaus.org which doesn't exist.
+# I can use the distributed jar, though.
+
+cd ~/java
+wget http://www.cafeconleche.org/XOM/xom-1.1.zip
+unzip xom-1.1.zip
+mv XOM XOM-1.1
+# Add xom-1.1.jar to classpath (in ~/.environment)
+
+cd ~/java/XOM-1.1
+wget http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.1.tar.gz
+tar zxf jaxen-1.1.1.tar.gz
+ln -s jaxen-1.1.1 jaxen
+
+## You'll also want the TagSoup parser:
+cd ~/java
+wget http://mercury.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.jar
+# Add xom-1.1.jar to classpath (in ~/.environment)
+# No need for this, probably: wget http://mercury.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2-src.zip
+mkdir -p ~/java/XOM-1.1/build/jaxen-classes
+cd ~/java/XOM-1.1/build/jaxen-classes
+jar xf ~/java/jaxen-1.1.1/jaxen-1.1.1.jar
+
+===========================================================================

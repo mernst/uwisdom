@@ -1,0 +1,112 @@
+===========================================================================
+
+Use firefox instead.  (And install that using Debian.)
+
+===========================================================================
+
+Mozilla 1.7:
+
+cd ~/tmp
+wget http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.7/mozilla-i686-pc-linux-gnu-1.7-installer.tar.gz
+tar zxf mozilla-i686-pc-linux-gnu-1.7-installer.tar.gz
+cd mozilla-installer
+sudo ./mozilla-installer
+# laptop: install into /usr/local/mozilla1.7 (default is /usr/local/mozilla)
+# pag: install into /usr/local/pkg/mozilla/mozilla-1.7
+# Don't let mozilla run at the end of the mozilla-installer script, lest
+# files in ~/.mozilla be owned by root.
+
+## Personal setup: 2 versions
+## Version 1 (for pag)
+cd /usr/local/bin
+sudo cp mozilla16 mozilla17
+sudo rm -f mozilla
+sudo ln -s mozilla17 mozilla
+# rm -f ~/bin/Linux-i686/mozilla
+# ln -fs /usr/local/mozilla-1.7/mozilla ~/bin/Linux-i686
+# (cd ~/bin/Linux-i686; ln -s mozilla netscape)
+## Version 2 (for laptop)
+cd /usr/local/bin; sudo rm -f mozilla; sudo ln -s /usr/local/mozilla1.7/mozilla .
+
+Customizations: see file "~/wisdom/pc-setup" (see Mozilla section)
+
+===========================================================================
+
+Mozilla 1.6:
+
+cd ~/tmp
+wget http://ftp.mozilla.org/pub/mozilla.org/mozilla/releases/mozilla1.6/mozilla-i686-pc-linux-gnu-1.6-installer.tar.gz
+tar zxf mozilla-i686-pc-linux-gnu-1.6-installer.tar.gz
+cd mozilla-installer
+sudo ./mozilla-installer
+# laptop: install into /usr/local/mozilla1.6 (default is /usr/local/mozilla)
+# pag: install into /usr/local/pkg/mozilla/mozilla-1.6
+# Don't let mozilla run at the end of the mozilla-installer script, lest
+# files in ~/.mozilla be owned by root.
+# Personal setup: 2 versions
+# Version 1 (for pag)
+rm -f ~/bin/Linux-i686/mozilla
+ln -fs /usr/local/mozilla/mozilla ~/bin/Linux-i686
+(cd ~/bin/Linux-i686; ln -s mozilla netscape)
+# Version 2 (for laptop)
+cd /usr/local/bin; sudo rm -f mozilla; sudo ln -s /usr/local/mozilla1.6/mozilla .
+
+Customizations: see file "~/wisdom/pc-setup" (see Netscape section)
+
+===========================================================================
+
+Mozilla 1.5:
+
+cd ~/tmp
+wget http://ftp.mozilla.org/pub/mozilla/releases/mozilla1.5/mozilla-i686-pc-linux-gnu-1.5-sea.tar.gz
+tar zxf mozilla-i686-pc-linux-gnu-1.5-sea.tar.gz
+cd mozilla-installer
+sudo ./mozilla-installer
+# Choose to install into /usr/local/mozilla1.5 (default is /usr/local/mozilla)
+# On pag, install into /usr/local/pkg/mozilla/mozilla-1.5
+# Don't let mozilla run at the end of the mozilla-installer script, lest
+# files in ~/.mozilla be owned by root.
+# Personal setup: 2 versions
+# Version 1 (for pag)
+rm -f ~/bin/Linux-i686/mozilla
+ln -fs /usr/local/mozilla/mozilla ~/bin/Linux-i686
+(cd ~/bin/Linux-i686; ln -s mozilla netscape)
+# Version 2 (for laptop)
+cd /usr/local/bin; sudo rm -f mozilla; sudo ln -s /usr/local/mozilla/mozilla .
+
+Customizations: see file "~/wisdom/pc-setup" (see Netscape section)
+
+===========================================================================
+
+Mozilla 1.4:
+
+cd ~/tmp
+wget http://ftp.mozilla.org/pub/mozilla/releases/mozilla1.4/mozilla-i686-pc-linux-gnu-1.4-sea.tar.gz
+tar zxf mozilla-i686-pc-linux-gnu-1.4-sea.tar.gz
+cd mozilla-installer
+sudo ./mozilla-installer
+# Personal setup: 2 versions
+# Version 1
+rm -f ~/bin/Linux-i686/mozilla
+ln -fs /usr/local/mozilla/mozilla ~/bin/Linux-i686
+(cd ~/bin/Linux-i686; ln -s mozilla netscape)
+# Version 2
+cd /usr/local/bin; sudo rm -f mozilla; sudo ln -s /usr/local/mozilla/mozilla .
+
+Customizations: see file "~/wisdom/pc-setup" (see Netscape section)
+
+===========================================================================
+
+Mozilla 1.2.1:
+
+cd ~/tmp
+wget http://ftp.mozilla.org/pub/mozilla/releases/mozilla1.2.1/mozilla-i686-pc-linux-gnu-1.2.1-sea.tar.gz
+tar zxf mozilla-i686-pc-linux-gnu-1.2.1-sea.tar.gz
+cd mozilla-installer
+sudo ./mozilla-installer
+ln -fs /usr/local/mozilla/mozilla ~/bin/Linux-i686
+(cd ~/bin/Linux-i686; ln -s mozilla netscape)
+
+Customizations: see file "~/wisdom/pc-setup"
+
+===========================================================================

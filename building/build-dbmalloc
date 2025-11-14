@@ -1,0 +1,111 @@
+Probably use dmalloc by Gray Watson instead, http://www.dmalloc.com/.
+(I neverr got dbmalloc to work.)
+
+===========================================================================
+
+Connor Cahill's dbmalloc:
+  ftp://ftp.digital.com/pub/usenet/comp.sources.misc/volume32/dbmalloc/
+
+Do *not* be fooled by the version by "mm7323"
+
+See http://www.cs.colorado.edu/homes/zorn/public_html/MallocDebug.html for
+a fuller list of Debugging Tools for Dynamic Storage Allocation and Memory
+Management.
+
+===========================================================================
+
+To build for Solaris:
+
+mkdir dbmalloc-parts
+# Download parts from
+#   ftp://ftp.digital.com/pub/usenet/comp.sources.misc/volume32/dbmalloc/
+uncompress *.Z
+# Edit each part to remove the header
+mkdir ../dbmalloc
+cd ../dbmalloc
+sh ../dbmalloc-parts/part01
+sh ../dbmalloc-parts/part02
+sh ../dbmalloc-parts/part03
+sh ../dbmalloc-parts/part04
+sh ../dbmalloc-parts/part05
+sh ../dbmalloc-parts/part06
+sh ../dbmalloc-parts/part07
+sh ../dbmalloc-parts/part08
+sh ../dbmalloc-parts/part09
+sh ../dbmalloc-parts/part10
+
+# edit Makefile: (replace-string "\t\n" "\n"), then:
+#   # CC=cc
+#   CC=gcc
+#   # INSTDIR=$(DESTDIR)/usr/local
+#   INSTDIR=/uns
+#   # INCINSTDIR=$(INSTDIR)/debug_include
+#   INCINSTDIR=/uns/include/debug_include
+
+gcc -DCHANGESTR cctest.c -o changestr
+./Configure
+# Edit .configure.s: change
+#   #define WRTSIZE   /* *GUESS* */
+# to
+#   #define WRTSIZE size_t
+# Perhaps also do this in sysdefs.h
+
+make malloc.h
+make
+make runtests
+# If it doesn't exist already:
+mkdir /uns/include/debug_include
+make install
+
+Now the files are in:
+  /uns/include/debug_include/malloc.h
+  /uns/lib/libdbmalloc.a
+And do "man dbmalloc"; typically just do
+  #include "malloc.h"
+and then, on the command line
+  -I/uns/include/debug_include -ldbmalloc
+
+Use in C++ code seems to have no effect, because new/delete/etc. are not
+caught by dbmalloc.
+
+To test, compile this small program:
+
+// Compile: gcc -Wall -g -I/uns/include/debug_include -ldbmalloc -o mdetest mdetest.c
+#include "malloc.h"             // possible use of debugging malloc library
+int main(int argc, char *argv[]) {
+  int * foo;
+  foo = (int*) malloc(10);
+  foo[10] = 2222;
+  free(foo);
+}
+
+I had terrible problems, apparently with the preprocessor.
+
+===========================================================================
+
+To build for Linux:
+
+Version for Linux:
+  http://www.clark.net/pub/dickey/dbmalloc/dbmalloc.html
+
+Edit Makefile; (replace-string "\t\n" "\n") and:
+#INSTDIR=$(DESTDIR)/usr/local
+INSTDIR=/uns
+# CC=cc
+CC=gcc
+
+# Per README.Linux, Don't run ./configure, etc; just do:
+make
+# But that runs ./Configure, at least for me.
+
+Then I did
+
+make tests
+./testmalloc
+./testmem
+./teststack
+
+and all three of the latter segmentation faulted.
+
+===========================================================================
+

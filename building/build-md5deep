@@ -1,0 +1,12 @@
+cd ~/bin/install
+wget http://sourceforge.net/projects/md5deep/files/md5deep/md5deep-3.9/md5deep-3.9.tar.gz
+tar xzf md5deep-3.9.tar.gz
+cd md5deep-3.9
+./configure
+make
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../install/md5deep-3.9/md5deep/tigerdeep ../install/md5deep-3.9/md5deep/whirlpooldeep ../install/md5deep-3.9/md5deep/sha1deep ../install/md5deep-3.9/md5deep/sha256deep ../install/md5deep-3.9/md5deep/md5deep .
+
+
+Run like this:
+md5deep -r DIRECTORYNAME

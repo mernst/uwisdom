@@ -4,20 +4,20 @@
 //   \include{my-personal-file1}
 //   \include{my-personal-file2}
 //   ...
-// Note that files "Mit.adoc" and "Uw.adoc" are not included in this file;
+// Note that files "Mit.md" and "Uw.md" are not included in this file;
 // users must include them explicitly.
 
-\include{README.adoc}
-\include{BuildSystems.adoc}
-\include{ContinuousIntegration.adoc}
-\include{Emacs.adoc}
-\include{Java.adoc}
-\include{Linux.adoc}
-\include{Mac.adoc}
-\include{MicrosoftWindows.adoc}
-\include{Network.adoc}
-\include{Php.adoc}
-\include{Programs.adoc}
-\include{Research.adoc}
-\include{Tex.adoc}
-\include{VersionControl.adoc}
+\include{README.md}
+\include{BuildSystems.md}
+\include{ContinuousIntegration.md}
+\include{Emacs.md}
+\include{Java.md}
+\include{Linux.md}
+\include{Mac.md}
+\include{MicrosoftWindows.md}
+\include{Network.md}
+\include{Php.md}
+\include{Programs.md}
+\include{Research.md}
+\include{Tex.md}
+\include{VersionControl.md}

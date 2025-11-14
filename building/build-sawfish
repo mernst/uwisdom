@@ -1,0 +1,9 @@
+http://prdownloads.sourceforge.net/sawmill/sawfish-1.3.tar.gz?download
+
+wget http://prdownloads.sourceforge.net/sawmill/sawfish-1.3.tar.gz?use_mirror=unc
+
+cd ~/tmp
+tar zxf sawfish-1.3.tar.gz 
+cd sawfish-1.3
+
+(It required too many other packages, so I gave up.)

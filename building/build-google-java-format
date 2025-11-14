@@ -1,0 +1,47 @@
+Documentation: https://github.com/google/google-java-format
+
+===========================================================================
+
+Released version:
+
+cd ~/java/
+wget https://github.com/google/google-java-format/releases/download/google-java-format-1.1/google-java-format-1.1-all-deps.jar
+
+Run as:
+java -jar ~/java/google-java-format-1.1-all-deps.jar
+
+===========================================================================
+
+Development version from GitHub:
+
+# Apparently must build with Java 8, not Java 7
+cd ~/java
+git clone https://github.com/google/google-java-format
+cd ~/java/google-java-format/
+git pull
+mvn install
+
+\cp -pf ~/java/google-java-format/core/target/google-java-format-1.2-SNAPSHOT-all-deps.jar /cse/www2/types/google-java-format-1.2-SNAPSHOT-`date +%Y%m%d`-all-deps.jar
+# Then update hard-coded pathname in ~/bin/src/run-google-java-format/run-google-java-format.py
+
+Run as:
+java -jar ~/java/google-java-format/core/target/google-java-format-1.2-SNAPSHOT-all-deps.jar --replace *.java
+
+Or, for development version if it is building but failing its tests:
+java -cp ~/java/google-java-format/core/target/classes:$HOME/java/google-java-format/./core/target/google-java-format-1.1-SNAPSHOT-all-deps.jar com.google.googlejavaformat.java.Main --replace *.java
+
+===========================================================================
+
+After running it, look for
+
+if \(.*\) [A-Za-z]
+
+
+===========================================================================
+
+https://github.com/diffplug/spotless:
+ * only works with Gradle
+ * works on more than just Java
+ * uses Eclipse formatter
+
+===========================================================================

@@ -1,0 +1,74 @@
+http://www.trilon.com/xv/downloads.html
+
+Get source distribution for xv 3.10a
+
+tar zxvf xv-3.10a.tar.gz
+# Edit config.h, Makefile, and xv.h per the diffs below.
+make
+
+
+--- /g2/users/mernst/xv-3.10a/config.h	Thu Jan  5 13:49:21 1995
++++ -	Mon Aug 12 17:59:04 2002
+@@ -13,13 +13,13 @@
+  * definition appropriately. (use 'which gunzip' to find if you have gunzip, 
+  * and where it lives)
+  */
+-#undef USE_GUNZIP
++#define USE_GUNZIP
+ 
+ #ifdef USE_GUNZIP
+ #  ifdef VMS
+ #    define GUNZIP "UNCOMPRESS"
+ #  else
+-#    define GUNZIP "/usr/local/bin/gunzip -q"
++#    define GUNZIP "/usr/bin/gunzip -q"
+ #  endif
+ #endif
+ 
+@@ -88,9 +88,9 @@
+  * should not need to be changed
+  */
+ 
+-/* #define GS_PATH "/usr/local/bin/gs" */
+-/* #define GS_LIB  "."                 */
+-/* #define GS_DEV  "ppmraw"            */
++#define GS_PATH "/usr/bin/gs"
++#define GS_LIB  "."
++#define GS_DEV  "ppmraw"
+ 
+ 
+ /***************************************************************************
+
+
+cd ~/xv-3.10a/
+diff -u -b -r /g2/users/mernst/xv-3.10a/xv.h.\~1\~ /g2/users/mernst/xv-3.10a/xv.h
+--- /g2/users/mernst/xv-3.10a/xv.h.~1~	Mon Jan 23 15:22:23 1995
++++ /g2/users/mernst/xv-3.10a/xv.h	Mon Aug 12 18:04:40 2002
+@@ -115,9 +115,6 @@
+ #ifndef VMS
+ #  include <errno.h>
+    extern int   errno;             /* SHOULD be in errno.h, but often isn't */
+-#  ifndef __NetBSD__
+-     extern char *sys_errlist[];     /* this too... */
+-#  endif
+ #endif
+ 
+ 
+
+Diff finished at Mon Aug 12 18:04:50
+
+cd ~/xv-3.10a/
+diff -u -b -r /g2/users/mernst/xv-3.10a/Makefile.\~1\~ /g2/users/mernst/xv-3.10a/Makefile
+--- /g2/users/mernst/xv-3.10a/Makefile.~1~	Mon Jan 23 15:20:54 1995
++++ /g2/users/mernst/xv-3.10a/Makefile	Mon Aug 12 18:05:21 2002
+@@ -102,7 +102,7 @@
+ 
+ 
+ ### for LINUX, uncomment the following line
+-#MCHN = -DLINUX
++MCHN = -DLINUX -L/usr/X11R6/lib
+ 
+ 
+ # For SCO 1.1 (UNIX 3.2v2) machines, uncomment the following:
+
+Diff finished at Mon Aug 12 18:05:28

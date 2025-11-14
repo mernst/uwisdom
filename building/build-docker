@@ -1,0 +1,98 @@
+===========================================================================
+
+To install Docker on Ubuntu:
+ * Method 1 (easier, better, per https://stackoverflow.com/questions/45023363/)
+   sudo apt -y install docker.io
+   and log out and back in again
+   (Do I also need to add my username to the group by doing
+     sudo usermod -aG docker $(whoami)
+   before logging out and back in?)
+ * Method 2: https://docs.docker.com/engine/installation/linux/ubuntulinux/
+   It's not optional to do the steps about "Create a Docker group".
+
+DO NOT install the "snap" version of docker.
+To see if it is installed:
+  snap list docker
+To uninstall it (which takes a long time!):
+  snap remove docker
+
+----------------
+
+On my home machine:
+1. Add to /etc/fstab:
+/dev/disk/by-uuid/adede637-85f0-42d0-8b4f-956b5f99876c /scratch ext4 defaults 0 1
+2. Edit (or create) file /etc/docker/daemon.json with:
+{
+"data-root": "/scratch/docker"
+}
+3. reboot
+4. sudo chmod -R og+r /scratch/docker && find /scratch/docker -type d -exec chmod +x {} + && echo "done"
+
+===========================================================================
+
+To install Docker on Windows:
+
+ * install Docker Desktop
+ * open a shell (cmd, PowerShell, etc.) and use docker, such as running:  docker run -it ubuntu /bin/bash
+
+----------------
+
+To install Docker on WSL, Mark says:
+
+[Mark didn't use the above instructions for Windows because he didn't realize that Docker is cross-platform.]
+[These are instructions for "remote containers".  I'm not sure what that is, though.)
+
+The basic setup instructions
+(https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers) are
+pretty good, but they seem to assume that your linux distro was setup to run the
+docker daemon at startup.  Mine wasn’t and I couldn’t find any simple
+instructions to do so.  You can start it manually with:
+
+  sudo dockerd
+
+BUT, this failed for me and it took a long time to figure out why and how to fix.  The answer is here: https://forums.docker.com/t/failing-to-start-dockerd-failed-to-create-nat-chain-docker/78269. In particular, the commands:
+
+  sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+  sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
+After that, starting the docker daemond worked, but it kept some sort of a log application running so I just started a second instance of linux and all it was pretty straightforward from then on.
+
+===========================================================================
+
+To use a Docker ubuntu image:
+docker pull ubuntu
+# I don't need to specify any tag because it's 16.04, as we can see by running
+docker run -i -t ubuntu
+# and then within it running: cat /etc/*release
+# To exit from the container, run: exit
+
+Usually run without, but can optionally refer to a version number (a "tag"):
+docker run -t -i ubuntu /bin/bash
+docker run -t -i ubuntu:14.04 /bin/bash
+docker run -t -i fedora /bin/bash
+docker run -t -i fedora:23 /bin/bash
+
+===========================================================================
+
+To build a new docker image, see ~/wisdom/Programs.adoc
+
+===========================================================================
+
+Docker on Travis:
+https://docs.travis-ci.com/user/docker/
+http://www.gizra.com/content/docker-travis-ci/
+Why is "bundle exec rake test" in both the before_install and the script sections of the .travis.yml file?  (Bundle is a Ruby-specific command.)  Maybe it's to test both under Docker and not.
+
+===========================================================================
+
+"An instance of an image is called a container".
+You can see all your images with docker images whereas you can see your running containers with docker ps (and you can see all containers with docker ps -a).
+
+Images are created with the build command, and they'll produce a container when started with run. Images are stored in a Docker registry such as registry.hub.docker.com.
+
+===========================================================================
+
+To change the Docker installation directory (on home machine I move it to /scratch):
+https://forums.docker.com/t/how-do-i-change-the-docker-image-installation-directory/1169
+
+===========================================================================

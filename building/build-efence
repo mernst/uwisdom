@@ -1,0 +1,29 @@
+Electric Fence (efence) is distributed with (some versions of?) Linux.
+
+ftp://ftp.perens.com/pub/ElectricFence/
+
+Electric Fence is a different kind of malloc() debugger. It uses the virtual
+memory hardware of your system to detect when software overruns the boundaries
+of a malloc() buffer. It will also detect any accesses of memory that has
+been released by free(). Because it uses the VM hardware for detection,
+Electric Fence stops your program on the first instruction that causes
+a bounds violation. It's then trivial to use a debugger to display the
+offending statement.
+
+Just add "-lefence" to the link line.
+
+INSTRUCTIONS FOR DEBUGGING YOUR PROGRAM
+       1.     Link with libefence.a as explained above.
+       2.     Run your program in a debugger and fix any overruns
+              or accesses to free memory.
+       3.     Quit the debugger.
+       4.     Set EF_PROTECT_BELOW = 1 in the shell  environment.
+       5.     Repeat  step  2,  this  time repairing underruns if
+              they occur.
+       6.     Quit the debugger.
+       7.     Read the restrictions in the section on WORD-ALIGN­
+              MENT  AND  OVERRUN  DETECTION.   See if you can set
+              EF_ALIGNMENT to 0 and repeat step 2. Sometimes this
+              will  be  too  much work, or there will be problems
+              with library routines for which you don't have  the
+              source, that will prevent you from doing this.

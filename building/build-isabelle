@@ -1,0 +1,5 @@
+To print the manual:
+
+  pstops -pletter '0(0,-2.25in)' tutorial.ps tutorial-letter.ps
+  psnup -2 tutorial-letter.ps -pletter -Pa4 -s.9 tutorial-4up2.ps
+  pstops -pletter '0(0,-.5in)' tutorial-4up2.ps tutorial-4up2-letter.ps

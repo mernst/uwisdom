@@ -1,0 +1,26 @@
+===========================================================================
+
+https://go.dev/doc/install says:
+
+# Get version number from https://golang.org/dl/
+VER=1.24.3
+cd ~/tmp
+wget https://go.dev/dl/go${VER}.linux-amd64.tar.gz
+
+## Choose one of the following two.
+# Install globally as root
+GOPARENT=/usr/local
+DOSU=sudo
+# Install at CSE without root; also need:  export GOROOT=$HOME/bin/install/go
+GOPARENT=$HOME/bin/install
+DOSU=
+
+$DOSU rm -rf $GOPARENT/go
+$DOSU tar -C $GOPARENT -xzf go$VER.linux-amd64.tar.gz
+go version
+
+# For CSE without root
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../install/go/bin/* .
+
+===========================================================================

@@ -1,0 +1,43 @@
+http://mumm.ibr.cs.tu-bs.de/softech/ddd/
+RPMs:
+  ftp://ftp.redhat.com/pub/rawhide/powertools/
+  ftp://ftp.redhat.com/pub/rawhide/powertools/i386/RedHat/RPMS/
+
+===========================================================================
+
+3.2.1
+
+Install lesstif from www.lesstif.org
+
+./configure
+make
+make -n install
+# as superuser
+make install
+
+===========================================================================
+
+./configure
+make
+make -n install
+make install
+
+The ./configure didn't work for me for ddd-3.1.6; I got
+
+configure: error: The Motif library '-lXm' could not be found.
+                  Please use the configure options '--with-motif-includes=DIR'
+                  and '--with-motif-libraries=DIR' to specify the Xm location.
+                  See the files 'config.log' and 'ddd/config.log'
+                  for further diagnostics.
+configure: error: ./configure failed for ddd
+
+
+Therefore, I downloaded
+ddd-3.1.3-sparc-sun-solaris2.5.1
+from 
+http://mumm.ibr.cs.tu-bs.de/softech/ddd/ftp/bin/sun/
+
+Uncompress, then do
+ddd --check-configuration
+
+===========================================================================

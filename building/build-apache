@@ -1,0 +1,96 @@
+===========================================================================
+
+Commons-IO:
+
+mkdir -p ~/java/apache
+cd ~/java/apache
+wget http://mirrors.koehn.com/apache//commons/io/binaries/commons-io-2.5-bin.tar.gz
+tar zxvf commons-io-2.5-bin.tar.gz
+ln -s commons-io-2.5 commons-io
+
+===========================================================================
+
+Axis (Apache SOAP):
+
+http://ws.apache.org/axis/java/install.html
+
+cd ~/tmp
+wget http://mirrors.isc.org/pub/apache/ws/axis/1_3/axis-src-1_3.tar.gz
+tar xzf axis-src-1_3.tar.gz
+cd ~/tmp/axis-src-1_3
+
+----------------
+
+JAX-RPC API
+
+Java Web Services Developer Pack 2.0, 
+http://java.sun.com/webservices/jwsdp/index.jsp
+
+Java web services:
+http://java.sun.com/webservices/downloads/install-unix.html
+
+sh jwsdp-2_0-unix.sh
+
+----
+
+For standalone Java(TM) applications to work with the Java(TM) Web Services Developer Pack 2.0, the JAXP classes built into JDK 1.5.x must be overridden.  Overriding these classes is not necessary in order to run the Web container or the samples, since the provided scripts set "java.endorsed.dirs".
+
+For JDK 1.5.x users, set the java.endorsed.dirs system property to:
+
+/afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/jaxp/lib:/afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/jaxp/lib/endorsed
+
+Alternatively, create the directory:
+
+  <JAVA_HOME>/jre/lib/endorsed
+
+and then copy the files in the following directories to the newly created directory.
+
+  /afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/jaxp/lib
+  /afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/jaxp/lib/endorsed
+
+Getting started:
+/afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/docs/GettingStarted.html
+
+Template Build File for Web Service Clients
+file:///afs/csail.mit.edu/u/m/mernst/java/jwsdp-2.0/docs/webserviceclient.html
+
+Developing an Amazon Web Services Client
+http://java.sun.com/developer/technicalArticles/WebServices/amazonws/
+
+Accessing a .NET Web Service using Apache/SOAP and Java
+http://gsraj.tripod.com/dotnet/webservices/webservice_java_client.html
+
+http://www.p2pgridbook.com/coresite/WebServices/invoke.html
+
+/afs/csail.mit.edu/u/m/mernst/tmp/axis-1_3/samples/stock/GetQuote.java
+
+http://www-128.ibm.com/developerworks/webservices/library/ws-eight/
+Has partial (not complete!) code.
+
+===========================================================================
+
+		
+import javax.xml.rpc.namespace.QName;
+import org.apache.axis.client.Call;
+import org.apache.axis.client.Service;
+import org.apache.axis.encoding.XMLType;
+import org.apache.axis.utils.Options;
+
+public class EightBallClient1 {
+  public static void main(String [] args)
+    throws Exception {
+    Service service = new Service();
+    Call call = (Call) service.createCall();
+    call.setTargetEndpointAddress(
+      new java.net.URL("http://localhost:8070/axis/services/"));
+    call.setOperationName(new QName("urn:EightBall", "getAnswer"));
+
+	
+try {
+  System.out.println(call.invoke(
+    new Object[] { }));
+} catch (java.rmi.RemoteException re) {
+  System.out.println("Error - " + re);
+}
+
+===========================================================================

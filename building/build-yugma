@@ -1,0 +1,18 @@
+===========================================================================
+
+Installation:
+
+I seem to have to install in ~/Yugma; I was given no other choice, and
+when I moved the installation directory to elsewhere, I got:
+
+sh: ./log/console.log: No such file or directory
+
+Making a symlink to the Yugma executable seems to work, though.
+
+===========================================================================
+
+Use:
+
+Yugma shows irritating animated gifs.  So, look for another tool like dimdim.
+
+===========================================================================

@@ -1,0 +1,149 @@
+I no longer use Unison.  I use Syncthing instead.
+
+Before upgrading, make sure all unison replicas (including Athena) are up
+to date.
+
+Ubuntu:
+sudo apt install unison
+
+Ubuntu 20.04:  follow instructions at
+https://askubuntu.com/questions/231562/what-is-the-difference-between-apt-purge-and-apt-remove:
+sudo apt purge unison
+wget http://ftp.fr.debian.org/debian/pool/main/u/unison/unison_2.48.4-1+b1_amd64.deb
+sudo dpkg -i unison_2.48.4-1+b1_amd64.deb
+wget http://ftp.fr.debian.org/debian/pool/main/u/unison/unison-gtk_2.48.4-1+b1_amd64.deb
+sudo dpkg -i unison-gtk_2.48.4-1+b1_amd64.deb
+sudo apt hold unison unison-gtk
+
+Mac:
+sudo port install unison
+Other, worse options:
+Option 1:
+  brew install unison
+(This requires xcode which (even though it is free!) requires a valid credit card.)
+Option 2: download prebuilt version from http://alan.petitepomme.net/unison/index.html
+but I am having trouble finding the command-line application (the .dmg is in /Users/mernst/Downloads/) and I can't tell whether the graphical app is hung or not because it doesn't give the time remaining (ETA) like the command-line app does; and I want to use the command line anyway.
+
+Unison: http://www.cis.upenn.edu/~bcpierce/unison/download.html
+
+===========================================================================
+
+# Installing unison is no longer necessary at CSE.
+(But version in /usr/bin/unison might be rather old.)
+
+# Install ocaml:  see file build-ocaml
+# If cygwin, install: wget make ctags libcurses-devel
+
+# Get version number from http://www.seas.upenn.edu/~bcpierce/unison/download/releases/stable/
+export PKG=unison-2.48.4
+mkdir -p ~/bin/install
+cd ~/bin/install
+wget http://www.seas.upenn.edu/~bcpierce/unison/download/releases/$PKG/$PKG.tar.gz
+tar xzf $PKG.tar.gz
+# For version 2.48.4 only: mv src $PKG
+cd $PKG
+make UISTYLE=text
+mkdir -p ~/bin/`uname`-`uname -m`
+(cd ~/bin/`uname`-`uname -m` && ln -s ../install/$PKG/unison .)
+
+===========================================================================
+
+    wget http://www.cis.upenn.edu/~bcpierce/unison/download/stable/latest/unison.linux-gtkui
+    sudo mv unison.linux-gtkui /usr/local/bin/unison
+    sudo chmod +x /usr/local/bin/unison
+
+Binaries for 2.27 and 2.28 are available at
+http://alan.petitepomme.net/projets/unison/assets/
+http://cs.haifa.ac.il/~shuly/unison/
+but I don't see binaries for 2.32.
+
+# Linux
+# Pre-compiled binaries for 2.27:
+mkdir -p ~/tmp
+cd ~/tmp
+## For 32-bit:
+wget http://alan.petitepomme.net/projets/unison/assets/unison-2.27.zip
+unzip unison-2.27.zip
+rm -f unison-2.27.zip
+## For 64-bit: (didn't work for me
+wget http://www.cs.haifa.ac.il/%7Eshuly/unison/unison-2.27.47-linux64.text
+mv unison-2.27.47-linux64.text unison-2.27.47
+## end of xx-bit conditional
+chmod +x unison-2.27.[45]7
+# /usr/local/bin is on my path after /usr/bin; I'm not sure why, but use
+# a subdirectory of ~/bin/ instead.
+# setenv UBINDIR /usr/local/bin
+setenv UBINDIR $HOME/bin/`uname`-`uname -m`
+# Use "sudo" if UBINDIR is /usr/local/bin
+mkdir -p $UBINDIR
+mv unison-2.27.[45]7 $UBINDIR
+(cd $UBINDIR; ln -s unison-2.27.[45]7 unison)
+
+
+# Problem: this is still at version 2.13, and I want 2.27
+Debian:
+  sudo apt install unison
+  sudo apt install unison-gtk
+
+Troubleshooting:
+ssh pag.lcs.mit.edu 'echo $PATH'
+
+===========================================================================
+
+For Windows:
+
+Just run
+  unison-2.9.1 -auto cygwin
+
+===========================================================================
+
+General setup, required 
+  cd
+  mkdir -p bin/share
+  mkdir -p bin/src
+  mkdir -p class/6170
+  mkdir -p class/admin
+  mkdir -p dots
+  mkdir -p java
+  mkdir -p prof/grants/2006-03-nsf-cybertrust
+  mkdir -p research
+  mkdir -p research/classify-tests
+  mkdir -p research/fcut
+  mkdir -p research/fcut/test-factoring-paper
+  mkdir -p research/generics/parameterization-paper
+  mkdir -p research/invariants
+  mkdir -p research/invariants/java
+  mkdir -p research/invariants/papers/compare
+  mkdir -p research/invariants/papers/groupthink-paper
+  mkdir -p research/invariants/papers/kvasir-paper
+  mkdir -p research/invariants/papers/predicate-fields
+  mkdir -p research/invariants/papers/repair-gen-paper
+  mkdir -p research/invariants/papers/tool-paper
+  mkdir -p research/javari
+  mkdir -p research/javari/design
+  mkdir -p wisdom
+
+===========================================================================
+
+For SunOS (Athena):
+
+cd ~/tmp
+wget http://www.cis.upenn.edu/~bcpierce/unison/download/releases/unison-2.27.57/unison-2.27.57.tar.gz
+gunzip unison-2.27.57.tar.gz
+tar xf unison-2.27.57.tar.gz
+cd unison-2.27.57
+add ocaml
+make UISTYLE=text
+cp unison ~/bin/SunOS-sun4u/unison-2.27.57
+cd ~/bin/SunOS-sun4u
+rm -rf unison
+ln -s unison-2.27.57 unison
+
+---------------------------------------------------------------------------
+
+# Older version was distributed in binary form
+wget http://www.cis.upenn.edu/~bcpierce/unison/download/stable/unison-2.9.1/unison.solaris-gtkui
+mv unison.solaris-gtkui ~/bin/SunOS-sun4u/unison
+chmod +x ~/bin/SunOS-sun4u/unison
+
+===========================================================================

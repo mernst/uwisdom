@@ -1,0 +1,45 @@
+Maven 3.8.1 is required for JDK 16.
+
+===========================================================================
+
+Maven 3 on Ubuntu:
+(as of 2022-01-18, this is Maven 3.6.3 whereas the newest is 3.8.7)
+(as of 2024-05-15, this is Maven 3.8.7 whereas the newest is 3.9.6)
+
+sudo apt update
+sudo apt install maven
+sudo apt remove maven2
+
+===========================================================================
+
+# Get version number from http://apache.mirrors.pair.com/maven/maven-3/
+VER=3.9.6
+mkdir -p $HOME/bin/install
+cd $HOME/bin/install
+wget http://apache.mirrors.pair.com/maven/maven-3/${VER}/binaries/apache-maven-${VER}-bin.tar.gz
+tar xzf apache-maven-${VER}-bin.tar.gz
+cd $HOME/bin/install
+rm -rf apache-maven
+ln -s apache-maven-${VER} apache-maven
+export PATH=$HOME/bin/install/apache-maven-${VER}/bin:$PATH
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+# The below is required only once.
+ln -s ../install/apache-maven/bin/mvn .
+
+# Alternative to last command:
+# (cd /usr/local/bin && ln -sf $HOME/bin/install/apache-maven-${VER}/bin/* .)
+# hash -r
+
+===========================================================================
+
+In a Dockerfile, use this:
+
+# Maven 3.6.3 (the default on Ubuntu 22.10) does not run under JDK 17.
+# (Don't try to use a variable here for the Maven version.)
+RUN export DEBIAN_FRONTEND=noninteractive \
+&& wget https://dlcdn.apache.org/maven/maven-3/3.9.10/binaries/apache-maven-3.9.10-bin.tar.gz \ \
+&& tar xzvf apache-maven-3.9.10-bin.tar.gz
+ENV PATH="/apache-maven-3.9.10/bin:$PATH"
+
+===========================================================================

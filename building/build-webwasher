@@ -1,0 +1,9 @@
+Version 3.0 for Linux was released on March 8, 2001.
+I haven't tried it yet.
+In the free version, security features (java, javascript, etc.) are disabled.
+
+mkdir ~/tmp/webwasher-install
+cd ~/tmp/webwasher-install
+wget http://www.webwasher.com/download/webwasher-3.0-linux-i386.tar.gz
+tar zxf webwasher-3.0-linux-i386.tar.gz
+sudo webwasher.install

@@ -1,0 +1,11 @@
+www.lesstif.org
+
+Download:
+lesstif-0.91.4-1.i386.rpm
+lesstif-devel-0.91.4-1.i386.rpm 
+
+rpm -i lesstif-0.91.4-1.i386.rpm
+rpm -i lesstif-devel-0.91.4-1.i386.rpm 
+
+# To see where the files live
+rpm -q -i lesstif

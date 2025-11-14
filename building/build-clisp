@@ -1,0 +1,96 @@
+===========================================================================
+
+Ubuntu:
+sudo apt install clisp
+
+Mac:
+sudo port install clisp
+(it hangs a LONG time at "building gettext"; be patient)
+
+===========================================================================
+
+NEED TO INVESTIGATE!
+
+
+http://clisp.cons.org/
+
+# 2.49 is dated 7-Jul-2010, is latest as of April 2013
+pkg=clisp-2.49
+
+cd ~/bin/install
+wget http://ftp.gnu.org/pub/gnu/clisp/release/latest/$pkg.tar.gz
+tar xzf $pkg.tar.gz
+cd $pkg
+
+  ## Build libsigsegv
+  lsspkg=libsigsegv-2.10
+  mkdir tools; cd tools; prefix=`pwd`/i686-pc-linux-gnu
+  wget http://ftp.gnu.org/pub/gnu/libsigsegv/${lsspkg}.tar.gz
+  tar xfz ${lsspkg}.tar.gz
+  cd ${lsspkg}
+  ./configure --prefix=${prefix} && make && make check && make install
+
+  ## Could optionally build libffcall
+
+ulimit -s 16384
+cd ../..
+rm -f build-with-gcc/config.cache
+# Argument to ./configure is directory in which to build.
+./configure --with-libsigsegv-prefix=${prefix} --prefix=$HOME/bin/install/$pkg-install build-with-gcc
+
+cd build-with-gcc
+# Not necessary:  emacsclient config.lisp
+make 
+# Takes a long time
+make check
+
+make install
+
+cd /uns/encap
+chgrp -R uns $pkg
+find $pkg -type d | xargs chmod go+x
+epkg -i $pkg
+
+===========================================================================
+
+UNS version:
+
+http://clisp.cons.org/
+
+# 2.49 is dated 7-Jul-2010, is latest as of April 2013
+pkg=clisp-2.49
+
+cd /uns/src
+wget http://ftp.gnu.org/pub/gnu/clisp/release/latest/$pkg.tar.gz
+tar xzf $pkg.tar.gz
+cd $pkg
+
+  ## Build libsigsegv
+  mkdir tools; cd tools; prefix=`pwd`/i686-pc-linux-gnu
+  wget http://ftp.gnu.org/pub/gnu/libsigsegv/libsigsegv-2.7.tar.gz
+  tar xfz libsigsegv-2.7.tar.gz
+  cd libsigsegv-2.7
+  ./configure --prefix=${prefix} && make && make check && make install
+
+  ## Could optionally build libffcall
+
+ulimit -s 16384
+cd ../..
+rm -f build-with-gcc/config.cache
+# Argument to ./configure is directory in which to build.
+./configure --with-libsigsegv-prefix=${prefix} --prefix=/uns/encap/$pkg build-with-gcc
+
+cd build-with-gcc
+# Not necessary:  emacsclient config.lisp
+make 
+# Takes a long time
+make check
+
+make install
+
+cd /uns/encap
+chgrp -R uns $pkg
+find $pkg -type d | xargs chmod go+x
+epkg -i $pkg
+
+===========================================================================

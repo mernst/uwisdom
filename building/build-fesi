@@ -1,0 +1,13 @@
+FESI EcmaScript interpreter
+http://home.worldcom.ch/jmlugrin/fesi/download.html
+
+FESI is only intended to be used on Windows, apparently.  For instance,
+capitalization of some filenames is off.
+
+
+cd ~/java
+jar -xf fesikit.zip
+chmod +rwx `find fesi -type d`
+jar -xf fesisrc.zip
+ln -s fesi/src/FESI .
+mv fesi/src/FESI/Ast fesi/src/FESI/AST

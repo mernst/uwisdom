@@ -1,0 +1,41 @@
+===========================================================================
+
+jsbeautifier:
+This looks like the best bet, if I want to bother.
+http://jsbeautifier.org/
+
+===========================================================================
+
+I don't like the output of tidy.  For example, it removes all blank lines from the file.
+
+VER=5.8.0
+cd ~/bin/install
+wget https://github.com/htacg/tidy-html5/archive/${VER}.tar.gz
+tar xzf ${VER}.tar.gz
+cd tidy-html5-${VER}
+cd build/cmake/
+cmake ../.. -DCMAKE_INSTALL_PREFIX=$HOME/bin/install/tidy-html5-${VER}-install
+make
+make install
+cd ~/bin/`uname`-`uname -m`
+ln -s $HOME/bin/install/tidy-html5-${VER}-install/bin/tidy .
+
+# Flags
+#   -q   suppress noise output.
+#   -i   indent nested tags
+#   -e   just show errors and warnings.
+#   -m   modify in place
+
+===========================================================================
+
+https://www.freeformatter.com/ is better than tidy, but I don't see a download for it.
+
+===========================================================================
+
+## This is pointless because it's just a port of http://jsbeautifier.org/:
+cd ~/bin/install
+npm install html
+Run with:
+$HOME/bin/install/node_modules/.bin/html
+
+===========================================================================

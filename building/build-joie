@@ -1,0 +1,43 @@
+rm joie		# delete the symbolic link
+jar xf joie0.10a.jar
+chmod -R -w joie
+mv joie joie-dist-0.10a-DATE
+jar xf joie0.10a.jar
+mv joie joie-0.10a
+ln -s joie-0.10a joie
+cd joie
+mv examples examples-dist
+ln -s ../joie-examples-0.10a examples
+# Possibly copy any new examples code from examples-dist/ to examples/.
+
+# Compile everything:
+javac -g *.java
+# Now possibly compile some files from the examples directory
+
+# Make TAGS table:
+etags `find -follow -name "*.java" | grep -v examples-dist`
+
+
+# A simple JOIE test:
+foreach cf (*.class)
+  echo "jdis $cf:r"
+  jdis $cf:r
+  echo "finished: jdis $cf:r"
+end
+
+Problem with "make GetURL.trace":  we never see output of the form
+"Exiting procedure GetURL.main"
+
+===========================================================================
+
+To transform a JOIE program and write it out:
+  java joie.examples.WriteFile Hello Hello2
+To run the tracer:
+  java joie.examples.Tracer Hello
+
+I don't seem to need the -verify flag to java; is it done automatically
+whenever there is a ClassLoader?
+
+Get parameter names by using the localvariable table -- the first local
+variables are the parameters.
+

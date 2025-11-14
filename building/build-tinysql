@@ -1,0 +1,2 @@
+cd ~/tmp
+wget http://downloads.sourceforge.net/project/tinysql/tinySQL2.26/V2.26/tinySQL-2.26.jar

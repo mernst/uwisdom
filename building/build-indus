@@ -1,0 +1,232 @@
+Indus program slicer
+http://indus.projects.cis.ksu.edu/
+"Java Program Slicer module" of Indus
+
+Convenient download links:
+http://projects.cis.ksu.edu/projects/indus/
+
+I downloaded everything I could to ~/bin/share/indus/, namely
+    Kaveri-0.6.0B.pdf
+    docs-0.7.2.zip
+    edu.ksu.cis.indus.kaveri-0.7.2.zip
+    edu.ksu.cis.indus_0.7.2.1.zip
+    examples-0.7.2.zip
+    indus-0.7.2.jar
+    indus-ug.pdf
+    jibx-run.jar
+    slicer-0.7.2.1.jar
+    slicer-ug.pdf
+    staticanalyses-0.7.2.1.jar
+    staticanalyses-ug.pdf
+
+The jar files only contain .class files.
+docs-0.7.2.zip is Javadocs.
+
+The license suggests this is provided in binary rather than source form.
+The license says, "YOU AGREE NOT TO USE, COPY, MODIFY OR TRANSFER THE
+Program OR Documentation OR ANY COPY, IN WHOLE OR IN PART."
+
+Kaveri is the Eclipse plug-in
+
+===========================================================================
+
+This section about external jars is a waste, because file
+edu.ksu.cis.indus_0.7.2.1.zip seems to contain all the required jar files!
+
+# Go to http://indus.projects.cis.ksu.edu/overview/used.shtml and download
+# the projects noted there.
+# 
+# cd ~/java
+# wget http://www.ibiblio.org/pub/mirrors/apache/jakarta/commons/cli/binaries/cli-1.0.tar.gz
+# tar zxf cli-1.0.tar.gz
+# 
+# cd ~/java
+# wget http://apache.cs.utah.edu/jakarta/commons/collections/binaries/commons-collections-3.1.tar.gz
+# tar zxf commons-collections-3.1.tar.gz
+# 
+# cd ~/java
+# wget http://apache.cs.utah.edu/jakarta/commons/io/binaries/commons-io-1.1.tar.gz
+# tar zxf commons-io-1.1.tar.gz
+# 
+# cd ~/java
+# wget http://apache.forbigweb.com/jakarta/commons/lang/binaries/commons-lang-2.1.tar.gz
+# tar zxf commons-lang-2.1.tar.gz
+# 
+# cd ~/java
+# wget http://apache.tradebit.com/pub/jakarta/commons/logging/binaries/commons-logging-1.0.4.tar.gz
+# tar zxf commons-logging-1.0.4.tar.gz
+# 
+# cd ~/java
+# wget http://apache.mirror99.com/jakarta/commons/pool/binaries/commons-pool-1.2.tar.gz
+# tar zxf commons-pool-1.2.tar.gz
+# 
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-cli-1.0/commons-cli-1.0.jar
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-collections-3.1/commons-collections-3.1.jar
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-io-1.1/commons-io-1.1.jar
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-lang-2.1/commons-lang-2.1.jar
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-logging-1.0.4/commons-logging-1.0.4.jar
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/commons-pool-1.2/commons-pool-1.2.jar
+# 
+# ----------------
+# 
+# cd ~/java
+# wget http://slf4j.org/dist/slf4j-1.0-rc5.tar.gz
+# tar zxf slf4j-1.0-rc5.tar.gz
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/slf4j-1.0-rc5/slf4j-jdk14.jar
+# 
+# cd ~/java
+# wget http://www.sable.mcgill.ca/software/sootall-2.2.2.tar.gz
+# tar zxf sootall-2.2.2.tar.gz
+# setenv CLASSPATH ${CLASSPATH}:${HOME}/java/soot-2.2.2/classes:${HOME}/java/jasmin-2.2.2/classes:${HOME}/java/polyglot-1.3.2/classes
+# 
+# 
+# # In Soot 2.2.0 and 2.2.2, soot.Printer contains method
+# # writeXXXDeprecated(SootClass,String) with comment "Use
+# # soot.util.JasminOutputStream instead."  The code in examples-0.7.2.zip
+# # (which the website claims is dated 2005-11-13) uses
+# # write(SootClass,String) and thus requires Soot 2.1.0, dated December
+# # 2003.  I could alternately try to adjust the examples code.
+# 
+# cd ~/java
+# wget http://www.sable.mcgill.ca/software/sootall-2.2.0.tar.gz
+# tar zxf sootall-2.2.0.tar.gz
+# 
+# cd ~/java
+# wget http://www.sable.mcgill.ca/software/soot-2.1.0.tar.gz
+# 
+# ----------------
+# 
+# # Trove: http://internap.dl.sourceforge.net/sourceforge/trove4j/trove-1.1b5.tar.gz
+
+===========================================================================
+
+mkdir -p ~/tmp/indus
+cd ~/tmp/indus
+
+unzip ~/bin/src/indus/edu.ksu.cis.indus_0.7.2.1.zip
+
+setenv CLASSPATH ${CLASSPATH}:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-cli-1.0.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-collections-3.1.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-io-1.0.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-lang-2.0.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-logging.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/commons-pool-1.2.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/indus.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/jasminclasses-sable-1.2.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/jibx-run.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/log4j-1.2.11.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/log4jconfig.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/polyglot-1.1.0.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/slf4j.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/slicer.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/soot-2.1.0-modified.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/staticanalyses.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/trove.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/xmlenc-0.47.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/xmlenc-0.50.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/xmlunit1.0.jar:\
+${HOME}/tmp/indus/plugins/edu.ksu.cis.indus_0.7.2.1/lib/xpp3.jar
+
+mkdir ~/java/swt
+cd ~/java/swt
+wget ftp://ftp.cse.buffalo.edu/pub/Eclipse/eclipse/downloads/drops/R-3.1-200506271435/swt-3.1-gtk-linux-x86.zip
+unzip swt-3.1-gtk-linux-x86.zip
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${HOME}/java/swt
+setenv CLASSPATH ${CLASSPATH}:${HOME}/java/swt/swt.jar
+
+unzip ~/bin/src/indus/examples-0.7.2.zip
+# 2 Files in this zip file:
+#  ~/tmp/indus/JavaSlicer/src-xml/edu/ksu/cis/indus/tools/slicer/SliceXMLizerCLI.java  
+#  ~/tmp/indus/JavaSlicer/src/edu/ksu/cis/indus/tools/slicer/criteria/sliceCriteria.xsd
+
+cd ~/tmp/indus/JavaSlicer/src-xml
+javac edu/ksu/cis/indus/tools/slicer/SliceXMLizerCLI.java
+java edu.ksu.cis.indus.tools.slicer.SliceXMLizerCLI -h
+
+# With the " -s
+# ../src/edu/ksu/cis/indus/tools/slicer/criteria/sliceCriteria.xsd" switch,
+# just makes a XML file.
+
+# I need to figure out the format of the [slicing] "criteria specification
+# file".
+# The SlicingCriterionFactory (?name) class may be the thing to check.
+
+# I may want to read from the mailing list, since no good documentation
+# seems to exist.
+
+===========================================================================
+
+From: Venkatesh Prasad Ranganath <rvprasad@ksu.edu>
+To: Michael Ernst <mernst@csail.mit.edu>
+Cc: indus-developers@lists.projects.cis.ksu.edu
+Subject: Re: [Indus-developers] How can I use the Indus slicer
+	programmatically?
+Date: Fri, 26 May 2006 15:08:06 -0500
+
+Hi Mike,
+
+First off, Indus does not (yet) directly operate on Java programs.  So,
+you will need to compile your program into bytecodes and then into
+Jimple (as supported by Soot 2.1.0).
+
+The Jimple representation of your program is given below.
+
+IndusSlicerTest
+
+  <IndusSlicerTest: void main(java.lang.String[])>:
+      > r0 : java.lang.String[]
+      > $r1 : java.util.Random
+      > i0 : int
+      > i1 : int
+      > $i2 : int
+      > $i3 : int
+      > i4 : int
+      0: r0 := @parameter0: java.lang.String[]
+      1: $r1 = new java.util.Random
+      2: specialinvoke $r1.<java.util.Random: void <init>()>()
+      3: $i2 = virtualinvoke $r1.<java.util.Random: int nextInt()>()
+      4: $i3 = 1 + $i2
+      5: i0 = $i3
+      6: i1 = $i3
+      7: if i1 != 2 goto i0 = 20
+      8: i1 = 10
+      9: goto [?= i4 = i1 + i0]
+      10: i0 = 20
+      11: i4 = i1 + i0
+      12: return
+    Traps: 
+
+Given the above Jimple representation, to programmatically generate a
+slice
+ - use SliceCriteriaFactory to create criteria based on either a Value
+object (denotes an expression), a Stmt object, or a SootMethod object of
+interest, 
+ - initialize the slicer as done in SliceXMLizerCLI, and
+ - execute the slicer with the above criteria (via addCriteria()
+method).
+Examples.zip contains illustrative examples of how to programmatically
+use various analysis (including the slicer) in Indus.
+
+As for command line, please use SliceXMLizerCLI class provided in
+examples.zip (and bundled in slicer.jar).  This CLI provides numerous
+options to configure and execute the slicer from the command line.  One
+such option is to provide the slice criteria in a serialized form as an
+XML document.  Please refer to sliceCriteria.xsd and criteria.xml
+(available in slicer.jar) for detailed information about the
+syntax/semantics of the criteria XML document.
+
+I hope that helps; if not, please post your
+questions/concerns/suggestions on the mailing list or on the public
+forums (preferable).
+
+Thanks for your interest in Indus!
+
+-- 
+
+Venkatesh Prasad Ranganath,
+Dept. Computing and Information Science,
+Kansas State University, US.
+web: http://www.cis.ksu.edu/~rvprasad
+
+===========================================================================

@@ -1,0 +1,33 @@
+Project homepage: http://commons.apache.org/proper/commons-bcel/
+
+cd ~/java
+svn checkout http://svn.apache.org/repos/asf/commons/proper/bcel/trunk bcel-svn
+cd bcel-svn
+mvn verify
+mvn javadoc:javadoc
+
+etags `find src/main/java -name '*.java'`
+
+The jar file is at: ./target/commons-bcel6-6.0-SNAPSHOT.jar
+
+
+Alternately:
+wget http://apache.tradebit.com/pub/commons/bcel/source/bcel-5.2-src.tar.gz
+tar xzf bcel-5.2-src.tar.gz
+
+
+===========================================================================
+
+To update plume-lib's version of BCEL:
+
+  # The typetools version of commons-bcel can only be compiled using Java 7.
+
+  cd $t/libraries/commons-bcel
+  (cd ~/java; \rm -f jdk; ln -s jdk7 jdk)
+  mvn verify
+  (cd ~/java; \rm -f jdk; ln -s jdk8 jdk)
+  \cp -pf ./target/commons-bcel6-6.0-SNAPSHOT.jar $pl/java/lib/bcel.jar
+  cd $pl
+  make
+
+===========================================================================

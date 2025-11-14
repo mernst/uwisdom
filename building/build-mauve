@@ -1,0 +1,180 @@
+Mauve: http://sourceware.cygnus.com/mauve/
+
+# I had trouble with the 6/12/99 snapshot, so I reverted back to the
+# 4/28/99 snapshot.  I am not certain much progress is happening on
+# this project, even as of 9/99.
+
+# In choices file:  replace each -n with nothing, and put it all on one line
+./configure
+make check KEYS="JDK1.0 JDK1.1 JDK1.2"
+make check KEYS="JDK1.2"
+make check KEYS="JDK1.2 \!java.lang.Character.unicode" JAVAC="javac"
+# With both JDK 1.1 and JDK 1.2, I got a few compilation errors.
+# Look into this more later, perhaps.
+
+# Should I use this?
+setenv CLASSPATH ~/java/mauve:$CLASSPATH
+
+
+
+# For debugging, add:   TESTFLAGS="-verbose -debug"
+
+# Running just one test:
+echo gnu.testlet.java.lang.Math.max | \
+  java gnu.testlet.SimpleTestHarness -verbose -debug
+
+For Daikon, I added this rule; but it's better to just call directly
+rather than via "make daikon".
+daikon: 
+	$(MAKE) check KEYS="JDK1.2 \!java.lang.Character.unicode" JAVA="java Xform -x DaikonTransformer"
+
+===========================================================================
+
+When I do make check KEYS="JDK1.2 \!java.lang.Character.unicode", I get 43
+errors:
+
+
+FAIL: gnu.testlet.java.beans.DescriptorTest (number 1)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 2)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 3)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 4)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 6)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 11)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 12)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 14)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 15)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 16)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 17)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 18)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 21)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 23)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 24)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 26)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 27)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 29)
+FAIL: gnu.testlet.java.beans.IntrospectorTest (number 30)
+FAIL: gnu.testlet.java.lang.Character.classify12 (number 1)
+FAIL: gnu.testlet.java.lang.Character.getType (number 27)
+FAIL: gnu.testlet.java.lang.Character.getType12 (number 1)
+FAIL: gnu.testlet.java.lang.Double.new_Double (number 1)
+FAIL: gnu.testlet.java.lang.Integer.new_Integer: decode (number 6)
+FAIL: gnu.testlet.java.lang.Integer.new_Integer: decode exceptions (number 3)
+FAIL: gnu.testlet.java.lang.Integer.new_Integer: decode exceptions (number 8)
+FAIL: gnu.testlet.java.text.AttributedString.Test: Attribute key count (number 1)
+FAIL: gnu.testlet.java.text.AttributedString.Test: getRunLimit (number 1)
+FAIL: gnu.testlet.java.text.Collator.GetSet: default decomposition (number 1)
+Hello!
+Hello!
+FAIL: gnu.testlet.java.text.DateFormatSymbols.Test: patterns (number 2)
+FAIL: gnu.testlet.java.text.DecimalFormat.format: pattern #.# (number 2)
+FAIL: gnu.testlet.java.text.DecimalFormat.parse: pattern 0.0000E# (number 1)
+FAIL: gnu.testlet.java.text.DecimalFormat.parse: pattern 0.0000E# (number 2)
+FAIL: gnu.testlet.java.text.DecimalFormat.parse: uncaught exception at "pattern 0.0000E#" number 3
+FAIL: gnu.testlet.java.text.DecimalFormat.topattern (number 1)
+FAIL: gnu.testlet.java.text.DecimalFormat.topattern (number 2)
+FAIL: gnu.testlet.java.text.DecimalFormat.topattern (number 3)
+FAIL: gnu.testlet.java.text.DecimalFormat.topattern (number 5)
+FAIL: gnu.testlet.java.text.MessageFormat.parse: no variables (number 2)
+FAIL: gnu.testlet.java.text.MessageFormat.parse: one variable (number 1)
+FAIL: gnu.testlet.java.text.MessageFormat.parse: number format (number 1)
+foo bar1
+FAIL: gnu.testlet.java.text.SimpleDateFormat.getAndSet2DigitYearStart: get2DigitYearStart() initial (number 1)
+FAIL: gnu.testlet.java.util.ResourceBundle.getBundle: book sample (number 5)
+43 of 1219 tests failed
+
+
+===========================================================================
+
+1999-04-28 snapshot:
+
+There is no choices file, though there was one in the 1999-03-03 snapshot:
+  rhodes 216% make check
+  Makefile:298: choices: No such file or directory
+
+When I tried to compile the distribution with jikes, I got a number of
+warnings and 3 errors:
+
+  rhodes 220% make check KEYS="JDK1.2"
+  ok=no; \
+  if test -f .save-keys && test -f choices && test "`cat .save-keys`" = "JDK1.2"; then \
+    ok=yes; \
+  fi; \
+  here=`/bin/pwd`; \
+  if test "$ok" = no; then \
+    echo "JDK1.2" > .save-keys; \
+    cd . && /bin/sh choose $here JDK1.2; \
+  fi
+  ok=no; \
+  if test -f .save-keys && test -f choices && test "`cat .save-keys`" = "JDK1.2"; then \
+    ok=yes; \
+  fi; \
+  here=`/bin/pwd`; \
+  if test "$ok" = no; then \
+    echo "JDK1.2" > .save-keys; \
+    cd . && /bin/sh choose $here JDK1.2; \
+  fi
+  here=`/bin/pwd`; cd .; \
+    CLASSPATH=$here:`/bin/pwd` jikes +D -g -g -d $here \
+      gnu/testlet/SimpleTestHarness.java gnu/testlet/TestHarness.java gnu/testlet/Testlet.java gnu/testlet/ResourceNotFoundException.java gnu/testlet/java/beans/DescriptorTest.java gnu/testlet/java/beans/IntrospectorTest.java gnu/testlet/java/io/BufferedByteOutputStream/Test.java gnu/testlet/java/io/BufferedCharWriter/Test.java gnu/testlet/java/io/BufferedInputStream/MarkReset.java gnu/testlet/java/io/BufferedInputStream/ProtectedVars.java gnu/testlet/java/io/BufferedInputStream/SimpleRead.java gnu/testlet/java/io/BufferedReader/MarkReset.java gnu/testlet/java/io/BufferedReader/SimpleRead.java gnu/testlet/java/io/ByteArrayInputStream/MarkReset.java gnu/testlet/java/io/ByteArrayInputStream/ProtectedVars.java gnu/testlet/java/io/ByteArrayInputStream/SimpleRead.java gnu/testlet/java/io/CharArrayReader/MarkReset.java gnu/testlet/java/io/CharArrayReader/ProtectedVars.java gnu/testlet/java/io/CharArrayReader/SimpleRead.java gnu/testlet/java/io/DataInputOutput/ReadReference.java gnu/testlet/java/io/DataInputOutput/WriteRead.java gnu/testlet/java/io/DataInputStream/readLine.java gnu/testlet/java/io/LineNumberInputStream/Test.java gnu/testlet/java/io/LineNumberReader/Test.java gnu/testlet/java/io/PipedReaderWriter/Test.java gnu/testlet/java/io/PipedStream/Test.java gnu/testlet/java/io/PushbackInputStream/BufferOverflow.java gnu/testlet/java/io/PushbackInputStream/ProtectedVars.java gnu/testlet/java/io/PushbackInputStream/Unread.java gnu/testlet/java/io/PushbackReader/BufferOverflow.java gnu/testlet/java/io/PushbackReader/Unread.java gnu/testlet/java/io/SequenceInputStream/Test.java gnu/testlet/java/io/StringBufferInputStream/MarkReset.java gnu/testlet/java/io/StringBufferInputStream/ProtectedVars.java gnu/testlet/java/io/StringBufferInputStream/SimpleRead.java gnu/testlet/java/io/StringWriter/Test.java gnu/testlet/java/io/Utf8Encoding/ReadReference.java gnu/testlet/java/io/Utf8Encoding/WriteRead.java gnu/testlet/java/lang/Boolean/equals_Boolean.java gnu/testlet/java/lang/Boolean/get.java gnu/testlet/java/lang/Boolean/hashcode_Boolean.java gnu/testlet/java/lang/Boolean/new_Boolean.java gnu/testlet/java/lang/Boolean/value.java gnu/testlet/java/lang/Byte/new_Byte.java gnu/testlet/java/lang/Character/classify.java gnu/testlet/java/lang/Character/classify12.java gnu/testlet/java/lang/Character/consts.java gnu/testlet/java/lang/Character/digit.java gnu/testlet/java/lang/Character/equals_Character.java gnu/testlet/java/lang/Character/forDigit.java gnu/testlet/java/lang/Character/getNumericValue.java gnu/testlet/java/lang/Character/getType.java gnu/testlet/java/lang/Character/getType12.java gnu/testlet/java/lang/Character/hash.java gnu/testlet/java/lang/Character/to.java gnu/testlet/java/lang/Character/unicode.java gnu/testlet/java/lang/Double/new_Double.java gnu/testlet/java/lang/Float/new_Float.java gnu/testlet/java/lang/Integer/getInteger.java gnu/testlet/java/lang/Integer/new_Integer.java gnu/testlet/java/lang/Long/getLong.java gnu/testlet/java/lang/Long/new_Long.java gnu/testlet/java/lang/Math/cos.java gnu/testlet/java/lang/Math/max.java gnu/testlet/java/lang/Math/min.java gnu/testlet/java/lang/Math/rint.java gnu/testlet/java/lang/Short/hash.java gnu/testlet/java/lang/String/charAt.java gnu/testlet/java/lang/String/compareTo.java gnu/testlet/java/lang/String/decode.java gnu/testlet/java/lang/String/getBytes.java gnu/testlet/java/lang/String/hash.java gnu/testlet/java/lang/String/indexOf.java gnu/testlet/java/lang/String/new_String.java gnu/testlet/java/lang/String/startsWith.java gnu/testlet/java/lang/String/substring.java gnu/testlet/java/lang/String/to.java gnu/testlet/java/lang/StringBuffer/plus.java gnu/testlet/java/lang/System/arraycopy.java gnu/testlet/java/lang/reflect/Modifier/toString.java gnu/testlet/java/sql/Array/ArrayTest.java gnu/testlet/java/sql/Blob/BlobTest.java gnu/testlet/java/sql/Clob/ClobTest.java gnu/testlet/java/sql/Types/TestJdbc10.java gnu/testlet/java/sql/Types/TestJdbc20.java gnu/testlet/java/text/ACIAttribute/Test.java gnu/testlet/java/text/Annotation/Test.java gnu/testlet/java/text/AttributedCharacterIterator/implement.java gnu/testlet/java/text/AttributedString/Test.java gnu/testlet/java/text/BreakIterator/chariter.java gnu/testlet/java/text/BreakIterator/lineiter.java gnu/testlet/java/text/BreakIterator/sentiter.java gnu/testlet/java/text/BreakIterator/worditer.java gnu/testlet/java/text/CharacterIterator/implement.java gnu/testlet/java/text/ChoiceFormat/format.java gnu/testlet/java/text/ChoiceFormat/next.java gnu/testlet/java/text/ChoiceFormat/parse.java gnu/testlet/java/text/Collator/Constants.java gnu/testlet/java/text/Collator/GetSet.java gnu/testlet/java/text/DateFormat/Test.java gnu/testlet/java/text/DateFormatSymbols/Test.java gnu/testlet/java/text/DecimalFormat/format.java gnu/testlet/java/text/DecimalFormat/parse.java gnu/testlet/java/text/DecimalFormat/position.java gnu/testlet/java/text/DecimalFormat/topattern.java gnu/testlet/java/text/DecimalFormatSymbols/DumpDefault11.java gnu/testlet/java/text/DecimalFormatSymbols/DumpDefault12.java gnu/testlet/java/text/DecimalFormatSymbols/GetSet11.java gnu/testlet/java/text/DecimalFormatSymbols/GetSet12.java gnu/testlet/java/text/FieldPosition/Test.java gnu/testlet/java/text/MessageFormat/format.java gnu/testlet/java/text/MessageFormat/parse.java gnu/testlet/java/text/ParseException/Test.java gnu/testlet/java/text/ParsePosition/Test.java gnu/testlet/java/text/RuleBasedCollator/VeryBasic.java gnu/testlet/java/text/SimpleDateFormat/Test.java gnu/testlet/java/text/SimpleDateFormat/getAndSet2DigitYearStart.java gnu/testlet/java/text/StringCharacterIterator/constructor.java gnu/testlet/java/text/StringCharacterIterator/iter.java gnu/testlet/java/util/BitSet/jdk10.java gnu/testlet/java/util/Hashtable/basic.java gnu/testlet/java/util/Random/basic.java gnu/testlet/java/util/ResourceBundle/getBundle.java gnu/testlet/java/io/DataInputOutput/ReadStream.java gnu/testlet/java/io/PipedReaderWriter/PipedTestWriter.java gnu/testlet/java/io/PipedStream/PipedStreamTestWriter.java gnu/testlet/java/lang/Character/CharInfo.java gnu/testlet/java/util/ResourceBundle/Resource1.java gnu/testlet/java/util/ResourceBundle/Resource10_en.java gnu/testlet/java/util/ResourceBundle/Resource2_en.java gnu/testlet/java/util/ResourceBundle/Resource3_bo.java gnu/testlet/java/util/ResourceBundle/Resource4.java gnu/testlet/java/util/ResourceBundle/Resource4_en.java gnu/testlet/java/util/ResourceBundle/Resource4_en_CA.java gnu/testlet/java/util/ResourceBundle/Resource4_jp.java gnu/testlet/java/util/ResourceBundle/Resource4_jp_JA.java gnu/testlet/java/util/ResourceBundle/Resource4_jp_JA_WIN.java gnu/testlet/java/util/ResourceBundle/Resource4_jp_JA_WIN_95.java gnu/testlet/java/util/ResourceBundle/Resource5.java gnu/testlet/java/util/ResourceBundle/Resource5_en.java gnu/testlet/java/util/ResourceBundle/Resource5_en_CA.java gnu/testlet/java/util/ResourceBundle/Resource5_jp.java gnu/testlet/java/util/ResourceBundle/Resource5_jp_JA.java gnu/testlet/java/util/ResourceBundle/Resource5_jp_JA_WIN.java gnu/testlet/java/util/ResourceBundle/Resource6.java gnu/testlet/java/util/ResourceBundle/Resource6_en.java gnu/testlet/java/util/ResourceBundle/Resource6_en_CA.java gnu/testlet/java/util/ResourceBundle/Resource6_jp.java gnu/testlet/java/util/ResourceBundle/Resource6_jp_JA.java gnu/testlet/java/util/ResourceBundle/Resource7.java gnu/testlet/java/util/ResourceBundle/Resource7_en.java gnu/testlet/java/util/ResourceBundle/Resource7_en_CA.java gnu/testlet/java/util/ResourceBundle/Resource7_jp.java gnu/testlet/java/util/ResourceBundle/Resource8.java gnu/testlet/java/util/ResourceBundle/Resource8_en.java gnu/testlet/java/util/ResourceBundle/Resource8_en_CA.java gnu/testlet/java/util/ResourceBundle/Resource9_en.java gnu/testlet/java/util/ResourceBundle/Resource9_en_CA.java
+  gnu/testlet/java/io/DataInputStream/readLine.java:42:24:42:27:
+      Error: A byte value must be an integer value (note that a character literal is not an integer value) in the range -128..127
+  gnu/testlet/java/io/DataInputStream/readLine.java:50:24:50:27:
+      Error: A byte value must be an integer value (note that a character literal is not an integer value) in the range -128..127
+  gnu/testlet/java/io/DataInputStream/readLine.java:58:24:58:27:
+      Error: A byte value must be an integer value (note that a character literal is not an integer value) in the range -128..127
+  gnu/testlet/java/io/DataInputStream/readLine.java:58:30:58:33:
+      Error: A byte value must be an integer value (note that a character literal is not an integer value) in the range -128..127
+  gnu/testlet/java/text/ChoiceFormat/format.java:35:16:35:28:
+      Warning: The name of this method "format" matches the name of the containing class. However, the method is not a constructor since it contains a return type
+  gnu/testlet/java/text/MessageFormat/format.java:35:17:35:29:
+      Warning: The name of this method "format" matches the name of the containing class. However, the method is not a constructor since it contains a return type
+  gnu/testlet/java/text/DecimalFormat/parse.java:51:10:51:21:
+      Warning: The name of this method "parse" matches the name of the containing class. However, the method is not a constructor since it contains a return type
+  make: *** [classes.stamp] Error 1
+  12.68u 12.87s 0:58.15 43.9%
+
+Even compiling with javac gave some errors:
+  gnu/testlet/java/io/DataInputStream/readLine.java:42: Incompatible type for array. Explicit cast needed to convert char to byte.
+	  byte[] ib1 = { '\n' };
+		       ^
+  gnu/testlet/java/io/DataInputStream/readLine.java:50: Incompatible type for array. Explicit cast needed to convert char to byte.
+	  byte[] ib2 = { '\r' };
+		       ^
+  gnu/testlet/java/io/DataInputStream/readLine.java:58: Incompatible type for array. Explicit cast needed to convert char to byte.
+	  byte[] ib3 = { '\r', '\n' };
+		       ^
+
+Here is a patch to correct the 3 errors:
+
+--- /homes/fish/mernst/java/mauve-snapshot-1999-04-28/gnu/testlet/java/io/DataInputStream/readLine.java	Mon Apr 12 11:37:00 1999
++++ -	Wed Apr 28 19:05:12 1999
+@@ -39,7 +39,7 @@
+ 	    harness.fail ("unexpected exception " + ex);
+ 	}
+ 
+-	byte[] ib1 = { '\n' };
++	byte[] ib1 = { (byte)'\n' };
+ 	din = new DataInputStream (new ByteArrayInputStream (ib1));
+ 	try {
+ 	    harness.check (din.readLine(), "");
+@@ -47,7 +47,7 @@
+ 	    harness.fail ("unexpected exception " + ex);
+ 	}
+ 
+-	byte[] ib2 = { '\r' };
++	byte[] ib2 = { (byte)'\r' };
+ 	din = new DataInputStream (new ByteArrayInputStream (ib2));
+ 	try {
+ 	    harness.check (din.readLine(), "");
+@@ -55,7 +55,7 @@
+ 	    harness.fail ("unexpected exception " + ex);
+ 	}
+ 
+-	byte[] ib3 = { '\r', '\n' };
++	byte[] ib3 = { (byte)'\r', (byte)'\n' };
+ 	din = new DataInputStream (new ByteArrayInputStream (ib3));
+ 	try {
+ 	    harness.check (din.readLine(), "");
+
+
+===========================================================================

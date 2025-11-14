@@ -1,0 +1,97 @@
+===========================================================================
+
+codecov.io is actually a cloud service, but this file has instructions.
+
+===========================================================================
+
+cd $d
+export USER_JAVA_FLAGS=-javaagent:${HOME}/java/jacoco/lib/jacocoagent.jar='excludes=plume.OrderedPairIterator'
+make test
+
+===========================================================================
+
+
+Code coverage for pull requests:
+Two good solutions:
+
+codecov.io:
+  https://codecov.io/
+    "Pull Request Comments: featuring Coverage Diffs®"
+    "Coverage Compare: git diff with coverage overlay"
+  https://codecov.io/docs
+  Java Example: https://github.com/codecov/example-java
+  There are browser extensions: see bottom of
+    https://github.com/codecov/browser-extension/blob/master/readme.md
+  http://vorba.ch/2015/java-gradle-travis-jacoco-codecov.html
+
+Diff-cover is it!
+https://github.com/Bachmann1234/diff-cover
+"To check the coverage of your pull request, just go to the top level of the edx-platform codebase and run:"
+
+Here are poor solutions.
+Most tools give total code coverage, not for lines in the PR.
+  Coveralls seems to give total code coverage, not for lines in the PR.
+    https://coveralls.io/features
+    Same for most other services.
+  Shippable: like Coveralls?
+    https://github.com/Shippable/support/issues/239
+  Shamer: global, not per-PR; has a leaderboard
+  Code Climate -- not for Java?
+
+===========================================================================
+
+For a new person to take advantage of a project that already has Codecov integration:
+
+Sign up for Codecov (this is necessary once on each computer+browser
+combination you use):
+https://codecov.io/login/github
+
+Install a browser extension: see the bottom of
+    https://github.com/codecov/browser-extension/blob/master/readme.md
+
+Browse to a URL such as
+https://github.com/randoop/randoop/blob/master/src/main/java/randoop/JavaFileWriter.java
+and you should see the covered lines in green and the uncovered lines in red.
+
+===========================================================================
+
+Sign up for Codecov:
+https://codecov.io/login/github
+
+The rest of this is for Maven integration.
+For Gradle integration instead:
+http://vorba.ch/2015/java-gradle-travis-jacoco-codecov.html
+
+Fork
+https://github.com/codecov/example-java
+to create
+https://github.com/mernst/example-java
+
+cd ~/java
+git clone git@github.com:mernst/example-java.git
+
+At
+https://travis-ci.org/profile/mernst
+click on
+"sync account"
+and then in the list enable
+mernst/example-java
+
+Browse to
+https://github.com/mernst/example-java
+and see "build unknown" next to the repository slug.
+
+trigger-travis.sh mernst example-java `cat ~/private/.travis-access-token` "Initial build"
+
+Wait 10 or more seconds to see a build running at
+https://travis-ci.org/mernst/example-java
+
+Problem:  I see "no coverage" at
+https://github.com/mernst/example-java/blob/master/src/main/java/org/jacoco/examples/maven/java/HelloWorld.java
+That's because there is no
+  script: mvn test
+line in .travis.yml!
+When I run "mvn test, I see output at
+  ~/java/example-java/target/site/jacoco:
+
+===========================================================================

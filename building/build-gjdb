@@ -1,0 +1,27 @@
+Obtain from http://www.cs.berkeley.edu/~hilfingr/gjdb/
+
+cd ~/tmp
+wget http://www.cs.berkeley.edu/~hilfingr/gjdb/gjdb-5.6.tgz
+tar zxf gjdb-5.6.tgz
+cd gjdb-5.6
+./configure --prefix=${HOME}/java/gjdb-5.6
+make
+make install
+cd ~/java
+rm -f gjdb
+ln -s gjdb-5.6 gjdb
+
+# Once ever
+cd ~/bin/share
+ln -s ../../java/gjdb/bin/gjdb gdjb
+
+# Once ever:  Add to .emacs:
+(load "$HOME/java/gjdb/lib/emacs/lisp/gjdb")
+
+
+===========================================================================
+
+This was a failure; I can't even run daikon.Daikon with no arguments, as it
+dies while trying to get the time-and-date format.
+
+===========================================================================

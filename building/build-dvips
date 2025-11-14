@@ -1,0 +1,29 @@
+===========================================================================
+
+I had to make this change on geyer, which was set up for A4 paper:
+
+cd /usr/share/texmf/dvips/config/
+diff -u -b -r /usr/share/texmf/dvips/config/config.ps-orig /usr/share/texmf/dvips/config/config.ps
+--- /usr/share/texmf/dvips/config/config.ps-orig	Thu May 20 14:31:30 1999
++++ /usr/share/texmf/dvips/config/config.ps	Mon Oct 23 16:39:09 2000
+@@ -45,10 +45,14 @@
+ % Remove the comment and adjust the name:
+ % p +myfonts.map
+ 
+-@ A4size 210mm 297mm
+-@+ %%PaperSize: A4
++%% Comment this out to make lettersize the default
++% @ A4size 210mm 297mm
++% @+ %%PaperSize: A4
+ 
+ @ letterSize 8.5in 11in
++@+ %%PaperSize: letter
++
++@ A4size 210mm 297mm
+ 
+ @ letter 8.5in 11in
+ @+ %%BeginPaperSize: Letter
+
+Diff finished at Fri Oct 27 15:05:37
+
+===========================================================================

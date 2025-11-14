@@ -1,0 +1,446 @@
+Switch to using Hyper-V on Windows -- built in and better performance.
+
+===========================================================================
+
+(Consider VirtualBox as a free alternative to VMware.)
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Customizations:
+
+Edit >> Preferences >> Hot Keys : Ctrl-Shift-Alt
+  [On recent versions, you need to add
+    pref.hotkey.gui = "false"
+    pref.hotkey.shift = "true"
+    pref.hotkey.control = "true"
+    pref.hotkey.alt = "true"
+  to the preferences file, which is one of
+    ~/.vmware/preferences
+    C:\Users\UserName\AppData\Roaming\VMware\preferences.ini
+  ]
+Edit >> Preferences >> Display >> Full Screen : Autofit guest
+Edit >> Preferences >> Display >> Full Screen >> Show toolbar edge : no
+Edit >> Preferences >> Devices >> Disable autorun : yes
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+VMware player:
+
+1. Download from https://customerconnect.vmware.com/en/downloads/#all_products
+   (older: from https://www.vmware.com/products/player/ )
+2. Run (in a terminal, doesn't work in a shell under Emacs):
+sudo bash ~/tmp/VMware-Player-*.bundle
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+To resolve problem of always getting the message "Before you can run
+VMware, several modules must be compiled and loaded into the running
+kernel."
+
+Possible solution #1 (that worked for me):
+  sudo vmware-modconfig --console --install-all
+possible solution #2 (didn't try it):
+  Uninstall then reinstall VMware player.
+  To uninstall:
+    sudo vmware-installer -u vmware-player
+
+On Ubuntu 15.04, net driver may not compile, so do this first:
+http://askubuntu.com/questions/613187/vmware-player-and-ubuntu-15-04-net-driver-does-not-compile-anymore-how-to-fix
+
+
+Afterward I will need to "discard the suspended state", but that doesn't
+harm the virtual machine itself; it's like power-cycling the virtual machine.
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+To build on Ubuntu:
+
+(Instructions from https://help.ubuntu.com/community/VMware .)
+
+# 1. Install the required compiler and kernel headers needed to compile the vmware kernel module.
+sudo apt -y install linux-headers-$(uname -r) build-essential g++
+# 2. Download VMware Workstation Player from VMware:
+# https://my.vmware.com/web/vmware/free
+# (download the "bundle" or ".tar.gz", not the "RPM") and upack:
+chmod +x ./VMware-Player*.bundle
+sudo ./VMware-Player*.bundle
+
+# 4. Run it:
+sudo vmware &
+sudo vmplayer &
+
+# Problem:  the first time I run "sudo vmware", I get
+#   /usr/lib/vmware/bin/vmware: /usr/lib/vmware/lib/libpng12.so.0/libpng12.so.0: no version information available (required by /usr/lib/libcairo.so.2)
+# and thereafter, I can't run it at all:  it exits immediately.
+
+# Problem:  now, vmware only works if I run it as root:  "sudo vmware".
+# This might fix permissions problem, but I need to solve the above
+# problems first.
+sudo chown -R mernst ~/.vmware/preferences 
+sudo chgrp -R mernst ~/.vmware/preferences 
+
+# To uninstall:
+sudo /usr/bin/vmware-installer -u vmware-player
+
+===========================================================================
+
+To build on Linux:
+
+1. Download from http://www.vmware.com/download/
+   Or, get directly from ~smcc/public/mernst:
+     VMware-workstation-4.5.2-8848.tar.gz
+   (Build 8848 is up to date as of 3/3/2005.)
+
+# Download and unpack VMware.
+rm -rf /scratch/${USER}/install-vmware
+mkdir -p /scratch/${USER}/install-vmware
+cd /scratch/${USER}/install-vmware
+# Place VMware-workstation-4.5.2-8848.tar.gz in this directory
+cp -p ~smcc/public/mernst/VMware-workstation-4.5.2-8848.tar.gz .
+tar xzf VMware-workstation-4.5.2-8848.tar.gz 
+cd /scratch/${USER}/install-vmware/vmware-distrib
+
+# Ensure that any old distribution is uninstalled.
+sudo /scratch/${USER}/install-vmware/vmware-distrib/bin/vmware-uninstall.pl
+# Optionally do the below, in case of problems with the uninstall:
+sudo rm -rf /usr/lib/vmware/
+sudo rm -rf /etc/vmware
+sudo rm -rf /var/run/vmware
+sudo rm -rf /usr/share/doc/vmware
+## Do NOT delete /scratch/${USER}/.vmware !
+# NOT: rm -rf ~/.vmware
+
+## Choose the kernel version; use "uname -r" to determine
+# setenv KERNEL 2.4.26
+setenv KERNEL 2.4.27
+# setenv KERNEL 2.4.28
+setenv PROC 686
+# setenv KNAME ${KERNEL}-1-${PROC}
+setenv KNAME `uname -r`
+# manioc:
+setenv KNAMETAR $KNAME
+# laptop:
+setenv KNAMETAR $KERNEL
+
+# Get kernel source (which we must compile; VMware provides pre-compiled
+# only for commercial Linux distributions such as Red Hat, but not for Debian).
+cd /scratch/${USER}/install-vmware
+# Do one of the following two (whichever works):
+tar xjf /usr/src/kernel-source-${KNAMETAR}.tar.bz2
+# Now, we need to configure the kernel.  Instead, it's easier to just copy
+# the (configured) headers over.
+# Do one of the following two (whichever works):
+mv kernel-source-${KNAMETAR}/include/linux kernel-source-${KNAMETAR}/include/linux-unconfigured
+# The below could be replaced by a call to "rsync -rLav", but don't bother
+# to change it, as the below works.
+# "-L" means dereference symlinks
+cp -pRL /usr/src/kernel-headers-${KNAME}/include/config kernel-source-${KNAMETAR}/include
+cp -pfRL /usr/src/kernel-headers-${KNAME}/include/linux kernel-source-${KNAMETAR}/include
+cp -p /usr/src/kernel-headers-${KNAME}/.config kernel-source-${KNAMETAR}
+(cd kernel-source-${KNAMETAR}/include; ln -s asm-i386 asm)
+
+cd /scratch/${USER}/install-vmware/vmware-distrib
+sudo ./vmware-install.pl
+
+# Answers to questions the script asks (use defaults for all others).
+# Just use all defaults, if I have installed/configured kernel-source.
+## Previously
+# Install binary files:  /usr/vmware/bin 
+# Location of directory of C header files:
+#   /scratch/${USER}/install-vmware/kernel-source-${KNAMETAR}/include
+#   e.g., /scratch/mernst/install-vmware/kernel-source-2.4.28-1-csail-i686/include
+# Use NAT networking [but as of 4/1/2009, only bridged networking works for me]
+# allow virtual machines to access the host's filesystem?:  yes
+
+# More SAMBA passwords: /usr/vmware/bin/vmware-smbpasswd vmnet1 -a <username>
+
+(cd ~/bin/Linux-i686/; ln -s /usr/vmware/bin/vmware .)
+
+---------------------------------------------------------------------------
+
+If kernel version of the host machine gets changed, no need to reinstall
+everything (though that works, too); just do the following:
+
+Anyway, the steps I was thinking you'd have to do were:
+1. Unpack /usr/src/kernel-source-2.4.27.tar.bz2 in a temporary directory.
+2. Replace the include/ subdirectory of that with a copy of
+   /usr/src/kernel-headers-2.4.27-1-686/include . (This is what rsync
+   makes easier.)
+3. Rerun /usr/vmware/bin/vmware-config.pl , recompiling the modules as
+   prompted but leaving the networking configuration as-is.
+(You can tell which files and directories you need in steps 1 and 2 by
+looking at the output of "uname -r".)
+
+---------------------------------------------------------------------------
+
+# To run vmware:
+/usr/vmware/bin/vmware
+
+  Help >> EnterSerialNumber >> 6D40C-ENV1J-AN26J-4TMUE  [EVALUATION!  Do not register]
+  Edit >> preferences >> workspace >> default path: /scratch/mernst/.vmware
+  [Don't use a directory in AFS; it takes way too long to save huge files.]
+
+"Be sure to install VMware tools in each guest operating system."
+
+If the option is grayed out, use the VMware menu to change the CD and floppy to "autodetect".
+
+===========================================================================
+
+To build on Windows:
+
+Download from http://www.vmware.com/download/workstation.html
+(I got " 5.0 | 4/7/05 | Build 13124 ").
+
+Run the executable to install.
+("IBM Rescue and Recovery" window popped up; cancel it.)
+
+Ask for a shortcut to be made on the start menu; the old one will be
+invalidated if you are upgrading from (say) VMware 5 to VMware 6.
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Create a new Debian (or Ubuntu) virtual workstation:
+
+[I should create the machine with sufficient RAM -- 6 GB or more!]
+
+[Probably no longer necessary?]
+I should run this in full-screen mode, so that it gives me the proper
+possible screen resolutions.
+
+----------------
+
+# First, get an image of an install CD, such as from
+# http://releases.ubuntu.com/15.04/
+# Don't delete that as I will need it if I want to repartition later
+
+New virtual machine:
+Linux >> Ubuntu  [for Debian: "Other Linux 2.6 Kernel"]
+Name: Not generic "Ubuntu 64-bit" but something like yoga-ubuntu
+Disk capacity:
+  * 80 GB (less if a throwaway, but it's a pain to increase the size later)
+     To learn host capacity:  Windows Explorer >> My Computer : view "C:" drive
+     A standard Ubuntu install is about 5GB, but there is also 8GB for the "extended" and "linux-swap" partitions.  And my research files are over 20GB even after only 1 week of cloning needed repositories.
+     I didn't manage to repartition later and had to re-install to increase the disk size!
+  * do NOT pre-allocate the space (pre-allocating prevents resizing later!)
+  * DO split disk into separate files
+  * To resize later: Find your disk, right click it and go through the resize wizard.
+Customize hardware:  allocate 4096MB of memory (default 1024MB)
+Network type:  keep default of NAT (network address translation)
+  The documentation seems to suggest bridged networking, but it requires a
+  different IP for the guest, which might account for some of my problems.
+  "If you want to use a wireless network card, use NAT mode".
+
+
+[I skipped this, since it's slow and has other issues.]
+Create a shared folder:
+  VM >> Settings >> Options >> Shared Folders >> Add: Desktop as host-desktop
+  VM >> Settings >> Options >> Shared Folders >> Add: My Documents as host-my-documents
+  VM >> Settings >> Options >> Shared Folders >> Add: C:\ as host-c
+In host Linux (Debian) operating system, shared folder appears in
+  /mnt/hgfs
+so eventually do
+  cd
+  sudo ln -s /mnt/hgfs/host-c /mnt/hgfs/host-desktop /mnt/hgfs/host-my-documents .
+Don't put my home directory in /mnt/hgfs, or link many directories to it.
+Pros:
+ * Can save disk space and simplify synchronizing the host and guest.
+Cons:
+ * About half as fast, and higher load on host CPU.
+ * Cannot make symbolic links; other limitations?
+ * Could problems occur from multiple OSes trying to access the files at
+   once?  Or Windows trying to lock them?
+ * I don't *that* often need all my files on Unix, anyway.
+
+
+Now, power on and follow the standard instructions for the host OS.
+(See "../setup/setup-debian" file.)
+# Use X server: vmware
+
+I was not able to get trackpad gestures, such as two fingers to scroll, to work in the guest machine.  I was afraid to try this:
+http://superuser.com/questions/131297/use-synaptics-touchpad-scroll-in-vmware-guest/683726#683726
+
+===========================================================================
+
+Create a new Windows XP virtual workstation:
+
+Use a 10 GB disk (don't use 4GB; it isn't enough space for programs).
+
+Set DVD/CD-ROM to use ISO image
+[On my laptop, my Windows XP CD does not work (even outside VMware), so
+use an ISO image of it instead.  It's currently in ~/.unison-synchronized/.]
+
+On my laptop, floppy 1 starts disconnected (because it isn't plugged in!);
+this is fine.
+
+[I used workgroup "maniocwkgp".]
+
+After the installation has completed and I am logged in,
+install VMware tools before I "activate" Windows XP.
+To install VMware tools:
+  VM >> Install VMware tools
+
+Set screen resolution to 1280x1024
+
+Set the DVD/CD-ROM back to the physical device.
+
+Create a Samba share:
+  VM >> Settings >> Options >> Shared Folders >> Add: /home/mernst/dose
+  VM >> Settings >> Options >> Shared Folders >> Add: /home/mernst
+In Windows Explorer:
+  map network drive e: to \\.host\Shared Folders\dose
+  map network drive h: to \\.host\Shared Folders\home
+
+VM >> Settings >> Hardware >> Add >> Serial Port
+(See http://www.vmware.com/support/gsx3/doc/devices_serial_useport_gsx.html)
+Should this be "/dev/ttyS0" or "COM1"?  Maybe the former...
+
+===========================================================================
+
+Install VMware tools for Linux guest:
+  Manage >> [Re]Install VMware tools
+This just mounts the CD image.
+Now see
+ http://www.vmware.com/support/ws55/doc/ws_newguest_tools_linux.html
+Essentially:
+  # First, save any files, especially in a remote Emacs.
+  # Next, warm up the sudo cache
+  # Run each of the two following commands on its own.
+  sudo apt install make gcc linux-headers-`uname -r`
+  sudo apt autoremove -y
+  # Run each of the two preceding commands on its own.
+  mkdir -p ~/tmp
+  cd ~/tmp
+  rm -rf vmware-tools-distrib
+  tar xzf /media/$USER/VMware\ Tools/VMwareTools-*.tar.gz 
+  cd vmware-tools-distrib
+  sudo ./vmware-install.pl -default
+  sudo /usr/bin/vmwarectrl timesync enable
+  cd ~/tmp
+  rm -rf VMwareTools-*.tar.gz vmware-tools-distrib
+
+  ## Network connectivity:
+  # I used to need to reboot; that doesn't seem necessary any more.  Instead,
+  # just restart the network connection.  Or it just stays up.
+  # With Ubuntu 8.04 (Hardy Heron), my network continued to operate (after
+  # clicking the network icon at the right of the tray).  [On 8/31/2008,
+  # rebooting Ubuntu didn't work; I had to reboot Windows and Ubuntu.  That
+  # may have been because of network problems rather than an upgrade?]
+  # As of 4/1/2009, I had to switch to bridged networking and all was well
+  # again, I think.  As of 4/20/2009, swiching *back* to NAT gave me
+  # connectivity (where rebooting both machines had not).
+
+If it says to run vmware-config-tools.pl, then run:
+  sudo vmware-config-tools.pl -default
+
+You need to re-install vmware tools if any update changes the kernel; for
+example, any upgrade that requests a reboot is suspect.
+One possible symptom is loss of networking in the guest.
+
+For t430, also add to the .vmx file (under ~/vmware/):
+mks.gl.allowBlacklistedDrivers = "TRUE"
+
+----------------
+
+For Ubuntu 8.10 Intepid Ibix running under VMware, after installing VMware
+tools, edit
+  /etc/X11/xorg.conf
+to make 2 changes:
+1. change 
+  Driver        "vmmouse"
+to
+  Driver        "mouse"
+2.Add this at the end:
+  # Added per http://www.siddharthabbineni.com/tutorials/tips/fedora-9-vmware-mouse-issue.html
+  Section "ServerFlags"
+	  Option      "AutoAddDevices" "false"
+  EndSection
+Hopefully the bug will be fixed one day and I can change these back...
+
+===========================================================================
+
+http://linux.seindal.dk/item39.html says:
+
+Getting a Debian kernel source tree for driver compilation
+
+Prep:
+
+setenv VERX 4
+setenv VERY 27
+setenv VERZ 2
+setenv VERARCH 386
+
+sudo apt install gcc kernel-package kernel-source-2.${VERX}.${VERY} libc6-dev libncurses5-dev fakeroot
+sudo apt install tk8.3
+
+Download the kernel source package:
+
+apt install kernel-source-2.${VERX}.${VERY}
+
+Unpack it:
+
+cd /usr/src
+tar -xjf kernel-source-2.${VERX}.${VERY}.tar.bz2
+
+Install the correct config-file:
+
+cd kernel-source-2.${VERX}.${VERY}
+cp /boot/config-2.${VERX}.${VERY}-${VERZ}-${VERARCH} .config
+
+Generate dependencies and Makefiles:
+
+make-kpkg --append-to-version "-${VERZ}-${VERARCH}" --revision 2.${VERX}.${VERY}-${VERZ} --config old configure
+
+Check build link:
+
+rm -f /lib/modules/2.${VERX}.${VERY}-${VERZ}-${VERARCH}/build
+ln -s /usr/src/kernel-source-2.${VERX}.${VERY} /lib/modules/2.${VERX}.${VERY}-${VERZ}-${VERARCH}/build
+
+Most drivers will use the build link to find the correct kernel source tree for include files and Makefiles.
+
+With this in place many drivers can be installed with a simple "make
+install". 
+
+===========================================================================
+
+From: Stephen McCamant <smcc@CSAIL.MIT.EDU>
+Sender: Stephen McCamant <smcc@csail.mit.edu>
+To: mernst@csail.mit.edu
+Subject: VMware patch for recent Linux kernels
+Date: Mon, 20 Mar 2006 15:41:33 -0500
+
+The self-installing binary patch I used to get VMware to work with
+TIG's 2.6.13 kernels is available from
+
+http://ftp.cvut.cz/vmware/vmware-any-any-update98.tar.gz
+
+You run the "runme.pl" script as root after running vmware's
+installer, but before doing the configuration that recompiles their
+kernel modules. I'm not sure if the patch (which actually makes a
+bunch of separate changes) is needed for the older 2.6.8 in sarge, but
+I suspect it wouldn't hurt.
+
+ -- Stephen
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Bug reporting:
+  cscript "c:\Program Files\VMware\VMware Workstation\vm-support.vbs"
+It works under either cygwin or DOS, but is very cpu-intensive.
+One should compress the output directory (which is in /cygdrive/c/documents
+and Settings/mernst/local Settings/temp) and send it to VMware support, but
+I'm not sure exactly how to do that (and they don't say).
+
+===========================================================================
+

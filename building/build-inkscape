@@ -1,0 +1,17 @@
+# Doesn't work without Boehm-GC, see http://wiki.inkscape.org/wiki/index.php/CompilingInkscape
+
+#VER=0.48.4
+VER=0.48.5
+cd ~/bin/install
+wget http://downloads.sourceforge.net/inkscape/inkscape-${VER}.tar.gz
+tar xzf inkscape-${VER}.tar.gz
+cd ~/bin/install/inkscape-${VER}
+# I can't figure out how to communicate the location of these dependencies:
+# ./configure --with-gc=${HOME}/bin/install/gc-7.1-install --with-intltool=${HOME}/bin/install/intltool-0.50.2-install
+# So, use this way for now.
+export PATH=/homes/gws/mernst/bin/install/intltool-0.50.2-install/bin:${PATH}
+#if CSE
+./configure --enable-lcms=no
+#else
+./configure
+#endif CSE

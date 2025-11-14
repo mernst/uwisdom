@@ -1,0 +1,25 @@
+http://mailcrypt.sourceforge.net/
+
+./configure
+make
+# on geyer:
+sudo make install-info
+
+Mailcrypt is only useful if you are using PGP or GPG.
+For simple encryption/decryption, I use crypt++.el instead.
+
+===========================================================================
+
+http://www.nb.net/~lbudney/linux/software/mailcrypt.html
+
+./configure --prefix=/uns/share
+# Edit makefile:
+#   EMACS = emacs-19
+make				# byte-compile Emacs files
+# Make /uns/share/info/dir editable by me (visit in Emacs, C-x C-q).
+make install
+# Probably undo changes to /uns/share/info/dir (in Emacs, C-x v u).
+# This installs timer.el[c] into site-lisp; that must be deleted, as it
+#  causes Emacs 20.3 to fail.
+
+To switch between versions of PGP, use   M-x mc-setversion RET.

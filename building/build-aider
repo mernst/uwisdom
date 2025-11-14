@@ -1,0 +1,3 @@
+# Per https://aider.chat/docs/install.html :
+
+curl -LsSf https://aider.chat/install.sh | sh

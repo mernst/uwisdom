@@ -1,0 +1,22 @@
+===========================================================================
+
+Debian:
+
+sudo apt install flashplugin-nonfree
+# This is not necessary (and that script doesn't exist anyway):
+# sudo update-flashplugin
+
+===========================================================================
+
+cp $HOME/flash_linux/libflashplayer.so /usr/lib/netscape/plugins
+cp $HOME/flash_linux/ShockwaveFlash.class /usr/lib/netscape/plugins
+
+sudo cp $HOME/flash_linux/libflashplayer.so /usr/lib/mozilla/plugins
+sudo cp $HOME/flash_linux/ShockwaveFlash.class /usr/lib/mozilla/plugins
+
+As of 10/28/2002, I can download Flash 5 but not Flash 6; 
+http://www.macromedia.com/shockwave/download/ said
+We are unable to locate a Web player that matches your platform and browser.
+(I was running Mozilla 1.2b.)
+
+===========================================================================

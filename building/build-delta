@@ -1,0 +1,8 @@
+Delta program from http://delta.tigris.org/, does delta debugging.
+
+As of 2015-08-21, the release delta-2006.08.03 is essentially identical to what is in SVN.
+
+There is documentation in the tarball (what's on the web isn't great), and better documentation at https://gcc.gnu.org/wiki/A_guide_to_testcase_reduction
+
+
+Alternatives include Zeller's DD.py, Lithium, and C-Reduce.

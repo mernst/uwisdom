@@ -1,0 +1,23 @@
+
+# First, get bootstrap version of GHC, to use to build "Haskell Platform"
+cd ~/tmp
+wget http://darcs.haskell.org/download/dist/6.12.3/ghc-6.12.3-i386-unknown-linux-t.tar.bz2
+tar xjf ghc-6.12.3-i386-unknown-linux-t.tar.bz2
+
+
+
+wget http://hackage.haskell.org/platform/2010.2.0.0/haskell-platform-2010.2.0.0.tar.gz
+tar xvf haskell-platform-2010.2.0.0.tar.gz
+
+
+cp /uns/src/generic-builder.sh ~/tmp/generic-builder-haskell.sh
+## This doesn't work:
+# Add to the .configure line:
+#   --with-ghc=/homes/gws/mernst/tmp/ghc-6.12.3/ghc/stage2/build/tmp/ghc-stage2 --with-ghc-pkg=/homes/gws/mernst/tmp/ghc-6.12.3/utils/ghc-pkg/dist-install/build/tmp/ghc-pkg --with-hsc2hs=/homes/gws/mernst/tmp/ghc-6.12.3/utils/hsc2hs/dist-install/build/tmp/hsc2hs
+#   --with-ghc=/homes/gws/mernst/tmp/ghc --with-ghc-pkg=/homes/gws/mernst/tmp/ghc-pkg --with-hsc2hs=/homes/gws/mernst/tmp/ghc-6.12.3/utils/hsc2hs/dist-install/build/tmp/hsc2hs
+## Neither of the above worked.
+# I tried putting the 3 binaries on my path.  This worked better, but there
+# was a segmentation fault.  So, give up.
+source ~/tmp/generic-builder-haskell.sh
+PKG=haskell-platform-2010.2.0.0
+install_generic haskell-platform-2010.2.0.0 http://hackage.haskell.org/platform/2010.2.0.0/$PKG.tar.gz

@@ -1,0 +1,3 @@
+cd ~/tmp
+# File date is 2010-03-29; most recent as of 2011-10-16
+wget http://www.sable.mcgill.ca/software/soot-2.4.0.jar

@@ -1,0 +1,40 @@
+# To install rustup:
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# OR
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > install-rustup.sh
+chmod +x install-rustup.sh
+sudo ./install-rustup.sh
+rustup component add rust-analyzer
+
+# to update Rust:
+rustup update
+
+The Rust book in PDF:
+ * https://doc.rust-lang.org/book/print.html and browser "print" or "save as PDF"
+ * https://github.com/max-heller/mdbook-pandoc?tab=readme-ov-file#rendered-books
+The Rust book built from source (but it doesn't produce PDF, so don't bother):
+# Version number at https://github.com/rust-lang/rust/blob/master/src/tools/rustbook/Cargo.toml
+cargo install mdbook --locked --version 0.4.51
+cd ~/tmp
+git clone git@github.com:rust-lang/book.git rust-lang-book
+cd rust-lang-book
+cargo install --locked --path packages/mdbook-trpl
+mdbook build
+
+===========================================================================
+
+# Install rustfmt:
+rustup component add rustfmt
+# Run rustfmt:
+cargo fmt
+
+===========================================================================
+
+# Install clippy:
+rustup component add rustfmt
+# Run clippy:
+cargo clippy
+# I don't understand why this always gives me "no such file or directory":
+clippy-driver --edition 2018 -Cpanic=abort compiler/rustc_driver_impl/src/lib.rs‎
+
+===========================================================================

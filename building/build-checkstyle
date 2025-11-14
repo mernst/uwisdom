@@ -1,0 +1,168 @@
+http://checkstyle.sourceforge.net
+
+Checkstyle processes source code.
+
+DO NOT USE.
+
+[Update: The below notes are from Dec 2018.  I tried again in Dec 2022, giving it a *lot* of my time.  On the plus side, it forced me to change from snake_case to camelCase, expand imports, and write some documentation, but its benefits were otherwise very limited.  It's not worth the horrific setup and the many useless warninngs, such as its prhibition of names like "FileIO" and "aComment".]
+
+It's mostly shallow code formatting issues (just as FindBugs is mostly shallow), and produces a lot of warnings about issues I don't consider important (just as FindBugs does).  Many of the issues are handled by formatting code with google-java-format.
+On the other hand, it is customizable.  Using the Google predefined checkstyle rules might be valuable, but then you need to disable a bunch of rules about formatting, even if you have used google-java-format.
+One compelling use to me is finding methods that lack Javadoc, but even that is buggy:  if there is a /* ... */ comment between the Javadoc comment and the method, Checkstyle issues a warning that there is no Javadoc comment.
+
+As of July 2018, Checkstyle is crashing on correct code, and the maintainers are truculent (made incorrect statements, closed the issue):
+https://github.com/checkstyle/checkstyle/issues/5989
+So, don't waste more time on this.
+
+For two bugs I wanted to report, I could not reproduce it with a small, independent file.  The Checkstyle maintainer says that by design, Checkstyle doesn't work on files that use any external libraries or dependencies (!).  This isn't true, but he doesn't want to look at any bug report that requires classpath to be set when running javac.
+
+===========================================================================
+
+Install:
+
+----------------
+
+Debian:
+
+apt install checkstyle
+
+Installs into /usr/share/java/checkstyle-3.4.jar
+
+----------------
+
+Non-Debian:
+
+Download checkstyle from Sourceforge
+
+cd ~/tmp
+wget http://unc.dl.sourceforge.net/sourceforge/checkstyle/checkstyle-3.4.tar.gz
+tar zxf checkstyle-3.4.tar.gz
+
+===========================================================================
+
+To remove warnings I don't care about:
+
+(progn
+(goto-char (point-min))
+(delete-matching-lines "'!' is followed by whitespace\\.$")
+(delete-matching-lines "Avoid inline conditionals\\.$")
+(delete-matching-lines "Comment matches to-do format 'TODO:'\\.$")
+(delete-matching-lines "Expected @throws tag for")
+(delete-matching-lines "File length is ")
+(delete-matching-lines "Line is longer than 80 characters")
+(delete-matching-lines "Redundant throws:")
+(delete-matching-lines "Unused @throws tag for '")
+(delete-matching-lines "hides a field\\.$")
+(delete-matching-lines "is a magic number\\.$")
+(delete-matching-lines "is not designed for extension - needs to be abstract, final or empty\\.$")
+(delete-matching-lines "is not followed by whitespace\\.$")
+(delete-matching-lines "is not preceded with whitespace\\.$")
+(delete-matching-lines "must be private and have accessor methods\\.$")
+(delete-matching-lines "must match pattern")
+(delete-matching-lines "should be final\\.$")
+(delete-matching-lines "src/plume/Weak")
+(delete-matching-lines "src/plume/Fmt")
+(delete-matching-lines "src/plume/TextFile")
+(delete-matching-lines "Must have at least one statement\\.$")
+(delete-matching-lines "'{' is followed by whitespace\\.$")
+(delete-matching-lines "Method length is")
+)
+
+
+
+Checkstyle configuration to do:
+
+<module name="HiddenField" >
+    <property name="ignoreSetter" value="true" />
+    <property name="ignoreConstructorParameter" value="true" />
+</module>
+
+<module name="JavadocVariable">
+    <!-- This is supposed to be the default already. -->
+    <property name="ignoreNamePattern" value="serialVersionUID"/>
+</module>
+
+
+
+
+===========================================================================
+
+(It checks Java source code, for instance indicating unused imports.)
+
+The documentation is sadly lacking.  The best documentation is at
+  http://checkstyle.sourceforge.net/cmdline.html
+
+Documentation on specific error messages can be found via a Google search
+like this one:
+  (google-search "utility site:checkstyle.sourceforge.net")
+
+
+To run, use 
+  java -jar /g2/users/mernst/java/checkstyle-3.4/checkstyle-all-3.4.jar
+(but this doesn't work with the Debian install).
+Alternately, add jar file (and /usr/share/java/commons-cli.jar) to
+CLASSPATH and use
+  java com.puppycrawl.tools.checkstyle.Main
+in the following way:
+  java -D<property>=<value>  \
+       com.puppycrawl.tools.checkstyle.Main \
+       -c <configurationFile> [-n <packageNameFile>] \
+       [-f <format>] [-p <propertiesFile>] [-o <file>] \
+       [-r <dir>] file...
+
+
+See $d/java/Makefile for specific rules
+
+===========================================================================
+
+BUGS TO REPORT:
+
+
+Checkstyle incorrectly isuses "Missing a Javadoc comment." for the following code.
+That's incorrect because if you run Javadoc on this code, the resulting HTML file does contain the information in the /** ... */ comment -- the Javadoc program is not thrown off by regular comments between the Javadoc comment and the method declaration.
+
+Furthermore, checkstyle knows that the Javadoc comment is for the id function, since it complains that there is no @param for arg.
+
+    /**
+     * The identity function.
+     * @return arg
+     */
+    /*@Pure*/
+    public int id(int arg) {
+	return arg;
+    }
+
+Therefore, my request is that checkstyle should not issue  "Missing a Javadoc comment." when the Javadoc comment is present but separated from the method declaration by an ordinary Java comment.
+
+
+
+This should not issue a warning, should it?
+
+/home/mernst/bin/src/plume-lib/java/src/plume/EntryReader.java:781:24: Expected @param tag for 'readAheadLimit'.
+
+
+This is legal:
+      boolean is_class = obj instanceof Class<?>;
+but I get this warning message:
+/home/mernst/bin/src/plume-lib/java/src/plume/Options.java:626:49: '>' is followed by an illegal character.
+
+Shouldn't get this warning:
+    for (int ii = 0; ii < args.length; ) {
+/home/mernst/bin/src/plume-lib/java/src/plume/Options.java:830:39: ';' is followed by whitespace.
+
+When the switch is exhaustive:
+    switch (format) {
+    case short_ascii:
+      System.out.println(matches.toString_short_ascii());
+      break;
+    case short_html:
+      System.out.println(matches.toString_short_html());
+      break;
+    case milestone_html:
+      System.out.println(matches.toString_milestone_html());
+      break;
+    }
+we shouldn't get an error:
+/home/mernst/bin/src/plume-lib/java/src/plume/TaskManager.java:311:5: switch without "default" clause.
+
+===========================================================================

@@ -1,0 +1,5 @@
+# Also see ./build-jarjar
+
+curl --proto '=https' --tlsv1.2 -fsSL https://static.pantsbuild.org/setup/get-pants.sh | bash
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../../.local/bin/pants .

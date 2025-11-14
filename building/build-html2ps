@@ -1,0 +1,13 @@
+http://www.tdb.uu.se/~jan/html2ps.html
+
+./install
+
+Install under /uns/share
+
+Don't bother using my own hyphen.tex (in /opt/texmf/tex/plain/hyphen.tex):
+the one distributed with html2ps is the same.
+
+Now, I can delete the original source directory.
+
+
+Also perhaps create a $HOME/.html2psrc configuration file.

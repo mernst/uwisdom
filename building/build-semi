@@ -1,0 +1,61 @@
+On 4/2/99, this went pretty smoothly.
+
+From ftp://ftp.jaist.ac.jp/pub/GNU/elisp/semi/ (subdirectory
+ftp://ftp.jaist.ac.jp/pub/GNU/elisp/semi/semi-stable/ seems to have many of
+them), or possibly from ftp://ftp.jaist.ac.jp/pub/GNU/elisp/mime/alpha/,
+download:
+  APEL (A Portable Emacs Library)
+    ftp://ftp.jaist.ac.jp/pub/GNU/elisp/apel/
+  FLIM (Faithful Library about Internet Message)
+    ftp://ftp.jaist.ac.jp/pub/GNU/elisp/flim/
+  RMAIL-MIME (provide MIME feature using SEMI)
+    ftp://ftp.jaist.ac.jp/pub/GNU/elisp/rmail-mime/
+  SEMI
+
+Copy them to site-lisp.  The tar files extract into their own
+(version-numbered) directories.
+
+----------------
+
+Build apel:
+
+In Emacs, execute:
+  (load-file "APEL-MK")
+  (compile-apel)
+
+----------------
+
+Build flim:
+
+In Emacs, execute:
+  (load-file "FLIM-MK")
+  (compile-flim)
+
+----------------
+
+Build semi:
+
+In Emacs, execute:
+  (load-file "SEMI-MK")
+  (compile-semi)
+
+Add to .emacs:
+  (load "mime-setup")
+
+----------------
+
+Build rmail-mime:
+
+In Emacs, execute:
+  (load-file "RMAIL-MIME-MK")
+  (compile-rmail-mime)
+
+Add to .emacs:
+  (setq rmail-enable-mime t)
+
+I also added this:
+  (defadvice rmail-show-mime-message (before make-interactive activate)
+    "Make interactive"
+    (interactive))
+
+===========================================================================

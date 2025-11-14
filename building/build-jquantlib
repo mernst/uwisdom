@@ -1,0 +1,8 @@
+
+
+One of these two commands, probably the first:
+  svn co https://jquant.svn.sourceforge.net/svnroot/jquant/trunk/jquantlib/
+  svn co https://jquant.svn.sourceforge.net/svnroot/jquant jquant
+
+I'm not sure that (as of March 15, 2008) the code is stable enough to
+build, much less worth us trying on our own.

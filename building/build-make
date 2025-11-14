@@ -1,0 +1,28 @@
+Get version number from https://ftp.gnu.org/gnu/make/
+
+VER=4.4.1
+cd ~/bin/install
+wget https://ftp.gnu.org/gnu/make/make-${VER}.tar.gz
+tar xzf make-${VER}.tar.gz
+cd make-${VER}
+./configure
+make
+(cd ~/bin/`uname`-`uname -m` && ln -s ../install/make-${VER}/make .)
+
+
+3.78:
+
+./configure
+make
+# As root:
+make install
+
+===========================================================================
+
+./configure
+make
+
+cp -f make.info* /uns/share/info
+mv make /uns/bin/gmake-3.77
+rm /uns/bin/gmake
+(cd /uns/bin; ln -s gmake-3.77 gmake)

@@ -1,0 +1,212 @@
+Also see file build-perl-module in this directory.
+
+===========================================================================
+
+ActiveState Perl (for CSE):
+
+I didn't have luck installing later versions than 5.28.
+
+----------------
+
+For version 5.28:
+
+At
+https://platform.activestate.com/mernst/ActivePerl-5.28/distributions?new_project=true
+I have two options:
+ * Download .tar.gz file
+ * Use the state tool.  (Don't do this.)
+
+For downloading:
+ * extract into ~/bin/install
+ * Run: sh install.sh
+   Directory for install: /homes/gws/mernst/bin/install/ActivePerl-5.28
+   Do NOT install the HTML documentation; trying to do so fails.
+
+===========================================================================
+
+Perl 5.10.0:
+
+# On 10/27/2008, I tried to download ActivePerl for Linux, but there was an
+# http error (bad URL, I guess).
+
+cd ~/tmp
+wget http://www.cpan.org/src/perl-5.10.0.tar.gz
+tar zxf perl-5.10.0.tar.gz
+cd perl-5.10.0
+# To run interactively, omit "-de"
+sh Configure -de
+make
+make test
+sudo make install
+
+
+===========================================================================
+
+Perl 5.8.0 on Red Hat Linux:
+
+Run all of this on geyer; it didn't work to do the build on a client and
+the install on geyer, because of different /usr/include/bits/ files.
+
+# This might not work sometimes because of "redirection to itself".
+# Or run it on a machine besides geyer.
+(cd ~/tmp; wget http://perl.com/CPAN/src/stable.tar.gz)
+cd ~/tmp
+mv stable.tar.gz perl-5.8.0.tar.gz
+tar zxf perl-5.8.0.tar.gz
+cd perl-5.8.0
+rm -f config.sh Policy.sh
+sh Configure -de
+make
+make test
+sudo make install
+(cd /usr/include && sudo h2ph *.h sys/*.h)
+sudo installhtml --help
+# (cd pod && make tex  && <process the latex files>)
+
+# Install info pages.
+# As of 7/2004, Perl 5.6.1 versions (made 3/2001) are the most recent.
+cd ~/tmp
+wget ftp://ftp.cpan.org/pub/CPAN/doc/manual/texinfo/perl5/perl-5.6-info.tar.gz
+tar zxvf perl-5.6-info.tar.gz
+cd perl-5.6-info/info
+rm *unsplit*
+# On pag, these "/usr/local" are "/usr/local/share" instead.
+sudo cp -pf * /usr/local/info
+sudo emacs /usr/local/info/dir
+# Add the following 3 lines to the dir file:
+Perl
+* Perl: (perl).         Practical Extraction and Reporting Language.
+* Perl moduldes: (pm).  Perl modules.
+
+
+
+
+## Now rebuild/reinstall perl modules that need to be.  In particular,
+## I must reinstall spamassassin immediately if I'm upgrading to a version
+## of Perl that is not binary-compatible, because spamassasin hard-codes
+## the Perl libraries.
+
+
+While building on geyer, I got two test failures in "make test".
+I ignored them.  (There were no errors when I built on the client machines,
+but then I couldn't install on geyer.)
+
+op/groups..............................FAILED test 1                         
+        Failed 1/2 tests, 50.00% okay
+op/lfs.................................FAILED tests 6, 8, 10, 12             
+        Failed 4/17 tests, 76.47% okay
+
+===========================================================================
+
+Here is what Greg typed when installing perl 5.8.0
+
+sh
+Configure
+-Dcc=gcc
+-Dprefix=/usr/local/pkg/perl/perl-5.8.0
+-Dman1dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man1
+-Dman3dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man3
+-Dprivlib=/usr/local/pkg/perl/perl-5.8.0/lib/perl5/5.8.0
+-Darchlib=/usr/local/pkg/perl/perl-5.8.0/lib/perl5/5.8.0/i686-linux
+-Dvendorprefix=/usr/local/pkg/perl/perl-5.8.0
+-Dvendorman1dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man1
+-Dvendorman3dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man3
+-Dvendorlib=/usr/local/pkg/perl/perl-5.8.0/lib/perl5/5.8.0
+-Dvendorarch=/usr/local/pkg/perl/perl-5.8.0/lib/perl5/5.8.0/i686-linux
+-Dsiteprefix=/usr/local/pkg/perl/perl-5.8.0
+-Dsiteman1dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man1
+-Dsiteman3dir=/usr/local/pkg/perl/perl-5.8.0/share/man/man3
+-Dsitelib=/usr/local/pkg/perl/perl-5.8.0/lib/perl5/5.8.0
+-Uinstallusrbinperl
+-Odes
+
+===========================================================================
+
+Perl 5.6.1 on Red Hat Linux:
+(For perl modules, see file build-perl-module)
+
+Per directions in INSTALL:
+	rm -f config.sh Policy.sh
+	sh Configure -de
+	make
+	make test
+	su
+	make install
+	cd pod
+	make all html
+
+Perl 5.6.1 does not contain an Info version of the manual; however, I
+found a version at ftp://ftp.cpan.org/pub/CPAN/doc/manual/texinfo/.
+Download from ftp://ftp.cpan.org/pub/CPAN/doc/manual/texinfo/perl5/.
+  tar zxvf perl-5.6-info.tar.gz
+  cd perl-5.6-info/info
+  rm *unsplit*
+  su
+  cp -pf * /usr/local/info
+
+At "make test", I got:
+  op/lfs...............FAILED at test 6
+so I ran
+  cd t
+  ./perl harness 
+which gave me:
+  Failed Test Status Wstat Total Fail  Failed  List of Failed
+  -----------------------------------------------------------
+  op/lfs.t                    17    4  23.53%  6, 8, 10, 12
+then I ran
+  ./perl op/lfs.t
+This indicated that the problem is with support for large files; maybe
+I just don't have enough free disk space at the moment.
+
+===========================================================================
+
+UW:
+ * create a build directory under /tmp or /usr/tmp
+ * symlink from there to /uns/src/perl5.004-building and the .tar.gz file
+ * ./perl5.004-building test
+   This produced
+	op/stat...........FAILED on test 4
+   but then "cd ./t; ./perl op/stat.t" produced
+	not ok 4
+	#4 If test op/stat.t fails test 4, check if you are on a tmpfs
+	#4 of some sort.  Building in /tmp sometimes has this problem.
+	#4	:866760644: != :866760644:
+   so I relaxed
+ * ./perl5.004-building install
+ * ./perl5.004-building h2ph
+ * chmod -R g+w /uns/share/lib/perl5.004
+ * chmod -R g+w /uns/lib/perl5.004
+ * copy libraries from 5.003 site-perl directory to 5.004 site-perl
+ * install 5.004 Info manual
+
+Everything worked on Solaris, old Linux; but on new Linux, I got:
+  Checking your choice of C compiler, libs, and flags for coherency...
+  I've tried to compile and run a simple program with:
+	  gcc -O -Dbool=char -DHAS_BOOL -I/usr/local/include -L/usr/local/lib -o try try.c -lgdbm -ldb -ldl -lm -lc
+	  ./try
+  and I got the following output:
+    /usr/i486-linux/bin/ld: cannot open -ldl: No such file or directory
+  I can't compile the test program.
+  (The supplied flags might be incorrect with this C compiler.)
+  You have a BIG problem.  Shall I abort Configure [y]  
+though libdl.so.1 is in /lib, which is in my LD_LIBRARY_PATH.
+It's right to build on old Linux, because then things work for both; if I
+build only on new Linux, then old Linux boxes can't run it.
+
+===========================================================================
+
+Configure -d
+  Actually, I did Configure and gave the default answer everywhere, except
+  that I added -DDEBUGGING.  But that has to do with debugging Perl, not
+  debugging Perl scripts, so I really didn't need to.
+make depend
+   Hints say:
+    MIPS machines may need to undef d_volatile.
+    MIPS machines may need to turn off -O on some files.
+    Some MIPS machines may need to undefine CASTNEGFLOAT.
+make
+   I got some cfe warnings
+make test
+doit make install
+
+===========================================================================

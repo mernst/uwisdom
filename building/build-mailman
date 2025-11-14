@@ -1,0 +1,179 @@
+===========================================================================
+
+mailman is installed by default on Red Hat 7.3.
+
+===========================================================================
+
+# Version 2.1b4 was released on 26-Oct-2002; it requires Python 2.1.3 or 2.2.1.
+# So version 2.1 should be coming soon.
+
+# Do all this on geyer.
+cd ~/tmp
+wget http://ftp.gnu.org/gnu/mailman/mailman-2.0.13.tgz
+tar xvfz mailman-2.0.13.tgz
+cd mailman-2.0.13
+
+# As root:
+mv /home/mailman /home/mailman-VER
+userdel mailman
+(cd /var/yp; make)
+useradd -d /home/mailman -u 60 -g mailman mailman
+set prefix=/home/mailman
+  cd $prefix
+  chgrp mailman .
+  chmod a+rx,g+ws .
+setenv MAILHOST pag.lcs.mit.edu
+setenv WWWHOST pag.lcs.mit.edu
+# I looked up --with-mail-gid value in /etc/sendmail.cf
+./configure --with-mail-gid=12
+make install
+# This failed (and passing  --[old]includedir=/usr/i386-glibc20-linux/ to
+# ./configure didn't help), so I ended up doing
+#   (query-replace "-I. " "-I. -I/usr/i386-glibc20-linux/include " nil)
+# to src/Makefile, and that seemed to work.
+
+# Check the installation
+cd $prefix
+bin/check_perms
+# If problems above, run "bin/check_perms -f" until no problems.
+
+... lots of other painful stuff here.
+
+===========================================================================
+
+To create a new list:
+
+/home/mailman/bin/newlist <listname> <listadmin-addr> <admin-password>
+
+---------------------------------------------------------------------------
+
+/home/mailman/bin/newlist daikon-announce mernst@lcs.mit.edu dkanncpw
+
+daikon-announce@pag.lcs.mit.edu
+
+Customize at:
+    http://pag.lcs.mit.edu/mailman/admin/daikon-announce
+General options:
+ * public name: downcase it
+ * add terse description: 
+    Announcements regarding Daikon invariant detector (low-volume)
+ * prefix for subject line: downcase it
+ * add introductory description
+    This is a low-volume, announcement-only list regarding the Daikon
+    invariant detector.  For example, announcements of new releases are
+    sent to this list.
+ * send monthly password reminder: no
+ * should administrator get immediate notice: no
+ * send mail to poster: no
+Membership Management:
+  * mass subscribe members from /g2/users/mernst/research/invariants/notes/notes-proselytization
+Privacy Options:
+ * who can view: list admin only
+ * must posts be approved: yes
+ * restrict posting privilege: no
+ * addresses of members: mernst@lcs.mit.edu
+Archival options:
+ * How often: yearly
+
+The web page for users is: 
+    http://pag.lcs.mit.edu/mailman/listinfo/daikon-announce
+
+Send initial announcement message:
+
+To: daikon-announce@pag.lcs.mit.edu
+bcc: daikon-discuss@pag.lcs.mit.edu
+Subject: New mailing lists: daikon-announce, daikon-discuss
+Reply-to: mernst@lcs.mit.edu
+
+In response to several requests, I have created two new mailing lists
+(see http://pag.lcs.mit.edu/mailman/listinfo/) for the Daikon invariant
+detector (http://pag.lcs.mit.edu/daikon/):
+
+  daikon-announce@pag.lcs.mit.edu is for announcements regarding the Daikon
+      invariant detector, such as when a new version is released.  This
+      list is low-volume -- one or two messages per month.
+
+  daikon-discuss@pag.lcs.mit.edu is a forum for discussion among Daikon
+      users.  Use it to share tips and successes, and to get help with
+      questions or problems (after checking the documentation).  Only list
+      members may post to the list.
+
+If you are receiving this message, you are subscribed to daikon-announce,
+because at some point you asked me to inform you of future updates.  If you
+wish to unsubscribe, then either go to
+http://pag.lcs.mit.edu/mailman/listinfo/daikon-announce (use the "Edit
+Options" button at the bottom of the page to retrieve your password), or
+send mail to daikon-announce-request@pag.lcs.mit.edu, or send mail to me.
+
+If you wish to subscribe to the daikon-discuss list, then go to
+http://pag.lcs.mit.edu/mailman/listinfo/daikon-discuss and enter your
+email address in the form.
+					-Michael Ernst
+					 mernst@lcs.mit.edu
+
+---------------------------------------------------------------------------
+
+/home/mailman/bin/newlist daikon-discuss mernst@lcs.mit.edu dkdiscpw
+
+Customize at:
+    http://pag.lcs.mit.edu/mailman/admin/daikon-discuss
+
+General options:
+ * public name: downcase it
+ * add terse description: 
+    Discussion list for Daikon users
+ * prefix for subject line: downcase it
+ * add introductory description
+    Daikon-discuss is a moderated list for the community of Daikon users.
+    Use it to share tips and successes, and to get help with questions or
+    problems (after checking the documentation).
+ * send monthly password reminder: no
+ * should administrator get immediate notice: no
+ * send mail to poster: no
+Privacy Options:
+ * who can view: list admin only
+ * must posts be approved: no
+ * restrict posting privilege: yes
+ * addresses of members: mernst@lcs.mit.edu
+Archival options:
+ * How often: yearly (for now)
+
+The web page for users is: 
+    http://pag.lcs.mit.edu/mailman/listinfo/daikon-discuss
+
+---------------------------------------------------------------------------
+
+/home/mailman/bin/newlist daikon-developers mernst@lcs.mit.edu dkdevpw
+
+Customize at:
+    http://pag.lcs.mit.edu/mailman/admin/daikon-developers
+
+General options:
+ * public name: downcase it
+ * add terse description: 
+    Mailing list for Daikon developers (send bug reports here)
+ * prefix for subject line: downcase it
+ * add introductory description
+    Use this list for bug reports, suggestions, and the like.
+ * send pssword reminders to: yes
+ * send monthly password reminder: no
+ * should administrator get immediate notice: no
+ * should administrator get notices of subscribes: yes
+ * send mail to poster: no
+ * maximum length in Kb: 100
+Membership Management:
+ * mass subscribe members: daikon@pag.lcs.mit.edu
+Privacy Options:
+ * what steps: confirm+approval
+ * who can view: list admin only
+ * must posts be approved: yes
+ * restrict posting privilege: no
+ * addresses of members: mernst@lcs.mit.edu
+Archival options:
+ * Is archive file source for public: private
+ * how often: yearly
+
+The web page for users is: 
+    http://pag.lcs.mit.edu/mailman/listinfo/daikon-developers
+
+===========================================================================

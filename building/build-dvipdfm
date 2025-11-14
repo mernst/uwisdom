@@ -1,0 +1,47 @@
+# 0.13.2c is latest as of 11/13/2003
+
+cd ~/tmp
+wget http://gaspra.kettering.edu/dvipdfm/dvipdfm-0.13.2c.tar.gz
+tar zxf dvipdfm-0.13.2c.tar.gz
+cd dvipdfm
+./configure
+make
+sudo make install
+setenv DEF `locate -n 1 /dvipdfm.def`
+echo $DEF
+sudo mv $DEF $DEF.orig
+sudo cp -pf latex-support/dvipdfm.def $DEF
+sudo mktexlsr
+
+===========================================================================
+
+From: Stephen McCamant <smcc@LCS.MIT.EDU>
+Date: Mon, 3 Mar 2003 13:17:00 -0500
+To: pag-admin@techsquare.com
+Cc: mernst@LCS.MIT.EDU
+Subject: Broken dvipdfm wrapper script
+
+The "dvipdfm" wrapper script in /usr/local/bin/dvipdfm is broken in
+two ways. First, it tries to export a variable using a dollar sign,
+which fails instead to export the value of the variable, and second,
+the path it supplies isn't sufficient for dvipdfm to find all of its
+files.
+
+The attached patch fixes it.
+
+--- /usr/local/bin/dvipdfm	Sat Feb 22 17:07:52 2003
++++ /g6/users/smcc/bin/dvipdfm	Mon Mar  3 13:12:19 2003
+@@ -1,8 +1,9 @@
+ #!/bin/bash
+ 
+ DVIPDFMHOME=/usr/local/pkg/dvipdfm/dvipdfm-0.13.2c
+-DVIPDFMINPUTS=$DVIPDFMHOME/share/texmf/dvipdfm/:
+-export $DVIPDFMINPUTS
++top=$DVIPDFMHOME/share/texmf/dvipdfm
++DVIPDFMINPUTS=$top/:$top/base:$top/config
++export DVIPDFMINPUTS
+ 
+ $DVIPDFMHOME/bin/dvipdfm $@
+ 
+
+===========================================================================

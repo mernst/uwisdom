@@ -1,0 +1,43 @@
+# Needed on CentOS which has ancient git installed
+# (CentOS has version 1.8.3 (released May, 2013), as of January 2017)
+
+# Get version number from https://github.com/git/git/tags
+VERSION=2.48.1
+cd ~/bin/install
+wget https://github.com/git/git/archive/v$VERSION.tar.gz
+mv v$VERSION.tar.gz git-$VERSION.tar.gz
+tar -zxf git-$VERSION.tar.gz
+cd git-$VERSION
+make configure
+./configure --prefix=$HOME/bin/install/git-$VERSION-install
+make all
+make install
+# Now add $HOME/bin/install/git-2.48.1-install to early on your path.
+
+# This requires xmlto, which isn't installed at CSE.
+make doc info
+make install-doc install-html install-info
+
+===========================================================================
+
+# To install git lfs on Ubuntu:
+sudo apt install git-lfs
+git-lfs install
+
+# I later had to do
+sudo rm /etc/apt/sources.list.d/github_git-lfs.list
+# because of problems while trying to update.
+# So, I did that and kept using the old binary.
+
+----------------
+
+# To install git lfs at CSE:
+cd ~/bin/install
+wget https://github.com/git-lfs/git-lfs/releases/download/v3.3.0/git-lfs-linux-amd64-v3.3.0.tar.gz
+tar xzf git-lfs-linux-amd64-v3.3.0.tar.gz
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/git-lfs-3.3.0/git-lfs .
+git lfs install
+
+===========================================================================

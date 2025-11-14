@@ -1,0 +1,44 @@
+===========================================================================
+
+# For details, see http://www.timj.co.uk/linux/sa.php
+cd /etc/mail/spamassassin
+sudo wget http://www.timj.co.uk/linux/bogus-virus-warnings.cf
+
+Periodically run these commands (possibly on even more mailboxes):
+      sa-learn --showdots --mbox --spam $HOME/.mail/sa-spam.mail
+      sa-learn --showdots --mbox --ham $HOME/.mail/sa-ham.mail
+[I need a huge ham folder in Unix mail format; how to do this?]
+
+On pag, run "spamassassin -D --lint" and keep an eye out for lines like:
+  debug: bayes: Not available for scanning, DB_File not installed
+  debug: bayes: Not available for scanning, only 0 spam(s) in Bayes DB < 200
+
+===========================================================================
+
+	perl -MCPAN -e shell
+	o conf prerequisites_policy ask
+	install Net::DNS
+	install Time::HiRes
+	install Mail::SpamAssassin
+	install Mail::Audit
+	quit
+
+      spamassassin -t < sample-nonspam.txt > nonspam.out
+      spamassassin -t < sample-spam.txt > spam.out
+
+[The files are:
+  http://us.spamassassin.org/dist/sample-nonspam.txt
+  http://us.spamassassin.org/dist/sample-spam.txt
+]
+
+mkdir .spamassassin
+
+----------------
+
+wget http://us.spamassassin.org/dist/spamd/README.spamd
+wget http://us.spamassassin.org/dist/spamd/redhat-rc-script.sh
+chmod +x redhat-rc-script.sh
+sudo mv redhat-rc-script.sh /etc/rc.d/init.d/spamassassin
+sudo /etc/rc.d/init.d/spamassassin start
+# I'm not sure whether I need to do something special to make sure
+# that spampassassin is started every time geyer is rebooted.

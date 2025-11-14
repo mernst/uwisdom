@@ -1,0 +1,10 @@
+# This didn't work at CSE as of 2025-01-26.
+
+VERSION=0.0.29
+cd ~/bin/install
+wget https://pagure.io/xmlto/archive/${VERSION}/xmlto-${VERSION}.zip
+unzip xmlto-${VERSION}.zip
+cd xmlto-${VERSION}
+flex -o xmlif/xmlif.c xmlif/xmlif.l
+automake
+./configure
