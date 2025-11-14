@@ -38,17 +38,20 @@ Run `doc -h` for complete usage instructions (see `doc` alias below).
 ## Obtaining the files
 
 The wisdom files appear on the web at
-  <https://github.com/mernst/uwisdom/tree/wiki> .
+  <https://github.com/mernst/uwisdom/>.
 You can get a local copy by following the instructions on that webpage.
 
 ## Comparison to web/email/etc. search
 
-Why would you want to use this program when you can just search the web
-instead?
+Why would you want to use this program when you can just search the web or ask
+an LLM instead?
 
-* You may have local data that you choose not to put on the web for global searching (e.g., your address book).
+* You may have local data that you choose not to put on the web for global
+  searching (e.g., your address book).
 * Having a local copy enables offline use.
-* Information may be available elsewhere, but time-consuming to find via a web search or in a manual.
+* Information may be available elsewhere, but time-consuming to find via a web
+  search or in a manual.
+* LLMs can yield incorrect information.
 
 Whenever I spend too long finding information, and especially if I think I
 might find the information useful in the future, I write an entry for a
@@ -70,12 +73,10 @@ more likely to find the correct entry.
 
 ## Installing the lookup program, and shell aliases
 
-The Lookup program is available as part of plume-lib
-(<https://github.com/mernst/plume-lib>).
-
-As indicated in the examples above, the Lookup program can be used for more
-than just searching the wisdom files.  Here are some further bash aliases
-that you can use when invoking the program.
+As indicated in the examples above, the [Lookup
+program](https://github.com/plume-lib/lookup) can be used for more than just
+searching the wisdom files.  Here are some further bash aliases that you can use
+when invoking the program.
 
 ```sh
   ## Lookup program.  "Lookup" is like "doc", but with the "-a" option (print
