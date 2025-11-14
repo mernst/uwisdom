@@ -4,7 +4,7 @@ default:
 	@echo "Doing nothing."
 
 markdownlint:
-	markdownlint-cli2 "**/*.md" "#node_modules"
+	markdownlint-cli2 --fix "**/*.md" "#node_modules"
 
 TAGS: tags
 tags:

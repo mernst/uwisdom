@@ -1,9 +1,4 @@
 = Wisdom about Linux
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 
@@ -678,11 +673,11 @@ Here, then, is my setup:
 
 1. I have the following in my .xsession:
 
-  ```sh
-  # !/bin/bash
-  source ~/.bashrc
-  startkde
-  ```
+   ```sh
+   # !/bin/bash
+   source ~/.bashrc
+   startkde
+   ```
 
 2. At the login screen, I set my session type to Default.  This
   will invoke the .xsession, which will set my environment
@@ -690,34 +685,34 @@ Here, then, is my setup:
 
 3. I executed the following command:
 
-  ```sh
-  ln -s /usr/bin/gnome-settings-daemon ~/.kde/Autostart/
-  ```
+   ```sh
+   ln -s /usr/bin/gnome-settings-daemon ~/.kde/Autostart/
+   ```
 
-  This lets Gnome take over font selection and UI elements.
+   This lets Gnome take over font selection and UI elements.
 
 4. I added some better fonts.  If you copy over from turnip
-  /usr/share/fonts/truetype/msttcorefonts/*,
-  /etc/defoma/hints/tahoma.hints, and
-  /etc/defoma/hints/msttcorefonts.hints, then you can install the
-  fonts with
+   /usr/share/fonts/truetype/msttcorefonts/*,
+   /etc/defoma/hints/tahoma.hints, and
+   /etc/defoma/hints/msttcorefonts.hints, then you can install the
+   fonts with
 
-  ```sh
-  defoma-font register-all /etc/defoma/hints/tahoma.hints
-  defoma-font register-all /etc/defoma/hints/msttcorefonts.hints
-  ```
+   ```sh
+   defoma-font register-all /etc/defoma/hints/tahoma.hints
+   defoma-font register-all /etc/defoma/hints/msttcorefonts.hints
+   ```
 
 5. I selected the fonts I wanted.  This requires settings in several
-  places:
+   places:
 
-  a) The KDE control panel
-  b) The Gnome control panel: /usr/bin/gnome-font-properties
-  c) Eclipse's internal fonts: Window > Preferences > Colors and Fonts
+   a) The KDE control panel
+   b) The Gnome control panel: /usr/bin/gnome-font-properties
+   c) Eclipse's internal fonts: Window > Preferences > Colors and Fonts
 
-  My personal favorites are Tahoma for UI elements, and 6x13 for
-  monotype text, but your mileage may vary.  I strongly recommend, when
-  using gnome-font-properties, that you go into the Details... pane and
-  select Full Hinting.  Other settings are up to you.
+   My personal favorites are Tahoma for UI elements, and 6x13 for
+   monotype text, but your mileage may vary.  I strongly recommend, when
+   using gnome-font-properties, that you go into the Details... pane and
+   select Full Hinting.  Other settings are up to you.
 
 Share and Enjoy,
 

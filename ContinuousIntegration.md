@@ -1,9 +1,4 @@
 = Information about continuous integration services
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 

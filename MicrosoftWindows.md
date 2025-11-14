@@ -1,9 +1,4 @@
 = Wisdom about using Microsoft Windows on a personal computer (PC)
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 

@@ -1,11 +1,4 @@
 = Tools for manipulating Java programs
-:toc:
-:toc-placement: manual
-
-
-toc::[]
-
-
 
 
 

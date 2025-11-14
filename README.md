@@ -1,12 +1,9 @@
 = Information about the uwisdom collection of useful facts, and how to search it
-:toc:
-:toc-placement: manual
 
 
 This is a description/blurb of the doc/lookup/help program for searching wisdom files.
 
 
-toc::[]
 
 
 

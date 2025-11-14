@@ -1,9 +1,4 @@
 = Wisdom about Java
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 

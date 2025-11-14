@@ -1,9 +1,4 @@
 = Wisdom about version control systems
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 
@@ -763,17 +758,17 @@ For Bitbucket, an example is:
 
 In GitHub, just
 
-```markdown
+```asciidoc
 :toc:
 ```
 
 doesn't produce a table of contents.  Instead, you need
 
-```markdown
+```asciidoc
 :toc:
-  :toc-placement: manual
-  ...
-  toc::[]
+:toc-placement: manual
+...
+toc::[]
 ```
 
 

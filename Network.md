@@ -1,9 +1,4 @@
 = Information about resources available on the network
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 // Examples include download locations, ftp sites, web sites, and some

@@ -1,11 +1,6 @@
 Wisdom about Emacs
 ==================
 
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 

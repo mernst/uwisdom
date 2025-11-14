@@ -1,15 +1,9 @@
 = Wisdom about programs
-:toc:
-:toc-placement: manual
-:experimental:
 
 
 
 This file is a bit of a catch-all, for everything that does not have a
 dedicated wiki page.
-
-
-toc::[]
 
 
 
@@ -1614,10 +1608,10 @@ Typical Makefile rules for markdownlint-cli2:
 ```make
 style-fix: markdownlint-fix
 markdownlint-fix:
-	markdownlint-cli2 --fix "**/*.md" "#node_modules"
+ markdownlint-cli2 --fix "**/*.md" "#node_modules"
 style-check: markdownlint-check
 markdownlint-check:
-	markdownlint-cli2 "**/*.md" "#node_modules"
+ markdownlint-cli2 "**/*.md" "#node_modules"
 ```
 
 

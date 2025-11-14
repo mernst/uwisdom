@@ -1,9 +1,4 @@
 = Wisdom about PHP
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 To change the memory

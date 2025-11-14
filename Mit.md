@@ -1,9 +1,4 @@
 = Wisdom about MIT
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 

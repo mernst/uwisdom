@@ -1,9 +1,4 @@
 = Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
@@ -640,31 +635,31 @@ To make bibliography items less indented, do one or both of the these:
 
 1. Comment out
 
-  ```latex
-         \advance\leftmargin\labelsep
-  ```
+   ```latex
+          \advance\leftmargin\labelsep
+   ```
 
 2. Change
 
-  ```latex
-         \settowidth\labelwidth{\@biblabel{#1}}%
-  ```
+   ```latex
+          \settowidth\labelwidth{\@biblabel{#1}}%
+   ```
 
-  to
+   to
 
-  ```latex
-         \settowidth\labelwidth{~}%
-  ```
+   ```latex
+          \settowidth\labelwidth{~}%
+   ```
 
-  (though this is a bit drastic).
+   (though this is a bit drastic).
 
-  To remove all vertical spacing (space) between bibliography items, add:
+   To remove all vertical spacing (space) between bibliography items, add:
 
-  ```latex
-    % These two commands remove inter-bib-item spacing
-    \setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}
-  ```
+   ```latex
+     % These two commands remove inter-bib-item spacing
+     \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{0pt}
+   ```
 
 
 To use only first initials (not whole first name) in BibTeX, change "ff" to
@@ -1396,22 +1391,22 @@ does not identify itself; at processing time, its location is obtained from
 the system and encoded in the resulting output file.)
 
 1. Use the ability of tex/latex to take information from the invocation.
-  Here is a script that does this for a latex document, so that the variable
-  \fileid can be used at will in the document and will expand to the absolute
-  pathname with hostname prepended
+   Here is a script that does this for a latex document, so that the variable
+   \fileid can be used at will in the document and will expand to the absolute
+   pathname with hostname prepended
 
-  ```sh
-   FN=`basename $1 .tex`.tex
-   FILEID=`hostname`:`pwd`/$FN
-   FILEID=`echo $FILEID | tr _ .`
-   echo Inserting $FILEID...
-   virtex "&"lplain \\def\\fileid{$FILEID}\\input $1
-  ```
+   ```sh
+    FN=`basename $1 .tex`.tex
+    FILEID=`hostname`:`pwd`/$FN
+    FILEID=`echo $FILEID | tr _ .`
+    echo Inserting $FILEID...
+    virtex "&"lplain \\def\\fileid{$FILEID}\\input $1
+   ```
 
 2. Use rcs or make.
 3. Use a script and UNIX file-editing filters to replace tokens in the text
-  with dynamically obtained environment information.
-  From: <vjcarey@sphunix.sph.jhu.edu> ("Vincent J. Carey")
+   with dynamically obtained environment information.
+   From: <vjcarey@sphunix.sph.jhu.edu> ("Vincent J. Carey")
 
 
 How can I make the pagestyle of the first page be empty (no page number)?

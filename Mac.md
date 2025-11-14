@@ -1,9 +1,4 @@
 = Wisdom about Mac (Apple Macintosh)
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 Force quit a mac program with option-command-esc.  You can use this

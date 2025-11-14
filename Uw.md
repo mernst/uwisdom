@@ -1,9 +1,4 @@
 = Wisdom about the University of Washington.
-:toc:
-:toc-placement: manual
-
-
-toc::[]
 
 
 
@@ -629,7 +624,7 @@ For course staff communication:
 You must be a member of the CSE unix group "smtp-users" to send mail
 from a script using `attumail.cs.washington.edu`. To check if you are a member:
 
-1. Go to https://intranet.cs.washington.edu/grpadmin
+1. Go to <https://intranet.cs.washington.edu/grpadmin>
 2. Click "Query or change group members"
 3. Click the radio button "user name" next to the Query By button.
 4. Then click the "Query By" button.

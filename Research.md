@@ -1,9 +1,4 @@
 = Tips about conducting technical research, and writing it up
-:toc:
-:toc-placement: manual
-
-
-// toc::[]
 
 
 
