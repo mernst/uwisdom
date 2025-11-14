@@ -62,9 +62,9 @@ to the manual, a web search, etc.
 ## Writing a wisdom entry
 
 Please help to improve this resource by adding and updating the information!
-You can submit a paragraph of text, a patch, a Mercurial bundle, or an
-issue on the issue tracker.  You can also make your own clone and add your
-personal information there, though it won't contribute to the main version.
+You can submit a paragraph of text, a pull request, or an issue on the issue
+tracker.  You can also make your own clone and add your personal information
+there, though it won't contribute to the main version.
 
 When writing a wisdom entry, please use appropriate keywords to ensure that
 you and others can find the information.  I often intentionally include
