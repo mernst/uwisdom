@@ -1,4 +1,4 @@
-= Wisdom about programs
+# Wisdom about programs
 
 
 
@@ -7,7 +7,7 @@ dedicated wiki page.
 
 
 
-== PostScript and PDF
+## PostScript and PDF
 
 
 To convert a text file to PostScript or PDF, here are possibilities.
@@ -450,7 +450,7 @@ other containing even pages scanned in reverse order:
 
 
 
-== WWW and HTML
+## WWW and HTML
 
 
 To make a webpage automatically forward/redirect, see
@@ -687,7 +687,7 @@ Instead, use one of
 
 
 
-=== Firefox
+### Firefox
 
 
 Firefox extensions (.xpi files): to install, open them in Firefox.
@@ -765,14 +765,14 @@ Here are two fixes:
   and edit the .html file to reference the local version of the .css file.
 
 
-=== Chrome
+### Chrome
 
 
 For the URLs of all (recently-used) tabs, browse to:
 chrome://inspect/#pages
 
 
-== Kerberos
+## Kerberos
 
 
 For jobs running longer than 8 days that need Kerberos tickets, see
@@ -851,7 +851,7 @@ Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 
 
 
-== AFS
+## AFS
 
 
 To modify AFS directory/file permissions/acls/access control lists, see
@@ -968,7 +968,7 @@ such problems.)
 
 
 
-== Perl
+## Perl
 
 
 To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
@@ -1181,7 +1181,7 @@ perl-style-check:
 
 
 
-== Python
+## Python
 
 
 In Python, by default variables have function (not block) scope.  To refer
@@ -1301,7 +1301,7 @@ Path('filename.txt').write_text(new_file_content)
 
 
 
-== Rust
+## Rust
 
 
 Rust code should have, in its main file (such as `main.rs`):
@@ -1312,7 +1312,7 @@ Rust code should have, in its main file (such as `main.rs`):
 
 
 
-== Shells
+## Shells
 
 
 Parsing command-line arguments in a Posix shell script:
@@ -1652,7 +1652,7 @@ SCRIPT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)"
 ```
 
 
-== ssh (secure shell)
+## ssh (secure shell)
 
 
 To use ssh (and other tools like CVS, SVN, git, Hg, ...) with RSA public keys,
@@ -1731,7 +1731,7 @@ For more on the difference between `[` and `[[`, see <http://mywiki.wooledge.org
 
 
 
-== X Windows
+## X Windows
 
 
 X Windows initialization depends on .Xdefaults and .xsession files, among others.
@@ -1817,7 +1817,7 @@ Applications >> Desktop Preferences >> Screen Resolution
 
 
 
-== C and C++
+## C and C++
 
 
 In C++, an auto_ptr is automatically deleted at the end of its scope.
@@ -1936,7 +1936,7 @@ Two things to check:
 
 
 
-== Email
+## Email
 
 
 Websieve (sieve) RFC is rfc3028, with Sieve grammar and rules.
@@ -2071,7 +2071,7 @@ Also see the tips here:
 
 
 
-== Eclipse
+## Eclipse
 
 
 Useful keystrokes in Eclipse:
@@ -2136,7 +2136,7 @@ Eclipse has two compilers.
 
 
 
-== IntelliJ
+## IntelliJ
 
 
 To prevent IntelliJ from using wildcard imports, you must do *both* of the following:
@@ -2146,7 +2146,7 @@ To prevent IntelliJ from using wildcard imports, you must do *both* of the follo
 
 
 
-== VMware
+## VMware
 
 
 To run VMware tools:
@@ -2166,7 +2166,7 @@ In VMware, shared folders from the host appear in /mnt/hgfs/.
 
 
 
-== Docker
+## Docker
 
 
 A Docker container image is simply a root filesystem (snapshot) for a given
@@ -2285,7 +2285,7 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 
 
 
-== Markdown
+## Markdown
 
 
 For converting (GitHub-style) markdown format (.md file) to HTML:
@@ -2320,7 +2320,7 @@ Markdown parsers:
 
 
 
-== AsciiDoc
+## AsciiDoc
 
 
 AsciiDoc has various advantages over Markdown, especially for complex documents
@@ -2360,7 +2360,7 @@ Then after the callout use unindented `{empty}` if the following text is indente
 
 
 
-== Diff
+## Diff
 
 
 To make a diff file good for patching old-file to produce new-file,
@@ -2421,7 +2421,7 @@ See my question at  <https://stackoverflow.com/questions/78252587> .
 
 
 
-== make
+## make
 
 
 For a list of all makefile targets:
@@ -2434,7 +2434,7 @@ make -qp |
 
 
 
-== Error Prone linter
+## Error Prone linter
 
 
 Gradle buildfile rules to run Error Prone linter on each compilation:
@@ -2478,7 +2478,7 @@ Example:
 
 
 
-== AI tools
+## AI tools
 
 
 AI code review, free for open source:
@@ -2494,7 +2494,7 @@ AI code review tools to investigate:
 * <https://devlo.ai/>
 
 
-== General wisdom (that is, everything without its own section above)
+## General wisdom (that is, everything without its own section above)
 
 
 Information about a variety of Java tools can be found in the wisdom

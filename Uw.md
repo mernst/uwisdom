@@ -1,10 +1,10 @@
-= Wisdom about the University of Washington.
+# Wisdom about the University of Washington.
 
 
 
 
 
-== UW (non-CSE-specific)
+## UW (non-CSE-specific)
 
 
 UW Travel Card rules, from <http://www.washington.edu/admin/procsrvcs/ecommerce/cta/travelcardpolicy.html>:
@@ -139,7 +139,7 @@ To schedule Panopto automated video recordings:
 
 
 
-== CSE (other than sysadmin)
+## CSE (other than sysadmin)
 
 
 At UW CSE, Jan Cuny can read equity & broadening participation in computing (BPC) part of grants
@@ -333,7 +333,7 @@ Purchase request:
 
 
 
-== CSE sysadmin
+## CSE sysadmin
 
 
 UW CSE printer: ps581
@@ -635,7 +635,7 @@ from a script using `attumail.cs.washington.edu`. To check if you are a member:
   email.
 
 
-== Seattle
+## Seattle
 
 
 Options for short-term Seattle housing/rentals/apartments/sublets:

@@ -1,8 +1,8 @@
-= Wisdom about Java
+# Wisdom about Java
 
 
 
-== JIT
+## JIT
 
 
 To disable the JIT, run Java with the  -Djava.compiler=DISABLED  option.
@@ -31,7 +31,7 @@ used "invokestatic".
 
 
 
-== JUnit
+## JUnit
 
 
 To migrate from JUnit 4 to JUnit 5:
@@ -89,7 +89,7 @@ Updating imports, using Emacs:
 ```
 
 
-== Debugging
+## Debugging
 
 
 Graphical Java debugger:  jswat (<http://www.bluemarsh.com/java/jswat/>).
@@ -135,7 +135,7 @@ To get line numbers too, make the VM create a core dump, then use jstack:
 
 
 
-== Profiling
+## Profiling
 
 
 For notes about Java garbage collection and the heap, see wiki page JavaHeap.
@@ -162,7 +162,7 @@ that works with CPU time rather than wallclock time.
 
 
 
-== Generics
+## Generics
 
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
@@ -211,7 +211,7 @@ from the declaration.
 
 
 
-== javac
+## javac
 
 
 javac is a script that runs a Java program that runs on a JVM, and you can
@@ -317,7 +317,7 @@ This is only needed in Java 8, because the bug is fixed in Java 11:
 
 
 
-== javadoc
+## javadoc
 
 
 How to quote less than and greater than (angle brackets), such as for generics, without using &lt; and &gt; in Javadoc comments:
@@ -489,7 +489,7 @@ Javadoc links:
 
 
 
-== Command-line options
+## Command-line options
 
 
 To run Java with a maximum of 4GB of memory:
@@ -540,7 +540,7 @@ Environment varibales used by Gradle (I don't know what the precedence is)
 
 
 
-== Everything else
+## Everything else
 
 
 JDK 1.4 is still distributed, but at an obscure URL:

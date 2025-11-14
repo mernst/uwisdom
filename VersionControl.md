@@ -1,4 +1,4 @@
-= Wisdom about version control systems
+# Wisdom about version control systems
 
 
 
@@ -11,7 +11,7 @@ merge conflicts when multiple people edit different parts of a paragraph.
 
 
 
-== Git
+## Git
 
 
 Here is my strategy for preventing my fork's master branch from getting out of sync, and in general to avoid branch confusion.
@@ -741,7 +741,7 @@ git merge --squash origin/BRANCHNAME
 
 
 
-== GitHub (Git-specific items go above)
+## GitHub (Git-specific items go above)
 
 
 For GitHub, to link directly to files in the repository, use rawgit.com.
@@ -849,7 +849,7 @@ git push)
 ```
 
 
-=== GitHub pull requests
+### GitHub pull requests
 
 
 The standard way to collaborate on Github-based projects is for you to fork
@@ -959,7 +959,7 @@ When making a GitHub pull request, if you do work in your own GitHub fork, then 
 
 
 
-== GitLab (Git-specific and GitHub-specific items go above)
+## GitLab (Git-specific and GitHub-specific items go above)
 
 
 To enable Gitlab commit/push notifications by email:
@@ -1005,7 +1005,7 @@ then there are two ways to solve it:
 
 
 
-== Bitbucket
+## Bitbucket
 
 
 For email notifications of changesets in Bitbucket, use Admin >> Services;
@@ -1022,7 +1022,7 @@ an API token.  Must create "api token WITH SCOPES", with permissions
 
 
 
-== Pull requests
+## Pull requests
 
 
 When you address a code review comment, you don't need to reply within the pull

@@ -1,4 +1,4 @@
-== Make and Makefiles
+## Make and Makefiles
 
 
 make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
@@ -139,7 +139,7 @@ THIS_MAKEFILE:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
 
 
 
-== Ant and buildfiles, build.xml
+## Ant and buildfiles, build.xml
 
 
 An Ant guide (documentation) for beginners:
@@ -393,7 +393,7 @@ ant -Doutgen.job.ant.opts=-XX:ActiveProcessorCount=1
 
 
 
-== Maven and pom.xml
+## Maven and pom.xml
 
 
 In a Maven buildfile pom.xml, here is where to put <plugins>:
@@ -465,14 +465,14 @@ To delete Maven Central snapshots, delete this directory:
 
 
 
-== Buck
+## Buck
 
 
 Pass `--version 8` to see the javac command line that buck issues.
 
 
 
-== Gradle and build.gradle
+## Gradle and build.gradle
 
 
 The standard gradle task (target), which builds all artifacts and runs all tests, is
@@ -955,7 +955,7 @@ mustRunAfter is strict.  Gradle may violate shouldRunAfter to increase paralleli
 
 
 
-=== Displaying Gradle dependencies
+### Displaying Gradle dependencies
 
 
 To see the source of the dependencies that end up in a fat/uber/shadow jar:
@@ -1014,7 +1014,7 @@ gradle dependencies --configuration=testCompileClasspath
 
 
 
-== Testing local version of Checker Framework by overwriting local caches
+## Testing local version of Checker Framework by overwriting local caches
 
 
 To copy a locally-built Checker Framework to the Gradle and Maven local caches:

@@ -1,8 +1,8 @@
-= Wisdom about using Microsoft Windows on a personal computer (PC)
+# Wisdom about using Microsoft Windows on a personal computer (PC)
 
 
 
-== VMware
+## VMware
 
 
 Do not switch between VMware regular and virtual console while the mouse is
@@ -28,7 +28,7 @@ Spoof MAC address under Linux:
 
 
 
-== Windows Subsystem for Linux (WSL)
+## Windows Subsystem for Linux (WSL)
 
 
 WSL:
@@ -38,7 +38,7 @@ Never access WSL files at via C:\Users\mernst\AppData\Local\Packages\... !
 
 
 
-== Microsoft Windows
+## Microsoft Windows
 
 
 Ctrl-ESC opens the "Start" menu.

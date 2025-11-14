@@ -1,4 +1,4 @@
-= Wisdom about Mac (Apple Macintosh)
+# Wisdom about Mac (Apple Macintosh)
 
 
 Force quit a mac program with option-command-esc.  You can use this

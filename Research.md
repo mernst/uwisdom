@@ -1,4 +1,4 @@
-= Tips about conducting technical research, and writing it up
+# Tips about conducting technical research, and writing it up
 
 
 

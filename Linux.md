@@ -1,8 +1,8 @@
-= Wisdom about Linux
+# Wisdom about Linux
 
 
 
-== Debian
+## Debian
 
 
 Debian installation and package maintenance with APT:
@@ -200,7 +200,7 @@ To make the Caps Lock key an additional Control/Ctrl key under Linux:
 
 
 
-== Ubuntu
+## Ubuntu
 
 
 It is a bug in Ubuntu 13.10 that pdflatex produces A4 output.
@@ -246,7 +246,7 @@ Ubuntu release names
 
 
 
-== Devices
+## Devices
 
 
 To mount a USB stick drive or CD-ROM on Ubuntu or Rocky Linux,
@@ -300,7 +300,7 @@ An Amazon Kindle plugged into Ubuntu Linux via USB has its books mounted at
 
 
 
-== Everything else
+## Everything else
 
 
 DMA settings on the hard disks make a significant (10X) difference
@@ -584,7 +584,7 @@ java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
 
 
 
-== long entries below
+## long entries below
 
 
 

@@ -1,4 +1,4 @@
-= Information about resources available on the network
+# Information about resources available on the network
 
 
 // Examples include download locations, ftp sites, web sites, and some
@@ -7,7 +7,7 @@
 // less important than it was in the past.
 
 
-== Email
+## Email
 
 
 Anyone may subscribe to the Computing Research Association's <jobs@cra.org>
@@ -56,7 +56,7 @@ Throwaway email addresses: simplelogin, maildrop
 
 
 
-== AWS Amazon Web services
+## AWS Amazon Web services
 
 
 To download files from Amazon S3, first install via
@@ -101,7 +101,7 @@ Amazon Web Services (AWS) tips, from Darioush Jalali:
 
 
 
-== Uncategorized
+## Uncategorized
 
 
 LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.

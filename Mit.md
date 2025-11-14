@@ -1,10 +1,10 @@
-= Wisdom about MIT
+# Wisdom about MIT
 
 
 
 
 
-== MIT-specific
+## MIT-specific
 
 
 MIT medical service personal physicians:
@@ -137,7 +137,7 @@ UROP Homepage for Students:  <https://sisapp.mit.edu/uropweb/home.mit>
 
 
 
-== Athena-specific
+## Athena-specific
 
 
 // This section contains information about Athena, the MIT computing system.
@@ -253,7 +253,7 @@ though this had worked for me earlier.)
 
 
 
-== CSAIL-specific
+## CSAIL-specific
 
 
 CSAIL Personnel Assistant: Rachel Avery
@@ -496,7 +496,7 @@ Don't forget to:
 
 
 
-== CSAIL printing
+## CSAIL printing
 
 
 CSAIL printer and copier locations:
@@ -561,7 +561,7 @@ To call Mike in Germany, use IP 139.19.100.30
 
 
 
-== EECS-specific
+## EECS-specific
 
 
 Info about undergraduate theses (including prizes):
@@ -587,7 +587,7 @@ not include
 
 
 
-== PAG-specific
+## PAG-specific
 
 
 EDG C front end:
@@ -670,7 +670,7 @@ The interesting lines are those with Type "Disk", so then do:
 
 
 
-== Boston-specific
+## Boston-specific
 
 
 Apollo Travel (617-876-4471, 860 Mass. Ave., between Harvard and Central

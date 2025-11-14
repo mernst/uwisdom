@@ -1,4 +1,4 @@
-= Tools for manipulating Java programs
+# Tools for manipulating Java programs
 
 
 
@@ -168,7 +168,7 @@ Parses the Java 1.1 language.
 
 
 
-== Java compilers
+## Java compilers
 
 
 <http://dir.yahoo.com/Computers_and_Internet/Programming_Languages/Java/Compilers/>
@@ -257,7 +257,7 @@ Perhaps it only works under NetBeans.
 
 
 
-== Parsers
+## Parsers
 
 
 Parsers:
@@ -319,7 +319,7 @@ Useful (but isn't deep):
 
 
 
-== Pretty-printers/decompilers for .class files
+## Pretty-printers/decompilers for .class files
 
 
 Java decompiler CFR:
@@ -403,7 +403,7 @@ actually a disassembler, not a decompiler, it seems.
 
 
 
-== Bytecode/classfile instrumenters/processing/rewriters
+## Bytecode/classfile instrumenters/processing/rewriters
 
 
 Java class-file API:
@@ -575,7 +575,7 @@ Also see <http://www.gnu.org/software/java/java-software.html>
 
 
 
-== Bytecode instrumenters and other tools
+## Bytecode instrumenters and other tools
 
 
 From David Saff, October 3, 2004:
@@ -655,7 +655,7 @@ makes it easy to add new tools.
 
 
 
-== Java test suites
+## Java test suites
 
 
 TCK: Java Technology Compatibility Kits.  There is one for each JSR.  The
@@ -714,7 +714,7 @@ quirks, which you have to work around or ignore.
 
 
 
-== Java interpreter
+## Java interpreter
 
 
 <http://www.beanshell.org/>
@@ -749,7 +749,7 @@ If you are intersted, send email to: <contact@metamata.com>.
 
 
 
-== Java debuggers
+## Java debuggers
 
 
 * NetBeans Developer
@@ -793,7 +793,7 @@ List of debuggers at <http://www.daimi.au.dk/~beta/ooli/Compare.html>
 As of 6/2017, not updated since 8/2011.
 
 
-== Compilers
+## Compilers
 
 
 The Flex compiler system built by Martin Rinard's group, over 100,000 lines
@@ -806,14 +806,14 @@ representation based on a variant of SSA form.  See <www.flexc.lcs.mit.edu>.
 
 
 
-== Pointer analysis
+## Pointer analysis
 
 
 The GraalVM pointer analysis is fast and precise.
 
 
 
-== Lightweight static checkers
+## Lightweight static checkers
 
 
 findbugs:
@@ -841,7 +841,7 @@ lgtm.com issues false positive warnings, and I don't see how to suppress them.
 
 
 
-== Profilers
+## Profilers
 
 
 jcmd can print a stack trace of a running Java program, at the current
@@ -856,7 +856,7 @@ share.  It shows screenshots but gives no usage instructions.
 
 
 
-=== Profilers in the JDK
+### Profilers in the JDK
 
 
 Flight Recorder:
@@ -885,7 +885,7 @@ It can be run as a standalone application.  To install:
 <https://www.eclipse.org/mat/downloads.php>
 
 
-== Other Java profilers
+## Other Java profilers
 
 
 Yourkit, or YJP, is a Java profiler.
@@ -941,7 +941,7 @@ java -Xrunhprof:cpu=samples,heap=all ...
 
 
 
-== Java code coverage
+## Java code coverage
 
 
 * JaCoCo: <http://www.eclemma.org/jacoco/>
@@ -981,7 +981,7 @@ java -Xrunhprof:cpu=samples,heap=all ...
 
 
 
-== Mutation coverage ("mutation testing") tools
+## Mutation coverage ("mutation testing") tools
 
 
 For a much more complete survey, see Gareth Snow's report of June 2010.
@@ -1036,7 +1036,7 @@ for $99; we should buy it when it comes out.
 
 
 
-== JVMs
+## JVMs
 
 
 
@@ -1126,7 +1126,7 @@ It's $5000 for an academic license ($50,000 for a commercial one).
 
 
 
-== Improving startup time
+## Improving startup time
 
 
 GraalVM Native Image
@@ -1220,7 +1220,7 @@ Nailgun is no longer maintained.
 
 
 
-== Slicers
+## Slicers
 
 
 Many papers claim results from a slicing tool (for example, there is a long
@@ -1370,7 +1370,7 @@ Java call graph (dependences) extraction:
 
 
 
-== Formatters
+## Formatters
 
 
 I prefer google-java-format (<https://github.com/google/google-java-format>) for Java formatting.
@@ -1384,7 +1384,7 @@ So, use Spotless (<https://github.com/diffplug/spotless>) to run google-java-for
 
 
 
-== Continuous integration
+## Continuous integration
 
 
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
@@ -1436,7 +1436,7 @@ scons
 
 
 
-== C# tools
+## C# tools
 
 
 Static rewriting:

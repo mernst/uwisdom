@@ -1,10 +1,9 @@
-Wisdom about Emacs
-==================
+# Wisdom about Emacs
 
 
 
 
-== General tips
+## General tips
 
 
 
@@ -34,7 +33,7 @@ specifier.
 
 
 
-== TAGS tables
+## TAGS tables
 
 
 Emacs's tags facility allows you to easily find a definition (of a
@@ -96,7 +95,7 @@ or, to run tags directly:
 
 
 
-== Gnus news/mail reader
+## Gnus news/mail reader
 
 
 To save (or execute some other gnus keystroke command upon) multiple
@@ -121,7 +120,7 @@ In Mew: to copy a message from one account to another, run:  l i
 
 
 
-== Uncategorized Emacs wisdom
+## Uncategorized Emacs wisdom
 
 
 

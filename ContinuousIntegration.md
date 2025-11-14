@@ -1,4 +1,4 @@
-= Information about continuous integration services
+# Information about continuous integration services
 
 
 
@@ -40,7 +40,7 @@ Comparison of CI systems:
 
 
 
-== Azure Pipelines
+## Azure Pipelines
 
 
 Azure Pipelines terminology:
@@ -120,7 +120,7 @@ After doing this, it may take a few minutes for users to see the "run next" butt
 
 
 
-== CircleCI
+## CircleCI
 
 
 CircleCI's `docker` executor:
@@ -192,7 +192,7 @@ echo $(($(cat /sys/fs/cgroup/cpu/cpu.shares) / 1024))
 
 
 
-== Travis CI
+## Travis CI
 
 
 Whitelist of Ubuntu packages that can be installed on container-based
@@ -355,7 +355,7 @@ When there are multiple Travis jobs in a single Travis build, each job runs diff
 
 
 
-== GitHub Actions
+## GitHub Actions
 
 
 GitHub Workflows CI is easy to set up: just commit a file to `.github/workflows/` (e.g., `gradle.yml`).
@@ -382,7 +382,7 @@ GitHub Actions is problematic if you have flaky jobs.
 
 
 
-== GitLab CI runners
+## GitLab CI runners
 
 
 GitLab CI coordinates runners, farms out work to them, and keeps track build histories and whatnot, but doesn't do the build itself.
@@ -413,7 +413,7 @@ To unregister a multi-runner:
 
 
 
-== Jenkins
+## Jenkins
 
 
 To give a new user permissions/privileges in Jenkins:
@@ -432,7 +432,7 @@ To give a new user permissions/privileges in Jenkins:
   adjust the privileges.
 
 
-== Dependabot
+## Dependabot
 
 
 Dependabot runs on forks, which is irritating.

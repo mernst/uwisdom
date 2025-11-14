@@ -1,4 +1,4 @@
-= Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
+# Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
 
 
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
@@ -13,7 +13,7 @@
 
 
 
-== Figures (floats)
+## Figures (floats)
 
 
 In LaTeX, always put a \protect in front of a \ref in a \caption.
@@ -109,7 +109,7 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
 
 
 
-== Tables
+## Tables
 
 
 To reduce intercolumn space in tables:
@@ -212,7 +212,7 @@ You can nest \multirow in \multicolumn but not vice versa.
 
 
 
-== Displays
+## Displays
 
 
 To intersperse left-justified text with aligned equations, use the TeX
@@ -255,7 +255,7 @@ to reduce the width of columns in a table or tabular environment.
 
 
 
-== Math mode
+## Math mode
 
 
 To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
@@ -277,7 +277,7 @@ notice that it is worthwhile to get the typesetting right.
 
 
 
-== Lists
+## Lists
 
 
 To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
@@ -361,7 +361,7 @@ environment does:
 
 
 
-== Defining macros
+## Defining macros
 
 
 Here are ways to test wither a macro argument is empty/null:
@@ -510,7 +510,7 @@ However, all of those solutions give me a Roman font that differs from the text 
 
 
 
-== Bibliographies and citations
+## Bibliographies and citations
 
 
 Very simple BibTeX usage:
@@ -706,7 +706,7 @@ proceedings, make this change:
 
 
 
-== Texinfo
+## Texinfo
 
 
 In Texinfo, to prevent the last index pages from being numbered i, ii,
@@ -770,7 +770,7 @@ or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
 
 
 
-== Hyphenization; word, line, and page breaking
+## Hyphenization; word, line, and page breaking
 
 
 <raymond@sunkist.berkeley.edu> (Raymond Chen) says:
@@ -997,7 +997,7 @@ This ought to permit more hyphenization in LaTeX:
 
 
 
-== PDF and pdflatex
+## PDF and pdflatex
 
 
 Regular TeX uses bitmap based fonts by default, so PDF looks bad for them.
@@ -1108,7 +1108,7 @@ geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
 
 
 
-== URLs
+## URLs
 
 
 To make hyperlinks (e.g., to URLs) in a LaTeX document:
@@ -1185,7 +1185,7 @@ Second approach (better style, possibly more robust):
 
 
 
-== Hevea
+## Hevea
 
 
 As an alternative to hevea: pandoc or tex4ht or tth
@@ -1230,7 +1230,7 @@ Testing whether a file exists, for both LaTeX and Hevea:
 ```
 
 
-== Fonts
+## Fonts
 
 
 The default LaTeX fonts look bad on-screen.  Consider this alternative; the
@@ -1363,7 +1363,7 @@ From an NSF proposal that made it through research.gov:
 
 
 
-== Everything else
+## Everything else
 
 
 LaTeX style files are found in the directories listed in the TEXINPUTS

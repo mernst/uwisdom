@@ -1,4 +1,4 @@
-= Information about the uwisdom collection of useful facts, and how to search it
+# Information about the uwisdom collection of useful facts, and how to search it
 
 
 This is a description/blurb of the doc/lookup/help program for searching wisdom files.
@@ -7,7 +7,7 @@ This is a description/blurb of the doc/lookup/help program for searching wisdom 
 
 
 
-== Motivation
+## Motivation
 
 
 Albert Einstein said,
@@ -46,7 +46,7 @@ Run `doc -h` for complete usage instructions (see `doc` alias below).
 
 
 
-== Obtaining the files
+## Obtaining the files
 
 
 The wisdom files appear on the web at
@@ -55,7 +55,7 @@ You can get a local copy by following the instructions on that webpage.
 
 
 
-== Comparison to web/email/etc. search
+## Comparison to web/email/etc. search
 
 
 Why would you want to use this program when you can just search the web
@@ -73,7 +73,7 @@ wisdom files, which only takes a moment.  Only if that fails do I proceed
 to the manual, a web search, etc.
 
 
-== Writing a wisdom entry
+## Writing a wisdom entry
 
 
 Please help to improve this resource by adding and updating the information!
@@ -92,7 +92,7 @@ The files use AsciiDoc syntax.
 
 
 
-== Installing the lookup program, and shell aliases
+## Installing the lookup program, and shell aliases
 
 
 The Lookup program is available as part of plume-lib
