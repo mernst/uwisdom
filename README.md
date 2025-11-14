@@ -33,8 +33,6 @@ quotefind einstein memory
 rolo maria rebelo
 ```
 
-Run `doc -h` for complete usage instructions (see `doc` alias below).
-
 ## Obtaining the files
 
 The wisdom files appear on the web at
@@ -67,16 +65,17 @@ respecing the two-blank-line delimiter.
 
 The Lookup program can also be used to search other resources, as shown in the
 examples above.  Here are some bash aliases that you can use when invoking the
-program.
+program.  (You won't invoke `lookup` directory, only the others.)
 
 ```sh
-alias doc='lookup -f ${HOME}/wisdom/root_user'
-alias bibfind='lookup -l -f ~/bib/bibroot'
-alias rolo='lookup -f ~/random/addresses.tex --comment-re='
-alias quotefind='lookup -f ~/random/quotes1 -f ~/random/quotes'
-alias lookup='java -ea -jar ${HOME}/java/lookup.jar -a'
+alias lookup='java -ea -jar SOMEDIRECTORY/lookup/build/libs/lookup-all.jar -a'
+alias doc='lookup -f ${HOME}/wisdom/root_user --two-blank-lines'
+alias bibfind='lookup -l -f ${HOME}/bib/bibroot'
+alias rolo='lookup -f ${HOME}/private/addresses.tex --comment-re='
+alias quotefind='lookup -f ${HOME}/misc/quotes1 -f ${HOME}/misc/quotes'
 ```
 
+Pass `-h` (for example, `doc -h`) for usage instructions.
 You can learn more about the Lookup program from its [documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
 
 ## Writing a wisdom entry
