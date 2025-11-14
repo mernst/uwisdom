@@ -514,6 +514,13 @@ HTML checking:
 * Try W3C HTML Validation Service, <http://validator.w3.org/>
 
 
+To improve accessibility when using bootstrap:
+  <style>
+    a { text-decoration: underline; }
+  </style>
+(Why can't I put this in a .css file?)
+
+
 "flatten" program converts hierarchies of WWW (World Wide Web) pages into a
 single page, for easier browsing.  The pages are concatenated in
 depth-first order.
