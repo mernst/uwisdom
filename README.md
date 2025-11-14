@@ -35,9 +35,9 @@ rolo maria rebelo
 
 ## Obtaining the files
 
-The wisdom files appear on the web at
-  <https://github.com/mernst/uwisdom/>.
-You can get a local copy by following the instructions on that webpage.
+```sh
+git clone https://github.com/mernst/uwisdom.git
+```
 
 ## Comparison to web/email/etc. search
 
