@@ -1,6 +1,6 @@
-# Information about the uwisdom collection of useful facts, and how to search it
+# The uwisdom collection of useful facts
 
-This is a description/blurb of the doc/lookup/help program for searching wisdom files.
+This is a collection of information that enables easy, local lookup.
 
 ## Motivation
 
@@ -59,6 +59,26 @@ wisdom file.  Then, when I am searching for information, I first search my
 wisdom files, which only takes a moment.  Only if that fails do I proceed
 to the manual, a web search, etc.
 
+## Searching the wisdom files
+
+Each nugget of wisdom is separated from others by two blank lines.  The [Lookup
+program](https://github.com/plume-lib/lookup) can search paragraph-wise,
+respecing the two-blank-line delimiter.
+
+The Lookup program can also be used to search other resources, as shown in the
+examples above.  Here are some bash aliases that you can use when invoking the
+program.
+
+```sh
+alias doc='lookup -f ${HOME}/wisdom/root_user'
+alias bibfind='lookup -l -f ~/bib/bibroot'
+alias rolo='lookup -f ~/random/addresses.tex --comment-re='
+alias quotefind='lookup -f ~/random/quotes1 -f ~/random/quotes'
+alias lookup='java -ea -jar ${HOME}/java/lookup.jar -a'
+```
+
+You can learn more about the Lookup program from its [documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
+
 ## Writing a wisdom entry
 
 Please help to improve this resource by adding and updating the information!
@@ -71,24 +91,6 @@ you and others can find the information.  I often intentionally include
 synonyms ("description" and "blurb", or "search" and "find") to make a search
 more likely to find the correct entry.
 
-## Installing the lookup program, and shell aliases
-
-As indicated in the examples above, the [Lookup
-program](https://github.com/plume-lib/lookup) can be used for more than just
-searching the wisdom files.  Here are some further bash aliases that you can use
-when invoking the program.
-
-```sh
-  ## Lookup program.  "Lookup" is like "doc", but with the "-a" option (print
-  ## all matches) and with no default files to examine.
-  alias lookup='java -ea -jar ${HOME}/java/lookup.jar -a'
-  alias doc='lookup -f ${HOME}/wisdom/root_user'
-  alias bibfind='lookup -l -f ~/bib/bibroot'
-  alias rolo='lookup -f ~/random/addresses.tex --comment-re='
-  alias quotefind='lookup -f ~/random/quotes1 -f ~/random/quotes'
-```
-
-You can learn more about the Lookup program from its documentation.
 
 // LocalWords:  wiki PAG pag pdfnup Cytron's bibfind cytron quotefind einstein
 // LocalWords:  rolo rebelo Lookup lookup
