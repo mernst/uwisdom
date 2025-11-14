@@ -1,7 +1,6 @@
 # Wisdom about Java
 
 
-
 ## JIT
 
 
@@ -28,7 +27,6 @@ The Java bytecode verifier gave me
 
 when the problem was that I had used "invokevirtual" where I should have
 used "invokestatic".
-
 
 
 ## JUnit
@@ -134,7 +132,6 @@ To get line numbers too, make the VM create a core dump, then use jstack:
 ```
 
 
-
 ## Profiling
 
 
@@ -157,9 +154,6 @@ Some ways to profile/understand java memory use
 Java timing information via System.currentTimeMillis() is only accurate
 to milliseconds.  I couldn't find anything more precise.  Nor anything
 that works with CPU time rather than wallclock time.
-
-
-
 
 
 ## Generics
@@ -208,7 +202,6 @@ isn't quite right).
 They don't have a name for a use of type parameter/variable, to distinguish
 from the declaration.
 (The *Effective Java* terminology differs from that used in the JLS.)
-
 
 
 ## javac
@@ -314,7 +307,6 @@ warning: [classfile] MethodParameters attribute introduced in version 52.0 class
 run javac with `-Xlint:-classfile`.
 This is only needed in Java 8, because the bug is fixed in Java 11:
 <https://bugs.openjdk.java.net/browse/JDK-8190452>
-
 
 
 ## javadoc
@@ -488,7 +480,6 @@ Javadoc links:
 * under JDK > 17 (i.e., JDK >= 18), use JDK 17 links, and "--link-modularity-mismatch info"
 
 
-
 ## Command-line options
 
 
@@ -537,7 +528,6 @@ Environment varibales used by Gradle (I don't know what the precedence is)
 
 "Could not reserve enough space for object heap" means that the
 "-Xmx" argument on the java command line was too large.
-
 
 
 ## Everything else
@@ -656,7 +646,6 @@ Here are ways to parse arrays without loops and repeatedly taking substrings:
 ```
 
 
-
 Java issues (bug reports, RFEs, etc.):  <http://bugs.sun.com/bugdatabase/>
 
 
@@ -753,7 +742,6 @@ state with other iterators.  But. clients really shouldn't assume this in
 the absence of documentation so stating, and if something is both an
 Iterable and an Iterator, it's intuitive (and should be documented) that
 iterator() would return itself.
-
 
 
 Notes about Java instrumentation:
@@ -1089,7 +1077,6 @@ This talk says that in Java, no non-LTS version has ever passed 1% of market sha
 However, this chart shows that developers are using non-LTS versions at considerable
 rates (along with LTS versions too, which are more widely used):
 <https://www.jetbrains.com/lp/devecosystem-2023/java/>
-
 
 
 The Java diff_match_patch program creates Patch objects that have a leading and

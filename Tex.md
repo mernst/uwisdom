@@ -9,10 +9,6 @@
 // any "%" character that is part of an entry.
 
 
-
-
-
-
 ## Figures (floats)
 
 
@@ -106,7 +102,6 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
 %        \hbox to\hsize{\hfil\box\@tempboxa\hfil}
 %    \fi}
 % ```
-
 
 
 ## Tables
@@ -209,9 +204,6 @@ cells where the multi-row is going to appear.
 You can nest \multirow in \multicolumn but not vice versa.
 
 
-
-
-
 ## Displays
 
 
@@ -252,9 +244,6 @@ Use
 to reduce the width of columns in a table or tabular environment.
 
 
-
-
-
 ## Math mode
 
 
@@ -274,7 +263,6 @@ To typeset a multi-character identifier in LaTeX math mode, use
 puts incorrect kerning between the letters.  LaTeX typesets $myvar$ as "m
 times y times v times a times r".  It looks bad, and enough people will
 notice that it is worthwhile to get the typesetting right.
-
 
 
 ## Lists
@@ -356,9 +344,6 @@ environment does:
  \begin{changemargin}{.05\columnwidth}{.05\columnwidth}
  \end{changemargin}
 ```
-
-
-
 
 
 ## Defining macros
@@ -505,9 +490,6 @@ To permit hyphenation in tt font globally throughout a document, see
 <http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt>
 However, all of those solutions give me a Roman font that differs from the text font, whereas I want a typewriter font.
 `\usepackage[htt]{hyphenat}` doesn't seem to work either.
-
-
-
 
 
 ## Bibliographies and citations
@@ -705,7 +687,6 @@ proceedings, make this change:
 ```
 
 
-
 ## Texinfo
 
 
@@ -767,7 +748,6 @@ Texinfo.
 
 Texinfo does not let you change the margins without changing 'texinfo.tex'
 or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
-
 
 
 ## Hyphenization; word, line, and page breaking
@@ -891,7 +871,6 @@ Examples:
 ```
 
 
-
 To permit more space between words, in order to prevent bad breaks in
 narrow columns (like in a newspaper):
 
@@ -994,7 +973,6 @@ This ought to permit more hyphenization in LaTeX:
 \lefthyphenmin=2
 \righthyphenmin=2
 ```
-
 
 
 ## PDF and pdflatex
@@ -1107,7 +1085,6 @@ geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
 ```
 
 
-
 ## URLs
 
 
@@ -1131,7 +1108,6 @@ If you also want to line-break the URL text, then:
 More on LaTeX HEVEA URLs (\ahref, etc.):
   <http://pauillac.inria.fr/~maranget/hevea/doc/manual018.html#toc22>
 but perhaps I want to ignore that and focus on using standard
-
 
 
 URLs in HTML and PDF documents:
@@ -1179,10 +1155,6 @@ Second approach (better style, possibly more robust):
   \makeatother
   \urlstyle{smallertt}
 ```
-
-
-
-
 
 
 ## Hevea
@@ -1360,7 +1332,6 @@ From an NSF proposal that made it through research.gov:
   % Palatino settings
   \usepackage{palatino}
   \linespread{1.005}
-
 
 
 ## Everything else
@@ -2668,12 +2639,10 @@ probsoln
   For selecting problems from a database or bank of problems.
 
 
-
 Put '~' before \cite, but do not put '~' before \footnote.  '~' is a
 non-breaking space.  It formats just like a space ' ', but it prohibits line
 breaks at that location.  You don't want a space before the footnote mark (so no
 '~' or space), but you do want a space between text and a citation (so use '~').
-
 
 
 // Please put new content in the appropriate section above, don't just

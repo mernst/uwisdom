@@ -1,7 +1,6 @@
 # Tips about conducting technical research, and writing it up
 
 
-
 The term "bug" has no established meaning, and different people use it to
 mean different things.  Therefore, it should not be used in technical
 writing.  (There are a very few exceptions, such as compound words with clear
@@ -57,12 +56,10 @@ It uses "error" to mean the magnitude or characterization of the
 discrepancy.
 
 
-
 ACM's ideosyncratic terminology (this might have changed??):
 Repeat = same team, same artifacts.
 Replicate = new team, same artifacts.
 Reproduce = same research question, but new experiment.
-
 
 
 Threats to the validity of research.
@@ -104,7 +101,6 @@ elsewhere?) is:
 * internal (alternative explanations)
 * external (generalize beyond subjects)
 * reliability (reproduce)
-
 
 
 Item #2 of Strunk & White's _The Elements of Style_ states

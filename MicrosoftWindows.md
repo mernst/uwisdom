@@ -1,7 +1,6 @@
 # Wisdom about using Microsoft Windows on a personal computer (PC)
 
 
-
 ## VMware
 
 
@@ -27,7 +26,6 @@ Spoof MAC address under Linux:
 ```
 
 
-
 ## Windows Subsystem for Linux (WSL)
 
 
@@ -35,7 +33,6 @@ WSL:
 In WSL, access Windows files at /mnt/c/ .
 In Windows, access Linux files for a running WSL distro \\wsl$\<distro_name> .
 Never access WSL files at via C:\Users\mernst\AppData\Local\Packages\... !
-
 
 
 ## Microsoft Windows

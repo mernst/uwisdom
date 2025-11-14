@@ -1,14 +1,12 @@
 # Wisdom about version control systems
 
 
-
 When working with a line-based version control system such as Git, please don't
 write very long lines, such as one line containing the content of an entire
 paragraph.  Instead, insert line breaks within each paragraph to keep the file's
 lines to a limited length, by convention 80 columns.  These line breaks serve no
 purpose in organizing the text or in editing it, but they do help to prevent
 merge conflicts when multiple people edit different parts of a paragraph.
-
 
 
 ## Git
@@ -197,7 +195,6 @@ In Git, to clone a particular branch:
 ```sh
   git clone -b <branch> --single-branch <remote_repo>
 ```
-
 
 
 To see the changes in a single git commit, as a diff, do either of these:
@@ -740,7 +737,6 @@ git merge --squash origin/BRANCHNAME
 ```
 
 
-
 ## GitHub (Git-specific items go above)
 
 
@@ -958,7 +954,6 @@ If you enable “Automatically delete head branches” in the repository setting
 When making a GitHub pull request, if you do work in your own GitHub fork, then continuous integration will complete faster.  The reason is that the "branch" continuous integration job will run against your personal CI quota, and the "pull request" continuous integration job will run against the upstream project's CI quota.
 
 
-
 ## GitLab (Git-specific and GitHub-specific items go above)
 
 
@@ -979,7 +974,6 @@ then there are two ways to solve it:
 
 * Unprotect the branch:  go to the project >> settings (gear icon) >> protected branches >> unprotect.
 * Make the user a Master:  go to the project >> settings (gear icon) >> members >> (fill in name, and "Master" for Project Access) >> Add Users to project
-
 
 
 // == Google Code
@@ -1004,7 +998,6 @@ then there are two ways to solve it:
 // ```
 
 
-
 ## Bitbucket
 
 
@@ -1019,7 +1012,6 @@ I'm not sure whether all this works for the wiki repository...
 I can't seem to use SSH authentication to bitbucket.org any more.  Instead, use
 an API token.  Must create "api token WITH SCOPES", with permissions
 "read:repository:bitbucket" and "write:repository:bitbucket".
-
 
 
 ## Pull requests

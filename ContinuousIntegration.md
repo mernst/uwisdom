@@ -1,7 +1,6 @@
 # Information about continuous integration services
 
 
-
 To avoid unnecessary CI slowdowns, work on a branch in your own fork, and
 don't create a pull request until you think the code is ready.
 
@@ -37,7 +36,6 @@ Comparison of CI systems:
 * Travis-CI was once the state of the art, but it doesn't seem well maintained
   any more.  The last time I checked, its infrastructure was rather old, and
   other systems now have more features.
-
 
 
 ## Azure Pipelines
@@ -119,7 +117,6 @@ To enable the "run next" button in Azure Pipelines:
 After doing this, it may take a few minutes for users to see the "run next" button.
 
 
-
 ## CircleCI
 
 
@@ -189,7 +186,6 @@ echo $(($(cat /sys/fs/cgroup/cpu/cpu.shares) / 1024))
 ```
 
 (CircleCI sometimes gives more than the promised number of CPUs.  There is no way to know whether it will, for a given job.)
-
 
 
 ## Travis CI
@@ -354,7 +350,6 @@ You can determine which command was run from the logs, or from the .travis.yml f
 When there are multiple Travis jobs in a single Travis build, each job runs different commands, or they run the same command with different arguments.  You can determine those commands from the .travis.yml file and run them locally.
 
 
-
 ## GitHub Actions
 
 
@@ -379,7 +374,6 @@ GitHub Actions is problematic if you have flaky jobs.
    expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
    time can *cause* flakiness as they all attempt to retrieve the same network
    resource, so on the re-run, the same or a different job may fail.
-
 
 
 ## GitLab CI runners
@@ -410,7 +404,6 @@ To unregister a multi-runner:
 ```sh
   gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
 ```
-
 
 
 ## Jenkins

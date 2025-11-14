@@ -1,9 +1,6 @@
 # Wisdom about MIT
 
 
-
-
-
 ## MIT-specific
 
 
@@ -134,9 +131,6 @@ UROP Homepage for Faculty:  <https://sisapp.mit.edu/uropweb/facultyHome.mit>
 UROP Homepage for Students:  <https://sisapp.mit.edu/uropweb/home.mit>
 
 
-
-
-
 ## Athena-specific
 
 
@@ -248,9 +242,6 @@ Select 'mediawiki', tell it what URL you want the wiki at, and you're
 done.  ( <http://scripts.mit.edu/start/> for more details )
 (As of 3/31/2008, I can't figure out how to set the "database host" field,
 though this had worked for me earlier.)
-
-
-
 
 
 ## CSAIL-specific
@@ -493,9 +484,6 @@ Don't forget to:
     fs sa _dir-with-htpasswd_ svn rl
 
 
-
-
-
 ## CSAIL printing
 
 
@@ -558,9 +546,6 @@ CSAIL video conference room (32-262):  IP 128.30.30.43
 To call Mike in Germany, use IP 139.19.100.30
 
 
-
-
-
 ## EECS-specific
 
 
@@ -582,9 +567,6 @@ The "Who is teaching what" or "who's teaching what" list for MIT EECS:
 It includes only the in-charge lecturer, not co-lecturers or section leaders.
 The HKN undeground guide doesn't include classes that they skipped, and may
 not include
-
-
-
 
 
 ## PAG-specific
@@ -667,9 +649,6 @@ The interesting lines are those with Type "Disk", so then do:
 ```
 
 
-
-
-
 ## Boston-specific
 
 
@@ -694,9 +673,6 @@ Can recycle styrofoam packing peanuts ("loose fill") at
 
 * Mailboxes Etc, 831 Beacon St, Newton Center
 * UPS Store, Davis Square
-
-
-
 
 
 // Please put new content in the appropriate section above, don't just

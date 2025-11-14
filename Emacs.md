@@ -1,10 +1,7 @@
 # Wisdom about Emacs
 
 
-
-
 ## General tips
-
 
 
 You should always run gdb within Emacs; use  M-x gdb RET
@@ -28,9 +25,6 @@ string-reading routine and once by the regexp routine.  Both of them happen
 to use backslash as their escape character.  So "a\\|b" is a four-character
 string with contents a \ | b and \| is the regexp routine's alternative
 specifier.
-
-
-
 
 
 ## TAGS tables
@@ -94,7 +88,6 @@ or, to run tags directly:
 ```
 
 
-
 ## Gnus news/mail reader
 
 
@@ -119,9 +112,7 @@ In gnus, "S o m" to forward/resend article via mail.
 In Mew: to copy a message from one account to another, run:  l i
 
 
-
 ## Uncategorized Emacs wisdom
-
 
 
 To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
@@ -467,7 +458,6 @@ since that font is generally defined.
 <http://www.levien.com/type/myfonts/Inconsolata.otf> .)
 
 
-
 To recompile my emacs directory:
 
 ```sh
@@ -675,7 +665,6 @@ or the following ought to work, but it does not:
   (put-text-property 0 (length current-string) 'face 'my-boxed-face
                      current-string)
   (insert current-string))
-
 
 
 // This last  is to prevent emacs from thinking the local variables above

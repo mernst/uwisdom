@@ -4,17 +4,13 @@
 This is a description/blurb of the doc/lookup/help program for searching wisdom files.
 
 
-
-
-
 ## Motivation
 
 
 Albert Einstein said,
 
-
-  I never waste memory on things that can easily be stored and retrieved
-  from elsewhere.
+> I never waste memory on things that can easily be stored and retrieved
+> from elsewhere.
 
 
 The "wisdom" files store information that is not worth memorizing, but
@@ -22,28 +18,27 @@ which I may wish to look up later.  You can retrieve the information with
 the "doc" program.  Here are some sample invocations:
 
 ```sh
-  # Look up how to cross-mount PAG machines' scratch drives.
-  doc pag scratch
+# Look up how to cross-mount PAG machines' scratch drives.
+doc pag scratch
 
-  # How to remove inter-item vertical space from LaTeX list environments.
-  doc latex list space
+# How to remove inter-item vertical space from LaTeX list environments.
+doc latex list space
 
-  # Typical command-line options to the pdfnup program.
-  doc pdfnup
+# Typical command-line options to the pdfnup program.
+doc pdfnup
 
-  # Find Ron Cytron's papers on static single assignment form.
-  bibfind cytron static single
+# Find Ron Cytron's papers on static single assignment form.
+bibfind cytron static single
 
-  # Find the Albert Einstein quote above.
-  quotefind einstein memory
+# Find the Albert Einstein quote above.
+quotefind einstein memory
 
-  # What is Maria's phone number?
-  rolo maria rebelo
+# What is Maria's phone number?
+rolo maria rebelo
 ```
 
 
 Run `doc -h` for complete usage instructions (see `doc` alias below).
-
 
 
 ## Obtaining the files
@@ -52,7 +47,6 @@ Run `doc -h` for complete usage instructions (see `doc` alias below).
 The wisdom files appear on the web at
   <https://github.com/mernst/uwisdom/tree/wiki> .
 You can get a local copy by following the instructions on that webpage.
-
 
 
 ## Comparison to web/email/etc. search
@@ -89,7 +83,6 @@ more likely to find the correct entry.
 
 
 The files use AsciiDoc syntax.
-
 
 
 ## Installing the lookup program, and shell aliases

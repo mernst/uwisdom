@@ -136,9 +136,6 @@ THIS_MAKEFILE:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
 ```
 
 
-
-
-
 ## Ant and buildfiles, build.xml
 
 
@@ -392,7 +389,6 @@ ant -Doutgen.job.ant.opts=-XX:ActiveProcessorCount=1
 ```
 
 
-
 ## Maven and pom.xml
 
 
@@ -464,12 +460,10 @@ To delete Maven Central snapshots, delete this directory:
 .m2/repository/org/checkerframework:
 
 
-
 ## Buck
 
 
 Pass `--version 8` to see the javac command line that buck issues.
-
 
 
 ## Gradle and build.gradle
@@ -627,7 +621,6 @@ Artifacts should be available in 10+ minutes.
 They will show up at search.maven.org in 2 hours.
 
 
-
 To set up a Java project to build with Gradle (to create a build.gradle file):
 
 1. `gradle wrapper --gradle-version 6.1.1`
@@ -748,7 +741,6 @@ The latest Gradle release version number is at <https://gradle.org/releases/> .
 2. Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
 
 
-
 To solve
 
 ```text
@@ -838,7 +830,6 @@ JAVA_TOOL_OPTIONS="-Xmx2g" ./gradlew build javadoc
 GitLab uses environment variable `GRADLE_CLI_OPTS`.
 
 
-
 For a task to show up in the output of `gradle tasks` or `gradlew tasks`,
 it must have a "group".
 
@@ -856,7 +847,6 @@ To use a locally-built version of a project:
 2. Run `./gradlew publishToMavenLocal`
 3. In the client, update the version number
    and add `mavenLocal()` to the `repositories {...}` block.
-
 
 
 To force resolving and downloading all Gradle dependencies:
@@ -954,7 +944,6 @@ In each case, the directive has no effect unless both tasks would run anyway.
 mustRunAfter is strict.  Gradle may violate shouldRunAfter to increase parallelism.
 
 
-
 ### Displaying Gradle dependencies
 
 
@@ -1011,7 +1000,6 @@ From the command line, this only lists the dependency names and version numbers,
 ```sh
 gradle dependencies --configuration=testCompileClasspath
 ```
-
 
 
 ## Testing local version of Checker Framework by overwriting local caches

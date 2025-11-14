@@ -1,7 +1,6 @@
 # Wisdom about Linux
 
 
-
 ## Debian
 
 
@@ -143,9 +142,6 @@ To remove a user's account, do
 //   sudo make
 
 
-
-
-
 To figure out the version of Ubuntu you are running, do
 
 ```text
@@ -197,9 +193,6 @@ To make the Caps Lock key an additional Control/Ctrl key under Linux:
   Keyboard Layout > Options > Ctrl key position
 
 
-
-
-
 ## Ubuntu
 
 
@@ -243,7 +236,6 @@ Ubuntu release names
 * Ubuntu 15.04 (Vivid Vervet)
 * Ubuntu 15.10 (Wily Werewolf)
 * Ubuntu 16.04 LTS (Xenial Xerus)
-
 
 
 ## Devices
@@ -297,7 +289,6 @@ that root doesn't necessarily have read-access to my private files!
 
 An Amazon Kindle plugged into Ubuntu Linux via USB has its books mounted at
 /media/$USER/Kindle/documents/ (not at /mnt).
-
 
 
 ## Everything else
@@ -505,7 +496,6 @@ For example, to quote: "Jeff's toy"
   The replace strings are: "'" and "'\\''"
 
 
-
 X11 problems monitor logfile XF86Config-4:
 If the X11 server doesn't start, look at the log file it creates.
 The log file is:  /var/log/XFree86.0.log.  Older version of the
@@ -539,7 +529,6 @@ To edit PDF on Linux or Ubuntu:
 * PDF Studio works with Ubuntu 15.04, but it's commercial software (their misleading webpage "PDF Studio 10 Free Download" means it's free to download a trial version that watermarks your documents with a huge diagonal "Qoppa Software" across its content, not that it's free to use!)
 * not PDFedit (not updated since January 2014, isn't available in Ubuntu 15.04 Vivid Vervet; also based on old Qt 3 toolkit; once corrupted my file)
 * not evince, it only reads
-
 
 
 To find circular symbolic links
@@ -583,9 +572,7 @@ java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
 ```
 
 
-
 ## long entries below
-
 
 
 >entry changing display

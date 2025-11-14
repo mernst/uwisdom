@@ -55,7 +55,6 @@ When creating a mailman mailing list, some common good options to change:
 Throwaway email addresses: simplelogin, maildrop
 
 
-
 ## AWS Amazon Web services
 
 
@@ -98,7 +97,6 @@ Amazon Web Services (AWS) tips, from Darioush Jalali:
    whenever they choose (this is rare).
 * Amazon limits the number of types of certain instances they grant.
    Customer support will increase this, but it takes a couple days.
-
 
 
 ## Uncategorized

@@ -1,9 +1,6 @@
 # Wisdom about the University of Washington.
 
 
-
-
-
 ## UW (non-CSE-specific)
 
 
@@ -136,7 +133,6 @@ washington.zoom.us/my/USERNAME
 
 To schedule Panopto automated video recordings:
 <https://itconnect.uw.edu/tools-services-support/teaching-learning/panopto/schedule-recordings/auto-sched/>
-
 
 
 ## CSE (other than sysadmin)
@@ -330,7 +326,6 @@ Allen Schoel event request form:
 
 Purchase request:
 <https://internal.cs.washington.edu/research-admin/research-finance-team/>
-
 
 
 ## CSE sysadmin
@@ -539,7 +534,6 @@ A CSE lab-supported Linux machine running CentOS 8 is cremosa.cs.washington.edu.
 You can only log into it from another CSE machine, not from outside.
 
 
-
 %% Obsolete entries go here
 
 
@@ -706,7 +700,6 @@ Visitors should get on the plse, 590n, and 590p mailing lists.
   * Korean Tofu house (15-minute walk)
 * Far
   * Araya's (29 minute walk but quite good)
-
 
 
 // Please put new content in the appropriate section above, don't just

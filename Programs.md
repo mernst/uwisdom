@@ -1,10 +1,8 @@
 # Wisdom about programs
 
 
-
 This file is a bit of a catch-all, for everything that does not have a
 dedicated wiki page.
-
 
 
 ## PostScript and PDF
@@ -214,7 +212,6 @@ in Acrobat Professional.  Or, do this:
 * pdftops -eps file.pdf
 * bbfig -o file.eps | gv -
    and add the %%BoundingBox line to the header of the ps file.
-
 
 
 // bbfig computes the bounding boxes of PostScript figures.
@@ -447,7 +444,6 @@ other containing even pages scanned in reverse order:
 * To use `pdfjam`, see <https://unix.stackexchange.com/a/53316/14002> .
 * To use `pdftk`: `pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf`
 * Online: <https://www.sejda.com/alternate-mix-pdf>
-
 
 
 ## WWW and HTML
@@ -686,7 +682,6 @@ Instead, use one of
 * `<samp>` for computer output
 
 
-
 ### Firefox
 
 
@@ -848,9 +843,6 @@ Also see:  <http://tig.csail.mit.edu/twiki/bin/view/TIG/CrossCellHowto>
 Also see:  ~mernst/bin/share/csail-athena-tickets.bash
 
 
-
-
-
 ## AFS
 
 
@@ -965,7 +957,6 @@ To test AFS latency performance (when the file system is sluggish), run
 
 (To test AFS bandwidth, use pv to copy a large file; but we've never seen
 such problems.)
-
 
 
 ## Perl
@@ -1180,7 +1171,6 @@ perl-style-check:
 ```
 
 
-
 ## Python
 
 
@@ -1300,7 +1290,6 @@ Path('filename.txt').write_text(new_file_content)
 ```
 
 
-
 ## Rust
 
 
@@ -1309,7 +1298,6 @@ Rust code should have, in its main file (such as `main.rs`):
 ```rust
 #![warn(missing_docs)]
 ```
-
 
 
 ## Shells
@@ -1730,7 +1718,6 @@ portable; it works in bash, ksh, and zsh.
 For more on the difference between `[` and `[[`, see <http://mywiki.wooledge.org/BashFAQ/031>
 
 
-
 ## X Windows
 
 
@@ -1812,9 +1799,6 @@ screensaver.
 
 Debian Linux screen resolution:
 Applications >> Desktop Preferences >> Screen Resolution
-
-
-
 
 
 ## C and C++
@@ -1931,9 +1915,6 @@ Two things to check:
 * you must `#include <vector>`, not `<vector.h>`
 * you must either say "using namespace std;" or say "std::vector", the
    latter being preferable in header files, of course.
-
-
-
 
 
 ## Email
@@ -2068,9 +2049,6 @@ Also see the tips here:
 <https://support.google.com/mail/answer/78892?hl=en>
 
 
-
-
-
 ## Eclipse
 
 
@@ -2135,7 +2113,6 @@ Eclipse has two compilers.
    building.)
 
 
-
 ## IntelliJ
 
 
@@ -2143,7 +2120,6 @@ To prevent IntelliJ from using wildcard imports, you must do *both* of the follo
 
 * Click on the Settings "wrench" icon on the toolbar, open "Imports" under "Code Style", and check the "Use single class import" selection.
 * go to Preferences (⌘ + , on macOS / Ctrl + Alt + S on Windows and Linux) > Editor > Code Style > Java > Imports tab set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
-
 
 
 ## VMware
@@ -2163,7 +2139,6 @@ To install VMware tools, see ~mernst/wisdom/building/build-vmware
 
 
 In VMware, shared folders from the host appear in /mnt/hgfs/.
-
 
 
 ## Docker
@@ -2284,7 +2259,6 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 
-
 ## Markdown
 
 
@@ -2317,7 +2291,6 @@ Markdown parsers:
 * <https://github.com/kivikakk/comrak>
    "Comrak's design goal is to model the upstream cmark-gfm as closely as possible in terms of code structure."
 * <https://github.com/github/cmark-gfm>
-
 
 
 ## AsciiDoc
@@ -2357,7 +2330,6 @@ In AsciiDoc, `+` (space followed by plus) is a hard line break (newline).
 In AsciiDoc, to put a callout within a list item (ie, indented rather than at the top level), add unindented "+" on a line by itself immediately before the callout.
 Then after the callout use unindented `{empty}` if the following text is indented.
 `{empty}` can take the place of `+` elsewhere.
-
 
 
 ## Diff
@@ -2420,7 +2392,6 @@ files, using the "<<<<<<", "||||||", and ">>>>>>" conflict markers/brackets.
 See my question at  <https://stackoverflow.com/questions/78252587> .
 
 
-
 ## make
 
 
@@ -2431,7 +2402,6 @@ make -qp |
     awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |
     sort -u
 ```
-
 
 
 ## Error Prone linter
@@ -2475,7 +2445,6 @@ When Error Prone's suggested replacement is `UTF_8`, that is
 `StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
 Example:
 `Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
-
 
 
 ## AI tools
@@ -2858,7 +2827,6 @@ To find/replace a multi-line string, use perl:
 ```sh
 perl -0777 -i.original -pe 's/input containing\nmultiple lines/Output can also have multiple\nlines/igs' myfile.txt
 ```
-
 
 
 In CMU Common Lisp (cmucl), smaller applications can result from
@@ -3455,7 +3423,6 @@ To see your current settings:
 ```
 
 
-
 Use the rss2email program as follows:
 First, run
 
@@ -3539,7 +3506,6 @@ Here is how to create a PDF that shows the annotation/comment text:
   * Foxit Reader doesn't do it.  I don't see a button "Summarize Comments" in the print dialog box as claimed by <https://help.foxitsoftware.com/kb/how-to-print-a-pdf-file-with-the-comment-notes-contents-showing.php>
   * Acrobat Reader doesn't exist except for Windows, Mac, and Android.
   * LibreOffice/OpenOffice doesn't display PDF well.
-
 
 
 To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
@@ -3978,7 +3944,6 @@ sed -e '1,/abc/d' -e '/mno/,$d' <FILE>
 ```
 
 
-
 A shell function that works around `wget` or `curl` hanging for very slow
 connections.  (`curl`'s timeouts don't seem to work in this case.)
 curl's `-z` option requires that the file exists.
@@ -4102,7 +4067,6 @@ checkstyle {
   ignoreFailures = false
 }
 ```
-
 
 
 To pretty-print (reformat) a JSON file, either of these commands:

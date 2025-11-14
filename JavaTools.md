@@ -1,9 +1,7 @@
 # Tools for manipulating Java programs
 
 
-
 One advantage of ASTs is that they give information about variable scope.
-
 
 
 In javac, the best place is probably just after a ClassDeclaration is set
@@ -16,7 +14,6 @@ status to CS_PARSED, but the parsing isn't done yet then), or possibly just
 do this immediately before SourceClass.check (though is that too late?).
   Some control flow analysis (on bytecodes) in
 src/share/sun/sun/tools/debug/FlowTracer.java
-
 
 
 (Email I sent (long ago) looking for additional suggestions.)
@@ -165,9 +162,6 @@ The AST built by Barat is a passive data structure which cannot be changed.
 Parses the Java 1.1 language.
 
 
-
-
-
 ## Java compilers
 
 
@@ -256,7 +250,6 @@ Eclipse refactorings.
 Perhaps it only works under NetBeans.
 
 
-
 ## Parsers
 
 
@@ -316,7 +309,6 @@ resolution, type checking and constant folding.
 
 Useful (but isn't deep):
 <https://scg.unibe.ch/archive/projects/Erni08b.pdf>
-
 
 
 ## Pretty-printers/decompilers for .class files
@@ -398,9 +390,6 @@ Jasmine:  <http://members.tripod.com/~SourceTec/jasmine.htm>
 
 "Java Decompiler Workshop 1.0", <http://www.megatrend.hu/jdw.htm>, is
 actually a disassembler, not a decompiler, it seems.
-
-
-
 
 
 ## Bytecode/classfile instrumenters/processing/rewriters
@@ -572,9 +561,6 @@ Documentation doesn't seem stellar.
 Also see <http://www.gnu.org/software/java/java-software.html>
 
 
-
-
-
 ## Bytecode instrumenters and other tools
 
 
@@ -637,9 +623,6 @@ verification/decompilation is currently the best working environment for
 me.  Your mileage may vary.
 
 
-
-
-
 Kaffe: free Java VM, <http://www.transvirtual.com/>
 
 
@@ -652,7 +635,6 @@ machine. The goal is to make advanced debugging and analysis tools
 available to Java programmers. Rivet has a modular internal structure that
 makes it easy to add new tools.
 (Abandoned by 1999 or so.)
-
 
 
 ## Java test suites
@@ -698,7 +680,6 @@ Performance-oriented:
 * JavaSPEC
 
 
-
 javacheck, javadis:  Gun's Java bytecode verifier and disassembler
         javacheck nameofclass
 runs the verifier on the class. If the class is, say java.io.Reader,
@@ -711,7 +692,6 @@ whether or not the .class suffix is at the end of the filename.
 BCEL bytecode verifier: Diagnostics an order of magnitude better than
 Java's built-in complaints.  However, it also gripes about some javac
 quirks, which you have to work around or ignore.
-
 
 
 ## Java interpreter
@@ -741,12 +721,10 @@ Eclipse's "Scrapbook page"
 DrJava
 
 
-
 Metamata has a commercial product for semantic analysis of Java:
         <http://www.metamata.com>
 It is not free but they do have an educational license program.
 If you are intersted, send email to: <contact@metamata.com>.
-
 
 
 ## Java debuggers
@@ -805,12 +783,10 @@ assembly. Right now it reads in Java byte codes and builds an intermediate
 representation based on a variant of SSA form.  See <www.flexc.lcs.mit.edu>.
 
 
-
 ## Pointer analysis
 
 
 The GraalVM pointer analysis is fast and precise.
-
 
 
 ## Lightweight static checkers
@@ -840,7 +816,6 @@ for download any longer.
 lgtm.com issues false positive warnings, and I don't see how to suppress them.
 
 
-
 ## Profilers
 
 
@@ -853,7 +828,6 @@ Baeldung's overview:
 <https://www.baeldung.com/java-profilers>
 It mentions JProfiler, YourKit, VisualVM, and others with smaller market
 share.  It shows screenshots but gives no usage instructions.
-
 
 
 ### Profilers in the JDK
@@ -940,7 +914,6 @@ java -Xrunhprof:cpu=samples,heap=all ...
     java -Xrunhprof:help
 
 
-
 ## Java code coverage
 
 
@@ -978,7 +951,6 @@ java -Xrunhprof:cpu=samples,heap=all ...
 //* JavaScope:  <http://www.codework.com/suntest/jscope.htm>
 //    free trial version available
 // * SilkScope:  <http://www.tngsoft.com/dextera/s_ds_silk_scope.htm>
-
 
 
 ## Mutation coverage ("mutation testing") tools
@@ -1019,7 +991,6 @@ For a much more complete survey, see Gareth Snow's report of June 2010.
     Recommended at JavaOne 2009.
 
 
-
 On Oct 15, 2001, IBM released the Jikes Research Virtual Machine (formerly
 Jalapeno) under an open-source license.
   Jikes RVM homepage: <http://www-124.ibm.com/developerworks/oss/jikesrvm/>
@@ -1028,16 +999,13 @@ Jalapeno) under an open-source license.
   <http://www-124.ibm.com/developerworks/forum/forum.php?forum_id=362>
 
 
-
 Branch coverage for Java:
   <http://glassjartoolkit.com/gjtk.html>
 As of April 2002, it is in beta.  They will sell it to us (academic price)
 for $99; we should buy it when it comes out.
 
 
-
 ## JVMs
-
 
 
 Supporting Java 5.0:
@@ -1055,7 +1023,6 @@ multiple processors.
 
 
 Eclipse 3.1
-
 
 
 Not supporting Java 5.0 (as of early 2005):
@@ -1086,7 +1053,6 @@ sablevm - Free implementation of Java Virtual Machine (JVM) second edition
   Does not appear to support Java 5.0
 
 
-
 summer 2002:  KaffeOS Java (from Wilson Hsieh at the University of Utah)
 virtual machine provides precise accounting of memory by applications.
 
@@ -1095,12 +1061,10 @@ Also see JMP, <http://www.khelekore.org/jmp/>.  Actively developed as of July
 2003.
 
 
-
 Sameer Ajmani says (10/2002):
 Andrew Meyers's "Polyglot" framework permits easy construction of tools for
 (dialects of Java); he has used it for three different such extensions so
 far.
-
 
 
 Kopi is a Java compiler that both Chandra Boyapati and Bill Thies have used
@@ -1113,17 +1077,14 @@ only supports a subset of the Java 5 features.  As of 4/2009, the latest
 release is 3/2007.
 
 
-
 JTest creates random unit tests based on the types of the arguments.
 If pre- and post-conditions are present, then it additionally uses them.
 (Gary Sevitsky and Tao Xie used it at IBM during summer 2002.)
 
 
-
 Semantic Designs (<www.semanticdesigns.com>) offers Java/C++ front ends
 (parser and unparser), designed for source-to-source transformation tools.
 It's $5000 for an academic license ($50,000 for a commercial one).
-
 
 
 ## Improving startup time
@@ -1148,9 +1109,6 @@ It can be a bit difficult to adapt code for GraalVM (such as identifying
 uses of reflection and other features).
 The general consensus on Reddit is that it's not ready for prime time as of
 mid-2024; that probably just means it is hard to use.
-
-
-
 
 
 The ahead-of-time `jaotc` compiler was removed in JDK 16.  It's now only in GraalVM.
@@ -1219,7 +1177,6 @@ Quarkus is a framework for kubernetes.  It supports CRaC.
 Nailgun is no longer maintained.
 
 
-
 ## Slicers
 
 
@@ -1233,7 +1190,6 @@ available.
 
 
 Several publicly available slicing tools exist for C, however.
-
 
 
 More details, mostly taken from papers that claim to have a Java slicer:
@@ -1261,7 +1217,6 @@ Slicing object-oriented java programs
 Zhenqiang Chen, Baowen Xu
 
 
-
 Context-sensitive slicing of concurrent programs
 Jens Krinke
 
@@ -1283,9 +1238,7 @@ Probes to extract runtime data without source code:
 Aspectwerks, TPTP
 
 
-
 Jass: Java extended assertions (pre-and post-conditions, class invariants).
-
 
 
 Non-Java tools:
@@ -1293,9 +1246,7 @@ For C, see <http://saturn.stanford.edu> (and it links to related projects on
 its webpage).
 
 
-
 XStream: quick-and-dirty, human-legible, easy-to-use object serialization.
-
 
 
 Java HTML parsing:  There are two fundamental models
@@ -1341,7 +1292,6 @@ Some advice:
 But some parsers claim to deal with bad HTML.
 
 
-
 Java call graph (dependences) extraction:
 
 * Understand: <http://www.scitools.com/products/understand/>
@@ -1369,7 +1319,6 @@ Java call graph (dependences) extraction:
 * Dynamic call graphs: AspectJ makes it trivial to weave into call sites
 
 
-
 ## Formatters
 
 
@@ -1381,7 +1330,6 @@ left a space at the end of a line
 The com.github.sherter.google-java-format plugin is not maintained, per this discussion:
 <https://github.com/sherter/google-java-format-gradle-plugin/issues/57#issuecomment-782886280> .
 So, use Spotless (<https://github.com/diffplug/spotless>) to run google-java-format.
-
 
 
 ## Continuous integration
@@ -1433,7 +1381,6 @@ scons
   Built in Python
   No Scala support
   Limited Java support
-
 
 
 ## C# tools
