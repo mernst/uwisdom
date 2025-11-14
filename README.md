@@ -39,24 +39,6 @@ rolo maria rebelo
 git clone https://github.com/mernst/uwisdom.git
 ```
 
-## Comparison to web/email/etc. search
-
-Why would you want to use this program when you can just search the web or ask
-an LLM instead?
-
-* You may have local data that you choose not to put on the web for global
-  searching (e.g., your address book).
-* Having a local copy enables offline use.
-* Information may be available elsewhere, but time-consuming to find via a web
-  search or in a manual.
-* LLMs can yield incorrect information.
-
-Whenever I spend too long finding information, and especially if I think I
-might find the information useful in the future, I write an entry for a
-wisdom file.  Then, when I am searching for information, I first search my
-wisdom files, which only takes a moment.  Only if that fails do I proceed
-to the manual, a web search, etc.
-
 ## Searching the wisdom files
 
 Each nugget of wisdom is separated from others by two blank lines.  The [Lookup
@@ -77,6 +59,24 @@ alias quotefind='lookup -f ${HOME}/misc/quotes1 -f ${HOME}/misc/quotes'
 
 Pass `-h` (for example, `doc -h`) for usage instructions.
 You can learn more about the Lookup program from its [documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
+
+## Comparison to web/email/etc. search
+
+Why would you want to use this program when you can just search the web or ask
+an LLM instead?
+
+* You may have local data that you choose not to put on the web for global
+  searching (e.g., your address book).
+* Having a local copy enables offline use.
+* Information may be available elsewhere, but time-consuming to find via a web
+  search or in a manual.
+* LLMs can yield incorrect information.
+
+Whenever I spend too long finding information, and especially if I think I
+might find the information useful in the future, I write an entry for a
+wisdom file.  Then, when I am searching for information, I first search my
+wisdom files, which only takes a moment.  Only if that fails do I proceed
+to the manual, a web search, etc.
 
 ## Writing a wisdom entry
 
