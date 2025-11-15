@@ -1,22 +1,30 @@
+# Build systems
+
+
+You can view the table of contents by clicking the menu icon (three lines or
+dots) in the top corner.
+
+
 ## Make and Makefiles
 
 
 make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
 is a segfault (<http://www.bitwizard.nl/sig11/>).
+"error 137" means that your program ran out of memory.
 
 
 Make has two flavors of variables that may appear in a Makefile.
 The normal type is recursively expanded, re-evaluated on each use:
 
 ```make
-     foo = $(bar)
+foo = $(bar)
 ```
 
 The GNU-specific type is simply expanded, set once when the assignment is
 encountered.
 
 ```make
-     x := foo
+x := foo
 ```
 
 
@@ -31,13 +39,13 @@ In a Makefile, the right way to invoke make on a subdirectory or other
 directory is
 
 ```sh
-             cd subdir && $(MAKE)
+cd subdir && $(MAKE)
 ```
 
 or, equivalently,
 
 ```sh
-             $(MAKE) -C subdir
+$(MAKE) -C subdir
 ```
 
 To execute parallel jobs on a multiprocessor, use the "-j2" option.
@@ -47,7 +55,7 @@ In make, to ensure that a rule always runs even if the target seems to be
 up to date, add an extra rule of the form
 
 ```make
-     .PHONY : clean
+.PHONY : clean
 ```
 
 Once this is done, `make clean' will run the commands regardless of
@@ -71,30 +79,30 @@ Example use of special automatic variables used by make:
 In Makefiles, to test whether a file/directory exists, do something like this:
 
 ```make
-  # Test that the directory exists.  There must be a better way to do this.
-  INV:=$(wildcard $(INV))
-  ifndef INV
-    $(error Environment variable INV is not set to an existing directory)
-  endif
+# Test that the directory exists.  There must be a better way to do this.
+INV:=$(wildcard $(INV))
+ifndef INV
+  $(error Environment variable INV is not set to an existing directory)
+endif
 ```
 
 or alternately:
 
 ```make
-  ifeq "$(wildcard ${INV}/scripts)" "${INV}/scripts"
-       ... it exists ...
-  else
-       ... it does not exist ...
-  endif
+ifeq "$(wildcard ${INV}/scripts)" "${INV}/scripts"
+     ... it exists ...
+else
+     ... it does not exist ...
+endif
 ```
 
 or:
 
 ```make
 ifneq ("$(wildcard $(PATH_TO_FILE))","")
-FILE_EXISTS = 1
+  FILE_EXISTS = 1
 else
-FILE_EXISTS = 0
+  FILE_EXISTS = 0
 endif
 ```
 
@@ -106,9 +114,9 @@ the Makefile I would like to write:
 ```make
 .PHONY: maybe-update-file1
 maybe-update-file1:
- Command A:  may or may not update file1.txt
+  Command A:  may or may not update file1.txt
 file2.txt:  maybe-update-file1 file1.txt
- Command B:  computes file2.txt from file1.txt
+  Command B:  computes file2.txt from file1.txt
 ```
 
 Problem: because the maybe-update-file1 target always executes, Command B
@@ -275,10 +283,10 @@ rather than
   <property name="x" value="folder/file.txt" />
 ```
 
-Also consider using ${basedir}, which is already absolute.
+Also consider using `${basedir}`, which is already absolute.
 It defaults to the containing directory of the buildfile, and it can appear
 in a build.properties file.
-A slightly less clean approach than ${basedir} is
+A slightly less clean approach than `${basedir}` is
 
 ```ant
   <dirname property="ant.file.dir" file="${ant.file}"/>
@@ -692,9 +700,16 @@ problem may recur at any time).
 
 To upgrade/update Gradle from one version to a newer version:
 First, find the projects:
-  `locate gradlew`
-  `(progn (delete-matching-lines "-fork-[^m]" nil nil t)
-     (delete-matching-lines "branch-[^m]" nil nil t))`
+
+```sh
+locate gradlew
+```
+
+```elisp
+(progn (delete-matching-lines "-fork-[^m]" nil nil t)
+  (delete-matching-lines "branch-[^m]" nil nil t))
+```
+
 Then:
 
 * ./gradlew wrapper --gradle-version 4.10.3 && ./gradlew build --warning-mode=all
@@ -718,9 +733,7 @@ Then:
 
 The latest Gradle release version number is at <https://gradle.org/releases/> .
 
-1. Add to `build.gradle`:
-   For Gradle 6 or 7:
-   Add at beginning `settings.gradle`:
+1. Add at beginning `settings.gradle`:
 
    ```gradle
    plugins { id "com.gradle.enterprise" version "3.2" }
@@ -729,18 +742,10 @@ The latest Gradle release version number is at <https://gradle.org/releases/> .
    }
    ```
 
-   For Gradle 5: Add to `build.gradle`:
-
-   ```gradle
-   plugins { id "com.gradle.build-scan" version "3.2" }
-   gradleEnterprise {
-     buildScan { termsOfServiceUrl = 'https://gradle.com/terms-of-service'; termsOfServiceAgree = 'yes' }
-   }
-   ```
-
 2. Run `./gradlew help --scan` and browse to the URL.  If the Deprecations tab appears, see it.  If the Deprecations tab does not apper, you are set.
 
 
+Gradle caching:
 To solve
 
 ```text
@@ -1006,7 +1011,7 @@ gradle dependencies --configuration=testCompileClasspath
 
 
 To copy a locally-built Checker Framework to the Gradle and Maven local caches:
-(Must update gradle directory names when updating $VER!)
+(Must update gradle directory names when updating `$VER`!)
 
 ```sh
 VER=3.10.0 && \
