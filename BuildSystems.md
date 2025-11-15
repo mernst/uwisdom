@@ -68,10 +68,11 @@ then rerun "make".
 
 Particularly useful special "automatic variables" used by make (in Makefile rules):
 
-* $@   the target of the rule
-* $<   the first prerequisite
-* $^   all the prerequisites
-* $*   the stem with which an implicit rule matches, including directory name
+* `$@`   the target of the rule
+* `$<`   the first prerequisite
+* `$^`   all the prerequisites
+* `$*`   the stem with which an implicit rule matches, including directory name
+
 Example use of special automatic variables used by make:
 `cp -p $< $@`
 
@@ -270,7 +271,7 @@ In Ant, to convert a relative filename/pathname to absolute, use:
   <property name="x" location="folder/file.txt" />
 ```
 
-and ${X} will be the absolute path of the file relative to the ${basedir} value.
+and `${X}` will be the absolute path of the file relative to the `${basedir}` value.
 In general, for a file or directory, it's less error-prone to use
 
 ```ant
