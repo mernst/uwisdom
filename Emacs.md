@@ -8,17 +8,17 @@ menu icon (three lines or dots) in the top corner.
 ## General tips
 
 
-You should always run gdb within Emacs; use  M-x gdb RET
+You should always run gdb within Emacs; use  <kbd>M-x gdb RET</kbd>.
 One advantage is that when you move up and down the stack, the file with
 the relevant code is read into a buffer and displayed.
 (Getting jdb to work within Emacs is a tiny bit tricky; I find that the JDE
 package with a few modifications works fine for me.)
 
 
-To compile a program or run make, use  M-x compile RET
-(A typical compilation command is "make -k".)
+To compile a program or run make, use  <kbd>M-x compile RET</kbd>.
+(A typical compilation command is `make -k`.)
 You can continue work while the compilation proceeds.
-If there are any errors,  C-x `  or  M-x next-error RET  takes you to the
+If there are any errors,  <kbd>C-x `</kbd>  or  <kbd>M-x next-error RET</kbd>  takes you to the
 line of the code which is mentioned in the error.  This works with the
 output of most compilers.
 
@@ -38,12 +38,12 @@ Emacs's tags facility allows you to easily find a definition (of a
 function, variable, class, etc.) or search a collection of related files.
 
 * To create a tags table, run `etags _files_`; for instance, `+etags *.h *.c+`.
-* To find a tag within Emacs, type  M*-.  or  M-x find-tag RET
-* To search all files in the tags table, type  M-x tags-search RET
-* To select a different tags table, type  M-x visit-tags-table RET
+* To find a tag within Emacs, type  <kbd>M-.</kbd>  or  <kbd>M-x find-tag RET</kbd>
+* To search all files in the tags table, type  <kbd>M-x tags-search RET</kbd>
+* To select a different tags table, type  <kbd>M-x visit-tags-table RET</kbd>
 
 
-etags returns the best matches in a TAGS table first; however, it examines
+`etags` returns the best matches in a TAGS table first; however, it examines
 entire TAGS tables at a time, so it is advantageous to use a single TAGS
 table instead of multiple smaller ones (along with include directives).
 
@@ -98,8 +98,8 @@ or, to run tags directly:
 To save (or execute some other gnus keystroke command upon) multiple
 articles to a file in GNUS, use '&' in Subject mode.  This only works on
 articles past point.
-In gnus, do C-c C-r to caesar-rotate the text of an article.
-In gnus 5, use  S o m  to forward the current article.
+In gnus, do <kbd>C-c C-r</kbd> to caesar-rotate the text of an article.
+In gnus 5, use  <kbd>S o m</kbd>  to forward the current article.
 
 
 Kill file like so:
@@ -126,10 +126,8 @@ To start an Emacs using a smaller font size,
 ```
 
 To change the font while emacs is running,
+<kbd>M-x set-frame-font RET 9x15 RET</kbd>
 
-```keys
-  M-x set-frame-font RET 9x15 RET
-```
 
 To list available fonts:
 
@@ -210,12 +208,9 @@ To run a command whenever a file is saved, add to its end:
 
 
 To select an input method [e.g., spanish-postfix, to get accents] in Emacs:
+<kbd>C-x RET C-\ METHOD RET</kbd>
 
-```keys
-  C-x <RET> C-\ METHOD <RET>
-```
-
-To enable/disable the selected input method:  C-\
+To enable/disable the selected input method:  <kbd>C-\</kbd>
 
 
 Emacs and multibyte encodings:
@@ -226,8 +221,8 @@ characters in a variety of input formats.  However, a serious disadvantage
 is that the mule format is not recognized by other programs; for example,
 printing such a file from the command line (or via enscript) leads to
 gibberish.  (Doing so from within Emacs does the right thing.)  To make
-Emacs save files in a different format, after reading the file, do "M-x
-set-buffer-file-coding-system".  Also consider adding a line like
+Emacs save files in a different format, after reading the file, do <kbd>M-x
+set-buffer-file-coding-system</kbd>.  Also consider adding a line like
 
 ```text
   -*- coding: latin-0 -*-
@@ -245,20 +240,23 @@ variants.)
 
 To do incremental search (isearch) across multiple files or buffers:
 
-* In dired, `M-s a C-s` for isearch across marked files.
-* In dired, `Q` does query-replace-regexp on all marked files.
-* In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
+* In dired, <kbd>M-s a C-s</kbd> for isearch across marked files.
+* In dired, <kbd>Q</kbd> does query-replace-regexp on all marked files.
+* In buffer-menu (Buffer List buffer) <kbd>M-s a C-s</kbd> for isearch across marked buffers.
 
 
 
 In Emacs, to find/search/grep and replace a regex across multiple files:
 
-* M-x find-grep-dired RET my-regex RET
-* mark files of interest: `% m`
-* invoke search and replace: `Q`
+* <kbd>M-x find-grep-dired RET my-regex RET</kbd>
+* mark files of interest: <kbd>% m</kbd>
+* invoke search and replace: <kbd>Q</kbd>
 
 To search through symbolic links, first do
+
+```elisp
   (setq find-program "find -L")
+```
 
 
 To add to the existing list of tags tables, do
@@ -273,27 +271,27 @@ To add to the existing list of tags tables, do
 
 
 In Emacs's Diff Mode, to refine the diff region so you see per-character
-diffs, go to the hunk you are interested in and hit C-c C-b for
-refine-hunk.  Or step through the file one hunk at a time with M-n; that
+diffs, go to the hunk you are interested in and hit <kbd>C-c C-b</kbd> for
+`refine-hunk`.  Or step through the file one hunk at a time with <kbd>M-n</kbd>; that
 will do the refining automatically.
 
 
 To use Emacs's ediff to resolve/patch a file with merge conflict markers
 of the form <<<<<< ====== >>>>>>, that were left by git,
-use M-x vc-resolve-conflicts.
+use <kbd>M-x vc-resolve-conflicts</kbd>.
 Do this in one pass because it slightly edits the <<<<<< ====== >>>>>>
-lines so that a subsequent invocation of M-x vc-resolve-conflicts won't
+lines so that a subsequent invocation of <kbd>M-x vc-resolve-conflicts</kbd> won't
 recognize them.
 
 
 ## Uncategorized Emacs wisdom
 
 
-To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
+To not load `.emacs` file, do `emacs -q`.  To debug it, `emacs --debug-init`.
 
 
 `(symbol-function 'foo)` to determine whether an emacs function is coded in C or
-elisp; C-h f now also gives that information.
+elisp; <kbd>C-h f</kbd> now also gives that information.
 
 
 just-one-space                <kbd>ESC SPC</kbd>
@@ -348,7 +346,7 @@ The following will make emacs `help' windows transient:
 
 
 To prevent Emacs from wrapping lines, (setq truncate-lines t).
-I have a function M-x truncate-lines that toggles this value.
+I have a function <kbd>M-x truncate-lines</kbd> that toggles this value.
 
 
 To prevent Emacs from truncating printed representations of values:
@@ -363,7 +361,7 @@ To prevent Emacs from truncating printed representations of values:
 ```
 
 
-Use split-line (by default, bound to <kbd>ESC C-o</kbd>) for open-line-like behavior.
+Use `split-line` (by default, bound to <kbd>ESC C-o</kbd>) for open-line-like behavior.
 
 
 The tex-complete emacs package provides completion of TeX commands.
@@ -385,13 +383,13 @@ Or, supply a prefix argument when invoking compare-windows.
 
 
 To delete (kill) the entire contents of an Emacs buffer, use (erase-buffer)
-or M-x erase-buffer.
+or <kbd>M-x erase-buffer</kbd>.
 
 
 To specify Emacs's indenting of a lisp expression, do something like:
 (put 'with-output-to-temp-buffer 'lisp-indent-hook 1)
 The number is the number of "special" (indented more than usual) arguments.
-To see some examples, do M-. indent-sexp, then go up a few lines.
+To see some examples, do <kbd>M-. indent-sexp</kbd>, then go up a few lines.
 
 
 Set command-switch-alist to something like '(("-foo" . foo-handler)) to add
@@ -429,16 +427,10 @@ evaluate Lisp code.
 
 In Emacs, to show only those unindented lines that are *not* preceded by *N*
 spaces, do
-
-```keys
-  C-u _N_ C-x $
-```
+<kbd>C-u _N_ C-x $</kbd>
 
 To reset, do
-
-```keys
-  C-x $
-```
+<kbd>C-x $</kbd>
 
 
 A crude, undocumented, and not-guaranteed-to-work-in-the-future way to
@@ -446,7 +438,7 @@ silence any Emacs function is to temporarily bind executing-kbd-macro to a
 non-nil value.
 
 
-edebug-eval-top-level-form is bound to C-x x; use this to debug an Emacs
+`edebug-eval-top-level-form` is bound to <kbd>C-x x</kbd>; use this to debug an Emacs
 Lisp program or function.
 
 
@@ -489,15 +481,12 @@ save-match-data as well; the reason is that files can be loaded at any time
 (due to autoload) and loading a file shouldn't modify match-data.
 
 
-To figure out how to bind a key in Emacs, first do it using M-x
-global-set-key, then use repeat-complex-command to see the Lisp representation.
+To figure out how to bind a key in Emacs, first do it using <kbd>M-x
+global-set-key</kbd>, then use `repeat-complex-command` to see the Lisp representation.
 
 
 Version control keystrokes:
-
-```text
-  C-x v =    Compare buffer with latest checked-in version
-```
+ * <kbd>C-x v</kbd>:    Compare buffer with latest checked-in version
 
 
 In an Emacs shell, if tabs are expanded into an (incorrect) number of
@@ -531,11 +520,7 @@ conventions, in Emacs do
 
 Or, use the dos2unix program.
 To save a file with DOS end-of-file conventions, in Emacs do
-
-```keys
-  C-x <RET> f dos <RET>
-```
-
+<kbd>C-x RET f dos RET</kbd>
 
 To update all installed Emacs packages:
 
@@ -547,10 +532,8 @@ To update all installed Emacs packages:
 
 or
 
-```elisp
-M-x package-list-packages RET U x
-M-x package-autoremove RET y
-```
+* <kbd>M-x package-list-packages RET U x</kbd>
+* <kbd>M-x package-autoremove RET y</kbd>
 
 or the following ought to work, but it does not:
 
@@ -603,17 +586,17 @@ To override dtrt-indent (which guesses indentation), do:
 ```
 
 This is not the same as Emacs's tab-width or c-indent-level, but I'm including
-them in this entry because someone searching for this entry might use them.
+those phrases in this entry because someone searching for this entry might use them.
 
 
 In Mew, use the following for searching:
 
-* `C-cC-s`
+* <kbd>C-cC-s</kbd>
     Incremental search forward in Message mode, only within the
     current message.
-* `C-cC-r` Incremental search backward in Message mode, only within the
+* <kbd>C-cC-r</kbd> Incremental search backward in Message mode, only within the
     current message.
-* `?`
+* <kbd>?</kbd>
      Put the `*` mark onto messages in this folder, which are matched
      to a specified pattern. Either `mewl` or `grep` is called according to
      the specified pattern.
@@ -624,8 +607,8 @@ To keep the original Subject line, use dcc: instead of bcc:.
 
 
 In Emacs, to edit a file with long lines so the display wraps/flows/fills
-the lines but the underlying buffer text retains long lines, use M-x
-visual-line-mode.  It's better than longlines mode.
+the lines but the underlying buffer text retains long lines, use <kbd>M-x
+visual-line-mode</kbd>.  It's better than longlines mode.
 
 
 When running Emacs in a Cygwin bash shell, the cursor can be a thin

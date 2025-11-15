@@ -561,7 +561,7 @@ single page, for easier browsing.  The pages are concatenated in depth-first
 order.
 
 
-To use the html-update-toc script to maintain a table of contents in a
+To use the `html-update-toc` script to maintain a table of contents in a
 webpage, insert the following near the top of the file:
 
 ```html
@@ -570,7 +570,7 @@ webpage, insert the following near the top of the file:
 <!-- end toc -->
 ```
 
-Also consider running, in Emacs, M-x html-add-heading-anchors .
+Also consider running, in Emacs, <kbd>M-x html-add-heading-anchors</kbd>.
 
 
 To convert HTML to a printable form (PostScript):
@@ -833,8 +833,8 @@ python imap_upload.py --gmail --user=$<USER@cs.washington.edu> --password=PASSWO
 ```
 
 It may be necessary to convert a BABYL file to mbox format.
-Don't use b2m for that; instead, use:  M-x unrmail
-(No need to read the file in as an RMAIL file; just run M-x unrmail.)
+Don't use b2m for that; instead, use:  <kbd>M-x unrmail</kbd>
+(No need to read the file in as an RMAIL file; just run <kbd>M-x unrmail</kbd>.)
 
 
 If you read Gmail via IMAP, then your trash mail doesn't get deleted and it uses up your quota.  You may want to delete it for real.
@@ -1241,6 +1241,19 @@ AI code review tools to investigate:
 * <https://devlo.ai/>
 
 
+## Vi editor
+
+
+vi editor commands:
+
+* <kbd>:q</kbd> quits vi after a file has been saved
+* <kbd>:q!</kbd> quits vi without saving the file
+* <kbd>:qa!</kbd> quits vi without saving the file
+* <kbd>:x</kbd> saves the file and quits vi
+* <kbd>:wq</kbd> saves the file and quits vi
+* <kbd>:help</kbd> help
+
+
 ## General wisdom (that is, everything without its own section above)
 
 
@@ -1584,14 +1597,19 @@ instead, as root, edit, then rebuild the NIS database:
  cd /var/yp; make
 ```
 
-If yppasswd does not work, then maybe the ypbind and/or yppasswd daemons
-have died.  "ypwhich" will return an error message if ypbind has stopped.
+If `yppasswd` does not work, then maybe the ypbind and/or yppasswd daemons
+have died.  `ypwhich` will return an error message if ypbind has stopped.
 To restart the daemons, do (as root)
 
 ```sh
   /etc/rc.d/init.d/ypbind restart
   /etc/rc.d/init.d/yppasswdd restart
 ```
+
+
+To see the equivalent of a yppasswd entry for user foo, do
+`ypmatch foo passwd` or `ypcat passwd | grep -i foo` or `~/bin/getpwent foo`.
+Or, at MIT LCS, do `inquir-cui` at mintaka.lcs.mit.edu.
 
 
 Find all subdirectories:
@@ -1654,32 +1672,13 @@ A way to find typos and grammar errors in papers:  run ps2ascii on a
 run its grammar checker.
 
 
-If the crontab log says "bad user", that typically means that the password
-is expired.  On marjoram, we fixed this (maybe) by adding an entry (with an
-in-the-future expiration time) to /etc/shadow, though it really should have
-been in /etc/shadow.local.  Other possibilities:
-
-* account is not locked
-* password is not expired
-* pwck does not complain about the account
-* account is in /etc/cron.d/cron.allow
-* or maybe (probably not) that the command was run and exited with a
-   return status of 1 (maybe the command wasn't in the path when cron ran?)
-
-
 Sometimes a single NFS client cannot see a directory when other clients of
-the same server can see the directory.  A workaround is to run 'rmdir' on
+the same server can see the directory.  A workaround is to run `rmdir` on
 the troublesome directory; this seems to fix the problem.
 
 
-Valgrind is a free, good Purify-like detector of memory errors (for x86
-Linux only).  It's better than what is built into gcc.
-<http://developer.kde.org/~sewardj/>
-
-
-To see the equivalent of a yppasswd entry for user foo, do
-`ypmatch foo passwd` or `ypcat passwd | grep -i foo` or `~/bin/getpwent foo`.
-Or, at MIT LCS, do `inquir-cui` at mintaka.lcs.mit.edu.
+Valgrind is a free, good Purify-like detector of memory errors.  It's better
+than what is built into gcc.  <https://valgrind.org/>
 
 
 To encrypt/decrypt:
@@ -1720,19 +1719,6 @@ To decrypt:
 ```
 
 
-Greg Shomo recommends that one use RPM to install anything that was
-included in the original (Red Hat) Linux distribution:  bugfixes and
-updates.  He recommends using source to install any new programs.
-He recommends installing package foo-1.2 with
-
-```sh
-  ./configure --prefix=/usr/local/pkg/foo/foo-1.2
-```
-
-then using gnu stow (ftp://ftp.gnu.org/gnu/stow/stow-1.3.3.tar.gz) to make
-the proper symlinks into that subdirectory.
-
-
 Don't use the "follow" option in Unison, which can delete the real file
 behind a symbolic link in ~/.synchronized -- see my Unison files for details.
 
@@ -1749,7 +1735,7 @@ Directories created in that directory also have their SGID bit set.
 (The SGID bit has nothing to do with the sticky bit.)
 
 
-lpr can assign "classes" or priorities to jobs.  For instance, to bypass
+`lpr` can assign "classes" or priorities to jobs.  For instance, to bypass
 all other jobs in the queue, do `lpr -C Z *filename*` (Z is the highest
 priority/class).
 
@@ -1759,7 +1745,7 @@ If trying to print results in the error
 then make sure that your PRINTER environment variable is properly set.
 
 
-ispell that requires only one argument at a time:
+To run a spell-check program that requires only one filename argument at a time:
 
 ```sh
 foreach file (*.tex)
@@ -1775,36 +1761,18 @@ To run VNC:
 ```
 
 
-Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,
-AIX), eg:
-smbclient '\\rfilesrv1\students' -W cseresearch
-
-
-Run smbpasswd to set samba passwords (there is a separate password file for
-them).
-
-
-To make Samba work from certain locations, I must first edit
-/etc/samba/smb.conf to add those IP addresses in the "hosts allow" section.
-Also edit /etc/hosts.allow similarly.
-
-
 `/etc/sudoers` says
 
 ```sh
 # This file MUST be edited with the 'visudo' command as root
 ```
 
-But the visudo command just does file-locking and checks for syntax errors;
+But the `visudo` command just does file-locking and checks for syntax errors;
 it's fine to edit the file with another editor.
 
 
-Combinatorial games suite (supersedes David Wolfe's package):
-<http://cgsuite.sourceforge.net/>
-
-
-To have a mount re-done at each reboot:
-Put in /etc/fstab
+To have a mount re-done at each reboot,
+put in `/etc/fstab`:
 
 ```fstab
   jbod.ai.mit.edu:/fs/jbod1/mernst-temp /mnt/dtrace-store nfs     defaults       \
@@ -1812,7 +1780,7 @@ Put in /etc/fstab
 ```
 
 (And you can also issue just `mount /mnt/dtrace-store` now.)
-This particular mount requires that the following appear in /etc/hosts.allow:
+This particular mount requires that the following appear in `/etc/hosts.allow`:
 
 ```hosts
   ALL: 128.52.0.0/255.255.0.0
@@ -1823,25 +1791,6 @@ Delta debugging application:
 
 * <http://delta.tigris.org/>
 * <https://www.st.cs.uni-saarland.de/dd/ddusage.php3>
-
-
-To exit the vi or vim editor:
-
-```vi
- :q
-```
-
-To exit without saving changes:
-
-```vi
- :qa!
-```
-
-For help:
-
-```vi
- :help
-```
 
 
 Parallel/distributed jobs across many machines:
@@ -1864,14 +1813,6 @@ Parallel/distributed jobs across many machines:
     More about PVM: <http://www.epm.ornl.gov/pvm/>
 
 * OpenPBS: <http://www-unix.mcs.anl.gov/openpbs/>
-
-
-vi commands:
-
-* `:q` quits vi after a file has been saved
-* `:q!` quits vi without saving the file
-* `:x` saves the file and quits vi
-* `:wq` saves the file and quits vi
 
 
 To start up network on Linux laptop (for NIC; not necessary for PCMCIA):

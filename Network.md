@@ -439,3 +439,9 @@ Installing Renovate would prevent the need for pull requests like this.  To onbo
 
 
 Pangram.com is the best AI text detector, as of 2025-11.
+
+
+Combinatorial games suite (supersedes David Wolfe's package):
+<http://cgsuite.sourceforge.net/>
+
+

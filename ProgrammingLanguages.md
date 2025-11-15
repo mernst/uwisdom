@@ -259,8 +259,8 @@ To make Python run unoptimized, do:
 ```
 
 To evaluate these in Emacs, put the cursor at the end of the line and type
-C-x C-e.
-After you change py-which-args, kill the `*Python*` buffer and restart
+<kbd>C-x C-e</kbd>.
+After you change `py-which-args`, kill the `*Python*` buffer and restart
 (it's not enough to kill the Python process and restart).
 
 

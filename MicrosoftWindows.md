@@ -60,3 +60,19 @@ When a USB device is not recognized, you can try uninstalling the USB
 device maanger and it will be automatically reinstalled when you plug it in
 again.  Go to "Device manager", find it and uninstall it, reboot, and plug
 it in again.
+
+
+Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,
+AIX), eg:
+smbclient '\\rfilesrv1\students' -W cseresearch
+
+
+Run smbpasswd to set samba passwords (there is a separate password file for
+them).
+
+
+To make Samba work from certain locations, I must first edit
+/etc/samba/smb.conf to add those IP addresses in the "hosts allow" section.
+Also edit /etc/hosts.allow similarly.
+
+
