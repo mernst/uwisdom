@@ -4,7 +4,7 @@
 //   \include{my-personal-file1}
 //   \include{my-personal-file2}
 //   ...
-// Note that files "Mit.md" and "Uw.md" are not included in this file;
+// Note that files `Afs.md`, `Mit.md`, and `Uw.md` are not included in this file;
 // users must include them explicitly.
 
 \include{README.md}
@@ -16,7 +16,7 @@
 \include{Mac.md}
 \include{MicrosoftWindows.md}
 \include{Network.md}
-\include{Php.md}
+\include{ProgrammingLanguages.md}
 \include{Programs.md}
 \include{Research.md}
 \include{Tex.md}

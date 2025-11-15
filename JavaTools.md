@@ -1303,7 +1303,7 @@ Java call graph (dependences) extraction:
    Static and dynamic call graphs.
 * GNU GLOBAL is for source tagging, does not generate call graphs.
 * Eclipse's Call Hierarchy: Highlight your method, right click and select
-   Open Call Hierarchy (Windows keyboard shortcut: CTRL+ALT+H).  For
+   Open Call Hierarchy (Windows keyboard shortcut: <kbd>CTRL+ALT+H</kbd>).  For
    programmatic access:
    <http://stackoverflow.com/questions/5321290/invoking-call-hierarchy-from-eclipse-plug-in>
 * JChord, <http://code.google.com/p/jchord/>

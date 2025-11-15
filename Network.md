@@ -28,16 +28,6 @@ This makes it easy for me to add "+" suffices to simplify sorting of my
 mail.
 
 
-To obfuscate mailto email address links on web pages with Javascript to
-avoid spam:  <http://www.u.arizona.edu/~trw/spam/spam.htm>
-But this is probably hopeless:  your email address is probably out there
-already, and you're probably using spam filtering already.
-
-
-In Horde mail reader, I must create folders with names like
-"INBOX.Daily", not "Daily" (which gives me "Permission denied" errors).
-
-
 To join a Google Groups mailing list with a Google Apps account (e.g.,
 @cs.washington.edu), you have to create your own URL:
   <http://groups.google.com/group/_groupname_/boxsubscribe?email=_email>_
@@ -121,16 +111,6 @@ DaVinci is similar, but for X windows:
 <http://www.informatik.uni-bremen.de/~inform/forschung/daVinci/>
 
 
-(What is a comparison between xgrab and graphviz?)
-'xgrab' (X graph browser), a graph layout and browser package running under
-X11.R4, is available as cs.washington.edu:pub/xgrab.tar.Z.
-Xgrab reads a textual specification of a graph, lays out the graph
-using heuristics to minimize the number of edge crossings, and displays
-the graph as labeled nodes and edges in an X window.  The user can then
-edit the graph.  Once happy with the graph layout, xgrab can write a
-postscript file or a text file describing the resulting graph.
-
-
 ACM copyright form is available at
 <http://www.acm.org/pubs/copyright_form.html>.
 
@@ -142,15 +122,6 @@ is "Do not use a chain-letter petition."
 
 To see whether a domain has been registered:
 <http://www.networksolutions.com/cgi-bin/whois/whois>
-
-
-SourceForge (<http://sourceforge.net/>) is a free open-source developer
-support service that provides, among other things, CVS repositories and
-access to compile farms.
-Savannah is the GNU/FSF alternative.
-
-
-Register domain names:  joker.com is cheap; also dotearth.com.
 
 
 BSD calendar program:
@@ -171,49 +142,6 @@ The Elements of Style by Strunk and White is online (do a search for it).
 
 NSF GPG (Grant Proposal Guide):
 <http://www.nsf.gov/publications/pub_summ.jsp?ods_key=GPG>
-
-
-wget is a command-line utility to fetch web pages and save them to the
-local disk.  <http://www.gnu.org/software/wget/wget.html>
-To download a single file, only if it's newer than the on-disk version:
-
-```sh
-  wget -N URL
-```
-
-wget is also useful for web site mirroring.
-To download everything below a current point:
-
-```sh
-  wget -r -k -np URL
-```
-
-To get just a single file and its dependencies, converted for local viewing:
-
-```sh
-  wget -pk -nH -nd -Pdownload-dir URL
-```
-
-Or, an easy way to do the latter is just to view the URL in Firefox, then
-choose "save as"!
-
-
-Andreas Zeller recommends EasyChair (<www.easychair.org>) as the best
-conference management system he has used.
-Many others recommend HotCRP, especially the systems community.
-
-
-Paperdyne conference management system:
-
-* To view all abstracts, the key is to log in as reviewer (not PCC).
-   Then, go to "Papers" and click "show abstracts' bodies".  (Click on
-   "printer-friendly" version if printing.)
-* In Paperdyne the submission phase is not cloased automatically.
-   Paperdyne closes if you switch to the next phase (see
-   <http://www.paperdyne.com/faq/p1_2.html>).
-
-
-VistaPrint.com: cheap business cards
 
 
 Shimano road bicycle components, as explained by
@@ -240,53 +168,19 @@ When having networking problems in a Linux/Debian/Ubuntu VMware guest (e.g,
 "no network connection" when hovering over icon), reinstall VMware tools.
 
 
-To get a printable version of a blogger webblog, apply these diffs:
-1:
-
-```html
-   #content {
--    width:660px;
-     margin:0 auto;
-```
-
-2:
-
-```html
-   #main {
--    width:410px;
-     float:left;
-```
-
-
-The plume-bib README instructions are available in these (identical) files:
-
-* <https://github.com/mernst/plume-bib>
-* <https://raw.githubusercontent.com/mernst/plume-bib/master/README.md>
-
-
-Neither of these redirect:
-
-* <http://rawgit.com/mernst/randoop/master/doc/index.html>
-* <https://rawgit.com/mernst/randoop/master/doc/index.html>
-
-even though the second one of these two does redirect:
-
-* <http://rawgit.com/mernst/plume-bib/master/README>
-* <https://rawgit.com/mernst/plume-bib/master/README>
-
-Weird.
+plume-bib README instructions:  <https://github.com/mernst/plume-bib>
 
 
 For PC remote control:
 
-* logmein.com,
-* If they are running Windows 7, its extremely easy to walk them through
-  * Hitting the start button,
-  * Typing 'Windows Remote Assistance' in the search bar
-  * Clicking 'Invite someone you trust to help you,'
-  * Clicking Easy Connect and having them recite the letters on their screen.
-* <www.mikogo.com>
 * teamviewer
+* logmein.com,
+* If they are running Windows 7:
+  * Hit the start button,
+  * Typ. 'Windows Remote Assistance' in the search bar
+  * Click 'Invite someone you trust to help you'
+  * Click Easy Connect and having them recite the letters on their screen.
+* <www.mikogo.com>
 * ultraVNC single click
 * Meraki Systems Manager
 * Chrome Remote Desktop: <https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp>
@@ -358,13 +252,6 @@ Coveralls (<https://coveralls.io/>) reports test coverage.
 For Java, it requires Maven.
 
 
-To search for source code (in approximate order of preference):
-
-* SearchCode
-* GitHub search
-* <http://code.openhub.net/> (was Koders.com; by Black Duck)
-
-
 To avoid waiting on hold:
 <http://www.lucyphone.com/>
 <http://www.fastcustomer.co/mf>
@@ -376,8 +263,9 @@ Outsourcing companies (I have no particular reason to prefer one over the other)
 * oDesk (Panos Ipeirotis is on sabbatical there)
 * Elance
 * others? TaskRabbit, Guru, TopCoder, Craigslist, rentacoder
+
 For designs: 99designs.com, dribbble.com
-Advice on hiring: <https://news.ycombinator.com/item?id=2539892> .  Key: ask
+Advice on hiring: <https://news.ycombinator.com/item?id=2539892>.  Key: ask
 a simple domain-knowledge type question in the posting, or how they would
 go about the project. Ask for references. Ask them to restate what you want,
 in their own words. Do a Skype interview. Be
@@ -385,6 +273,7 @@ willing to pay (say, $50/hour instead of $25). Give a small test
 project before moving forward. Hire multiple people for that first project.
 Say there may be more work after the initial bit.
 <http://www.keithmander.com/?p=243> says:
+
 * Use uTest to perform QA of the code.
 * Always make sure you have a clear agreement in place that spells out how owns the finished output and what the rights are for the contractor.
 
@@ -396,7 +285,7 @@ Example issues:
 <https://issues.sonatype.org/browse/OSSRH-37810>
 
 
-SPL (Seattle Public Library) suggestions for purchane:
+SPL (Seattle Public Library) suggestions for purchase:
 <https://www.spl.org/library-collection/suggestions-for-purchase/purchase-suggestion-form-for-books-and-music-scores>
 
 
@@ -411,8 +300,6 @@ Suppose in your Canvas Dashboard (canvas.uw.edu) you see
 XXX C Sp18, each of which has multiple sections, AA, AB, BA, BB, CA, CB.
 * or a cross-listed course with two "courses" CSE XXX A Sp 18 and CSEM
 XXX A Sp18.
-
-*
 
 1. Select one of these from your Dashboard and click on it.  You are
 going to use this one as the "home course" where all the other sections
@@ -444,8 +331,6 @@ to the "home course" and your view will be teleported to the inside of
 the "home course".
 8. Go back to your Canvas Dashboard.
 
-*
-
 If *other* Canvas "courses" associated with your course still show up
 then they still have sections that you haven't moved so go back to Step 4.
 If all of their sections have been moved then the Canvas courses will
@@ -454,14 +339,19 @@ have disappeared from your Dashboard.   Do one final check via
 that everything is there.  If so, you are done!
 
 
-I don't have permission to edit the calendar event (in Google Calendar).  I personally use this Chrome extension to make that the default
+I don't have permission to edit the calendar event (in Google Calendar).  I personally use this Chrome extension to make that the default:
 <https://chrome.google.com/webstore/detail/google-calendar-guests-mo/hjhicmeghjagaicbkmhmbbnibhbkcfdb?hl=en>
+
+To change the default guest permissions in Google Calendar:
+In the Settings menu, click Settings.
+Under General > Event Settings, choose Default guest permissions.
 
 
 Charlie Garrett's perferred C++ references:
-The C++ Standard Library by Josuttis
-C++ Templates by Vandevoorde, Josuttis and Gregor
-C++ for the Impatient by Overland
+
+* The C++ Standard Library by Josuttis
+* C++ Templates by Vandevoorde, Josuttis and Gregor
+* C++ for the Impatient by Overland
 
 
 Cloud credits for research from AWS and EC2, for experiments:
@@ -494,11 +384,6 @@ To make sure your site is indexed:
 <https://support.google.com/webmasters/answer/7474347>
 
 
-To change the default guest permissions in Google Calendar:
-In the Settings menu, click Settings.
-Under General > Event Settings, choose Default guest permissions.
-
-
 Anonymize a GitHub repo, for example for double-blind submission:
 <https://anonymous.4open.science/>
 
@@ -507,8 +392,9 @@ Anonymize a GitHub repo, for example for double-blind submission:
 
 
 Handwriting practice worksheets:
-allkidsnetwork.com
-worksheetworks.com
+
+* <allkidsnetwork.com>
+* <worksheetworks.com>
 
 
 To report malicious/abusive Bitbucket repositories: <abuse@atlassian.com>
@@ -520,9 +406,9 @@ You should scan the exams exam by exam. That is, staple the exam together for th
 
 If your exam is one-sided (which I recommend for ease of students taking the exam and also for ease of scanning), do not under any circumstances permit students to write on the back of pages.
 
-You will also scan, separately, a single example exam. Then you will choose, with a mouse, the area of the page that is related to each "Question". You want each Gradescope question to be as small as possible. For instance, if you have question 22 on the exam that is "select all of the following four that apply", then you almost certainly want to split it into separate Gradescope questions, each one treated like a true false question by gradescope. Don't make the tas do any mental arithmetic in their heads. I made this mistake.
+You will also scan, separately, a single example exam. Then you will choose, with a mouse, the area of the page that is related to each "Question". You want each Gradescope question to be as small as possible. For instance, if you have question 22 on the exam that is "select all of the following four that apply", then you almost certainly want to split it into separate Gradescope questions, each one treated like a true false question by gradescope. Don't make the TAs do any mental arithmetic in their heads.
 
-There is a specific graphical format that you want to use for true false questions. It is shown on some Gradescope web pages, and I can also help you with it. For multiple choice, I think it isn't as important. That is, I think that circling a letter or filling in a Scantron style are both acceptable. I would need to double check that.
+There is a specific graphical format that you want to use for true false questions. It is shown on some Gradescope web pages. For multiple choice, I think it isn't as important. That is, I think that circling a letter or filling in a Scantron style are both acceptable.
 
 One nice thing about Gradescope grading is that it will cluster answers. For example, it will show you one example of all the students who marked question 22.B, and one example of all the students who didn't mark it. Thus, it is not necessary to look at each m exam individually. Except for written answers, that is.
 

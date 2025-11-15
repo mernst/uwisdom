@@ -9,10 +9,10 @@ This file is a bit of a catch-all, for everything that does not have a
 dedicated wisdom file.
 
 
-## PostScript and PDF
+## File format conversions for printing
 
 
-To convert a text file to PostScript or PDF, here are possibilities.
+To convert a text file to PostScript or PDF.
 Reasonable choices:
 
 * paps: is packaged for Unix distributions (Ubuntu, Red Hat), so perhaps
@@ -28,6 +28,7 @@ Poor choices, if you are concerned about UTF-8 (non-ASCII characters):
 * u2ps: Internet chatter says it is not as good as paps?
 * h2ps and bg5ps: intended specifically for Asian fonts
 
+
 Enscript is a standby, since it has so many options and is widely installed,
 but it doesn't handle UTF-8, and GNU enscript has not been updated since
 2012 (version 1.6.6).  a2ps has, though, and it does syntax highlighting.
@@ -42,6 +43,13 @@ Otherwise, to convert a text file to PostScript (86 characters per line):
 ```
 
 Can add "-H 2" for highlight bars (good for tabular data).
+
+enscript common options:
+
+* -h: no burst/header page
+* -B: no page headings
+
+
 a2ps is maintained!  But it's a bit of a pain to install.
 The equivalent a2ps line is:
 
@@ -55,17 +63,70 @@ or, with syntax highlighting (why no -E argument?):
   a2ps -r -f 7 --columns=1 -o OUTFILE.ps INFILE
 ```
 
-To print on Lexmark Z52, which cannot image the top .5 inches of a sheet,
-for twoup output use
+
+Conversions between PostScript and PDF:
+
+* PS -> PDF:
 
 ```sh
-  enscript --margins=:::36 -2r
+   distill foo.ps   (for an entire directory, "distill -files .ps")
+   ps2pdf foo.ps
 ```
 
-enscript common options:
+* PDF -> PS:
+   Avoid these acroread invocations; pdftops seems better.
 
-* -h: no burst/header page
-* -B: no page headings
+```sh
+   acroread -toPostScript file.pdf
+   cat sample.pdf | acroread -toPostScript > sample.ps
+   acroread -toPostScript sample1.pdf sample2.pdf <dir>
+   acroread -toPostScript -pairs pdf_file_1 ps_file_1 ...
+   acroread -toPostScript -level2 pdf_file_1
+```
+
+When using acroread to manually do the conversion, selecting the option
+"Download Fonts Once" in the Print menu may cause math fonts to be messed
+up; in case of that trouble, deselect this option.
+
+
+sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
+
+
+To convert a Microsoft Word .doc file to PDF:
+
+* open it in OpenOffice and export as PDF
+* wvPDF file.doc file.pdf
+
+Neither technique dominates the other, and each is sometimes bad
+
+
+To convert PDF to ASCII text (txt) format, use the pdftotext program, which is
+part of the xpdf package.
+
+
+To convert a 1-page PDF to good-quality .gif:
+
+```sh
+  convert -density 300 -quality 100 file.pdf file.gif
+```
+
+
+html2ps converts a HTML file to PostScript, potentially recursively.
+
+```sh
+  html2ps -n -u -C bh -W bp http://pag.csail.mit.edu/daikon/ > index.ps
+```
+
+* "-n" means number pages
+* "-u" means underline links
+* "-C bh" means generate a table of contents.
+* "-W bp" means process recursively retrieving hyperlinked documents ("p"
+   means prompt for remote documents).  Watch out:  using -W b might seem
+   reasonable, but it will try to print some binary files!
+* "-2L" means two-column landscape
+
+
+## PostScript and PDF
 
 
 To convert a PostScript file for A4 paper for printing on letter
@@ -77,8 +138,6 @@ size paper (that is, to shift the text down on the page), use
 
 Alternately, convert to PDF and then back to PostScript, using ps2pdf and
 pdf2ps.  Or use pdftops, which seems nicer than pdf2ps.
-(By default, dvips creates PostScript for A4 paper.  Some people forget to
-fix this when they install dvips.  See file ~mernst/wisdom/building/build-dvips)
 To create Encapsulated PostScript, can also run
 
 ```sh
@@ -92,6 +151,14 @@ the "L" or "R" or "U" modifiers.  For instance:
 ```sh
   pstops -pletter '0L(8.5in,0)' orig.ps rotated-counterclockwise.ps
 ```
+
+
+To combine/interleave two PDF files, one containing odd pages scanned and the
+other containing even pages scanned in reverse order:
+
+* To use `pdfjam`, see <https://unix.stackexchange.com/a/53316/14002> .
+* To use `pdftk`: `pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf`
+* Online: <https://www.sejda.com/alternate-mix-pdf>
 
 
 Tools for transforming PDF files:
@@ -172,11 +239,7 @@ Maybe I can just do
 ```
 
 There is also the podofo suite of tools.
-acroread can also do this, as part of its conversion-to-PostScript
-which is available from the command line.  (But acroread isn't installed at CSE.)
 evince's print dialog does not seem available from the command line.
-
-psnup or pdfnup seem better than mpage.
 
 
 Sample use of mpage (-o suppresses lines between pages):
@@ -207,46 +270,10 @@ bounding box):
   epstopdf ${FILE}-cropped.eps
 ```
 
-(One culprit is Visio 2010, saving the selection as PDF (the selection is under "page
-range" choices, only after you have selected PDF) still gives a page-size
-PDF file, and "save as EPS" is no longer supported.  I cropped it by hand
-in Acrobat Professional.  Or, do this:
-
-* save as PDF
-* pdftops -eps file.pdf
-* bbfig -o file.eps | gv -
-   and add the %%BoundingBox line to the header of the ps file.
-
-
 ghostview:  view PostScript on an X windows display.
 
 
-Conversions between PostScript and PDF:
-
-* PS -> PDF:
-
-```sh
-   distill foo.ps   (for an entire directory, "distill -files .ps")
-   ps2pdf foo.ps
-```
-
-* PDF -> PS:
-   Avoid these acroread invocations; pdftops seems better.
-
-```sh
-   acroread -toPostScript file.pdf
-   cat sample.pdf | acroread -toPostScript > sample.ps
-   acroread -toPostScript sample1.pdf sample2.pdf <dir>
-   acroread -toPostScript -pairs pdf_file_1 ps_file_1 ...
-   acroread -toPostScript -level2 pdf_file_1
-```
-
-When using acroread to manually do the conversion, selecting the option
-"Download Fonts Once" in the Print menu may cause math fonts to be messed
-up; in case of that trouble, deselect this option.
-
-
-If you are having trouble printing from Acrobat Reader (such as mising
+If you are having trouble printing from Acrobat Reader (such as missing
 characters on some pages):
 Printer Properties >> Advanced >> Postscript Options >> PS Output : Optimize for Portability
 
@@ -265,69 +292,8 @@ Try changing the first line to
   %!PS
 ```
 
-and the ghostview will turn off looking for ADSC comments.
+and ghostview won't look for ADSC comments.
 Or, use gs (ghostscript), which gives a plain X window, no ghostview buttons.
-
-
-To convert an Excel PostScript file into Encapsulated PostScript (for
-inclusion in a LaTeX document, for instance), use Greg Badros's
-excel-ps-to-eps program.  (First remove the leading/trailing HPLJ
-notations, and be sure there are no ^M characters in the file.)
-
-```sh
-  excel-ps-to-eps graph1.ps graph2.ps
-```
-
-It may produce lots of spurious warning messages but creates a valid .eps file.
-(This used to only work on Linux, with `~gjb/bin/{share,linux}` in your path.
-Another problem is that the PostScript's clipping region won't be set; this
-draws a (too) big white box.  To fix that, in LaTeX2e, use
-
-```latex
-    \epsfig{file=foo.eps,clip=}
-```
-
-(note that there is nothing after the "clip=").
-Alternately, Jeremy Buhler says:
-GhostScript (GS) 6.0 includes a ps2ps script that can munge printed output from
-Excel well enough to turn it into an eps file with ps2epsi and
-put it in a LaTeX document.
-Alternately, Mike Perkowitz says:
-
- 1. print chart to a postscript file in excel.
- 2. edit the postscript:
-    * the file is full of little blocks that are, i assume, the PC representation
-      of unix linefeeds or crs or whatever. (if you're editing on PC)
-    * remove everything before "%!PS-Adobe-3.0" at the beginning
-    * remove everything after "end" at the end
-    * at the beginning remove all "%%BeginFeature" through "%%EndFeature"
-      things
-    * my file, at the end, after showpage, had a line "Page SV restore" which
-      seemed to cause a gratuitous page advance. i removed it
- 3. rotate the document properly.
-      on june: `psfix -r 270 file.ps > file-r.ps`
-      or just remove the *whole* line that contains the word "rotate"
- 4. convert to EPS. on june: "ps2epsi file-r.ps file-r.eps"
- 5. "\input epsf" in your paper, and include the figure with "\epsfig{file=file-r.eps}"
-
-Note that the ghostscript viewer on the PCs can also convert from PS to EPS,
-but i had trouble getting it to rotate and save that rotation. and if you do
-psfix after the EPS conversion, i think your bounding box gets made full page
-size again or something.
-
-
-To print the word DRAFT diagonally on every page of a PostScript document,
-insert this at the second line of a postscript file (immediately after the
-"%!PS" line):
-
-```postscript
-   << /BeginPage { pop gsave /Helvetica-Bold 200 selectfont 0.9 setgray
-   306 396 translate 60 rotate 0 -100 moveto (DRAFT) dup stringwidth pop
-   2 div neg 0 rmoveto show grestore } >> setpagedevice
-```
-
-It assumes letter-size paper.
-Or, if you're using LaTeX2e, use the draftcopy package.
 
 
 Converting PostScript to text (ASCII), and other PostScript FAQs:
@@ -341,28 +307,6 @@ To add page numbers to a PostScript document (does not work for PDF):  pspage
 PrimoPDF.com is a free PDF converter for most Windows applications.
 
 
-sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
-
-
-To turn off screensavers in Gnome:
-
- 1. Click on the little foot in the lower left
-    Programs->Settings->Desktop->Screensaver
- 2. Select 'No Screensaver' in the list in the upper left
- 3. Click 'OK'
-
-
-Do
-
-```sh
-  xmodmap -e 'add mod1 = Alt_R'
-```
-
-to work around this bug with right Meta (Alt) Tab not working:
-  <http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=258003>
-It's supposed to be fixed now.
-
-
 To convert a paper formatted for LNCS into two-column, use
 
 ```sh
@@ -370,29 +314,10 @@ To convert a paper formatted for LNCS into two-column, use
 ```
 
 
-To convert a Microsoft Word .doc file to PDF:
-
-* open it in OpenOffice and export as PDF
-* wvPDF file.doc file.pdf
-
-Neither technique dominates the other, and each is sometimes bad
-
-
-To convert PDF to ASCII text (txt) format, use the pdftotext program, which is
-part of the xpdf package.
-
-
 To compress a PDF file:
 
 ```sh
   gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
-```
-
-
-To convert a 1-page PDF to good-quality .gif:
-
-```sh
-  convert -density 300 -quality 100 file.pdf file.gif
 ```
 
 
@@ -430,23 +355,12 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
 ```
 
 
-To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
-to the end of the link's URL.
-
-
-To combine/interleave two PDF files, one containing odd pages scanned and the
-other containing even pages scanned in reverse order:
-
-* To use `pdfjam`, see <https://unix.stackexchange.com/a/53316/14002> .
-* To use `pdftk`: `pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf`
-* Online: <https://www.sejda.com/alternate-mix-pdf>
-
-
-## WWW and HTML
+## HTML and CSS
 
 
 To make a webpage automatically forward/redirect, see
   <http://www.cs.washington.edu/info/faq/homefaq.html#else>
+
 More simply, do:
 
 ```html
@@ -457,41 +371,9 @@ This belongs in the `<head>` section, along with `<title>`.
 The number "0" can be set to a delay in seconds.
 
 
-To restart the httpd server:
-
-```sh
-  /etc/rc.d/init.d/httpd restart
-```
-
-or else
-
-```sh
-  /etc/rc.d/init.d/httpd stop
-  /etc/rc.d/init.d/httpd start
-```
-
-Another possible problem that could lead to failure to server webpages is
-that I failed to start Guidescope; do "myxapps".
-
-
-To allow use of "order", "allow", and "deny" in .htaccess, I had to add the
-following to /etc/httpd/conf/httpd.conf:
-
-```htaccess
-  # To allow use of "order", "allow", and "deny" in .htaccess.
-  <Directory /home/httpd/html/pag/daikon>
-    AllowOverride limit
-  </Directory>
-  <Directory /home/httpd/html/pag/pag>
-    AllowOverride limit
-  </Directory>
-```
-
-(Then I stopped and restarted the http server.)
-
-
 HTML checking:
 
+* htmlproofer
 * htmlchek is quite picky (not necessarily a problem) and hasn't been
    updated since February 20, 1995
 * NetMechanic seems reasonable.  <http://www.netmechanic.com/html_check.htm>
@@ -500,16 +382,29 @@ HTML checking:
 * Try W3C HTML Validation Service, <http://validator.w3.org/>
 
 
+The checklink program (from W3C) tells about broken links in HTML documents.
+Run like this:
+
+```sh
+  checklink -q -r http://homes.cs.washington.edu/~mernst/
+  ~/bin/src/checklink/checklink -q -r $(grep -v '^#' ~/bin/src/checklink/checklink-args.txt) MYURL
+```
+
+(Linkchecker (from <http://linkchecker.sourceforge.net/>?) seems to spawn
+lots of threads and never return.)
+Probably best to run these in the background with output sent to a file.
+`tidy` checks HTML.
+
+
 To improve accessibility when using bootstrap:
+
+```html
   <style>
     a { text-decoration: underline; }
   </style>
-(Why can't I put this in a .css file?)
+```
 
-
-"flatten" program converts hierarchies of WWW (World Wide Web) pages into a
-single page, for easier browsing.  The pages are concatenated in
-depth-first order.
+Why can't I put this in a .css file?
 
 
 In HTML and CSS, to set font color and style, you can do one of the following:
@@ -563,79 +458,6 @@ HTML em dash: &mdash; or &#8212;
 HTML en dash: &ndash; or &#8211;
 
 
-To use the html-update-toc script to maintain a table of contents in a
-webpage, insert the following near the top of the file:
-
-```html
-<p>Contents:</p>
-<!-- start toc.  do not edit; run html-update-toc instead -->
-<!-- end toc -->
-```
-
-Also consider running, in Emacs, M-x html-add-heading-anchors .
-
-
-The checklink program (from W3C) tells about broken links in HTML documents.
-Run like this:
-
-```sh
-  checklink -q -r http://homes.cs.washington.edu/~mernst/
-  ~/bin/src/checklink/checklink -q -r $(grep -v '^#' ~/bin/src/checklink/checklink-args.txt) MYURL
-```
-
-(Linkchecker (from <http://linkchecker.sourceforge.net/>?) seems to spawn
-lots of threads and never return.)
-Probably best to run these in the background with output sent to a file.
-`tidy` checks HTML.
-
-
-/uns/share/bin/wwwis is a Perl script which adds image size tags to
-HTML documents.  It's a nifty way to speed page rendering and avoid
-ugly incremental reflows.
-
-
-To convert HTML to a printable form (PostScript):
-I sometimes have trouble with html2ps, and find that htmldoc is better:
-
-```sh
-  htmldoc --webpage -t ps --outfile FILE.ps FILE.html
-```
-
-html2ps converts a HTML file to PostScript, potentially recursively.
-
-```sh
-  html2ps -n -u -C bh -W bp http://pag.csail.mit.edu/daikon/ > index.ps
-```
-
-
-* "-n" means number pages
-* "-u" means underline links
-* "-C bh" means generate a table of contents.
-* "-W bp" means process recursively retrieving hyperlinked documents ("p"
-   means prompt for remote documents).  Watch out:  using -W b might seem
-   reasonable, but it will try to print some binary files!
-* "-2L" means two-column landscape
-
-
-Apache 1.3.33 recognizes only the last "Options" directive, it seems.
-So put all the arguments in one directive:
-
-```apache
-  Options Indexes FollowSymLinks SymLinksIfOwnerMatch
-```
-
-Alternately, precede each argument by +, which means to modify the
-existing option directives instead of overriding and resetting them.
-
-A caveat about FollowSymLinks:  if any directory along the path is not
-accessible to the web server, then the symbolic link will appear not to
-exist.
-
-
-If guidescope isn't working, try "guidescope &".  I'm not sure exactly how
-to make this start up automatically every time.
-
-
 Here is a template/boilerplate for the start/beginning of a typical HTML file:
 
 ```html
@@ -656,11 +478,6 @@ Here is a template/boilerplate for the start/beginning of a typical HTML file:
 ```
 
 
-To find out the location of the apache/httpd config files and other
-information about the server, execute `httpd -V`.  This works on all
-systems that support apache (macos, windows, linux)
-
-
 To add a "favicon.ico" image to the address bar, do this in the
 `<head>...</head>` section of the HTML document:
 
@@ -678,24 +495,113 @@ Instead, use one of
 * `<samp>` for computer output
 
 
+## WWW
+
+
+To target an HTML link to a specific page in a PDF file, add `#page=PAGENUMBER`
+to the end of the link's URL.
+
+
+To restart the httpd server:
+
+```sh
+  /etc/rc.d/init.d/httpd restart
+```
+
+or else
+
+```sh
+  /etc/rc.d/init.d/httpd stop
+  /etc/rc.d/init.d/httpd start
+```
+
+Another possible problem that could lead to failure to server webpages is
+that I failed to start Guidescope; do "myxapps".
+
+
+To allow use of "order", "allow", and "deny" in .htaccess, I had to add the
+following to /etc/httpd/conf/httpd.conf:
+
+```htaccess
+  # To allow use of "order", "allow", and "deny" in .htaccess.
+  <Directory /home/httpd/html/pag/daikon>
+    AllowOverride limit
+  </Directory>
+  <Directory /home/httpd/html/pag/pag>
+    AllowOverride limit
+  </Directory>
+```
+
+(Then I stopped and restarted the http server.)
+
+
+The `flatten` program converts hierarchies of WWW (World Wide Web) pages into a
+single page, for easier browsing.  The pages are concatenated in depth-first
+order.
+
+
+To use the html-update-toc script to maintain a table of contents in a
+webpage, insert the following near the top of the file:
+
+```html
+<p>Contents:</p>
+<!-- start toc.  do not edit; run html-update-toc instead -->
+<!-- end toc -->
+```
+
+Also consider running, in Emacs, M-x html-add-heading-anchors .
+
+
+To convert HTML to a printable form (PostScript):
+I sometimes have trouble with html2ps, and find that htmldoc is better:
+
+```sh
+  htmldoc --webpage -t ps --outfile FILE.ps FILE.html
+```
+
+Apache 1.3.33 recognizes only the last "Options" directive, it seems.
+So put all the arguments in one directive:
+
+```apache
+  Options Indexes FollowSymLinks SymLinksIfOwnerMatch
+```
+
+Alternately, precede each argument by +, which means to modify the
+existing option directives instead of overriding and resetting them.
+
+A caveat about FollowSymLinks:  if any directory along the path is not
+accessible to the web server, then the symbolic link will appear not to
+exist.
+
+
+If guidescope isn't working, try "guidescope &".  I'm not sure exactly how
+to make this start up automatically every time.
+
+
+To find out the location of the apache/httpd config files and other
+information about the server, execute `httpd -V`.  This works on all
+systems that support apache (macos, windows, linux)
+
+
 ### Firefox
 
 
 Firefox extensions (.xpi files): to install, open them in Firefox.
 Adblock: <http://adblock.mozdev.org/>
 Firefox Adblock filter list: <http://www.geocities.com/pierceive/adblock/>
-(Must update by hand via "Tools > Adblock > Preferences > Adblock Options
->> Import filters".)
+(Must update by hand via "Tools > Adblock > Preferences > Adblock Options > Import filters".)
 Also get the Adblock filter updater extension.
 
 
-In Firefox, setting "font.name.serif.x-western" to "sans-serif" (do this in
-about:config, or (easier) via Edit >> Preferences >> Content >> Fonts &
-Colors >> Default Font) causes webpages to appear in sans serif font by
+In Firefox, setting "font.name.serif.x-western" to "sans-serif" causes webpages to appear in sans serif font by
 default.  It also makes webpages print in sans serif, which is not
 necessarily desirable:  sans serif is easier to read on screen, but serif
 is easier to read on paper.  I wish there was an easy way to get both of
 those features.
+
+To enable the setting: browse to
+about:config, or (easier) use Edit >> Preferences >> Content >> Fonts &
+Colors >> Default Font)
 
 
 If Firefox or Thunderbird says that a copy is already running, but that
@@ -704,56 +610,13 @@ somewhere under  ~/.mozilla or ~/.mozilla-thunderbird .
 
 
 In Firefox, to make searches ("find") default to case-insensitive:
-Press Ctrl+F , the quick find appears at taskbar.
+Press <kbd>Ctrl+F</kbd>, the quick find appears at taskbar.
 Uncheck the Match case check box
 
 
 If Firefox behaves badly (doesn't go to homepage, address bar doesn't
 update, back button doesn't work), try moving your ~/.mozilla directory
 aside, because one of your plugins may be corrupting Firefox.
-
-
-When printing a blog (or some other types of webpages) from Firefox, often
-only the first page is printed:  each blog post is one box, but overflowed
-boxes are invisibly hanging off the page instead of ontinued to the next
-page.  This is due to a problem in the blog's .css file.
-Here are two fixes:
-
-1. Permit wrapping text across pages:  remove
-
-```html
-      <div class="contenttext">
-```
-
-  Also, get rid of sidebars so the blog content prints full width:  remove
-
-```html
-      <div id="leftside">
-```
-
-  through
-
-```html
-      <div class="post">
-```
-
-  (inclusive).
-2. Fix the .css file.  Copy the blog locally:
-
-```sh
-      wget -O localfile.html URL
-```
-
-  and also copy its .css file locally.
-  Edit the .css file to contain:
-
-```html
-      * {
-      overflow: visible !important;
-      }
-```
-
-  and edit the .html file to reference the local version of the .css file.
 
 
 ### Chrome
@@ -763,880 +626,7 @@ For the URLs of all (recently-used) tabs, browse to:
 chrome://inspect/#pages
 
 
-## Kerberos
-
-
-For jobs running longer than 8 days that need Kerberos tickets, see
-  /afs/csail/group/lis/bin/lislongjob
-Also see "longsession" command.
-Finally, see the "longjob" command.  The syntax for this one is
-
-```sh
-  longjob <your job>
-```
-
-longjob -h shows other options.
-
-
-To renew a Kerberos ticket (without having to type a password):
-
-```sh
-  kinit -R
-```
-
-To see the result:
-
-```sh
-  klist
-```
-
-On AFS, the appropriate commands are:
-
-```sh
-  renew -r 8d
-  authloop &
-```
-
-To run a detached long job, you can do
-
-```sh
-  authloop &
-  <your job>
-```
-
-but "longjob" may be more convenient.
-
-
-kpasswd:  change Kerberos password
-(I may need to do `kinit` before `kpasswd`.)
-
-
-Cross-realm Kerberos authentication:
-To get athena tickets:
-
-```sh
-  setenv KRB5CCNAME /tmp/krb5cc_$$.athena
-  kinit -5 $USER@ATHENA.MIT.EDU
-  aklog -cell athena
-```
-
-To get CSAIL tickets:
-
-```sh
-  setenv KRB5CCNAME /tmp/krb5cc_$$.csail
-  kinit -5 $USER@CSAIL.MIT.EDU
-  aklog -cell csail.mit.edu
-```
-
-To get UW CSE tickets:
-
-```sh
-  setenv KRB5CCNAME /tmp/krb5cc_$$.uwcse
-  kinit -5 $USER@CS.WASHINGTON.EDU
-```
-
-Also see:  <http://tig.csail.mit.edu/twiki/bin/view/TIG/CrossCellHowto>
-Also see:  ~mernst/bin/share/csail-athena-tickets.bash
-
-
-## AFS
-
-
-To modify AFS directory/file permissions/acls/access control lists, see
-
-* <http://www-2.cs.cmu.edu/~help/afs/afs_quickref.html>
-* <http://openafs.org/>
-* <http://web.mit.edu/answers/unix/unix_chmod.html>
-
-To view AFS permissions:
-
-```sh
-  fs listacl directory
-```
-
-To set permissions:
-
-```sh
-  fs setacl directory [id rights]*
-```
-
-where id is a user or "system:groupname".
-To make a directory world-readable:
-
-```sh
-  fs sa directory system:anyuser rl
-```
-
-To make a directory and all subdirectories world-readable:
-
-```sh
-  find . -type d -exec fs sa {} system:anyuser rl \;
-  find . -type d -exec fs sa {} mernst.cron rlidw \;
-```
-
-
-Seven rights/permissions are predefined by AFS: four control access to
-a directory and three to all of the files in a directory.
-The four directory rights are:
-
-* lookup (l) -- list the contents of a directory
-* insert (i) -- add files or subdirectories to a directory
-* delete (d) -- delete entries from a directory
-* administer (a) -- modify the ACL
-
-The three rights that affect all of the files in a directory are:
-
-* read (r) -- read file content and query file status
-* write (w) -- write file content and change the Unix permission modes
-* lock (k) -- use full-file advisory locks
-
-The following are shortcuts:
-
-* all : gives all rights - rlidwka
-* write : gives rlidwk rights
-* read : gives rl rights
-* none : removes all rights
-
-
-In AFS, (only) the user mode bits of regular files retain their function;
-they are applied to anyone who can access the file.
-
-
-AFS groups:
-(On Athena, don't use these commands.
-Instead, use blanche, listmaint, or <http://web.mit.edu/moira>.)
-Add a user to an AFS group:
-
-```sh
-  pts adduser USERNAME GROUPNAME
-```
-
-List users in a group, or groups a user belongs to
-
-```sh
-  pts mem GROUPNAME
-  pts mem USER
-```
-
-Create a group:
-
-```sh
-  pts creategroup GROUPNAME
-  pts creategroup pag-admin:daikondevelopers -owner pag-admin
-```
-
-(If you belong to a group, you can add members if its fourth privacy flag
-is the lowercase letter a.)
-
-
-To determine how much AFS (e.g., Athena) quota is available/free and used
-(i.e., to determine disk space usage), do
-fs lq /mit/6.170
-
-
-The command
-
-```sh
-  zgrep 'Lost contact' /var/log/messages*
-```
-
-on a CSAIL Debian box will show you all the times in the last month that
-your machine noticed the AFS servers being down.
-
-
-To test AFS latency performance (when the file system is sluggish), run
-(bash syntax):
-
-```sh
-  for i in `seq 1 10`; do /usr/bin/time -f "%E" mkdir foo; rmdir foo; done
-```
-
-(To test AFS bandwidth, use pv to copy a large file; but we've never seen
-such problems.)
-
-
-## Perl
-
-
-To install Perl dependencies from a `cpanfile`, run the following in the directory that contains `cpanfile`:
-
-```sh
-sudo cpanm --installdeps .
-```
-
-
-Perl5:
-
-* arguments are in `+@_+`, that is `+$_[0]+`, `+$_[1]+`, etc.
-* "local" gives dynamic scoping; "my" gives static scoping.  But "local" does not seem to work for imported variables (declared via @EXPORT in a module).
-* Forward jumps screw up containing for loops, it seems.
-* foreach implicitly localizes the argument inside the for body.
-* `wantarray` (no parens) returns true if current sub called in list context
-
-
-Perl5 regexps:
-
-* To match end of line without newline, `\Z(?!\n)`.
-* Add `?` after a repetition operator to render it stingy instead of greedy: `foo(.*?)bar`
-* To quote regexp metacharacters, use `\Q...\E` or `quotemeta()`.
-* `(?:REGEXP)` is like `(REGEXP)` but doesn't make backreferences.
-
-Perl5 data structures:
-
-```text
-  @foo[$bar] => my @foo; returns one-element slice of foo = ($foo[$bar])
-  @{$foo[$bar]} => my @foo = list of references to arrays; @{...} converts
-    such a reference into the referred-to array
-  @{$foo}[$bar] => foo = reference to array; take that array's bar'th element
-```
-
-Don't assign result from splice; use `splice(@foo, $i, 0)`, not `@foo = splice(...)`
-
-
-Perl to consider:
-
-```text
- @_ => @ARG; $_ => $ARG
- Packages: class::template, alias
- -d:DProf flag to profile
- -I to add include path (do this as an alias??)
- -u  (faster startup; why?)
- Compiler: do  "perl -MO=C foo.pl > foo.c"
-```
-
-
-Perl 5 uses $PERLLIB environment variable as include path for libraries
-
-
-In awk, perl, and C, output format "%2.1f" rounds, does not truncate.
-
-
-Perl regular expression to match a string:
-
-```perl
-  /"([^"\\]|\\[\000-\377])*"/
-```
-
-
-In Perl, to read (slurp) a whole file into a string, do
-
-```perl
-          undef $/;
-          $_ = <FH>;              # whole file now here
-```
-
-To read an entire file in perl:
-
-```perl
-open(FILE, "data.txt") or die("Unable to open file");
-@data = <FILE>;
-close(FILE);
-```
-
-
-To run Perl interactively, invoke the Perl debugger on an empty program:
-
-```sh
-   perl -de 42
-```
-
-
-In Perl, to count the number of newlines (or any other character) in a
-string, use tr/\n// (or tr/\n/\n/).
-
-
-To make a script use perl without specifying an explicit #!path, adjust the
-"-n" flag as appropriate, then put this at the top instead of #!/usr/bin/perl:
-
-```sh
-#!/usr/bin/env perl
-```
-
-or, alternately:
-
-```sh
-: # Use -*- Perl -*- without knowing its path
-  eval 'exec perl -S -w -n $0 "$@"'
-  if 0;
-```
-
-Using `#!/usr/bin/perl` is faster but requires knowing perl's path.
-
-
-To install/build a perl module, do the following as root:
-
-```sh
-  perl -MCPAN -e shell
-  install MIME::Base64
-```
-
-For more details, see ~mernst/wisdom/building/build-perl-module
-
-
-In Perl, to determine whether file named $foo exists, use "if (-e $foo) ...".
-
-
-Perl scripts should start this way, for portability and error checking:
-
-```perl
-#!/usr/bin/env perl
-use strict;
-use English;
-$WARNING = 1;
-```
-
-
-In perl:
-
-* To read a whole file:  $/ = undef.
-* To read by paragraphs:  $/ = "\n\n".
-* To read by paragraphs, eliminating empty paragraphs: $/ = "".
-* $/ is also known as `$RS` or `$INPUT_RECORD_SEPARATOR`.
-
-In perl, to properly open a file, check like this:
-
-```perl
-  open(FILE, $filename) or die "Can't open '$filename': $!";
-```
-
-
-In Perl, Date::Manip seems a touch nicer than Date::Calc.
-(There's also Date::Format and Date::Parse, but Date::Manip does it all.)
-
-
-In perl, write
-
-```perl
-  use filetest 'access';  # for AFS
-```
-
-to make the file access test operators (-r, -w, etc) work better for AFS.
-
-
-To disable Perl's "deep recursion" warnings (they're not errors), use
-
-```perl
-  no warnings 'recursion';
-```
-
-
-In Perl, here is a way to extract the unique elements from a list.
-
-```perl
-  # Return the argument list with duplicates removed (eliminated).
-  sub uniq () {
-    my @uniq = ();
-    my %seen = ();
-    foreach my $item (@_) {
-      push(@uniq, $item) unless $seen{$item}++;
-    }
-    return @uniq;
-  }
-```
-
-
-Perl trick:
-
-```perl
-use FindBin ();
-use lib "$FindBin::Bin";
-```
-
-
-To lint Perl:
-
-```sh
-perl -Mstrict -Mdiagnostics -cw <file>
-```
-
-(Maybe: `perl -I /path/to/dependency/lib -c /path/to/file/to/check` .)
-For Perl coding standards:
-
-* Perl::Lint
-* Perl::Critic: run with: `perlcritic --brutal --verbose 9 file.pl`
-
-
-To lint/format/pretty-print perl files, put this in the Makefile:
-
-```make
-PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-perl-style-fix:
- perltidy -b ${PERL_FILES}
-perl-style-check:
- perltidy -w ${PERL_FILES}
-```
-
-
-## Python
-
-
-In Python, by default variables have function (not block) scope.  To refer
-to (really, to change) a global variable, use the "global" declaration in
-the class/function/whatever.
-
-
-To test whether a file exists in Python, do os.path.exists('/file/name').
-In Python, to reimport module foo, do reload(foo).
-
-
-Python debugger:  pdb ~/python/test.py
-You need to "s"tep a few times before "n"ext, which would jump over the
-entire program.  Or just do "continue" to the error.
-
-
-For time-critical Python runs, disable assertions via -O command-line
-option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
-You can be sure that the optimized version is running if a .pyo instead of
-a .pyc file is created after you do "import".
-To make Python run optimized, do:
-
-```elisp
-  (setq-default py-which-args (cons "-O" (default-value 'py-which-args)))
-```
-
-To make Python run unoptimized, do:
-
-```elisp
-  (setq-default py-which-args (delete "-O" (default-value 'py-which-args)))
-```
-
-To evaluate these in Emacs, put the cursor at the end of the line and type
-C-x C-e.
-After you change py-which-args, kill the `*Python*` buffer and restart
-(it's not enough to kill the Python process and restart).
-
-
-As of Python 1.5.1, cPickle is buggy; don't use it in preference to pickle,
-even if it is faster...
-
-
-Typical Makefile rules to enforce Python style rules:
-
-```make
-style-fix: python-style-fix
-style-check: python-style-fix
-PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/env \)python')
-python-style-fix:
-ifneq (${PYTHON_FILES},)
- @ruff --version
- @ruff format ${PYTHON_FILES}
- @ruff -q check ${PYTHON_FILES} --fix
-endif
-python-style-check:
-ifneq (${PYTHON_FILES},)
- @ruff --version
- @ruff -q format --check ${PYTHON_FILES}
- @ruff -q check ${PYTHON_FILES}
-endif
-python-typecheck:
-ifneq (${PYTHON_FILES},)
- @mypy --version
- @mypy --strict --install-types --non-interactive ${PYTHON_FILES} > /dev/null 2>&1 || true
- mypy --strict --ignore-missing-imports ${PYTHON_FILES}
-endif
-showvars:
- @echo "PYTHON_FILES=${PYTHON_FILES}"
-```
-
-
-To activate conda:
-
-```sh
-source activate <yourenvironmentname>
-```
-
-
-To disable tqdm output:
-
-```python
-from functools import partialmethod
-if os.getenv("TERM", "dumb") == "dumb":
-    tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
-```
-
-More info at:
-<https://github.com/tqdm/tqdm/issues/619#issuecomment-425234504>
-<https://stackoverflow.com/a/67238486/173852>
-
-
-Write Python docstrings as a command ("Do this", "Return that"), not as a description ("Does this", "Returns that").
-Write `@override` on an overriding method; this requires `from typing import override`.
-
-
-Running `mypy` on a script without a `.py` extension yields "error:  Duplicate
-module named '__main__'".  To fix it, pass `--scripts-are-modules` to `mypy`.
-
-
-In Python, instead of `datetime.date.today()`, use `datetime.now().astimezone()`.
-
-
-To suppress a Ruff error or warning message on one line of code:
-
-```python
-.... # noqa: F401
-```
-
-
-The simplest way to read or write a a whole file into a string in Python is:
-
-```python
-from pathlib import Path
-file_content = Path('filename.txt').read_text()
-Path('filename.txt').write_text(new_file_content)
-```
-
-
-## Rust
-
-
-Rust code should have, in its main file (such as `main.rs`):
-
-```rust
-#![warn(missing_docs)]
-```
-
-
-## Shells
-
-
-Parsing command-line arguments in a Posix shell script:
-<https://gist.github.com/deshion/10d3cb5f88a21671e17a>
-
-
-Redirecting output in command shells:
-
-* In sh/bash (in a shell script):
-   **To redirect standard error to standard output, use `2>&1`.
-      Warning:  this must come after any file redirection:  `cmd > file 2>&1`.
-      This is because `2>&1` means to make stderr a copy of stdout.  If you
-      redirect to a file with `> file` after doing so, then stdout is
-      reopened as the file, but stderr (a copy of the original stdout) is
-      not affected.
-   ** To redirect standard output to standard error, use `>&2`.
-      For example, `echo "to stderr" >&2`.
-   **To send both standard error and standard output through a pipe: `2>&1 |`.
-     There are simpler commands in bash, but they don't work in sh.
-   ** To redirect standard error to a file, use `2>filename`.
-     For more details, see <http://tomecat.com/jeffy/tttt/shredir.html>
-* In csh/tcsh:
-   **To overwrite an existing file, redirect via `>!` instead of `>`.
-   ** To redirect both standard error and standard output to a file,
-      use `>&` (`>` redirects just standard output to the file).
-   ** To redirect standard error and output through the pipe, use `|&`.
-
-
-In bash shell scripts, `"$@"` mans all the arguments, and it quotes each argument
-individually before concatenating them (separated by spaces).
-In bash, to do an extra level of shell expansion on "FOO", use "eval echo FOO".
-In csh shell scripts, `$*` means all the arguments.
-
-
-In bash, interactive shells call `.bashrc`; noninteractive shells call
-`.bash_profile`.
-
-
-In tcsh, a for loop looks like
-
-```csh
-  foreach var (a b c d)
-    use $var
-  end
-```
-
-In bash, a for loop looks like
-
-```sh
-  for name [ in word ] ; do list ; done
-```
-
-
-In bash, the exit status ("exit code") of a command is stored in variable "$?".
-In csh, it is stored in variable "$status".
-Zero means success, non-zero means failure.
-
-
-Command substitution, performed by a subshell, in csh/bash:
-enclose in backquotes/backticks (+\`...`+).
-In sh, it's better style to use +$(...)+ than +\`...`+, but both have the same effect.
-
-
-Bash's `hash -r` command is equivalent to csh's `rehash`.
-
-
-When debugging a bash script, it can be helpful to turn on Bash's strict
-error handling and debug options (exit on error, unset variable detection
-and execution tracing) to make sure problems are caught early:
-
-```sh
-  #!/bin/bash
-  set -o errexit -o nounset
-  ...
-```
-
-For a Posix shell script to halt on error, use:
-
-```sh
-  set -e
-```
-
-Also consider:
-  set -x (or set -o xtrace): Display commands and their arguments as they are executed.
-  set -v : Display shell input lines as they are read.
-It's also possible to set these when running the script:
-
-```sh
-  sh -xv myscript.sh
-```
-
-
-By default, a shell script continues if a command within it fails.  This is
-highly error-prone.  To halt/stop on error, almost all shell scripts should start with
-
-```sh
-set -e
-```
-
-If it's a bash script (bash 3.0 or later), it should also contain
-
-```sh
-set -o pipefail
-```
-
-If there is a command that is allowed to fail, add `|| true` at its end.
-
-
-To get bash 3.0 to fail if any command in a pipeline fails, do
-
-```sh
-  set -o pipefail
-```
-
-or launch bash with
-
-```sh
-  bash -o pipefail
-```
-
-To give make this semantics, put the following in the Makefile:
-
-```sh
-  export SHELL=/bin/bash -o pipefail
-```
-
-Alternatives, if you are stuck with bash 2.x:
-  `${PIPESTATUS[n]}` where n=0 is the status from the first command in the pipe.
-The exact syntax for a Makefile is:
-
-```make
-  foo | bar | baz && exit $${PIPESTATUS[0]}
-```
-
-or the following simple bash script that preserves exit status
-
-```sh
-  export result=$?
-  cat | $*
-  exit $result
-```
-
-
-The Unix program "timeout" seems to subsume `exec_cpu_limited` (and perhaps
-more).
-The shell builtin "ulimit" can be used to limit a processes stack size, CPU
-time, virtual memory, etc.
-
-
-In general, a bash script should contain this at the top:
-
-```sh
-  set -euo pipefail
-```
-
-and optionally
-
-```sh
-  set -o xtrace
-```
-
-
-To get a shell in which none of your personal customizations (environment
-variables) are set, do:
-
-```sh
-  exec -c bash --noprofile --norc
-```
-
-(There is not a way to do this directly via ssh, which always reads your
-.bashrc file.)
-A problem is that with DISPLAY not set, X programs such as xterm do not
-work.
-I tried
-
-```sh
-   echo $DISPLAY > ~/tmp/display
-   xauth list > ~/tmp/xauth-list
-   exec -c bash --noprofile --norc
-   export DISPLAY=`cat ~/tmp/display`
-   xauth -f ~/.Xauthority-2 add [relevant a line from ~/tmp/xauth-list]
-```
-
-but this did not work; I still got
-
-```text
-  X11 connection rejected because of wrong authentication.
-```
-
-
-To create a shell with no environment variables set:
-
-```sh
- /usr/bin/bash --noprofile --norc
-```
-
-
-In Unix/Linux, owner permissions take precedence over group permissions.
-Suppose a file has o-w and g+w permissions, and suppose that the owner is
-in the group.  Then the owner cannot write the file.
-
-
-A portable way to obtain the absolute path of a directory:
-
-```sh
-dir="$(unset CDPATH && cd "$dir" && pwd)"
-```
-
-
-Diagnostics for shell scripts (`set -o pipefail` is only for bash):
-
-```sh
-set -eu
-set -o pipefail
-```
-
-In more detail:
-
-```sh
-# Print each command before executing it
-set -x
-# Exit the script if any statement returns a non-true value.
-# Can temporarily disable within `set +e ... set -e`.
-# There are exceptions; for example, commands in a
-# pipeline, other than the last one, are immune.
-set -e
-set -o pipefail
-# Warn about unset variables
-set -u
-```
-
-
-To suppress a pylint warning, write inline:
-
-```python
-# pylint: disable=too-many-locals
-```
-
-
-The `shellcheck` program is a linter for sh and bash scripts.  Run like:
-
-```sh
-shellcheck --format=gcc
-```
-
-There is also `checkbashisms`.
-Here are Makefile rules to run them:
-
-```make
-SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
-   echo "checkbashisms" ; \
- else \
-   wget -q -N https://homes.cs.washington.edu/~mernst/software/checkbashisms && \
-   mv checkbashisms .checkbashisms && \
-   chmod +x ./.checkbashisms && \
-   echo "./.checkbashisms" ; \
- fi)
-shell-style-fix:
-ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
- @shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
- @shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
-endif
-shell-style-check:
-ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
- @shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
- @shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
-endif
-ifneq ($(SH_SCRIPTS),)
- @${CHECKBASHISMS} -l ${SH_SCRIPTS}
-endif
-showvars:
- @echo "SH_SCRIPTS=${SH_SCRIPTS}"
- @echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
-```
-
-Also consider adding rules to enforce Python style, which appear elsewhere in this file.
-
-
-Use a directive to disable/ignore/suppress a certain instance of a shellcheck warning/error:
-
-```sh
-hexToAscii() {
-  # shellcheck disable=SC2059 # Justification goes here.
-  printf "\x$1"
-}
-```
-
-
-Typical Makefile rules for markdownlint-cli2:
-
-```make
-style-fix: markdownlint-fix
-markdownlint-fix:
- markdownlint-cli2 --fix "**/*.md" "#node_modules"
-style-check: markdownlint-check
-markdownlint-check:
- markdownlint-cli2 "**/*.md" "#node_modules"
-```
-
-
-Typical gradle buildfile rules for markdownlint-cli2:
-
-```gradle
-/* Validate Markdown files. */
-tasks.register("markdownlint", Exec) {
-  group = "Verification"
-  description = "Run markdownlint-cli2 linter on Markdown files"
-  executable = "markdownlint-cli2"
-  args(".")
-}
-check.dependsOn("markdownlint")
-```
-
-
-To create a "here document"
-
-```sh
-cat > myfile.txt <<END
-... Contents of myfile.txt ...
-END
-```
-
-
-To determine the directory containing the currently-executing shell script:
-bash:
-
-```bash
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
-```
-
-sh:
-
-```sh
-SCRIPT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)"
-```
-
-
-## ssh (secure shell)
+## ssh (secure shell) and public keys
 
 
 To use ssh (and other tools like CVS, SVN, git, Hg, ...) with RSA public keys,
@@ -1658,24 +648,25 @@ Do not use the following, which is intended for X sessions.
 or, alternately:
 To run an entire X-session underneath ssh-agent:
 
-  1. move `.xinitrc` file (other X client startup script) to `.xinitrc-real`.
-  2. add the command "ssh-add" to the beginning of that script.
-  3. create a new `.xinitrc` script containing the sole command:
+1. move `.xinitrc` file (other X client startup script) to `.xinitrc-real`.
+2. add the command "ssh-add" to the beginning of that script.
+3. create a new `.xinitrc` script containing the sole command:
 
-```conf
-[source]
-.~/.xinitrc
-```
+   ```conf
+   [source]
+   .~/.xinitrc
+   ```
 
-```sh
-exec ssh-agent $HOME/.xinitrc-real
-```
+   ```sh
+   exec ssh-agent $HOME/.xinitrc-real
+   ```
 
 
 To set up public keys for ssh-agent and similar programs:
 
  1. On client machine (from which I will login), do `ssh-keygen`
  2. Append client's `~/.ssh/id_rsa.pub` (or `identity.pub`, etc.) to server's `~/.ssh/authorized_keys` (and maybe `~/.ssh/authorized_keys2`, if you are using ssh2)
+
 ssh2 needs file `~/.ssh/authorized_keys2`; to make it, do
 
 ```sh
@@ -1706,205 +697,6 @@ ClientAliveInterval which causes the daemon to periodically
 poll the client to see if it is still alive.
 
 
-The single bracket `[` is an alias for the `test` command.
-`[` is specified by Posix and works in any implementation of sh.
-The double bracket `[[` is a builtin (is syntax) and is desirable because
-it is less error-prone and more featureful.  However, `[[` is less
-portable; it works in bash, ksh, and zsh.
-For more on the difference between `[` and `[[`, see <http://mywiki.wooledge.org/BashFAQ/031>
-
-
-## X Windows
-
-
-X Windows initialization depends on .Xdefaults and .xsession files, among others.
-(.Xdefaults, aka .Xresources, is used by xrdb.)
-
-
-xmodmap:  modify keymaps in X
-
-
-xlock:  screen-locking + screen-saving program
-
-
-xterm windows:  use control + mouse to get VT/VT100 menus.
-
-
-X fonts are in /usr/local/lib/X11/fonts, aka /usr/lib/X11/fonts, among
-other places; xlsfonts lists all available X fonts.
-
-
-Linux key bindings:
-
-* M-C-F7 = return to X session after accidentally hitting M-C-F[26] or some such
-* M-C-F2 = tty mode (also M-C-F1)
-* M-C-n,p,? = change terminal mode (??)
-* M-C-backspace: reset X server
-* F1 instead of enter = safe login
-
-
-`editres` lets you inspect and modify X application resources.
-
-
-`xwininfo` gives information about an X Window (eg size, location, etc.)
-
-
-`xev`: X event tester (report to stdout all X events sent to it)
-
-
-Ctrl-Alt-"+" and Ctrl-Alt-"-" switch between resolutions on debian;
-and see /etc/X11/XF86Config.  Or run "anXious" to reset X configuration
-parameters.
-Ctrl-Alt-Backspace kills the X server.
-To turn that off, in /etc/X11/XF86Config-4 (or /etc/X11/xorg.conf) add to "ServerLayout":
-  Option "DontZap"  "true"
-(Also do "man XF86Config")
-
-
-LeftAlt-Fn switches to a new "virtual console", where "Fn" is F1 for the
-main one, F3 for the third one, etc.
-
-
-/usr/lib/X11/ is directory with rgb.txt, which is names of X11 colors.
-
-
-Sawfish window manager themes (list of problems with them)
-
-* brushed-metal
-    slightly goofly looking window title bar
-* CoolClean
-    window title bar has gradient
-* mono
-    default blue focused window color is unreadable, can't drag border to resize
-* simple
-    can't drag border to resize
-    doesn't have all the standard buttons at the top of the window
-
-
-"xlock -mode blank" locks the screen without running a compute-intensive
-screensaver.
-
-
-Debian Linux screen resolution:
-Applications >> Desktop Preferences >> Screen Resolution
-
-
-## C and C++
-
-
-In C++, an auto_ptr is automatically deleted at the end of its scope.
-
-
-In C++,
-char *const s;   declares a constant pointer to possibly varying data
-const char* s;   declares a possibly varying pointer to constant data
-char const *s;   is the same as "const char* s"
-In other words, const modifies the type-element to its left.
-Put another way:  "const" and "int" are declaration specifiers which may
-occur in any order; "* [const]" is a type modifier.
-
-
-Do not use dbmalloc; use dmalloc instead.
-
-
-The GNU program checker (gccchecker) detects memory use errors in a program.
-
-
-To run just the GNU C preprocessor (analogous to cpp), do gcc -E.
-To suppress line markers (line numbers) in the output, use gcc -E -P.
-To retain comments (/*...*/) in the output, use gcc -E -C.
-
-
-When compiling a C program with cc, put the -lLIBNAME flag at the end of
-the line, after the cfile name (the order matters).
-
-
-Debugging C memory (pointer) corruption problems:
-
-* Electric Fence (efence) is distributed with (some versions of?) Linux, and
-   is available from ftp://ftp.perens.com/pub/ElectricFence/.
-   It uses the virtual memory hardware to detect the instruction at which a
-   bad memory reference occurs.  (I had a problem with it running out of memory.)
-    **`setenv MALLOC_CHECK_ 2`
-    ** compile with "-lefence"
-* GNU Checker:  like Purify (includes gc).
-   <http://www.gnu.org/software/checker/checker.html>, ftp://alpha.gnu.org/gnu
-   It's sometimes called gccchecker or checkergcc.
-   It has not been tested on C++ (or updated since August 1998, as of 6/2001).
-* Other Purify-like tools:  <http://www.hotfeet.ch/~gemi/LDT/tools_deb.html>
-* (libYaMa detects leaks and some other memory errors; is a malloc replacement:
-   <http://freshmeat.net/projects/libyama/>)
-* Also consider dmalloc (debug malloc); don't use dbmalloc.
-   (dmalloc is somewhat distributed with Linux; I had trouble making it work.)
-
-
-The `c++filt` program demangles (unmangles) mangled overloaded C++
-method/function names.
-
-
-To write a cpp macro which takes a variable number of arguments:
-One popular trick is to define the macro with a single argument,
-and call it with a double set of parentheses, which appear to
-the preprocessor to indicate a single argument
-
-```c
-#define DEBUG(args) {printf("DEBUG: "); printf args;}
-if(n != 0) DEBUG(("n is %d\n", n))
-```
-
-
-To strip all comments and blank lines from a (Java or C) file, use
-
-```sh
-  cpp -P -nostdinc -undef
-```
-
-(This also expands any #include directives.)
-This can help in computing non-comment non-blank (NCNB) lines of code
-(though you may want to remove #include directives before doing that, then
-reinsert them afterward).  The script ~jhp/bin/ncnbcode.php accepts
-a list of files and reports their ncnb lines of code, all lines, and
-a total.
-
-This error:
-
-```text
-    Undefined symbol            first referenced in file
-    socket                              /usr/X11R6/lib/libX11.so
-```
-
-means I should add more "-lsocket" and such flags to my link command.  Do
-"man *undefinedsymbol*" to see where the symbol is defined.
-
-
-Insight:  GUI front end to gdb.
-<http://sources.redhat.com/insight/>
-Also see DDD.
-
-
-gdb:
-
-* For wide strings, just print with wstring2string.
-* "x/20s wstr" gives characters one per line; look at every third element.
-* "print wstr@20" gives characters on one line, but in ASCII.
-
-
-If having trouble with gdb not being able to step over inlined functions,,
-add these arguments to gcc:
-
-```sh
- -O0 -fno-default-inline -fno-inline
-```
-
-
-Why g\++ 3.2 doesn't like uses of vector that g++ does:
-Two things to check:
-
-* you must `#include <vector>`, not `<vector.h>`
-* you must either say "using namespace std;" or say "std::vector", the
-   latter being preferable in header files, of course.
-
-
 ## Email
 
 
@@ -1918,15 +710,19 @@ Be sure to remove any "From VM" rule before running sievetest!
 To have mailing list errors reflected to the list administrator:
 
 * If you are using sendmail, the first thing to do is create the alias:
-      owner-edb-list: edb-list-request
-   This causes errors occuring on edb-list to be reflected to "owner-edb-list".
-* The other, sure-fire way is to pipe the edb-list mail through a sendmail
-   invocation which changes the sender:
 
-```sendmail
-    edb-list: "|/usr/lib/sendmail -fedb-list-request -oi real-edb-list"
-    real-edb-list: :include:/usr/lib/edb-list.alias
-```
+  ```text
+      owner-edb-list: edb-list-request
+  ```
+
+  This causes errors occuring on edb-list to be reflected to "owner-edb-list".
+* The other, sure-fire way is to pipe the edb-list mail through a sendmail
+  invocation which changes the sender:
+
+  ```sendmail
+      edb-list: "|/usr/lib/sendmail -fedb-list-request -oi real-edb-list"
+      real-edb-list: :include:/usr/lib/edb-list.alias
+  ```
 
 
 To expand a mailing list (alias), to learn its members:
@@ -2030,7 +826,7 @@ I want the trash label and no others; the way seems to be to list every label!
 
 ```text
 -in:sent -in:chat -in:draft -in:inbox -in
-````
+```
 
 There is also `has:nouserlabels`; is that useful?
 Also see the tips here:
@@ -2042,18 +838,18 @@ Also see the tips here:
 
 Useful keystrokes in Eclipse:
 
-* kbd:[C-S-t]  lookup type (like kbd:[M-.] in Emacs, but only for classes, not methods)
-* kbd:[F3] open definition, also like kbd:[M-.]
+* <kbd>C-S-t</kbd>  lookup type (like <kbd>M-.</kbd> in Emacs, but only for classes, not methods)
+* <kbd>F3</kbd> open definition, also like <kbd>M-.</kbd>
           (how do you find a method's definitions?)
-* kbd:[C-S-h] all callers (call sites) for a particular method implemention (but
-    not calls via a superclass or interface):  opposite of kbd:[F3]
-* kbd:[C-S-r]  lookup resources: finds all uses of this method name, like grep; but
-    stays within the type hierarchy, not just textual; more useful than kbd:[C-S-h]
-* kbd:[C-h]  textual search through Java files
-* kbd:[F5]   refresh (for updates made through the file system)
-* kbd:[C-O]  quickly type your way to a field or method declaration
-* kbd:[F4] class hierarchy (also available from a context menu)
-  Eclipse Debugger:  kbd:[F6] goes to next line
+* <kbd>C-S-h</kbd> all callers (call sites) for a particular method implemention (but
+    not calls via a superclass or interface):  opposite of <kbd>F3</kbd>
+* <kbd>C-S-r</kbd>  lookup resources: finds all uses of this method name, like grep; but
+    stays within the type hierarchy, not just textual; more useful than <kbd>C-S-h</kbd>
+* <kbd>C-h</kbd>  textual search through Java files
+* <kbd>F5</kbd>   refresh (for updates made through the file system)
+* <kbd>C-O</kbd>  quickly type your way to a field or method declaration
+* <kbd>F4</kbd> class hierarchy (also available from a context menu)
+  Eclipse Debugger:  <kbd>F6</kbd> goes to next line
 
 
 To make Eclipse use spaces instead of tabs for indentation:
@@ -2107,7 +903,7 @@ Eclipse has two compilers.
 To prevent IntelliJ from using wildcard imports, you must do *both* of the following:
 
 * Click on the Settings "wrench" icon on the toolbar, open "Imports" under "Code Style", and check the "Use single class import" selection.
-* go to Preferences (⌘ + , on macOS / Ctrl + Alt + S on Windows and Linux) > Editor > Code Style > Java > Imports tab set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
+* go to Preferences (⌘ + , on macOS / <kbd>Ctrl + Alt + S</kbd> on Windows and Linux) > Editor > Code Style > Java > Imports tab set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
 
 
 ## VMware
@@ -2927,13 +1723,13 @@ executable (including debugging format), etc).
 
 On a Kinesis Advantage contoured keyboard:
 
-* Soft reset: Press Progm + Shift + F10.
-* Hard Reset: With computer turned off, press F7, turn computer on, release F7 after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
-* Toggle the click:  Progrm key + pipes/backslash key (below the hyphen key)
-* Toggle the tone: progrm+hyphen
+* Soft reset: Press <kbd>Progm + Shift + F10</kbd>.
+* Hard Reset: With computer turned off, press <kbd>F7,</kbd> turn computer on, release <kbd>F7</kbd> after about 10 seconds. Successful if the lights on your keyboard flash for several seconds after releasing.
+* Toggle the click:  <kbd>Progrm key + pipes/backslash key</kbd> (below the hyphen key)
+* Toggle the tone: <kbd>progrm+hyphen</kbd>
 * Dvorak
-  * on Advantage 2 keyboard:  progrm+f4
-  * on Advantage 1 keyboard:  progrm+shift+f5 (this erases any remapping, but not macros)
+  * on Advantage 2 keyboard:  <kbd>progrm+f4</kbd>
+  * on Advantage 1 keyboard:  <kbd>progrm+shift+f5</kbd> (this erases any remapping, but not macros)
 * If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
   mode.  Holding down = then tapping s may produce "v3.2[]".  Change to PC
   mode by holding down = then tapping p; now holding down = and tapping s may
@@ -3367,7 +2163,7 @@ To create a transparent signature stamp:
 * use Gimp to make the background transparent:
     **menu > layer > transparency > add alpha channel
     ** click on the fuzzy selector tool (magic wand)
-    **for each area to remove, select it, then "edit > clear" (ctrl + k)
+    **for each area to remove, select it, then "edit > clear" (<kbd>ctrl + k</kbd>)
     ** save as gif or png
    (instructions from <http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp>)
 * Imagemagick's "convert" program didn't work, so convert the gif or png to
@@ -3558,7 +2354,7 @@ command is issued immediately afterward.
 In Acrobat (not reader), to fill in a form, either:
 
 * use the typewriter tool, or
-* ctrl-left-click (this is easier from a unability point of view)
+* <kbd>ctrl-leftclick</kbd> (this is easier from a unability point of view)
 
 
 To give up and uninstall a package installed by encap/epkg:
@@ -3698,7 +2494,7 @@ To rename a file to its creation or modification date:
 ```
 
 
-To recover a closed tab in Chrome:  Ctrl-Shift-t
+To recover a closed tab in Chrome:  <kbd>Ctrl-Shift-t</kbd>
 
 
 To open Task Manager in Google Chrome:
@@ -3751,6 +2547,31 @@ The solution is to use plain text format.
 Choose Mail > Preferences, click Composing, then select "plain text".
 This is an issue with Apple Mail on a Mac laptop.
 Replies sent from an iPhone look fine, with a quotation marker.
+
+
+wget is a command-line utility to fetch web pages and save them to the
+local disk.  <http://www.gnu.org/software/wget/wget.html>
+To download a single file, only if it's newer than the on-disk version:
+
+```sh
+  wget -N URL
+```
+
+wget is also useful for web site mirroring.
+To download everything below a current point:
+
+```sh
+  wget -r -k -np URL
+```
+
+To get just a single file and its dependencies, converted for local viewing:
+
+```sh
+  wget -pk -nH -nd -Pdownload-dir URL
+```
+
+Or, an easy way to do the latter is just to view the URL in Firefox, then
+choose "save as"!
 
 
 curl vs wget:
@@ -3821,7 +2642,7 @@ Chromebook:
 
 
 To increase font size in an xterm terminal on Ubuntu Linux:
-Ctrl-rightmouse.
+<kbd>Ctrl-rightmouse</kbd>.
 
 
 Use middle button to paste into an xterm.
@@ -4048,6 +2869,14 @@ sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 To find all files not containing a string: "-L foo".
 This works with grep and ag, etc.
 For rg: --files-without-matches
+
+
+To turn off screensavers in Gnome:
+
+ 1. Click on the little foot in the lower left
+    Programs->Settings->Desktop->Screensaver
+ 2. Select 'No Screensaver' in the list in the upper left
+ 3. Click 'OK'
 
 
 <!--

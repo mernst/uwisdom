@@ -107,7 +107,7 @@ To get a traceback (stack trace) from each Java thread (but keep running):
 * `jstack _pid_`
 * `jcmd _pid_ Thread.print`  (just `jcmd` gives a list of pids)
 * `kill -QUIT _pid_`
-* `ctrl-\` if Java is running in a shell.
+* <kbd>ctrl-\</kbd> if Java is running in a shell.
   This is useful for debugging an infinite loop in a Java program.
 * Use the -Xtrace:trigger option to produce a Java dump by whenever a given method is called.
   For example, for a dump whenever the substring method is called:

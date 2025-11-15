@@ -296,7 +296,7 @@ To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
 elisp; C-h f now also gives that information.
 
 
-just-one-space                ESC SPC
+just-one-space                <kbd>ESC SPC</kbd>
   Function: Delete all spaces and tabs around point, leaving one space.
 
 
@@ -363,7 +363,7 @@ To prevent Emacs from truncating printed representations of values:
 ```
 
 
-Use split-line (by default, bound to ESC C-o) for open-line-like behavior.
+Use split-line (by default, bound to <kbd>ESC C-o</kbd>) for open-line-like behavior.
 
 
 The tex-complete emacs package provides completion of TeX commands.

@@ -17,17 +17,6 @@ MIT medical prescription refills:
 (used to be <https://pol.mit.edu/>)
 
 
-MIT human resources/benefits/personnel:
-
-* Benefits office:  E19-215, (617) 253-4251 (x4 for Benefits)
-* Susan Guralnick (x3-4643):  LCS personnel admin
-* Scott Runkle in HR was useful about 401(k), x3-0923
-* 401(k): <http://netbenefits.non-profits.com/>
-   (but to change amount taken out of my paycheck, I apparently need to
-   call 1-800-343-0860)
-* 403(b): <http://web.mit.edu/benefits/www/bentda.htm>
-
-
 To have a copy job (e.g., course notes) performed by Copy Tech, send it to
   <ctc-sendfiles@mit.edu>
 Info required:
@@ -57,17 +46,13 @@ Don Choate (8-7794) or Scott Perrigo (2-3575)
 Include this block in the email:
 
 ```text
-Client:         Michael Ernst
-Phone:          3-0945
-Dept.:          EECS
-MIT Status:     Faculty
-MIT Address:    32-G718
-Email:          mernst@csail.mit.edu
+Client:         
+Phone:          
+Dept.:          
+MIT Status:     
+MIT Address:    
+Email:          
 ```
-
-
-Barker Engineering Library EECS specialist:  Deborah Helman (<dhelman@mit.edu>)
-MIT central libraries CSAIL specialist: Amy Stout (<astout@mit.edu>)
 
 
 WEBSIS is the student (and advisor) information system run by the registrar.
@@ -82,8 +67,6 @@ MIT sales tax exemption number:  E 042-103-594
 
 The MIT Registrar's picture class list (photo sheets of registered students
 in a subject, from ID photographs) is available from <http://student.mit.edu>.
-There is some software to manipulate these at
-~mernst/class/6170/2005-spring/ST05/administrivia/picture-directories/ .
 
 
 For hotels that are nearby MIT, see
@@ -220,21 +203,12 @@ Ask a question of an Athena consultant:
 <olc-unix@mit.edu>
 
 
-Running long jobs on Athena:
-Myron Freeman (<fletch1@eecs.mit.edu>), who goes by "Fletch", is the
-sysadmin for eecs-course.mit.edu, which is an Athena machine on which
-long-running jobs can be run.
-
-
-Athena combination:  on Athena, run:  tellme combo
+Athena door lock combination:  on Athena, run:  tellme combo
 
 
 If your Athena dotfiles (.bashrc, .cshrc, .environment) become corrupted,
 you can try 'quarantining' your personalized dotfiles (move them aside) and
 then copying over the dotfiles found in /usr/prototype_usr/ .
-
-
-athena.csail.mit.edu is owned by Frans Kaashoek.
 
 
 To create a Wiki on Athena:
@@ -246,15 +220,11 @@ To create a Wiki on Athena:
 
 Select 'mediawiki', tell it what URL you want the wiki at, and you're
 done.  ( <http://scripts.mit.edu/start/> for more details )
-(As of 3/31/2008, I can't figure out how to set the "database host" field,
+(As of 2008-03-31, I can't figure out how to set the "database host" field,
 though this had worked for me earlier.)
 
 
 ## CSAIL-specific
-
-
-CSAIL Personnel Assistant: Rachel Avery
-EECS Personnel: Lisa Bella, 253-4611
 
 
 You can send email to any floor in the Stata Center using the unmoderated
@@ -294,11 +264,6 @@ To delete/remove a mailing list (this script also removes the INQUIR entry):
 ```
 
 
-Martin Rinard's group ("program analysis and compilation group", or PACG)
-email address:
-<freepizza@lesser-magoo.csail.mit.edu>
-
-
 Cron jobs:
 Ask TIG for an individual crontab account.  The files will be in
 /afs/csail.mit.edu/group/tig/keytabs/$USER/$USER.keytab, readable
@@ -306,8 +271,8 @@ and deletable by $USER.  These should be stored in a secure (local)
 file system on the machine where your cron jobs will run, and should
 be readable only by $USER.  I'm assuming it's stored in /etc in the
 example below.
-The name of the principal is $USER/cron@CSAIL.MIT.EDU, which in AFS
-is called $USER.cron.  Your cron job needs to call a script of the
+The name of the principal is `$USER/cron@CSAIL.MIT.EDU`, which in AFS
+is called `$USER.cron`.  Your cron job needs to call a script of the
 following form:
 
 ```sh
@@ -383,12 +348,6 @@ logs are at /var/log/apache2/error.log
 The TIG webservers for csail are people.csail.mit.edu, group.csail.mit.edu
 
 
-At CSAIL, to use Java 1.4, either by use "javac-1.4" and "java-1.4" instead
-of "javac" and "java", or put
-  /afs/csail.mit.edu/group/pag/software/pkg/jdk-1.4/bin
-at the front of your PATH.
-
-
 Creating a new CSAIL account (including guest accounts):
   <https://inquir.csail.mit.edu/cgi-bin/welcome.cgi>
 
@@ -397,28 +356,10 @@ To change CSAIL shell:
   <https://inquir.csail.mit.edu/cgi-bin/chsh.cgi>
 
 
-SPEC benchmarks can be found on CAG, in /home/benchmarks.
-
-
 To close (resolve) a TIG/OPS ticket, click on "reply" in the display and
 then set the status when sending the reply.
 But TIG prefers to close them itself, so it's better to just send them a
 message asking that it be closed.
-
-
-TWiki web at CSAIL:
-(But many folks recommend MediaWiki instead.)
-Only TIG can create a new web; ask them for each one to be created.
-The PAG web is
-  <https://projects.csail.mit.edu/cgi-bin/wiki/view/PAG/WebHome>
-The Web can be configured at
-  <https://projects.csail.mit.edu/cgi-bin/wiki/view/PAG/WebPreferences>
-Read <https://projects.csail.mit.edu/cgi-bin/wiki/view/TWiki/WelcomeGuest>
-  to get a quick overview of this collaboration platform.
-You should create a "WikiName" for yourself at
-  <https://projects.csail.mit.edu/cgi-bin/wiki/view/Main/TWikiUsers>
-then, my personal TWiki topic is located at
-  <https://projects.csail.mit.edu/cgi-bin/wiki/view/Main/MichaelErnst> .
 
 
 Creating a MySQL database at CSAIL:  Must ask a sysadmin to do so.  They
@@ -428,24 +369,9 @@ server, mysql.csail.mit.edu.
 
 
 Access any O'Reilly book online.
-goto libraries.mit.edu and search for the book you want.  From the
+Go to libraries.mit.edu and search for the book you want.  From the
 correct record, choosoe 'Online Ed. URL'
 or go directly to <http://library.mit.edu:80/F/SEVDTEY3AA8RXCLBJAPG35KDC2I4X1RPIQNXQSHVXV1KGNSLAE-06114?func=service&doc_library=MIT01&doc_number=001351184&line_number=0002&service_type=MEDIA>
-
-
-Noah Meyerhans has a bicycle truing stand in his office at CSAIL.
-
-
-Garrett Wollman runs CSAIL's nntp (netnews) servers.
-They include a mail->news gateway, but no news->mail gateway.
-The names are .lcs.mit.edu rather than .csail.mit.edu
-The news servers are only readable from net 18 (MIT).
-Other news servers on campus are run by EECS (Fletch) and SIPB
-(<usenet@mit.edu>).
-
-
-Creating public SVN access:
-<https://svn.csail.mit.edu:1443/admin/admin.cgi>
 
 
 The Stata stairwell alarm sounds "bong bong bong _stairwell_ 0 _floor_",
@@ -459,14 +385,6 @@ rocker switch that is hidden in a recession below the big red button.
 
 Creating a CSAIL TR (technical report):
   <http://publications.csail.mit.edu/>
-
-
-A notary at CSAIL:
-Rachel Avery
-Human Resources Assistant
-32-G425a
-<rachel@csail.mit.edu>
-617-253-3212
 
 
 A web proxy for accessing MIT resources from home:  see the FAQ at the
@@ -542,14 +460,8 @@ Alternate way to print to MIT CSAIL printers from Windows:
 Start > Run > \\teem.lcs.mit.edu\windows\printer-drivers\
 
 
-CSAIL copier codes:
-  6.170: 30500
-Perhaps 30500 is a generally-used code?
-
-
 CSAIL video conference room (32-262):  IP 128.30.30.43
 <http://tig.csail.mit.edu/twiki/bin/view/OOPS/VideoConference>
-To call Mike in Germany, use IP 139.19.100.30
 
 
 ## EECS-specific
@@ -564,106 +476,10 @@ students (such as advertising a TA position), via
 <grad-students@altoids.mit.edu> .
 
 
-The Chu Lounge combination (as of 3/24/2006) is 4-15
-(push 4, then push 5 and 1 at the same time)
-
-
-The "Who is teaching what" or "who's teaching what" list for MIT EECS:
-<http://www.eecs.mit.edu/WTW_ST07.html>
-It includes only the in-charge lecturer, not co-lecturers or section leaders.
-The HKN undeground guide doesn't include classes that they skipped, and may
-not include
-
-
 ## PAG-specific
 
 
-EDG C front end:
-<https://www.edg.com/download>, user id mit, password saman6398.
-Don't download or view the software until you have signed an NDA!
-You can find the NDA at $inv/doc/www/mit/edg-nda-noncomm.pdf .
-
-
-The pag machines allow cross-mounting of /scratch and /scratch2:
-
-```sh
-  cd /var/autofs/net/{pag-client}/scratch
-```
-
-but not:
-
-```sh
-  cd /var/autofs/net/{pag-client}/scratch2
-```
-
-
-Bugzilla database at <http://pag.csail.mit.edu/zilla>
-
-
-pag.csail.mit.edu IP address: 128.30.84.11 (?)
-manioc.csail.mit.edu IP address: 128.30.84.42
-
-
-To advertise for UROPs send email to Anne Hunter (<anneh@mit.edu>).
-It seems best to send each announcement separately (one day apart)
-
-
-The CSAIL "daikonuser" account has PAG-specific customizations (like old
-daikongroupmember).  The Daikon overnight regression tests are run as
-daikonuser.
-The CSAIL "paguser" account has no customizations (like old daikonuser).
-
-
-On PAG Debian machines, a cron job updates file
-`/afs/csail.mit.edu/group/pag/adm/package-lists/auto`.
-
-Whenever you install a new package on a machine, make an entry for the
-package you wanted in /afs/csail.mit.edu/group/pag/adm/debian-pkgs ,
-cutting and pasting the output from "dpkg -l" into the appropriate
-category.  This will help us distinguish which packages we really want, and
-which were installed just as dependencies; packages of the latter type
-might need to be removed to accommodate other upgrades.
-
-
-Samba accounts at pag.lcs.mit.edu:
-
-* all samba accounts must (first) have real unix accounts
-  (aka, exist at pag.lcs.mit.edu:/etc/passwd)
-* use smbpasswd to add a user (as root)
-  See ~ts/bin/samba/add-windows-user, which calls
-    /usr/bin/smbpasswd -a -n -d NEWUSERNAME
-* use smbpasswd to change password for the user (as root)
-
-The user should now have a valid entry at pag.lcs.mit.edu:/etc/samba/smbpasswd
-
-```sh
-sudo grep ${username} /etc/samba/smbpasswd
-```
-
-
-To test the samba connectivity at pag.lcs.mit.edu:
-  smbclient -L pag.lcs.mit.edu
-The interesting lines are those with Type "Disk", so then do:
-
-```sh
-  $ smbclient '\\pag.lcs.mit.edu\ts'
-  added interface ip=18.24.8.42 bcast=18.24.8.255 nmask=255.255.255.0
-  Password:
-  Domain=[PROGRAMANALYSIS] OS=[Unix] Server=[Samba 2.2.7-security-rollup-fix]
-  smb: \> ls
-  ;; shows me ~ts
-```
-
-
 ## Boston-specific
-
-
-Apollo Travel (617-876-4471, 860 Mass. Ave., between Harvard and Central
-Squares) knocked 22% off Jeremy Nimmer's ticket price (sometimes requires
-being a student, sometimes doesn't), and he has heard similar things from
-other friends, so they seem to be a good agent.  I use
-Abra Smith (<abratravel@yahoo.com>) of Council Travel, who has worked similar
-or greater miracles.
 
 
 Boston-area housing/renting/rental apartments/condos:
@@ -673,12 +489,6 @@ Boston-area housing/renting/rental apartments/condos:
 * boston.craigslist.org/hsw/
 * web.mit.edu/housing/och/
 * <reuse@csail.mit.edu>
-
-
-Can recycle styrofoam packing peanuts ("loose fill") at
-
-* Mailboxes Etc, 831 Beacon St, Newton Center
-* UPS Store, Davis Square
 
 
 <!--

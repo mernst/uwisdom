@@ -10,7 +10,10 @@ menu icon (three lines or dots) in the top corner.
 
 make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
 is a segfault (<http://www.bitwizard.nl/sig11/>).
-"error 137" means that your program ran out of memory.
+
+Exit code 137 is a good indication of being killed by the out-of-memory (OOM)
+killer.  It means your process was killed by SIGKILL (signal 9), which is what
+the OOM killer sends.  <http://tldp.org/LDP/abs/html/exitcodes.html>
 
 
 Make has two flavors of variables that may appear in a Makefile.

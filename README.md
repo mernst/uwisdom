@@ -86,6 +86,8 @@ an LLM?
 * Information may be available elsewhere, but time-consuming to find via a web
   search or in a manual.
 * The web, and LLMs, sometimes provide incorrect or out of date information.
+  uwisdom may get out of date, too.  If you notice wrong information, please
+  open an issue or a pull request.
 
 Whenever I spend time finding information, and I might want the information
 again in the future, I write an entry for a wisdom file.  Then, when I am
