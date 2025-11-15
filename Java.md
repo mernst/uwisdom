@@ -258,32 +258,34 @@ There are two ways to disable javac warnings of the form
 
 * Approach #1 is to run
 
-```sh
-  javac -XDignore.symbol.file ...
-```
+  ```sh
+    javac -XDignore.symbol.file ...
+  ```
 
-flag which will compile your program against Oracle's/Sun's internal rt.jar
-rather than the public-facing symbol file `ct.sym`.
+  flag which will compile your program against Oracle's/Sun's internal rt.jar
+  rather than the public-facing symbol file `ct.sym`.
 
 * Approach 2 has two variants
-** Approach #2a is to run
 
-```sh
-  javac -XDenableSunApiLintControl -Xlint:-sunapi ...
-```
+  * Approach #2a is to run
 
-This still issues a "note" but not a warning.
-** Approach #2b is to suppress the warning and the note by writing
+    ```sh
+      javac -XDenableSunApiLintControl -Xlint:-sunapi ...
+    ```
 
-```java
-  @SuppressWarnings("sunapi")
-```
+    This still issues a "note" but not a warning.
 
-in the source code, but this still requires you to run javac as follows:
+  * Approach #2b is to suppress the warning and the note by writing
 
-```sh
-  javac -XDenableSunApiLintControl ...
-```
+    ```java
+      @SuppressWarnings("sunapi")
+    ```
+
+    in the source code, but this still requires you to run javac as follows:
+
+    ```sh
+      javac -XDenableSunApiLintControl ...
+    ```
 
 
 To suppress a javac warning like
