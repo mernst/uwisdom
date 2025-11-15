@@ -9,9 +9,9 @@ Albert Einstein said,
 > I never waste memory on things that can easily be stored and retrieved
 > from elsewhere.
 
-The "wisdom" files store information that is not worth memorizing, but
-which I may wish to look up later.  You can retrieve the information with
-programs such as `doc`, described below.  Here are some sample invocations:
+The uwisdom project stores information that is not worth memorizing, but which I
+may wish to look up later.  You can retrieve the information with programs such
+as `doc`, described below.  Here are some sample invocations:
 
 ```sh
 # Look up how to cross-mount PAG machines' scratch drives.
@@ -60,32 +60,44 @@ Pass `-h` for usage instructions; for example, run `doc -h`.  You can learn more
 from the [Lookup program's
 documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
 
+## Searching private information
+
+Running the `doc` alias searches all the files mentioned in [`root`](root).  If
+file `root_user` exists, it is used instead.  You can create a `root_user` file
+of the following form, which searches both everything in uwisdom and also your
+personal files.
+
+```text
+\include{root}
+\include{my-personal-file1}
+\include{my-personal-file2}
+```
+
 ## Comparison to web/email/etc. search
 
-Why would you want to use this program when you can just search the web or ask
-an LLM instead?
+Why would you want to use this program when you could just search the web or ask
+an LLM?
 
 * You may have local data that you choose not to put on the web for global
   searching (e.g., your address book).
 * Having a local copy enables offline use.
 * Information may be available elsewhere, but time-consuming to find via a web
   search or in a manual.
-* LLMs can yield incorrect information.
+* The web, and LLMs, sometimes provide incorrect or out of date information.
 
-Whenever I spend too long finding information, and especially if I think I
-might find the information useful in the future, I write an entry for a
-wisdom file.  Then, when I am searching for information, I first search my
-wisdom files, which only takes a moment.  Only if that fails do I proceed
-to the manual, a web search, etc.
+Whenever I spend time finding information, and I might want the information
+again in the future, I write an entry for a wisdom file.  Then, when I am
+searching for information, I first search my wisdom files, which only takes a
+moment.  Only if that fails do I proceed to the manual, a web search, etc.
 
 ## Writing a wisdom entry
 
-Please help to improve this resource by adding and updating the information!
+You can help to improve this resource by adding and updating the information.
 You can submit a paragraph of text, a pull request, or an issue on the issue
-tracker.  You can also make your own clone and add your personal information
-there, though it won't contribute to the main version.
+tracker.
 
-Each nugget of wisdom is separated from others by two blank lines.
+Each wisdom file is a Markdown file containing entries separated by **two**
+blank lines.
 
 When writing a wisdom entry, please use appropriate keywords to ensure that
 you and others can find the information.  I often intentionally include
