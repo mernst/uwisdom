@@ -1329,7 +1329,7 @@ So, use Spotless (<https://github.com/diffplug/spotless>) to run google-java-for
 Build systems (in my order of preference, which agrees with Jonathan Burke's):
 
 
-Gradle
+* Gradle
   Has O'Reilly books (none of the others do).  This is a measure of popularity.
   Maven compatibility.
   Best documentation.
@@ -1337,7 +1337,7 @@ Gradle
   Jonathan Burke says:  Gradle has by far the best documentation and to me
   has the most intuitive usage.  Gradle seems the most flexible but I'll
   admit I spent less time with buildr.
-buildr
+* buildr
   Built on top of Rake, but intended for Java-based applications.
   Seems reasonable enough.
   Good Maven integration.
@@ -1346,7 +1346,7 @@ buildr
   is more extensive.
   Jonathan Burke says:  Buildr seemed reasonable but it felt like Gradle
   was more easily read and better documented.
-sbt
+* sbt
   Same directory structure as Maven
   Has continuous testing mode.
   Complicated explanations; uses lots of types without explaining them and
@@ -1364,11 +1364,11 @@ sbt
   underlying AST it's all just function calls that build a Map[Key -> Some action
   or setting]).  I feel like every time I want to do something simple I have to
   wrestle with some new abstraction.  
-Rake
+* Rake
   con: not from JVM community.  Possible to use, but support may be worse.
   JVM startup time is slow and painful.  buildr is probably better and
   higher-level.
-scons
+* scons
   Built in Python
   No Scala support
   Limited Java support
@@ -1378,24 +1378,24 @@ scons
 
 
 Static rewriting:
-  CCI
-    On-disk only.  Doesn't even work for rewriting at load time.
+* CCI
+  On-disk only.  Doesn't even work for rewriting at load time.
 
 
 Dynamic rewriting:
-  ER, for "Extended Reflection" (though it's really dynamic monitoring)
-    Available in binary form only.
-    Provides a callback for every event at run time, such as field access,
-    method call, assignment, arithmetic, ...
-    Causes 1000x slowdown.
-    All of the below are built on ER.
-  Moles:  detouring, or AOP for mocking
-  PEX
+* ER, for "Extended Reflection" (though it's really dynamic monitoring)
+  Available in binary form only.
+  Provides a callback for every event at run time, such as field access,
+  method call, assignment, arithmetic, ...
+  Causes 1000x slowdown.
+  All of the below are built on ER.
+* Moles:  detouring, or AOP for mocking
+* PEX
     Uses ER, Moles, Z3
     Docs & tutorials:
       <http://research.microsoft.com/en-us/projects/pex/documentation.aspx>
     Open source projects that use/extend Pex (e.g., DySy, REX for regexps):
       <http://research.microsoft.com/en-us/projects/pex/community.aspx>
-  CHESS
+* CHESS
 
 

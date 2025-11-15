@@ -435,17 +435,6 @@ and then, in the result
 and finally look for instances of `[<>]`.
 
 
-The error message
-
-```text
-com.sun.tools.javac.code.Type$AnnotatedType cannot be cast to com.sun.tools.javac.code.Type$ClassType
-```
-
-is due to this JDK bug:
-<https://bugs.openjdk.java.net/browse/JDK-8215542>.
-It is fixed in JDK 9 ea b14 onwards.
-
-
 Always run Javadoc with `-notimestamp`, to minimize gratuitous diffs.
 A problem is that `-notimestamp` may get passed to doclets, so they need to be able to handle it.
 In gradle, use
@@ -530,16 +519,132 @@ Environment varibales used by Gradle (I don't know what the precedence is)
 "-Xmx" argument on the java command line was too large.
 
 
+## File reading
+
+A way to iterate over the lines in a file is:
+
+```java
+BufferedReader br = new BufferedReader(new FileReader(file));
+for (String line; (line = br.readLine()) != null; ) {
+   ... // do stuff with line here  
+}
+```
+
+
+To read a file line by line from Java use
+
+```java
+    BufferedReader br = new BufferedReader (new FileReader (filename));
+    for (String line = br.readLine(); line != null; line = br.readLine())
+        ;
+```
+
+Unfortunately, this will throw IOExceptions.  I don't know of any standard
+Java class that does not.
+
+Or, to read lines with line numbers use
+
+```java
+    LineNumberReader lr = new LineNumberReader (new FileReader (filename));
+    for (String line = lr.readLine(); line != null; line = lr.readLine())
+        lr.getLineNumber();
+```
+
+Or, you can use plume-util's `EntryReader` which supports the new-style for loop.
+
+
+Java file reading usually permits either \n or \r\n to end a line.
+However, if the first character of a file is \n, Java file reading seems to
+produce blank lines for each subsequent \r\n.
+
+
+## Modules and the module system
+
+
+To convert a .jar file to a module:
+
+```sh
+jdeps --generate-module-info . mylib.jar
+javac --patch-module SOME.MODULE.NAME=mylib.jar module-info.java
+```
+
+
+Here is a formula to make a jar file into a modular jar file.
+
+```sh
+usejdk11
+JARPATH=checker-qual.jar
+MODULENAME=org.checkerframework.checker.qual
+jdeps --generate-module-info . $JARPATH
+javac --patch-module $MODULENAME=$JARPATH $MODULENAME/module-info.java
+jar uf $JARPATH -C $MODULENAME module-info.class
+```
+
+
+Command-line options for the Java module system:
+
+* `--patch-module`
+    It adds classes into a module.
+    The replacement of
+    -Xbootclasspath/p is the option --patch-module to override classes in a module. It can also be used to augment the contents of module. The --patch-module option is also supported by javac to compile code "as if" part of the module.
+    You need to supply it *both* to `javac` and to `java`.
+* `--add-exports` (use ALL-UNNAMED to give access from the *classpath*; is anything else required for modules?
+   --add-exports <exporter-module>/<package>=<accessor-module>(,<accessor-module>)*
+* `--add-opens` enables reflection
+* `--add-modules`
+   add modules (and their dependencies) to the module graph that would otherwise not show up because the initial module does not depend on them (directly or indirectly).
+* `--add-reads $module=$targets` adds readability edges from $module to all modules in the comma-separated list $targets. This allows $module to access all public types in packages exported by those modules even though $module has no requires clauses mentioning them. If $targets is set to ALL-UNNAMED, $module can even read the unnamed module.
+
+
+`com.sun.javadoc` is deprecated and superseded by `jdk.javadoc.doclet`.
+`jdk.javadoc.doclet` only exists in Java 9 and later, so switching to it means losing support for Java 8.
+Another difference is that Javadoc in JDK 8 supports this option:
+
+```text
+  -d <directory>                   Destination directory for output files
+```
+
+but in JDK9+, only the standard doclet supports it.
+Documentation on using the new Doclet API:
+<https://openjdk.java.net/groups/compiler/using-new-doclet.html>
+Gradle always passes the -d command-line argument.  Idea: If the doclet is always
+run by itsef, on JDK 9+ it could support the `-d` command-line
+argument, even if it ignores it.  But if the doclet is run together with the
+standard doclet, I'm not sure that is the right thing.
+You can use `title = ""` to prevent gradle from passing other command-line arguments.
+
+
+## Native compilation and speed hacks
+
+Typical commands for Java native compilation with GraalVM:
+
+```sh
+./gradlew -Pagent test
+./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
+./gradlew -Pagent nativeTest
+./gradlew nativeCompile
+```
+
+
+Native compilation with picocli:
+
+```sh
+./gradlew -Pagent test
+./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
+./gradlew -Pagent nativeTest
+./gradlew nativeCompile
+```
+
+This produces a binary at: build/native/nativeCompile/plumelib-merge-tool
+
+
+Java collection libraries:
+For caching, use Caffeine (<https://github.com/ben-manes/caffeine>) rather than Google Guava.
+Prefer Eclipse Collections over Guava?  Faster, less memory, smaller package.
+There is little need for multimap and multisets with computeIfAbsent.
+
+
 ## Everything else
-
-
-JDK 1.4 is still distributed, but at an obscure URL:
- <http://java.sun.com/javase/downloads/jdk/142/>
-Or, at <http://java.sun.com/javase/downloads/>, click on "Previous Releases".
-
-
-To get a copy of the JDK 7 source:
-  hg clone <http://hg.openjdk.java.net/jdk7/jdk7/jdk>
 
 
 Major version number for the Java class file format (JVM version numbers)
@@ -572,11 +677,6 @@ Major version number for the Java class file format (JVM version numbers)
 * JDK 1.1 = 45 (0x2D hex)     [released 1996]
 
 
-To pretty-print or indent a Java program, do "java JavaPP filename.java".
-Or, use my shell script "javapp file1.java file2.java file3.java ...",
-which overwrites the original file.
-
-
 java.lang.Class.forName requires different versions of the string
 representation of a class as its argument depending on whether you want to
 get back an array or not.  For instance, these are legal:
@@ -593,20 +693,11 @@ but this is not:
 ```
 
 
-Java file reading usually permits either \n or \r\n to end a line.
-However, if the first character of a file is \n, Java file reading seems to
-produce blank lines for each subsequent \r\n.
-
-
-Java 1.5 meta-data facility (annotations) (JSR 175) implements meta-data tags:
-<http://www.jcp.org/en/jsr/detail?id=175>
-
-
 JWhich tells where on the classpath a Java file is found.
 I have a "jwhich" shell script wrapped around this.
 
 
-In Java, "null instanceof Class" returns false for any Class.
+In Java, `null instanceof Class` returns false for any Class.
 
 
 Canonical use of package java.util.regex.* for Java regular expressions:
@@ -690,10 +781,7 @@ that give no indication of what .class file was problematic.
 
 
 To execute a shell command in Java:
-
-```java
-Runtime.getRuntime().exec(String [] cmdarray);
-```
+don't use Runtime.exec(); instead, use ProcessBuilder.start().
 
 
 In Java, File.getName() returns the basename:  no directory components, but
@@ -701,8 +789,12 @@ does include the filename extension.
 
 
 After starting jdb, do something like
+
+```text
   stop in utilMDE.JWhich.main
   run
+```
+
 lest when you issue the "run" command the application continues to termination.
 
 
@@ -782,31 +874,6 @@ Jardiff takes two jar files and outputs all the public API changes.
 <http://www.osjava.org/jardiff/>
 
 
-To read a file line by line from Java use
-
-```java
-    BufferedReader br = new BufferedReader (new FileReader (filename));
-    for (String line = br.readLine(); line != null; line = br.readLine())
-        ;
-```
-
-Unfortunately, this will throw IOExceptions.  I don't know of any standard
-Java class that does not.
-
-Or, to read lines with line numbers use
-
-```java
-    LineNumberReader lr = new LineNumberReader (new FileReader (filename));
-    for (String line = lr.readLine(); line != null; line = lr.readLine())
-        lr.getLineNumber();
-```
-
-Or, you can use utilMDE.EntryReader which supports the new-style for loop.
-
-
-Don't use Runtime.exec(); instead, use ProcessBuilder.start().
-
-
 Here is how to set JAVA_HOME portably (including on Linux and Mac OS X).
 
 In a sh script:
@@ -839,16 +906,6 @@ When you deprecate a method, also make it final.  That way you will find
 places that it is overridden (because they won't compile any longer).
 
 
-A way to iterate over the lines in a file is:
-
-```java
-BufferedReader br = new BufferedReader(new FileReader(file));
-for (String line; (line = br.readLine()) != null; ) {
-   ... // do stuff with line here  
-}
-```
-
-
 This command lists all supertypes of all .class files in the current directory or below.
 
 ```sh
@@ -875,59 +932,6 @@ java -cp "asm-${VER}.jar:asm-tree-${VER}.jar:asm-analysis-${VER}.jar:asm-util-${
 ```
 
 but for me this just crashed rather than giving a useful result.
-
-
-To convert a .jar file to a module:
-
-```sh
-jdeps --generate-module-info . mylib.jar
-javac --patch-module SOME.MODULE.NAME=mylib.jar module-info.java
-```
-
-
-Here is a formula to make a jar file into a modular jar file.
-
-```sh
-usejdk11
-JARPATH=checker-qual.jar
-MODULENAME=org.checkerframework.checker.qual
-jdeps --generate-module-info . $JARPATH
-javac --patch-module $MODULENAME=$JARPATH $MODULENAME/module-info.java
-jar uf $JARPATH -C $MODULENAME module-info.class
-```
-
-
-Command-line options for the Java module system:
-
-* `--patch-module`
-    It adds classes into a module.
-    The replacement of
-    -Xbootclasspath/p is the option --patch-module to override classes in a module. It can also be used to augment the contents of module. The --patch-module option is also supported by javac to compile code "as if" part of the module.
-    You need to supply it *both* to `javac` and to `java`.
-* `--add-exports` (use ALL-UNNAMED to give access from the *classpath*; is anything else required for modules?
-   --add-exports <exporter-module>/<package>=<accessor-module>(,<accessor-module>)*
-* `--add-opens` enables reflection
-* `--add-modules`
-   add modules (and their dependencies) to the module graph that would otherwise not show up because the initial module does not depend on them (directly or indirectly).
-* `--add-reads $module=$targets` adds readability edges from $module to all modules in the comma-separated list $targets. This allows $module to access all public types in packages exported by those modules even though $module has no requires clauses mentioning them. If $targets is set to ALL-UNNAMED, $module can even read the unnamed module.
-
-
-`com.sun.javadoc` is deprecated and superseded by `jdk.javadoc.doclet`.
-`jdk.javadoc.doclet` only exists in Java 9 and later, so switching to it means losing support for Java 8.
-Another difference is that Javadoc in JDK 8 supports this option:
-
-```text
-  -d <directory>                   Destination directory for output files
-```
-
-but in JDK9+, only the standard doclet supports it.
-Documentation on using the new Doclet API:
-<https://openjdk.java.net/groups/compiler/using-new-doclet.html>
-Gradle always passes the -d command-line argument.  Idea: If the doclet is always
-run by itsef, on JDK 9+ it could support the `-d` command-line
-argument, even if it ignores it.  But if the doclet is run together with the
-standard doclet, I'm not sure that is the right thing.
-You can use `title = ""` to prevent gradle from passing other command-line arguments.
 
 
 Many Java `equals` methods should look like this:
@@ -963,10 +967,10 @@ Every Java `hashCode` method should look like one of these:
 
 In Java, `String.format` is much slower than string concatenation with `+`.
 Multiple string concatenation with `+` gets converted into an efficient
-StringBuilder, but not if there are potetnial side effects, so put any
+StringBuilder, but not if there are potential side effects, so put any
 computations into a local variable before doing the string concatenation.
 (Or just use a StringBuilder directly, rather than repeated string
-concatation.
+concatation.)
 
 
 `jshell` is a Java interpreter or REPL (read-eval-print loop).
@@ -977,13 +981,15 @@ An array's element type is a non-array type, obtained by taking component types 
 For example, the component type of `int[][]` is `int[]`, but its element type is `int`.
 
 
-The `map` function over a list is implemented in Java as:
+The `map` function over a list can be implemented in Java as:
 
 ```java
 Collection<E> c = ...
 Object[] mapped = c.stream().map(e -> doMap(e)).toArray();
 List<E> mapped = c.stream().map(e -> doMap(e)).collect(Collectors.toList());
 ```
+
+Or, just use `mapList` from plume-util.
 
 
 To obtain the classpath at run time, on any JDK:
@@ -1044,7 +1050,7 @@ Here is Oracle's migration guide from java.io.File to java.nio.file.Path:
 <https://docs.oracle.com/javase/tutorial/essential/io/legacy.html>
 
 
-If you are targeting Java 17, then you should not use types like `Pair` and
+If you are targeting Java 17 or later, then you should not use types like `Pair` and
 `Triplet` (say, from the `org.javatuples` package).  A record:
 
 * is very little code to define (thus, little code clutter),
@@ -1090,38 +1096,6 @@ Using Guava in a build.gradle file:
 // Using Guava also requires this, unfortunately, to avoid "class file for javax.annotation.meta.TypeQualifierDefault not found".
 annotatedGuava 'com.google.code.findbugs:jsr305:3.0.2'
 ```
-
-
-There is no longer a maintained (or even functional) version of Jar Jar Links (aka JarJar Links).
-It just uses ASM for renaming, so use that directly.
-
-
-Typical commands for Java native compilation with GraalVM:
-
-```sh
-./gradlew -Pagent test
-./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
-./gradlew -Pagent nativeTest
-./gradlew nativeCompile
-```
-
-
-Java collection libraries:
-For caching, use Caffeine (<https://github.com/ben-manes/caffeine>) rather than Google Guava.
-Prefer Eclipse Collections over Guava?  Faster, less memory, smaller package.
-There is little need for multimap and multisets with computeIfAbsent.
-
-
-native compilation with picocli:
-
-```sh
-./gradlew -Pagent test
-./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
-./gradlew -Pagent nativeTest
-./gradlew nativeCompile
-```
-
-This produces a binary at: build/native/nativeCompile/plumelib-merge-tool
 
 
 To determine the default character set of the Java JVM, run these commands:
