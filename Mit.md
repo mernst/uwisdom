@@ -245,17 +245,17 @@ To create/edit a CSAIL mailing list, follow the directions at
 Common things to change after creation:
 
 * General options:
-    **Public name (case changes only)
-    ** Terse phrase identifying the list
-    ** Introductory description
+  * Public name (case changes only)
+  * Terse phrase identifying the list
+  * Introductory description
 * Passwords:
-    ** administrator password
+  * administrator password
 * Privacy options
-    **Subscription rules
-       ***advertise this list
-       *** require approval
-    ** Sender filters
-       *** action to take for postings from non-members
+  * Subscription rules
+    * advertise this list
+    * require approval
+  * Sender filters
+    * action to take for postings from non-members
 
 To delete/remove a mailing list (this script also removes the INQUIR entry):
 

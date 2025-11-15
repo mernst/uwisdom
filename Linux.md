@@ -187,11 +187,10 @@ To make the <kbd>Caps Lock</kbd> key an additional <kbd>Control/Ctrl</kbd> key u
 
 Debian backports (of packages not yet available on stable) can be found at
 backports.org.  Instructions on how to use backports are available at:
-<http://www.backports.org/dokuwiki/doku.php?id=instructions>.  If you
-want to install on all pag machines, consider copying the .deb files
+<http://www.backports.org/dokuwiki/doku.php?id=instructions>.
+To install, consider copying the .deb files
 from /var/cache/apt/archives to $pag/adm/extra-debs and then intall
-them elsewhere using 'dpkg -i' directly.  This needs to be done separately
-for the 64 bit package.
+them elsewhere using 'dpkg -i' directly.
 
 
 File `/etc/debian_version` gives the version number of Debian that you are
@@ -355,6 +354,23 @@ Sawfish window manager themes (list of problems with them)
 
 "xlock -mode blank" locks the screen without running a compute-intensive
 screensaver.
+
+
+## Red Hat Enterprise Linux (RHEL)
+
+
+Red Hat Enterprise Linux or RHEL, is the most popular commercially supported Linux distribution.
+Rocky Linux is downstream of Red Hat, and is nearly identical to it.
+Fedora Linux is upstream of Red Hat, and tends to be more up-to-date.
+
+
+There's no perfectly reliable way to determine the version of Red Hat Linux
+is being run, but you can try:
+
+```sh
+  rpm -q redhat-release
+  cat /etc/redhat-release  # the single file that the above package installs
+```
 
 
 ## Everything else
@@ -561,11 +577,6 @@ To find circular symbolic links
 (but note that this may produce huge output, and also that it cannot be pruned).
 
 
-Red Hat Enterprise Linux or RHEL, is the most popular commercially supported Linux distribution.
-Rocky Linux is downstream of Red Hat, and is nearly identical to it.
-Fedora Linux is upstream of Red Hat, and tends to be more up-to-date.
-
-
 To print a PDF document one-sided (single-sided, non-duplex):
 
 ```sh
@@ -581,3 +592,6 @@ Here is a typical use of `tee`:
 ```sh
 java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
 ```
+
+
+To install an RPM, do  `rpm -Uvh foo.rpm`

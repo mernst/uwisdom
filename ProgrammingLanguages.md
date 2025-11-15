@@ -217,6 +217,14 @@ perl-style-check:
 ```
 
 
+To convert a Perl program with POD ("plain old documentation") embedded
+documentation into a man page, run pod2man.  For example:
+
+```sh
+  pod2man my-script.pl | nroff -man
+```
+
+
 ## Python
 
 
@@ -356,23 +364,23 @@ Parsing command-line arguments in a Posix shell script:
 Redirecting output in command shells:
 
 * In sh/bash (in a shell script):
-   **To redirect standard error to standard output, use `2>&1`.
+  * To redirect standard error to standard output, use `2>&1`.
       Warning:  this must come after any file redirection:  `cmd > file 2>&1`.
       This is because `2>&1` means to make stderr a copy of stdout.  If you
       redirect to a file with `> file` after doing so, then stdout is
       reopened as the file, but stderr (a copy of the original stdout) is
       not affected.
-   ** To redirect standard output to standard error, use `>&2`.
+  * To redirect standard output to standard error, use `>&2`.
       For example, `echo "to stderr" >&2`.
-   **To send both standard error and standard output through a pipe: `2>&1 |`.
+  * To send both standard error and standard output through a pipe: `2>&1 |`.
      There are simpler commands in bash, but they don't work in sh.
-   ** To redirect standard error to a file, use `2>filename`.
+  *  To redirect standard error to a file, use `2>filename`.
      For more details, see <http://tomecat.com/jeffy/tttt/shredir.html>
 * In csh/tcsh:
-   **To overwrite an existing file, redirect via `>!` instead of `>`.
-   ** To redirect both standard error and standard output to a file,
-      use `>&` (`>` redirects just standard output to the file).
-   ** To redirect standard error and output through the pipe, use `|&`.
+  * To overwrite an existing file, redirect via `>!` instead of `>`.
+  * To redirect both standard error and standard output to a file,
+    use `>&` (`>` redirects just standard output to the file).
+  * To redirect standard error and output through the pipe, use `|&`.
 
 
 In bash shell scripts, `"$@"` mans all the arguments, and it quotes each argument
@@ -722,8 +730,8 @@ Debugging C memory (pointer) corruption problems:
    is available from ftp://ftp.perens.com/pub/ElectricFence/.
    It uses the virtual memory hardware to detect the instruction at which a
    bad memory reference occurs.  (I had a problem with it running out of memory.)
-    **`setenv MALLOC_CHECK_ 2`
-    ** compile with "-lefence"
+   * `setenv MALLOC_CHECK_ 2`
+   * compile with `-lefence`
 * GNU Checker:  like Purify (includes gc).
    <http://www.gnu.org/software/checker/checker.html>, ftp://alpha.gnu.org/gnu
    It's sometimes called gccchecker or checkergcc.

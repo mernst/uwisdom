@@ -644,6 +644,52 @@ Prefer Eclipse Collections over Guava?  Faster, less memory, smaller package.
 There is little need for multimap and multisets with computeIfAbsent.
 
 
+## Error Prone linter
+
+
+Gradle buildfile rules to run Error Prone linter on each compilation:
+<https://plugins.gradle.org/plugin/net.ltgt.errorprone>
+
+
+Typical gradle setup for using the Error Prone linter:
+
+```gradle
+if (isJava21orHigher) {
+  apply plugin: "net.ltgt.errorprone"
+  dependencies {
+    errorprone("com.google.errorprone:error_prone_core:${errorproneVersion}")
+  }
+  tasks.withType(JavaCompile).configureEach {
+    options.errorprone {
+      disable("AnnotateFormatMethod") // Error Prone doesn't know about Checker Framework @FormatMethod.
+      disable("DoNotCallSuggester") // Suggests use of an Error Prone annotation.
+      disable("EffectivelyPrivate") // Loses information about the abstraction.
+      disable("ExtendsObject")  // Incorrect when using the Checker Framework.
+      disable("InlineMeSuggester") // Using `@InlineMe` requires clients to declare a dependency on error_prone_annotations.
+      disable("PatternMatchingInstanceof") // requires Java 16 or later
+      disable("ReferenceEquality") // Use Interning Checker instead.
+      disable("StatementSwitchToExpressionSwitch") // requires Java 12 or later
+      disable("StringConcatToTextBlock") // requires Java 15 or later
+      // Code copied from BCEL that we don't want to change gratuitously.
+      excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
+    }
+  }
+}
+```
+
+
+Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
+clients (of the project containing the `@InlineMe` annotation) to declare a
+dependency on error_prone_annotations.
+
+
+When Error Prone's suggested replacement is `UTF_8`, that is
+`StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
+`StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
+Example:
+`Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
+
+
 ## Everything else
 
 

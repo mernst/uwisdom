@@ -126,6 +126,27 @@ html2ps converts a HTML file to PostScript, potentially recursively.
 * "-2L" means two-column landscape
 
 
+Format manual pages:  nroff -man foo.1 | more
+Print roff files:     troff -t filename | lpr -t
+.ms => PostScript:    groff -pte -ms file.ms > file.ps
+man pages => PS:      groff -pte -man foo.1 > file.ps
+
+
+/uns/share/bin/ps2img converts PostScript to gif (or other image format?)
+files.  It will handle multipage postscript files fairly gracefully without
+filling up your disk, and it will look for and pay attention to the
+BoundingBox of EPS files if you give the -e option.  Run it with no
+arguments to see the options.
+
+
+LAOLA converts Microsoft Word .doc documents to plain text.  It is
+superseded by the Perl OLE::Storage module
+(<http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/> or
+<http://www.cs.tu-berlin.de/~schwartz/perl/>), which gives access to
+"structured storage", the binary data format of standard Microsoft Windows
+OLE documents.
+
+
 ## PostScript and PDF
 
 
@@ -800,10 +821,6 @@ To add some ASCII text at the beginning:
 mpack can only encode one file, not multiple files.  For that, try pine.
 
 
-Mailing lists are in /etc/aliases on pag.
-To redirect to a file, it must be in a non-group-writeable directory.
-
-
 In Horde, to "bulk delete" or "delete all", go to the folders view, mark
 the desired folder, and then "Choose Action:  Empty Folder(s)".
 
@@ -920,9 +937,6 @@ To install VMware tools, see ~mernst/wisdom/building/build-vmware
 
 
 In VMware, shared folders from the host appear in /mnt/hgfs/.
-
-
-## VMware
 
 
 Do not switch between VMware regular and virtual console while the mouse is
@@ -1101,7 +1115,7 @@ Markdown parsers:
 
 A modern alternative to Markdown, by the author of Pandoc and CommonMark, is djot.
 File names end in `.dj`.
-It isn't yet supported by GitHub.
+It isn't yet supported by GitHub, which makes it less practical to use.
 
 
 
@@ -1153,7 +1167,7 @@ To make a diff file good for patching old-file to produce new-file,
   diff -c old-file new-file
 ```
 
-In GNU diff, specify lines of context using -C # (not -c #).
+In GNU diff, specify lines of context using `-C N` (not `-c N`).
 
 
 There is no standalone `diff` program that incorporates the patience diff
@@ -1166,16 +1180,11 @@ algorithm, but instead you can use
 This does a two-way, not a three-way, diff.
 
 
-With patch version 2.4 or 2.5 (and maybe other versions), you must set the
-environment variable POSIXLY_CORRECT to TRUE. Otherwise patch won't look at
-the "Index:" lines and it will ask for the filename for each patch.
-
-
 moss:  a software plagiarism detector by Alex Aiken.
 <http://www.cs.berkeley.edu/~aiken/moss.html>
 
 
-Use the `-N` or `--new-file` command-line option to make diff show the full
+With the `-N` or `--new-file` command-line option, `diff` shows the full
 contents of a new or deleted file (a file that did not exist), rather than
 displaying "Only in ...".
 Use
@@ -1201,7 +1210,7 @@ git dft
 
 I cannot figure out how to see all differences (even mergeable ones) among 3
 files, using the "<<<<<<", "||||||", and ">>>>>>" conflict markers/brackets.
-See my question at  <https://stackoverflow.com/questions/78252587> .
+See my question at <https://stackoverflow.com/questions/78252587>.
 
 
 ## make
@@ -1214,49 +1223,6 @@ make -qp |
     awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split($1,A,/ /);for(i in A)print A[i]}' |
     sort -u
 ```
-
-
-## Error Prone linter
-
-
-Gradle buildfile rules to run Error Prone linter on each compilation:
-<https://plugins.gradle.org/plugin/net.ltgt.errorprone>
-
-
-Typical gradle setup for using the Error Prone linter:
-
-```gradle
-plugins {
-  id('net.ltgt.errorprone') version '4.2.0'
-}
-dependencies {
-  errorprone("com.google.errorprone:error_prone_core:2.38.0")
-}
-tasks.withType(JavaCompile).configureEach {
-  options.compilerArgs << "-Xlint:all,-processing" << "-Werror"
-  options.errorprone {
-    disable('ReferenceEquality') // Use Interning Checker instead.
-    disable('AnnotateFormatMethod') // Error Prone doesn't know about Checker Framework @FormatMethod
-    disable('StatementSwitchToExpressionSwitch') // requires Java 12 or later
-    disable('StringConcatToTextBlock') // requires Java 15 or later
-    disable('PatternMatchingInstanceof') // requires Java 16 or later
-    // Code copied from BCEL that we don't want to change gratuitously.
-    excludedPaths = ".*/org/plumelib/bcelutil/StackVer.java"
-  }
-}
-```
-
-
-Do not use Error Prone's `@InlineMe` annotation.  Using it seems to require
-clients (of the project containing the `@InlineMe` annotation) to declare a
-dependency on error_prone_annotations.
-
-
-When Error Prone's suggested replacement is `UTF_8`, that is
-`StandardCharsets.UTF_8`.  When it uses `APPEND` or `CREATE`, those are
-`StandardOpenOption.APPEND` and `StandardOpenOption.CREATE`.
-Example:
-`Files.newBufferedWriter(p, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.APPEND)`
 
 
 ## AI tools
@@ -1282,42 +1248,38 @@ Information about a variety of Java tools can be found in the wisdom
 repository, in file JavaTools.md.
 
 
-expand, unexpand:  change TABs to SPACEs and vice versa.
+`expand`, `unexpand`:  change TABs to SPACEs and vice versa.
 
 
-rehash:  If my path seems messed up, or I've added programs, do rehash.
-(Perhaps this only works under csh.)
+`rehash`:  If my path seems messed up, or I've added programs, do rehash.
 
 
-sed:  for example, sed -e '/^SED/ s|SED|SOGGY|' man-sed | more
+`sed`:  text replacement.  For example, sed -e '/^SED/ s|SED|SOGGY|' man-sed | more
 
 
-ps:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,
-ps -lf gives a long full listing (use -e or -d to see more processes).
-"top" shows percent of CPU being used by each process; good adjunct to ps.
-ps options:
+`ps`:  Use ps -aux to get job #s of all jobs.  On some machines such as SGIs,
+`ps -lf` gives a long full listing (use -e or -d to see more processes).
+`top` shows percent of CPU being used by each process; good adjunct to ps.
+`ps` options:
 
-* -l long format, shows priorities (set by nice or renice)
-* -u user-oriented format
-
-also:
-
-* -a show all processes
-* -x show even processes with no controlling terminal
-* -w use wide display
+* `-l` long format, shows priorities (set by nice or renice)
+* `-u` user-oriented format
+* `-a` show all processes
+* `-x` show even processes with no controlling terminal
+* `-w` use wide display
 
 
-xterm:  give -ut flag to prevent appearing in finger.
+`xterm`:  give -ut flag to prevent appearing in finger.
 
 
-system, eval evaluate their argument.
-exec replaces the current shell with its argument.  Be careful!
+`system`, `eval` evaluate their argument.
+`exec` replaces the current shell with its argument.  Be careful!
 
 
-sleep:  delays execution; waits that many seconds.
+`sleep`:  delays execution; waits that many seconds.
 
 
-expr:  Bourne shell way to do lots of stuff (ex regular expressions,
+`expr`:  Bourne shell way to do lots of stuff (ex regular expressions,
 arithmetic, comparisons); see also TEST
 
 
@@ -1335,14 +1297,14 @@ Programs for drawing figures under X Windows (from best to worst in ease of use)
 
 The mayura draw program for Windows takes Windows Metafiles (such as produced by
 PowerPoint) and creates PostScript.
-It may be best just to create figures using PowerPoint
+It may be best just to create figures using PowerPoint...
 
 
 The Ipe extensible drawing editor edits PDF files directly:
 <https://ipe.otfried.org/>
 
 
-split:
+`split`:
 Use
 
 ```sh
@@ -1358,28 +1320,17 @@ then
 to split files into parts.
 
 
-du:  disk usage.
+`du`:  disk usage.
 
 * `du -s *`     only display grand total for each file and subdirectory in this dir
 * `du -S`       not sum child directories in count for parent
 * `du | sort -r -n`   sort directories, with most usage first.
 * `du | xdu`    only when you're in X, obviously. Better grain than above, with the ability to drill down into subdirectories
 
-Also see Alan Donovan's program "prune"
-(executable: ~adonovan/bin/Linux-i686/prune; sources: ~/work/c/prune/)
-For example,
-
-```sh
-  ~adonovan/bin/Linux-i686/prune -size 104857600 -age 604800 ~
-```
-
 Looking at files within a single directory, rather than a whole directory tree:
 
 * `ls -l | sort -n +4` sorts files in size order, good for finding big files in a directory
 * `du -s * | sort -n` similar to above, find the biggest files & subdirectories of the current dir
-
-
-`.DESKTOP` file:  Macintosh info about my files.  Safe to delete.
 
 
 To make a soft link, do
@@ -1389,11 +1340,11 @@ To make a soft link, do
 ```
 
 
-expect:  controls interactive programs to permit them to be used in a batch
+`expect`:  controls interactive programs to permit them to be used in a batch
 fashion via send/expect sequences, job control, user interaction, etc.
 
 
-To create a script file that will respond to any prompt, not just a
+Use a "here doc" to create a script file that will respond to any prompt, not just a
 top-level one:
 
 ```sh
@@ -1407,24 +1358,18 @@ top-level one:
 ```
 
 
-crontab:  batch sorts of programs run repeatedly (say, each night)
+`crontab`:  batch programs run repeatedly (say, each night)
 
 
-Format manual pages:  nroff -man foo.1 | more
-Print roff files:     troff -t filename | lpr -t
-.ms => PostScript:    groff -pte -ms file.ms > file.ps
-man pages => PS:      groff -pte -man foo.1 > file.ps
+`nslookup` converts domain names into ip numbers.
+`host` and `dig` also query the same DNS information.
 
 
-nslookup converts domain names into ip numbers.
-"host" and "dig" also query the same DNS information.
+`ftp`:  do "prompt off" to turn off confirmation requests on multiple commands
 
 
-ftp:  do "prompt off" to turn off confirmation requests on multiple commands
-
-
-David Wilson says about running background jobs:
-The simplest thing to do is a shell script that does `rsh <nice command>` on
+Running persistent background jobs on multiple machines:
+Create a shell script that does `rsh <nice command>` on
 the various machines, and then run the shell script on a machine that
 doesn't get rebooted very often.
 
@@ -1433,16 +1378,17 @@ If there is no password specified in the netrc file, then the macdef init
 seems not to take.
 
 
-To permit arbitrary-size core dumps:  unlimit corelimit
+To permit arbitrary-size core dumps:  `unlimit corelimit`
 
 
-Undo the setuid bit of a file with chmod -s.
+Undo the setuid bit of a file with `chmod -s`.
 
 
-df:  Report free disk space and which filesystems are mounted.
+`df`:  Report free disk space and which filesystems are mounted.
 
 
-tar:  tape archive program.  Usual extraction from files is
+`tar`:  tape archive program for representing a directory as a single file.
+Usual extraction from files is
 
 ```sh
   tar xf filename
@@ -1470,15 +1416,8 @@ To extract a rar archive:
 ```
 
 
-To see and manipulate your junk files which are taking up precious
-space on the computer, use the program junk.  Typing
-just "junk" will show you the names of all the junk files subordinate
-to your current directory.  Typing "junk -c rm" will remove them
-(CAREFUL!).  For more information, see /a/aviary/unix/junk.doc.
-
-
 Converting binhex files:
-  "hexbin foo" creates "foo.bin".  Also consider "-u" or "-U" option.
+  `hexbin foo` creates `foo.bin`.  Also consider `-u` or `-U` option.
 
 
 In /usr/local/man, manX subdirectories contain raw man pages.
@@ -1489,149 +1428,27 @@ catX subdirectories contain formatted man pages preprocessed by
   pack -f cat1/emacs.1
 ```
 
-The .z suffix on these files indicates that they were created by pack (use
-unpack or pcat to view), NOT gzip.
+The `.z` suffix on these files indicates that they were created by `pack` (use
+`unpack` or `pcat` to view), NOT `gzip`.
 
 
-ppanel program: control printing from a GUI
+`renice` causes a running program to acquire only idle resources.
 
 
-"polite" is like "nice"; it runs a program at lower priority.
-It allows other users to 'nap' the 'polite' program for an interval.
-
-```sh
-  % polite big-cache-simulator -assoc 2 -size 8192 -other flags
-```
-
-and then an interactive user of merganser could do
-
-```sh
-  % nap all
-```
-
-putting the cache simulator to sleep for 15 minutes.
-See the man pages for more information.
-Child jobs spawned by the polited process aren't run under polite, however.
+`strace` tells all systems calls made by a process (a program run from
+the command line).  It's `truss` on Solaris.
 
 
-renice causes a running program to acquire only idle resources
+`ldd *executablename*` tells which shared libraries a program uses.
 
 
-truss, strace tell all systems calls made by a process (a program run from
-the command line).  It's truss on Solaris, strace everywhere else.
+`/etc/groups` on some systems is `ypcat group` on others.
+The `id` program also lists the groups for each user.
 
 
-ldd *executablename* tells which shared libraries a program uses.
-
-
-/etc/groups on some systems is "ypcat group" on others.
-The "id" program also lists the groups for each user.
-
-
-jgraph - filter for graph plotting to postscript.
-Also see ~jdean/graph, which is a preprocessor for it by Eric Brewer.
-Sample invocation:
-
-```sh
-graph -e -g -p -c <sample-input.graph | jgraph -P | gv -
-```
-
-
-gnuplot: with the "eps" terminal, has only six symbols available.  The
+`gnuplot`: with the "eps" terminal, has only six symbols available.  The
 "latex" terminal has more symbols (and the output is more customizable),
 though the output isn't as pretty.
-
-
-An alternative to gnuplot/jgraph is xmgr; supposedly nice but has steep
-learning curve.
-
-
-xdvi: use "s" to set shrink (image/font size); 3 is a reasonable prefix
-argument
-
-
-The "search" program is like a combination of 'find' and 'grep' (but using
-Perl regular expressions, and more powerful and efficient).
-Files:
-
-* the program: ~mernst/bin/share/search
-* its manpage: ~mernst/bin/share/search.manpage
-* example dotfile: ~mernst/.search
-
-I find `search' easier to use than`grep`, but`grep` can often replace
-it.  For example, these give identical results (except for order):
-
-```sh
-search -dir lucene -n 'SuppressWarnings.*interning'
-grep -r -n -e 'SuppressWarnings.*interning' lucene
-```
-
-
-To find/search and replace in multiple files (say, an entire directory)
-use
-
-```sh
-  preplace [options] oldregexp newregexp [files]
-```
-
-which is like
-
-```sh
-  perl -pi -e 's/OLD/NEW/g'
-```
-
-except that the timestamp on each file is updated only if the replacement
-is performed.
-[WATCH OUT when omitting the [files] argument, since you generally do *not*
-want to perform the replacement in files in the .svn directory.]
-[WARNING: This program does not respect symbolic links, instead replacing
-each symbolic link with a copy of its contents.  So, generate the [files]
-arguments without symbolic links.]
-See below for more details.
-
-To find/search and replace in multiple files (say, an entire directory)
-from the command line via perl, do
-
-```sh
-  perl -pi.bak -e 's/OLD/NEW/g' *
-```
-
-NOTE caveats below; it's better to search, then replace only in relevant files.
-Add "i" after g for case-insensitive.
-Other possible invocations:
-
-```sh
-  find . -type f -print | xargs perl -pi.bak -e 's/OLD/NEW/g'
-  find . -type f -name '*.html' -print | xargs grep -l 'sdg.lcs.mit.edu/~mernst/' | xargs perl -pi.bak -e 's|sdg.lcs.mit.edu/~mernst/|pag.lcs.mit.edu/~mernst/|g'
-  find . -type f -name Root -print | xargs grep -l '/g1/users/adbirka/.cvs' | xargs perl -pi.bak -e 's|/g1/users/adbirka/.cvs|/g4/projects/constjava/.cvs|g'
-  preplace /g1/users/adbirka/.cvs /g4/projects/constjava/.cvs `find . -type f -name Root -print`
-```
-
-(You can do the same for SVN with `svn switch --relocate OLD-PREFIX NEW-PREFIX`,
-which retargets a checkout, or for many repositories:
-
-```sh
-  find . -path \*/.svn/entries -print0 | xargs -0 preplace manioc.csail login.csail
-```
-
-)
-Problems with the first invocation, fixed by the others:
-
-* The first invocation will search/replace in compressed, binary, PostScript,
-   etc. files.  (a few examples: .tar .gz .gif .pdf .ps .Z)
-* The first invocation will update all the files' modification dates, even if
-   no replacement occurs.
-* The first invocation will copy links into regular files.
-
-*
-
-An alternate way to fix CVS repositories is
-
-```sh
-  cd ~/research/invariants
-  echo ":ext:${USER}@pag.csail.mit.edu:/g4/projects/invariants/.CVS' >new-root
-  find . -name Root | xargs -n1 cp ~/research/invariants/new-root
-```
 
 
 To find/replace a multi-line string, use perl:
@@ -1641,20 +1458,8 @@ perl -0777 -i.original -pe 's/input containing\nmultiple lines/Output can also h
 ```
 
 
-In CMU Common Lisp (cmucl), smaller applications can result from
+To copy a (local) directory recursively:  `cp -pR source target-parent`
 
-```lisp
-    (declaim (optimize (speed 3) (safety 0) (debug 0)))
-```
-
-An apparently reasonable development setting:
-
-```lisp
-    (declaim (optimize (safety 3) (speed 2) (debug 2) (compilation-speed 0)))
-```
-
-
-To copy a (local) directory recursively:  cp -pR source target-parent
 To copy a (remote) directory structure from one machine to another:
 
 ```sh
@@ -1671,60 +1476,46 @@ This is like
 except that the latter doesn't preserve symbolic links.
 
 
-Regular expressions (regexps):
+Regular expressions (regexes, regexps):
 
 * In alternation, first match is chosen, not longest match.  For
-   efficiency, put most likely match (or most likely to fail fast) first.
+  efficiency, put most likely match (or most likely to fail fast) first.
 * `(ab)?(abcd)?` matches "ab" in "abcde"; does not match the longer "abcd"
 * character class `[abc]` is more efficient than alternation `(a|b|c)`
 * unrolling the loop:     `+opening normal* (special normal*)* closing+`
-    eg, for a quoted string:   `+/L?"[^"\\]*(?:\\.[^"\\]*)*"/+`
-    or `+$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';+`
-    **start of normal and special must never intersect
-    ** special must not match nothingness
-    ** text matched by one application of special must not be matched by
-      multiple applications of special
+   * eg, for a quoted string:   `+/L?"[^"\\]*(?:\\.[^"\\]*)*"/+`
+     or `+$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';+`
+   * start of normal and special must never intersect
+   * special must not match nothingness
+   * text matched by one application of special must not be matched by
+     multiple applications of special
 
 
-uname gives operating system (uname -a gives more info).
+`uname` gives operating system (`uname -a` gives more info).
 
 
-sysinfo:  information about this hardware, like amount of memory,
+`sysinfo`:  information about this hardware, like amount of memory,
 architecture, operating system, and much more.
-/usr/sbin/psrinfo -v:  information about processor speed and coprocessor.
-The "top" program also tells the machine's amount of memory and swap space.
-Also see "uname -a" and "cat /proc/cpuinfo" (as
-well as some of the other kernel pseudo-files under /proc).
+`/usr/sbin/psrinfo -v`:  information about processor speed and coprocessor.
+The `top` program also tells the machine's amount of memory and swap space.
+Also see `uname -a` and `cat /proc/cpuinfo` (as
+well as some of the other kernel pseudo-files under `/proc/`).
 
 
-The ispell program will merge personal dictionaries (.ispell_english) found
+The `ispell` program will merge personal dictionaries (`.ispell_english`) found
 in the current directory and the home directory.
 
 
 To run a program disowned (so that exiting the shell doesn't exit the
-program), precede it by "nohup".  Programs run in the background also
+program), precede it by `nohup`.  Programs run in the background also
 continue running when the shell exits (though interactive programs and some
 others seem to be exceptions to this rule; or maybe the rule about
 background jobs continuing only applies for programs that ignore the hangup
 (hup) signal).
 
 
-To add Frostbyte's public key to my PGP keyring:
-
-```sh
-  pgpk -a http://sub-zero.mit.edu/fbyte/pgp.html
-```
-
-
-To find all the executables on my path with a particular name, use
-/usr/local/bin/which -a
-
-
-/uns/share/bin/ps2img converts PostScript to gif (or other image format?)
-files.  It will handle multipage postscript files fairly gracefully without
-filling up your disk, and it will look for and pay attention to the
-BoundingBox of EPS files if you give the -e option.  Run it with no
-arguments to see the options.
+To find all the executables on my path with a particular name:
+`/usr/local/bin/which -a`
 
 
 To convert a directory from DOS to Unix conventions:
@@ -1737,20 +1528,12 @@ end
 ```
 
 
-LAOLA converts Microsoft Word .doc documents to plain text.  It is
-superseded by the Perl OLE::Storage module
-(<http://wwwwbs.cs.tu-berlin.de/~schwartz/perl/> or
-<http://www.cs.tu-berlin.de/~schwartz/perl/>), which gives access to
-"structured storage", the binary data format of standard Microsoft Windows
-OLE documents.
-
-
-mkid (part of GNU's id-utils) is something like tags, but records all uses
+`mkid` (part of GNU's id-utils) is something like `tags`, but records all uses
 of all tokens and permits lookup.  There's an Emacs interface, too.
 
 
-The `file` command gives information about the file format (type of file,
-executable (including debugging format), etc).
+The `file` command gives information about the file format: type of file,
+executable (including debugging format), etc.
 
 
 On a Kinesis Advantage contoured keyboard:
@@ -1763,29 +1546,21 @@ On a Kinesis Advantage contoured keyboard:
   * on Advantage 2 keyboard:  <kbd>progrm+f4</kbd>
   * on Advantage 1 keyboard:  <kbd>progrm+shift+f5</kbd> (this erases any remapping, but not macros)
 * If I am getting bizarre "super" modifiers, then the keyboard may be in Mac
-  mode.  Holding down = then tapping s may produce "v3.2[]".  Change to PC
-  mode by holding down = then tapping p; now holding down = and tapping s may
+  mode.  Holding down <kbd>=</kbd> then tapping <kbd>s</kbd> may produce
+  "v3.2[]".  Change to PC mode by holding down <kbd>=</kbd> then tapping
+  <kbd>p;</kbd> now holding down <kbd>=</kbd> and tapping <kbd>s</kbd> may
   produce "v3.2[SL K H x e ]".
-
-
-There's no perfectly reliable way to determine the version of Red Hat Linux
-is being run, but you can try:
-
-```sh
-  rpm -q redhat-release
-  cat /etc/redhat-release  # the single file that the above package installs
-```
 
 
 ImageMagick is a replacement for (part of) xv:  three of its programs are:
 
-* display will view images in a great many different file formats.
-* import grabs screen shots, either that you select with the mouse, that
+* `display` will view images in a great many different file formats.
+* `import` grabs screen shots, either that you select with the mouse, that
    you specify by window ID, or the root window.
-* convert old.gif new.jpg lets you easily change image formats.
+* `convert old.gif new.jpg` lets you easily change image formats.
 
 
-"locate" finds a file of a given name anywhere on the system.
+`locate` finds a file of a given name anywhere on the system.
 Its database is updated nightly or so.  To update it manually:
 
 ```sh
@@ -1793,16 +1568,12 @@ sudo updatedb
 ```
 
 
-To use "crypt" to encrypt a string, like in the password file `/etc/passwd`,
-use "openssl passwd".
-(Note that "crypt" is known to be insecure; only use it for `/etc/passwd`.)
+To use `crypt` to encrypt a string, like in the password file `/etc/passwd`,
+use `openssl passwd`.
+(Note that `crypt` is known to be insecure; only use it for `/etc/passwd`.)
 
 
-Use "chsh" to set/change your shell.
-
-
-make: "error 139" means that your program segfaulted:  139 = 128+11, and 11
-is a segfault (<http://www.bitwizard.nl/sig11/>).
+Use `chsh` to set/change your shell, such as from `sh` to `bash`.
 
 
 If using YP for password (yppasswd) and other files, don't edit /etc/group;
@@ -1849,18 +1620,12 @@ Find all group-writeable files:
 ```
 
 
-To install an RPM, do  rpm -Uvh foo.rpm
-
-
 If machines come up before the ntpd server (and as a result their time
 and date are not synchronized/synched), run this command on each machine:
 
 ```sh
   /etc/rc.d/init.d/xntpd restart
 ```
-
-
-On pag, use "yppasswd" instead of "passwd".
 
 
 `zip -r foo foo`
@@ -1870,18 +1635,18 @@ The first argument is the zipfile base name, and the rest of the arguments
 are its contents.
 
 
-To uuencode a file:   uuencode filename filename > filename.UUE
+To uuencode a file:   `uuencode filename filename > filename.UUE`
 
 
-Use unzip to extract files from zip/pkzip archives.
+Use `unzip` to extract files from zip/pkzip archives.
 
 
-finger crashes on NIS clients when the GECOS field of the NIS-entry is
+`finger` crashes on NIS clients when the GECOS field of the NIS-entry is
 blank and the user home directories is chmod'd to 700.  (as of 1/2002)
 
 
-To compute a file's checksum, use "sum" or "cksum" or "md5sum".
-For an entire directory, "md5deep" works.
+To compute a file's checksum, use `sum` or `cksum` or `md5sum`.
+For an entire directory, `md5deep` works.
 
 
 A way to find typos and grammar errors in papers:  run ps2ascii on a
@@ -1913,8 +1678,8 @@ Linux only).  It's better than what is built into gcc.
 
 
 To see the equivalent of a yppasswd entry for user foo, do
-"ypmatch foo passwd" or "ypcat passwd | grep -i foo" or "~/bin/getpwent foo".
-Or, at MIT LCS, do "inquir-cui" at mintaka.lcs.mit.edu.
+`ypmatch foo passwd` or `ypcat passwd | grep -i foo` or `~/bin/getpwent foo`.
+Or, at MIT LCS, do `inquir-cui` at mintaka.lcs.mit.edu.
 
 
 To encrypt/decrypt:
@@ -1978,14 +1743,14 @@ The one starting with "S" (start) is invoked when runlevel N is entered.
 The one starting with "K" (kill) is invoked when runlevel N is exited.
 
 
-"chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created
+`chmod g+s dirname` sets the directory's SGID bit/attribute.  Files created
 in that directory will have their group set to the directory's group.
 Directories created in that directory also have their SGID bit set.
 (The SGID bit has nothing to do with the sticky bit.)
 
 
 lpr can assign "classes" or priorities to jobs.  For instance, to bypass
-all other jobs in the queue, do "lpr -C Z *filename*" (Z is the highest
+all other jobs in the queue, do `lpr -C Z *filename*` (Z is the highest
 priority/class).
 
 
@@ -2024,22 +1789,7 @@ To make Samba work from certain locations, I must first edit
 Also edit /etc/hosts.allow similarly.
 
 
-To execute a command on all the PAG clients:
-
-```sh
-  pagdo sudo <full-path-to-that-command && args>
-```
-
-(But that command apparently can't be "emacs", as the X connection gets
-rejected due to "wrong authentication.  Also, apparently don't include ";"
-to split multiple commands; use multiple "pagdo sudo" commands.)
-This requires typing my password N times for N machines.
-To make this easier, we could add a /root/.ssh/authorized_keys file to each
-client which includes (y)our public key and use "root@" in the ssh command
-in pagdo.
-
-
-/etc/sudoers says
+`/etc/sudoers` says
 
 ```sh
 # This file MUST be edited with the 'visudo' command as root
@@ -2061,7 +1811,7 @@ Put in /etc/fstab
  0 0
 ```
 
-(And you can also issue just "mount /mnt/dtrace-store" now.)
+(And you can also issue just `mount /mnt/dtrace-store` now.)
 This particular mount requires that the following appear in /etc/hosts.allow:
 
 ```hosts
@@ -2099,8 +1849,8 @@ Parallel/distributed jobs across many machines:
 * The distcc compiler permits compilation jobs to be distributed (in
    parallel) across many machines.  See <http://distcc.samba.org/>.
 * Another useful tool for speeding up compilation is ccache; to use it,
-   change the "CC=gcc" line in your Makefile to be "CC=ccache gcc".
-* "drqueue", the distributed renderer queue; I'm not sure how
+   change the `CC=gcc` line in your Makefile to be `CC=ccache gcc`.
+* `drqueue`, the distributed renderer queue; I'm not sure how
    rendering-specific it is.
 * There are two add-ons to GNU make:
 
@@ -2180,10 +1930,10 @@ periodically -- say, every minute or hour in a cron job.
 
 To print a reasonable map from google maps do the following:
 
-* execute 'import map.jpg'
+* execute `import map.jpg`
 * Draw a rectangle over the part of the map you want.  The result will
     be saved in map.jpg
-* execute 'gimp map.jpg'
+* execute `gimp map.jpg`
 * print from gimp.  Gimp does a nice job of laying the jpeg out on
     the screen and allows you to scale it and the like.
 
@@ -2193,15 +1943,15 @@ To create a transparent signature stamp:
 * scan a hardcopy of my signature
 * clean it up (in Paint or in the Gimp)
 * use Gimp to make the background transparent:
-    **menu > layer > transparency > add alpha channel
-    ** click on the fuzzy selector tool (magic wand)
-    **for each area to remove, select it, then "edit > clear" (<kbd>ctrl + k</kbd>)
-    ** save as gif or png
-   (instructions from <http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp>)
-* Imagemagick's "convert" program didn't work, so convert the gif or png to
-   PDF with Acrobat Professional
-* Convert the PDF to EPS via imagemagick's "convert" program (other
-   techniques might work, too)
+  * menu > layer > transparency > add alpha channel
+  * click on the fuzzy selector tool (magic wand)
+  * for each area to remove, select it, then "edit > clear" (<kbd>ctrl + k</kbd>)
+  * save as gif or png
+  (instructions from <http://www.fabiovisentin.com/tutorial/GIMP_transparent_image/gimp_how_to_make_transparent_image.asp>)
+* Imagemagick's `convert` program didn't work, so convert the gif or png to
+  PDF with Acrobat Professional
+* Convert the PDF to EPS via imagemagick's `convert` program (other
+  techniques might work, too)
 
 
 When you have a PDF file that is marked up with annotations, you can either
@@ -2286,10 +2036,6 @@ Setting up a new USB microphone/headset:  run
 
 When the application starts, choose the default device and unmute both the
 headphones *and* the microphone.
-For Skype, under Linux, see
-  <http://www.skype.com/help/guides/soundsetup_linux.html>
-Under Fedora, I had to unset "allow skype to automatically adjust my mixer
-levels" lest the recording level was much too low.
 
 
 On Linux, after plugging in headphones, you have to tell the application
@@ -2297,7 +2043,7 @@ On Linux, after plugging in headphones, you have to tell the application
 soundcard (card1) in order to get audio over the headphones.
 
 
-The "-e" argument to mail means send no mail if the body is empty.  So use
+The `-e` argument to mail means send no mail if the body is empty.  So use
 (in csh)
 
 ```csh
@@ -2331,13 +2077,13 @@ Server-side includes (SSI) for web pages:
 Use "file=" for relative filenames, "virtual=" for relative or non-relative
 filenames (e.g., an address starting at the server root).
 In some cases, you must configure the webserver to preprocess all
-pages with a distinctive extension (normally, ".shtml").
+pages with a distinctive extension (normally, `.shtml`).
 UW CSE lets us tweak our `.htaccess` file such that we can have
 all regular .html files get this behavior, not just .shtml files.  See the
 WASP webpages for an example.
 
 
-The "rev" program reverses the order of characters in every line of input.
+The `rev` program reverses the order of characters in every line of input.
 It's the way to reverse all lines of a file.
 To sort lines, with the sort key being the reverse of each line:
   cat myfile | rev | sort -r | rev
@@ -2357,7 +2103,7 @@ When a sh/bash script wishes to pass one of its arguments to another
 program, it's necessary to quote those arguments so they are not
 re-interpreted (and in particular, so that embedded spaces do not cause an
 argument to be split into two).  A way to do this is to surround the
-argument by spaces, and then call the other program with "eval" instead of
+argument by spaces, and then call the other program with `eval` instead of
 directly:
 
 ```sh
@@ -2397,7 +2143,7 @@ To give up and uninstall a package installed by encap/epkg:
 ```
 
 
-"ack" is like "grep -r" or "search", but claims to be more flexible.
+`ack` is like `grep -r` or `search`, but claims to be more flexible.
   I've given up using it, though; I find `search` more featureful and less buggy.
   A problem is that unlike the `search` program, it does not seach in
 compressed (.gz, .Z) files.
@@ -2453,21 +2199,13 @@ now only one way to match:  the "\\s-" matches the first whitespace
 character, and ".*" matches the rest.  This runs faster.
 
 
-To convert a Perl program with POD ("plain old documentation") embedded
-documentation into a man page, run pod2man.  For example:
-
-```sh
-  pod2man my-script.pl | nroff -man
-```
-
-
 To resolve a symbolic link to its true name (truename):
 
 * in a program, use the `readlink` system call
 * from the command line, use `realpath` or `readlink -f` or `readlink -e`
    `readlink` seems to be preferred.
 
-HOWEVER, Mac OS X's `readlink` behaves differently than `readlink` on Linux
+**However**, Mac OS X's `readlink` behaves differently than `readlink` on Linux
 (it has no `-f` command-line argument, for example), and `realpath` is not
 installed.  Thus, portable scripts should not use them.
 If the directory exists (like `readlink -f`), use this instead:
@@ -2532,7 +2270,8 @@ To recover a closed tab in Chrome:  <kbd>Ctrl-Shift-t</kbd>
 To open Task Manager in Google Chrome:
 
 * right-click the title bar, or
-* press "Shift-Esc"
+* press <kbd>Shift-Esc</kbd>
+
 This helps to debug high CPU usage by Chrome.
 
 
@@ -2670,7 +2409,7 @@ If ripgrep matches files within the `.git` directory, then add this to the `.git
 
 Chromebook:
 
-* the "terminal" application runs Linux
+* the `terminal` application runs Linux
 
 
 To increase font size in an xterm terminal on Ubuntu Linux:
@@ -2898,17 +2637,17 @@ sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 ```
 
 
-To find all files not containing a string: "-L foo".
-This works with grep and ag, etc.
-For rg: --files-without-matches
+To find all files not containing a string: `-L foo`.
+This works with `grep` and `ag`, etc.
+For `rg`: `--files-without-matches`
 
 
 To turn off screensavers in Gnome:
 
- 1. Click on the little foot in the lower left
-    Programs->Settings->Desktop->Screensaver
- 2. Select 'No Screensaver' in the list in the upper left
- 3. Click 'OK'
+1. Click on the little foot in the lower left
+   Programs->Settings->Desktop->Screensaver
+2. Select 'No Screensaver' in the list in the upper left
+3. Click 'OK'
 
 
 <!--
