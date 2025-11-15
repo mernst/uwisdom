@@ -5,31 +5,6 @@ On github.com, you can view the table of contents of this file by clicking the
 menu icon (three lines or dots) in the top corner.
 
 
-## VMware
-
-
-Do not switch between VMware regular and virtual console while the mouse is
-moving, because the switch might occur between packets that the mouse is
-sending, throwing off synchronization.
-
-
-<kbd>Ctrl-Alt-Space</kbd> is the VMware escape:  the next key (such as <kbd>Ctrl-Alt-ESC</kbd>)
-goes to the guest, rather than being interpreted by VMware.
-
-
-In VMware, press <kbd>Ctrl-Alt</kbd> to take mouse/keyboard focus away from the guest.
-
-
-MAC address of VMware (discovered via "/usr/sbin/arp"): 00:0C:29:C1:70:EF
-Spoof MAC address under Linux:
-
-```sh
-  sudo /sbin/ifdown eth0
-  sudo ifconfig eth0 hw ether 00:0C:29:C1:70:EF
-  sudo /sbin/ifup eth0
-```
-
-
 ## Windows Subsystem for Linux (WSL)
 
 

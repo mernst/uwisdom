@@ -903,7 +903,8 @@ Eclipse has two compilers.
 To prevent IntelliJ from using wildcard imports, you must do *both* of the following:
 
 * Click on the Settings "wrench" icon on the toolbar, open "Imports" under "Code Style", and check the "Use single class import" selection.
-* go to Preferences (⌘ + , on macOS / <kbd>Ctrl + Alt + S</kbd> on Windows and Linux) > Editor > Code Style > Java > Imports tab set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
+* go to Preferences (<kbd>⌘ + ,</kbd> on macOS / <kbd>Ctrl + Alt + S</kbd> on Windows and Linux) > Editor > Code Style > Java > Imports tab
+* set Class count to use import with '*' and Names count to use static import with '*' to a higher value. Any value over 99 seems to work fine.
 
 
 ## VMware
@@ -919,6 +920,31 @@ To install VMware tools, see ~mernst/wisdom/building/build-vmware
 
 
 In VMware, shared folders from the host appear in /mnt/hgfs/.
+
+
+## VMware
+
+
+Do not switch between VMware regular and virtual console while the mouse is
+moving, because the switch might occur between packets that the mouse is
+sending, throwing off synchronization.
+
+
+<kbd>Ctrl-Alt-Space</kbd> is the VMware escape:  the next key (such as <kbd>Ctrl-Alt-ESC</kbd>)
+goes to the guest, rather than being interpreted by VMware.
+
+
+In VMware, press <kbd>Ctrl-Alt</kbd> to take mouse/keyboard focus away from the guest.
+
+
+MAC address of VMware (discovered via "/usr/sbin/arp"): 00:0C:29:C1:70:EF
+Spoof MAC address under Linux:
+
+```sh
+  sudo /sbin/ifdown eth0
+  sudo ifconfig eth0 hw ether 00:0C:29:C1:70:EF
+  sudo /sbin/ifup eth0
+```
 
 
 ## Docker
@@ -1071,6 +1097,12 @@ Markdown parsers:
 * <https://github.com/kivikakk/comrak>
    "Comrak's design goal is to model the upstream cmark-gfm as closely as possible in terms of code structure."
 * <https://github.com/github/cmark-gfm>
+
+
+A modern alternative to Markdown, by the author of Pandoc and CommonMark, is djot.
+File names end in `.dj`.
+It isn't yet supported by GitHub.
+
 
 
 ## AsciiDoc
