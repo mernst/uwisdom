@@ -1,10 +1,16 @@
 # Information about resources available on the network
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
+<!--
 // Examples include download locations, ftp sites, web sites, and some
 // information on network-specific programs.
-// In the brave new Google world of effective searching, it may be somewhat
+// In the brave new Google world of effective searching, this file is
 // less important than it was in the past.
+--->
 
 
 ## Email

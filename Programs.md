@@ -1,8 +1,12 @@
 # Wisdom about programs
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 This file is a bit of a catch-all, for everything that does not have a
-dedicated wiki page.
+dedicated wisdom file.
 
 
 ## PostScript and PDF

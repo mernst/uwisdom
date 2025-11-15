@@ -1,6 +1,10 @@
 # Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
 
 

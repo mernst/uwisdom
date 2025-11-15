@@ -1,6 +1,10 @@
 # Wisdom about version control systems
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 When working with a line-based version control system such as Git, please don't
 write very long lines, such as one line containing the content of an entire
 paragraph.  Instead, insert line breaks within each paragraph to keep the file's

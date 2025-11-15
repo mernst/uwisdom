@@ -1,6 +1,10 @@
 # Wisdom about PHP
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 To change the memory
 available to PHP, use `ini_set ("memory_limit", "32M")`.
 There are similar settings for the time limit.

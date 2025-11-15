@@ -1,6 +1,10 @@
 # Wisdom about the University of Washington.
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 ## UW (non-CSE-specific)
 
 

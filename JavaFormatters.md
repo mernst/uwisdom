@@ -1,3 +1,10 @@
+# Java formatters
+
+
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 <https://github.com/diffplug/spotless>
   Can do any of: Java (google-java-format, eclipse jdt, clang-format, prettier, palantir-java-format)
   Configuration:

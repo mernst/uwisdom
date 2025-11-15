@@ -1,8 +1,8 @@
 # Build systems
 
 
-You can view the table of contents by clicking the menu icon (three lines or
-dots) in the top corner.
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
 
 
 ## Make and Makefiles

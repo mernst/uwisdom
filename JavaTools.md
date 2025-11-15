@@ -1,6 +1,10 @@
 # Tools for manipulating Java programs
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 One advantage of ASTs is that they give information about variable scope.
 
 

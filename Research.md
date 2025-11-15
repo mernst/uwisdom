@@ -1,6 +1,10 @@
 # Tips about conducting technical research, and writing it up
 
 
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
 The term "bug" has no established meaning, and different people use it to
 mean different things.  Therefore, it should not be used in technical
 writing.  (There are a very few exceptions, such as compound words with clear
