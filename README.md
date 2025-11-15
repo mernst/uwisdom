@@ -11,7 +11,7 @@ Albert Einstein said,
 
 The "wisdom" files store information that is not worth memorizing, but
 which I may wish to look up later.  You can retrieve the information with
-the "doc" program.  Here are some sample invocations:
+programs such as `doc`, described below.  Here are some sample invocations:
 
 ```sh
 # Look up how to cross-mount PAG machines' scratch drives.
@@ -41,13 +41,12 @@ git clone https://github.com/mernst/uwisdom.git
 
 ## Searching the wisdom files
 
-Each nugget of wisdom is separated from others by two blank lines.  The [Lookup
-program](https://github.com/plume-lib/lookup) can search paragraph-wise,
-respecing the two-blank-line delimiter.
+Install the [Lookup program](https://github.com/plume-lib/lookup).
 
-The Lookup program can also be used to search other resources, as shown in the
-examples above.  Here are some bash aliases that you can use when invoking the
-program.
+The Lookup program can also be used to search other resources in addition to the
+wisdom files, as shown in the examples above.  Here are some bash aliases that
+you can use when invoking the program.  `doc` (short for "documentation")
+searches these wisdom files.
 
 ```sh
 alias lookup='java -ea -jar SOMEDIRECTORY/lookup/build/libs/lookup-all.jar -a'
@@ -57,7 +56,7 @@ alias rolo='lookup -f ${HOME}/private/addresses.tex --comment-re='
 alias quotefind='lookup -f ${HOME}/misc/quotes1 -f ${HOME}/misc/quotes'
 ```
 
-Pass `-h` for usage instructions; for example run `doc -h`.  You can learn more
+Pass `-h` for usage instructions; for example, run `doc -h`.  You can learn more
 from the [Lookup program's
 documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
 
@@ -85,6 +84,8 @@ Please help to improve this resource by adding and updating the information!
 You can submit a paragraph of text, a pull request, or an issue on the issue
 tracker.  You can also make your own clone and add your personal information
 there, though it won't contribute to the main version.
+
+Each nugget of wisdom is separated from others by two blank lines.
 
 When writing a wisdom entry, please use appropriate keywords to ensure that
 you and others can find the information.  I often intentionally include
