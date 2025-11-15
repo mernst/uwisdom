@@ -93,12 +93,12 @@ In git, to unadd an accidentally-added file, do
 
 In git, after resolving the conflicts in the appropriate files:
 
-# `git add` all of the conflicted files
+* `git add` all of the conflicted files
 
-# `git commit`
+* `git commit`
 
-   (which will automatically fill in the message with something about
-   resolving conflicts between the appropriate revisions)
+  (which will automatically fill in the message with something about
+  resolving conflicts between the appropriate revisions)
 
 
 To undo a `git add` command before doing a commit, do `git reset <file>`.
@@ -831,7 +831,8 @@ You can find an example configuration file at
 <https://github.com/typetools/checker-framework/blob/master/.github/renovate.json>
 but you probably don't need the "packageRules" section.
 
-# How I edit a Renovate pull request to make the configuration changes I prefer
+
+How I edit a Renovate pull request to make the configuration changes I prefer~
 
 ```sh
 DIR=~/java/plume-lib/require-javadoc

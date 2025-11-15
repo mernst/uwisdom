@@ -302,41 +302,42 @@ only re-builds a target if some prerequisite is newer.)
 To make Ant re-build prerequisites only if necessary, there are two general
 approaches.
 
- 1. Use the uptodate task to set a property.  Then, your task can test the
+1. Use the `uptodate` task to set a property.  Then, your task can test the
    property and build only if the property is (not) set.
 
-```ant
-  <uptodate property="mytarget.uptodate">  // in set.mytarget.uptodate task
-    ...
-  </uptodate>
-  <!-- The prerequisites are executed before the "unless" is checked. -->
-  <target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate">
-    ...
-  </target>
-```
+   ```ant
+     <uptodate property="mytarget.uptodate">  // in set.mytarget.uptodate task
+       ...
+     </uptodate>
+     <!-- The prerequisites are executed before the "unless" is checked. -->
+     <target name="mytarget" depends="set.mytarget.uptodate" unless="mytarget.uptodate">
+       ...
+     </target>
+   ```
 
    Alternately, use the outofdate task from ant contrib.  It's nicer in
    that it is just one target without a separate property being defined; by
    contrast, outofdate requires separate targets to set and to test the
    property.
- 2. Create a <fileset> using the <modified> selector.  It calculates MD5
+
+2. Create a <fileset> using the <modified> selector.  It calculates MD5
    hashes for files and selects files whose MD5 differs from earlier stored
    values.  It's optional to set
 
-```ant
-     <param name="cache.cachefile"     value="cache.properties"/>
-```
+   ```ant
+        <param name="cache.cachefile"     value="cache.properties"/>
+   ```
 
    inside the <modified> selector; it defaults to "cache.properties".
    Example that copies all files from src to dest whose content has changed:
 
-```ant
-        <copy todir="dest">
-            <fileset dir="src">
-                <modified/>
-            </fileset>
-        </copy>
-```
+   ```ant
+           <copy todir="dest">
+               <fileset dir="src">
+                   <modified/>
+               </fileset>
+           </copy>
+   ```
 
 There is also Ivy, but I can't tell from its documentation whether it
 provides this feature.  The key use case in the documentation seems to be
@@ -635,10 +636,10 @@ To set up a Java project to build with Gradle (to create a build.gradle file):
 1. `gradle wrapper --gradle-version 6.1.1`
 2. Run one of the following lines:
 
-```sh
-./gradlew init --type java-library
-./gradlew init --type java-application
-```
+   ```sh
+   ./gradlew init --type java-library
+   ./gradlew init --type java-application
+   ```
 
 Put the code under `src/main/java`.
 
@@ -703,10 +704,12 @@ To upgrade/update Gradle from one version to a newer version:
 First, find the projects:
 
 ```sh
+# In your shell:
 locate gradlew
 ```
 
 ```elisp
+# In Emacs:
 (progn (delete-matching-lines "-fork-[^m]" nil nil t)
   (delete-matching-lines "branch-[^m]" nil nil t))
 ```
@@ -826,7 +829,7 @@ Note that `GRADLE_OPTS` and `JAVA_OPTS` are treated identically by Gradle.
 Also note that `GRADLE_OPTS` is *not* about options to Gradle such as `--console=plain`, but about JVM options such as `-Xmx2g`.  And, it doesn't affect the Gradle daemon, which is what you really care about.  That is controlled by `org.gradle.jvmargs` in file `gradle.properties` (in your project's root directory or in your Gradle user home directory (typically ~/.gradle/gradle.properties).
 
 There is also `JAVA_TOOL_OPTS` which works for all Java processes (java, jar,
-javac, but it is overridden by any command-line arguments that are passed by
+javac), but it is overridden by any command-line arguments that are passed by
 Gradle when calling the subprocess:
 
 ```sh

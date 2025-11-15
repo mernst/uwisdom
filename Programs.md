@@ -3276,23 +3276,24 @@ Parallel/distributed jobs across many machines:
    rendering-specific it is.
 * There are two add-ons to GNU make:
 
-  # The customs library; read about it in the make distro in README.customs
+  * The customs library; read about it in the make distro in README.customs
 
-  (It will ask you to download pmake from
-  ftp://ftp.icsi.berkeley.edu/pub/ai/stolcke/software/, among other things.)
+    (It will ask you to download pmake from
+    ftp://ftp.icsi.berkeley.edu/pub/ai/stolcke/software/, among other things.)
 
-  # The GNU make port to PVM: <http://www.crosswinds.net/~jlabrous/GNU/PVMGmake/>
+  * The GNU make port to PVM: <http://www.crosswinds.net/~jlabrous/GNU/PVMGmake/>
 
-  More about PVM: <http://www.epm.ornl.gov/pvm/>
+    More about PVM: <http://www.epm.ornl.gov/pvm/>
 
 * OpenPBS: <http://www-unix.mcs.anl.gov/openpbs/>
 
 
 vi commands:
-:q quits vi after a file has been saved
-:q! quits vi without saving the file
-:x saves the file and quits vi
-:wq saves the file and quits vi
+
+* `:q` quits vi after a file has been saved
+* `:q!` quits vi without saving the file
+* `:x` saves the file and quits vi
+* `:wq` saves the file and quits vi
 
 
 To start up network on Linux laptop (for NIC; not necessary for PCMCIA):

@@ -8,7 +8,7 @@ menu icon (three lines or dots) in the top corner.
 ## JIT
 
 
-To disable the JIT, run Java with the  -Djava.compiler=DISABLED  option.
+To disable the JIT, run Java with: -Djava.compiler=DISABLED
 
 
 To make Throwable.printStackTrace() produce file names and line numbers in
@@ -108,16 +108,13 @@ To get a traceback (stack trace) from each Java thread (but keep running):
 * `jcmd _pid_ Thread.print`  (just `jcmd` gives a list of pids)
 * `kill -QUIT _pid_`
 * `ctrl-\` if Java is running in a shell.
-This is useful for debugging an infinite loop in a Java program.
+  This is useful for debugging an infinite loop in a Java program.
+* Use the -Xtrace:trigger option to produce a Java dump by whenever a given method is called.
+  For example, for a dump whenever the substring method is called:
 
-*
-
-Use the -Xtrace:trigger option to produce a Java dump by whenever a given method is called.
-For example, for a dump whenever the substring method is called:
-
-```text
--Xtrace:trigger=method{java/lang/String.substring,javadump}
-```
+  ```text
+  -Xtrace:trigger=method{java/lang/String.substring,javadump}
+  ```
 
 
 To eliminate nondeterminism from a (sequential, non-concurrent) Java program:
@@ -139,13 +136,10 @@ To get line numbers too, make the VM create a core dump, then use jstack:
 ## Profiling
 
 
-For notes about Java garbage collection and the heap, see wiki page JavaHeap.
+For notes about Java profiling, see [JavaTools](JavaTools.md).
 
 
-For notes about Java profiling, see wiki page JavaTools.
-
-
-Some ways to profile/understand java memory use
+Some ways to profile/understand Java memory use
   The Runtime class has methods that will return the total amount of
   memory used.  These don't seem to be terribly accurate.
   There is a heap/CPU profiler that seems to work pretty well.
@@ -167,45 +161,45 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
 
 
 * The formal type parameter is called a "type parameter".
-   The parameter is
-   also, equivalently, called a "type variable".  But "type parameter"
-   tends to be used when speaking of the declaration and "type variable"
-   tends to be used when speaking of its uses in the body.
-   (For a method/constructor, it's called the "formal type parameter";
-   JLS3, sec 8.4.4.)
-   The "type parameter section" is delimited by angle brackets and
-   declares the type variables.  (JLS3, sec 8.1.2).
+  The parameter is
+  also, equivalently, called a "type variable".  But "type parameter"
+  tends to be used when speaking of the declaration and "type variable"
+  tends to be used when speaking of its uses in the body.
+  (For a method/constructor, it's called the "formal type parameter";
+  JLS3, sec 8.4.4.)
+  The "type parameter section" is delimited by angle brackets and
+  declares the type variables.  (JLS3, sec 8.1.2).
 * The actual type parameter is called a "type argument".
 * A "parameterized type" is a type that has type arguments/parameters.
 * A class is generic if it declares one or more type variables (JLS3, sec 8.1.2).
-   JLS only uses "generic" to refer to class *declarations*, not
-   classes.  "A generic class declaration defines a set of parameterized
-   types, one for each possible invocation of the type parameter section."
+  JLS only uses "generic" to refer to class *declarations*, not
+  classes.  "A generic class declaration defines a set of parameterized
+  types, one for each possible invocation of the type parameter section."
 
-*
+* Terminology for generics/parametric polymorphism in Java, from *Effective Java*, second edition, page 115.
 
-Terminology for generics/parametric polymorphism in Java, from *Effective Java*, second edition, page 115.
-|====
-| Parameterized type      | `List<String>`              |
-| Actual type parameter   | `String`                    |
-| Generic type            | `List<E>`                   |
-| Formal type parameter   | `E`                         |
-| Unbounded wildcard type | `List<?>`                   |
-| Raw type                | `List`                      |
-| Bounded type parameter  | `<E extends Number>`        |
-| Recursive type bound    | `<T extends Comparable<T>>` |
-| Bounded wildcard type   | `List<? extends Number>`    |
-| Generic method static   | `<E> List<E> asList(E[] a)` |
-| Type token              | `String.class`              |
-|====
-The first part ("`List`") of a parameterized type name is called the
-class name.
-The first part ("`List`") of a generic type name is called:  (??? no
-good name, Alex Buckley suggested that it also be "class name", but that
-isn't quite right).
-They don't have a name for a use of type parameter/variable, to distinguish
-from the declaration.
-(The *Effective Java* terminology differs from that used in the JLS.)
+  |====
+  | Parameterized type      | `List<String>`              |
+  | Actual type parameter   | `String`                    |
+  | Generic type            | `List<E>`                   |
+  | Formal type parameter   | `E`                         |
+  | Unbounded wildcard type | `List<?>`                   |
+  | Raw type                | `List`                      |
+  | Bounded type parameter  | `<E extends Number>`        |
+  | Recursive type bound    | `<T extends Comparable<T>>` |
+  | Bounded wildcard type   | `List<? extends Number>`    |
+  | Generic method static   | `<E> List<E> asList(E[] a)` |
+  | Type token              | `String.class`              |
+  |====
+
+  The first part ("`List`") of a parameterized type name is called the
+  class name.
+  The first part ("`List`") of a generic type name is called:  (??? no
+  good name, Alex Buckley suggested that it also be "class name", but that
+  isn't quite right).
+  They don't have a name for a use of type parameter/variable, to distinguish
+  from the declaration.
+  (The *Effective Java* terminology differs from that used in the JLS.)
 
 
 ## javac
@@ -1118,12 +1112,14 @@ There is little need for multimap and multisets with computeIfAbsent.
 
 native compilation with picocli:
 
+```sh
 ./gradlew -Pagent test
 ./gradlew metadataCopy --task test --dir src/main/resources/META-INF/native-image
 ./gradlew -Pagent nativeTest
 ./gradlew nativeCompile
+```
 
-# Binary at: build/native/nativeCompile/plumelib-merge-tool
+This produces a binary at: build/native/nativeCompile/plumelib-merge-tool
 
 
 To determine the default character set of the Java JVM, run these commands:

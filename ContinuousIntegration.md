@@ -198,7 +198,7 @@ echo $(($(cat /sys/fs/cgroup/cpu/cpu.shares) / 1024))
 Whitelist of Ubuntu packages that can be installed on container-based
 Travis-CI infrastructure using the APT addon mechanism:
 <https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise>
-(which is linked from <https://github.com/travis-ci/apt-package-whitelist>)
+(which is linked from <https://github.com/travis-ci/apt-package-whitelist>).
 
 
 Travis-CI advantages:
@@ -273,13 +273,13 @@ Travis debug VM:
 
 1. Add
 
-```yaml
-- travis_debug
-```
+   ```yaml
+   - travis_debug
+   ```
 
-as one of the commands in the script block.
+   as one of the commands in the script block.
 
-1. Send a POST request to /job/:job_id/debug using:
+2. Send a POST request to /job/:job_id/debug using:
    TOKEN = your API token; see <https://github.com/travis-ci/travis.rb#token>
    JOB_ID = displayed in the build log after expanding "Build system information"
 
@@ -294,7 +294,7 @@ as one of the commands in the script block.
      https://api.travis-ci.org/job/<JOB_ID>/debug
    ```
 
-2. Head back to the web UI and in the log of your job. You should see the
+3. Head back to the web UI and in the log of your job. You should see the
    following lines to connect to the VM:
 
    ```text
@@ -304,7 +304,7 @@ as one of the commands in the script block.
    ssh ukjiuCEkxBBnRAe32Y8xCH0zj@ny2.tmate.io
    ```
 
-3. Connect from your computer using SSH into the interactive session, and once
+4. Connect from your computer using SSH into the interactive session, and once
    you're done, just type `exit` and your build will terminate.
    The job will skip the remaining phases after debug.
    Also, please consider removing the build log after you've finished debugging.

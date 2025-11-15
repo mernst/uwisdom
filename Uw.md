@@ -1,4 +1,4 @@
-# Wisdom about the University of Washington.
+# Wisdom about the University of Washington
 
 
 On github.com, you can view the table of contents of this file by clicking the

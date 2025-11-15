@@ -116,14 +116,184 @@ In gnus, "S o m" to forward/resend article via mail.
 In Mew: to copy a message from one account to another, run:  l i
 
 
+## Fonts
+
+
+To start an Emacs using a smaller font size,
+
+```sh
+  emacs -fn 7x13
+```
+
+To change the font while emacs is running,
+
+```keys
+  M-x set-frame-font RET 9x15 RET
+```
+
+To list available fonts:
+
+* use program xlsfonts.
+  Any font with `m' or`c' in the SPACING field of
+  the long name is a fixed-width font.  Here's how to use the `xlsfonts'
+  program to list all the fixed-width fonts available on your system:
+
+  ```sh
+  xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"
+  xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'
+  xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
+  ```
+
+* see variable x-fixed-font-alist
+* run `(x-list-fonts "*")`
+
+
+To see what a particular font looks like, use the `xfd' command, eg
+
+```sh
+  xfd -fn 6x13
+```
+
+
+If starting Emacs gives an error like "Font `Inconsolata 12' is not defined",
+then do:
+
+```sh
+emacs --font Monospace
+```
+
+since that font is generally defined.
+(You can install the Inconsolata font by clicking at
+<http://www.levien.com/type/myfonts/Inconsolata.otf> .)
+
+
+In Emacs 20, to remove text properties (such as faces/fonts/colors) from a
+string, use (format "%s" string-with-properties).
+In Emacs 21, use `copy-sequence` to copy the string, then use
+`set-text-properties` to remove the properties of the copy.
+
+
+## Local variables actions
+
+
+This bit of text makes Emacs automatically update the date at the bottom of
+a webpage when it is saved.
+
+```html
+  <hr />
+  <p>
+  Last updated: July 4, 1776
+  </p>
+  </body>
+  </html>
+  <!--
+  Local Variables:
+  time-stamp-start: "^Last updated: "
+  time-stamp-end: "\\.?$"
+  time-stamp-format: "%:b %:d, %:y"
+  time-stamp-line-limit: -50
+  End:
+  -->
+```
+
+
+To run a command whenever a file is saved, add to its end:
+
+```text
+# Local variables:
+# eval: (add-hook 'after-save-hook '(lambda () (run-command nil "make")) nil 'local)
+# end:
+```
+
+
+## Multibyte/internationalization
+
+
+To select an input method [e.g., spanish-postfix, to get accents] in Emacs:
+
+```keys
+  C-x <RET> C-\ METHOD <RET>
+```
+
+To enable/disable the selected input method:  C-\
+
+
+Emacs and multibyte encodings:
+Emacs 22 and earlier saves non-ASCII files in its own internal file format,
+called mule.
+This format has some advantages; for example, like unicode, it can specify
+characters in a variety of input formats.  However, a serious disadvantage
+is that the mule format is not recognized by other programs; for example,
+printing such a file from the command line (or via enscript) leads to
+gibberish.  (Doing so from within Emacs does the right thing.)  To make
+Emacs save files in a different format, after reading the file, do "M-x
+set-buffer-file-coding-system".  Also consider adding a line like
+
+```text
+  -*- coding: latin-0 -*-
+```
+
+to the top of the file, or in the local variables
+section.  (Even without this, Emacs ought to recognize the file's format
+when you read it back in, though Emacs can't tell among the various latin-X
+variants.)
+
+
+
+## Multiple files
+
+
+To do incremental search (isearch) across multiple files or buffers:
+
+* In dired, `M-s a C-s` for isearch across marked files.
+* In dired, `Q` does query-replace-regexp on all marked files.
+* In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
+
+
+
+In Emacs, to find/search/grep and replace a regex across multiple files:
+
+* M-x find-grep-dired RET my-regex RET
+* mark files of interest: `% m`
+* invoke search and replace: `Q`
+
+To search through symbolic links, first do
+  (setq find-program "find -L")
+
+
+To add to the existing list of tags tables, do
+
+```elisp
+(let ((tags-add-tables t))
+  (visit-tags-table FILE))
+```
+
+
+## Diffs
+
+
+In Emacs's Diff Mode, to refine the diff region so you see per-character
+diffs, go to the hunk you are interested in and hit C-c C-b for
+refine-hunk.  Or step through the file one hunk at a time with M-n; that
+will do the refining automatically.
+
+
+To use Emacs's ediff to resolve/patch a file with merge conflict markers
+of the form <<<<<< ====== >>>>>>, that were left by git,
+use M-x vc-resolve-conflicts.
+Do this in one pass because it slightly edits the <<<<<< ====== >>>>>>
+lines so that a subsequent invocation of M-x vc-resolve-conflicts won't
+recognize them.
+
+
 ## Uncategorized Emacs wisdom
 
 
 To not load .emacs file, do "emacs -q".  To debug it, "emacs --debug-init".
 
 
-(symbol-function 'foo) to determine whether an emacs function is coded in C
-or elisp; C-h f now also gives that information.
+`(symbol-function 'foo)` to determine whether an emacs function is coded in C or
+elisp; C-h f now also gives that information.
 
 
 just-one-space                ESC SPC
@@ -214,15 +384,11 @@ function:  (sit-for 0).
 Or, supply a prefix argument when invoking compare-windows.
 
 
-Bard Bloom wrote insert-patterned for emacs.
-Also see Wayne Mesard's dmacro (Dynamic Macro) for flexible template insertion.
-
-
 To delete (kill) the entire contents of an Emacs buffer, use (erase-buffer)
 or M-x erase-buffer.
 
 
-To specify Emacs' indenting of a lisp expression, do something like:
+To specify Emacs's indenting of a lisp expression, do something like:
 (put 'with-output-to-temp-buffer 'lisp-indent-hook 1)
 The number is the number of "special" (indented more than usual) arguments.
 To see some examples, do M-. indent-sexp, then go up a few lines.
@@ -314,28 +480,8 @@ To create a standalone program that does Emacs Lisp, you can do something like
 ```
 
 
-Emerge commands:
-
-```text
-  sa: auto-advance
-  a,b: choose that text
-  n,p: next,previous difference
-```
-
-(Emerge is superseded by Ediff.  Thus, it's probably better to use ediff-merge.)
-
-
-In Emacs's Diff Mode, to refine the diff region so you see per-character
-diffs, go to the hunk you are interested in and hit C-c C-b for
-refine-hunk.  Or step through the file one hunk at a time with M-n; that
-will do the refining automatically.
-
-
 The .texi (texinfo) files for Emacs are in the distribution in the man
 directory.
-
-
-easymenu provides for common menus for Emacs 19 and Lucid Emacs 19.
 
 
 *Never* use string-match to check Emacs version in a Lisp file without
@@ -358,12 +504,6 @@ In an Emacs shell, if tabs are expanded into an (incorrect) number of
 spaces, do `stty tabs' -- probably in one of your dotfiles.
 
 
-In Emacs 20, to remove text properties (such as faces/fonts/colors) from a
-string, use (format "%s" string-with-properties).
-In Emacs 21, use `copy-sequence' to copy the string, then use
-`set-text-properties' to remove the properties of the copy.
-
-
 To avoid compiler warnings about undefined symbols, consider compile-time
 require:  (eval-when-compile (require 'dired))
 The downside is that the require also happens if the uncompiled code is
@@ -382,10 +522,6 @@ When debugging Emacs Lisp that does frame/window/buffer switching:
 ```
 
 
-pcl-cvs used to be distributed with CVS, in its tools/pcl-cvs directory.
-Now it is distributed with Emacs.
-
-
 To save a DOS file using Unix end-of-line (carriage-return and newline)
 conventions, in Emacs do
 
@@ -401,92 +537,35 @@ To save a file with DOS end-of-file conventions, in Emacs do
 ```
 
 
-To add to the existing list of tags tables, do
+To update all installed Emacs packages:
 
 ```elisp
-(let ((tags-add-tables t))
-  (visit-tags-table FILE))
+(progn
+  (package-refresh-contents)
+  (package-upgrade-all))
+```
+
+or
+
+```elisp
+M-x package-list-packages RET U x
+M-x package-autoremove RET y
+```
+
+or the following ought to work, but it does not:
+
+```elisp
+(progn
+  (package-list-packages)
+  (package-menu-mark-upgrades)
+  (package-menu-execute t))
 ```
 
 
-New in Emacs 20.4:
-See new functions file-expand-wildcards, with-temp-message.
-See new command pop-tag-mark.
-
-
-To start an Emacs using a smaller font size,
-
-```sh
-  emacs -fn 7x13
-```
-
-To change the font while emacs is running,
-
-```keys
-  M-x set-frame-font RET 9x15 RET
-```
-
-To list available fonts:
-
-
-* use program xlsfonts.
-   Any font with `m' or`c' in the SPACING field of
-   the long name is a fixed-width font.  Here's how to use the `xlsfonts'
-   program to list all the fixed-width fonts available on your system:
-
-```sh
-     xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"
-     xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'
-     xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
-```
-
-* see variable x-fixed-font-alist
-* run `(x-list-fonts "*")`
-
-To see what a particular font looks like, use the `xfd' command, eg
-
-```sh
-  xfd -fn 6x13
-```
-
-
-If starting Emacs gives an error like "Font `Inconsolata 12' is not defined",
-then do:
-
-```sh
-emacs --font Monospace
-```
-
-since that font is generally defined.
-(You can install the Inconsolata font by clicking at
-<http://www.levien.com/type/myfonts/Inconsolata.otf> .)
-
-
-To recompile my emacs directory:
+To recompile my emacs directory (there must be a better way to do this):
 
 ```sh
 emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '^Add to load-path: ' | grep -v '^Checking'
-```
-
-
-This bit of text makes Emacs automatically update the date at the bottom of
-a webpage when it is saved.
-
-```html
-  <hr />
-  <p>
-  Last updated: July 4, 1776
-  </p>
-  </body>
-  </html>
-  <!--
-  Local Variables:
-  time-stamp-start: "^Last updated: "
-  time-stamp-end: "\\.?$"
-  time-stamp-format: "%:b %:d, %:y"
-  time-stamp-line-limit: -50
-  End:
-  -->
 ```
 
 
@@ -504,45 +583,6 @@ as distinguished from where the .elc versions can be found:
 ```
 
 
-To run a command whenever a file is saved, add to its end:
-
-```text
-# Local variables:
-# eval: (add-hook 'after-save-hook '(lambda () (run-command nil "make")) nil 'local)
-# end:
-```
-
-
-To select an input method [e.g., spanish-postfix, to get accents] in Emacs:
-
-```keys
-  C-x <RET> C-\ METHOD <RET>
-```
-
-To enable/disable the selected input method:  C-\
-
-
-Emacs and multibyte encodings:
-Emacs 22 and earlier saves non-ASCII files in its own internal file format,
-called mule.
-This format has some advantages; for example, like unicode, it can specify
-characters in a variety of input formats.  However, a serious disadvantage
-is that the mule format is not recognized by other programs; for example,
-printing such a file from the command line (or via enscript) leads to
-gibberish.  (Doing so from within Emacs does the right thing.)  To make
-Emacs save files in a different format, after reading the file, do "M-x
-set-buffer-file-coding-system".  Also consider adding a line like
-
-```text
-  -*- coding: latin-0 -*-
-```
-
-to the top of the file, or in the local variables
-section.  (Even without this, Emacs ought to recognize the file's format
-when you read it back in, though Emacs can't tell among the various latin-X
-variants.)
-
-
 crypt.el :
 <http://cvs.xemacs.org/viewcvs.cgi/XEmacs/packages/xemacs-packages/os-utils/crypt.el>
 It's best, I think, to encrypt the file via the command line rather than
@@ -554,13 +594,6 @@ Example:
 ```
 
 (But I don't need to use any special suffix.)
-
-
-To do incremental search (isearch) across multiple files or buffers:
-
-* In dired, `M-s a C-s` for isearch across marked files.
-* In dired, `Q` does query-replace-regexp on all marked files.
-* In buffer-menu (Buffer List buffer) `M-s a C-s` for isearch across marked buffers.
 
 
 To override dtrt-indent (which guesses indentation), do:
@@ -590,27 +623,9 @@ In Mew, bcc: changes the Subject to "A blind carbon copy".
 To keep the original Subject line, use dcc: instead of bcc:.
 
 
-In Emacs, to find/search/grep and replace a regex across multiple files:
-
-* M-x find-grep-dired RET my-regex RET
-* mark files of interest: `% m`
-* invoke search and replace: `Q`
-
-To search through symbolic links, first do
-  (setq find-program "find -L")
-
-
 In Emacs, to edit a file with long lines so the display wraps/flows/fills
 the lines but the underlying buffer text retains long lines, use M-x
 visual-line-mode.  It's better than longlines mode.
-
-
-To use Emacs's ediff to resolve/patch a file with merge conflict markers
-of the form <<<<<< ====== >>>>>>, that were left by git,
-use M-x vc-resolve-conflicts.
-Do this in one pass because it slightly edits the <<<<<< ====== >>>>>>
-lines so that a subsequent invocation of M-x vc-resolve-conflicts won't
-recognize them.
 
 
 When running Emacs in a Cygwin bash shell, the cursor can be a thin
@@ -631,35 +646,7 @@ Using Emacs as an External Editor in IntelliJ IDEA:
 <https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html>
 
 
-Mail reading in Emacs:
-One possibility is mu4e with offlineimap on Ubuntu.
-
-
-To update all installed Emacs packages:
-
 ```elisp
-(progn
-  (package-refresh-contents)
-  (package-upgrade-all))
-```
-
-or
-
-```elisp
-M-x package-list-packages RET U x
-M-x package-autoremove RET y
-```
-
-or the following ought to work, but it does not:
-
-```elisp
-(progn
-  (package-list-packages)
-  (package-menu-mark-upgrades)
-  (package-menu-execute t))
-```
-
-
 ;; Setting face attributes:
 (defface my-boxed-face
   '((default))
@@ -669,6 +656,7 @@ or the following ought to work, but it does not:
   (put-text-property 0 (length current-string) 'face 'my-boxed-face
                      current-string)
   (insert current-string))
+```
 
 
 <!--
