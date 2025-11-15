@@ -1323,11 +1323,10 @@ The com.github.sherter.google-java-format plugin is not maintained, per this dis
 So, use Spotless (<https://github.com/diffplug/spotless>) to run google-java-format.
 
 
-## Continuous integration
+## Build systems
 
 
-Build systems (in my order of preference, which agrees with Jonathan Burke's):
-
+Build systems for Java (in my order of preference, which agrees with Jonathan Burke's):
 
 * Gradle
   Has O'Reilly books (none of the others do).  This is a measure of popularity.
