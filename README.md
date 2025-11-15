@@ -47,7 +47,7 @@ respecing the two-blank-line delimiter.
 
 The Lookup program can also be used to search other resources, as shown in the
 examples above.  Here are some bash aliases that you can use when invoking the
-program.  (You won't invoke `lookup` directory, only the others.)
+program.
 
 ```sh
 alias lookup='java -ea -jar SOMEDIRECTORY/lookup/build/libs/lookup-all.jar -a'
@@ -57,8 +57,9 @@ alias rolo='lookup -f ${HOME}/private/addresses.tex --comment-re='
 alias quotefind='lookup -f ${HOME}/misc/quotes1 -f ${HOME}/misc/quotes'
 ```
 
-Pass `-h` (for example, `doc -h`) for usage instructions.
-You can learn more about the Lookup program from its [documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
+Pass `-h` for usage instructions; for example run `doc -h`.  You can learn more
+from the [Lookup program's
+documentation](https://plumelib.org/lookup/api/org/plumelib/lookup/Lookup.html).
 
 ## Comparison to web/email/etc. search
 
