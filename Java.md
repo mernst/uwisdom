@@ -178,7 +178,8 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
 
 * Terminology for generics/parametric polymorphism in Java, from *Effective Java*, second edition, page 115.
 
-  |====
+  | Effective Java term     | Java code example           |
+  | :---------------------- | :-------------------------- |
   | Parameterized type      | `List<String>`              |
   | Actual type parameter   | `String`                    |
   | Generic type            | `List<E>`                   |
@@ -190,7 +191,6 @@ Official (JLS) terminology for Java generics (parametric polymorphism):
   | Bounded wildcard type   | `List<? extends Number>`    |
   | Generic method static   | `<E> List<E> asList(E[] a)` |
   | Type token              | `String.class`              |
-  |====
 
   The first part ("`List`") of a parameterized type name is called the
   class name.
