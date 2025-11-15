@@ -105,5 +105,7 @@ synonyms ("description" and "blurb", or "search" and "find") to make a search
 more likely to find the correct entry.
 
 
+<!--
 // LocalWords:  wiki PAG pag pdfnup Cytron's bibfind cytron quotefind einstein
 // LocalWords:  rolo rebelo Lookup lookup
+-->

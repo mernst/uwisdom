@@ -891,10 +891,6 @@ JProfiler
 <http://www.ej-technologies.com/products/jprofiler/overview.html>
 
 
-// J-Sprint (shareware) was once good, but <http://www.j-sprint.com/> no longer
-// exists as of May 2007.
-
-
 ProfileViewer helps in interpreting Java profiling output.
 <http://www.ulfdittmer.com/profileviewer/index.html>
 
@@ -942,15 +938,6 @@ java -Xrunhprof:cpu=samples,heap=all ...
      <http://www.soft.com/Products/Coverage.msw/tcatj.html>
      trial version available
 * JIE does branch coverage
-
-
-//// Tools that no longer exist:
-// *glassjartoolkit.com: Java branch code coverage, Jeremy Nimmer says
-//    "it seems to be a well-engineered tool with good reporting"; academic
-//    license $99.  (Later was at <http://www.testersedge.com/glass.htm> ?)
-//* JavaScope:  <http://www.codework.com/suntest/jscope.htm>
-//    free trial version available
-// * SilkScope:  <http://www.tngsoft.com/dextera/s_ds_silk_scope.htm>
 
 
 ## Mutation coverage ("mutation testing") tools

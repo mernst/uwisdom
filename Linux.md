@@ -137,9 +137,6 @@ To remove a user's account, do
 ```
 
 `useradd` is standard; `adduser` is a wrapper around it.
-// After running useradd or userdel (or userdel -r), always do
-//   cd /var/yp
-//   sudo make
 
 
 To figure out the version of Ubuntu you are running, do

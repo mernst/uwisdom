@@ -976,28 +976,6 @@ then there are two ways to solve it:
 * Make the user a Master:  go to the project >> settings (gear icon) >> members >> (fill in name, and "Master" for Project Access) >> Add Users to project
 
 
-// == Google Code
-
-
-// For Google Code, it is possible to link straight to HTML files in the
-// repository.  Examples:
-//   <http://jsr308-langtools.googlecode.com/hg/doc/README-jsr308.html>
-//   <http://jsr308-langtools.googlecode.com/hg/doc/jsr308-changes.html>
-// However, it's not convenient to link to files that are not in the
-// repository (such as a release or other generated files),
-// so it's generally better to put a project's webpages elsewhere.
-
-
-// Google code wiki syntax (a variant of MoinMoin syntax):
-//  *Don't break a bullet point across lines.
-//* Don't break an external link (in square brackets) across lines.
-//  * For a table of contents, use
-// ```
-//   Contents:
-//   <wiki:toc max_depth="1" />
-// ```
-
-
 ## Bitbucket
 
 
@@ -1047,8 +1025,12 @@ Now, you have a choice:
    this until there are no more CodeRabbit comments on the new PR.
 
 
+<!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+-->
 
 
+<!--
 // LocalWords:  RCS toc VC rsync dir DIR1 DIR2 Cavz
+-->

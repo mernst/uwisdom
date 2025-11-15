@@ -148,8 +148,6 @@ Register domain names:  joker.com is cheap; also dotearth.com.
 
 
 BSD calendar program:
-// old: ftp://sunsite.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
-// old: ftp://metalab.unc.edu/pub/Linux/distributions/redhat/contrib/libc5/i386/calendar-8.4-3.i386.rpm
 ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
 Or, use "qalendar", but it doesn't permit comment lines.
 Install:
@@ -252,10 +250,6 @@ To get a printable version of a blogger webblog, apply these diffs:
 -    width:410px;
      float:left;
 ```
-
-
-// To run NetMeeting on Windows XP,
-//   Start -> Run -> conf.exe
 
 
 The plume-bib README instructions are available in these (identical) files:

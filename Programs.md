@@ -214,14 +214,6 @@ in Acrobat Professional.  Or, do this:
    and add the %%BoundingBox line to the header of the ps file.
 
 
-// bbfig computes the bounding boxes of PostScript figures.
-// See the bbfig man page for more details.
-// To avoid wasting paper and time going to the printer, use
-// ```
-//   bbfig -o file.ps | gv -
-// ```
-
-
 ghostview:  view PostScript on an X windows display.
 
 
@@ -1789,14 +1781,6 @@ Sawfish window manager themes (list of problems with them)
 screensaver.
 
 
-// gnomecc:  adjust properties of window manager
-// Especially:
-//  *Sawfish window manager >> Matched Windows
-//* Sawfish window manager >> Shortcuts
-//  * Sawfish window manager >> Meta >> Advanced
-// (But I think I now use metacity under Gnome.)
-
-
 Debian Linux screen resolution:
 Applications >> Desktop Preferences >> Screen Resolution
 
@@ -2132,10 +2116,6 @@ To run VMware tools:
 ```
 
 To install VMware tools, see ~mernst/wisdom/building/build-vmware
-
-
-// Information on how to configure our ESX VMware servers is available
-// in PAG logistics at:  <http://groups.csail.mit.edu/pag/pag/esx.html>
 
 
 In VMware, shared folders from the host appear in /mnt/hgfs/.
@@ -3051,68 +3031,6 @@ and date are not synchronized/synched), run this command on each machine:
 On pag, use "yppasswd" instead of "passwd".
 
 
-// SAS:
-//  *Avoid all comments.  Comments in random places cause bizarre behavior
-//    and inscrutible error messages.
-//* In programs (in particular, in "datalines"), lines longer than 127
-//    characters (assuming 8-character tabs) are silently discarded.
-//  *In "infile" files, tab characters cause confusion; untabify.
-//
-// SAS tips:
-// Run SAS:
-//* using GUI:  sas
-//  *from command line:   sas myfile.sas
-// Data input:
-//* skip first observation (first line):
-//    infile 'blah.dat' firstobs=2;
-//  *allow for really long records:
-//    infile 'blah.dat' lrecl=2000;
-//* data values must be space-separated (tabs cause problems on some systems)
-// New data set which is a subsets of the original data:
-//  *data bigx; set orig;
-//      if x > 10;
-//* data nocontrol; set orig;
-//      if trt = 'control' then delete;
-// When comparing strings, use only the first 8 characters (!):  not
-//     if treat = 'non_partic' then treat_numeric = 0;
-//   but
-//     if treat = 'non_part' then treat_numeric = 0;
-// Subgroups of a data set:  must be sorted before invoking "proc means"
-//  *proc sort; by sex trt;
-//* proc means; by sex trt;
-// Procecure return values:
-//  *proc means noprint;
-//      var x y;
-//      output out=b mean=mx my std=sx sy;  /* output means and SD for x,y */
-// Interaction plot:  plot of the average values of y for each period and trt.
-//  * proc sort; by period trt;
-//    proc means noprint; by period trt;
-//      var y;
-//      output out=means mean=my;
-//    proc plot;
-//      plot my*period=trt;
-// Proc GLM permits using both regressor (continuous) type variables and
-//   categorical (class) variables as independent variables.  However, the
-//   dependent variable must be continuous.
-//   Furthermore, no variable noted in the "class" section may be (always missing).
-// The chi-square test is good for nominal (categorical, class) independent
-//   and dependent variables.
-// Three-way anova with all interactions:
-//  *proc anova;
-//      class a b c;
-//      model y = a b c a*b a*c b*c a*b*c;
-//  *proc anova;       /* shorthand */
-//      class a b c;
-//      model y = a | b | c;
-// Multivariate methods (manova) may be *less* powerful than univariate ones
-//   if responses are *not* correlated.
-// Frequency tables: proc freq
-//  * proc freq;
-//      tables sex;   /* one-way table */
-//  * proc freq;
-//      tables infilt*score;   /*two-way table*/
-
-
 `zip -r foo foo`
 makes a zip archive named foo.zip, which contains directory foo and all its
 contents.
@@ -3226,27 +3144,6 @@ After adding a script to /etc/rc.d/init.d, add two symbolic links to
 /etc/rc.d/rcN.d/.
 The one starting with "S" (start) is invoked when runlevel N is entered.
 The one starting with "K" (kill) is invoked when runlevel N is exited.
-
-
-// At LCS, to upgrade a Red Hat Linux machine with the latest security (or
-// other) patches:
-// ```
-//   # Prepare (can always determine mount point by executing
-//   # '/usr/sbin/showmount -e coua.lcs.mit.edu')
-//   mount coua.lcs.mit.edu:/scratch /mnt
-//   # Check status (a nice list of the rpms that require "freshening")
-//   # (Does this script need to have "/i686" appended to its pathnames?)
-//   /mnt/bin/amIUp2Date
-//   # Update
-//   cd /mnt/mirror.techsquare.com/redhat-7.2-ia32/suggested/i686
-//   # Don't do "rpm -Fvh *.rpm"!  Select all the rpms *except* for anything
-//   # XFree86*, since my laptop's hardware isn't supported and that will prevent
-//   # X from starting.
-//   rpm -Fvh `\ls *.rpm | grep -v XFree86`
-//   # Unmount
-//   cd /
-//   umount /mnt
-// ```
 
 
 "chmod g+s dirname" sets the directory's SGID bit/attribute.  Files created
@@ -3534,15 +3431,6 @@ Marat Boshernitsan says,
 
 If OpenOffice or LibreOffice is trying to restore a file that no longer
 exists, press 'escape' at the Recovery window.
-
-
-// // More manual, less desirable solution:
-// If OpenOffice is trying to restore a file that no longer exists, delete a
-// file such as one of these:
-// ```
-//   ~/.openoffice.org2/user/registry/data/org/openoffice/Office/Recovery.xcu
-//   ~/.openoffice.org/3/user/registry/data/org/openoffice/Office/Recovery.xcu
-// ```
 
 
 To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
@@ -4157,5 +4045,7 @@ This works with grep and ag, etc.
 For rg: --files-without-matches
 
 
+<!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+-->

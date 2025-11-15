@@ -667,8 +667,11 @@ or the following ought to work, but it does not:
   (insert current-string))
 
 
-// This last  is to prevent emacs from thinking the local variables above
-// are for real; there are no local variables mentioned on the last page now.
+<!--
+This last  is to prevent Emacs from thinking the local variables above
+are for real; the local variables below are the ones Emacs should process.
+-->
 
-
-// LocalWords:  toc gdb RET
+<!--
+LocalWords:  toc gdb RET
+-->

@@ -1143,10 +1143,12 @@ java DefaultCharset
 ```
 
 
-//  LocalWords:  jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
-//  LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
-//  LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
-//  LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
-//  LocalWords:  PublicTest ProfileViewer javac JSR JWhich classpath jwhich pid
-//  LocalWords:  instanceof traceback ctrl aaaaab boolean lookingAt unjar jdk src
-//  LocalWords:  RFEs LVTT BCEL daikon LVT BCELUtil
+<!--
+LocalWords:  jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
+LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
+LocalWords:  javadoc cd utilMDE subpackages dirname uniq perl HashMap itor Xmx
+LocalWords:  entrySet getKey getValue ValType Mbytes forName JUnit ps jswat
+LocalWords:  PublicTest ProfileViewer javac JSR JWhich classpath jwhich pid
+LocalWords:  instanceof traceback ctrl aaaaab boolean lookingAt unjar jdk src
+LocalWords:  RFEs LVTT BCEL daikon LVT BCELUtil
+-->

@@ -134,7 +134,9 @@ UROP Homepage for Students:  <https://sisapp.mit.edu/uropweb/home.mit>
 ## Athena-specific
 
 
-// This section contains information about Athena, the MIT computing system.
+<!--
+This section contains information about Athena, the MIT computing system.
+-->
 
 
 To find out whether a particular software program is available/installed on
@@ -675,10 +677,8 @@ Can recycle styrofoam packing peanuts ("loose fill") at
 * UPS Store, Davis Square
 
 
-// Please put new content in the appropriate section above, don't just
-// dump it all here at the end of the file.
-
-
+<!--
 // LocalWords:  Guralnick admin Runkle HR FRU Choate Perrigo Helman WEBSIS faq gi
 // LocalWords:  firelane eetimes DesignJet lpoptions xerox psets StapleLocation
 // LocalWords:  DualLandscape lpr myfile listname PACG Cron
+-->

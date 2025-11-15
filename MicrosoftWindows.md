@@ -113,18 +113,6 @@ to
 The zeroes seem to make everyhing happy.
 
 
-// To produce Encapsulated PostScript (.eps) from Visio, pre-2007:
-//  1. Select the desired elements on a page.
-//  2. File >> Save As
-//      *save only the selection
-//* save as Encapsulated PostScript
-//  3. Edit to remove cruft before "%!PS-Adobe" or after "%%EOF".
-//     Also remove any blank lines near top of file.
-//  4. excel-ps-to-eps file.eps
-//     (Yuriy says just ps2epsi will work here.)
-// (There's no need to use bbfig.)
-
-
 To crop whitespace while converting from PostScript to Encapsulated PostScript:
 
 ```sh

@@ -2645,19 +2645,23 @@ breaks at that location.  You don't want a space before the footnote mark (so no
 '~' or space), but you do want a space between text and a citation (so use '~').
 
 
+<!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+-->
 
-
+<!--
 // This entry is to avoid having the ones earlier in this file be interpreted.
 // Local Variables:
 // major-mode: text-mode
 // End:
+-->
 
-
+<!--
 // LocalWords:  Hevea wiki makeatletter topfigrule kern hrule botfigrule floatsep
 // LocalWords:  dblfigrule makeatother nocaptionrule textfloatsep dbltextfloatsep
 // LocalWords:  dblfloatsep unindent topfraction dbltopfraction floatpagefraction
 // LocalWords:  dblfloatpagefraction textfraction clearpage cleardoublepage ifdim
 // LocalWords:  renewcommand captionfont newcommand baselineskip hsize noindent
 // LocalWords:  parbox hbox fi
+-->

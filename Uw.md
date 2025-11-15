@@ -702,5 +702,7 @@ Visitors should get on the plse, 590n, and 590p mailing lists.
   * Araya's (29 minute walk but quite good)
 
 
+<!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
+-->
