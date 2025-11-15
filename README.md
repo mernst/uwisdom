@@ -41,6 +41,8 @@ git clone https://github.com/mernst/uwisdom.git
 
 ## Searching the wisdom files
 
+You can browse the wisdom files on GitHub, or you can search a local clone.
+
 Install the [Lookup program](https://github.com/plume-lib/lookup).
 
 The Lookup program can also be used to search other resources in addition to the
