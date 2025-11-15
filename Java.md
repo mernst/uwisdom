@@ -526,7 +526,7 @@ A way to iterate over the lines in a file is:
 ```java
 BufferedReader br = new BufferedReader(new FileReader(file));
 for (String line; (line = br.readLine()) != null; ) {
-   ... // do stuff with line here  
+   ... // do stuff with line here
 }
 ```
 

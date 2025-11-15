@@ -108,7 +108,7 @@ Example:
 
 ```sh
   alien *.rpm
-  dpkg -i *deb 
+  dpkg -i *deb
 ```
 
 

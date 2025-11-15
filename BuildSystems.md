@@ -252,7 +252,7 @@ A recipe for a temporary directory in Ant:
 
 ```ant
   <property name="tmpdir" location="${java.io.tmpdir}/${user.name}/${ant.project.name}" />
-  <delete dir="${tmpdir}" />    
+  <delete dir="${tmpdir}" />
   <mkdir dir="${tmpdir}" />
 ```
 

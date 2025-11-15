@@ -306,13 +306,13 @@ For scheduling a meeting:
 
 * Doodle contains iCalendar integration (for $40/year).  WhenIsGood/When2Meet does not.
 * Doodle supports "if-need-be" (ifneedbe) responses.  WhenIsGood premium has this.
-   When2Meet does not.  
+  When2Meet does not.
 * Doodle only permits 20 possibilities per poll.  For a weekly meeting, I had to make 5 different polls, one per day.
 * Outlook supports "preferred" and "yes" (similar to "yes" and "ifneedbe", which is terminology I prefer).
 * WhenIsGood/When2Meet has a nicer interface.  With Doodle, you need to create
-   many 30-minute proposals even to schedule a 1-hour meeting.  Each one
-   takes multiple clicks to create and to answer.  WhenIsGood/When2Meet just lets you
-   quickly paint over the relevant times.
+  many 30-minute proposals even to schedule a 1-hour meeting.  Each one
+  takes multiple clicks to create and to answer.  WhenIsGood/When2Meet just lets you
+  quickly paint over the relevant times.
 * WhenIsGood has accounts.  When2Meet does not.
 * When2Meet can do days of the week, WhenIsGood does not.
 

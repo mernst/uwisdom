@@ -101,7 +101,7 @@ To get rid of excel's tendency to put a white background in eps files, change
 ```postscript
   %%Page: 1 1
   %%BeginPageSetup
-  userdict begin /pagesave save def end mysetup concat colspRefresh : 1.000 1.000 1.000 sco 0 0 5100 6600 rf ; 
+  userdict begin /pagesave save def end mysetup concat colspRefresh : 1.000 1.000 1.000 sco 0 0 5100 6600 rf ;
   %%EndPageSetup
 ```
 

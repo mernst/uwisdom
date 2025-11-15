@@ -183,9 +183,9 @@ On athena, to check whether a directory was ever used:
 ```sh
     athena% vos e course.6.170.se84
     course.6.170.se84                 537323985 RW          2 K  On-line
-     ERIS.MIT.EDU /vicepb 
-     RWrite  537323985 ROnly          0 Backup  537323987 
-     MaxQuota      20000 K 
+     ERIS.MIT.EDU /vicepb
+     RWrite  537323985 ROnly          0 Backup  537323987
+     MaxQuota      20000 K
      Creation    Mon Sep 25 18:57:57 2000
      Last Update Mon Sep 25 19:02:33 2000
 ```
@@ -299,7 +299,7 @@ email address:
 <freepizza@lesser-magoo.csail.mit.edu>
 
 
-Cron jobs:  
+Cron jobs:
 Ask TIG for an individual crontab account.  The files will be in
 /afs/csail.mit.edu/group/tig/keytabs/$USER/$USER.keytab, readable
 and deletable by $USER.  These should be stored in a secure (local)
@@ -587,7 +587,7 @@ You can find the NDA at $inv/doc/www/mit/edg-nda-noncomm.pdf .
 The pag machines allow cross-mounting of /scratch and /scratch2:
 
 ```sh
-  cd /var/autofs/net/{pag-client}/scratch  
+  cd /var/autofs/net/{pag-client}/scratch
 ```
 
 but not:
@@ -648,7 +648,7 @@ The interesting lines are those with Type "Disk", so then do:
 ```sh
   $ smbclient '\\pag.lcs.mit.edu\ts'
   added interface ip=18.24.8.42 bcast=18.24.8.255 nmask=255.255.255.0
-  Password: 
+  Password:
   Domain=[PROGRAMANALYSIS] OS=[Unix] Server=[Samba 2.2.7-security-rollup-fix]
   smb: \> ls
   ;; shows me ~ts

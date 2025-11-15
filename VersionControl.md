@@ -348,11 +348,11 @@ Here are some commands that are not as helpful to me:
 ```sh
   # All differences (including my changes and theirs)
   git diff master upstream/master
-  # differences in upstream since we diverged (not including my own changes) 
-  git diff upstream/master.. 
-  # differences between my branch and upstream (including my changes and theirs) 
-  # (note: three dots) 
-  git diff ...upstream/master 
+  # differences in upstream since we diverged (not including my own changes)
+  git diff upstream/master..
+  # differences between my branch and upstream (including my changes and theirs)
+  # (note: three dots)
+  git diff ...upstream/master
 ```
 
 
@@ -971,7 +971,7 @@ The master branch is protected by default.
 If you get this error:
 
 ```output
-  remote: GitLab: You are not allowed to push code to protected branches on this project.        
+  remote: GitLab: You are not allowed to push code to protected branches on this project.
    ! [remote rejected] master -> master (pre-receive hook declined)
 ```
 

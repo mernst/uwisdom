@@ -109,9 +109,9 @@ Apparently no analyses are provided.
 They have a mailing list archive and seem decently active, but I don't know
 what kind of support is available (or needed).
 Marius Nita says (4/2009):
-  SableCC keeps all concrete syntax except whitespace.  
-  You can write visitors that visit only AST nodes, only tokens, or a  
-  combination. Because it keeps concrete syntax details, writing a  
+  SableCC keeps all concrete syntax except whitespace.
+  You can write visitors that visit only AST nodes, only tokens, or a
+  combination. Because it keeps concrete syntax details, writing a
   deparser is pretty easy.
 
 
@@ -572,7 +572,7 @@ From David Saff, October 3, 2004:
 
 
 One note of general use to the group, I guess most specifically people
-considering packages for utilities for Java bytecode instrumentation.  
+considering packages for utilities for Java bytecode instrumentation.
 I've now used tools from the following four toolkits: the JDK, BCEL,
 jad, and JODE.  The three main tasks I've used them for are
 instrumentation (changing bytecodes in compiled files), verification
@@ -616,7 +616,7 @@ JODE:
 anything that Java itself wouldn't.  Diagnostics printed on verification
 failures contain most of the information BCEL provides, but not in as
 pretty or readable a format.
-* Decompilation: at least as good as jad, in 100% open-source Java.  
+* Decompilation: at least as good as jad, in 100% open-source Java.
 This makes it easy to plug in a call to the decompiler wherever I want
 during my class file's transformation, which is nice.  No Eclipse
 plug-in, but the jad one wasn't that good anyway.
@@ -1363,7 +1363,7 @@ Build systems (in my order of preference, which agrees with Jonathan Burke's):
   that's half java, half "DSL" (I say "DSL" because there seems to be no
   underlying AST it's all just function calls that build a Map[Key -> Some action
   or setting]).  I feel like every time I want to do something simple I have to
-  wrestle with some new abstraction.  
+  wrestle with some new abstraction.
 * Rake
   con: not from JVM community.  Possible to use, but support may be worse.
   JVM startup time is slow and painful.  buildr is probably better and
@@ -1378,11 +1378,13 @@ Build systems (in my order of preference, which agrees with Jonathan Burke's):
 
 
 Static rewriting:
+
 * CCI
   On-disk only.  Doesn't even work for rewriting at load time.
 
 
 Dynamic rewriting:
+
 * ER, for "Extended Reflection" (though it's really dynamic monitoring)
   Available in binary form only.
   Provides a callback for every event at run time, such as field access,
@@ -1397,5 +1399,3 @@ Dynamic rewriting:
     Open source projects that use/extend Pex (e.g., DySy, REX for regexps):
       <http://research.microsoft.com/en-us/projects/pex/community.aspx>
 * CHESS
-
-

@@ -555,7 +555,7 @@ For mix-n-match BibTeX citations,
 ```latex
   \makeatletter
   \def\bibref#1{\nocite{#1}\@ifundefined{b@#1}{{\bf ??}\@warning
-     {Citation `#1' on page \thepage \space 
+     {Citation `#1' on page \thepage \space
       undefined}}{\@nameuse{b@#1```
   \makeatother
 ```
@@ -821,7 +821,7 @@ or
   \edef\savehyphenchar{\the\hyphenchar\the\font}
   \hyphenchar\the\font=0
   \showhyphens{subsystem module subsystem-module
-  \hyphenchar\the\font=\savehyphenchar} 
+  \hyphenchar\the\font=\savehyphenchar}
 ```
 
 
@@ -1438,14 +1438,14 @@ usual paragraph indentation:
 OR, change the definition of \section (example from art10; '-' becomes '+')
 
 ```latex
-  \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+  \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
    -.2ex}{2.3ex plus .2ex}{\Large\bf}}
 ```
 
 to
 
 ```latex
-  \def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus 
+  \def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus
    +.2ex}{2.3ex plus .2ex}{\Large\bf}}
 ```
 
@@ -1841,7 +1841,7 @@ the lower left-hand corner of a conference paper) in LaTeX, do this:
 
 ```latex
   \renewcommand{\thefootnote}{}
-  \footnotetext{A version of this paper will appear in the 25th 
+  \footnotetext{A version of this paper will appear in the 25th
   Annual International Symposium on Computer Architecture, June 1998}
   \renewcommand{\thefootnote}{\arabic{footnote}}
 ```
@@ -2031,20 +2031,20 @@ pagesize block comes first; the first "@" block is the default.
 Emacs "Local variables" section of a LaTeX file looks like one of the following:
 
 ```latex
- %%% Local Variables: 
+ %%% Local Variables:
  %%% mode: latex
  %%% TeX-master: t
  %%% auto-fill-function: nil
  %%% fill-column: 75
  %%% TeX-command-default: "PDF"
- %%% End: 
+ %%% End:
 ```
 
 ```latex
- %%% Local Variables: 
+ %%% Local Variables:
  %%% mode: latex
  %%% TeX-master: "daikon-ioa-2002"
- %%% End: 
+ %%% End:
 ```
 
 
@@ -2538,7 +2538,7 @@ git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
 
 where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
 Then, delete the clone to prevent storing your token in its .git/config file,
-and you can clone any overleaf repository without providing the authentication token.  
+and you can clone any overleaf repository without providing the authentication token.
 The Git authentication token expires every 6 months or so. :-(
 
 
@@ -2557,10 +2557,10 @@ LaTeX font sizes:
 
 ```latex
 \tiny
-\scriptsize 
+\scriptsize
 \footnotesize
-\small 
-\normalsize 
+\small
+\normalsize
 \large
 \Large
 \LARGE

@@ -130,7 +130,7 @@ To concatenate PDF files:
   pdfunite file1.pdf file2.pdf singlefile.pdf
   cpdf -merge ${ALL_PDFS} -o singlegfile.pdf
   pdfjoin --output singlefile.pdf ${ALL_PDFS}
-  pdftk ${ALL_PDFS} cat output singlefile.pdf 
+  pdftk ${ALL_PDFS} cat output singlefile.pdf
 ```
 
 
@@ -204,7 +204,7 @@ bounding box):
   FILE=myfilebasename
   pdftops -eps ${FILE}.pdf
   epstool --copy --bbox ${FILE}.eps --output ${FILE}-cropped.eps
-  epstopdf ${FILE}-cropped.eps  
+  epstopdf ${FILE}-cropped.eps
 ```
 
 (One culprit is Visio 2010, saving the selection as PDF (the selection is under "page
@@ -804,7 +804,7 @@ To run a detached long job, you can do
   <your job>
 ```
 
-but "longjob" may be more convenient.  
+but "longjob" may be more convenient.
 
 
 kpasswd:  change Kerberos password
@@ -815,7 +815,7 @@ Cross-realm Kerberos authentication:
 To get athena tickets:
 
 ```sh
-  setenv KRB5CCNAME /tmp/krb5cc_$$.athena 
+  setenv KRB5CCNAME /tmp/krb5cc_$$.athena
   kinit -5 $USER@ATHENA.MIT.EDU
   aklog -cell athena
 ```
@@ -1242,7 +1242,7 @@ showvars:
 To activate conda:
 
 ```sh
-source activate <yourenvironmentname> 
+source activate <yourenvironmentname>
 ```
 
 
@@ -1393,7 +1393,7 @@ By default, a shell script continues if a command within it fails.  This is
 highly error-prone.  To halt/stop on error, almost all shell scripts should start with
 
 ```sh
-set -e 
+set -e
 ```
 
 If it's a bash script (bash 3.0 or later), it should also contain
@@ -1827,7 +1827,7 @@ Debugging C memory (pointer) corruption problems:
    bad memory reference occurs.  (I had a problem with it running out of memory.)
     **`setenv MALLOC_CHECK_ 2`
     ** compile with "-lefence"
-* GNU Checker:  like Purify (includes gc).  
+* GNU Checker:  like Purify (includes gc).
    <http://www.gnu.org/software/checker/checker.html>, ftp://alpha.gnu.org/gnu
    It's sometimes called gccchecker or checkergcc.
    It has not been tested on C++ (or updated since August 1998, as of 6/2001).
@@ -2953,7 +2953,7 @@ ImageMagick is a replacement for (part of) xv:  three of its programs are:
 
 * display will view images in a great many different file formats.
 * import grabs screen shots, either that you select with the mouse, that
-   you specify by window ID, or the root window.  
+   you specify by window ID, or the root window.
 * convert old.gif new.jpg lets you easily change image formats.
 
 
@@ -3102,7 +3102,7 @@ Concrete example:
 
 ```sh
   openssl enc -aes128 -pbkdf2 -e -in wisdom.machines.decrypted -out wisdom.machines.aes128 && chmod og-rwx wisdom.machines.decrypted && rm -f wisdom.machines.decrypted
-  openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted 
+  openssl enc -aes128 -pbkdf2 -d -in wisdom.machines.aes128 -out wisdom.machines.decrypted && chmod og-rwx wisdom.machines.decrypted
 ```
 
 
@@ -4009,7 +4009,7 @@ do one of these:
 
 ```sh
 sudo snap-store --quit && sudo snap refresh
-sudo killall snap-store && sudo snap refresh 
+sudo killall snap-store && sudo snap refresh
 ```
 
 

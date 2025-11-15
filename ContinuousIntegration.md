@@ -406,7 +406,7 @@ email address for notification of failed builds.
 To unregister a multi-runner:
 
 ```sh
-  gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project> 
+  gitlab-ci-multi-runner unregister --token=<the runners token, which you can from the runners page on your project>
 ```
 
 
@@ -416,17 +416,17 @@ To unregister a multi-runner:
 To give a new user permissions/privileges in Jenkins:
 
 1. Find the Jenkins user name for the user:
-  Go to (e.g.) <http://tern.cs.washington.edu:8080/>
-  -> Manage Jenkins
-  -> Manage Users (second to last option)
-  We should request everybody from CSE to use their CSE account name.
+   Go to (e.g.) <http://tern.cs.washington.edu:8080/>
+   -> Manage Jenkins
+   -> Manage Users (second to last option)
+   We should request everybody from CSE to use their CSE account name.
 2. Go to <http://tern.cs.washington.edu:8080/>
-  -> Manage Jenkins
-  -> Configure Global Security (second option)
-  Now either look for whether that user is already present and adjust the
-  privileges.
-  Or add the user name into the small "User/group to add" box and then
-  adjust the privileges.
+   -> Manage Jenkins
+   -> Configure Global Security (second option)
+   Now either look for whether that user is already present and adjust the
+   privileges.
+   Or add the user name into the small "User/group to add" box and then
+   adjust the privileges.
 
 
 ## Dependabot
