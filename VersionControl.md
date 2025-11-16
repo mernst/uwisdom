@@ -718,9 +718,9 @@ For GitHub, to link directly to files in the repository, use rawgit.com.
 Examples:
   <https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html>
 This does not seem to work for wiki files.
-For Gitlab at UW, an example is:
+For GitLab at UW, an example is:
   <https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md>
-but Gitlab will not permit direct viewing of HTML files -- Gitlab sets the headers so that the browser shows the HTML code, as in
+but GitLab will not permit direct viewing of HTML files -- GitLab sets the headers so that the browser shows the HTML code, as in
   <https://gitlab.cs.washington.edu/randoop/toradocu-evaluation/raw/master/docs/index.html>
 For Bitbucket, an example is:
   <http://htmlpreview.github.io/?https://bitbucket.org/typetools/jsr308-langtools/raw/tip/doc/README-jsr308.html>
@@ -911,10 +911,43 @@ If you enable “Automatically delete head branches” in the repository setting
 When making a GitHub pull request, if you do work in your own GitHub fork, then continuous integration will complete faster.  The reason is that the "branch" continuous integration job will run against your personal CI quota, and the "pull request" continuous integration job will run against the upstream project's CI quota.
 
 
+## Pull requests
+
+
+When you address a code review comment, you don't need to reply within the pull
+request or describe what you did.  You can just click "resolve conversation".
+The next iteration of the code review will examine your new code or comments.
+On the other hand, if you disagree with a suggestion or more discussion is
+needed, then continuing the conversation in the pull request thread is great.
+
+
+CodeRabbit comments on every push to a pull request.  CodeRabbit only comments
+on new changes in the pull request If you want a fresh review of an entire pull
+request (for example, if you have lost track of the CodeRabbit comments or you
+didn't want to address them as you made incremental commits), then you should
+make a new branch and a new pull request, with the same contents as the original
+PR branch but with a different history.  You can do this by:
+
+```sh
+# In a new branch (created from main/master, not from the PR branch):
+git merge --squash PR-BRANCH
+git commit
+git push
+# Browse to the URL to create a new pull request.
+```
+
+Now, you have a choice:
+
+* Replace the original PR by the new one, or
+* Continue to use the original PR.  Address the comments on the new PR in
+   either of the two branches and pull changes into the other branch.  Repeat
+   this until there are no more CodeRabbit comments on the new PR.
+
+
 ## GitLab (Git-specific and GitHub-specific items go above)
 
 
-To enable Gitlab commit/push notifications by email:
+To enable GitLab commit/push notifications by email:
 Settings >> integrations >> emails on push
 
 
@@ -947,39 +980,6 @@ I'm not sure whether all this works for the wiki repository...
 I can't seem to use SSH authentication to bitbucket.org any more.  Instead, use
 an API token.  Must create "api token WITH SCOPES", with permissions
 "read:repository:bitbucket" and "write:repository:bitbucket".
-
-
-## Pull requests
-
-
-When you address a code review comment, you don't need to reply within the pull
-request or describe what you did.  You can just click "resolve conversation".
-The next iteration of the code review will examine your new code or comments.
-On the other hand, if you disagree with a suggestion or more discussion is
-needed, then continuing the conversation in the pull request thread is great.
-
-
-CodeRabbit comments on every push to a pull request.  CodeRabbit only comments
-on new changes in the pull request If you want a fresh review of an entire pull
-request (for example, if you have lost track of the CodeRabbit comments or you
-didn't want to address them as you made incremental commits), then you should
-make a new branch and a new pull request, with the same contents as the original
-PR branch but with a different history.  You can do this by:
-
-```sh
-# In a new branch (created from main/master, not from the PR branch):
-git merge --squash PR-BRANCH
-git commit
-git push
-# Browse to the URL to create a new pull request.
-```
-
-Now, you have a choice:
-
-* Replace the original PR by the new one, or
-* Continue to use the original PR.  Address the comments on the new PR in
-   either of the two branches and pull changes into the other branch.  Repeat
-   this until there are no more CodeRabbit comments on the new PR.
 
 
 <!--
