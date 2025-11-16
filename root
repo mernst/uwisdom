@@ -4,10 +4,14 @@
 //   \include{my-personal-file1}
 //   \include{my-personal-file2}
 //   ...
-// Note that files `Afs.md`, `Mit.md`, and `Uw.md` are not included in this file;
-// users must include them explicitly.
 
-\include{README.md}
+// Users must choose to explicitly include these files, which are not included
+// by default: `Afs.md`, `Mit.md`, `Uw.md`.
+
+// Files `JavaFormatters.md`, `JavaTools.md`, and `README.md` are not included,
+// because they are not organized as lots of small nuggets of searchable
+// information.
+
 \include{BuildSystems.md}
 \include{ContinuousIntegration.md}
 \include{Emacs.md}
