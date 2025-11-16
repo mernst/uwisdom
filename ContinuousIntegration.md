@@ -429,14 +429,6 @@ To give a new user permissions/privileges in Jenkins:
    adjust the privileges.
 
 
-## Dependabot
-
-
-Dependabot runs on forks, which is irritating.
-The workaround for now is to delete the fork and re-create it without enabling Dependabot security updates.
-Or, use Renovate instead.
-
-
 ## Hudson
 
 

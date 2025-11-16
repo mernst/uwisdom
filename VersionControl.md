@@ -41,17 +41,6 @@ To display a stash as a diff/patch:
 ```
 
 
-For the Git equivalent of `hg rollback` which uncommits or undoes or reverts a commit,
-do one of these:
-
-* `git reset HEAD^`: resets the index but not the working tree
-* `git reset --soft HEAD^`: does not touch the index or the working tree.
-* `git reset --hard HEAD~ && git push -f`
-
-The commit will still appear in other clones, if anyone has pulled from remote
-while the commit was there.
-
-
 To revise a commit before pushing it -- similarly to what "hg rollback" enables -- without rewriting the commit message:
 
 * do more edits
@@ -82,56 +71,6 @@ The git equivalent to `hg incoming` is:
 ```
 
 
-In Git, to list branches:
-
-```sh
-  git branch -a
-```
-
-Note that `git branch` only shows *local* branches.
-Periodically remove branches that have been deleted from the remote repository:
-
-```sh
-  git remote prune origin
-```
-
-You can also see the branches in Github, for example at
-<https://github.com/typetools/checker-framework/branches/all>
-together with how old, who last changed, whether there is a pull request open.
-You can see diffs by clicking "create pull request", which gets you to a
-page showing the diffs (actually creating the pull request requires another
-click -- don't do that).
-
-
-In Git, to create a branch and switch to it
-(just `git branch newbranch` doesn't switch to the new branch):
-
-```sh
-  git checkout -b new_branch_name
-```
-
-In Git, to delete a local branch:
-
-```sh
-  git branch -d the_local_branch
-```
-
-To remove a remote branch (if you know what you are doing!)
-
-```sh
-  git push origin --delete the_remote_branch
-```
-
-(or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
-
-
-In Git, to clone a particular branch:
-
-```sh
-  git clone -b <branch> --single-branch <remote_repo>
-```
-
-
 To see the changes in a single git commit, as a diff, do either of these:
 
 ```sh
@@ -143,7 +82,7 @@ To see the changes in a single git commit, as a diff, do either of these:
 To make a bundle of all changes:
 
 ```sh
-  git bundle create ../yourRepo.bundle master     // for all changes
+  git bundle create ../yourRepo.bundle master     # for all changes
 ```
 
 To make a bundle of just some changes:
@@ -169,43 +108,6 @@ To obtain the repository state as of a particular moment in time, do
 ```
 
 on't use `git checkout 'HEAD@{Jan 17 2014}'` because that will give you a newer version for code whose history doesn't go back that far in the history.
-
-
-To unpush a commit, leaving no trace in the version control history:
-
-```sh
-  git reset --hard <desired-commit>
-  git push -f <remote> <branch>
-```
-
-where <desired-commit> is something like HEAD~1 or a SHA hash,
-and <remote> and <branch> are optional.
-The commit will still exist in any clones of the repository,
-so it must be removed from each one individually.
-
-
-If merging works perfectly then rebasing simplifies the history.
-If there is a problem, then rebasing can cause confusion and can make debugging
-harder in the future, because you can't get back to the exact same codebase as
-you had during development.
-So really one should rebase only if there is no merge conflict, and the code
-continues to compile and all the tests pass.
-
-In the very most simple case of no collisions:
-
-* git pull --rebase: rebases your local commits ontop of remote HEAD and does not create a merge/merge commit
-* git pull: merges and creates a merge commit
-If there is a textual conflict in file modified-file, you will get asked to resolve them manually and then
-* continue with rebase:git add modified-file; git rebase --continue, or
-* merge:git add modified-file; git commit
-
-
-To squash multiple commits into one (say, the last 3 commits):
-
-```sh
-  git reset --soft HEAD~3
-  git commit
-```
 
 
 To compare two branches in Git:
@@ -287,37 +189,11 @@ Here are some commands that are not as helpful to me:
 ```
 
 
-To clone a repository, or update it if it already exists:
+To clone a repository into directory `repo/`, or update it if it already exists in `repo/`:
 
 ```sh
   git -C repo pull || git clone https://server/repo repo
 ```
-
-
-Here are ways to search the git history.
-For all commits that match the given regular expression:
-
-```sh
-  git log -G"ANY_OCCURRENCE.*"
-```
-
-For all commits with a different number of occurrences of the search
-string before and after (ie, removals or additions of the search string,
-but it would not match in-file moves or other patches that don't add or
-remove the string); add `--pickaxe-regex:` to treat the string as a regex:
-
-```sh
-  git log -S"DIFFERENT_NUMBER_OF_OCCURRENCES"
-```
-
-Commits that touch given function:
-
-```sh
-  git log -L :function:file
-```
-
-To see the commit's diff as well, supply the `-p` option.
-Use `--all` to search all branches.
 
 
 To diff two revisions/commits:
@@ -343,21 +219,6 @@ in the `.git/config` file:
 [remote "origin"]
  url = https://github.com/typetools/checker-framework.git
  pushurl = git@github.com:typetools/checker-framework.git
-```
-
-
-To delete/remove a commit in a local git repository, use one of these:
-
-```sh
-git reset --hard HEAD~1
-git reset --hard <sha>
-```
-
-Then, to delete in a remote branch, use one of these
-
-```sh
-git push -f
-git push origin HEAD --force
 ```
 
 
@@ -430,7 +291,7 @@ git diff master...branch
 Equivalently:
 
 ```sh
-git diff `git merge-base master branch`..branch
+git diff $(git merge-base master branch)..branch
 ```
 
 Merge base is the point where branch diverged from master.
@@ -450,41 +311,6 @@ git hash-object -w FILENAME
 ```
 
 
-It is a good practice to keep the `master` or `main` branch of a fork
-identical to the corresponding branch upstream.  If the fork's branch has
-become different (say, there are a lot of extraneous merges in it), here is
-how to correct that problem.  (This affects only your `master` or `main`
-branch, not any other branch in your repository:  you will not lose any work.)
-
-* Find some commit that is before the two branches diverged, by running
-   `git log --graph`.  The very first commit is an acceptable choice, but
-   causes some extra network traffic.
-* Check out that commit: `git checkout def11847c05324c26dda93ac59b4f3d6aca245f5`
-* `git pull --ff-only THE_UPSTREAM_REPO`
-   where THE_UPSTREAM_REPO is something like "<https://github.com/codespecs/daikon.git>".
-* `git push -f origin HEAD:master`
-   (or use some other branch name such as `main`)
-* Now, the master branch of the repository is correct on GitHub), but
-   this and other clones/checkouts/enlistments may still retain the extraneous commits.
-   For *every* clone on every machine (regardless of what branch it has checked out):
-  * delete it and re-clone (easiest), after ensuring it has no uncommitted or unpushed work
-
-
-To format all files before committing, put this in the pre-commit hook:
-(BUT, I don't trust this.  I expect it would stage all changes in the files,
-including those I had intentionally not staged.)
-
-```sh
-stagedFiles=$(git diff --staged --name-only)
-./gradlew spotlessApply -q
-for file in $stagedFiles; do
-  if test -f "$file"; then
-    git add "$file"
-  fi
-done
-```
-
-
 In the `.gitattributes` file, using
 
 ```gitattributes
@@ -497,14 +323,22 @@ make sure the file has the right line endings when I create and edit it.
 Local settings like `core.autocrlf` are an anti-pattern, best left to false.
 
 
-If a .git directroy is taking too much hard disk space:
-This will make a git repository smaller, quickly:
-  git gc --aggressive --prune=now
-To see the gains:
-  du -c | tail -1 && git gc --aggressive --prune=now && du -c | tail -1
-This does it the right way, but may need to be run overnight:
-  git repack -a -d --depth=250 --window=250
+If a `.git/` directroy is taking too much hard disk space, a quick hack is:
 
+```sh
+  git gc --aggressive --prune=now
+  # To see the gains as you run the command:
+  du -c | tail -1 && git gc --aggressive --prune=now && du -c | tail -1
+```
+
+This reduces a git repository's size the right way, but may need to be run overnight:
+
+```sh
+  git repack -a -d --depth=250 --window=250
+```
+
+
+I avoid using `--filter` with `git clone`.
 
 To reduce the time spent cloning a repository, and to reduce its disk space, use
 
@@ -512,49 +346,16 @@ To reduce the time spent cloning a repository, and to reduce its disk space, use
 git clone --filter=blob:none
 ```
 
-The disadvantage is that some git commands may be a bit slower because they will
-retrieve information from the remote repo (once ever per piece of information).
-For example, running `git annotate` (= `git blame`) on such a repository takes a
-very long time.
+Disadvantages:
+
+* It is impossible to pull from that clone.
+* Git commands are slower (sometimes much slower) because they will inefficiently
+  retrieve information from the remote repo (once ever per piece of information).
+  For example, running `git annotate` (= `git blame`) on such a repository takes a
+  very long time.
 
 GitHub recommends against `--filter=tree:0`, and against `--depth=1` except for
 CI when the clone will be immediately discarded.
-
-A problem with a clone created with `--filter=blob:none` is that it is
-impossible to pull from that clone.  Therefore, I do not use it.
-
-
-Git merge terminology:
-
-* merge strategy: A merge strategy is about performing three-way merge at the
-   tree level, figuring out which three variants of contents to hand to a merge
-   driver that handles the content-level three-way merge.  However, if two of
-   {parent1,parent2,base} are the same, then the merge driver is never called.
-   The merge strategy is responsible for detecting and handling renames.  You
-   rarely have to write a new merge strategy.
-* merge driver: A merge driver is called whenever no two of
-   {base,parent1,parent2} are the same.  It is run on one file at a time.  It is
-   run on temporary files, but you can get the path of the conflicting file
-   using the %P parameter.  It observes the original version of the parent and
-   base files; no conflict markers exist.  It overwrites its input named `%A`
-   with the merge result, which may contain conflict markers.  You can use Git
-   attributes to use different merge strategies for files whose names match
-   given patterns.
-* merge tool (mergetool):  A merge tool never runs automatically.  If a user
-   issues the command `git mergetool`, then the mergetool is run on all
-   conflicted files (one at a time), getting a chance to redo the merge.  The
-   merge tool is invoked with $BASE, $LOCAL, and $REMOTE set to temporary files,
-   and $MERGED set to the file with the conflict markers (which is also where to
-   write the merge tool's result).  A git mergetool is never invoked on a file
-   that contains no merge conflict.  It assumes that if the merge driver didn't
-   output a merge conflict, then the merge was correct.  This means that a git
-   mergetool will never reduce the number of clean-but-incorrect merged files.
-   By default, if a mergetool returns a non-zero status, git discards any edits
-   done by the mergetool, reverting to the state before the mergetool was run
-   from a backup file.  To work around this, such a tool can write partial
-   results to a **BACKUP** file (named analogously to **LOCAL**, **BASE**, etc.).
-   A merge tool can be run explicitly on files: `git mergetool file file...`.
-   However, the merge tool does nothing if the file has no conflict markers.
 
 
 The user-level (aka "global") git attributes are by default read from
@@ -591,7 +392,7 @@ git submodule update --recursive --remote
 ```
 
 
-To obtain all pull request branchs from a GitHub repository:
+To obtain all pull request branches from a GitHub repository:
 
 ```sh
 git pull origin 'refs/pull/*/head:refs/remotes/origin/pull/*'
@@ -646,17 +447,77 @@ git diff --no-index ...
 `git diff` is recursive by default.
 
 
-Please do not force-push to GitHub.  Force-pushing has no benefit, since we squash-and-merge pull requests.  Force-pushing has negative consequences, such as removing code review comments on any deleted commits.
+### The git staging area
 
 
-Rebasing is evil because it modifies the history and can lead to unnecessary merge conflicts.  The history of the branch in a pull request should never matter.  The pull request should be squash-and-merged, which results in a single commit on the mainline, corresponding to the pull request which should contain a single logical change (no matter how many iterations of bug fixes and code reviews it has gone through).
+Modalities of running `git commit`:
+
+* `git commit` without filename arguments only commits the files that are staged (in the staging area).  To put a file in the staging area, `git add FILENAME`.
+* `git commit FILE1 FILE2 ...` only commits files that are mentioned on the command line.
+* `git commit -a` commits all changed files.
 
 
-To make a squashed commit out of all the differences on a branch, run this in a *different* branch.
+To undo a `git add` command before doing a commit, do `git reset <file>`.
+To undo changes in your working copy (like `hg revert`) do
+`git checkout filename`; for the whole tree, `git checkout -f`.
+A different command that undoes all uncommitted changes in the working tree
+is `git reset --hard`, but some people discourage its use because it's "dangerous".
+
+
+
+### Git branches
+
+
+In Git, to list branches:
 
 ```sh
-git merge --squash origin/BRANCHNAME
+  git branch -a
 ```
+
+Note that `git branch` only shows *local* branches.
+Periodically remove branches that have been deleted from the remote repository:
+
+```sh
+  git remote prune origin
+```
+
+You can also see the branches in GitHub, for example at
+<https://github.com/typetools/checker-framework/branches/all>
+together with how old, who last changed, whether there is a pull request open.
+You can see diffs by clicking "create pull request", which gets you to a
+page showing the diffs (actually creating the pull request requires another
+click -- don't do that).
+
+
+In Git, to create a branch and switch to it
+(just `git branch newbranch` doesn't switch to the new branch):
+
+```sh
+  git checkout -b new_branch_name
+```
+
+In Git, to delete a local branch:
+
+```sh
+  git branch -d the_local_branch
+```
+
+To remove a remote branch (if you know what you are doing!)
+
+```sh
+  git push origin --delete the_remote_branch
+```
+
+(or, equivalently but with more obscure syntax: `git push origin :the_remote_branch`).
+
+
+In Git, to clone a particular branch:
+
+```sh
+  git clone -b <branch> --single-branch <remote_repo>
+```
+
+
 
 
 ### Git merging
@@ -684,21 +545,169 @@ In git, after resolving the conflicts in the appropriate files:
   resolving conflicts between the appropriate revisions)
 
 
-### The git staging area
+Git merge terminology:
+
+* merge strategy: A merge strategy is about performing three-way merge at the
+  tree level, figuring out which three variants of contents to hand to a merge
+  driver that handles the content-level three-way merge.  However, if two of
+  {parent1,parent2,base} are the same, then the merge driver is never called.
+  The merge strategy is responsible for detecting and handling renames.  You
+  rarely have to write a new merge strategy.
+* merge driver: A merge driver is called whenever no two of
+  {base,parent1,parent2} are the same.  It is run on one file at a time.  It is
+  run on temporary files, but you can get the path of the conflicting file
+  using the %P parameter.  It observes the original version of the parent and
+  base files; no conflict markers exist.  It overwrites its input named `%A`
+  with the merge result, which may contain conflict markers.  You can use Git
+  attributes to use different merge strategies for files whose names match
+  given patterns.
+* merge tool (mergetool):  A merge tool never runs automatically.  If a user
+  issues the command `git mergetool`, then the mergetool is run on all
+  conflicted files (one at a time), getting a chance to redo the merge.  The
+  merge tool is invoked with $BASE, $LOCAL, and $REMOTE set to temporary files,
+  and $MERGED set to the file with the conflict markers (which is also where to
+  write the merge tool's result).  A git mergetool is never invoked on a file
+  that contains no merge conflict.  It assumes that if the merge driver didn't
+  output a merge conflict, then the merge was correct.  This means that a git
+  mergetool will never reduce the number of clean-but-incorrect merged files.
+  By default, if a mergetool returns a non-zero status, git discards any edits
+  done by the mergetool, reverting to the state before the mergetool was run
+  from a backup file.  To work around this, such a tool can write partial
+  results to a **BACKUP** file (named analogously to **LOCAL**, **BASE**, etc.).
+  A merge tool can be run explicitly on files: `git mergetool file file...`.
+  However, the merge tool does nothing if the file has no conflict markers.
 
 
-Modalities of running `git commit`:
-
-* `git commit` without filename arguments only commits the files that are staged (in the staging area).  To put a file in the staging area, `git add FILENAME`.
-* `git commit FILE1 FILE2 ...` only commits files that are mentioned on the command line.
-* `git commit -a` commits all changed files.
+### Searching the git history
 
 
-To undo a `git add` command before doing a commit, do `git reset <file>`.
-To undo changes in your working copy (like `hg revert`) do
-`git checkout filename`; for the whole tree, `git checkout -f`.
-A different command that undoes all uncommitted changes in the working tree
-is `git reset --hard`, but some people discourage its use because it's "dangerous".
+To search for for all commits in the git history that match the given regular
+expression:
+
+```sh
+  git log -G"ANY_OCCURRENCE.*"
+```
+
+
+To search for for all commits in the git history with a different number of
+occurrences of the search string before and after (ie, removals or additions of
+the search string, but it would not match in-file moves or other patches that
+don't add or remove the string); add `--pickaxe-regex:` to treat the string as a
+regex:
+
+```sh
+  git log -S"DIFFERENT_NUMBER_OF_OCCURRENCES"
+```
+
+
+To search for for all commits in the git history that touch a given function:
+
+```sh
+  git log -L :function:file
+```
+
+To see the commit's diff as well, supply the `-p` option.
+Use `--all` to search all branches.
+
+
+### Rewriting history
+
+
+For the Git equivalent of `hg rollback` which uncommits or undoes or reverts a commit,
+do one of these:
+
+* `git reset HEAD^`: resets the index but not the working tree
+* `git reset --soft HEAD^`: does not touch the index or the working tree.
+* `git reset --hard HEAD~ && git push -f`
+
+The commit will still appear in other clones, if anyone has pulled from remote
+while the commit was there.
+
+
+To unpush a commit, leaving no trace in the version control history:
+
+```sh
+  git reset --hard DESIRED-COMMIT
+  git push -f REMOTE BRANCH
+```
+
+where `DESIRED-COMMIT` is something like HEAD~1 or a SHA hash,
+and `REMOTE` and `BRANCH` are optional.
+The commit will still exist in any clones of the repository,
+so it must be removed from each one individually.
+
+
+To delete/remove a commit in a local git repository, use one of these:
+
+```sh
+git reset --hard HEAD~1
+git reset --hard <sha>
+```
+
+Then, to delete in a remote branch, use one of these
+
+```sh
+git push -f
+git push origin HEAD --force
+```
+
+
+If merging works perfectly then rebasing simplifies the history.
+If there is a problem, then rebasing can cause confusion and can make debugging
+harder in the future, because you can't get back to the exact same codebase as
+you had during development.
+So really one should rebase only if there is no merge conflict, and the code
+continues to compile and all the tests pass.
+
+In the very most simple case of no collisions:
+
+* `git pull --rebase`: rebases your local commits ontop of remote HEAD and does not create a merge/merge commit
+* `git pull`: merges and creates a merge commit
+  If there is a textual conflict in file modified-file, you will get asked to resolve them manually and then
+* continue:
+  * with rebase: `git add modified-file; git rebase --continue`
+  * with merge: `git add modified-file; git commit`
+
+
+To squash multiple commits into one (say, the last 3 commits):
+
+```sh
+  git reset --soft HEAD~3
+  git commit
+```
+
+
+It is a good practice to keep the `master` or `main` branch of a fork
+identical to the corresponding branch upstream.  If the fork's branch has
+become different (say, there are a lot of extraneous merges in it), here is
+how to correct that problem.  (This affects only your `master` or `main`
+branch, not any other branch in your repository:  you will not lose any work.)
+
+* Find some commit that is before the two branches diverged, by running
+   `git log --graph`.  The very first commit is an acceptable choice, but
+   causes some extra network traffic.
+* Check out that commit: `git checkout def11847c05324c26dda93ac59b4f3d6aca245f5`
+* `git pull --ff-only THE_UPSTREAM_REPO`
+   where THE_UPSTREAM_REPO is something like "<https://github.com/codespecs/daikon.git>".
+* `git push -f origin HEAD:master`
+   (or use some other branch name such as `main`)
+* Now, the master branch of the repository is correct on GitHub), but
+   this and other clones/checkouts/enlistments may still retain the extraneous commits.
+   For *every* clone on every machine (regardless of what branch it has checked out):
+  * delete it and re-clone (easiest), after ensuring it has no uncommitted or unpushed work
+
+
+Please do not force-push to GitHub.  Force-pushing has no benefit, since we squash-and-merge pull requests.  Force-pushing has negative consequences, such as removing code review comments on any deleted commits.
+
+
+Rebasing is evil because it modifies the history and can lead to unnecessary merge conflicts.  The history of the branch in a pull request should never matter.  The pull request should be squash-and-merged, which results in a single commit on the mainline, corresponding to the pull request which should contain a single logical change (no matter how many iterations of bug fixes and code reviews it has gone through).
+
+
+To make a squashed commit out of all the differences on a branch, run this in a *different* branch.
+
+```sh
+git merge --squash origin/BRANCHNAME
+```
 
 
 
@@ -735,14 +744,14 @@ toc::[]
 
 GitHub wikis:
 
-* in a separate wiki
+* in a separate wiki repository
 * can write in AsciiDoc and other formats
 * other people can theoretically edit
 
 GitHub pages:  e.g., <http://mernst.github.io/randoop>
 
-* in a separate branch in the main wiki
-* html only
+* in a separate branch in the main repo
+* HTML only
 * if using automatic page generator:
   * can paste in Markdown, but it gets converted to .html
   * attractive themes:  Modernist, Leap Day, Cayman, Architect (?)
@@ -774,6 +783,9 @@ for each page (above, `3`).
 
 
 If you reply to GitHub comments using your email client, don't quote the message you are replying to, or it will clutter the conversation history.
+
+
+### Automatic updates
 
 
 To disable dependabot on a fork, either:
@@ -814,33 +826,11 @@ git push)
 ### GitHub pull requests
 
 
-The standard way to collaborate on Github-based projects is for you to fork
-the project on Github, and then commit your changes to your clone, and then
-on the Github page describing your commit there is a button whereby you can
+The standard way to collaborate on GitHub-based projects is for you to fork
+the project on GitHub, and then commit your changes to your clone, and then
+on the GitHub page describing your commit there is a button whereby you can
 submit a "pull request" which lets the owner know that you want a patch to
 be merged.
-
-
-Two ways to submit GitHub pull requests:
-
-Branching Workflow:  (<https://guides.github.com/introduction/flow/>)
-a) Create a branch locally.
-b) Work as normal, committing/pushing to your branch as you go.
-c) When finished, push your branch to the main repo.
-d) Initiate a pull request between your branch and the main branch.
-e) Incorporate code review feedback by pushing new commits to your branch.
-f) You or another developer merges the pull request
-   and deletes your branch to keep the list of active branches small
-   (<https://help.github.com/articles/deleting-unused-branches/>)
-
-Personal Fork & Pull Workflow: (<https://help.github.com/articles/using-pull-requests/>)
-a) Create a fork using your GitHub account.
-b) Work on that fork, commiting/pushing to it as you go.
-c) Initiate a pull request between your repo and the main branch.
-d) Incorporate code review feedback by pushing new commits to your repo.
-e) Owner merges the pull request
-f) Optionally delete your fork
-The "Personal Fork" workflow is simpler, but it only lets you have one outstanding code review at a time.
 
 
 Here is how to create a GitHub pull request for a single git commit, if I
@@ -870,7 +860,8 @@ request.
 Finally, at the parent's GitHub webpage, submit a pull request for <mybranchname>
 
 
-GitHub doesn't support pull requests for the wiki repository, only the main repository, according to <http://stackoverflow.com/questions/10642928/> .
+GitHub doesn't support pull requests for the wiki repository, only the main
+repository, according to <http://stackoverflow.com/questions/10642928/>.
 
 
 To pull a GitHub pull request into my local clone/copy,
