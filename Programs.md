@@ -2451,9 +2451,10 @@ sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 
 
 When searching, to find all files not containing a string:
- * `grep -L foo`
- * `ag -L foo`
- * `rg --files-without-matches`
+
+* `grep -L foo`
+* `ag -L foo`
+* `rg --files-without-matches`
 
 
 To turn off screensavers in Gnome:

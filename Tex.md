@@ -2575,6 +2575,7 @@ index b97409f..17ec5fb 100644
 
 
 To typeset exercises and solutions in a LaTeX document:
+
 * exercise package. -- last changed 2014
   Seems good, documentation doesn't give concrete examples.
 * answers package. -- last changed 2014

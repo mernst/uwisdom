@@ -171,8 +171,9 @@ since that font is generally defined.
 
 
 To remove text properties (such as faces/fonts/colors) from a string
- * In Emacs 20: `(format "%s" string-with-properties)`
- * In Emacs 21:  use `copy-sequence` to copy the string, then use
+
+* In Emacs 20: `(format "%s" string-with-properties)`
+* In Emacs 21:  use `copy-sequence` to copy the string, then use
    `set-text-properties` to remove the properties of the copy.
 
 

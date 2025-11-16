@@ -1,7 +1,7 @@
 MD_FILES:=$(wildcard *.md)
 
 default:
-	@echo "Doing nothing."
+	@echo "The 'default' target does nothing."
 
 markdownlint:
 	markdownlint-cli2 --fix "**/*.md" "#node_modules"

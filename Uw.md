@@ -195,8 +195,9 @@ cs-ugrads-urgent@cs.
 
 Card key access to rooms and labs in CSE buildings (the Allen Center or the Gates Center):
 To: <cardkey@cs.washington.edu>
- * For undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253.
- * For non-undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253, and the amenity spaces like the kitchens.
+
+* For undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253.
+* For non-undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253, and the amenity spaces like the kitchens.
 
 For undergraduates, need:
 
@@ -228,6 +229,7 @@ and then copy the clone contents.
 
 
 Fellowships/scholarships that students can apply for:
+
 * NSF -- first two years only
 * NDSEG -- first two years only
 * Adobe Research fellowship
@@ -361,6 +363,7 @@ To apply for a new UW NetID, the sponsor fills out a form at
 
 What files in the file system contain the content served at webpages/URLs
 (for instance, for UW CSE classes/courses)?
+
 * <https://types.cs.washington.edu/> : /cse/www2/types/
 * <https://checkerframework.org/> : /cse/www2/types/checker-framework/
 * <http://fault-localization.cs.washington.edu/> : /cse/web/research/fault-localization/
@@ -450,6 +453,7 @@ Files of the form
 have become
   `/cse/web/courses/cse503/11au`
 To fix, use:
+
 ```elisp
   (replace-string "/cse/www/education/courses/" "/cse/web/courses/cse")
 ```

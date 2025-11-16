@@ -36,22 +36,24 @@ Here is terminology adapted from
 IEEE Std 610.12-1990 IEEE Standard Glossary of Software Engineering
 Terminology says:
 
->   error.
->   (1) The difference between a computed, observed, or measured value or
->     condition and the true, specified, or theoretically correct value or
->     condition. For example, a difference of 30 meters between a computed result
->     and the correct result.
->   (2) An incorrect step, process, or data definition. For example, an
->     incorrect instruction in a computer program.
->   (3) An incorrect result. For example, a computed result of 12 when the
->     correct result is 10.
->   (4) A human action that produces an incorrect result. For example, an
->     incorrect action on the part of a programmer or operator.
->   Note: While all four definitions are commonly used, one distinction assigns
->   definition 1 to the word "error," definition 2 to the word "fault,"
->   definition 3 to the word "failure," and definition 4 to the word "mistake."
->   See also: dynamic error; fatal error; indigenous error; semantic error;
->   syntactic error; static error; transient error.
+> error.
+>
+> 1. The difference between a computed, observed, or measured value or
+>    condition and the true, specified, or theoretically correct value or
+>    condition. For example, a difference of 30 meters between a computed result
+>    and the correct result.
+> 2. An incorrect step, process, or data definition. For example, an
+>    incorrect instruction in a computer program.
+> 3. An incorrect result. For example, a computed result of 12 when the
+>    correct result is 10.
+> 4. A human action that produces an incorrect result. For example, an
+>    incorrect action on the part of a programmer or operator.
+>
+> Note: While all four definitions are commonly used, one distinction assigns
+> definition 1 to the word "error," definition 2 to the word "fault,"
+> definition 3 to the word "failure," and definition 4 to the word "mistake."
+> See also: dynamic error; fatal error; indigenous error; semantic error;
+> syntactic error; static error; transient error.
 
 Note that IEEE Std 610.12-1990 does not distinguish between the (Wikipedia)
 dependability notions of error and failure -- it calls them both failures
