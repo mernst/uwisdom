@@ -1819,7 +1819,7 @@ To encrypt/decrypt a file symmetrically with GPG (but I have had trouble with it
 ```sh
   gpg --output encrypted.data --symmetric --cipher-algo AES256 un_encrypted.data
   gpg --output un_encrypted.data --decrypt encrypted.data
-``
+```
 
 
 To encrypt a file symmetrically with openssl:

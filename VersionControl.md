@@ -19,7 +19,7 @@ merge conflicts when multiple people edit different parts of a paragraph.
 When working with a line-based version control system such as Git and a text
 markup language such as LaTeX or Markdown, please don't refill paragraphs.
 Doing so causes merge conflicts and massive, unreadable diffs.  Instead, insert
-or delete text without changing anl line breaks outside the edit.  This can lead
+or delete text without changing any line breaks outside the edit.  This can lead
 to paragraphs in LaTeX or Markdown files that look a bit funny because some
 lines are short and some are long, but that file doesn't matter because readers
 will see a rendered version.

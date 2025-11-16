@@ -217,7 +217,7 @@ Ubuntu's equivalent of /usr/bin/dict is
 
 
 To mount a USB stick drive or CD-ROM on Ubuntu or Rocky Linux,
-just insert it, and it appears under `/media/${USER}/` or `/run/media/${USER}/'.
+just insert it, and it appears under `/media/${USER}/` or `/run/media/${USER}/`.
 When using a USB stick under Linux, give it plenty of time to finish
 writing a file.
 To eject it, first do one of these
