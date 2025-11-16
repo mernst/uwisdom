@@ -401,11 +401,11 @@ Make sure that each directory gives the user svn rlidwka access.
 Don't forget to:
 
 * create the htpasswd file (I don't know how to set up an ACL file):
-    htpasswd -c /afs/csail/group/pag/projects/annotations-htpasswd _username_
+    `htpasswd -c /afs/csail/group/pag/projects/annotations-htpasswd _username_`
 * set permissions for the repository directory:
-    find . -type d -exec fs sa {} svn rlidwk \;
+    `find . -type d -exec fs sa {} svn rlidwk \;`
 * set permissions for the htpasswd file:
-    fs sa _dir-with-htpasswd_ svn rl
+    `fs sa _dir-with-htpasswd_ svn rl`
 
 
 ## CSAIL printing

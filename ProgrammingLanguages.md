@@ -154,15 +154,6 @@ In Perl, Date::Manip seems a touch nicer than Date::Calc.
 (There's also Date::Format and Date::Parse, but Date::Manip does it all.)
 
 
-In perl, write
-
-```perl
-  use filetest 'access';  # for AFS
-```
-
-to make the file access test operators (-r, -w, etc) work better for AFS.
-
-
 To disable Perl's "deep recursion" warnings (they're not errors), use
 
 ```perl
@@ -242,10 +233,10 @@ You need to "s"tep a few times before "n"ext, which would jump over the
 entire program.  Or just do "continue" to the error.
 
 
-For time-critical Python runs, disable assertions via -O command-line
+For time-critical Python runs, disable assertions via `-O` command-line
 option to Python or setting variable `__debug__` to false:  `__debug__ = 0`.
-You can be sure that the optimized version is running if a .pyo instead of
-a .pyc file is created after you do "import".
+You can be sure that the optimized version is running if a `.pyo` instead of
+a `.pyc` file is created after you do `import`.
 To make Python run optimized, do:
 
 ```elisp
@@ -374,7 +365,7 @@ Redirecting output in command shells:
       For example, `echo "to stderr" >&2`.
   * To send both standard error and standard output through a pipe: `2>&1 |`.
      There are simpler commands in bash, but they don't work in sh.
-  *  To redirect standard error to a file, use `2>filename`.
+  * To redirect standard error to a file, use `2>filename`.
      For more details, see <http://tomecat.com/jeffy/tttt/shredir.html>
 * In csh/tcsh:
   * To overwrite an existing file, redirect via `>!` instead of `>`.
@@ -438,8 +429,10 @@ For a Posix shell script to halt on error, use:
 ```
 
 Also consider:
-  set -x (or set -o xtrace): Display commands and their arguments as they are executed.
-  set -v : Display shell input lines as they are read.
+
+* `set -x` (or `set -o xtrace`): Display commands and their arguments as they are executed.
+* `set -v`: Display shell input lines as they are read.
+
 It's also possible to set these when running the script:
 
 ```sh
@@ -715,12 +708,12 @@ Do not use dbmalloc; use dmalloc instead.
 The GNU program checker (gccchecker) detects memory use errors in a program.
 
 
-To run just the GNU C preprocessor (analogous to cpp), do gcc -E.
-To suppress line markers (line numbers) in the output, use gcc -E -P.
-To retain comments (/*...*/) in the output, use gcc -E -C.
+To run just the GNU C preprocessor (analogous to cpp), do `gcc -E`.
+To suppress line markers (line numbers) in the output, use `gcc -E -P`.
+To retain comments (`/*...*/`) in the output, use `gcc -E -C`.
 
 
-When compiling a C program with cc, put the -lLIBNAME flag at the end of
+When compiling a C program with `cc`, put the `-lLIBNAME` flag at the end of
 the line, after the cfile name (the order matters).
 
 
@@ -730,8 +723,8 @@ Debugging C memory (pointer) corruption problems:
    is available from ftp://ftp.perens.com/pub/ElectricFence/.
    It uses the virtual memory hardware to detect the instruction at which a
    bad memory reference occurs.  (I had a problem with it running out of memory.)
-   * `setenv MALLOC_CHECK_ 2`
-   * compile with `-lefence`
+  * `setenv MALLOC_CHECK_ 2`
+  * compile with `-lefence`
 * GNU Checker:  like Purify (includes gc).
    <http://www.gnu.org/software/checker/checker.html>, ftp://alpha.gnu.org/gnu
    It's sometimes called gccchecker or checkergcc.

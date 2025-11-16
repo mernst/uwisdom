@@ -17,7 +17,7 @@ Finally, see the "longjob" command.  The syntax for this one is
   longjob <your job>
 ```
 
-longjob -h shows other options.
+`longjob -h` shows other options.
 
 
 To renew a Kerberos ticket (without having to type a password):
@@ -195,5 +195,14 @@ To test AFS latency performance (when the file system is sluggish), run
 
 (To test AFS bandwidth, use pv to copy a large file; but we've never seen
 such problems.)
+
+
+In perl, write
+
+```perl
+  use filetest 'access';  # for AFS
+```
+
+to make the file access test operators (`-r`, `-w`, etc) work better for AFS.
 
 

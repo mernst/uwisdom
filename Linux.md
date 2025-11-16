@@ -169,6 +169,13 @@ apt update && apt install -y lsb-release && apt clean all && lsb_release -a
 ```
 
 
+To determine which version of RedHat/Fedora/CentOS I am running:
+
+```sh
+  cat /etc/redhat-release
+```
+
+
 To find out the host address (ID) use the ifconfig command
 
 
@@ -190,7 +197,7 @@ backports.org.  Instructions on how to use backports are available at:
 <http://www.backports.org/dokuwiki/doku.php?id=instructions>.
 To install, consider copying the .deb files
 from /var/cache/apt/archives to $pag/adm/extra-debs and then intall
-them elsewhere using 'dpkg -i' directly.
+them elsewhere using `dpkg -i` directly.
 
 
 File `/etc/debian_version` gives the version number of Debian that you are
@@ -276,8 +283,8 @@ Sometimes the problem is simply that the display has screwed up when
 it autoadjusts.  Try logging in and out.  If that doesn't work play
 with the buttons on the front of the screen to make sure it is correct
 (peanut currently has a 1920x1200 monitor).
-To see what X thinks, use xdpyinfo | grep -i pixel  or
-xrandr (with no arguments) will print out the choices.
+To see what X thinks, use `xdpyinfo | grep -i pixel`  or
+`xrandr` (with no arguments) will print out the choices.
 
 
 For a list of installed fonts under Linux (X windows), run "xlsfonts".
@@ -458,9 +465,9 @@ To recompile the Debian package "foobar" from source code:
   fakeroot debian/rules binary
 ```
 
-You'll then have a foobar_1.42-12_i386.deb file in the directory you
-*started in*, which you can install with "dpkg -i". The version of the
-source that `apt` gets is controlled by the /etc/apt/sources.list
+You'll then have a `foobar_1.42-12_i386.deb` file in the directory you
+*started in*, which you can install with `dpkg -i`. The version of the
+source that `apt` gets is controlled by the `/etc/apt/sources.list`
 file.  You can often "backport" an updated package from a newer
 release to an older release by fetching the newer source and compiling
 it on a machine running the older release. This tends to work well for
@@ -595,3 +602,24 @@ java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
 
 
 To install an RPM, do  `rpm -Uvh foo.rpm`
+
+
+To update all snaps (all snap packages) on an Ubuntu system:
+
+```sh
+sudo snap update
+```
+
+
+To resolve Ubuntu popup
+"please update the application snap-store"
+or
+"Pending Update of Snap-Store, Close the App to Avoid Disruption"
+do one of these:
+
+```sh
+sudo snap-store --quit && sudo snap refresh
+sudo killall snap-store && sudo snap refresh
+```
+
+

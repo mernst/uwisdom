@@ -135,7 +135,7 @@ JTB. <http://www.cs.purdue.edu/jtb/>
 
 requires no change to the grammar.
 children are accessed by position, not name.
-  (partly fixed in JTB 1.1.2; use -f flag, but names still aren't great.
+  (partly fixed in JTB 1.1.2; use `-f` flag, but names still aren't great.
   A potential disadvantage of that field is incompatibility with JavaPrinter.)
 JTB 1.3.2 (released Jan 2005) is most recent as of Feb 2010.  Sai Zhang
 reports that JTB 1.3.2 seems to be incompatible with the latest JavaCC
@@ -753,14 +753,6 @@ If you are intersted, send email to: <contact@metamata.com>.
 To run java so that a debugger can be attached, add the following to your commandline:
  -Xdebug -Djava.compiler=NONE -Xnoagent -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
 You can use any port for address, but 8000 seems to be the standard one.
-
-
-Jeff Perkins likes jdebugtool.com (<http://www.debugtools.com/>)
-A script to start it is ~jhp/bin/jd:
-  #! /bin/csh -f
-  set jdir = "~jhp/j2sdk1.4.1_02"
-  #set jdir = "/usr/local/pkg/java/java-1.4.1/j2sdk1.4.1_01"
-  $jdir/bin/java -jar ~/jdebugtool/jdebugtool_jdk13.jar $*
 
 
 "Omniscient debugger" lets you go backwards in time, heavy marketing hype:

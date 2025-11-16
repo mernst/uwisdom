@@ -46,47 +46,22 @@ Can add "-H 2" for highlight bars (good for tabular data).
 
 enscript common options:
 
-* -h: no burst/header page
-* -B: no page headings
+* `-h` no burst/header page
+* `-B` no page headings
 
 
-a2ps is maintained!  But it's a bit of a pain to install.
-The equivalent a2ps line is:
+`a2ps` is maintained.  But it's a bit of a pain to install.
+The equivalent `a2ps` line is:
 
 ```sh
   a2ps -r -f 7 -E --highlight-level=normal --columns=1 -o OUTFILE.ps INFILE
 ```
 
-or, with syntax highlighting (why no -E argument?):
+or, with syntax highlighting (why no `-E` argument?):
 
 ```sh
   a2ps -r -f 7 --columns=1 -o OUTFILE.ps INFILE
 ```
-
-
-Conversions between PostScript and PDF:
-
-* PS -> PDF:
-
-```sh
-   distill foo.ps   (for an entire directory, "distill -files .ps")
-   ps2pdf foo.ps
-```
-
-* PDF -> PS:
-   Avoid these acroread invocations; pdftops seems better.
-
-```sh
-   acroread -toPostScript file.pdf
-   cat sample.pdf | acroread -toPostScript > sample.ps
-   acroread -toPostScript sample1.pdf sample2.pdf <dir>
-   acroread -toPostScript -pairs pdf_file_1 ps_file_1 ...
-   acroread -toPostScript -level2 pdf_file_1
-```
-
-When using acroread to manually do the conversion, selecting the option
-"Download Fonts Once" in the Print menu may cause math fonts to be messed
-up; in case of that trouble, deselect this option.
 
 
 sam2p: convert raster (bitmap) image formats into Adobe PostScript or PDF.
@@ -117,25 +92,27 @@ html2ps converts a HTML file to PostScript, potentially recursively.
   html2ps -n -u -C bh -W bp http://pag.csail.mit.edu/daikon/ > index.ps
 ```
 
-* "-n" means number pages
-* "-u" means underline links
-* "-C bh" means generate a table of contents.
-* "-W bp" means process recursively retrieving hyperlinked documents ("p"
-   means prompt for remote documents).  Watch out:  using -W b might seem
+* `-n` number pages
+* `-u` underline links
+* `-C bh` generate a table of contents.
+* `-W bp`process recursively retrieving hyperlinked documents (`p`
+   means prompt for remote documents).  Watch out:  using `-W b` might seem
    reasonable, but it will try to print some binary files!
-* "-2L" means two-column landscape
+* `-2L` two-column landscape
 
 
-Format manual pages:  nroff -man foo.1 | more
-Print roff files:     troff -t filename | lpr -t
-.ms => PostScript:    groff -pte -ms file.ms > file.ps
-man pages => PS:      groff -pte -man foo.1 > file.ps
+ma pages:
+
+* Format manual pages:  `nroff -man foo.1 | more`
+* Print roff files:     `troff -t filename | lpr -t`
+* .ms => PostScript:    `groff -pte -ms file.ms > file.ps`
+* man pages => PS:      `groff -pte -man foo.1 > file.ps`
 
 
 /uns/share/bin/ps2img converts PostScript to gif (or other image format?)
 files.  It will handle multipage postscript files fairly gracefully without
 filling up your disk, and it will look for and pay attention to the
-BoundingBox of EPS files if you give the -e option.  Run it with no
+BoundingBox of EPS files if you give the `-e` option.  Run it with no
 arguments to see the options.
 
 
@@ -147,7 +124,63 @@ superseded by the Perl OLE::Storage module
 OLE documents.
 
 
-## PostScript and PDF
+Conversions between PostScript and PDF:
+
+* PS -> PDF:
+
+```sh
+   distill foo.ps   (for an entire directory, "distill -files .ps")
+   ps2pdf foo.ps
+```
+
+* PDF -> PS:
+   Avoid these acroread invocations; pdftops seems better.
+
+```sh
+   acroread -toPostScript file.pdf
+   cat sample.pdf | acroread -toPostScript > sample.ps
+   acroread -toPostScript sample1.pdf sample2.pdf <dir>
+   acroread -toPostScript -pairs pdf_file_1 ps_file_1 ...
+   acroread -toPostScript -level2 pdf_file_1
+```
+
+When using acroread to manually do the conversion, selecting the option
+"Download Fonts Once" in the Print menu may cause math fonts to be messed
+up; in case of that trouble, deselect this option.
+
+
+To compress a JPEG file:
+
+```sh
+  convert input.jpg -quality nn output.jpg
+```
+
+where nn is between 1 and 100.  1 is the lowest quality (highest
+compression).
+
+
+To convert .svg to vector-format PDF:
+
+```sh
+  BASENAME=filename
+  rsvg-convert -f pdf -o $BASENAME.pdf $BASENAME.svg
+```
+
+But note that Google Slides does not allow import of SVG or PDF files.
+To edit a .svg file, use inkscape (or a variety of other tools).
+In Inkscape, to resize/crop the canvas to the size of the drawing:
+
+* File >> Document Properties >> Page size >> Custom size >> Resize page to content >> click "Resize Page to drawing or selection" button
+
+
+To use GraphViz to convert a `.dot` file to a `.pdf` file:
+
+```sh
+dot -T pdf -O filename.dot
+```
+
+
+## PDF and PostScript
 
 
 To convert a PostScript file for A4 paper for printing on letter
@@ -376,6 +409,46 @@ To print a USGS topographical quad map on 8 sheets of letter paper:
 ```
 
 
+When you have a PDF file that is marked up with annotations, you can either
+view the annotation text one-by-one in a PDF reader, or you can create a PDF
+file that contains the annotations visibly.  Different people prefer the
+two approaches, and some PDF readers such as Evince don't seem to provide
+any way to view the annotations.
+Here is how to create a PDF that shows the annotation/comment text:
+
+* Using Acrobat Reader or Foxit Reader: start Print, then select "Summarize
+   Comments" in the print dialog (sometimes in the upper right).  That pops
+   up another print
+   dialog, where you can finally print or save to PDF.  The final PDF has
+   alternating pages of the original document and the comments, with each
+   annotation in the original document cross-referenced to the comments page.
+  * Acrobat Reader is a bit easier to use, but as of 4/2019 Dragon is unusably
+      slow (10-15 seconds), though Dragon still works with other programs.
+  * With Foxit Reader, to make a comment using voice dictation, I must:
+    * select the text
+    * double-click to open the comment box
+    * speak; after a second or two the text comes up in a "Dictation Box"
+    * Click "transfer" to copy the text to the comment box.
+* In Acrobat Professional:  Review & Comment >> Summarize Comments
+   In Foxit Reader: Comment >> Summarize Comments
+   This can draw lines between the annotations in the original document and
+   the comments, or format in other ways such as the way that printing does.
+   I like the numbered, separate page style.
+* Foxit Reader can also export just the text of all the annotations.
+* I cannot find a way to print PDF annotations on Ubuntu.
+  * No answer at <https://askubuntu.com/questions/1092169/is-there-a-pdf-software-that-allows-printing-a-comment-summary>
+  * xournal doesn't do it
+  * Foxit Reader doesn't do it.  I don't see a button "Summarize Comments" in the print dialog box as claimed by <https://help.foxitsoftware.com/kb/how-to-print-a-pdf-file-with-the-comment-notes-contents-showing.php>
+  * Acrobat Reader doesn't exist except for Windows, Mac, and Android.
+  * LibreOffice/OpenOffice doesn't display PDF well.
+
+
+To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
+choose Image Annotation, position the cursor on the area you want to insert
+the image, hold and drag your mouse to draw a rectangle, browse an image in
+the pop-up Add image dialog box, and click on Ok to insert it.
+
+
 ## HTML and CSS
 
 
@@ -516,6 +589,22 @@ Instead, use one of
 * `<samp>` for computer output
 
 
+Server-side includes (SSI) for web pages:
+
+```html
+  <!--#include file="filename.html"-->
+  <!--#include virtual="/directory/included.html" -->
+```
+
+Use "file=" for relative filenames, "virtual=" for relative or non-relative
+filenames (e.g., an address starting at the server root).
+In some cases, you must configure the webserver to preprocess all
+pages with a distinctive extension (normally, `.shtml`).
+UW CSE lets us tweak our `.htaccess` file such that we can have
+all regular .html files get this behavior, not just .shtml files.  See the
+WASP webpages for an example.
+
+
 ## WWW
 
 
@@ -647,6 +736,11 @@ For the URLs of all (recently-used) tabs, browse to:
 chrome://inspect/#pages
 
 
+If Google Chrome (proviously `chromium-browser`, now `google-chrome`) hangs,
+then complains about unresponsive pages, try:  `rm -rf ~/.cache`.
+Alternately, clear the relevant cookies from within Chrome/Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
+
+
 ## ssh (secure shell) and public keys
 
 
@@ -754,7 +848,7 @@ To expand a mailing list (alias), to learn its members:
   quit
 ```
 
-Another technique is "finger -a list@host"; at UW this works for me from
+Another technique is `finger -a list@host`; at UW this works for me from
 Solaris (eg hoh), but not from Linux (eg nishin).
 If you get a 503 error, try doing "helo HOSTNAME" and then doing expn.
 
@@ -772,7 +866,7 @@ To decode a MIME file (actually just one component of a mime message), use
 
 You need to save to a file (it doesn't read from standard input), and to
 strip off all headers (e.g., "Content-Type:" and "Content-Transfer-Encoding:").
-For quoted-printable, use -q flag as well.
+For quoted-printable, use `-q` flag as well.
 Also see the script (stolen from Greg Badros) "decode_mime", which
 
 * strips off headers
@@ -782,18 +876,18 @@ Also see the script (stolen from Greg Badros) "decode_mime", which
 Mime unpacking:  use ftp://ftp.andrew.cmu.edu/pub/mpack/
 Options:
 
-* -f
+* `-f`
           Forces the overwriting of existing files.  If a message
           suggests a file name of an existing file, the file will be
           overwritten.  Without this flag, munpack appends ".1", ".2",
           etc to find a nonexistent file.
-* -t
+* `-t`
           Also unpack the text parts of multipart messages to files.
           By default, text parts that do not have a filename parameter
           do not get unpacked.
-* -q
+* `-q`
           Be quiet--suppress messages about saving partial messages.
-* -C directory
+* `-C directory`
           Change the current directory to "directory" before reading
           any files.  This is useful when invoking munpack
           from a mail or news reader.
@@ -1292,7 +1386,7 @@ repository, in file JavaTools.md.
 `sleep`:  delays execution; waits that many seconds.
 
 
-`expr`:  Bourne shell way to do lots of stuff (ex regular expressions,
+`expr`:  Bourne shell way to do lots of stuff (regular expressions,
 arithmetic, comparisons); see also TEST
 
 
@@ -1496,12 +1590,34 @@ Regular expressions (regexes, regexps):
 * `(ab)?(abcd)?` matches "ab" in "abcde"; does not match the longer "abcd"
 * character class `[abc]` is more efficient than alternation `(a|b|c)`
 * unrolling the loop:     `+opening normal* (special normal*)* closing+`
-   * eg, for a quoted string:   `+/L?"[^"\\]*(?:\\.[^"\\]*)*"/+`
+  * eg, for a quoted string:   `+/L?"[^"\\]*(?:\\.[^"\\]*)*"/+`
      or `+$string_literal_re = 'L?"[^"\\\\]*(?:\\.[^"\\\\]*)*"';+`
-   * start of normal and special must never intersect
-   * special must not match nothingness
-   * text matched by one application of special must not be matched by
+  * start of normal and special must never intersect
+  * special must not match nothingness
+  * text matched by one application of special must not be matched by
      multiple applications of special
+
+
+To make your slow regular expressions (regexps) faster, restrict the number of
+different ways the regexp could match the same text.  For example, if
+you're trying to match some whitespace followed by all the text until the
+end of the line, don't write this:
+
+```text
+ \s-+.*
+```
+
+Since the "." can match whitespace too, there are as many different ways
+to apportion the match between the two subexpressions "\s-+" and ".*"
+as there are whitespace characters.  Instead, write this:
+
+```text
+ \s-.*
+```
+
+Although this regexp matches exactly the same set of strings, there is
+now only one way to match:  the "\\s-" matches the first whitespace
+character, and ".*" matches the rest.  This runs faster.
 
 
 `uname` gives operating system (`uname -a` gives more info).
@@ -1869,7 +1985,7 @@ and finally, nothing happens unless I run
 periodically -- say, every minute or hour in a cron job.
 
 
-To print a reasonable map from google maps do the following:
+To print a reasonable map from Google Maps do the following:
 
 * execute `import map.jpg`
 * Draw a rectangle over the part of the map you want.  The result will
@@ -1895,46 +2011,6 @@ To create a transparent signature stamp:
   techniques might work, too)
 
 
-When you have a PDF file that is marked up with annotations, you can either
-view the annotation text one-by-one in a PDF reader, or you can create a PDF
-file that contains the annotations visibly.  Different people prefer the
-two approaches, and some PDF readers such as Evince don't seem to provide
-any way to view the annotations.
-Here is how to create a PDF that shows the annotation/comment text:
-
-* Using Acrobat Reader or Foxit Reader: start Print, then select "Summarize
-   Comments" in the print dialog (sometimes in the upper right).  That pops
-   up another print
-   dialog, where you can finally print or save to PDF.  The final PDF has
-   alternating pages of the original document and the comments, with each
-   annotation in the original document cross-referenced to the comments page.
-  * Acrobat Reader is a bit easier to use, but as of 4/2019 Dragon is unusably
-      slow (10-15 seconds), though Dragon still works with other programs.
-  * With Foxit Reader, to make a comment using voice dictation, I must:
-    * select the text
-    * double-click to open the comment box
-    * speak; after a second or two the text comes up in a "Dictation Box"
-    * Click "transfer" to copy the text to the comment box.
-* In Acrobat Professional:  Review & Comment >> Summarize Comments
-   In Foxit Reader: Comment >> Summarize Comments
-   This can draw lines between the annotations in the original document and
-   the comments, or format in other ways such as the way that printing does.
-   I like the numbered, separate page style.
-* Foxit Reader can also export just the text of all the annotations.
-* I cannot find a way to print PDF annotations on Ubuntu.
-  * No answer at <https://askubuntu.com/questions/1092169/is-there-a-pdf-software-that-allows-printing-a-comment-summary>
-  * xournal doesn't do it
-  * Foxit Reader doesn't do it.  I don't see a button "Summarize Comments" in the print dialog box as claimed by <https://help.foxitsoftware.com/kb/how-to-print-a-pdf-file-with-the-comment-notes-contents-showing.php>
-  * Acrobat Reader doesn't exist except for Windows, Mac, and Android.
-  * LibreOffice/OpenOffice doesn't display PDF well.
-
-
-To insert an image in Foxit Reader: Navigate to HOME menu in Foxit Reader,
-choose Image Annotation, position the cursor on the area you want to insert
-the image, hold and drag your mouse to draw a rectangle, browse an image in
-the pop-up Add image dialog box, and click on Ok to insert it.
-
-
 To make a screencast video demo (i.e., screen capture/recording from a
 running program), Marat Boshernitsan recommends
 Camtasia Studio from TechSmith (<http://www.techsmith.com/camtasia.asp>).
@@ -1957,7 +2033,7 @@ If OpenOffice or LibreOffice is trying to restore a file that no longer
 exists, press 'escape' at the Recovery window.
 
 
-To print an OpenOffice or LibreOffice Calc spreadsheet (.xls) on one page, first do:
+To print an OpenOffice or LibreOffice Calc spreadsheet (`.xls`) on one page, first do:
 Format > Page > Sheet tab > Scale options > Scaling mode > "Fit print range(s) on number of pages" > Number of Pages: 1
 
 Alternately:
@@ -1967,21 +2043,6 @@ Print preview icon > Format Page > sheet tab > Scaling Mode > Fit print range on
 In LibreOffice/OpenOffice, to freeze rows/columns so that they do not
 scroll but are always visible, select the row (or cell) BELOW (and to the
 right of) the one you want to freeze, then do Window > Freeze.
-
-
-Setting up a new USB microphone/headset:  run
-
-```sh
-  gnome-volume-control
-```
-
-When the application starts, choose the default device and unmute both the
-headphones *and* the microphone.
-
-
-On Linux, after plugging in headphones, you have to tell the application
-(e.g., Skype) you are trying to use with the headset to use the second
-soundcard (card1) in order to get audio over the headphones.
 
 
 The `-e` argument to mail means send no mail if the body is empty.  So use
@@ -2003,25 +2064,9 @@ instead of
 Generate a random password:
 
 * CentOS:
-   mkpasswd
+  `mkpasswd`
 * Ubuntu:
-   echo "$(pwgen -N1)$(pwgen -N1)"
-
-
-Server-side includes (SSI) for web pages:
-
-```html
-  <!--#include file="filename.html"-->
-  <!--#include virtual="/directory/included.html" -->
-```
-
-Use "file=" for relative filenames, "virtual=" for relative or non-relative
-filenames (e.g., an address starting at the server root).
-In some cases, you must configure the webserver to preprocess all
-pages with a distinctive extension (normally, `.shtml`).
-UW CSE lets us tweak our `.htaccess` file such that we can have
-all regular .html files get this behavior, not just .shtml files.  See the
-WASP webpages for an example.
+  `echo "$(pwgen -N1)$(pwgen -N1)"`
 
 
 The `rev` program reverses the order of characters in every line of input.
@@ -2030,10 +2075,10 @@ To sort lines, with the sort key being the reverse of each line:
   cat myfile | rev | sort -r | rev
 
 
-`cd -` connects to your previous directory.
+`cd -` goes back to (connects to) your previous directory.
 
 
-The canonical @sys directory for your path is
+The canonical `@sys` directory for your path is
 
 ```sh
   $HOME/bin/`uname`-`uname -m`
@@ -2052,14 +2097,7 @@ directly:
 ```
 
 
-To determine which version of RedHat/Fedora/CentOS I am running:
-
-```sh
-  cat /etc/redhat-release
-```
-
-
-To make the history command show times, do this:
+To make the `history` command show times, do this:
 
 ```sh
   export HISTTIMEFORMAT='%Y-%b-%d::%Hh:%Mm:%Ss '
@@ -2084,60 +2122,12 @@ To give up and uninstall a package installed by encap/epkg:
 ```
 
 
-`ack` is like `grep -r` or `search`, but claims to be more flexible.
-  I've given up using it, though; I find `search` more featureful and less buggy.
-  A problem is that unlike the `search` program, it does not seach in
-compressed (.gz, .Z) files.
-  You should always run ack with the --text option (put that in an alias or in
-.ackrc).  Otherwise, ack discards some text files, since by default, text
-files (and also binary and "skipped") are not considered interesting (!),
-but everything else is.  Turning on text, turns off every other type, but
-the files get searched anyway since they are considered text as well as
-their other file type.
-  To get a list of files ack is searching (-f means print all files searched):
-
-```sh
-  ack -f
-```
-
-
 To perform an advanced search of messages in thunderbird, goto
 edit->find->search-messages
 
 
 Pidgin (previously GAIM) is a Linux IM client that can interoperate with
 Google Talk.
-
-
-An uninterrupted Hudson build has one of the following statuses:
-
-* Failed - it doesn't compile
-* Unstable - compiles without errors, but tests fail
-* Stable - compiles without errors and all the tests are passing
-
-A manually interrupted Hudson job gives a message like "SCM check out aborted".
-
-
-To make your slow regular expressions (regexps) faster, restrict the number of
-different ways the regexp could match the same text.  For example, if
-you're trying to match some whitespace followed by all the text until the
-end of the line, don't write this:
-
-```text
- \s-+.*
-```
-
-Since the "." can match whitespace too, there are as many different ways
-to apportion the match between the two subexpressions "\s-+" and ".*"
-as there are whitespace characters.  Instead, write this:
-
-```text
- \s-.*
-```
-
-Although this regexp matches exactly the same set of strings, there is
-now only one way to match:  the "\\s-" matches the first whitespace
-character, and ".*" matches the rest.  This runs faster.
 
 
 To resolve a symbolic link to its true name (truename):
@@ -2155,7 +2145,7 @@ If the directory exists (like `readlink -f`), use this instead:
 SCRIPT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)"
 ```
 
-where -P resolves symbolic links.
+where `-P` resolves symbolic links.
 Common uses for tracing a script (but these do *not* work for a sourced script!):
 
 ```sh
@@ -2167,20 +2157,6 @@ echo Exiting "$(cd "$(dirname "$0")" && pwd -P)/$(basename "$0")"
 On Mac OS X if the directory does not exist, I don't have a good solution.
 If the directory ends in ../, you can call dirname twice (and hope that
 there is no symbolic link across directories).
-
-
-If running `dropbox.py start -i` yields
-
-```text
-  To link this computer to a dropbox account, visit the following url: ...
-```
-
-then run:
-
-```sh
-  dropbox.py stop
-  dropbox.py start -i
-```
 
 
 To get the current date in a sortable numeric format:
@@ -2216,52 +2192,10 @@ To open Task Manager in Google Chrome:
 This helps to debug high CPU usage by Chrome.
 
 
-To replace the dictionary in the Android Kindle app:
-
-* A Spanish-to-Spanish dictionary is already installed with the app
-* Adding new dictionaries is finally supported in 2015, but I don't see how to change the default dictionary and it's a pain to always have to click to a new dictionary to see definitions.  So, follow these directions:
-   <http://learnoutlive.com/add-german-english-dictionary-android-kindle-app/>
-* if you have an Internet connection: <http://ebookfriendly.com/translate-words-in-kindle-app/>
-
-
 For RBCommons, you can submit a review by either downloading their command-line tools, <http://www.reviewboard.org/downloads/rbtools/>, or by uploading a diff on their webpage.
 
 
-To compress a JPEG file:
-
-```sh
-  convert input.jpg -quality nn output.jpg
-```
-
-where nn is between 1 and 100.  1 is the lowest quality (highest
-compression).
-
-
-To convert .svg to vector-format PDF:
-
-```sh
-  BASENAME=filename
-  rsvg-convert -f pdf -o $BASENAME.pdf $BASENAME.svg
-```
-
-But note that Google Slides does not allow import of SVG or PDF files.
-To edit a .svg file, use inkscape (or a variety of other tools).
-In Inkscape, to resize/crop the canvas to the size of the drawing:
-
-* File >> Document Properties >> Page size >> Custom size >> Resize page to content >> click "Resize Page to drawing or selection" button
-
-
-Apple Mail, when configured to send mail as "rich text", mangles quoted text.
-The quoted text shows up to the recipient colored, but
-without a quotation marker such as a vertical bar or ">" in the left column.
-This makes the mail very hard for recipients to read.
-The solution is to use plain text format.
-Choose Mail > Preferences, click Composing, then select "plain text".
-This is an issue with Apple Mail on a Mac laptop.
-Replies sent from an iPhone look fine, with a quotation marker.
-
-
-wget is a command-line utility to fetch web pages and save them to the
+`wget` is a command-line utility to fetch web pages and save them to the
 local disk.  <http://www.gnu.org/software/wget/wget.html>
 To download a single file, only if it's newer than the on-disk version:
 
@@ -2269,7 +2203,7 @@ To download a single file, only if it's newer than the on-disk version:
   wget -N URL
 ```
 
-wget is also useful for web site mirroring.
+`wget` is also useful for web site mirroring.
 To download everything below a current point:
 
 ```sh
@@ -2286,7 +2220,7 @@ Or, an easy way to do the latter is just to view the URL in Firefox, then
 choose "save as"!
 
 
-curl vs wget:
+`curl` vs `wget`:
 
 * `wget` is easier to use (better command-line flags, and more needed ones enabled by default), but
    `curl` is more reliable (gives error message instead of hanging) and has more functionality.
@@ -2363,11 +2297,20 @@ Use middle button to paste into an xterm.
 For my slide titles in LibreOffice Impress, I like color #674EA7.  I think this is a default purple in PowerPoint, but LibreOffice does not have an equally nice purple in its standard color set.
 
 
-A replacement for the lines-between program is:
+A replacement for the `lines-between` program is:
 
 ```sh
 sed -e '1,/abc/d' -e '/mno/,$d' <FILE>
 ```
+
+
+Printing all lines after a match in sed:
+
+```sh
+sed -ne '/pattern/,$ p'
+```
+
+This is similar to my old `lines-after` script.
 
 
 A shell function that works around `wget` or `curl` hanging for very slow
@@ -2397,16 +2340,9 @@ download_url() {
 Three ways to retry a command repeatedly a limited number of times, with a delay between:
 (This retries the command if it fails, until it succeeds or the retry limit is reached.)
 
-* timeout 300 COMMAND || COMMAND
+* `timeout 300 COMMAND || COMMAND`
 * <https://github.com/kadwanev/retry>
-* parallel --retries 5 --delay 15s ::: ./do_thing.sh
-
-
-To use GraphViz to convert a .dot file to a .pdf file:
-
-```sh
-dot -T pdf -O filename.dot
-```
+* `parallel --retries 5 --delay 15s ::: ./do_thing.sh`
 
 
 To find all files that contain one string (stringA) but not another (stringB):
@@ -2427,21 +2363,12 @@ Screen recording:
 * kazam always gives me a black screen
 * recordmydesktop: creates .ogv files that fail in subsequent conversion with "Broken file, keyframe not correctly marked.".
 
-```sh
-recordmydesktop --fps 15 --delay 10 -o myfile.ogv
-```
+  ```sh
+  recordmydesktop --fps 15 --delay 10 -o myfile.ogv
+  ```
 
 * simplescreenrecorder: I haven't tried it yet.
   To install: `sudo apt install simplescreenrecorder`
-
-
-Printing all lines after a match in sed:
-
-```sh
-sed -ne '/pattern/,$ p'
-```
-
-This is similar to my old `lines-after` script.
 
 
 To uncolorize a file:
@@ -2456,42 +2383,6 @@ To find duplicated/repeated/doubled words:
 ```sh
 rg '\bthe the\b|\band and\b|\bor or\b|\ba a\b|\bto to\b|\bit it\b|@return return\b|\bis is\b|\bare are\b|\bif if\b|\bto to\b|\bas as\b|\bof of\b'
 search -n '\b([A-Za-z]+)[ \t]+\1\b'
-```
-
-
-Here is my program for handling multiple repositories, in case you want to try it:
-Homepage: <https://github.com/plume-lib/multi-version-control>
-Documentation: <https://plumelib.org/multi-version-control/api/org/plumelib/multiversioncontrol/MultiVersionControl.html>
-From my dotfiles:
-alias mvc='java -ea -cp ${HOME}/java/plume-lib/multi-version-control/build/libs/multi-version-control-all.jar org.plumelib.multiversioncontrol.MultiVersionControl'
-
-
-As of Dec 2022, the checkstyle Gradle plugin does not support specifying a
-suppression filter, as the Maven plugin does with `<SuppressionFilter>`.
-
-
-Here is how to apply the Google Style with the checkstyle linter, in a Gradle
-`build.gradle` file, without downloading the `google_checks.xml` file.
-Unfortunately, the checkstyle Gradle plugin does not support a way to
-suppress/disable some rules, so it rejects any program that uses the Options
-package.
-
-```gradle
-/// Checkstyle linter
-// Run by `gradle check`, which is run by `gradle build`
-apply plugin: 'checkstyle'
-ext.checkstyleVersion = '10.5.0'
-configurations {
-  checkstyleConfig
-}
-dependencies {
-  checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
-}
-checkstyle {
-  toolVersion "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
-  ignoreFailures = false
-}
 ```
 
 
@@ -2527,25 +2418,6 @@ scp mernst@godwit.cs.washington.edu:sync/gradle-assemble-output-xps8940.txt ~/tm
 ```
 
 
-To update all snaps (all snap packages) on an Ubuntu system:
-
-```sh
-sudo snap update
-```
-
-
-To resolve Ubuntu popup
-"please update the application snap-store"
-or
-"Pending Update of Snap-Store, Close the App to Avoid Disruption"
-do one of these:
-
-```sh
-sudo snap-store --quit && sudo snap refresh
-sudo killall snap-store && sudo snap refresh
-```
-
-
 To output Google Slides *without* "skipped" slides:
 
 * Click File in the Google Slides interface.
@@ -2567,7 +2439,7 @@ This can help in reclaiming space from a full partition, where you cannot figure
 File `~/.cups/lpoptions` sets a default printer for `lpr`, `lpq`, etc.
 
 
-The `bear` program is for clang what do-like-javac is for Java.
+The `bear` program is for clang what `do-like-javac` is for Java.
 
 
 A better way to do `lsb_release -si` or `lsb_release -sr` is:
@@ -2578,9 +2450,10 @@ sed -n -e 's/^VERSION_ID="\(.*\)"/\1/p' /etc/os-release)
 ```
 
 
-To find all files not containing a string: `-L foo`.
-This works with `grep` and `ag`, etc.
-For `rg`: `--files-without-matches`
+When searching, to find all files not containing a string:
+ * `grep -L foo`
+ * `ag -L foo`
+ * `rg --files-without-matches`
 
 
 To turn off screensavers in Gnome:

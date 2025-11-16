@@ -598,8 +598,8 @@ Travis says not to cache Docker images:
 Preparing the Gradle buildfile for uploading/releasing to Maven Central:
 Set up directory:
 
-1. Run once ever: ln -s ../../../gradle.properties gradle.properties
-2. Add gradle.properties to .gitignore file.
+1. Run once ever: `ln -s ../../../gradle.properties gradle.properties`
+2. Add `gradle.properties` to `.gitignore` file.
 3. Gradle buildfile rules:
    <http://central.sonatype.org/pages/gradle.html>
    (It's better to use the "maven-publish" plugin; does it now suport signing?)

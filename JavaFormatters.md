@@ -21,8 +21,8 @@ menu icon (three lines or dots) in the top corner.
 
 
 <https://clang.llvm.org/docs/ClangFormat.html>
-  To install: sudo apt install clang-format -y
-  To run: clang-format --style=Google -i
+  To install: `sudo apt -y install clang-format`
+  To run: `clang-format --style=Google -i`
   "--qualifier-alignment=<string> - If set, overrides the qualifier alignment style
                                    determined by the QualifierAlignment style flag"
   Formats @SuppressWarnings wrong:

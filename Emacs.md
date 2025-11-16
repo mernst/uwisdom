@@ -23,11 +23,11 @@ line of the code which is mentioned in the error.  This works with the
 output of most compilers.
 
 
-Why are there two backslashes in \\| in a regexp in Lisp code?
+Why are there two backslashes in `\\|` in a regexp in Lisp code?
 Because the string is being interpreted twice, once by the Emacs Lisp
-string-reading routine and once by the regexp routine.  Both of them happen
-to use backslash as their escape character.  So "a\\|b" is a four-character
-string with contents a \ | b and \| is the regexp routine's alternative
+string-reading routine and once by the regexp routine.  Both of them happen to
+use backslash as their escape character.  So `a\\|b` is a four-character string
+with contents `a`, `\`, `|`, `b` and `\|` is the regexp routine's alternative
 specifier.
 
 
@@ -43,7 +43,8 @@ function, variable, class, etc.) or search a collection of related files.
 * To select a different tags table, type  <kbd>M-x visit-tags-table RET</kbd>
 
 
-`etags` returns the best matches in a TAGS table first; however, it examines
+`etags` returns the best matches in a TAGS table first.
+`etags` examines
 entire TAGS tables at a time, so it is advantageous to use a single TAGS
 table instead of multiple smaller ones (along with include directives).
 
@@ -78,17 +79,17 @@ and then call it from the root of your source tree like this:
 ```
 
 
-To get a list of LaTeX files that are \inputted (not \included) in a LaTeX
-file, for use in making a tags table or in a Makefile or Ant build.xml file:
+Here is a Make command to get a list of LaTeX files that are `\inputted` (not
+`\included`) in a LaTeX file, for use in making a tags table or in a buildfile:
 
-```sh
+```make
   TEX_FILES=$(shell latex-process-inputs -list main.tex)
 ```
 
 or, to run tags directly:
 
 ```sh
-  etags `latex-process-inputs -list main.tex`
+  etags $(latex-process-inputs -list main.tex)
 ```
 
 
@@ -103,17 +104,21 @@ In gnus 5, use  <kbd>S o m</kbd>  to forward the current article.
 
 
 Kill file like so:
+
+```elisp
 (gnus-kill "Subject" "foo\\|bar" "u")
 (gnus-kill "Subject" ".")
 (gnus-expunge "X")
+```
+
 will un-kill all except foo or bar in subject.  (There might be a faster
 way, but this works fine.)
 
 
-In gnus, "S o m" to forward/resend article via mail.
+In gnus, <kbd>S o m</kbd> to forward/resend article via mail.
 
 
-In Mew: to copy a message from one account to another, run:  l i
+In Mew: to copy a message from one account to another, run:  <kbd>l i</kbd>
 
 
 ## Fonts
@@ -131,10 +136,10 @@ To change the font while emacs is running,
 
 To list available fonts:
 
-* use program xlsfonts.
-  Any font with `m' or`c' in the SPACING field of
-  the long name is a fixed-width font.  Here's how to use the `xlsfonts'
-  program to list all the fixed-width fonts available on your system:
+* use program `xlsfonts`.
+  Any font with "m" or "c" in the SPACING field of
+  the long name is a fixed-width font.  Here's how
+  to list all the fixed-width fonts available on your system:
 
   ```sh
   xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"
@@ -142,7 +147,7 @@ To list available fonts:
   xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
   ```
 
-* see variable x-fixed-font-alist
+* see variable `x-fixed-font-alist`
 * run `(x-list-fonts "*")`
 
 
@@ -162,13 +167,13 @@ emacs --font Monospace
 
 since that font is generally defined.
 (You can install the Inconsolata font by clicking at
-<http://www.levien.com/type/myfonts/Inconsolata.otf> .)
+<http://www.levien.com/type/myfonts/Inconsolata.otf>.)
 
 
-In Emacs 20, to remove text properties (such as faces/fonts/colors) from a
-string, use (format "%s" string-with-properties).
-In Emacs 21, use `copy-sequence` to copy the string, then use
-`set-text-properties` to remove the properties of the copy.
+To remove text properties (such as faces/fonts/colors) from a string
+ * In Emacs 20: `(format "%s" string-with-properties)`
+ * In Emacs 21:  use `copy-sequence` to copy the string, then use
+   `set-text-properties` to remove the properties of the copy.
 
 
 ## Local variables actions
@@ -374,26 +379,26 @@ To remember the old value of an emacs function:
 ```
 
 
-To force a window or screen to repaint DURING the execution of an Elisp
-function:  (sit-for 0).
+To force a window or screen to repaint **during** the execution of an Elisp
+function:  `(sit-for 0)`.
 
 
-(setq cw-ignore-whitespace t) ingores whitespace in emacs's compare-windows.
+`(setq cw-ignore-whitespace t)` ingores whitespace in emacs's compare-windows.
 Or, supply a prefix argument when invoking compare-windows.
 
 
-To delete (kill) the entire contents of an Emacs buffer, use (erase-buffer)
+To delete (kill) the entire contents of an Emacs buffer, use `(erase-buffer)`
 or <kbd>M-x erase-buffer</kbd>.
 
 
 To specify Emacs's indenting of a lisp expression, do something like:
-(put 'with-output-to-temp-buffer 'lisp-indent-hook 1)
+`(put 'with-output-to-temp-buffer 'lisp-indent-hook 1)`.
 The number is the number of "special" (indented more than usual) arguments.
 To see some examples, do <kbd>M-. indent-sexp</kbd>, then go up a few lines.
 
 
-Set command-switch-alist to something like '(("-foo" . foo-handler)) to add
-new command line switches; use command-line-args-left to see following
+Set `command-switch-alist` to something like `'(("-foo" . foo-handler))` to add
+new command line switches; use `command-line-args-left` to see following
 arguments, and remove them from it when done.
 
 
@@ -427,7 +432,7 @@ evaluate Lisp code.
 
 In Emacs, to show only those unindented lines that are *not* preceded by *N*
 spaces, do
-<kbd>C-u _N_ C-x $</kbd>
+<kbd>C-u *N* C-x $</kbd>
 
 To reset, do
 <kbd>C-x $</kbd>
@@ -486,7 +491,8 @@ global-set-key</kbd>, then use `repeat-complex-command` to see the Lisp represen
 
 
 Version control keystrokes:
- * <kbd>C-x v</kbd>:    Compare buffer with latest checked-in version
+
+* <kbd>C-x v</kbd>:    Compare buffer with latest checked-in version
 
 
 In an Emacs shell, if tabs are expanded into an (incorrect) number of
@@ -518,7 +524,7 @@ conventions, in Emacs do
   (setq buffer-file-coding-system nil)
 ```
 
-Or, use the dos2unix program.
+Or, use the `dos2unix` program.
 To save a file with DOS end-of-file conventions, in Emacs do
 <kbd>C-x RET f dos RET</kbd>
 
@@ -552,18 +558,10 @@ emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& g
 ```
 
 
-On Debian, site-local .el Emacs Lisp source code files are installed in
-(for example)
-
-```filename
-  /usr/share/emacs/site-lisp/
-```
-
+On Debian, site-local `.el` Emacs Lisp source code files are installed in
+(for example) `/usr/share/emacs/site-lisp/`
 as distinguished from where the .elc versions can be found:
-
-```filename
-  /usr/share/emacs22/site-lisp/
-```
+`/usr/share/emacs22/site-lisp/`.
 
 
 crypt.el :

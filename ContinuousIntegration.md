@@ -61,8 +61,7 @@ Azure Pipelines terminology:
 In Azure Pipelines, to run CI for a new GitHub project, do:
 
 * New project.
-* Pipelines
-* >> New pipeline
+* Pipelines >> New pipeline
 * GitHub
 
 
@@ -105,7 +104,7 @@ For each project, I need to
 * create an Azure account
   * Be sure to click "Sign in with GitHub"
   * Create a project named randoop (not mernstrandoop)
-  * add my regular email address (eg, <mernst@alum.mit.edu>) to the team
+  * add my regular email address to the team (in addition to the new account's email address)
 * Create the pipelines
   * delete old project from my personal Azure account, where they were competing for the same small resources.
 
@@ -126,8 +125,11 @@ After doing this, it may take a few minutes for users to see the "run next" butt
 
 CircleCI's `docker` executor:
 
-* The `large` resource class gives 8GB of memory and is the largest available to free users as of 2023-06-03.
-   (sources: <https://circleci.com/pricing/> <https://circleci.com/docs/using-docker/#available-docker-resource-classes>)
+* The `large` resource class gives 8GB of memory and is the largest available to
+  free users as of 2023-06-03 and 2025-11-15.  Sources:
+  <https://circleci.com/pricing/>,
+  <https://circleci.com/docs/using-docker/#available-docker-resource-classes>
+
 
 CircleCI's `machine` executor is for a Linux machine not running a Docker image.
 
@@ -135,11 +137,8 @@ CircleCI's `machine` executor is for a Linux machine not running a Docker image.
    (source: <https://circleci.com/docs/using-linuxvm/#available-linuxvm-resource-classes>)
    It may require payment in the future.  You specify a VM image rather than a Docker image.
 
-Travis-CI:  "The default one is ‘medium’, which is ... usually ... 2vCPU and around 4 or 8 GB of RAM".
-The Checker Framework tests do not run in 4GB of memory.
 
-
-Grant CircleCI access to your organization at:
+Grant CircleCI access to your GitHub organization at:
 <https://github.com/settings/connections/applications/78a2ba87f071c28e65bb>
 
 
@@ -365,8 +364,9 @@ GitHub Actions offers free 2000 Linux minutes per month for public repositories.
   That's 1 hour per day.
   A macOS minutes costs 10 Linux minutes.
   A Windows minute costs 2 Linux minutes.
-  Details at <https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages> .
-Each virtual machine has a 2-core CPU with 7 GB of RAM
+  Details at <https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages>.
+
+Each virtual machine has a 2-core CPU with 7 GB of RAM.
   Details at <https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners> .
 
 
@@ -435,3 +435,17 @@ To give a new user permissions/privileges in Jenkins:
 Dependabot runs on forks, which is irritating.
 The workaround for now is to delete the fork and re-create it without enabling Dependabot security updates.
 Or, use Renovate instead.
+
+
+## Hudson
+
+
+An uninterrupted Hudson build has one of the following statuses:
+
+* Failed - it doesn't compile
+* Unstable - compiles without errors, but tests fail
+* Stable - compiles without errors and all the tests are passing
+
+A manually interrupted Hudson job gives a message like "SCM check out aborted".
+
+

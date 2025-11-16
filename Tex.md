@@ -5,18 +5,22 @@ On github.com, you can view the table of contents of this file by clicking the
 menu icon (three lines or dots) in the top corner.
 
 
+<!--
 // Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
+-->
 
 
+<!--
 // PROBLEM with this file is that TeX comments starting in column 1 will be
 // ignored by the database searching program!  Therefore, put a space before
 // any "%" character that is part of an entry.
+-->
 
 
 ## Figures (floats)
 
 
-In LaTeX, always put a \protect in front of a \ref in a \caption.
+In LaTeX, always put a `\protect` in front of a `\ref` in a `\caption`.
 
 
 In LaTeX, to get a line between floats (figures, tables, etc.) and text, do
@@ -45,9 +49,11 @@ additionally do
 ```
 
 
+<!--
 // Can't unindent the LaTeX comments or the doc program will respect those
 // comments.  That's unfortunate, because I typically unindent when inserting
 // in a LaTeX document.
+-->
 To prevent having just a couple of figures, and lots of white space, on a
 page produced by LaTeX, do the following.  Also consider making it 90%.
 
@@ -65,7 +71,7 @@ page produced by LaTeX, do the following.  Also consider making it 90%.
 To fix "too many unprocessed floats" error, do one of the following:
 
 * spread your figures further apart in your document, or
-* put in a \clearpage or \cleardoublepage command to allow a page full of figures to be generated.
+* put in a `\clearpage` or `\cleardoublepage` command to allow a page full of figures to be generated.
 
 
 To change the font and line spacing for LaTeX figure captions in acmart.cls (eg, prevent captions from being bold or reduce their font size), do:
@@ -75,37 +81,6 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
  \usepackage{setspace,caption}
  \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
 ```
-
-
-% The change in font size of a LaTeX figure caption won't take unless you give
-% `\caption` an empty optional argument, like so:
-% ```
-%   \caption[]{{\small Small caption}}
-% ```
-% However, don't use that approach because it does not adjust the inter-line spacing in the caption.
-%
-% To get inter-line spacing right in LaTeX figure captions that are set smaller
-% than body text:
-% In the paper, do
-% ```
-%   \renewcommand{\captionfont}{\small}
-% ```
-% or
-% ```
-%   \renewcommand{\captionfont}{\small\bf}
-% ```
-% and use the following definition of \captionfont:
-% ```
-% \newcommand{\captionfont}{\bf}
-% \long\def\@makecaption#1#2{
-%    \vskip \baselineskip
-%    \setbox\@tempboxa\hbox{\captionfont{#1: #2\strut}}
-%    \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-%        {\captionfont\noindent\parbox{\hsize}{#1: #2\strut}}\par     %   THEN set as ordinary paragraph.
-%      \else                      %   ELSE  center.
-%        \hbox to\hsize{\hfil\box\@tempboxa\hfil}
-%    \fi}
-% ```
 
 
 ## Tables
@@ -140,7 +115,7 @@ at the right side of the column, or let extra digits after the decimal
 point lap into the next column.
 
 
-In LaTeX, to define new column types L, C, and R:  Note that a width is REQUIRED
+In LaTeX, to define new column types L, C, and R:  Note that a width is **required**
 as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
 
 ```latex
@@ -175,9 +150,9 @@ as with the HTML "colspan" attribute, use an entry like
 ```
 
 where 3 is the number of columns to span, and "l" is the alignment of
-the spanning contents. \multicolumn seems to want to insert
+the spanning contents. `\multicolumn` seems to want to insert
 inter-column spacing around the contents even if you've tried to
-disable it in the header line with @{} (or @{your amount of space}),
+disable it in the header line with `@{}` (or `@{your amount of space}`),
 but you can override it by putting a negative version of the space on
 the *inside* of the multicolumn, as in:
 
@@ -185,11 +160,13 @@ the *inside* of the multicolumn, as in:
    \multicolumn{3}{l}{\hskip-\tabcolsep...}
 ```
 
+
 Here is a "MultiColumn, One, Centered" macro:
 
 ```latex
   \newcommand{\mcoc}[1]{\multicolumn{1}{c|}{#1}}
 ```
+
 
 To span multiple rows (as with the HTML "rowspan" attribute), use
 \multirow:
@@ -198,6 +175,7 @@ To span multiple rows (as with the HTML "rowspan" attribute), use
   \usepackage{multirow}
   \multirow{nrows}[bigstruts]{width}[fixup]{text}
 ```
+
 
 Multirow documentation is at
 <http://mirror.math.ku.edu/tex-archive/macros/latex/contrib/multirow/multirow.sty>
@@ -251,22 +229,23 @@ to reduce the width of columns in a table or tabular environment.
 ## Math mode
 
 
-To define a (say) binary operator in TeX or LaTeX, use \mathord, \mathop,
-\mathbin, \mathrel, \mathopen, \mathclose, \mathpunct, \mathinner.
+To define a (say) binary operator in TeX or LaTeX, use `\mathord`, `\mathop`,
+`\mathbin`, `\mathrel`, `\mathopen`, `\mathclose`, `\mathpunct`, `\mathinner`.
 These give "class" 1..8 to the math character or formula.
 
-* mathbin: for binary operators like "+"
-* mathrel: for binary relations like "=" (slightly more space)
-* mathop: for things like \sum, \cos, \ln, etc.
-(There is no \binop or \binrel; I mention them here in case someone
+* `\mathbin`: for binary operators like "+"
+* `\mathrel`: for binary relations like "=" (slightly more space)
+* `\mathop`: for things like \sum, \cos, \ln, etc.
+
+(There is no `\binop` or `\binrel`; I mention them here in case someone
 searches for them.)
 
 
-To typeset a multi-character identifier in LaTeX math mode, use
-\mathit{...} (or, if you have it defined, \|...|) .  Never use $...$, which
-puts incorrect kerning between the letters.  LaTeX typesets $myvar$ as "m
-times y times v times a times r".  It looks bad, and enough people will
-notice that it is worthwhile to get the typesetting right.
+To typeset a multi-character identifier in LaTeX math mode, use `\mathit{...}`
+(or, if you have it defined, `\|...|`) .  Never use `$...$`, which puts
+incorrect kerning between the letters.  LaTeX typesets `$myvar$` as "m times y
+times v times a times r".  It looks bad, and enough people will notice that it
+is worthwhile to get the typesetting right.
 
 
 ## Lists
@@ -295,8 +274,8 @@ To remove the vertical space from between two LaTeX trivlist environments:
 
 
 To reduce the indentation of bullets/numbers/items a LaTeX list environment
-(itemize, enumerate, description), do this *outside* the env.  It needs to come
-after `\begin{document}`.  (It's especially needed in the acmart style.)
+(itemize, enumerate, description), do this *outside* the environment.  It needs
+to come after `\begin{document}`.  (It's especially needed in the acmart style.)
 
 ```latex
   % Reduce indentation in lists.
@@ -306,9 +285,9 @@ after `\begin{document}`.  (It's especially needed in the acmart style.)
 ```
 
 
-In a LaTeX enumerate list environment, to insert an ordinary
-(left-justified) paragraph of text without interrupting the item numbering,
-do the following:
+In a LaTeX enumerate list environment, to insert an ordinary (left-justified)
+paragraph of text outside the list, then resume the item numbering, do the
+following:
 
 ```latex
   \label{item:pre-break}
@@ -357,40 +336,36 @@ Here are ways to test wither a macro argument is empty/null:
 
 1. The following macro definition will test whether a macro argument is empty:
 
-```latex
-    \def\mymacro#1{%
-     \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
-     }%
-```
+   ```latex
+       \def\mymacro#1{%
+        \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
+        }%
+   ```
 
-  Note that PLAIN.TEX defines \empty as follows:
+   Note that `plain.tex` defines `\empty` as `\def\empty{}%`.
 
-```latex
-    \def\empty{}%
-```
-
-  LaTeX defines \@empty in a similar way, if you want to work with .sty files.
-  Note that since this uses \def to assign the value of #2 to a macro, it
-  won't work in TeX's mouth, and needs the stomach as well (so it won't work
-  inside an \edef for example).
+   LaTeX defines `\@empty` in a similar way, if you want to work with .sty files.
+   Note that since this uses \def to assign the value of #2 to a macro, it
+   won't work in TeX's mouth, and needs the stomach as well (so it won't work
+   inside an \edef for example).
 2. This way of testing for null arguments can be done entirely in TeX's mouth:
 
-```latex
-      \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
-```
+   ```latex
+         \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
+   ```
 
-  It does however fail badly if #1 begins with \relax
-  (e.g., \showempty{\relax...}).
+   It does however fail badly if #1 begins with \relax
+   (e.g., \showempty{\relax...}).
 3. Another way of testing for empty arguments in TeX's mouth is to say:
 
-```latex
-       \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
-```
+   ```latex
+        \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
+   ```
 
-  This will expand to `true text' iff #2 is empty, or begins with
-  \unlikely.  So if you make \unlikely an unlikely macro for #2 to begin
-  with, then you're away.  (It also dies if #2 contains unbalanced \if,
-  \else or \fi's, but that should be pretty rare.  Touch wood.)
+   This will expand to `true text' iff #2 is empty, or begins with
+   \unlikely.  So if you make \unlikely an unlikely macro for #2 to begin
+   with, then you're away.  (It also dies if #2 contains unbalanced \if,
+   \else or \fi's, but that should be pretty rare.  Touch wood.)
 
 
 LaTeX macros gobble space after them.  If you wish to insert space
@@ -446,9 +421,11 @@ For Verbatim environments, do this:
 ```
 
 
+<!--
 // Can't unindent the LaTeX comments or the doc program will respect those
 // comments.  That's unfortunate, because I typically unindent when inserting
 // in a LaTeX document.
+-->
 
 
 Here are definitions for identifiers in LaTeX math mode formulas:
@@ -465,13 +442,14 @@ Here are definitions for identifiers in LaTeX math mode formulas:
   % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ```
 
-This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/> ):
+This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
 
 ```latex
   \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
 ```
 
-To switch from "\texttt{...}" to "\<...>":
+
+To switch from `\texttt{...}` to `\<...>`:
 
 ```elisp
   (tags-query-replace "\\\\texttt{\\([^{}<>]+\\)}" "\\\\<\\1>")
@@ -479,7 +457,7 @@ To switch from "\texttt{...}" to "\<...>":
   (tags-search "texttt")
 ```
 
-To switch from "$...$" to "\|...|":
+To switch from `$...$` to `\|...|`:
 
 ```elisp
   (tags-query-replace "\\\\|" "\\\\parallel")
@@ -491,9 +469,10 @@ To switch from "$...$" to "\|...|":
 
 
 To permit hyphenation in tt font globally throughout a document, see
-<http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt>
-However, all of those solutions give me a Roman font that differs from the text font, whereas I want a typewriter font.
-`\usepackage[htt]{hyphenat}` doesn't seem to work either.
+<http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt>.
+However, all of those solutions give me a Roman font that differs from the text
+font, whereas I want a typewriter font.  `\usepackage[htt]{hyphenat}` doesn't
+seem to work either.
 
 
 ## Bibliographies and citations
@@ -501,14 +480,15 @@ However, all of those solutions give me a Roman font that differs from the text 
 
 Very simple BibTeX usage:
 
-* See ~mernst/bib for bibliographies (but you should get your own copy).
+* See <https://github.com/mernst/plume-bib> for bibliographies (but you should get your own copy).
 * At beginning of document:   ((Why not at the end?))
-   \bibliographystyle{alpha}
+  `\bibliographystyle{alpha}`
 * Within document:
-   \cite{key}
+  `\cite{key}`
 * At end of document:
-   \bibliography{bibstring-unabbrev,invariants,dispatch,generals,alias}
-* Run latex, then bibtex, then latex again.
+  `\bibliography{bibstring-unabbrev,invariants,dispatch,generals,alias}`
+* Run `latex`, then `bibtex`, then `latex` again.
+  But it's better to use `latexmk` rather than `latex` and `bibtex`.
 
 
 Typical LaTeX commands for bibliography:
@@ -519,10 +499,10 @@ Typical LaTeX commands for bibliography:
 ```
 
 
-\thebibliography is defined in the main document style (article.sty, etc.).
+`\thebibliography` is defined in the main document style (`article.sty`, etc.).
 
 
-For multiple bibliographies (say, one per chapter), use chapterbib.sty.
+For multiple bibliographies (say, one per chapter), use `chapterbib.sty`.
 
 
 How can I permit line breaks in a citation?
@@ -541,13 +521,12 @@ I'm not sure if this is good style or not, but this is how to do it
 ```
 
 
-BibTeX journal abbreviations are in /usr/local/lib/tex/bib/abbreviations,
-which is pointed to by ~/tex/abbreviations.
+BibTeX journal abbreviations are in `/usr/local/lib/tex/bib/abbreviations`.
 
 
 The problem with BibTeX's cross referencing feature is that it puts the
 book, proceedings, etc. in the bibliography as an entry of its own.
-However, supplying argument -min-crossrefs=10000 disables this feature.
+However, supplying argument `-min-crossrefs=10000` disables this feature.
 
 
 For mix-n-match BibTeX citations,
@@ -600,7 +579,7 @@ For other bibliography styles, do
 ```
 
 
-In LaTeX 2e, to adjust bibliography formatting:
+To adjust bibliography formatting:
 (For IEEE styles, just do `\def\IEEEbibitemsep{0pt plus .5pt}`.)
   First, copy from article.cls the definition of
 
@@ -698,7 +677,7 @@ In Texinfo, to prevent the last index pages from being numbered i, ii,
 etc., add an @page before @summarycontents or @contents.
 
 
-To format a texinfo file (ie, to produce a .dvi file from a .texi file), do
+To format a texinfo file (ie, to produce printed output such as PDF from a .texi file), do
 
 ```sh
     tex foo.texi
@@ -717,22 +696,13 @@ Make sure that any usages of the macro are also put inside @iftex, and
 make sure that you provide an equivalent construction inside @ifinfo.
 
 
-Help for texinfo:
-You might want to check out texinfo, a system for preparing both
-high-quality typeset (by TeX) documents and on-line hypertext (viewable
-from Emacs or a stand-alone viewer).  It's available from
-prep.ai.mit.edu:/pub/gnu/texinfo-2.??.tar.Z.  There's also a latexinfo
-system available from
-tut.cis.ohio-state.edu:pub/gnu/emacs/elisp-archive/packages/LaTeXinfo.shar.*.Z.
-
-
 LaTeXinfo takes a different input format than LaTeX -- for instance, there
-are only three special characters (\{}), so comments are introduced by \c,
+are only three special characters (`\{}`), so comments are introduced by `\c`,
 and so forth.  Thus, it could be a lot of work to convert a document into
 LaTeXinfo.
 
 
-Texinfo summary of cross reference commands (@xref @ref @pxref @inforef):
+Texinfo summary of cross reference commands (`@xref`, `@ref`, `@pxref`, `@inforef`):
 <http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands>
 
 
@@ -754,19 +724,57 @@ Texinfo does not let you change the margins without changing 'texinfo.tex'
 or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
 
 
-## Hyphenization; word, line, and page breaking
+## Non-breaking spaces
+
+
+In LaTeX, there should be a space before a citation.  Both a non-breaking space
+`~` and a regular space ` ` are acceptable:
+
+```latex
+  WRONG: one plus one is two\cite{authority}
+  RIGHT: one plus one is two~\cite{authority}
+  RIGHT: one plus one is two \cite{authority}
+```
+
+
+In LaTeX, `~` is a non-breaking space.  It formats just like a space ` `, but it
+prohibits line breaks at that location.  It should never be adjacent to another
+(breaking) space.
+
+```latex
+  WRONG: one plus one is two ~\cite{authority}
+  RIGHT: one plus one is two~\cite{authority}
+  RIGHT: one plus one is two \cite{authority}
+```
+
+```latex
+  WRONG: Figure ~\ref{fig:beautiful}
+  RIGHT: Figure~\ref{fig:beautiful}
+  RIGHT: Figure \ref{fig:beautiful}
+```
+
+
+In LaTeX, always jam `\footnote` against the preceding text.  If you write
+`text \footnote{...}`, then there is an ugly space between the text and the
+footnote mark, and LaTeX might even put a line break or a page break
+between them.
+
+
+## Hyphenization and hyphenation
 
 
 <raymond@sunkist.berkeley.edu> (Raymond Chen) says:
-To prevent word breaking (hyphenation) in (La)TeX, \hyphenpenalty=10000
+To prevent word breaking (hyphenation) in (La)TeX, `\hyphenpenalty=10000`
 Note, however, that although it'll work, it ain't exactly the nicest
-thing to do to your CPU :-) +
+thing to do to your CPU :-)
+
 Reason:  TeX will go ahead and hyphenate all the words in your
 paragraph, and consider every possible breakpoint (including the
 hyphens it inserted), but when it's just about ready to insert a hyphen,
 it looks at \hyphenpenalty and say "Whoa!  Better not do it here."
 This is repeated for every hyphenation point in every word of your
-paragraph. +
+paragraph.
+
 A much more polite way to do it is to set the \hyphenchar to a
 number not between 0 and 255; typically, -1 is used to suppress
 hyphenation.  When the \hyphenchar is set to an invalid number,
@@ -833,11 +841,11 @@ To have LaTeX hyphenate words with imbedded hyphens, you may use the
 ```
 
 You could play tricks mapping it to a character that's made active for
-the purpose, but `-'?
+the purpose, but `-`?
 
 
-LaTeX doesn't hyphenate (line-break) automatically when in font \tt because
-in the customary uses for \tt fonts, one does not want TeX to insert any
+LaTeX doesn't hyphenate (line-break) automatically when in font `\tt` because
+in the customary uses for `\tt` fonts, one does not want TeX to insert any
 hyphens.
 Here are two workarounds:
 
@@ -873,6 +881,29 @@ Examples:
   \discretionary{}{.}{.}             % permit break before period (e.g., in URL)
   \discretionary{f-}{fi}{ffi}cult    % kerning
 ```
+
+
+LaTeX's `\underline{...}` macro does not permit hyphenization (line breaking).
+Instead, use
+
+```latex
+  \usepackage{soul}
+  ...
+  \ul{...}
+```
+
+
+This ought to permit more hyphenization in LaTeX:
+
+```latex
+\hyphenpenalty=100
+\exhyphenpenalty=100
+\lefthyphenmin=2
+\righthyphenmin=2
+```
+
+
+## word, line, and page breaking
 
 
 To permit more space between words, in order to prevent bad breaks in
@@ -912,13 +943,14 @@ the breqn package or the split environment provided by the amsmath package.
 LaTeX can break an inline math mode formula at a \discretionary{}{}{} command.
 It can automatically break the formula only when a relation symbol
 (=, >, ...)  or a binary operation symbol (+, -, ...) exists and at least
-one of these symbols appears at the outer level of the formula. Thus $a+b+c$
-can be broken across lines, but ${a+b+c}$ cannot and neither can
-$\left\langle ... \right\rangle$.
+one of these symbols appears at the outer level of the formula. Thus `$a+b+c$`
+can be broken across lines, but `${a+b+c}$` cannot and neither can
+`$\left\langle ... \right\rangle$`.
 You can wrap parts of your formula in \mathrel or the like to fool LaTeX into
 thinking there is a relation symbol at the outer level of the formula.
-There is also \* which is discretionary multiplication sign:  "\times"
+There is also `\*` which is discretionary multiplication sign:  `\times`
 appears in the document only if the document is broken there.
+
 
 From
 <http://stackoverflow.com/questions/1703867/latex-how-to-put-line-break-in-a-math>,
@@ -959,32 +991,7 @@ Another solution, from <http://tex.stackexchange.com/questions/19094/allowing-li
 ```
 
 
-LaTeX's \underline{...} macro does not permit hyphenization (line breaking).
-Instead, use
-
-```latex
-  \usepackage{soul}
-  ...
-  \ul{...}
-```
-
-
-This ought to permit more hyphenization in LaTeX:
-
-```latex
-\hyphenpenalty=100
-\exhyphenpenalty=100
-\lefthyphenmin=2
-\righthyphenmin=2
-```
-
-
 ## PDF and pdflatex
-
-
-Regular TeX uses bitmap based fonts by default, so PDF looks bad for them.
-To, use "pdflatex" on your tex documents, to use outline fonts instead (and
-to generate PDF instead of .dvi.
 
 
 When using the graphicx package to include figures in a LaTeX document:
@@ -1052,19 +1059,6 @@ To embed fonts in a PDF document:
 
 This creates tmp.pdf with as many fonts embedded as are available on the
 computer where you ran the command.
-
-
-To embed the 14 base fonts (make them embedded fonts) in a PDF document,
-when starting from a PostScript document:
-
-```sh
-  ps2pdf13 -dPDFSETTINGS=/prepress doc.ps doc2.pdf
-```
-
-Be sure to do this on PostScript that is generated by dvips, not on
-PostScript that is generated by pdf2ps or similar programs.
-(The instructions at <http://users.rsise.anu.edu.au/~luke/embedded_fonts.html>
-that are supposed to make pdflatex embed the fonts did not work for me.)
 
 
 You can set the compatibility level (e.g., PDF 1.7) in LaTex as follows:
@@ -1336,6 +1330,25 @@ From an NSF proposal that made it through research.gov:
   % Palatino settings
   \usepackage{palatino}
   \linespread{1.005}
+
+
+## Overleaf
+
+
+To find the git URL for an Overleaf project, click on the word "menu" in
+the upper left corner, then (in section "sync") "git".
+
+
+To get your Git credential helper to remember an Overleaf password, clone a repository like this:
+
+```sh
+git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
+```
+
+where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
+Then, delete the clone to prevent storing your token in its .git/config file,
+and you can clone any overleaf repository without providing the authentication token.
+The Git authentication token expires every 6 months or so. :-(
 
 
 ## Everything else
@@ -1998,8 +2011,8 @@ this produces MyGraph.dot with the contents:
     digraph MyGraph {a->b}
 ```
 
-If you run dot to get MyGraph.ps (ie, dot -Tps -o MyGraph.ps MyGraph.dot),
-then the \digraph macro will include the postscript file in your document.
+If you run `dot` to get `MyGraph.ps` (ie, `dot -Tps -o MyGraph.ps MyGraph.dot`),
+then the `\digraph` macro will include the postscript file in your document.
 The macro file is available at:
     <http://web.mit.edu/~drayside/www/graphviz.tex/graphviz.tex>
 and a bit more documentation is at:
@@ -2008,24 +2021,6 @@ and a bit more documentation is at:
 
 In LaTeX, use \enlargethispage to expand a page or column, fitting slightly
 more text on it.
-
-
-Tell TeX programs (from the teTeX distribution, which is standard on modern
-Unix systems) to default to US-Letter-sized paper:
-
-```sh
-  texconfig xdvi us
-  texconfig dvips paper letter
-  texconfig dvipdfm paper letter
-  texconfig pdftex paper letter
-```
-
-Alternately, a less desirable fix that only solves part of the problems above:
-To make dvips produce lettersize output by default, edit config.ps (maybe in
-/usr/share/texmf/dvips/config/config.ps or
-/g2/local/lib/texmf/texmf/dvips/config/config.ps) to make sure the "letter"
-pagesize block comes first; the first "@" block is the default.
-(Otherwise, one must invoke dvips with the "-t letter" switch.)
 
 
 Emacs "Local variables" section of a LaTeX file looks like one of the following:
@@ -2376,11 +2371,9 @@ locations.  This means that standard commands such as `latex` and
 
 Ways to convert LaTeX to plaintext:
 
-* detex program (comes with LaTeX distributions):  `detex yourfile > yourfile.txt`
-   opendetex supposedly improves detex but as of 9/2015 hasn't been updated since 10/2008
-* catdvi program, to retain formatting: `catdvi yourfile.dvi | fmt -u`
-* convert to PDF (disabling hyphenation), then use pdftotext
-* use pandoc
+* `detex` program (comes with LaTeX distributions):  `detex yourfile > yourfile.txt`
+* convert to PDF (disabling hyphenation), then use `pdftotext`
+* use `pandoc`
 
 
 To make cleveref use a serial comma (sometimes called an Oxford comma):
@@ -2404,12 +2397,12 @@ Alternately, do this:
 ```
 
 
-When using the cleveref package, use \Cref at the beginning of a sentence,
-where you would capitalize a word.  Use \cref elsewhere, where you would
+When using the cleveref package, use `\Cref` at the beginning of a sentence,
+where you would capitalize a word.  Use `\cref` elsewhere, where you would
 not capitalize a word.  If you want the words "Section", "Figure",
-etc. capitalized throughout (this is personal preference, not a requirement
-of English or of style guides), then do "\usepackage[capitalize]{cleveref}"
-rather than mis-using \Cref where \cref belongs.
+etc. capitalized throughout (this is personal preference, *not* a requirement
+of English or of style guides), then do `\usepackage[capitalize]{cleveref}`
+rather than mis-using `\Cref` where `\cref` belongs.
 
 
 When using hyperref and cleveref together:
@@ -2465,11 +2458,12 @@ latexmk -silent ...
 However, this suppresses some error messages, so use:
 
 ```sh
-latexmk -silent -pdf -interaction=nonstopmode myfile.tex || latexmk -gg -pdf -interaction=nonstopmode myfile.tex
+latexmk -silent -pdf -interaction=nonstopmode myfile.tex \
+ || latexmk -gg -pdf -interaction=nonstopmode myfile.tex
 ```
 
 
-For a single-colum, double-spaced version of an ACM LaTeX paper, for review:
+For a single-column, double-spaced version of an ACM LaTeX paper, for review:
 
 ```latex
 \documentclass[acmlarge,anonymous,]{acmart}
@@ -2526,22 +2520,6 @@ In ACM style, to make acknowledgments smaller:
 ```
 
 
-To find the git URL for an Overleaf project, click on the word "menu" in
-the upper left corner, then (in section "sync") "git".
-
-
-To get your Git credential helper to remember an Overleaf password, clone a repository like this:
-
-```sh
-git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
-```
-
-where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
-Then, delete the clone to prevent storing your token in its .git/config file,
-and you can clone any overleaf repository without providing the authentication token.
-The Git authentication token expires every 6 months or so. :-(
-
-
 ```latex
  % Set em dashes (LaTeX ---) with thin spaces surrounding them.
  \usepackage[kerning=true]{microtype}
@@ -2567,28 +2545,6 @@ LaTeX font sizes:
 \huge
 \Huge
 ```
-
-
-In Latex, there should be a space before a citation, for example:
-  one plus one is two \cite{authority}
-It is conventional to use a non-breaking space (~) so the citation
-doesn't start a line in the generated document:
-  one plus one is two~\cite{authority}
-Don't put a regular space before the non-breaking space:
-  WRONG one plus one is two ~\cite{authority}
-
-
-In LaTeX, `~' is a non-breaking space.  It should never be adjacent to
-another space.  For example, do not write`text ~\cite{ref}` because that
-will put two spaces between "text" and the citation, which looks bad.
-Instead, write `text~\cite{ref}`.  Similarly, do not write`Figure
-~\ref{fig:beautiful}` but write `Figure~\ref{fig:beautiful}`.
-
-
-In LaTeX, always jam `\footnote` against the preceding text.  If you write
-`text \footnote{...}`, then there is an ugly space between the text and the
-footnote mark, and LaTeX might even put a line break or a page break
-between them.
 
 
 This change prevents an "underfull hbox" warning.
@@ -2619,34 +2575,28 @@ index b97409f..17ec5fb 100644
 
 
 To typeset exercises and solutions in a LaTeX document:
-exercise package. -- last changed 2014
+* exercise package. -- last changed 2014
   Seems good, documentation doesn't give concrete examples.
-answers package. -- last changed 2014
+* answers package. -- last changed 2014
   Does what I want, but the documentation is a bit lacking.
   Section 4 of the documentation contains a MWE.
   Often recommended.
-ans.sty -- last changed 1994
+* ans.sty -- last changed 1994
   Supports only a subsection of exercises at the end of each section/chapter,
   not exercises interspersed throughout the document.
   Handles book document class.  A bit fiddly wrt carriage returns.
-ExSol package -- last changed 2018
+* ExSol package -- last changed 2018
   Documentation gives examples.  Can be used with book class.
   The MWEs at <https://tex.stackexchange.com/questions/510760/how-to-sync-the-exsol-counter-with-the-section-value>
   both yield LaTeX errors for me.
-exercises package. -- last changed 2020
+* exercises package. -- last changed 2020
   Does not permit answers at end of document.
-exam document class. -- last changed 2021
+* exam document class. -- last changed 2021
   Not really for my use case, might not put answers at end.
-xsim package
+* xsim package
   Doesn't allow for printing at end of document, it seems.
-probsoln
+* probsoln
   For selecting problems from a database or bank of problems.
-
-
-Put '~' before \cite, but do not put '~' before \footnote.  '~' is a
-non-breaking space.  It formats just like a space ' ', but it prohibits line
-breaks at that location.  You don't want a space before the footnote mark (so no
-'~' or space), but you do want a space between text and a citation (so use '~').
 
 
 <!--

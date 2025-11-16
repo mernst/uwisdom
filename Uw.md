@@ -25,7 +25,7 @@ Taxi stands near UW:
 * UW Hospital
 
 Or call Orange Cab, 206-522-8800.  For CSE, specify Paul G. Allen Center
-for CSE - *not* Paul Allen Library - (technical address is 185 Stevens way
+for CSE -- *not* Paul Allen Library -- (technical address is 185 Stevens Way,
 south of the Hub, but the dispatchers seem to have assigned an address
 plotted within the grid surrounding campus:  3815 Stevens Way.
 
@@ -39,14 +39,6 @@ To enter grades online:  <https://catalyst.uw.edu/gradepage>
 
 Final exam times can be predicted from weekly meeting times.
 See <http://www.washington.edu/students/reg/calendar.html>
-
-
-UW grading guidelines are
-  <http://depts.washington.edu/grading/practices/guidelines.html>
-which is linked from here:
-  <http://depts.washington.edu/grading/practices/index.html>
-UW CSE grading guidelines are
-  <https://homes.cs.washington.edu/~djg/instructors_only/internal_grading_guidelines.html>
 
 
 For off-campus access to the ACM digital library and similar UW-licensed
@@ -90,8 +82,8 @@ shuttle, or walk.  A relevant Microsoft campus map is:
 To access the ACM digital library (or other content licensed by the UW
 libraries) from an IP address that is not at washington.edu,
 
-* bookmark the following javascript URL:
-   javascript:void(location.href=%22<http://offcampus.lib.washington.edu/login?url=%22+location.href>)
+* bookmark the following JavaScript URL:
+   <javascript:void(location.href=%22http://offcampus.lib.washington.edu/login?url=%22+location.href>.
 To get access, visit the ACM DL, then visit the bookmark.
 
 
@@ -104,27 +96,10 @@ In UW Hires (<https://uwhires.admin.washington.edu/eng/hm/default.cfm?szcat=hm>)
    applicant), then click on the percentage in the "score" column.
 
 
-Cheap ($10) Microsoft Office/Project/Visio for home use, for UW faculty and
-staff:  <https://www.washington.edu/itconnect/wares/uware/microsoft/hup.html>
-Be sure to copy down the license key, as it is only temporarily saved on the
-Microsoft server.
-
-
-To approve spending:
-
-* Visit <https://ucs.admin.washington.edu/MyFD/UWNetID/ReconciliationDashboard/ReconciliationDashboard>
-* Click on "Reports >> Reconciliation Status"
-* Choose list: My PI Budgets (dynamic)
-* Click on "Go"
-* Click on any red "PI review" text (you cannot right-click to open it in another tab)
-* Click on green "Change Status/Audit Trail" button
-* In the popup window:
-  * Select the "Sign off" radio button
-  * Click "Save and close"
-* Repeat until there is no more red "PI review" text
-
-
-Poll Everywhere is free to UW faculty and students.  You can create simple polls that students can vote on anonymously via a URL or text message. It also has integrations with Powerpoint and Google Slides.
+[Poll Everywhere](https://www.polleverywhere.com/) is free to UW faculty and
+students.  You can create simple polls that students can vote on anonymously via
+a URL or text message. It also has integrations with Powerpoint and Google
+Slides.
 
 
 User guide for UW Telecom handsets/telephones:
@@ -132,7 +107,7 @@ User guide for UW Telecom handsets/telephones:
 
 
 The "personal Zoom room" is
-washington.zoom.us/my/USERNAME
+<https://washington.zoom.us/my/USERNAME>.
 
 
 To schedule Panopto automated video recordings:
@@ -140,15 +115,6 @@ To schedule Panopto automated video recordings:
 
 
 ## CSE (other than sysadmin)
-
-
-At UW CSE, Jan Cuny can read equity & broadening participation in computing (BPC) part of grants
-
-
-At UW CSE notaries:
-
-* Jen Worrell
-* Donna Cheung
 
 
 PLSE (PL/SE) lab is room CSE2 253.
@@ -184,8 +150,7 @@ Petitions for non-majors to take a UW CSE majors-only class:
 <http://www.cs.washington.edu/education/ugrad/academics/petition.html>
 
 
-To reserve seminar rooms 305 and Gates Commons, ask Tracy Erbeck or Heidi
-Dlubac.  Or maybe use the <cse-maintenance@cs.washington.edu> mailing list?
+To reserve seminar rooms CSE 305 and Gates Commons, maybe use <events@cs.washington.edu>?
 
 
 Use the <cse-maintenance@cs.washington.edu> mailing list for requests about facilities (physical plant) issues with the Allen Center.
@@ -212,18 +177,14 @@ Connie Ivey-Pasche or Kay Beck-Benton:
   visitor schedule in MVIS if available
 
 
-For read permissions/access to the UW CSE grad student and advising
-database, ask Dan Boren.  Then, access it via the Web:
+The UW CSE grad student and advising
+database can be accessed via the Web (if you have proper permissions)
   <https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/>
 or from the command line (you need postgres, and you need to be on the CSE network):
 
 ```sh
   psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
 ```
-
-
-Instructions for maintaining UW CSE Drupal webpages/website:
-<https://wasp.cs.washington.edu/Internal/plse-webpages.html>
 
 
 If you want to send a message to UW CSE undergrads, send it to
@@ -234,19 +195,21 @@ cs-ugrads-urgent@cs.
 
 Card key access to rooms and labs in CSE buildings (the Allen Center or the Gates Center):
 To: <cardkey@cs.washington.edu>
-For undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253:
-For non-undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253, and the amenity spaces like the kitchens:
+ * For undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253.
+ * For non-undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253, and the amenity spaces like the kitchens.
+
 For undergraduates, need:
 
 * student ID
 * rooms to be given access to
 * end date (I always make it December 31)
+
 For visitors, need:
+
 * name
 * email address
 * end date
 * whether to give access to "amenity" spaces like the kitchens and printer/copier rooms
-The PLSE Lab is room Gates 253.
 
 
 How to order lunches / snack carts at UW CSE:
@@ -256,17 +219,21 @@ How to order lunches / snack carts at UW CSE:
 UW CSE course web template:
 <https://gitlab.cs.washington.edu/lab/simple-courseweb-template>
 To use:
+
+```sh
 git clone <git@gitlab.cs.washington.edu>:lab/simple-courseweb-template.git
-and then copy into my course directory.
+```
+
+and then copy the clone contents.
 
 
 Fellowships/scholarships that students can apply for:
-NSF -- first two years only
-NDSEG -- first two years only
-Adobe Research fellowship
-Facebook fellowship
-Symantec Fellowship
-Google Fellowship
+* NSF -- first two years only
+* NDSEG -- first two years only
+* Adobe Research fellowship
+* Facebook fellowship
+* Symantec Fellowship
+* Google Fellowship
 
 
 gitlab.cs.washington.edu does not support adding collaborators by email
@@ -324,7 +291,7 @@ To reimburse an expense such as travel or equipment:
 <https://internal.cs.washington.edu/research-admin/research-finance-team/>
 
 
-Allen Schoel event request form:
+Allen School event request form:
 <https://docs.google.com/forms/d/e/1FAIpQLSdiiC7fMVgkpUwCT-S9IGbU0RHnHlBBkKKuUKnfl-Ebw4itNA/viewform>
 
 
@@ -335,7 +302,7 @@ Purchase request:
 ## CSE sysadmin
 
 
-UW CSE printer: ps581
+UW CSE printers:
 
 * One-sided (single-sided):
     ps581/noduplex
@@ -345,11 +312,9 @@ UW CSE printer: ps581
 Color printer: psc581
   I can't seem to create
     psc581/noduplex
-Too often landscape PDF comes out rotated (& scaled down).  A solution is
-to print from Acrobat Reader, and to check the "landscape" button.
 
 
-An undergrad instructional linux server: attu
+An undergrad instructional linux server: attu.cs
 
 
 Printing enscript and cedilla output at CSE:
@@ -374,23 +339,20 @@ ens1:
 * directly on ps581:  cut off left margin
 
 
-To set up a wiki at UW CSE, see
-<http://www.cs.washington.edu/lab/www/MediaWiki.shtml>
-
-
 To apply for a new UW CSE computer account at cs.washington.edu,
 the sponsor fills out a form at
-  <https://password.cs.washington.edu/account/csenetid/>
+  <https://password.cs.washington.edu/account/csenetid/>.
 (I think the user gets to choose a preferred username.)
 A guest account ("research" account type) is only permitted to use 25 MB (!) of space, so:
 
 * Always log into the same machine.
-* On that machine, create a directory /scratch/${USER} and store your
-   files there.
-* maybe make symbolic links from your home directory so you don't even notice
-   the disk quota limitation.
+* On that machine, create a directory `/scratch/${USER}` and store your
+  files there.
+* Make symbolic links from your home directory so you don't even notice
+  the disk quota limitation.
 * periodically check whether your jobs have created new files in your home
-   directory -- say, under ${HOME}/.m2
+  directory -- say, under `${HOME}/.m2/`.  Move any such files to
+  `/scratch/${USER}/` and link from your home directory.
 
 
 To apply for a new UW NetID, the sponsor fills out a form at
@@ -399,27 +361,20 @@ To apply for a new UW NetID, the sponsor fills out a form at
 
 What files in the file system contain the content served at webpages/URLs
 (for instance, for UW CSE classes/courses)?
-<https://types.cs.washington.edu/> : /cse/www2/types/
-<https://checkerframework.org/> : /cse/www2/types/checker-framework/
-<http://fault-localization.cs.washington.edu/> : /cse/web/research/fault-localization/
-<http://plse.cs.washington.edu/> : /cse/web/research/plse/
-<http://plse.cs.washington.edu/daikon/> : /cse/web/research/plse/daikon/
-<http://uwplse.org> : version control repository
-<https://courses.cs.washington.edu/courses/cse331/18au/> : /cse/web/courses/cse331/18au
-<http://plumelib.org/> : /cse/web/research/plumelib/
+* <https://types.cs.washington.edu/> : /cse/www2/types/
+* <https://checkerframework.org/> : /cse/www2/types/checker-framework/
+* <http://fault-localization.cs.washington.edu/> : /cse/web/research/fault-localization/
+* <http://plse.cs.washington.edu/> : /cse/web/research/plse/
+* <http://plse.cs.washington.edu/daikon/> : /cse/web/research/plse/daikon/
+* <http://uwplse.org> : version control repository
+* <https://courses.cs.washington.edu/courses/cse331/18au/> : /cse/web/courses/cse331/18au
+* <http://plumelib.org/> : /cse/web/research/plumelib/
+
+Via tramp: `/tern.cs.washington.edu:/cse/web/courses/cse590n`
 
 
-Via tramp: /tern.cs.washington.edu:/cse/web/courses/cse590n
-Support can create a new virtual host, putting data under /cse/web/research/.
+Support can create a new virtual host, putting data under `/cse/web/research/`.
 (For large data that doesn't need to persist for an extended period of time, can use Google Drive instead.)
-
-
-Incoming anonymous ftp:
-You can upload files here via anonymous ftp:
-  ftp://ftp.cs.washington.edu/incoming
-You won't be able to see the files (but that directory is readable by me as
-/cse/ftp/incoming).  Let me know when the files are there so I can retrieve
-them.
 
 
 Remote desktop from Linux workstation to Windows Terminal Server
@@ -467,21 +422,7 @@ An undergrad (such as a TA) who wants to change such files must log in
 through vole.cs.washington.edu.
 
 
-If Google Chrome (proviously `chromium-browser`, now `google-chrome`) hangs,
-then complains about unresponsive pages, try:  `rm -rf ~/.cache`.
-Alternately, clear the relevant cookies from within Chrome/Chromium (Wrench icon in the upper right of Chromium-> Preferences-> "Under the Hood" in the left menu bar-> "Content Settings..." button-> "All cookies and site data...")
-
-
-Cycle servers for UW CSE are:
-bam, boom, bicycle, tricycle, recycle, each with 72 3GHz i9 cores.
-tern has 36 CPUs (i9-10980XE CPU @ 3.00GHz), 128GB of memory, and an NVIDIA GeForce RTX 3090.
-honu has 40 CPUs (Xeon Silver 4114 CPU @ 2.20GHz), 96GB of memory.  It is owned by Rene Just.
-buffalo has 8 CPUs (i7-2600 CPU @ 3.40GHz), 16GB of memory.
-
-
-To solve "Product Activation Failed" red titlebar for Microsoft Office 2010
-(no activation key, KMS):
-<http://www.cs.washington.edu/lab/sw/windows/office2010/>
+Cycle servers for UW CSE are listed at <https://uwplse.org/internal/computers.html>.
 
 
 Set UW CSE Unix file permissions and access using the GrpAdmin group management
@@ -500,16 +441,18 @@ after which the user will have access to the group.
 Another potential complication is that each user can have only 20 login
 groups -- those are the ones that are active at any time.  To change login
 groups permanently, use
-<https://intranet.cs.washington.edu/grpadmin?screen=logingroups>
-.  To change effective groups temporarily, use chgrpsh.
+<https://intranet.cs.washington.edu/grpadmin?screen=logingroups>.
+To change effective groups temporarily, use `chgrpsh`.
 
 
 Files of the form
-  /cse/www/education/courses/503/11au
+  `/cse/www/education/courses/503/11au`
 have become
-  /cse/web/courses/cse503/11au
+  `/cse/web/courses/cse503/11au`
 To fix, use:
+```elisp
   (replace-string "/cse/www/education/courses/" "/cse/web/courses/cse")
+```
 
 
 If I get
@@ -523,10 +466,6 @@ this may be due to a slow or laggy connection.  Try going directly to
 <https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi>
 
 
-If there is trouble with parsing Jekyll webpages (such as those under
-<http://uwplse.org/meet/>), you can see logs at <http://hooknook.uwplse.org/>
-
-
 A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
 
 
@@ -538,48 +477,6 @@ A CSE lab-supported Linux machine running CentOS 8 is cremosa.cs.washington.edu.
 You can only log into it from another CSE machine, not from outside.
 
 
-%% Obsolete entries go here
-
-
-% The /uns Maintainers' unFAQ:
-% <http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html>
-
-
-% Typical instructions for installing a package in /uns (see
-% <http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html#q3.2> ):
-% ```
-%   source /uns/src/generic-builder.sh
-%   PKG=graphviz-2.20.3
-%   install_generic $PKG http://www.graphviz.org/pub/graphviz/stable/SOURCES/$PKG.tar.gz
-% ```
-
-
-% To serve a Mercurial (hg) repository via the web (https:), first add
-% something like the following to its `.hg/hgrc` file:
-% ```
-%   [web]
-%   allow_push = mdb, mernst, rcook, rose
-% ```
-% Then, ask <webmaster@cs.washington.edu> something like the following:
-% ```
-%   Can you make the https: Mercurial server serve
-%   /projects/swlab1/ductile/paper-2010, as
-%   https://dada.cs.washington.edu/hgweb/ductile-paper-2010/
-%   (Don't forget to change the directory ownership to prohibit access
-%   through the file system.)
-%   Please use the existing password file, but ensure it has entries for
-%   these users:  mdb, mernst, rcook
-%   One of:
-%     Please make the repository world-readable.
-%     Please issue a basic auth challenge on any access.
-%   Thanks a lot!
-% ```
-% After this operation, it is only possible to access the repository via https:.
-% Direct file URLs will not work, because Apache (I think) will own the file.
-% The Hg repositories served by https are listed at
-% <https://wasp.cs.washington.edu/Internal/hg.html>
-
-
 BS/MS students do not have access to the CSE gws research computers/servers like bicycle and tricycle.
 That requires additional account sponsorship.
 
@@ -588,7 +485,7 @@ Email for the UW CSE website:
 <web-content@cs.washington.edu>
 
 
-Coriander Server Usage Rules:
+Coriander GPU Server Usage Rules:
 
 1. All long-running GPU tasks must be scheduled before execution, and any task running longer than 30 minutes without a reservation may be terminated.
 2. Do not use the /home/username directory; instead, store all files under /m-coriander/coriander/username.
@@ -602,14 +499,13 @@ My tickets:
 <https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketOverview;Subaction=MyTickets>
 
 
-To invite undergrads to Slack:
+To invite undergrads to Slack (permissible only for research, not course staff):
 
 * Choose the Paul G. Allen workspace
 * click the down-caret to its right
 * choose "invite people" from the dropdown
   * can batch multiple people if they should have access to the same channels
 * Must select Guest (not Member)
-But, don't do this for course staff, only for research.
 
 
 For course staff communication:
@@ -627,13 +523,20 @@ from a script using `attumail.cs.washington.edu`. To check if you are a member:
 3. Click the radio button "user name" next to the Query By button.
 4. Then click the "Query By" button.
 5. You will be presented with a table of all groups you are in. Check
-  if "smtp-users" is in the table.
+   if "smtp-users" is in the table.
 6. If it is, you're good to go. If not, submit a ticket to support@cs
-  saying that you need to be added to the group in order to send
-  email.
+   saying that you need to be added to the group in order to send
+   email.
 
 
-## Seattle
+## PLSE
+
+
+If there is trouble with parsing Jekyll webpages (such as those under
+<http://uwplse.org/meet/>), you can see logs at <http://hooknook.uwplse.org/>
+
+
+## Seattle visitors
 
 
 Options for short-term Seattle housing/rentals/apartments/sublets:
@@ -671,9 +574,11 @@ university.  Sites include
 I am happy to help with logistics in Seattle (such as visiting an
 apartment or helping with signing contracts).
 
+
 Wait lists for preschool or daycare can be very long.  If you want that,
 get on waiting lists as soon as possible, though most places require an
 in-person visit before you can get on the waiting list.
+
 
 All children in the US, regardless of nationality, are entitled to free
 public school.  Schools are assigned based on your home address.  As a
@@ -682,14 +587,11 @@ be good to very good.  South of that waterway, there are both good and bad
 schools.
 
 
-Visitors should get on the plse, 590n, and 590p mailing lists.
-
-* plse: <https://mailman.cs.washington.edu/mailman/listinfo/plse>
-* 590n (software engineering): <https://mailman.cs.washington.edu/mailman/listinfo/cse590n>
-* 590p (programming languages): <https://mailman.cs.washington.edu/mailman/listinfo/cse590p>
+## Seattle
 
 
-* Restaurants near CSE:
+Restaurants near CSE:
+
 * U Village (18-minute walk)
   * Dough Zone
   * Ba Bar

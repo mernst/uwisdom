@@ -5,6 +5,9 @@ On github.com, you can view the table of contents of this file by clicking the
 menu icon (three lines or dots) in the top corner.
 
 
+## Line breaks
+
+
 When working with a line-based version control system such as Git, please don't
 write very long lines, such as one line containing the content of an entire
 paragraph.  Instead, insert line breaks within each paragraph to keep the file's
@@ -13,34 +16,16 @@ purpose in organizing the text or in editing it, but they do help to prevent
 merge conflicts when multiple people edit different parts of a paragraph.
 
 
+When working with a line-based version control system such as Git and a text
+markup language such as LaTeX or Markdown, please don't refill paragraphs.
+Doing so causes merge conflicts and massive, unreadable diffs.  Instead, insert
+or delete text without changing anl line breaks outside the edit.  This can lead
+to paragraphs in LaTeX or Markdown files that look a bit funny because some
+lines are short and some are long, but that file doesn't matter because readers
+will see a rendered version.
+
+
 ## Git
-
-
-Here is my strategy for preventing my fork's master branch from getting out of sync, and in general to avoid branch confusion.
-
-1. Never run any git commands in the master branch, including "git pull" and "git commit".  (Note:  I sometimes carefully violate this rule.)
-To update the master branch in my fork, run `mdevcupdate`, which will fail if the fork diverges from upstream.
-2. Never change branches in any working copy; that is, never run `git checkout`.
-3. To create a new branch, run command `gnb`, which creates a new branch and working copy in a new directory.  Run it from the fork's master branch.
-4. To edit an existing branch, run command `gcb`, which creates a new directory and checks out the branch there.  Run it from the fork's master branch.
-
-The definitions of `gnb` and `gcb` appear in ~mernst/.aliases .
-The definition of `mdevcupdate` appears in ~mernst/bin/src/mdedots/share/ .
-
-
-In git,
-
-```sh
-  git commit
-```
-
-only commits the files mentioned on the command line; without commands, it
-commits only the files explicitly added via a previous command.  To commit
-all changed files, use
-
-```sh
-  git commit -a
-```
 
 
 Typical operation on a stash:
@@ -56,70 +41,15 @@ To display a stash as a diff/patch:
 ```
 
 
-`git merge` always writes a file with merge conflict markers (if there
-is a conflict); it never asks the user to resolve the conflict.
-The user is expected to run "git mergetool" to resolve the conflict.
-
-
-When running git under Emacs, to disable the pager when viewing help (& see
-the help topics in a new Emacs buffer), do this:
-
-```sh
-  git config --global man.viewer woman
-```
-
-Or, to see them in a web browser:
-
-```sh
-  apt install git-doc
-  git config --global man.viewer firefox
-  git config --global man.firefox.cmd firefox
-  git config --global help.format web
-```
-
-To undo the change:
-
-```sh
-  git config --global man.viewer man
-```
-
-
-In git, to unadd an accidentally-added file, do
-
-```sh
-  git reset FILE
-```
-
-
-In git, after resolving the conflicts in the appropriate files:
-
-* `git add` all of the conflicted files
-
-* `git commit`
-
-  (which will automatically fill in the message with something about
-  resolving conflicts between the appropriate revisions)
-
-
-To undo a `git add` command before doing a commit, do `git reset <file>`.
-To undo changes in your working copy (like `hg revert`) do
-`git checkout filename`; for the whole tree, `git checkout -f'.
-A different command that undoes all uncommitted changes in the working tree
-is`git reset --hard`, but some people discourage its use because it's "dangerous".
-
-
 For the Git equivalent of `hg rollback` which uncommits or undoes or reverts a commit,
 do one of these:
 
-```sh
-  git reset HEAD^
-  git reset --soft HEAD^
-  git reset --hard HEAD~ && git push -f
-```
+* `git reset HEAD^`: resets the index but not the working tree
+* `git reset --soft HEAD^`: does not touch the index or the working tree.
+* `git reset --hard HEAD~ && git push -f`
 
-The first one resets the index but not the working tree;
-with `--soft` does not touch the index or the working tree.
-The commit will still appear in other clones, if anyone has pulled from remote while the commit was there.
+The commit will still appear in other clones, if anyone has pulled from remote
+while the commit was there.
 
 
 To revise a commit before pushing it -- similarly to what "hg rollback" enables -- without rewriting the commit message:
@@ -127,7 +57,8 @@ To revise a commit before pushing it -- similarly to what "hg rollback" enables 
 * do more edits
 * `git commit --amend`
 * or, to keep the current commit message: `git commit --amend --no-edit`
-`git revert' is different:  it makes a new, opposite commit.
+
+`git revert` is different:  it makes a new, opposite commit.
 
 
 In git:
@@ -489,19 +420,6 @@ git checkout -b mynamefortheirbranch theirusername/theirbranch
 ```
 
 
-To abandon/abort a git merge:
-
-```sh
-git merge --abort
-```
-
-Older command:
-
-```sh
-git reset --hard HEAD
-```
-
-
 To get a diff between a branch and master, but not including unmerged master commits:
 
 ```sh
@@ -643,7 +561,7 @@ The user-level (aka "global") git attributes are by default read from
 `$XDG_CONFIG_HOME/git/attributes`, or (if (`$XDG_CONFIG_HOME` is either not set
 or empty) `$HOME/.config/git/attributes`.  This behavior can be overridden by
 setting the `core.attributesfile` configuration option to a file, which is used
-instead.  To set it to `~/.gitattributes':
+instead.  To set it to `~/.gitattributes`:
 `git config --global core.attributesfile '~/.gitattributes'`
 
 
@@ -704,7 +622,7 @@ git clean -fdx
 In `git diff`, to see the containing Java method names along with each hunk,
 add this line to a git attributes file:
 
-```gitattributes'
+```gitattributes
 *.java diff=java
 ```
 
@@ -716,7 +634,7 @@ project -- that is, it will affect only you, not other people using the reposito
 The user-level git attributes file file is by default
 `$XDG_CONFIG_HOME/git/attributes`. You can change the user-level file to be
 `~/.gitattributes` by running the following command, once ever per computer:
-`git config --global core.attributesfile '~/.gitattributes`
+`git config --global core.attributesfile ~/.gitattributes`
 
 
 To use `git diff` on arbitrary files, use:
@@ -739,6 +657,49 @@ To make a squashed commit out of all the differences on a branch, run this in a 
 ```sh
 git merge --squash origin/BRANCHNAME
 ```
+
+
+### Git merging
+
+
+`git merge` always writes a file with merge conflict markers (if there
+is a conflict); it never asks the user to resolve the conflict.
+The user is expected to run `git mergetool` to resolve the conflict.
+
+
+To abandon/abort a git merge:
+
+```sh
+git merge --abort
+```
+
+
+In git, after resolving the conflicts in the appropriate files:
+
+* `git add` all of the conflicted files
+
+* `git commit`
+
+  (which will automatically fill in the message with something about
+  resolving conflicts between the appropriate revisions)
+
+
+### The git staging area
+
+
+Modalities of running `git commit`:
+
+* `git commit` without filename arguments only commits the files that are staged (in the staging area).  To put a file in the staging area, `git add FILENAME`.
+* `git commit FILE1 FILE2 ...` only commits files that are mentioned on the command line.
+* `git commit -a` commits all changed files.
+
+
+To undo a `git add` command before doing a commit, do `git reset <file>`.
+To undo changes in your working copy (like `hg revert`) do
+`git checkout filename`; for the whole tree, `git checkout -f`.
+A different command that undoes all uncommitted changes in the working tree
+is `git reset --hard`, but some people discourage its use because it's "dangerous".
+
 
 
 ## GitHub (Git-specific items go above)

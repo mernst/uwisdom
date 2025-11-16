@@ -607,7 +607,7 @@ Another difference is that Javadoc in JDK 8 supports this option:
 but in JDK9+, only the standard doclet supports it.
 Documentation on using the new Doclet API:
 <https://openjdk.java.net/groups/compiler/using-new-doclet.html>
-Gradle always passes the -d command-line argument.  Idea: If the doclet is always
+Gradle always passes the `-d` command-line argument.  Idea: If the doclet is always
 run by itsef, on JDK 9+ it could support the `-d` command-line
 argument, even if it ignores it.  But if the doclet is run together with the
 standard doclet, I'm not sure that is the right thing.
@@ -746,7 +746,7 @@ I have a "jwhich" shell script wrapped around this.
 In Java, `null instanceof Class` returns false for any Class.
 
 
-Canonical use of package java.util.regex.* for Java regular expressions:
+Canonical use of package `java.util.regex` for Java regular expressions:
 
 ```java
   Pattern p = Pattern.compile("a*b");
@@ -1162,6 +1162,35 @@ echo "public class DefaultCharset {
 }" > DefaultCharset.java
 javac DefaultCharset.java
 java DefaultCharset
+```
+
+
+As of Dec 2022, the checkstyle Gradle plugin does not support specifying a
+suppression filter, as the Maven plugin does with `<SuppressionFilter>`.
+
+
+Here is how to apply the Google Style with the checkstyle linter, in a Gradle
+`build.gradle` file, without downloading the `google_checks.xml` file.
+Unfortunately, the checkstyle Gradle plugin does not support a way to
+suppress/disable some rules, so it rejects any program that uses the Options
+package.
+
+```gradle
+/// Checkstyle linter
+// Run by `gradle check`, which is run by `gradle build`
+apply plugin: 'checkstyle'
+ext.checkstyleVersion = '10.5.0'
+configurations {
+  checkstyleConfig
+}
+dependencies {
+  checkstyleConfig("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") { transitive = false }
+}
+checkstyle {
+  toolVersion "${checkstyleVersion}"
+  config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, 'google_checks.xml')
+  ignoreFailures = false
+}
 ```
 
 

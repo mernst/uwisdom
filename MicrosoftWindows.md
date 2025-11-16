@@ -64,7 +64,7 @@ it in again.
 
 Samba's smbclient lets you access your NT files (at UW, Solaris, Linux,
 AIX), eg:
-smbclient '\\rfilesrv1\students' -W cseresearch
+`smbclient '\\rfilesrv1\students' -W cseresearch`
 
 
 Run smbpasswd to set samba passwords (there is a separate password file for
