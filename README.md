@@ -108,6 +108,10 @@ you and others can find the information.  I often intentionally include
 synonyms ("description" and "blurb", or "search" and "find") to make a search
 more likely to find the correct entry.
 
+## How to build programs
+
+The [`building/` subdirectory](building/) contains information about how to
+build/install various programs.
 
 <!--
 // LocalWords:  wiki PAG pag pdfnup Cytron's bibfind cytron quotefind einstein
