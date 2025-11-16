@@ -1,0 +1,28 @@
+First try to use the OS's packaging system:
+
+sudo apt install asciidoctor
+
+If I can't do that (for example, at UW CSE), then do:
+
+gem install asciidoctor
+cd ~/bin
+mv asciidoctor* ~/bin/`uname`-`uname -m`
+
+AsciiDoc language specification:
+git clone https://gitlab.eclipse.org/eclipse/asciidoc-lang/asciidoc-lang.git
+
+===========================================================================
+
+Convert AsciiDoc to Markdown:
+
+Install: npm i downdoc
+Run: downdoc foo.md
+
+Or, just run: npx downdoc foo.md
+
+===========================================================================
+
+asciidoc-linter
+https://github.com/docToolchain/asciidoc-linter/
+As of 2025-11-06, asciidoc-linter produces no useful output for me, so don't bother with it.
+

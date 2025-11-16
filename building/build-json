@@ -1,0 +1,19 @@
+# This is the library that Emacs recognizes.
+cd ~/bin/install
+VER=2.14
+wget https://github.com/akheron/jansson/releases/download/v${VER}/jansson-${VER}.tar.gz
+tar xzf jansson-${VER}.tar.gz
+cd ~/bin/install/jansson-${VER}
+./configure --prefix=${HOME}/.local
+
+===========================================================================
+
+# Emacs does not recognize this library.
+cd ~/bin/install
+git clone https://github.com/vincenthz/libjson
+cd ~/bin/install/libjson
+git pull --ff-only
+make
+cp -pf json.h ~/.local/include
+cp -pf libjson.pc ~/.local/lib/pkgconfig
+cp -pf libjson.so* ~/.local/lib

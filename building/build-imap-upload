@@ -1,0 +1,27 @@
+cd ~/bin/install
+wget https://sourceforge.net/projects/imap-upload/files/imap-upload/1.2/imap-upload-1.2.zip
+unzip imap-upload-1.2.zip
+
+Now, the file is ~/bin/install/imap-upload-1.2/imap_upload.py
+
+My wisdom files say how to run it.
+
+===========================================================================
+
+For version 1.0, this patch may be necessary.
+(Actually, I may need to run without this patch, then on the error output
+with this patch.)
+I don't know whether this is necessary with version 1.2.
+
+--- /home/mernst/bin/install/imap-upload-1.0/imap_upload.py	2009-05-24 05:32:55.000000000 -0700
++++ -	2010-01-01 13:43:17.036712361 -0800
+@@ -133,7 +133,7 @@
+     not to work in Python 2.5.4.
+     """
+     try:
+-        time_str = re.sub(r'^[^ ]* (.{24}).*', r'\1', self.get_from())
++        time_str = re.sub(r'^[^ ]* (.{25}).*', r'\1', self.get_from())
+         try:
+             t = time.strptime(time_str, "%a %b %d %H:%M:%S %Y")
+             t = time.mktime(t)
+

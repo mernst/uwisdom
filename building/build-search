@@ -1,0 +1,86 @@
+http://enterprise.ic.gc.ca/~jfriedl/perl/ is a mirror of
+http://www.wg.omron.co.jp/~jfriedl/perl which seems not to exist any longer
+(as of 5/9/99).  O'Reilly's site links to the Canadian one, so maybe it's
+official now.  It was updated 2/15/99.
+
+
+I made the following changes to add a by-paragraph search mode (-para).
+
+
+cd /homes/fish/mernst/bin/share/
+diff -u -b -r /uns/share/bin/search /homes/fish/mernst/bin/share/search
+--- /uns/share/bin/search	Fri Sep  5 15:20:06 1997
++++ /homes/fish/mernst/bin/share/search	Sun May  9 22:22:28 1999
+@@ -120,6 +120,7 @@
+   $words=0;             ## set true by -w (match whole-words only)
+   $MARK='';             ## set by -bold (-red, etc.). Does ANSI markup.
+   $literal=0;           ## set by -F -- "regex" args taken as literal strings
++  $paragraph=0;	        ## set by -para, meaning to read input by paragraphs
+   $retval=1;            ## will set to 0 if we find anything.
+   $DESCEND_SUBDIRECTORIES=1;## set to false by -depth=0
+ 
+@@ -234,6 +235,7 @@
+       $literal=1,           next if $arg eq '-lit';     ## args are literal
+       $literal=0,           next if $arg eq '-R';       ## args are regexes
+       $literal=0,           next if $arg eq '-regex';   ## args are regexes
++      $/="\n\n",$paragraph=1,next if $arg eq '-para';    ## search by paragraphs
+       &strip                     if $arg eq '-strip';   ## dump this program
+       last                       if $arg eq '-e';
+ 
+@@ -1166,10 +1168,18 @@
+ 
+ 	} else {  ## else not using faster block scanning.....
+ 
++  	    $lineno = 1;
++	    $this_lines = 0;
+             $lines_printed = 0 if $NICE;
+ 	    while (<FILE_IN>) {
+ 		study;
+-		next unless (eval $REGEX_TEST);
++
++	        # Correctness depends on $/="\n\n" (rather than $/="").
++	        if ($paragraph) {
++		    $this_lines = ($_ =~ tr/\n/\n/);
++		}
++
++		$lineno += $this_lines, next unless (eval $REGEX_TEST);
+ 
+ 		##
+ 		## We found a matching line.
+@@ -1185,6 +1195,9 @@
+ 			print '-' x 70, "\n" if $NICE > 1;
+ 			print $file, ":\n";
+ 		    }
++		    if (!$paragraph) {
++		      $lineno = $.;
++		    }
+ 
+ 		    ##
+ 		    ## Print all the prelim stuff. This looks less efficient
+@@ -1195,20 +1208,21 @@
+ 		    ##
+ 		    if ($NICE) {
+ 			if ($REPORT_LINENUM) {
+-			    print " line $.:  ";
++			    print " line $lineno:  ";
+ 			} else {
+ 			    print "  ";
+ 			}
+ 		    } elsif ($REPORT_LINENUM && $PREPEND_FILENAME) {
+-			print "$file:$.: ";
++			print "$file:$lineno: ";
+ 		    } elsif ($PREPEND_FILENAME) {
+ 			print "$file: ";
+ 		    } elsif ($REPORT_LINENUM) {
+-			print "$.: ";
++			print "$lineno: ";
+ 		    }
+ 		    if ($DOMARK) { eval $MARK; }
+ 		    print $_;
+ 		    print "\n" unless m/\n$/;
++		    $lineno += $this_lines;
+ 		}
+ 	    }
+ 	    print "\n" if ($NICE > 1) && $lines_printed;
+
+Diff finished at Sun May  9 22:22:38

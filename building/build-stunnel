@@ -1,0 +1,18 @@
+# In Ubuntu: sudo apt install stunnel4
+
+
+
+# At CSE:  just ask support to install stunnel
+
+
+Old attempt
+PKG=stunnel-4.34
+mkdir -p ~/bin/install
+cd ~/bin/install
+wget -N http://www.stunnel.org/download/stunnel/src/${PKG}.tar.gz
+tar xzf ${PKG}.tar.gz
+cd ${PKG}
+./configure --disable-libwrap
+make
+cd ~/bin/`uname`-`uname -m`
+ln -sf ../install/${PKG}/src/stunnel .

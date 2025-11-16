@@ -1,0 +1,11 @@
+For installing /uns software, see
+  http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html
+
+Souces and per-package instructions appear in /uns/src/ .
+
+Typical instructions are at
+  http://dada.cs.washington.edu/uns/faq/uns-maintainer-faq.html#q3.2
+Namely:
+  source /uns/src/generic-builder.sh
+  PKG=graphviz-2.20.3
+  install_generic $PKG http://www.graphviz.org/pub/graphviz/stable/SOURCES/$PKG.tar.gz

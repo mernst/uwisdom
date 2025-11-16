@@ -1,0 +1,20 @@
+
+
+To build jdee-server:
+
+cd ~/java
+git clone https://github.com/jdee-emacs/jdee-server.git
+cd jdee-server
+mvn -Dmaven.test.skip=true package
+# cp target/jdee-bundle-1.1-SNAPSHOT.jar.jar ~/java/jdee-bundle-1.1-SNAPSHOT.jar
+
+;; Add in an Emacs configuraton file, something like this:
+(custom-set-variables
+ `(jdee-server-dir (,(expand-file-name "~/java/jdee-server/target"))))
+
+;; Not necessary with the above
+Start Emacs and enter the following commands:
+M-x customize
+In the search field enter jdee-server-dir
+In the field next to "Jdee Server Dir:" enter the directory holding the jar from step 6 (e.g. ~/myJars)
+Click the "Apply and Save" button

@@ -1,0 +1,14 @@
+# I wasn't able to install this at CSE; Support did so for me instead.
+
+# Get version number from https://download.gnome.org/sources/librsvg/
+
+cd ~/bin/install
+wget https://download.gnome.org/sources/librsvg/2.40/librsvg-2.40.9.tar.xz
+cd librsvg-2.40.9/
+./configure
+# This required another library
+
+Ask support to install:
+librsvg2-tools
+
+	librsvg2-2.34.0-2.fc15.armv5tel.rpm

@@ -1,0 +1,32 @@
+* Get image from:  http://www.ubuntu.com/desktop/get-ubuntu/download
+* Create the directory into which the VM will be stored
+* Run vmplayer
+
+Do I need someone from support to install VMware tools on every VM I
+create?
+Yuck!
+
+
+
+===========================================================================
+
+# For the Checker Framework:
+
+sudo apt install emacs23 openjdk-6-jdk mercurial ant
+
+
+System > Administration > Users and Groups
+  Create account checker-user
+
+
+===========================================================================
+
+For each user:
+
+System > Preferences > Monitors:
+  Change monitor resolution to 1600x1200 (or at least to 1280x960)
+System > Preferences > Screensaver:
+  Uncheck "Activate screensaver"
+  Uncheck "lock screen"
+
+===========================================================================

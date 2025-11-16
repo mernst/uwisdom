@@ -1,0 +1,43 @@
+Jacoco is the replacement for Emma
+
+To create a jacoco.xml file, use the Maven or Ant support.
+From the command line, Jacoco only creates a jacoco.exec file.
+But, Codecov needs an xml file.  
+To convert jacoco.exec to jacoco.xml:
+Change
+http://eclemma.org/jacoco/trunk/doc/examples/build/build.xml
+(I only need the report target, there is no need to 
+specify Java source files, and remove the html and xml output.)
+
+
+Integration with Code
+
+Manual for command-line use: http://eclemma.org/jacoco/trunk/doc/agent.html
+
+Download the latest snapshot from https://oss.sonatype.org/service/local/artifact/maven/redirect?g=org.jacoco&a=jacoco&e=zip&v=LATEST
+which is linked from
+http://eclemma.org/jacoco/
+
+cd ~/java 
+rm -rf jacoco jacoco-0.7.8
+mkdir jacoco-0.7.8
+ln -l jacoco-0.7.8 jacoco
+cd jacoco-0.7.8
+wget -O jacoco-0.7.8.zip http://search.maven.org/remotecontent?filepath=org/jacoco/jacoco/0.7.8/jacoco-0.7.8.zip
+unzip jacoco-0.7.8.zip
+
+To run:
+
+* Delete the file
+* Run repeatedly the following
+
+-javaagent:${HOME}/java/jacoco/lib/jacocoagent.jar
+
+cd $pl/java
+make -C $pl/java test
+mv $pl/java/jacoco.exec $pl
+
+
+===========================================================================
+
+mvn jacoco:prepare-agent test jacoco:report

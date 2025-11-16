@@ -1,0 +1,7 @@
+I can't build the Javadoc, but it can be downloaded from
+https://javadoc.io/doc/org.eclipse.jgit/org.eclipse.jgit/latest/index-all.html
+
+rm -rf ~/java/jgit-javadoc
+mkdir -d ~/java/jgit-javadoc
+cd ~/java/jgit-javadoc
+# Now extract the jar file.

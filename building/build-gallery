@@ -1,0 +1,19 @@
+# All this installation must occur on pink-panther.csail.mit.edu.
+
+mysqladmin -uroot create gallery2
+mysql gallery2 -uroot -e"GRANT ALL ON gallery2.* TO mernst@localhost IDENTIFIED BY 'mdemysqlpw'" 
+# I don't have permission to do this on pink-panther.
+# I guess I could run a web server on manioc, but that seems like a bit of
+# a pain.  I've asked how to get permission to do this.
+
+cd $HOME
+mkdir g2data
+chmod 777 g2data
+
+# They recommend installing via CVS checkout (so updates are easy), but I'm
+# not that brave:  I want to run a released version.
+mkdir $HOME/www/gallery-installation
+cd $HOME/www/gallery-installation
+wget http://internap.dl.sourceforge.net/sourceforge/gallery/gallery-2.0.1-typical.tar.gz
+tar xzf gallery-2.0.1-typical.tar.gz
+

@@ -1,0 +1,65 @@
+===========================================================================
+
+I've had bad networking problems where a Windows guest cannot access the
+network.
+
+This advice from Alex Eckerman didn't work:
+  When you switched it to NAT, did you have any sort of network access in
+  the VM? You might try switching back to NAT, running a "ipconfig
+  /flushdns" on the guest, then uninstalling the network adapter from
+  device manager and rebooting. The Windows VM should automatically
+  redetect the virtual network card and settings, hopefully for the
+  better.
+but I re-installed Guest Additions for Windows and rebooted and changed
+networking to/from NAT, and some combination of that gave me connectivity back.
+
+Due to many frustrations with networking under VirtualBox, as of early
+2013 I'm back to using VMware instead, and it seems to work pretty well
+now.
+
+===========================================================================
+
+You can determine your VirtualBox version by running either of these commands:
+  vboxmanage --version
+  vbox-img --version
+
+To open a virtual machine, run either of these commands:
+  VBoxManage startvm ubuservloc --type headless
+  VBoxHeadless --startvm "VM name"
+
+===========================================================================
+
+Ubuntu:
+
+# Older:
+# sudo apt install virtualbox-ose
+sudo apt install virtualbox-qt -y
+
+sudo usermod -a -G lp,users,vboxusers ${USER}
+# Verify the usermod commands succeeded:
+id ${USER}
+
+===========================================================================
+
+Building from source (don't do this):
+
+Even to build from the "All distributions" download requires administrator
+privileges.
+
+wget http://download.virtualbox.org/virtualbox/3.1.6/VirtualBox-3.1.6-59338-Linux_x86.run
+
+===========================================================================
+
+In the virtual machine:
+
+I can ignore this error:
+The virtual machine window is optimized to work in 32 bit color mode but the virtual display is currently set to 24 bit.
+
+Install VirtualBox Guest Additions
+
+net use h: \\vboxsvr\mernst-host
+[Given h:, could I have skipped many of the Cygwin checkouts entirely??
+Probably!  That would be cleaner.  I could make links from /home/mernst ...
+or even make /home/mernst itself a link!]
+
+===========================================================================

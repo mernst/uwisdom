@@ -1,0 +1,11 @@
+http://www.pdfhacks.com/pdftk/
+
+# This requires gcj to be installed, but it isn't at CSE (as of 1/2009 and 2/2010).
+# The GCJ runtime is now deprecated, so I should find a different program or a
+# version that uses OpenJDK.
+
+cd ~/tmp
+wget http://www.pdfhacks.com/pdftk/pdftk-1.41.tar.gz
+tar xzf pdftk-1.41.tar.gz
+cd pdftk-1.41/pdftk
+make -f Makefile.RedHat

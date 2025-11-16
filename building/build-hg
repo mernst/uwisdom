@@ -1,0 +1,90 @@
+===========================================================================
+
+# At CSE, see: /uns/src/mercurial-1.6.BUILDING
+
+===========================================================================
+
+# On Ubuntu (though the version may lag the latest Mercurial release):
+sudo apt install mercurial
+
+===========================================================================
+
+Windows:
+
+http://mercurial.selenic.com/wiki/Download#Windows
+
+[Alternately (and not desired), to install and configure from source: http://mercurial.selenic.com/wiki/WindowsInstall
+It seems old -- it suggests Mercurial 1.3 whereas the current version is 2.9.1 as of this writing.  Get the latest from http://mercurial.selenic.com/downloads .]
+
+===========================================================================
+
+Install from source:
+
+#if Ubuntu
+sudo apt install python-dev
+#endif
+
+# Get version number from http://www.selenic.com/mercurial/wiki/
+VER=2.8.1
+PKG=mercurial-${VER}
+mkdir -p ~/bin/install
+cd ~/bin/install
+wget http://www.selenic.com/mercurial/release/${PKG}.tar.gz
+tar xzf ${PKG}.tar.gz
+cd ${PKG}
+make local && ./hg version
+cd ~/bin/`uname`-`uname -m`
+rm -f hg
+ln -s ../install/${PKG}/hg .
+hash -r
+cd
+hg version
+
+----------------
+
+# Don't do this; "hg shelve" does not work well
+mkdir -p ~/bin/src/python
+cd ~/bin/src/python
+hg clone http://bitbucket.org/tksoh/hgshelve/
+
+----------------
+
+If I get the error
+  ImportError: No module named osutil
+then do
+  sudo apt install python-dev
+and then re-install Mercurial from source.
+
+===========================================================================
+
+*****
+* Don't do this -- install from source instead.  After "sudo easy_install
+* -U mercurial", hg didn't work at all for me any more!
+*****
+## These instructions are for installing a more recent version of mercurial
+## than is already installed (e.g., packaged for Debian).
+# If the below gives me "bash: easy_install: command not found", then first do:
+#   cd ~/tmp
+#   wget http://peak.telecommunity.com/dist/ez_setup.py
+#   sudo python ./ez_setup.py
+sudo easy_install -U mercurial
+
+----
+
+To uninstall:  delete the .egg file (found in the installation directory).
+But the .egg file is a directory, not a file.
+
+ mv /usr/lib/python2.4/site-packages/mercurial-1.0.1-py2.4-linux-x86_64.egg /usr/lib/python2.4/site-packages/mercurial-1.0.1-py2.4-linux-x86_64.egg-BAD
+
+That didn't work either.  So I did
+
+  sudo apt uninstall mercurial
+  sudo apt install mercurial
+
+(Maybe I should have done this?
+  sudo apt --purge remove mercurial
+)
+
+And now I won't mess with it any longer!
+
+===========================================================================

@@ -1,0 +1,5 @@
+This looks way too painful for me to reproduce the build tools.
+
+cd ~/tmp
+wget http://sisyphus.meta-environment.org/downloads/binaries/rascal-0.1pre.29758.74216.bin.sh
+./rascal-0.1pre.29758.74216.bin.sh

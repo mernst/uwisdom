@@ -1,0 +1,25 @@
+    bsddb:  http://www.sleepycat.com/db
+        
+
+For Python, use version 1.85, and also apply the patches
+
+
+tar xvfz db.1.85.tar.gz 
+cd db.1.85
+
+# Also apply the patches
+cd PORT/linux/
+patch < ../../../patch.1.1
+cd ../..
+patch < ../patch.1.2
+patch < ../patch.1.3
+patch < ../patch.1.4
+
+cd PORT/sunos.5.2
+# Edit Makefile to add
+#     CC = gcc
+make
+
+# Install
+cp -p libdb.a /uns/lib
+cp -p db.h /uns/include    # ???

@@ -1,0 +1,30 @@
+Make a Debian package for the Checker Framework, with a javacheck alias.  Maybe start with Daikon, to warm up.
+Create a Debian package first; get a sponsor; and get it into Debian.
+(After that, figure out how to get it into Ubuntu, may involve "syncing" to
+make an Ubuntu package: https://wiki.ubuntu.com/SyncRequestProcess .)
+Use the dh packaging helper, and the 3.0 (quilt) format
+Do this setup:
+http://packaging.ubuntu.com/html/getting-set-up.html
+
+Use dh rather than debhelper.
+pbuilder: https://wiki.ubuntu.com/PbuilderHowto
+
+Look up how to do this.
+Ubuntu packaging guide
+  http://packaging.ubuntu.com/html/packaging-new-software.html
+create a .deb Package from scripts or binaries
+  http://askubuntu.com/questions/27715/create-a-deb-package-from-scripts-or-binaries
+Tuturial slides; is useful (see especially slides 15ff):
+  https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.en.pdf
+  (slide 45 is "Getting your package in Debian" -- use private repo first, I guess)
+  (slide 60 is packaging a Java library; answers are later in the slide deck)
+Another tutorial:
+  https://wiki.debian.org/IntroDebianPackaging
+Very brief tutorial, for an already-compiled program; only useful for information:
+  http://ubuntuforums.org/showthread.php?t=910717
+Debian New Maintainers’ Guide
+  http://www.debian.org/doc/maint-guide/
+Ubuntu Packaging Guide
+  http://developer.ubuntu.com/resources/tools/packaging/
+
+Test the package with: lintian, piuparts

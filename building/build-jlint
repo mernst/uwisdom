@@ -1,0 +1,42 @@
+[Instead of downloading and building, I can just use Debian:
+  sudo apt install jlint
+]
+
+Version 3.0
+
+http://jlint.sourceforge.net/
+
+JLint 3.1 (released October 13, 2006)
+
+cd ~/tmp
+wget http://internap.dl.sourceforge.net/sourceforge/jlint/jlint-3.1.tar.gz
+tar xzf jlint-3.1.tar.gz
+cd jlint-3.1
+make
+
+# This reports approximately 2200 messages as of 10/8/2007
+cd $inv/java
+~/tmp/jlint-3.1/jlint `make showvar_CLASS_FILES`
+
+===========================================================================
+
+Version 2.3 (released August 8, 2001)
+
+(Don't bother using jlint 2.3; see below.)
+
+README file at: http://artho.com/jlint/jlint/README
+
+cd ~/tmp
+wget http://artho.com/jlint/jlint.tar.gz
+gunzip -c jlint.tar.gz | tar -xvf -
+cd jlint-2.3
+make
+
+
+cd $inv/java
+~/tmp/jlint-2.3/jlint `make showvar_CLASS_FILES`
+# And an internal assertion failed after 844 messages were printed.
+
+# Far too many "variable may be null" warnings.
+
+===========================================================================

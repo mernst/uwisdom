@@ -1,0 +1,32 @@
+# if Ubuntu:
+sudo apt install libatomic-ops-dev
+
+===========================================================================
+
+# Cygwin: this is pre-packaged
+
+===========================================================================
+
+From source:
+
+# Determine version number at http://www.hboehm.info/gc/
+# Unnumbered version is most stable; numbered versions are less stable.
+# (But, install 7.1 anyway, as of 9/2009 and 12/2010.)
+
+https://www.hboehm.info/gc/gc_source/gc.tar.gz
+
+VER=gc
+# Why did I not choose gc-7.2d?  What went wrong?
+# VER=gc-7.2d
+# VER=gc-7.1
+
+cd ~/bin/install
+wget http://www.hboehm.info/gc/gc_source/${VER}.tar.gz
+tar zxf ${VER}.tar.gz
+# Warning:  the extracted directory name may differ from the tarfile name,
+# especially when VER=gc
+cd ${VER}
+./configure --prefix=${HOME}/.local && make && make check && make install
+
+# Add to ~/.bashrc.mine (BUT ADD THE VERSION NUMBER!):
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/bin/install/gc-VER-install

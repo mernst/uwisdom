@@ -1,0 +1,94 @@
+http://freepastry.org/FreePastry/download.html
+
+----------------
+
+## Prerequisite:  Oracle Berkeley Database Java Edition
+# I need to have installed "Oracle Berkeley Database Java Edition" (new
+# name for SleepyCat).  I think I have the multiverse installed, but this
+# does not work:
+sudo apt install libdb-je-java
+# So get it from:
+#  http://www.oracle.com/technology/software/products/berkeley-db/je/index.html
+# and then:
+wget http://download.oracle.com/berkeley-db/je-3.2.68.tar.gz
+tar xzf je-3.2.68.tar.gz
+
+----------------
+
+# Install via SVN:
+
+mkdir -p ~/tmp/try-freepastry
+cd ~/tmp/try-freepastry
+svn co https://svn.mpi-sb.mpg.de/DS/freepastry/trunk/pastry
+
+# See below for command to run the checker
+
+----------------
+
+# Altenate install via download.
+# Don't do this, as the SVN installation is more up-to-date and includes
+# almost twice as many files.
+
+FPVER=2.1alpha3
+mkdir -p ~/tmp/try-freepastry
+cd ~/tmp/try-freepastry
+wget http://freepastry.org/FreePastry/FreePastry-$FPVER-source.tgz
+tar xzf FreePastry-$FPVER-source.tgz
+# wget http://freepastry.org/FreePastry/FreePastry-$FPVER.jar
+# wget http://freepastry.org/FreePastry/FreePastry-$FPVER-docs.tgz
+# tar xzf FreePastry-$FPVER-docs.tgz
+cd pastry-$FPVER
+# Temporary hack to put je-3.2.68.jar in lib/
+(cd lib; wget http://download.oracle.com/berkeley-db/je-3.2.68.tar.gz; tar xzf je-3.2.68.tar.gz je-3.2.68/lib/je-3.2.68.jar; mv je-3.2.68/lib/je-3.2.68.jar .; rm -rf je-3.2.68.tar.gz je-3.2.68)
+# Edit build.xml to remove "deprecation=yes" from the "compile" target.
+perl -pi -e 's/deprecation="yes"/deprecation="no"/g' build.xml
+# Now, it should compile:
+ant -e
+
+----------------
+
+Apply this patch in order to make NodeHandle interned (but then the
+standard build target no longer works...).
+
+--- /DS/home-0/mernst/tmp/try-freepastry/pastry/src/rice/p2p/commonapi/NodeHandle.java	2008-03-20 09:27:43.466001686 +0100
++++ -	2008-03-20 09:28:13.856846719 +0100
+@@ -42,6 +42,8 @@
+ 
+ import rice.p2p.commonapi.rawserialization.OutputBuffer;
+ 
++import checkers.interning.quals.*;
++
+ /**
+  * @(#) NodeHandle.java
+  *
+@@ -56,7 +58,7 @@
+  * @author Alan Mislove
+  * @author Peter Druschel
+  */
+-public abstract class NodeHandle extends Observable implements Serializable  {
++public /*@Interned*/ abstract class NodeHandle extends Observable implements Serializable  {
+ 
+   // constants defining types of observable events
+   public static final Integer PROXIMITY_CHANGED = new Integer(1);
+
+----------------
+
+# Optionally create the checkout:
+mkdir -p ~/tmp/try-freepastry
+cd ~/tmp/try-freepastry
+svn co https://svn.mpi-sb.mpg.de/DS/freepastry/trunk/pastry
+
+# Optionally update the checkout:
+cd ~/tmp/try-freepastry/pastry
+svn update
+
+# Run the checkers:
+cd ~/tmp/try-freepastry/pastry
+ant -find build.xml clean
+ant -e -find build.xml -Djsr308.checkers.dir=$ch -Djsr308.javac=$anno/langtools/dist/bin/javac -Djsr308.processor=checkers.interning.InterningChecker checker
+ant -find build.xml clean
+ant -e -find build.xml -Djsr308.checkers.dir=$ch -Djsr308.javac=$anno/langtools/dist/bin/javac -Djsr308.processor=checkers.nullness.NullnessChecker checker
+ant -find build.xml clean
+ant -e -find build.xml -Djsr308.checkers.dir=$ch -Djsr308.javac=$anno/langtools/dist/bin/javac -Djsr308.processor=checkers.igj.IGJChecker checker
+
+===========================================================================

@@ -1,0 +1,32 @@
+# If I have root:
+sudo npm install markdownlint-cli2 --global
+# If no root:
+npm install markdownlint-cli2 --global
+
+----------------
+
+Typical invocation:
+
+markdownlint-cli2 --fix "**/*.md" "#node_modules"
+
+----------------
+
+Common to put in .md files:
+
+<!-- markdownlint-disable no-hard-tabs -->
+<!-- markdownlint-enable no-hard-tabs -->
+
+<!-- markdownlint-disable no-hard-tabs line-length -->
+<!-- markdownlint-enable no-hard-tabs line-length -->
+
+<!-- markdownlint-disable line-length -->
+<!-- markdownlint-enable line-length -->
+
+===========================================================================
+
+Mado is a Markdown linter that aims for compatibility with markdownlint.
+However, it does *not* support config via comments:
+https://github.com/DavidAnson/markdownlint/blob/v0.32.1/README.md#configuration
+Therefore, stick with markdownlint.
+# To install Mado:
+sudo nix profile install github:akiomik/mado --extra-experimental-features nix-command --extra-experimental-features flakes

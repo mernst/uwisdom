@@ -1,0 +1,12 @@
+
+
+# Ubuntu:
+sudo apt install git-restore-mtime
+
+
+# From source:
+https://github.com/MestreLion/git-tools
+
+cd ~/bin/src
+git clone https://github.com/MestreLion/git-tools.git
+echo 'PATH=$PATH:~/bin/src/git-tools' >> ~/.profile

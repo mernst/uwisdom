@@ -1,0 +1,157 @@
+On Debian, often there is a pre-existing package; just do something like
+  apt install libcrypt-ssleay-perl
+This is better because when perl is updated, they won't break or need to
+be reinstalled.
+However, those packages should be listed not here, but in file
+  ~mernst/wisdom/setup/setup-debian-pkgs.needed-laptop
+
+===========================================================================
+
+When there is a CSE operating system upgrade, delete ~/.cpan and start over installing CPAN packages.
+Also probably ~/perl5
+
+===========================================================================
+
+To install CPAN modules (these are the ones I seem to need):
+(On my own machine, run all these with `sudo`.)
+
+cpan App::cpanminus
+cpanm CSS::DOM
+cpanm Bundle::LWP
+cpanm List::MoreUtils
+
+# These are needed for createcal
+sudo cpanm Date::Manip
+sudo cpanm Date::Calc
+sudo cpanm HTML::Strip
+sudo cpanm Date::ICal
+sudo cpanm HTML::TableExtract
+sudo cpanm DateTime::Format::DateParse
+sudo cpanm JSON::Parse
+
+===========================================================================
+
+OLDER:
+
+To use Perl CPAN quickinstall
+(http://theoryx5.uwinnipeg.ca/auto/install.html):
+ * As root:
+     perl -MCPAN -e shell
+ * Copy the cpan-install module to ~/bin/share/ and make it executable)
+ * On Unix, under Edit -> Preferences -> Navigator -> Applications in
+   Netscape, create a new helper application for MIME Type
+   application/x-cpan. Under Handled By, select Application and choose
+   /path/to/xterm -e /path/to/cpan-install %s. The program xterm is that
+   used to call up a terminal window - you may have to provide some further
+   options to this, or you may want to use another program. With this
+   configuration, Netscape will launch an xterm window and run the relevant
+   script to install the package when a quickinstall link from CPAN Search
+   is selected.
+
+First, setup:
+(When running this command, be sure that the gcc version is the same as
+that used when compiling Perl.)
+  perl -MCPAN -e shell
+If as root, take defaults, and done with setup.
+If not as root, make the below choices.
+You need to set (this comes after about 35 questions for which you select
+the default):
+  Parameters for the 'perl Makefile.PL' command? []
+  PREFIX=/homes/gws/mernst/bin/src/perl
+  Parameters for the 'make install' command? []
+  INSTALLMAN3DIR=/homes/gws/mernst/bin/src/perl/lib/perl5/man/man3
+  Parameters for the 'perl Build.PL' command? []
+  --install_base /homes/gws/mernst/bin/src/perl
+Instead of the above, you can take all defaults and then apply this patch:
+diff -u ~/.cpan-save2/CPAN/MyConfig.pm ~/.cpan/CPAN/MyConfig.pm
+--- /homes/gws/mernst/.cpan-save2/CPAN/MyConfig.pm	2013-01-03 05:14:31.011634071 -0800
++++ /homes/gws/mernst/.cpan/CPAN/MyConfig.pm	2013-01-05 09:19:35.529117479 -0800
+@@ -28,14 +28,14 @@
+   'keep_source_where' => q[/homes/gws/mernst/.cpan/sources],
+   'load_module_verbosity' => q[none],
+   'make' => q[/usr/bin/make],
+-  'make_arg' => q[],
+-  'make_install_arg' => q[],
++  'make_arg' => q[-j3 INSTALLMAN3DIR=/homes/gws/mernst/bin/src/perl/lib/perl5/man/man3],
++  'make_install_arg' => q[-j3 INSTALLMAN3DIR=/homes/gws/mernst/bin/src/perl/lib/perl5/man/man3],
+   'make_install_make_command' => q[/usr/bin/make],
+-  'makepl_arg' => q[],
++  'makepl_arg' => q[PREFIX=/homes/gws/mernst/bin/src/perl],
+   'mbuild_arg' => q[],
+   'mbuild_install_arg' => q[],
+   'mbuild_install_build_command' => q[./Build],
+-  'mbuildpl_arg' => q[],
++  'mbuildpl_arg' => q[--install_base /homes/gws/mernst/bin/src/perl],
+   'no_proxy' => q[],
+   'pager' => q[/usr/bin/less],
+   'patch' => q[/usr/bin/patch],
+
+
+Now, actual installation:
+  perl -MCPAN -e shell
+Do NOT attempt to do
+  install CPAN
+  reload CPAN
+which does not work for me, even though the program suggests it.
+Then, do these:  either all on one "install" line separated by spaces, or ONE-BY-ONE (because some ask questions):
+  install Bundle::CPAN
+# Instead of Bundle::LWP, on Ubuntu just do: sudo apt install libwww-perl
+  install Bundle::LWP
+## Instead of CSS::DOM, on Ubuntu just do: sudo apt install libcss-dom-perl
+  install CSS::DOM
+# I am delaying re-installing the below until I know what each is for.
+  install LWP::Protocol::https
+  install Bundle::libnet
+  install Config::General
+  install Crypt::SSLeay
+  install Date::Manip
+  install Devel::Symdump
+  install Digest::MD5
+  install DB_File
+  install Getopt::Tabular
+  install HTML::Parser
+  install HTML::Tree
+  install List::Util
+  install MIME::Base64
+  install MIME::Parser
+  install Mail::Audit
+  install MailTool
+  install Net::DNS
+  install Net::FTP
+  install Net::IP
+  install Term::ReadKey
+  install Text::BibTeX
+  install Text::CSV
+  install Text::CSV_XS
+  install Time::HiRes
+  install WWW::Link
+To search for a package:
+  i /regexp/
+
+10/27/2008:  Failure for
+  install Mail::SpamAssassin
+
+===========================================================================
+
+Notes on specific modules:
+
+Bundle::LWP is libwww-perl
+
+===========================================================================
+
+To build a perl module by hand:
+
+ # If no root permissions, then:
+ # perl Makefile.PL PREFIX=$HOME/bin/src/perl
+ perl Makefile.PL
+ make
+ make test
+ make install
+
+It's really that simple!
+
+
+If a test (say, "op lfs.t") fails, do
+  perl t/op/lfs.t
+
+===========================================================================

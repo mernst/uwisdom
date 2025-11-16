@@ -1,0 +1,9 @@
+http://www.lysator.liu.se/projects/about_psgml.html
+
+./configure 
+make
+# Problem with "make install":  it drops the .elc files there, but nothing
+# else.  Better to copy the entire directory!
+# Edit Makefile:
+# -	for p in *.elc; do \
+# +	for p in *.el *.elc; do \

@@ -1,0 +1,51 @@
+# http://www.cs.ucla.edu/~smarkstr/javacop/
+# There are no Makefiles or build.xml files anywhere in the distribution!
+
+
+setenv JCOP ~/tmp/try-javacop
+
+mkdir -p $JCOP
+cd $JCOP
+
+# Javacop itself:
+wget http://www.cs.ucla.edu/~smarkstr/javacop/bin/JavaCop.jar
+wget http://www.cs.ucla.edu/~smarkstr/javacop/docs/javacop-README
+
+# Javacop sources.  This is only .java sources, no Haskell.
+wget http://www.cs.ucla.edu/~smarkstr/javacop/src/JavaCop_source.tar.gz
+tar xvzf JavaCop_source.tar.gz
+# Above tar command dumps files in main directory, due to bad packaging.
+rm -rf META-INF LICENSE
+
+# Javacop rules compiler -- binary version.  No sources seem to be available.
+wget http://www.cs.ucla.edu/~smarkstr/javacop/bin/JavaCop_linux_x86.bin
+chmod +x JavaCop_linux_x86.bin
+ln -s JavaCop_linux_x86.bin JavaCop
+# When I run this binary (with or without arguments, e.g. "JavaCop" or
+# "./JavaCop examples/nonnull/rules.jcop"), I get "Floating point exception".
+
+# Examples
+wget http://www.cs.ucla.edu/~smarkstr/javacop/src/JavaCop_rule_examples.tar.bz2
+tar --bzip2 -xf JavaCop_rule_examples.tar.bz2
+# Compile the nonnull example
+# This gives "Floating point exception", with binary downloaded from website
+./JavaCop examples/nonnull/rules.jcop
+
+
+
+
+# There's no makefile for the tests, so I'll try to figure it out...
+
+java -jar JavaCop.jar -javacop [compiled JavaCop rules] [Java files]
+
+
+# Size of nonnull checker: 700 lines
+cd $JCOP/examples/nonnull
+wc \
+./Nonnull.jcop \
+./javacop/nonnull/RawTypesFlowFacts.java \
+./javacop/nonnull/NonNullFlowFacts.java \
+./javacop/annotations/Raw.java \
+./javacop/annotations/Nonnull.java \
+./javacop/annotations/RawThis.java
+

@@ -1,0 +1,84 @@
+4.73:
+
+http://home.netscape.com/computing/download/index.html?cp=hom05p1.
+
+Download the file (into /tmp/mernst).
+
+cd /tmp/mernst
+mkdir netscape473
+mv communicator-v473-us.sparc-sun-solaris2.5.1.tar.gz netscape473
+cd netscape473
+tar zvxf communicator-v473-us.sparc-sun-solaris2.5.1.tar.gz
+cd communicator-v473.sparc-sun-solaris2.5.1
+./ns-install
+	/uns/lib/netscape473
+
+cd /uns/bin
+cp netscape netscape473
+# Edit netscape473 to modify paths; now link netscape -> netscape473
+
+===========================================================================
+
+4.7:
+
+Download the file (into /tmp/mernst).
+
+mkdir netscape47
+mv communicator-v47-us.sparc-sun-solaris2.5.1.tar.gz netscape47
+cd netscape47
+tar zvxf communicator-v47-us.sparc-sun-solaris2.5.1.tar.gz
+cd communicator-v47.sparc-sun-solaris2.5.1
+./ns-install
+	/uns/lib/netscape47
+
+===========================================================================
+
+1.0 (or 1.1?):
+
+Get the regular version, not the inst version.
+
+The tar file extracts itself into the current directory rather than
+creating a new directory.
+
+./ns-install
+	/uns/lib/netscape
+
+That was always enough for me.  Craig Kaplan recommends putting in /uns/bin
+a shell script something like the following; he says it's good to set
+MOZILLA_HOME, which overrides lots of things you would otherwise have to set.
+
+#!/bin/sh
+MOZILLA_HOME=/uns/netscape-45; export MOZILLA_HOME
+cd /uns/netscape-45
+./netscape "$@"
+
+===========================================================================
+
+Follow these steps to install Communicator: 
+
+  1.Download the gzip compressed Communicator tar archive. 
+
+  2.Uncompress and extract the tar file: gzip -dc filename | tar -xvf - 
+
+  3.When the file is uncompressed, a Bourne shell script called
+    ns-install will be created. Type ./ns-install 
+
+  4.When prompted, either press Return/Enter to accept the default,
+    or enter the path to the installation directory of your choice. You
+    will be notified if you do not have permission to install in the
+    directory specified or if the directory does not exist. 
+
+    To run Communicator after installation type: cd
+    the_directory_you_just_installed_to ./netscape 
+
+If you do not wish to use ns-install, or want to perform a custom
+installation, please consult the README.install file. Once you have
+restarted your computer, go to the folder where you installed your new
+software. Double-click on the Communicator or Navigator application
+to launch your new browser. 
+
+===========================================================================
+
+
+
+===========================================================================

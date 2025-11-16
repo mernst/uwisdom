@@ -1,0 +1,191 @@
+
+===========================================================================
+
+Sometimes, a user expects that checklink will produce certain warnings.
+Some reasons include robot exclusion rules, password-protected content, and
+errors in automatically-generated content.
+
+A user would prefer checklink to show only the unexpected warnings, rather
+than hiding them in an avalance of uninteresting output.
+
+This patch adds flags that suppress certain warnings.
+
+Here is a snippet from the (new) "checklink --help" output.
+
+ --exclude-redirect URI->URI  Do not report a redirect from the first to the
+                            second URI.  The "->" is literal text.
+ --exclude-redirect-prefix URI->URI  Do not report a redirect from a child of
+                            the first URI to the same child of the second
+                            URI.  The "->" is literal text.
+ --exclude-broken CODE:URI  Do not report a broken link with the given CODE.
+                            CODE is HTTP response, or -1 for robots exclusion.
+                            The ":" is literal text.
+ --exclude-fragment URL#FRAG  Do not report the given broken fragment.
+                            The "#" is literal text.
+
+With this patch, I am able to regularly check large sets of webpages for
+broken links, with no warning output in the common case.  Below the patch,
+I have attached the patch, and also an example of some arguments that I
+pass to checklink.
+
+                    -Michael Ernst
+
+===========================================================================
+
+Stable version:
+http://search.cpan.org/dist/W3C-LinkChecker/
+(example: http://search.cpan.org/CPAN/authors/id/S/SC/SCOP/W3C-LinkChecker-4.6.tar.gz)
+Repository:
+http://dvcs.w3.org/hg/link-checker/
+OLD: http://dev.w3.org/cvsweb/perl/modules/W3C/LinkChecker/
+
+---------------------------------------------------------------------------
+
+Contact info:
+
+Send bugs to www-validator@w3.org (with 'checklink: ' in the subject).
+  Archives at: http://lists.w3.org/Archives/Public/www-validator/
+  (Replies are not necessarily cc'ed to me, so I must read the archives to see a response.)
+
+Alternate mailing list: public-qa-dev@w3.org
+  Archives at: http://lists.w3.org/Archives/Public/public-qa-dev/
+
+Alternate: Bugzilla:  http://www.w3.org/Bugs/Public/
+
+Fairly helpful chief maintainer:  Ville Skyttä <ville.skytta@iki.fi>
+
+===========================================================================
+
+development version from Hg:
+
+#if ubuntu
+sudo apt install libcss-dom-perl libconfig-general-perl
+#endif ubuntu
+mkdir -p ~/bin/src/perl/W3C-LinkChecker
+cd ~/bin/src/perl/W3C-LinkChecker
+hg clone https://dvcs.w3.org/hg/link-checker
+
+cd ~/bin/src/perl/W3C-LinkChecker/link-checker/
+perl Makefile.PL
+make
+make test
+(cd ~/bin/share; ln -s ~/bin/src/perl/W3C-LinkChecker/perl/modules/W3C/LinkChecker/bin/checklink .)
+
+===========================================================================
+
+# Version 4.3 is dated "22 Oct 2006".
+
+# Debian only:
+sudo apt install libnet-ip-perl
+
+cd ~/tmp
+wget http://search.cpan.org/CPAN/authors/id/S/SC/SCOP/W3C-LinkChecker-4.3.tar.gz
+perl Makefile.PL
+make
+make test
+# as root:
+make install
+
+# After installing (and installing some necessary perl modules), I had to do:
+pagdo sudo mkdir -p /etc/w3c
+pagdo sudo cp -p $HOME/checklink.conf /etc/w3c
+
+Don't forget to fix the first line (change /usr/bin/perl to
+/usr/local/bin/perl).
+
+===========================================================================
+
+For command-line options, do
+  checklink --help
+For full documenatation, do
+  perldoc ~/bin/src/perl/W3C-LinkChecker/perl/modules/W3C/LinkChecker/bin/checklink.pod
+
+More documentation at: http://www.w3.org/2000/07/checklink
+
+To use in gradle:
+
+// Run: gradle check
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = "8.11"
+    ignoreFailures = false
+//    configFile = file("${project.rootDir}/checkstyle.xml")
+}
+
+and add a `config/checkstyle/checkstyle.xml` file.
+
+===========================================================================
+
+Explanation of "broken fragment":
+
+http://lists.w3.org/Archives/Public/www-validator/2004Mar/0062.html say:
+
+"Broken fragment" comes from the term "fragment identifier", which is used
+for the part of a URI after the "#" character. These fragment identifiers
+are used to reference a particular location in a (HTML) document.
+
+[Or the fragment that appears after a URI. The URI specifications partly
+use a bit weird terms, and technically they say that a fragment is not
+part of a URI but part of a "URI reference". See the nasty details in RFC
+2396, specifically section 4, "URI References", available at
+http://www.cs.tut.fi/~jkorpela/rfc/2396/full.html#4]
+
+Checklink is telling you that it found a link where 
+"fragment identifier" (e.g <a href="#example">) that does not refer 
+to any "name" or "id" in the document, so the link may not be broken, 
+but the fragment is.
+
+P.S: the link checker is relatively clever and manages to understand
+broken HTML, but you may still want to use the HTML validator for your
+page(s), too. ( http://validator.w3.org/ )
+
+===========================================================================
+
+To debug record_redirects, insert just before
+      if (($from eq $from_prefix) && ($to eq $to_prefix)) {t
+the following:
+      # Debugging output.
+      if (0) {
+        my $from_try_prefix = substr($from, 0, $from_prefix_len);
+        my $to_try_prefix = substr($to, 0, $to_prefix_len);
+        my $from_try_base = substr($from, $from_prefix_len);
+        my $to_try_base = substr($to, $to_prefix_len);
+        print STDERR "Checking prefix:\n  from_prefix: $from_prefix\n  to_prefix: $to_prefix\n  from: $from\n  from_try_prefix: $from_try_prefix\n  from_try_base: $from_try_base\n  to: $to\n  to_try_prefix: $to_try_prefix\n  to_try_base: $to_try_base\n";
+      }
+
+===========================================================================
+
+I agree that consistency is a good goal, but there are different types of
+consistency, and consistency is valuable only insofar as it leads to
+clarity.
+
+Here are some facts about checklink:
+ * checklink's output uses "#" when reporting URL fragments and "->"
+   when reporting redirects
+ * checklink's --masquerade command line option uses " " for separating URLs.
+
+No matter what the choice for specifying fragments and redirects on the
+command line, there is going to be an inconsistency.
+ * if we delimit with spaces on the command line, there is an inconsistency
+   between how fragments/redirects are input and output.
+ * if we delimit with # and ->, then the fragment representations are
+   self-consistent.  However, they use different delimiters than
+   masquerading.
+
+You have identified the latter inconsistency, but you don't seem to
+acknwowledge the former, despite my mail directly to you and also to the
+list.
+
+In my view, self-consistency within a concept (all representations of
+fragments, say, or all representations of redirects) is most important;
+violating this will lead to confusion or errors from users.
+
+Use of an identical delimiter in all command line options is not a bad
+thing in and of itself, but not at the cost of user confusion and errors.
+
+I would be interested in hearing feedback about tradeoffs amoung the two
+types of consistency, especially from people who have tried the new
+checklink options.
+
+===========================================================================

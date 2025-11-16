@@ -1,0 +1,4 @@
+cargo install ast-grep --locked
+
+Playground, for online testing:
+https://ast-grep.github.io/playground.html

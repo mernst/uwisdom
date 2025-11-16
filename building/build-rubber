@@ -1,0 +1,7 @@
+cd ~/tmp
+wget http://ebeffara.free.fr/pub/rubber-1.1.tar.gz
+tar xf rubber-1.1.tar.gz
+cd rubber-1.1
+./configure
+make
+make install

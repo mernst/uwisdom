@@ -1,0 +1,89 @@
+http://www.cs.purdue.edu/jtb/
+
+cd ~/tmp
+wget http://www.cs.purdue.edu/jtb/Files/jtb122.class
+java jtb122
+# Install to ~/java/jtb
+
+... I stopped at this point.
+
+===========================================================================
+
+Older notes:
+
+http://www.cs.purdue.edu/jtb/
+
+# From JavaPrinter installation notes:
+
+cd ~/java/jtb-test
+
+# Create syntaxtree/ and visitor/ directories, and jtb.out.jj file.
+# -f means use slightly nicer names; if I want to use JavaPrinter, I can't
+# use that.
+../jtb/bin/jtb -tk -printer ../JavaCC/examples/JavaGrammars/Java1.1.jj
+
+# Run JavaCC:
+setenv CLASSPATH ~/java/JavaCC/JavaCC.zip:$CLASSPATH
+java COM.sun.labs.javacc.Main jtb.out.jj
+etags *.java syntaxtree/*.java visitor/*.java &
+jikes -g +D *.java
+
+# Don't use the Main.java from the tutorial; copy it from JavaPrinter.
+
+
+# To run JavaPrinter itself:
+java Main inputfile
+
+The interesting file is visitor/TreeFormatter.java
+
+---------------- cut here for Main.java ----------------
+import syntaxtree.*;
+import visitor.*;
+
+public class Main {
+  public static void main(String args[]) {
+    JavaParser parser = new JavaParser(System.in);
+
+    try {
+      Node root = parser.CompilationUnit();
+      System.err.println("Java program parsed successfully.");
+      root.accept(new Visitor());
+    }
+    catch (ParseError e) {
+      System.err.println("Encountered errors during parse.");
+    }
+  }
+}
+---------------- cut here ----------------
+
+===========================================================================
+
+At http://www.cs.purdue.edu/jtb/tutorial.html,
+"catch (ParseError e)" should be "catch (ParseException e)"
+
+===========================================================================
+
+JavaPrinter:
+
+My interest is in a printer, not a pretty-printer.  So I can ignore most of
+this, only perhaps snagging some of its Main.java command-line processing.
+In particular, don't call TreeFormatter, only TreeDumper.
+
+cd ~/java/JavaPrinter
+java COM.sun.labs.javacc.Main jtb.out.jj
+jikes -g +D Main.java
+java Main TokenMgrError.java 
+
+===========================================================================
+
+--- /homes/fish/mernst/java/Daikon/syntaxtree/NodeSequence.java	Wed Jun 16 16:28:41 1999
++++ -	Wed Jun 16 17:01:11 1999
+@@ -10,7 +10,7 @@
+  * Represents a sequence of nodes nested within a choice, list,
+  * optional list, or optional, e.g. ( A B )+ or [ C D E ]
+  */
+-public class NodeSequence implements Node {
++public class NodeSequence implements NodeListInterface {
+    public NodeSequence(int n) {
+       nodes = new Vector(n);
+    }

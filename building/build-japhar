@@ -1,0 +1,15 @@
+As of 3/15/99, only JDK 1.1.5.
+
+Download from ftp://ftp.japhar.org/pub/hungry/japhar/source/
+
+ftp://ftp.japhar.org/pub/hungry/japhar/archive* file is a mailing list archive.
+
+
+
+# Problem:  this gave me 
+#   checking for JDK distribution at /projects/cecil/java/BETA/jdk1.2beta4... configure: error: could not find a 1.1.x or 1.2 distribution
+./configure --with-jdk=/projects/cecil/java/BETA/jdk1.2beta4 --program-suffix=-japhar
+make
+make check
+make install
+# Rename japhar-japhar to just japhar

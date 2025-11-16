@@ -1,0 +1,16 @@
+I can use LibreOffice Draw to edit PDF documents.
+
+===========================================================================
+
+Download Foxit Reader (Linux, 64-bit) from https://www.foxitsoftware.com/downloads/
+
+# This version is dated Sept 2018, is still the latest as of Dec 2023.
+# As of Feb 2025, the download button doesn't seem to work on Linux.
+cd ~/tmp
+tar xzf FoxitReader.enu.setup.2.4.5.0727.x64.run.tar.gz
+sudo './FoxitReader.enu.setup.2.4.5.0727(rb70e8df).x64.run'
+
+Now the program is /opt/foxitsoftware/foxitreader/FoxitReader
+
+To print a PDF File with the Comment-Notes contents showing:
+https://help.foxitsoftware.com/kb/how-to-print-a-pdf-file-with-the-comment-notes-contents-showing.php

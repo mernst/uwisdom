@@ -1,0 +1,651 @@
+# Wisdom about Emacs
+
+
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
+## General tips
+
+
+You should always run gdb within Emacs; use  <kbd>M-x gdb RET</kbd>.
+One advantage is that when you move up and down the stack, the file with
+the relevant code is read into a buffer and displayed.
+(Getting jdb to work within Emacs is a tiny bit tricky; I find that the JDE
+package with a few modifications works fine for me.)
+
+
+To compile a program or run make, use  <kbd>M-x compile RET</kbd>.
+(A typical compilation command is `make -k`.)
+You can continue work while the compilation proceeds.
+If there are any errors,  <kbd>C-x `</kbd>  or  <kbd>M-x next-error RET</kbd>  takes you to the
+line of the code which is mentioned in the error.  This works with the
+output of most compilers.
+
+
+Why are there two backslashes in `\\|` in a regexp in Lisp code?
+Because the string is being interpreted twice, once by the Emacs Lisp
+string-reading routine and once by the regexp routine.  Both of them happen to
+use backslash as their escape character.  So `a\\|b` is a four-character string
+with contents `a`, `\`, `|`, `b` and `\|` is the regexp routine's alternative
+specifier.
+
+
+## TAGS tables
+
+
+Emacs's tags facility allows you to easily find a definition (of a
+function, variable, class, etc.) or search a collection of related files.
+
+* To create a tags table, run `etags _files_`; for instance, `+etags *.h *.c+`.
+* To find a tag within Emacs, type  <kbd>M-.</kbd>  or  <kbd>M-x find-tag RET</kbd>
+* To search all files in the tags table, type  <kbd>M-x tags-search RET</kbd>
+* To select a different tags table, type  <kbd>M-x visit-tags-table RET</kbd>
+
+
+`etags` returns the best matches in a TAGS table first.
+`etags` examines
+entire TAGS tables at a time, so it is advantageous to use a single TAGS
+table instead of multiple smaller ones (along with include directives).
+
+
+To make an Emacs TAGS table using the ctags program, run:
+
+```sh
+  ctags -e -R
+```
+
+
+Francesco Potorti` (<pot@CNUCE.CNR.IT>) says:
+To make a single tags file for all the source files in your tree,
+
+```sh
+    find . -name '*.[chCH]' -print | etags [options] -
+    find . \( -name '*.[chCH]' -o -name '*.[cC][cC]' \) -print | etags -
+    find . \( -name UNUSED -o -name CVS -o -name SCCS -o -name RCS \) -prune -o \( -name '*.[cC][cC]' -o -name '*.[chCH]' \) -print | etags -
+```
+
+To create a tags file per directory, write a two line shell script:
+
+```sh
+    cd $1
+    etags *.[chCH]
+```
+
+and then call it from the root of your source tree like this:
+
+```sh
+    find . -type d -exec script {} \;
+```
+
+
+Here is a Make command to get a list of LaTeX files that are `\inputted` (not
+`\included`) in a LaTeX file, for use in making a tags table or in a buildfile:
+
+```make
+  TEX_FILES=$(shell latex-process-inputs -list main.tex)
+```
+
+or, to run tags directly:
+
+```sh
+  etags $(latex-process-inputs -list main.tex)
+```
+
+
+## Gnus news/mail reader
+
+
+To save (or execute some other gnus keystroke command upon) multiple
+articles to a file in GNUS, use '&' in Subject mode.  This only works on
+articles past point.
+In gnus, do <kbd>C-c C-r</kbd> to caesar-rotate the text of an article.
+In gnus 5, use  <kbd>S o m</kbd>  to forward the current article.
+
+
+Kill file like so:
+
+```elisp
+(gnus-kill "Subject" "foo\\|bar" "u")
+(gnus-kill "Subject" ".")
+(gnus-expunge "X")
+```
+
+will un-kill all except foo or bar in subject.  (There might be a faster
+way, but this works fine.)
+
+
+In gnus, <kbd>S o m</kbd> to forward/resend article via mail.
+
+
+In Mew: to copy a message from one account to another, run:  <kbd>l i</kbd>
+
+
+## Fonts
+
+
+To start an Emacs using a smaller font size,
+
+```sh
+  emacs -fn 7x13
+```
+
+To change the font while emacs is running,
+<kbd>M-x set-frame-font RET 9x15 RET</kbd>
+
+
+To list available fonts:
+
+* use program `xlsfonts`.
+  Any font with "m" or "c" in the SPACING field of
+  the long name is a fixed-width font.  Here's how
+  to list all the fixed-width fonts available on your system:
+
+  ```sh
+  xlsfonts -fn '*x*' | egrep "^[0-9]+x[0-9]+"
+  xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-m*'
+  xlsfonts -fn '*-*-*-*-*-*-*-*-*-*-*-c*'
+  ```
+
+* see variable `x-fixed-font-alist`
+* run `(x-list-fonts "*")`
+
+
+To see what a particular font looks like, use the `xfd' command, eg
+
+```sh
+  xfd -fn 6x13
+```
+
+
+If starting Emacs gives an error like "Font `Inconsolata 12' is not defined",
+then do:
+
+```sh
+emacs --font Monospace
+```
+
+since that font is generally defined.
+(You can install the Inconsolata font by clicking at
+<http://www.levien.com/type/myfonts/Inconsolata.otf>.)
+
+
+To remove text properties (such as faces/fonts/colors) from a string
+
+* In Emacs 20: `(format "%s" string-with-properties)`
+* In Emacs 21:  use `copy-sequence` to copy the string, then use
+   `set-text-properties` to remove the properties of the copy.
+
+
+## Local variables actions
+
+
+This bit of text makes Emacs automatically update the date at the bottom of
+a webpage when it is saved.
+
+```html
+  <hr />
+  <p>
+  Last updated: July 4, 1776
+  </p>
+  </body>
+  </html>
+  <!--
+  Local Variables:
+  time-stamp-start: "^Last updated: "
+  time-stamp-end: "\\.?$"
+  time-stamp-format: "%:b %:d, %:y"
+  time-stamp-line-limit: -50
+  End:
+  -->
+```
+
+
+To run a command whenever a file is saved, add to its end:
+
+```text
+# Local variables:
+# eval: (add-hook 'after-save-hook '(lambda () (run-command nil "make")) nil 'local)
+# end:
+```
+
+
+## Multibyte/internationalization
+
+
+To select an input method [e.g., spanish-postfix, to get accents] in Emacs:
+<kbd>C-x RET C-\ METHOD RET</kbd>
+
+To enable/disable the selected input method:  <kbd>C-\</kbd>
+
+
+Emacs and multibyte encodings:
+Emacs 22 and earlier saves non-ASCII files in its own internal file format,
+called mule.
+This format has some advantages; for example, like unicode, it can specify
+characters in a variety of input formats.  However, a serious disadvantage
+is that the mule format is not recognized by other programs; for example,
+printing such a file from the command line (or via enscript) leads to
+gibberish.  (Doing so from within Emacs does the right thing.)  To make
+Emacs save files in a different format, after reading the file, do <kbd>M-x
+set-buffer-file-coding-system</kbd>.  Also consider adding a line like
+
+```text
+  -*- coding: latin-0 -*-
+```
+
+to the top of the file, or in the local variables
+section.  (Even without this, Emacs ought to recognize the file's format
+when you read it back in, though Emacs can't tell among the various latin-X
+variants.)
+
+
+
+## Multiple files
+
+
+To do incremental search (isearch) across multiple files or buffers:
+
+* In dired, <kbd>M-s a C-s</kbd> for isearch across marked files.
+* In dired, <kbd>Q</kbd> does query-replace-regexp on all marked files.
+* In buffer-menu (Buffer List buffer) <kbd>M-s a C-s</kbd> for isearch across marked buffers.
+
+
+
+In Emacs, to find/search/grep and replace a regex across multiple files:
+
+* <kbd>M-x find-grep-dired RET my-regex RET</kbd>
+* mark files of interest: <kbd>% m</kbd>
+* invoke search and replace: <kbd>Q</kbd>
+
+To search through symbolic links, first do
+
+```elisp
+  (setq find-program "find -L")
+```
+
+
+To add to the existing list of tags tables, do
+
+```elisp
+(let ((tags-add-tables t))
+  (visit-tags-table FILE))
+```
+
+
+## Diffs
+
+
+In Emacs's Diff Mode, to refine the diff region so you see per-character
+diffs, go to the hunk you are interested in and hit <kbd>C-c C-b</kbd> for
+`refine-hunk`.  Or step through the file one hunk at a time with <kbd>M-n</kbd>; that
+will do the refining automatically.
+
+
+To use Emacs's ediff to resolve/patch a file with merge conflict markers
+of the form <<<<<< ====== >>>>>>, that were left by git,
+use <kbd>M-x vc-resolve-conflicts</kbd>.
+Do this in one pass because it slightly edits the <<<<<< ====== >>>>>>
+lines so that a subsequent invocation of <kbd>M-x vc-resolve-conflicts</kbd> won't
+recognize them.
+
+
+## Uncategorized Emacs wisdom
+
+
+To not load `.emacs` file, do `emacs -q`.  To debug it, `emacs --debug-init`.
+
+
+`(symbol-function 'foo)` to determine whether an emacs function is coded in C or
+elisp; <kbd>C-h f</kbd> now also gives that information.
+
+
+just-one-space                <kbd>ESC SPC</kbd>
+  Function: Delete all spaces and tabs around point, leaving one space.
+
+
+To get local variables in emacs, put one of the following at the end of the
+file, preferrably following a page-feed (^L) character:
+
+```text
+Local Variables:
+page-delimiter: "^\f\n===========================================================================\n"
+End:
+```
+
+```text
+/* Local Variables: */
+/* compile-command: "gcc thisfile.c -o thisfile -lm -O -g" */
+/* compile-history: ("gcc thisfile.c -o thisfile -lm -O -g") */
+/* End: */
+```
+
+(Compile-command first `cd`'s to default-directory.)
+These are equivalent (save a mode line update), but the second doesn't
+require eval:
+
+```text
+Local Variables:
+eval: (auto-fill-mode 0)
+End:
+```
+
+```text
+Local Variables:
+auto-fill-function: nil
+End:
+```
+
+
+The following form will make the emacs buffer-list `transient':
+
+```elisp
+  (global-set-key "\C-x\C-b" 'electric-buffer-list)
+```
+
+The following will make emacs `help' windows transient:
+
+```elisp
+  (progn (require 'ehelp)
+         (fset 'help-command ehelp-map))
+```
+
+
+To prevent Emacs from wrapping lines, (setq truncate-lines t).
+I have a function <kbd>M-x truncate-lines</kbd> that toggles this value.
+
+
+To prevent Emacs from truncating printed representations of values:
+
+```elisp
+(setq eval-expression-print-level nil
+      eval-expression-print-length nil
+      print-level nil
+      print-length nil
+      edebug-print-level nil
+      edebug-print-length nil)
+```
+
+
+Use `split-line` (by default, bound to <kbd>ESC C-o</kbd>) for open-line-like behavior.
+
+
+The tex-complete emacs package provides completion of TeX commands.
+
+
+To remember the old value of an emacs function:
+
+```elisp
+  (fset 'old-fill-paragraph (symbol-function 'fill-paragraph))
+```
+
+
+To force a window or screen to repaint **during** the execution of an Elisp
+function:  `(sit-for 0)`.
+
+
+`(setq cw-ignore-whitespace t)` ingores whitespace in emacs's compare-windows.
+Or, supply a prefix argument when invoking compare-windows.
+
+
+To delete (kill) the entire contents of an Emacs buffer, use `(erase-buffer)`
+or <kbd>M-x erase-buffer</kbd>.
+
+
+To specify Emacs's indenting of a lisp expression, do something like:
+`(put 'with-output-to-temp-buffer 'lisp-indent-hook 1)`.
+The number is the number of "special" (indented more than usual) arguments.
+To see some examples, do <kbd>M-. indent-sexp</kbd>, then go up a few lines.
+
+
+Set `command-switch-alist` to something like `'(("-foo" . foo-handler))` to add
+new command line switches; use `command-line-args-left` to see following
+arguments, and remove them from it when done.
+
+
+To redump emacs, put the following in a file (say load-and-dump.el) and run
+it as
+  `gnuemacs -batch -l load-and-dump`:
+
+```elisp
+(load "pkg1.elc")
+(garbage-collect)
+(load "pkg2.elc")
+(garbage-collect)
+(message "Dumping...")
+(setq command-line-processed nil)
+(garbage-collect)
+(dump-emacs "product" "/local/bin/gnuemacs")
+```
+
+For more info, see startup.el.
+
+
+To add hooks to an Emacs function, use advice, which, like Aspect-Oriented
+Programming, permits you to run arbitrary code before, after, around, or
+instead of a given function call.
+Also see post-command-hook.
+
+
+The gnuserv program lets you force a running Emacs to edit a file or
+evaluate Lisp code.
+
+
+In Emacs, to show only those unindented lines that are *not* preceded by *N*
+spaces, do
+<kbd>C-u *N* C-x $</kbd>
+
+To reset, do
+<kbd>C-x $</kbd>
+
+
+A crude, undocumented, and not-guaranteed-to-work-in-the-future way to
+silence any Emacs function is to temporarily bind executing-kbd-macro to a
+non-nil value.
+
+
+`edebug-eval-top-level-form` is bound to <kbd>C-x x</kbd>; use this to debug an Emacs
+Lisp program or function.
+
+
+To use tabs instead of spaces when indenting in Emacs, do
+
+```elisp
+ (setq-default indent-tabs-mode nil)
+```
+
+
+Use condition-case to catch errors in Emacs Lisp (like try...catch).
+
+
+To prevent Emacs from simulating a scrolling line mode terminal under X
+Windows, do
+
+```elisp
+  (if (equal window-system 'x)
+      (setq baud-rate 153600))
+```
+
+
+In Emacs C source, `initial_define_key` sets up default keybindings.
+
+
+To create a standalone program that does Emacs Lisp, you can do something like
+
+```sh
+ #!/usr/local/emacs/bin/emacs -batch
+ ...
+```
+
+
+The .texi (texinfo) files for Emacs are in the distribution in the man
+directory.
+
+
+*Never* use string-match to check Emacs version in a Lisp file without
+save-match-data as well; the reason is that files can be loaded at any time
+(due to autoload) and loading a file shouldn't modify match-data.
+
+
+To figure out how to bind a key in Emacs, first do it using <kbd>M-x
+global-set-key</kbd>, then use `repeat-complex-command` to see the Lisp representation.
+
+
+Version control keystrokes:
+
+* <kbd>C-x v</kbd>:    Compare buffer with latest checked-in version
+
+
+In an Emacs shell, if tabs are expanded into an (incorrect) number of
+spaces, do `stty tabs' -- probably in one of your dotfiles.
+
+
+To avoid compiler warnings about undefined symbols, consider compile-time
+require:  (eval-when-compile (require 'dired))
+The downside is that the require also happens if the uncompiled code is
+loaded.
+
+
+Emacs perl (and cperl) mode mismatches the parentheses in "(\b|$)" because
+"$)" looks like a variable rather than looking like it contains a close
+parenthesis.  The solution is to reverse the parts of the test:  "($|\b)".
+
+
+When debugging Emacs Lisp that does frame/window/buffer switching:
+
+```elisp
+  (setq special-display-buffer-names '("*Backtrace*"))
+```
+
+
+To save a DOS file using Unix end-of-line (carriage-return and newline)
+conventions, in Emacs do
+
+```elisp
+  (setq buffer-file-coding-system nil)
+```
+
+Or, use the `dos2unix` program.
+To save a file with DOS end-of-file conventions, in Emacs do
+<kbd>C-x RET f dos RET</kbd>
+
+To update all installed Emacs packages:
+
+```elisp
+(progn
+  (package-refresh-contents)
+  (package-upgrade-all))
+```
+
+or
+
+* <kbd>M-x package-list-packages RET U x</kbd>
+* <kbd>M-x package-autoremove RET y</kbd>
+
+or the following ought to work, but it does not:
+
+```elisp
+(progn
+  (package-list-packages)
+  (package-menu-mark-upgrades)
+  (package-menu-execute t))
+```
+
+
+To recompile my emacs directory (there must be a better way to do this):
+
+```sh
+emacs -batch -l $HOME/.emacs -f batch-byte-recompile-directory $HOME/emacs/ |& grep -v '^Add to load-path: ' | grep -v '^Checking'
+```
+
+
+On Debian, site-local `.el` Emacs Lisp source code files are installed in
+(for example) `/usr/share/emacs/site-lisp/`
+as distinguished from where the .elc versions can be found:
+`/usr/share/emacs22/site-lisp/`.
+
+
+crypt.el :
+<http://cvs.xemacs.org/viewcvs.cgi/XEmacs/packages/xemacs-packages/os-utils/crypt.el>
+It's best, I think, to encrypt the file via the command line rather than
+trying to create an encrypted file within Emacs.
+Example:
+
+```sh
+  openssl enc -bf -e -in file -out file.bfe
+```
+
+(But I don't need to use any special suffix.)
+
+
+To override dtrt-indent (which guesses indentation), do:
+
+```elisp
+  (set (nth 2 (assoc major-mode dtrt-indent-hook-mapping-list)) 2)
+```
+
+This is not the same as Emacs's tab-width or c-indent-level, but I'm including
+those phrases in this entry because someone searching for this entry might use them.
+
+
+In Mew, use the following for searching:
+
+* <kbd>C-cC-s</kbd>
+    Incremental search forward in Message mode, only within the
+    current message.
+* <kbd>C-cC-r</kbd> Incremental search backward in Message mode, only within the
+    current message.
+* <kbd>?</kbd>
+     Put the `*` mark onto messages in this folder, which are matched
+     to a specified pattern. Either `mewl` or `grep` is called according to
+     the specified pattern.
+
+
+In Mew, bcc: changes the Subject to "A blind carbon copy".
+To keep the original Subject line, use dcc: instead of bcc:.
+
+
+In Emacs, to edit a file with long lines so the display wraps/flows/fills
+the lines but the underlying buffer text retains long lines, use <kbd>M-x
+visual-line-mode</kbd>.  It's better than longlines mode.
+
+
+When running Emacs in a Cygwin bash shell, the cursor can be a thin
+vertical bar that is hard to see.  This cannot be changed within Emacs,
+because it is controlled by Cygwin and the shell.  To fix it:
+
+* Right-click on the window title bar > Options > Looks > Cursor
+
+
+To change an Emacs buffer from Mac or Dos to Unix line endings:
+
+```elisp
+(set-buffer-file-coding-system 'utf-8-unix)
+```
+
+
+Using Emacs as an External Editor in IntelliJ IDEA:
+<https://www.jetbrains.com/help/idea/using-emacs-as-an-external-editor.html>
+
+
+```elisp
+;; Setting face attributes:
+(defface my-boxed-face
+  '((default))
+  "A face that highlights text with a red box.")
+(set-face-attribute 'my-boxed-face nil :box t)
+(let ((current-string "text to insert"))
+  (put-text-property 0 (length current-string) 'face 'my-boxed-face
+                     current-string)
+  (insert current-string))
+```
+
+
+<!--
+This last  is to prevent Emacs from thinking the local variables above
+are for real; the local variables below are the ones Emacs should process.
+-->
+
+<!--
+LocalWords:  toc gdb RET
+-->

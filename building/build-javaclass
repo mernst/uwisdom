@@ -1,0 +1,10 @@
+http://www.inf.fu-berlin.de/~dahm/JavaClass
+
+For version 3.2.4:
+# There is a problem with the supplied docs/directory.  (I'm not sure
+# exactly what, but this fixes the problem.)
+make docs
+
+# Also do:
+jdk-add-munged-anchor-names `find /homes/fish/mernst/java/JavaClass/docs -name '*.html' -print`
+

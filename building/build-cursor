@@ -1,0 +1,13 @@
+At CSE:
+
+
+At https://cursor.com/download, download "Linux Appimage (x64)".
+mv ~/tmp/Cursor-1.6.45-x86_64.AppImage ~/bin/Linux-x86_64/cursor
+chmod +x ~/bin/Linux-x86_64/cursor
+
+
+CLI:
+```
+curl https://cursor.com/install -fsS | bash
+```
+Then run `cursor-agent`

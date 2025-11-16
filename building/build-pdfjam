@@ -1,0 +1,18 @@
+Per https://github.com/rrthomas/pdfjam, pdfjam should already be part of the TeX Live distribution.
+At CSE, that means that I need to run it on texlive.cs.washington.edu.
+
+===========================================================================
+
+cd ~/bin/install
+wget http://www2.warwick.ac.uk/fac/sci/statistics/staff/academic/firth/software/pdfjam/pdfjam_latest.tgz
+tar zxf pdfjam_latest.tgz
+cd pdfjam
+# Run tests
+unzip tests.zip && (cd tests && ./run.sh)
+cp pdfjam.conf ~/dots/.pdfjam.conf
+(cd && ln -s dots/.pdfjam.conf .)
+# Finally, edit ~/dots/.pdfjam.conf to use letter size paper
+
+===========================================================================
+
+See /uns/src/pdfjam_1.21-BUILDING

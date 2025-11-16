@@ -1,0 +1,4 @@
+pip3 install --user grip
+
+Then, to run it on a markdown file:
+grip myfile.md --export

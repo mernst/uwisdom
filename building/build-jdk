@@ -1,0 +1,346 @@
+Also see file build-graalvm .
+
+===========================================================================
+
+BUILDING
+
+Instructions for building the JDK:
+http://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
+
+Running `configure --enable-debug ...` seems to affect the built binaries,
+but does not tell me anything more about a failed build.
+
+===========================================================================
+
+Ubuntu, switching between versions of the JDK
+(but I just use symbolic links):
+
+sudo apt install oracle-java8-installer 
+sudo apt install oracle-java8-set-default
+
+sudo apt install openjdk-11-jdk
+
+sudo apt install openjdk-17-jdk
+
+sudo update-java-alternatives --list
+sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+===========================================================================
+
+Here are alternate ways to install JDK 19 on Ubuntu.
+But it's best just to use Ubuntu 22.10, which has the openjdk-19-jdk package.
+
+# # I should use update-java-alternatives, but I don't see how to use it because the .deb file lacks a *.jinfo file.
+# # So, I should use more `update-alternatives` commands.
+# RUN export DEBIAN_FRONTEND=noninteractive \
+# && apt -qqy update \
+# && apt -qqy install wget \
+# && wget https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.deb \
+# && apt -qqy install ./jdk-19_linux-x64_bin.deb \
+# && update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-19/bin/java 1919 \
+# && update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-19/bin/javac 1919 \
+# && update-alternatives --install /usr/bin/javadoc javadoc /usr/lib/jvm/jdk-19/bin/javadoc 1919
+
+# # So that the `source` command works
+# SHELL ["/bin/bash", "-c"]
+# RUN export DEBIAN_FRONTEND=noninteractive \
+# && apt -qqy update \
+# && apt -qqy install curl zip \
+# && curl -s "https://get.sdkman.io" | bash \
+# && source "/root/.sdkman/bin/sdkman-init.sh" \
+# && hash -r \
+# && sdk install java 19-open
+# # With both "19-open" and "19-oracle", gradle gives me errors of the form
+# #   JAVA_HOME is set to an invalid directory: /root/.sdkman/candidates/java/19-oracle
+# regardless of whether I set JAVA_HOME here.
+# # ENV JAVA_HOME=/root/.sdkman/candidates/java/19-oracle
+
+===========================================================================
+
+Installing an early access JDK on Ubuntu:
+
+----------------
+
+# Obtain URL from https://jdk.java.net/25/
+
+cd ~/java
+wget https://download.java.net/java/GA/jdk25/bd75d5f9689641da8e1daabeccb5528b/36/GPL/openjdk-25_linux-x64_bin.tar.gz
+tar xzf openjdk-25_linux-x64_bin.tar.gz
+ln -s jdk-25 jdk25
+
+
+cd ~/java
+wget https://download.oracle.com/java/24/latest/jdk-24_linux-x64_bin.tar.gz
+tar xzf jdk-24_linux-x64_bin.tar.gz
+ln -s jdk-24 jdk24
+
+
+----------------
+
+# Obtain URL from https://jdk.java.net/23
+
+# Install JDK 21 on Ubuntu, before openjdk-21-jdk package exists:
+cd ~/java
+wget https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz
+tar xzf openjdk-21_linux-x64_bin.tar.gz
+
+# JDK 23
+cd ~/java
+wget https://download.java.net/java/GA/jdk23/3c5b90190c68498b986a97f276efd28a/36/GPL/openjdk-23_linux-x64_bin.tar.gz
+tar xzf openjdk-23_linux-x64_bin.tar.gz
+ln -s jdk-23 jdk23
+
+----------------
+
+Installing JDK 17 on Ubuntu, before it is available from official Ubuntu repo:
+
+# To see what other versions of the JDK are available without adding a ppa, run:
+#   apt search openjdk
+
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt update
+sudo apt install oracle-java17-installer --no-install-recommends
+(cd ~/java && ln -s /usr/lib/jvm/java-17-oracle jdk17)
+
+# To uninstall: sudo apt remove oracle-java17-installer
+
+===========================================================================
+
+Installing JDK 21 at CSE:
+VER=21
+FULLVER=21.0.2
+cd ~/java
+wget https://download.oracle.com/java/${VER}/latest/jdk-${VER}_linux-x64_bin.tar.gz
+tar xzf jdk-${VER}_linux-x64_bin.tar.gz
+ln -s jdk-${FULLVER} jdk-${VER}
+ln -s jdk-${VER} jdk${VER}
+hash -r
+
+# To test it:
+usejdk21
+java -version
+
+===========================================================================
+
+Installing JDK 20 at CSE:
+VER=20
+cd ~/java
+wget https://download.oracle.com/java/20/latest/jdk-20_linux-x64_bin.tar.gz
+tar xzf jdk-20_linux-x64_bin.tar.gz
+ln -s jdk-20.0.1 jdk-20
+ln -s jdk-20 jdk20
+hash -r
+
+# To test it:
+usejdk20
+java -version
+
+===========================================================================
+
+Installing JDK 19 at CSE:
+cd ~/java
+wget https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.tar.gz
+tar xzf jdk-19_linux-x64_bin.tar.gz
+ln -s jdk-19 jdk19
+
+# To test it:
+usejdk19
+java -version
+
+===========================================================================
+
+Installing JDK 18 at CSE:
+cd ~/java
+wget https://download.oracle.com/java/18/latest/jdk-18_linux-x64_bin.tar.gz
+tar xzf jdk-18_linux-x64_bin.tar.gz
+ln -s jdk-18 jdk18
+
+# To test it:
+usejdk18
+java -version
+
+===========================================================================
+
+Installing JDK 17 at CSE:
+cd ~/java
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+tar xzf jdk-17_linux-x64_bin.tar.gz
+ln -s jdk-17.0.4.1 jdk17
+
+# To test it:
+usejdk17
+java -version
+
+===========================================================================
+
+Installing JDK 16 at CSE:
+cd ~/java
+wget https://download.java.net/java/GA/jdk16.0.1/7147401fd7354114ac51ef3e1328291f/9/GPL/openjdk-16.0.1_linux-x64_bin.tar.gz
+tar xzf openjdk-16.0.1_linux-x64_bin.tar.gz
+ln -s jdk-16.0.1 jdk16
+
+# To test it:
+usejdk16
+java -version
+
+===========================================================================
+
+Building OpenJDK 12:
+
+# Need a JDK 12 boot JDK, so install it using instructions from
+# https://www.linuxuprising.com/2019/03/how-to-install-oracle-java-12-jdk-12-in.html
+sudo add-apt-repository ppa:linuxuprising/java && \
+sudo apt update && \
+sudo apt install oracle-java12-installer
+
+# Other prerequisites
+sudo apt install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+sudo apt install -y libcups2-dev libfontconfig1-dev libasound2-dev
+
+# Now, clone and build OpenJDK 12
+cd ~/java
+hg clone http://hg.openjdk.java.net/jdk/jdk12 jdk-openjdk12
+cd ~/java/jdk-openjdk12
+bash ./configure --with-jtreg=$HOME/java/jtreg --disable-warnings-as-errors
+make
+
+# The `make` command failed without: --disable-warnings-as-errors
+
+.class files are in, for example:
+./build/linux-x86_64-server-release/jdk/modules/java.base/java/lang/Object.class
+
+----------------
+
+git clone --depth 1 https://github.com/typetools/jdk.git
+cd jdk
+bash ./configure --disable-warnings-as-errors --with-jtreg=$HOME/java/jtreg
+make images
+./build/*/images/jdk/bin/java -version
+make run-test-tier1
+
+===========================================================================
+
+### JDK docs, including Javadoc
+
+To get documentation of internal JDK files (this one gets those in "jdk.compiler"):
+
+sudo apt install -y libasound2-dev libcups2-dev libfontconfig1-dev \
+  libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+# Maybe only the first "make" line is necessary; try that.
+cd ~/java/jdk-openjdk
+bash ./configure --enable-full-docs && \
+make docs && \
+make docs-jdk-api-javadoc docs-jdk-api-graphs docs-javase-api-javadoc \
+    docs-javase-api-graphs docs-reference-api-javadoc \
+    docs-reference-api-graphs docs-jdk-specs docs-jdk-index docs-zip \
+    docs-specs-zip && \
+make docs-javase docs-reference && \
+make all-docs-images all-docs-bundles
+cd ~/java/jdk-openjdk/build/linux-x86_64-server-release/support/docs/ && \
+cp -pf _javadoc_REFERENCE_API_exec.cmdline javadoc_COMPILER.cmdline && \
+sed -i 's/java.se/jdk.compiler/' javadoc_COMPILER.cmdline
+# sed -i 's/REFERENCE/COMPILER/' 's/reference/compiler/' javadoc_COMPILER.cmdline
+In ~/java/jdk-openjdk/src/jdk.compiler/share/classes/module-info.java, in the "exports" statements:
+  (query-replace-regexp " to[^;]*;$" ";")
+rm -rf ~/java/jdk-openjdk/build/linux-x86_64-server-release/images/docs-reference/api && \
+(sh javadoc_COMPILER.cmdline || true) && \
+rm -rf ~/java/z-jdk-compiler-api/ && \
+mv ~/java/jdk-openjdk/build/linux-x86_64-server-release/images/docs-reference/api ~/java/z-jdk-compiler-api/
+
+
+There are files such as ~/java/jdk-openjdk/build/linux-x86_64-server-release/support/docs/_javadoc_JAVASE_API_exec.cmdline !
+
+Possibly useful; they all call jdk.javadoc.internal.tool.Main, so I should be able to adapt them.
+~/java/jdk-openjdk/build/linux-x86_64-server-release/support/docs/_javadoc_JAVASE_API_exec.cmdline
+~/java/jdk-openjdk/build/linux-x86_64-server-release/support/docs/_javadoc_JDK_API_exec.cmdline
+~/java/jdk-openjdk/build/linux-x86_64-server-release/support/docs/_javadoc_REFERENCE_API_exec.cmdline
+
+look for instances of _javadoc_ ??
+look for instances of images/docs ??  There should be a javadoc invocation that drops files there.
+There are too many hits for these in my log files.
+
+----------------
+
+# Java 21
+cd ~/java
+# Download (wget does not work) from https://www.oracle.com/java/technologies/javase-jdk21-doc-downloads.html
+unzip -q jdk-21.0.6_doc-all.zip
+mv docs jdk21-docs
+rm -f jdk-docs
+ln -s jdk21-docs jdk-docs
+
+# Now, rerun:
+java -cp $HOME/java/plume-lib/javadoc-lookup/build/libs/javadoc-lookup-all.jar org.plumelib.javadoclookup.CreateJavadocIndex > ~/.javadoc-index.el
+
+----------------
+
+# Java 17
+cd ~/java
+# Download (wget does not work) from https://www.oracle.com/java/technologies/javase-jdk17-doc-downloads.html
+unzip -q jdk-17.0.14_doc-all.zip
+mv docs jdk17-docs
+rm -f jdk-docs
+ln -s jdk17-docs jdk-docs
+
+----------------
+
+# Java 11
+cd ~/java
+# Download (wget does not work) from https://www.oracle.com/technetwork/java/javase/documentation/jdk11-doc-downloads-5097203.html
+unzip -q jdk-11.0.11_doc-all.zip
+mv docs jdk11-docs
+ln -s jdk11-docs jdk-docs
+
+----------------
+
+### JDK docs for release: (the date might be a day off!)
+export JDKDOCDIR=$HOME/java/jdk-${OJDKMAJORVER}
+mkdir -p $JDKDOCDIR
+cd $JDKDOCDIR
+# wget http://www.java.net/download/jdk${OJDKMAJORVER}/archive/${OJDKBUILDNO}/binaries/jdk-${OJDKMAJORVER}-docs-all.zip
+# unzip -q jdk-${OJDKMAJORVER}-docs-all.zip
+wget http://www.java.net/download/java/jdk${OJDKMAJORVER}/archive/${OJDKBUILDNO}/binaries/jdk-${OJDKMAJORVER}_doc-api-spec.tar.gz
+tar xzf jdk-${OJDKMAJORVER}_doc-api-spec.tar.gz
+# Only necessary once ever: cd ~/java; ln -s jdk/docs jdk-docs; ln -s jdk-${OJDKMAJORVER} jdk${OJDKMAJORVER}; ln -s jdk${OJDKMAJORVER} jdk
+javadoc-index-to-alist > ~/.javadoc-index.el
+
+
+===========================================================================
+
+Building OpenJDK 11:
+
+# Need a JDK 12 boot JDK, so install it using instructions from
+# https://www.linuxuprising.com/2019/03/how-to-install-oracle-java-11-jdk-11-in.html
+sudo add-apt-repository ppa:linuxuprising/java && \
+sudo apt update && \
+sudo apt install oracle-java12-installer
+
+# Other prerequisites
+sudo apt install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+sudo apt install -y libcups2-dev libfontconfig1-dev libasound2-dev
+
+# Now, clone and build OpenJDK 11
+cd ~/java
+hg clone http://hg.openjdk.java.net/jdk/jdk11 jdk-openjdk11
+cd ~/java/jdk-openjdk11
+bash ./configure --with-jtreg=$HOME/java/jtreg --disable-warnings-as-errors
+make
+
+===========================================================================
+
+# To build and test just the JDK:
+bash ./configure --with-jtreg=$HOME/java/jtreg --disable-warnings-as-errors
+make jdk
+make run-test TEST="jtreg:test/jdk:tier1" JTREG="TIMEOUT=8"
+
+===========================================================================
+
+JDK 8:
+
+At UW, use Mark's installation.
+
+Download "Linux x64 Compressed Archive" from
+https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html
+
+===========================================================================

@@ -1,0 +1,55 @@
+JML webpages:
+  http://www.eecs.ucf.edu/~leavens/JML/
+  ftp://ftp.cs.iastate.edu/pub/leavens/JML/
+  http://sourceforge.net/project/showfiles.php?group_id=65346
+
+To get the "Common" tools:
+
+# To set this variable, see "jmlspecs" part of
+# http://sourceforge.net/project/showfiles.php?group_id=65346
+# 5.6_rc4 is dated 3/2009, and is most recent as of 9/2009
+VER=5.6_rc4
+PKG=JML.$VER
+# cd $pag/software/pkg
+cd ~/tmp
+wget http://downloads.sourceforge.net/project/jmlspecs/jmlspecs/$VER/$PKG.tar.gz
+# The following creates a "JML" directory
+rm -f JML
+tar xzf $PKG.tar.gz
+mv JML $PKG
+ln -s $PKG JML
+
+# If I just want to examine the annotations, see:
+#   ~/tmp/JML/specs/
+# If I want to run it, read on.
+
+# Now, read file JML/README.html.
+# The below are from that.
+
+## Only needed once ever.  This helps jmldoc find tools.jar.
+# Do this first, to warm up the sudo cache.
+sudo date
+# jmldoc needs to find lib/tools.jar in jre/lib/ext.
+cd ~/java/jdk/
+(cd jre/lib/ext; sudo ln -s ../../../lib/tools.jar)
+cd ~/java/jdk-1.4/
+(cd jre/lib/ext; sudo ln -s ../../../lib/tools.jar)
+
+
+# Myseriously, this does not work.  I don't understand this.
+mkdir $pag/software/pkg/JML/install
+JMLDIR=$pag/software/pkg/JML INSTALLDIR=$pag/software/pkg/JML/install JDKTOOLS=$pag/software/pkg/jdk-1.4/lib/tools.jar JML/bin/Install-JML-Scripts
+
+## Only (really) needs to be done when new programs/man pages appear in JML.
+# Symbolic link everything in $pag/software/pkg/JML/install/bin to $pag/software/bin
+# Symbolic link everything in $pag/software/pkg/JML/install/man/man1 to $pag/software/man/man1
+
+----------------
+
+To build:
+
+cd /g2/users/mernst/java/JML/edu/iastate/cs/jml/docs/prelimdesign/
+make -k -f GMakefile
+
+
+===========================================================================

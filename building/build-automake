@@ -1,0 +1,17 @@
+cd ~/tmp
+wget http://ftp.gnu.org/gnu/automake/automake-1.6.3.tar.bz2
+tar jxf automake-1.6.3.tar.bz2
+cd automake-1.6.3
+./configure
+make
+make check
+(cd ~/tmp/automake-1.6.3; sudo make install)
+make install
+
+===========================================================================
+
+cd automake-1.5
+./configure
+make
+make check
+make install

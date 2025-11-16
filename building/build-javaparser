@@ -1,0 +1,28 @@
+To create Javadoc:
+
+cd ~/java
+git clone https://github.com/javaparser/javaparser.git
+cd ~/java/javaparser
+# This will fail, but you can probably ignore the failure
+mvn javadoc:javadoc
+
+===========================================================================
+
+# To run tests:
+mvn --errors clean test
+# To run the slow tests too:
+mvn --errors clean test --activate-profiles AlsoSlowTests
+
+===========================================================================
+
+To make a branch from which I can make a pull request to JavaParser:
+
+cd $t/stubparser-fork-mernst
+gnb MY-BRANCH-NAME
+git reset --hard 42b208af878581f686161ba6a2246eb50a66a105
+git pull --ff-only /scratch/mernst/javaparser
+# Periodically:
+# (cd /scratch/mernst/javaparser && git pull) && git pull --rebase /scratch/mernst/javaparser && git push -f
+
+===========================================================================
+

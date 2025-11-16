@@ -1,0 +1,13 @@
+# Requires programs /homes/gws/csk/bin/share/{jcup,jlex}.
+# Requires /homes/gws/csk/Java to be on my CLASSPATH (actually, just the
+# java_cup subdirectory thereof).
+
+cd parse
+make
+cd ..
+javac Main.java
+
+Now just run it:
+  gud
+or
+  java gud.Main

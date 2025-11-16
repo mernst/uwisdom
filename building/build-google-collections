@@ -1,0 +1,46 @@
+kevinb@google.com 
+also:  jlevy, jessewilson, java-libraries-team
+
+# Non-members may check out a read-only working copy anonymously over HTTP.
+cd ~/tmp
+svn checkout http://google-collections.googlecode.com/svn/trunk/ google-collections-read-only 
+
+# To download
+DATE=20090211
+BASENAME=google-collect-snapshot-$DATE
+cd ~/tmp/
+wget http://google-collections.googlecode.com/files/$BASENAME.zip
+unzip $BASENAME.zip
+cd $BASENAME
+unzip src-snapshot-$DATE.zip
+
+
+
+===========================================================================
+
+Insert this in the build.xml file.
+(It's in Windows format...)
+
+  <target name="check-nullness" description="Check for nullness errors." depends="clean">
+    <mkdir dir="${build.dir}/classes"/>
+    <javac srcdir="${src.dir}"
+	   fork="yes"
+	   executable="C:/Program\ Files/checkers/binary/javac"
+           debug="on"
+           destdir="${build.dir}/classes"
+           source="1.5"
+           target="1.5">
+      <!-- <compilerarg value="-version"/> -->
+      <!-- <compilerarg line="-target 5"/> -->
+      <compilerarg line="-processor checkers.nullness.NullnessChecker"/>
+      <compilerarg line="-sourcepath C:/Program\ Files/checkers/jdk/nullness/src"/>
+      <compilerarg value="-implicit:class"/>
+      <classpath>
+        <pathelement location="${lib.dir}/jsr305.jar"/>
+      </classpath>
+    </javac>
+    <copy toDir="${build.dir}/classes">
+      <fileset dir="${src.dir}" excludes="**/*.java"/>
+    </copy>
+  </target>
+

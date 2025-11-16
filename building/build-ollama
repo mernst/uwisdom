@@ -1,0 +1,10 @@
+Ollama permits running a LLM model locally, using the CPU in addition to the GPU (if any).
+
+
+https://github.com/ollama/ollama
+https://github.com/ollama/ollama/blob/main/docs/linux.md
+
+cd ~/tmp
+curl -L https://ollama.com/download/ollama-linux-amd64.tgz -o ollama-linux-amd64.tgz
+cd ~/.local
+tar -C ~/.local -xzf ~/tmp/ollama-linux-amd64.tgz

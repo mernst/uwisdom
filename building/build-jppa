@@ -1,0 +1,40 @@
+===========================================================================
+
+Documentation:
+http://jppa.sourceforge.net/PURITY-README.html
+
+
+To install:
+
+cd /scratch/$USER
+wget http://downloads.sourceforge.net/project/jppa/purity-kit/0.09/purity-kit-0.09.tgz
+tar xzf purity-kit-0.09.tgz
+cd purity-kit
+# This should produce a lot of output to the terminal:
+./purity-test
+cd ..
+
+To run:
+# This will not work with JDK 7; you need to be using JDK 5 or 6.
+
+# The argument to --daikon-purity-file is relative to the location of the
+# run-purity script!  So, make it absolute.
+purity-kit/run-purity MyClass "${CLASSPATH}" --daikon-purity-file $HOME/pure-methods-MyClass
+
+For a list of command-line arguments:
+
+CLASSPATH=purity-kit/purity.jar:purity-kit/suppJars/jpaul.jar:purity-kit/suppJars/jutil.jar java harpoon.Main.SAMain -h
+
+
+===========================================================================
+
+To build from sources, see "GETTING STARTED" section of Harpoon/README .
+But, even when I use
+  ./common-build --with-gcj
+The section of Harpoon/classpath-0.08/lib/Makefile near
+  # handling javac definition including programs like jikes here
+still hard-codes jikes instead of gcj.
+
+So, give up on building from sources.
+
+===========================================================================

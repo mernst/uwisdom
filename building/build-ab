@@ -1,0 +1,16 @@
+Aspect Brower,
+http://www-cse.ucsd.edu/users/wgg/Software/AB/
+
+I installed in
+  /g2/users/mernst/research/invariants/tests/packages/AB-1.1
+
+cd icons
+make all
+# link inferaspects and redsummary to ~/bin/share
+
+
+To run:
+  setenv CLASSPATH /g2/users/mernst/research/invariants/tests/packages/AB-1.1/nebulous.jar:/g2/users/mernst/research/invariants/tests/packages/AB-1.1/gnu-regexp-1.0.8.jar:$CLASSPATH
+  (setq load-path (cons "/g2/users/mernst/research/invariants/tests/packages/AB-1.1/AE" load-path))
+  (autoload 'aspect-workspace "aspect-workspace.el" "Aspect Workspace" t)
+then M-x aspect-workspace

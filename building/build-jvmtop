@@ -1,0 +1,13 @@
+git clone git@github.com:patric-r/jvmtop.git
+cd jvmtop/
+mvn install
+
+The jvmtop release is in
+jvmtop/target/jvmtop-0.9.0-SNAPSHOT/jvmtop-0.9.0-SNAPSHOT.tar.gz
+
+You can run it with the following options:
+
+./jvmtop --profile --threadnamewidth 400 --width 400 <pid>
+
+(Smaller values for threadnamewidth and width would probably work, but the
+defaults are too small.)

@@ -1,0 +1,7 @@
+mkdir -p ~/bin/install/7z2407
+cd ~/bin/install/7z2407
+wget https://www.7-zip.org/a/7z2407-linux-x64.tar.xz	
+tar xf 7z2407-linux-x64.tar.xz	
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/7z2407/7zz .

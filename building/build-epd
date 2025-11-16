@@ -1,0 +1,38 @@
+Go to http://www.enthought.com/products/edudownload.php
+Enter your email address
+Go to the provided link.
+[http://www.enthought.com/repo/.hidden_epd_installers/]
+
+Download the appropriate file, depending on your operating system (MacOS,
+Linux, SunOS, Windows) and version.  The file versions that include "_64"
+in the name are for 64-bit operating systems.  To find out whether you are
+running a 32-bit or 64-bit operating system:
+
+ * Linux: type:  uname -m
+   If the result is x86_64, you are running a 64-bit operating system.
+   Otherwise, you are running a 32-bit operating system.
+ * MacOS:  see http://support.apple.com/kb/HT4287
+ * Windows:  see http://windows.microsoft.com/en-us/windows7/find-out-32-or-64-bit
+
+Now, perform the installation
+If you are running on a 64-bit machine, replace 
+each instance of epd-7.3-1-rh5-x86 by epd-7.3-1-rh5-x86_64 in the below.
+ * Linux:
+   mkdir -p $HOME/bin/install
+   cd $HOME/bin/install
+   # Download or copy the file epd-7.3-1-rh5-x86.sh to that directory.
+   chmod + x epd-7.3-1-rh5-x86.sh
+   ./epd-7.3-1-rh5-x86.sh
+   # When you see "--more--", press space (then possibly return)
+   # Accept the default location for the installation.
+   # Add the following line to your ~/.bashrc file:
+   #   export PATH=${HOME}/bin/install/epd-7.3-1-rh5-x86/bin:${PATH}
+   # Either Log out and log back in again, or run "source ~/.bashrc"
+   python --version
+   # Should produce:  Python 2.7.3 -- EPD 7.3-1 (64-bit)
+
+ * MacOS:
+
+ * Windows:
+   Download the apprpriate .msi file.
+   Double-click the .msi file after it is downloaded.

@@ -1,0 +1,18 @@
+Rob Miller says:
+
+I didn't do our MediaWiki configuration personally -- Michael Bolin did 
+it.  But from what he told me, and looking at the INSTALL file in the 
+MediaWiki dist, here's what you have to do:
+
+1. Unpack the MediaWiki distribution into a web-accessible directory
+
+2. Make sure its "config" subdirectory is writable by the web server (fs 
+sa www.pink-panther.csail.mit.edu write)
+
+3. Browse to the MediaWiki distribution's directory through the CSAIL 
+web server.  It'll redirect you to the config subdirectory, and then 
+it's just a matter of filling out web forms to create LocalSettings.php.
+
+4. Move LocalSettings.php from the config subdir up to the main 
+directory of the wiki distribution, and delete the world-writable config 
+directory.

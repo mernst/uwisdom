@@ -1,0 +1,14 @@
+http://developer.kde.org/~sewardj/
+
+cd ~/tmp
+wget http://developer.kde.org/~sewardj/valgrind-1.0.4.tar.bz2
+tar jxf valgrind-1.0.4.tar.bz2
+cd valgrind-1.0.4
+./configure
+# Increase env/argv limit
+perl -pi.bak -e 's/1000\)/2000)/g' vg_main.c
+make
+# On pag.lcs:
+(cd ~/tmp/valgrind-1.0.4; sudo make install)
+
+Now run with "valgrind command".

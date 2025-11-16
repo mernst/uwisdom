@@ -1,0 +1,99 @@
+http://www.dmalloc.com/
+
+===========================================================================
+
+geyer:
+(Download both RPM and SRPM)
+(Become root)
+rpm -i 
+
+===========================================================================
+
+Full instructions are in ./INSTALL
+
+Edit settings.dist to change
+  #define ALLOW_FREE_NULL 0
+  #define ALLOW_FREE_NULL_MESSAGE 1
+to
+  #define ALLOW_FREE_NULL 1
+  #define ALLOW_FREE_NULL_MESSAGE 0
+lest I have to do
+  dmalloc -p allow-free-null
+all the time from the command line.
+
+
+sh ./configure
+make
+# Optional
+make threads
+make tests
+make light
+make heavy
+
+make install
+make installth
+make installinfo
+
+g++ -Wall -g -c dmalloc.cc
+# Copy dmalloc.o (for use with C++ programs) someplace
+cp -p dmalloc.o ~/bin/src/dmalloc/`uname`
+
+# Save away some important files.
+# First time, do:  mkdir ~/bin/src/dmalloc/
+cp -rpf dmalloc.h dmalloc.cc return.h contrib ~/bin/src/dmalloc/
+
+(dmalloc.h ends up in /uns/share/include)
+
+===========================================================================
+
+Add to .cshrc:
+  alias dmalloc 'eval `\dmalloc -C \!*`'
+
+Copy dmallocrc to ~/.dmallocrc
+
+Add contrib/dmalloc.gdb to ~/.gdbinit
+
+
+===========================================================================
+
+Using:
+
+In every .c file, as the last #include (or at least after malloc.h):
+  #include "dmalloc.h"
+
+Compiling:
+  -I/uns/share/include
+
+Linking:
+  -ldmalloc
+
+Usage info:
+  dmalloc --usage
+
+Enable debugging; sets environment variable DMALLOC_OPTIONS, which is
+necessary in order to get output (to the logfile).  Checking options (in
+order) are: none runtime low medium high; more in ~/.dmallocrc.
+Do not name the logfile "dmalloc.log"; that caused no output for me!
+  dmalloc -l dmalloclog -i 100 low
+
+I need to figure out how to use it with C++.
+Essentially:
+  Compile and link dmalloc.cc with the C++ program you want to debug.
+
+To disable the dmalloc library, do one of the following:
+ * compile with "-DDMALLOC_DISABLE" flag all files that include "dmalloc.h".
+ * link with "-ldmalloclp"
+
+Using
+  -DDMALLOC_FUNC_CHECK
+adds checking to functions that aren't heap allocation/deallocation functions.
+However, it defines an "index" macro that interacts badly with
+declaration of a function or field initializer for "index".
+
+In a debugger, can put a breakpoint at `dmalloc_error()' to stop when
+dmalloc detects a memory error.
+
+# To get better info about the "ra=0x..." stuff, do
+# AND PIPE IT INTO A FILE.
+ra_info.pl  dmalloc-log  binary-that-generated-log
+

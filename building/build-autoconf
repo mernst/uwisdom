@@ -1,0 +1,9 @@
+cd ~/tmp/
+wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.58.tar.bz2
+tar jxf autoconf-2.58.tar.bz2
+cd autoconf-2.58
+./configure
+make
+make check
+# On geyer:
+(cd ~/tmp/autoconf-2.58; sudo make install)

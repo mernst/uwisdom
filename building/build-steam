@@ -1,0 +1,9 @@
+Give up on Ubuntu.
+
+# Don't gunk up your system with 32-bit packages.
+
+# This didn't work, either.  I'm getting:
+#   steam.sh[56034]: Error: You are missing the following 32-bit libraries, and Steam may not run:
+#   libc.so.6
+sudo snap install steam
+

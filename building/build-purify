@@ -1,0 +1,33 @@
+See $pag/software/pkg/PurifyPlus.2003a.06.15
+
+The license is for only one user on one CPU.
+
+===========================================================================
+
+"Download director" isn't worth it:  just download via http.
+I need to download both the product and the evaluation key.
+cp C539INA.upd ~/Rational/config/Temporary.dat
+  UNIX and Linux - Save the license key (the file with the .upd extension) in
+  the /config directory with the filename Temporary.dat. If the Temporary.dat
+  already exists on your system, append the contents of the license key file
+  into the existing Temporary.dat file.
+  (When I didn't do this, I couldn't get it to accept the data I copied and
+  pasted from that file.)
+
+Evaluation version:
+
+gtar zxf C83FAML.tar.gz
+# Set the X terminal window size before running rs_install.
+./rs_install
+
+# Add to my path:
+set path = ( ~/Rational/releases/PurifyPlus.2003a.06.15/sun4_solaris2/bin $path )
+
+grumpy-fuzzball.mit.edu
+
+===========================================================================
+
+Building mangel-wurzel:
+
+# This is WRONG!  See file PORTING instead.
+#  copy src/defines.h.solaris to src/defines.h

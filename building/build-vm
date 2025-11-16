@@ -1,0 +1,62 @@
+VM 8:  http://www.nongnu.org/viewmail/
+Robert Widhopf-Fenk <hack@robf.de>
+Bug reports: https://bugs.launchpad.net/viewmail/
+  My bug reports to do: ~/emacs/bug/BUGS.to-do
+  My bug reports submitted:  https://bugs.launchpad.net/viewmail/+bugs?field.bug_reporter=michaelernst
+
+===========================================================================
+
+VM 8.0.11:
+
+cd ~/emacs
+wget http://download.savannah.gnu.org/releases/viewmail/vm-8.0.12.tgz
+tar xzf vm-8.0.12.tgz
+cd vm-8.0.12
+# At CSE
+./configure --with-other-dirs=$HOME/emacs/bbdb-2.35/lisp
+# Elsewhere
+./configure --with-other-dirs=/usr/share/emacs/site-lisp/bbdb/lisp
+make
+# Don't do "make install"; just use from that directory.
+
+===========================================================================
+
+Older:
+
+http://www.wonderworks.com/vm/
+VM 7.19 is current as of December 31, 2005.
+VM 7.18 is current as of July 1, 2004.  It was released November 2, 2003.
+FAQ (http://www.wonderworks.com/vm/FAQ.html) was last revised Dec 8, 2003.
+gnu.emacs.vm.info got 18 messages in June 2004.  Also see gnu.emacs.vm.bug
+ http://groups.google.com/groups?hl=en&lr=&ie=UTF-8&group=gnu.emacs.vm.info
+ http://groups.google.com/groups?hl=en&lr=&ie=UTF-8&group=gnu.emacs.vm.bug
+
+---------------------------------------------------------------------------
+
+I failed while trying to use Debian APT to install vm 7.19 (on Debian 4.0
+at MPI), via these commands:
+
+  # Debian vm package depends on emacs21.  Why isn't emacs22 acceptable?
+  apt install vm
+  cp -pR /usr/share/emacs/site-lisp/vm /usr/share/emacs/22.1/site-lisp/vm
+  rm /usr/share/emacs/22.1/site-lisp/vm/vm.elc
+  apt uninstall emacs21
+  cp -pR /usr/share/emacs/22.1/site-lisp/vm /usr/share/emacs/site-lisp/vm
+
+but at this point "vm-autoloads" was missing.
+so I used the manual commands below.
+
+---------------------------------------------------------------------------
+
+VM 7.19:
+
+cd ~/emacs/emacs-22
+wget ftp://ftp.uu.net/networking/mail/vm/vm-7.19.tar.gz
+tar zxf vm-7.19.tar.gz
+cd vm-7.19
+make all
+make INFODIR=/usr/share/info install-info
+# Edit /usr/share/info/dir to add a line:
+#   * VM: (vm).          			A mail reader.
+
+===========================================================================

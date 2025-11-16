@@ -1,0 +1,117 @@
+# Java formatters
+
+
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
+<https://github.com/diffplug/spotless>
+  Can do any of: Java (google-java-format, eclipse jdt, clang-format, prettier, palantir-java-format)
+  Configuration:
+    <https://github.com/diffplug/spotless/tree/main/plugin-gradle#java>
+    <https://github.com/apache/beam/blob/1d9daf1aca101fa5a194cbbba969886734e08902/buildSrc/src/main/groovy/org/apache/beam/gradle/BeamModulePlugin.groovy#L776-L789>
+  I should create a `typeAnnotations()` filter within `java` that is a postprocessing step, just like run-google-java-format does now.
+    See <https://github.com/diffplug/spotless/blob/main/CONTRIBUTING.md>
+    It has an "Integration testing" section too.
+  It would be analogous to "GoogleJavaFormatStep.java".
+  Spotless supports only some configuration options, but I could add more in file "GoogleJavaFormatStep.java".
+
+
+<https://github.com/jhipster/prettier-java>
+
+
+<https://clang.llvm.org/docs/ClangFormat.html>
+  To install: `sudo apt -y install clang-format`
+  To run: `clang-format --style=Google -i`
+  "--qualifier-alignment=<string> - If set, overrides the qualifier alignment style
+                                   determined by the QualifierAlignment style flag"
+  Formats @SuppressWarnings wrong:
+    -    @SuppressWarnings("unchecked")
+    -    T[] result = (T[]) Array.newInstance(o.getClass(), n);
+    +    @SuppressWarnings("unchecked") T[] result = (T[]) Array.newInstance(o.getClass(), n);
+  It would be better to have a space between an annotation and a set of array brackets:
+    -    ListOrArray(T @Nullable [] theArray) {
+    +    ListOrArray(T @Nullable[] theArray) {
+  Formats type annotations wrong:
+    -    @NonNegative int size() {
+    +    @NonNegative
+    +    int size() {
+  Overall, google-java-format makes better choices for line breaks, e.g., in assertions.
+  clang-format is more concise, e.g. it puts multiple formal parameters on the same line.
+
+
+palantir-java-format
+  A fork of google-java-format, but apparently abandoned.
+  Maybe they would take a pull request with names of other type annotations...
+  Looks like it might default to 4-space indentation?
+  They seem to be a fair distance behind google-java-format; for example, as of August 2022 they do not have this old commit about type annotations:
+  865cff01 (Liam Miller-Cushon     2021-08-25 2409)
+
+
+Eclipse:
+  <https://www.beyondjava.net/run-eclipse-formatter-command-line>
+  <https://stackoverflow.com/questions/32599714/running-the-eclipse-java-formatter-on-the-command-line-with-eclipse-4-4>
+
+
+spring-javaformat: <https://github.com/spring-io/spring-javaformat>
+  "It is effectively limited to adding or removing whitespace and line feeds."
+  "switching to spaces is the one configuration option that we do support."
+  120 character width.  What is indentation: 4 spaces?
+  "Keeping whitespace lines out of method bodies can help make the code easier to scan.": so it removes all blank lines?
+Vim: vim MyClass.java <<< gg=G:wq
+  echo -e "G=gg\n:wq\n" | vim ./myfile.php
+  "Unfortunately this doesn't work nicely when you have several java annotations before a method (e.g. @Override, @Deprecated)"
+
+
+Not free:
+IntelliJ IDEA: <https://www.jetbrains.com/help/idea/command-line-formatter.html#5b357a2d>
+  Not free
+Jindent: <http://www.newforms-tech.com/products/jindent/components/console>
+  $40 for academic use.
+  I sent mail asking whether it handles type annotations.
+
+
+Not good enough:
+
+
+google-java-format: The authors refuse to build in names of well-known type annotations.
+
+
+OpenRewrite
+  <https://github.com/openrewrite/rewrite>
+  Add to `build.gradle` file:
+    plugins {
+ id("org.openrewrite.rewrite") version("5.26.3")
+    }
+    rewrite {
+ activeRecipe("org.openrewrite.java.format.AutoFormat")
+    }
+  Then run: ./gradlew rewriteRun
+    This compiles the project -- I'm not sure why.
+  Crashes when run on my projects.
+  Removes annotated receiver parameters!  But leaves in the colon, which results in illegal Java files.
+  By default uses 4-character indentation.
+  Put this in a file named rewrite.yml:
+
+- org.openrewrite.java.style.TabsAndIndentsStyle:
+      indentSize: 2
+  "OpenRewrite recipes make minimally invasive changes to your source code that honor the original formatting."
+
+
+No longer maintained:
+
+- <http://jalopy.sourceforge.net/>
+- <http://astyle.sourceforge.net/> -- last release 2018, no changes since 2019
+- <https://sourceforge.net/projects/jastyle/> -- last updated 2015
+- <http://www.semanticdesigns.com/Products/Formatters/JavaFormatter.html>
+   "Handles Java 1.1-1.6 and Java version 7"
+- <http://jrefactory.sourceforge.net/>
+- <http://universalindent.sourceforge.net/>
+
+
+Only for C:
+<https://www.gnu.org/software/indent/manual/indent.html>
+
+
+Not a code formatter:
+<https://www.ibm.com/docs/en/i/7.4?topic=classes-running-format-as-standalone-program>

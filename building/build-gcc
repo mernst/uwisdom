@@ -1,0 +1,351 @@
+http://www.gnu.org/software/gcc/gcc.html
+ftp://aeneas.mit.edu/pub/gnu/gcc/
+
+===========================================================================
+
+To build gcc 3.3.2:
+
+cd /tmp/mernst
+wget ftp://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3.2/gcc-3.3.2.tar.gz
+tar zxf gcc-3.3.2.tar.gz
+mkdir gcc-3.3.2-linux
+cd gcc-3.3.2-linux
+../gcc-3.3.2/configure
+make bootstrap
+# make check
+# Become root
+make install
+
+===========================================================================
+
+To build gcc 3.3:
+
+cd /tmp/mernst
+wget ftp://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3/gcc-3.3.tar.gz
+tar zxf gcc-3.3.tar.gz
+mkdir gcc-3.3-linux
+cd gcc-3.3-linux
+../gcc-3.3/configure
+make bootstrap
+# make check
+# Become root
+make install
+
+===========================================================================
+
+I might need to add this as file /usr/local/pkg/gcc/gcc-3.2.1/info/dir:
+
+
+This is the file .../info/dir, which contains the
+topmost node of the Info hierarchy, called (dir)Top.
+The first time you invoke Info you start off looking at this node.
+
+File: dir,	Node: Top	This is the top of the INFO tree
+
+  This (the Directory node) gives a menu of major topics.
+  Typing "q" exits, "?" lists all Info commands, "d" returns here,
+  "h" gives a primer for first-timers,
+  "mEmacs<Return>" visits the Emacs manual, etc.
+
+  In Emacs, you can click mouse button 2 on a menu item or cross reference
+  to select it.
+
+* Menu:
+
+Programming:
+* gcc: (gcc).                  The GNU Compiler Collection.
+* Gcj: (gcj).               Ahead-of-time compiler for the Java language
+* Cpp: (cpp).		       The GNU C preprocessor.
+* Cpplib: (cppinternals).      Cpplib internals.
+* gccint: (gccint).            Internals of the GNU Compiler Collection.
+* g77: (g77).                  The GNU Fortran compiler.
+
+
+===========================================================================
+
+To build gcc 3.0.2:
+
+cd /tmp/mernst
+tar Ixf gcc-3.0.2.tar.bz2 
+mkdir gcc-3.0.2-linux
+cd gcc-3.0.2-linux
+../gcc-3.0.2/configure
+make bootstrap
+# make check
+# Become root
+make install
+
+===========================================================================
+
+To build gcc 2.95.3:
+
+On geyer (linux):
+
+cd /tmp/mernst
+wget ftp://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-2.95.3/gcc-2.95.3.tar.gz
+tar zxf gcc-2.95.3.tar.gz
+mkdir gcc-2.95.3-linux
+cd gcc-2.95.3-linux
+../gcc-2.95.3/configure
+make bootstrap
+# make check
+# Become root
+make install
+
+===========================================================================
+
+To build gcc 2.95:
+
+On geyer (linux):
+
+cd /tmp/mernst
+tar zxf gcc-2.95.2.tar.gz
+mkdir gcc-2.95.2-linux
+cd gcc-2.95.2-linux
+../gcc-2.95.2/configure
+make bootstrap
+# make check
+# Become root
+make install
+
+===========================================================================
+
+To build gcc 2.95.3 on Solaris 2.7 (marjoram) in a temporary directory:
+
+Here are the commands I typed to build and install gcc 2.95.3 on Solaris
+2.7 in a temporary directory, on a machine on which I did not have root
+privileges.  The directory names are arbitrary and you may want to choose
+different ones (in particular, you certainly don't want to build or install
+in /tmp, which I was forced to do because I don't have enough quota on my
+machine).
+
+  cd /tmp
+  mkdir mernst
+  cd mernst
+  wget ftp://prep.ai.mit.edu/pub/gnu/gcc/gcc-2.95.3.tar.gz
+  gunzip gcc-2.95.3.tar.gz
+  tar xf gcc-2.95.3.tar
+  mkdir gcc-2.95.3-build-solaris
+  cd gcc-2.95.3-build-solaris
+  ../gcc-2.95.3/configure --prefix=/tmp/mernst/gcc-installation-solaris
+  make bootstrap
+  make install
+
+To test it:
+
+  which gcc
+  gcc -v
+  set path = (/tmp/mernst/gcc-installation-solaris $path)
+  which gcc
+  gcc -v
+
+And now just use it.
+
+===========================================================================
+
+On Solaris:
+
+[
+ Problem with gcc 2.95.2:  gcc -v gives me:
+    The following default directories have been omitted from the search path:
+     /uns/gcc-2.95.2/lib/gcc-lib/sparc-sun-solaris2.5.1/2.95.2/../../../../../include/g++-3
+    End of omitted list.
+ this should have had one less "../" in it; it's not obvious to me how to
+ fix it.
+]
+
+(I built on froggie, because klamath gave me "no space left" errors which
+might have had something to do with either swap or /tmp.)
+
+Bug in 2.95, supposedly fixed in 2.95.1:  does not respect my
+"CONFIG_SITE=/uns/share/config.site" env var.  ./configure did say "loading
+site script /uns/share/config.site", but that file's settings didn't take
+(Makefile was unaffected, etc.).  Thus, I will try unsetting that variable
+(since it appeared that some subcomponents of gcc do respect it, confusing
+the build).
+
+Jeremy Buhler says:
+  When I installed gcc 2.95 on Linux, I did *not* use config.site because I
+  wanted the include files to go into the platform-specific /uns/gcc-2.95.
+  I'm not 100% convinced that it's safe to share the g++ include directory --
+  there are some include files that were installed for Solaris (notably
+  libio.h) but are normally provided by libc on Linux systems.  Of course,
+  it's probably still safe to share between non-GNU-libc platforms (ie
+  everything but Linux).
+
+
+cd /tmp/mernst
+# or: bunzip2 gcc-2.95.2.tar.bz2; tar xvf gcc-2.95.2.tar
+# ...but I had trouble with this once, so avoid it.
+tar zxvf gcc-2.95.2.tar.gz
+mkdir gcc-2.95.2-solaris
+cd gcc-2.95.2-solaris
+## One of these might be preferable to creating an entire new directory
+## under /uns/.  But that's the policy as of now (see linux:/uns/gcc-2.95.2)
+# ../gcc-2.95/configure --prefix=/uns/share --exec-prefix=/uns
+# ../gcc-2.95/configure --prefix=/uns/gcc-2.95
+# ../gcc-2.95/configure --prefix=/uns/share/gcc-2.95 --exec-prefix=/uns/gcc-2.95
+## Bug in 2.95, supposedly fixed in 2.95.1:  does not respect my
+## "CONFIG_SITE=/uns/share/config.site" env var.  ./configure did say "loading
+## site script /uns/share/config.site", but that file's settings didn't take
+## (Makefile was unaffected, etc.).  Thus, I will try unsetting that variable
+## (since it appeared that some subcomponents of gcc do respect it, confusing
+## the build).  This seems to be fixed in 2.95.2, since the unsetenv has no
+## effect on the resulting Makefile.
+## unsetenv CONFIG_SITE
+# You can't just do "../gcc-2.95.2/configure --prefix=/uns/gcc-2.95.2"
+# because that will get exec_prefix from config.site, resulting in, at runtime:
+#   The following default directories have been omitted from the search path:
+#    /uns/gcc-2.95.2/lib/gcc-lib/sparc-sun-solaris2.5.1/2.95.2/../../../../../include/g++-3
+#   End of omitted list.
+# So either do "unsetenv CONFIG_SITE; ../gcc-2.95.2/configure
+# --prefix=/uns/gcc-2.95.2" or "../gcc-2.95.2/configure
+# --prefix=/uns/gcc-2.95.2 --exec-prefix=/uns/gcc-2.95.2".
+../gcc-2.95.2/configure --prefix=/uns/gcc-2.95.2 --exec-prefix=/uns/gcc-2.95.2 --enable-shared
+make bootstrap
+# make check
+make install
+
+(cd /uns; rm -f gcc gcc-2.95; ln -s gcc-2.95.2 gcc-2.95; ln -s gcc-2.95 gcc)
+# This isn't quite right, because I want version numbers to be noted.
+# But do add such symbolic links.
+# (cd /uns/bin; ln -s /uns/gcc-2.95.2/bin/* .)
+ln -s /uns/gcc-2.95.2/bin/gcc /uns/bin/gcc-2.95.2
+ln -s /uns/gcc-2.95.2/bin/g++ /uns/bin/g++-2.95.2
+ln -s /uns/gcc-2.95.2/bin/g77 /uns/bin/g77-2.95.2
+# If I did --enable-shared:
+ln -s /uns/gcc-2.95.2/lib/libstdc++.so.2.10.0 /uns/lib
+
+
+Use "truss -f" or "strace -f" to see system calls (for instance, what
+filenames are being searched for by a program).
+For gcc, even better would be to just use the verbose flag to gcc.
+
+===========================================================================
+
+To build egcs-1.1.2:
+
+ftp://egcs.cygnus.com/pub/egcs/releases/index.html
+http://egcs.cygnus.com/
+Installation notes: http://egcs.cygnus.com/install/
+
+cd /tmp/mernst
+tar xvfz egcs-1.1.2.tar.gz
+
+mkdir egcs-1.1.2-obj
+cd egcs-1.1.2-obj
+# I really ought to provide some --prefix arguments here.
+# ../egcs-1.1.2/configure
+# The first time around I used --prefix=/uns/share
+../egcs-1.1.2/configure --prefix=/uns/share/egcs-1.1.2 --exec-prefix=/uns --libexecdir=/uns/lib/libexec --sbindir=/uns/bin
+make bootstrap
+# Testing:  I don't do this now because it requires dejagnu
+# make -k check
+
+make install
+
+===========================================================================
+
+To build gcc 2.6.0 under IRIX 5.2:
+
+cd /usr/local/src
+doit mkdir /usr/local/src/gcc-2.6.0
+doit chown mernst /usr/local/src/gcc-2.6.0
+doit chgrp analysts /usr/local/src/gcc-2.6.0
+tar xvf /usr/local/src/gcc-2.6.0.tar
+
+README.IRIX5 says to get gas 2.3, apply the patch, then install it.
+   cd /usr/local/src/gas-2.3/gas/config
+   patch < /usr/local/src/gcc-2.6.0/README.IRIX5
+   cd /usr/local/src/gas-2.3
+   ./configure
+   make
+   doit cp gas/as.new /usr/local/bin/gas-2.3
+   doit ln -s gas-2.3 /usr/local/bin/as
+   cd gas/doc
+   make info
+   doit cp as.info* /usr/local/info
+
+make distclean
+./configure --with-gnu-as
+make LANGUAGES=c
+make stage1
+	[Some "No such file or directory" errors]
+cp /usr/local/bin/gas-2.3 stage1/as
+make CC="stage1/xgcc -Bstage1/" CFLAGS="-g -O"
+rm -rf stage1
+
+Test:
+
+make stage2
+cp /usr/local/bin/gas-2.3 stage2/as
+make CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+make compare
+
+Objective C:
+
+make objc-runtime CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+doit make install-libobjc CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+
+Install:
+
+doit make install CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+
+>      `make compare' may fail on version 5 of IRIX unless you add
+>      `-save-temps' to `CFLAGS'.  ...  
+>      Do not add `-save-temps' unless the comparisons 
+>      fail without that option.  If you do you `-save-temps', you will
+>      have to manually delete the `.i' and `.s' files after each series
+>      of compilations.
+
+===========================================================================
+
+To build gcc 2.5.7 under IRIX 4.0.5F:
+
+make distclean
+configure mips-sgi-irix4loser
+make LANGUAGES=c
+make stage1
+make CC="stage1/xgcc -Bstage1/" CFLAGS="-g -O"
+rm -rf stage1
+
+To test:
+make stage2
+make CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+make compare
+
+Objective C:
+make objc-runtime CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+doit make install-libobjc CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+
+doit make install CC="stage2/xgcc -Bstage2/" CFLAGS="-g -O"
+
+Install libg++ distribution.
+
+----------------
+
+>     `mips-sgi-*'
+>           Silicon Graphics MIPS machines running IRIX.  In order to
+>           compile GCC on an SGI the "c.hdr.lib" option must be
+>           installed from the CD-ROM supplied from Silicon Graphics.
+>           This is found on the 2nd CD in release 4.0.1.
+
+There isn't any c.hdr.lib.  Do they mean dev.hdr.lib?  Things seem to work
+for me when I have that installed.
+
+>    On Irix version 4.0.5F, and perhaps on some other versions as well,
+> there is an assembler bug that reorders instructions incorrectly.  To
+> work around it, specify the target configuration `mips-sgi-irix4loser'.
+> This configuration inhibits assembler optimization.
+> 
+>    You can turn off assembler optimization in a compiler configured with
+> target `mips-sgi-irix4' using the `-noasmopt' option.  This compiler
+> option passes the option `-O0' to the assembler, to inhibit reordering.
+> 
+>    The `-noasmopt' option can be useful for testing whether a problem
+> is due to erroneous assembler reordering.  Even if a problem does not go
+> away with `-noasmopt', it may still be due to assembler
+> reordering--perhaps GNU CC itself was miscompiled as a result.
+> 
+>    We know this is inconvenient, but it's the best that can be done at
+> the last minute.

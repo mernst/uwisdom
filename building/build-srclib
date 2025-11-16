@@ -1,0 +1,10 @@
+srclib isn't advertised as supporting Java, but there is
+https://github.com/sourcegraph/srclib-java
+
+https://srclib.org/plugins/emacs/
+
+
+To install:
+[The first command didn't work, and I don't understand why.]
+go get -u -v sourcegraph.com/sourcegraph/srclib/cmd/srclib
+srclib toolchain install go ruby javascript python

@@ -1,0 +1,46 @@
+http://www.gradle.org/installation
+
+===========================================================================
+
+# Install sdkman, then:
+sdk install gradle 9.1.0
+
+===========================================================================
+
+# Download:
+
+# Get version number at https://gradle.org/gradle-download/
+VER=4.10.2
+mkdir -p ~/bin/install
+cd ~/bin/install
+wget http://services.gradle.org/distributions/gradle-$VER-all.zip
+unzip -q gradle-$VER-all.zip 
+ln -s gradle-$VER gradle
+
+mkdir -p $HOME/bin/`uname`-`uname -m`
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../install/gradle/bin/gradle .
+
+===========================================================================
+
+To update a repository to a newer Gradle version:
+(Dependabot does not update Gradle.)
+
+VER=7.4
+gnb gradle$VER && ./gradlew wrapper --gradle-version=$VER && ./gradlew build --warning-mode=all && git commit -a -m "Use Gradle $VER" && git push --set-upstream origin gradle$VER
+
+===========================================================================
+
+# To use the Gradle nightly build:
+# This one doesn't support Java 25 classfiles (version 69), so it cannot run under Java 25.
+./gradlew wrapper --gradle-version=9.1.0-20250607002815+0000
+
+===========================================================================
+
+Build from source:
+
+./gradlew :distributions-full:binDistributionZip
+# To use it:
+./gradlew wrapper --gradle-distribution-url=file:/path/to/gradle-<version>-bin.zip
+
+===========================================================================

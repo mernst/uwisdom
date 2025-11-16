@@ -1,0 +1,57 @@
+http://retroweaver.sourceforge.net
+bugs to: Toby Reyelts <toby@reyelts.com>
+(but he's not very helpful or professional)
+
+People say this program generally works, but it seems very pooly
+documented, and the "verifyrefs" option definitely has errors, so I am
+slightly amazed if it truly does work consistently.
+
+cd ~/java
+wget http://voxel.dl.sourceforge.net/sourceforge/retroweaver/retroweaver-all.jar
+jar xf retroweaver-all.jar
+rm -rf META-INF
+mv retroweaver retroweaver-1.1
+cd ~/java/retroweaver-1.1
+
+http://jace.reyelts.com/jace
+
+===========================================================================
+
+I was not able to obtain the source code using the following:
+(I have not yet reported this problem.)
+
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/retroweaver login 42
+cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/retroweaver co -P retroweaver
+
+===========================================================================
+
+The jace library that is used by Retroweaver appears to be from
+http://jace.reyelts.com/jace
+(but on Feb 7, that wasn't responding to http requests).
+
+===========================================================================
+
+# retroweaver changes source code in place in the given directory
+
+
+setenv RWHOME $HOME/java/retroweaver-1.1
+setenv RWCLASSPATH $RWHOME/src:$RWHOME/lib/bcel-5.1.jar:$RWHOME/lib/jace.jar:$RWHOME/lib/Regex.jar:$CLASSPATH
+# To use the distributed jar file (but it does not support -verifyref argument).
+setenv RWJARCLASSPATH $HOME/java/retroweaver-1.1/src:$HOME/java/retroweaver-1.1/lib/bcel-5.1.jar:lib/jace.jar:lib/Regex.jar:$CLASSPATH
+setenv JAVA14CLASSPATH `echo $CLASSPATH | perl -pe s:/mernst/java/jdk/jre/:/mernst/java/jdk-1.4/jre/:`
+
+# To recompile retrowaver:
+cd ~/java/retroweaver-1.1
+javac -cp $RWCLASSPATH `findfile '*.java'`
+
+# To run with -verifyrefs option:
+java -cp $RWCLASSPATH com.rc.retroweaver.Weaver -source $inv/java/utilMDE -verifyrefs $JAVA14CLASSPATH
+
+# To reproduce -verifyrefs bug:
+cd ~/bin/bugs/src
+javac RetroweaverBug.java
+java -cp $RWCLASSPATH com.rc.retroweaver.Weaver -source . -verifyrefs $JAVA14CLASSPATH
+java-1.4 RetroweaverBug
+
+===========================================================================
+

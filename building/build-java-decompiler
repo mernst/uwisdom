@@ -1,0 +1,10 @@
+https://github.com/java-decompiler/jd-gui
+
+cd ~/java
+git clone https://github.com/java-decompiler/jd-gui.git
+cd jd-gui
+./gradlew build 
+java -classpath ~/java/jd-gui/build/libs/jd-gui-1.4.0.jar org.jd.gui.App
+
+# The GUI runs, but I cannot select a file because the file selection dialog
+# hangs.  So, this is not usable for me.

@@ -1,0 +1,7 @@
+Download fram link at http://cobertura.github.io/cobertura/
+
+Copy to ~/bin/install
+cd ~/bin/install
+tar zxvf cobertura-2.1.1-bin.tar.gz
+
+The tar file's README.markdown file doesn't say how to run it, and the changelog at the bottom of that file only goes through version 2.0.3.

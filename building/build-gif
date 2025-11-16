@@ -1,0 +1,8 @@
+cd ~/bin/install
+VERSION=5.2.2
+wget https://sourceforge.net/projects/giflib/files/latest/download
+tar xzvf giflib-${VERSION}.tar.gz
+cd ~/bin/install/giflib-${VERSION}
+# Edit Makefile:  (Must be parens, not ${...}.)
+# PREFIX = $(HOME)/.local
+make install

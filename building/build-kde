@@ -1,0 +1,27 @@
+This is actually about using KDE.  I gave up, again (2/17/2006).
+My problems were with the window manager.
+
+
+Can I use another window (such as sawfish or, better, metacity) with KDE?
+
+See "The K Window Manager Handbook"
+But I can't find that anywhere.  (Maybe it isn't installed via Debian?)
+Themes:
+  http://kde.themes.org/  http://www.kde-look.org
+KDE Control Center and select Regional & Accessibility->Keyboard Shortcuts
+
+Background: no picture
+Colors: single color
+
+Control Center >> Appearance and Themes >> Window Decorations	
+Halfway reasonable window decorations:
+ Glow
+ Redmond
+ KStep (not as good)
+
+I can't figure out how to make Alt-TAB not require an extra keystroke.
+This is driving me nuts.  May be an X problem.  Try "xev"?
+
+Another serious problem is that KDE steals some keystrokes from Emacs.
+
+And focus doesn't follow the mouse, which I also don't like.

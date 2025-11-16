@@ -1,0 +1,71 @@
+===========================================================================
+
+Bugs to report:  see end of this file.
+
+===========================================================================
+
+JastAdd:
+http://jastadd.org
+
+According to
+http://jastadd.org/jastadd-tutorial-examples/non-null-types-for-java, after
+running the inference system, "There are still possible-null pointer
+violations in the program ... Such errors will be detected if we run the
+annotated source file through the checker as described previously."
+
+Torbjorn explains:
+ String[@NonNull] is a possibly-null reference to an array where each
+ element is non-null. This is not supported by the current tools.  There is
+ currently no analysis to determine nullness for array elements.
+
+===========================================================================
+
+JastAdd non-null inferencer and checker:
+JSR 308 version: http://builds.jastadd.org/NonNullTools
+Distributed version:
+  http://jastadd.org/jastadd-tutorial-examples/non-null-types-for-java
+  http://jastadd.cs.lth.se/examples/NonNullTypesExtension/index.shtml
+Bugzilla:  http://bugs.jastadd.org  (product category: NonNullTools)
+
+
+## Installation (instructions: http://jastadd.org/installation)
+cd ~/java
+mv JavaNonNullInferencer.jar JavaNonNullInferencer.jar-`ls -l JavaNonNullInferencer.jar | cut --delimiter=' ' --fields=6`
+wget http://builds.jastadd.org/NonNullTools/latest/JavaNonNullInferencer.jar
+## For now, ignore these other downloads; focus on the inferencer instead.
+# mv JavaNonNullTypes-src.jar JavaNonNullTypes-src.jar-old
+# wget http://builds.jastadd.org/NonNullTools/latest/JavaNonNullTypes-src.jar
+# mv JavaNonNullChecker.jar JavaNonNullChecker.jar-old
+# wget http://builds.jastadd.org/NonNullTools/latest/JavaNonNullChecker.jar
+
+## Alias for convenient usage
+# "nninfer MyFile.java" creates inferred/MyFile.java:
+alias nninfer='java -Xmx768M -jar ~/java/JavaNonNullInferencer.jar -classpath ${CLASSPATH} -legacysyntax -import "checkers.quals.*"'
+
+===========================================================================
+
+# Example command lines
+
+# Useful command line options include:
+#  -disableraw
+#  -defaultnonnull
+#   -debug FileName.java
+
+# Debugging:  to find out which file is the problem, do:
+for name in *.java ; do echo $name; nninfer $name ; done
+
+
+## To run on Daikon:
+# Infer
+rm -rf ~/tmp/nninfer/invariants-java
+cd $inv/java
+nninfer -d ~/tmp/nninfer/invariants-java `make showvar_JAVA_FILES`
+# Compile
+setenv CLASSPATH .:$CLASSPATH
+cd ~/tmp/nninfer/invariants-java
+# To make the javac command work, I have to replace some but not all @Raw by
+# @checkers.quals.Raw.  Why?
+javac `find -name '*.java'`
+javac -typeprocessor checkers.nonnull.NonNullChecker -Xmaxwarns 1000 `find -name '*.java'`
+
+===========================================================================

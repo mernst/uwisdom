@@ -1,0 +1,36 @@
+See /uns/src
+
+===========================================================================
+
+Until Ubuntu has 1.6 out of experimental:
+
+----------------
+
+## This worked; I got it from
+## http://stackoverflow.com/questions/831723/where-to-find-prebuilt-binaries-for-subversion-1-6-for-ubuntu-or-debian
+
+## Add to /etc/apt/sources.list:
+##   deb http://ppa.launchpad.net/anders-kaseorg/subversion-1.6/ubuntu intrepid main
+##   deb-src http://ppa.launchpad.net/anders-kaseorg/subversion-1.6/ubuntu intrepid main
+sudo apt update
+sudo apt install subversion
+
+----------------
+
+## Building from sources does not work for me!
+# Until Ubuntu has 1.6:
+cd ~/bin/install
+mkdir -p subversion
+cd subversion
+PKG=subversion-1.6.2
+wget http://subversion.tigris.org/downloads/$PKG.tar.gz
+tar xzf $PKG.tar.gz
+cd $PKG
+svn co http://svn.apache.org/repos/asf/apr/apr/branches/1.2.x apr
+(cd apr; buildconf)
+svn co http://svn.apache.org/repos/asf/apr/apr-util/branches/1.2.x apr-util
+(cd apr-util; buildconf)
+./configure
+make
+
+===========================================================================

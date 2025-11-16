@@ -1,0 +1,64 @@
+For International ispell,
+ispell-3.4.00 was released Feb 9 2015, is the latest as of Sep 2016.
+is the latest as of 
+
+Ispell 3.2
+http://fmg-www.cs.ucla.edu/fmg-members/geoff/ispell.html
+
+# Do all this on geyer
+cd ~/tmp
+wget http://fmg-www.cs.ucla.edu/geoff/tars/ispell-3.2.06.tar.gz
+tar zxvf ispell-3.2.06.tar.gz
+cd ispell-3.2.06
+# For USG (System V) systems such as Linux:
+cp -p local.h.samp local.h
+## Edit local.h:
+#  -#undef USG		/* Define on System V or if term.c won't compile */
+#  +#define USG		/* Define on System V or if term.c won't compile */
+## And add the end:
+#  #define LANGUAGES "{american,MASTERDICTS=american.med+,HASHFILES=americanmed.hash,EXTRADICT=/usr/dict/words}"
+#  #define EQUAL_COLUMNS
+#  #define SORTPERSONAL 10000
+#  #define MAX_SCREEN_SIZE 24
+make
+sudo make install
+
+===========================================================================
+
+Ispell 3.1:
+
+http://fmg-www.cs.ucla.edu/geoff/ispell.html
+
+----------------
+
+* The first time, I had to create /usr/dict (linking it on all systems to
+/usr/local/dict).
+
+* Add to local.h:
+
+#define __STDC__
+
+* Next time, make the columns line up (see local.h to find out how).
+
+* Maybe add to local.h (but these might not be necessary):
+
+#define USG		/* Define this on System V */
+#define GENERATE_LIBRARY_PROTOS
+
+* Run make
+
+* Run doit make install
+
+* As root, move man pages from /usr/local/man[14] to /usr/catman/local
+  via M-m in Emacs.
+
+----------------
+
+To patch:
+
+patch -p0 < patchname
+make dictclean
+make             # Actually, this failed and I had to do "make clean; make".
+doit make install
+
+I also had to remove an old man page.

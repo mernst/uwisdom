@@ -1,0 +1,8 @@
+cd ~/bin/install
+wget http://www.scala-lang.org/downloads/distrib/files/scala-2.9.1.final.tgz
+tar xzf scala-2.9.1.final.tgz
+ln -s scala-2.9.1.final scala
+export PATH=$HOME/bin/install/scala/bin:$PATH
+(cd scala/misc/scala-tool-support/emacs && make)
+
+# Now install SBT and Ensime

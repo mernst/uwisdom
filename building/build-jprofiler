@@ -1,0 +1,6 @@
+cd ~/java
+wget https://download-gcdn.ej-technologies.com/jprofiler/jprofiler_linux-x64_12_0_2.sh
+sh ./jprofiler_linux-x64_12_0_2.sh
+# Install under ~/java/jprofiler12
+
+There is a 10-day evaluation license.

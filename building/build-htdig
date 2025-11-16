@@ -1,0 +1,53 @@
+ht://Dig (local Web search):
+
+Obtain the software from ftp://ftp.htdig.org/pub/htdig/
+
+su
+mv htdig-3.1.2.tar.gz /usr/local/src
+cd /usr/local/src
+tar xzvf htdig-3.1.2.tar.gz
+chgrp -R cf-web htdig-3.1.2*
+chmod -R g+w htdig-3.1.2
+exit
+cd /usr/local/src/htdig-3.1.2
+
+In a Web browser, view file:/usr/local/src/htdig-3.1.2/htdoc/install.html
+
+./configure --prefix=/usr/local/etc/htdig --with-cgi-bin-dir=/home/httpd/cgi-bin --with-image-dir=/www/icons --with-search-dir=/www/htdig
+
+make
+
+[
+ Once only:
+ su
+ mkdir /usr/local/etc/htdig
+ mkdir /usr/local/etc/htdig-customize
+ chgrp cf-web /usr/local/etc/htdig*
+ chmod g+w /usr/local/etc/htdig*
+ exit
+]
+
+make install
+
+Edit /usr/local/etc/htdig/conf/htdig.conf
+
+/usr/local/etc/htdig/bin/rundig
+# I need to use -a to permit searching while re-indexing, probably.
+
+After the installation, you will be ready to test out everything. You can use the rundig script to make a test database of the online
+documentation at http://www.htdig.org/ 
+
+The only thing left to do is to modify the htdig.conf config file which was placed in CONFIG_DIR/htdig.conf. The Configuration manual
+has the details on how what attributes are needed. 
+
+===========================================================================
+
+This has problems with directory URLs that lack the trailing /, so
+I had to edit (for instance) /www/cystic-l/search-blank.html accordingly.
+(I did "find . -type d" to find the directories.)
+
+
+For index pages (like those in Cystic-L monthly archives), add 
+<meta robots=noindex> or some such.
+
+Should double-check that the daily archives aren't appearing.

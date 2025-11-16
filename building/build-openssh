@@ -1,0 +1,22 @@
+# First, build openSSL:
+cd ~/tmp
+wget http://www.openssl.org/source/openssl-0.9.7d.tar.gz
+tar xzf openssl-0.9.7d.tar.gz
+cd openssl-0.9.7d
+./config
+make
+make test
+sudo make install
+
+cd ~/tmp
+wget ftp://carroll.cac.psu.edu/pub/OpenBSD/OpenSSH/portable/openssh-3.8p1.tar.gz
+tar xzf openssh-3.8p1.tar.gz
+cd openssh-3.8p1
+./configure
+make
+sudo make install
+
+
+After all this, I could log in, but I couldn't seem to run xterm or other X
+applications.  So I gave up and renamed /usr/local/bin/ssh* to
+/usr/local/bin/openssh-ssh* .

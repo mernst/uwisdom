@@ -1,0 +1,11 @@
+# Install lxc
+
+sudo apt install lxc
+echo "${USER} veth lxcbr0 10" | sudo tee -a /etc/lxc/lxc-usernet
+mkdir -p ~/.config/lxc
+cp /etc/lxc/default.conf ~/.config/lxc/default.conf
+echo "lxc.id_map = u 0 100000 65536" >> ~/.config/lxc/default.conf
+echo "lxc.id_map = g 0 100000 65536" >> ~/.config/lxc/default.conf
+
+mkdir -p ~/.local
+find ~/.local -type d | xargs chmod o+x

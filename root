@@ -1,0 +1,23 @@
+// Generic top-level wisdom file.  If file root_user exists, it is
+// used instead.  Therefore, a root_user file is often of the form
+//   \include{root}
+//   \include{my-personal-file1}
+//   \include{my-personal-file2}
+//   ...
+// Note that files `Afs.md`, `Mit.md`, and `Uw.md` are not included in this file;
+// users must include them explicitly.
+
+\include{README.md}
+\include{BuildSystems.md}
+\include{ContinuousIntegration.md}
+\include{Emacs.md}
+\include{Java.md}
+\include{Linux.md}
+\include{Mac.md}
+\include{MicrosoftWindows.md}
+\include{Network.md}
+\include{ProgrammingLanguages.md}
+\include{Programs.md}
+\include{Research.md}
+\include{Tex.md}
+\include{VersionControl.md}

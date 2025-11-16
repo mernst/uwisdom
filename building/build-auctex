@@ -1,0 +1,18 @@
+http://www.gnu.org/software/auctex/
+
+AUCTeX is distributed as an Emacs Lisp package
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html).
+These instructions are for using a different version.
+
+VER=11.85
+cd ~/emacs
+wget http://ftp.gnu.org/pub/gnu/auctex/auctex-${VER}.tar.gz
+tar xzf auctex-${VER}.tar.gz
+cd auctex-${VER}
+./configure
+make
+## Alterately, set Info-directory-alist.
+# On pag (all subsequent steps):
+(cd ~/emacs/auctex-${VER}/doc; sudo cp -p auctex* /usr/local/share/info/)
+# edit /usr/local/share/info/dir according to ~/emacs/auctex-${VER}/doc/auctex:
+sudo emacs /usr/local/share/info/dir ~/emacs/auctex-${VER}/doc/auctex

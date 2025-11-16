@@ -1,0 +1,11 @@
+For Ubuntu 18.10 and later:
+sudo apt install ripgrep
+
+For Centos, and for earlier versions of Ubuntu:
+
+# Version number at https://github.com/BurntSushi/ripgrep/releases/
+VERSION=14.1.0
+cd ~/bin/install
+wget https://github.com/BurntSushi/ripgrep/releases/download/$VERSION/ripgrep-$VERSION-x86_64-unknown-linux-musl.tar.gz
+tar zxf ripgrep-$VERSION-x86_64-unknown-linux-musl.tar.gz
+cd ~/bin/`uname`-`uname -m` && rm -f rg && ln -s ../install/ripgrep-$VERSION-x86_64-unknown-linux-musl/rg

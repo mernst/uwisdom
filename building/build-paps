@@ -1,0 +1,17 @@
+Ubuntu:
+sudo apt install paps
+
+
+From source:
+# PROBLEM: running paps as installed by the below produces ridiculously
+# tiny output (what should be 4 pages is a fraction of an inch long and
+# just a blob on the output page).  So, use cedilla instead.
+VER=0.6.8
+PKG=paps-$VER
+PREFIX=${HOME}/bin/install/${PKG}-install
+cd ~/bin/install
+wget http://prdownloads.sourceforge.net/paps/${PKG}.tar.gz
+tar xzf ${PKG}.tar.gz
+cd ${PKG}
+./configure --prefix=${PREFIX} && make && make install
+(cd ~/bin/`uname`-`uname -m` && ln -s ${PREFIX}/bin/paps .)

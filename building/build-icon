@@ -1,0 +1,19 @@
+http://www.cs.arizona.edu/icon/
+
+The file extracts into the current directory.
+
+cd ~/bin/src
+mkdir icon-9.3.2
+cd icon-9.3.2
+tar xzvf unix.tar.gz
+
+Installation notes wer terribly hard to find; evenutally I found them at 
+http://www.cs.arizona.edu/icon/docs/ipd243.htm
+
+make X-Configure name=intel_linux
+make Icon
+make Samples
+make Test
+cd ~/bin/Linux-i686
+ln -s ../src/icon-9.3.2/bin/icont .
+ln -s ../src/icon-9.3.2/bin/iconx .

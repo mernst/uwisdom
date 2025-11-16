@@ -1,0 +1,11 @@
+ftp://gatekeeper.dec.com/pub/GNU/grep
+
+tar zxvf grep-2.3.tar.gz
+cd grep-2.3
+
+# Standard GNU build procedure:
+
+./configure
+make
+make check
+make install

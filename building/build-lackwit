@@ -1,0 +1,72 @@
+http://www.cs.cmu.edu/People/roc/Lackwit.html
+[New version as of June 4, 1999: ftp://majesty.fac.cs.cmu.edu/lackwit-dist/sun4_55.tar.gz]
+
+The Lackwit tar file extracts into the current directory.
+
+When running the demo:
+Change Makefile:
+  -include Makefile.@sys
+  +include Makefile.solaris
+Create Makefile.solaris:
+  cp -p Makefile.sun4_413 Makefile.solaris
+Edit Makefile.solaris:
+  -KRBINCDIR=/usr/local/include
+  -KRBLIBDIR=/usr/local/lib
+  +KRBINCDIR=/usr/include/kerberos
+  +KRBLIBDIR=/usr/lib
+  -DESINCDIR=/usr/local/include
+  +DESINCDIR=/usr/include/des/
+I couldn't find libdes* in /uns/lib/, /usr/lib/, or /usr/local/lib/.  Where
+is it?
+
+Each time before I run Lackwit, do (in a separate shell, so I don't
+contaminate my other work):
+  setenv PATH $LACKWIT_HOME/bin:$PATH
+Then do:
+  EmitHeaders $LACKWIT_HOME/lib/Default.sigs 
+  gcc -c $LACKWIT_HOME/lib/libc.c -o /dev/null
+One of these:
+  make
+  Lackwit foo2.c
+Then, to query:
+  BackEnd
+
+Even after all that, I got lots of errors, and the -ldes link step
+(obviously) failed; but the database did get fully built and seems to work.
+I should perhaps try to run Lackwit on a (much) simpler example.
+
+To find the variables that share types with a given variable, do
+"searchlocal procname:varname", eg "searchlocal real_count:start".
+
+===========================================================================
+
+BUGS already reported:
+
+When I issue the "counts" command to BackEnd (processing the lislook
+example database), I get a segmentation fault, even if "counts" is the
+first command I enter.
+
+I was confused by messages like this:
+  Enter your command ('help' for help): searchlocal f_empty:a
+  Expression is not a pointer
+which you explained meant that a's type is an unconstrained type variable.
+I thought it had something to do with the type of variable "a" in the
+underlying program -- "int" rather than "int*".  I don't even know what
+"pointer" means in this context, since I think it doesn't have to do with
+whether the variable is a pointer (I can produce that message for both
+"int" and "int*" variables).  It would be helpful to users if you made the
+message a bit more explicit.
+
+[For foo.c, described in my mail of Fri, 9 Apr 1999 10:18:52:]
+Enter your command ('help' for help): searchlocal f:*a
+../../src/globalInf/cTypeTable.c:1238: failed assertion `0 <= componentNum && componentNum < getCTypeArity(t)'
+Abort
+
+Please add a flag to searchlocal to report all hits, even if no operator is
+involved.
+
+===========================================================================
+
+BUGS to report:
+
+===========================================================================

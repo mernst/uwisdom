@@ -1,0 +1,50 @@
+===========================================================================
+
+To switch versions (there must be a better way!):
+
+sudo date
+(cd /usr/bin; sudo rm -f abrowser firefox; sudo ln -s firefox-3.5 abrowser; sudo ln -s firefox-3.5 firefox)
+
+===========================================================================
+
+getfirefox.com
+  Unpack; do one of these:
+    tar xzf firefox*.tar.gz
+    tar xjf firefox*.tar.bz2
+  rename "firefox" directory" ~/bin/install/firefox-XX
+  cd ~/bin/`uname`-`uname -m`; ln -s ../install/firefox-3.0.3/firefox .
+[This didn't work at MPI because:
+  You have GTK+ 2.8.
+  This application requires GTK+ 2.10 or newer.
+]
+
+Preferences:
+  See ~/wisdom/setup/setup-preferences
+
+===========================================================================
+
+Java plug-in for Firefox:
+
+cd /usr/lib/mozilla-firefox/plugins
+sudo ln -s /home/mernst/java/jdk1.5.0/jre/plugin/i386/ns7/libjavaplugin_oji.so
+
+Restart firefox
+
+Go to Edit > Preferences. Under Web Features category > Select Enable Java
+
+===========================================================================
+
+Acrobat Reader plug-in for Firefox:
+
+First, navigate to about:plugins to see whether it is already installed.
+
+# http://get.adobe.com/reader/otherversions/
+cd ~/tmp
+wget http://ardownload.adobe.com/pub/adobe/reader/unix/8.x/8.1.3/enu/AdobeReader_enu-8.1.3-1.i486.tar.gz
+tar -zxvf AdobeReader_enu-8.1.3-1.i486.tar.gz
+cd AdobeReader
+./INSTALL --install_path=$HOME/bin/install/opt
+cd $HOME/bin/`uname`-`uname -m`
+# TO DO:  ln -s ../install/opt/Adobe/Reader8/bin
+
+===========================================================================

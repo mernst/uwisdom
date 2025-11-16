@@ -1,0 +1,618 @@
+# Wisdom about the University of Washington
+
+
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
+## UW (non-CSE-specific)
+
+
+UW Travel Card rules, from <http://www.washington.edu/admin/procsrvcs/ecommerce/cta/travelcardpolicy.html>:
+You may use the UW Travel Card only for expenses related to the following
+official UW business while on travel status.
+
+* UW business related travel expenses
+   such as airfare, lodging, meals, registration, car rental, ground transportation and miscellaneous travel expenses.
+* Meals associated with hosting and entertaining, and employee recruitment meals.
+   (Reimbursement is based on department approval and funding source.)
+* UW business related expenses such as photocopying and faxing.
+
+
+Taxi stands near UW:
+
+* Hotel Deca, 4507 Brooklyn
+* UW Hospital
+
+Or call Orange Cab, 206-522-8800.  For CSE, specify Paul G. Allen Center
+for CSE -- *not* Paul Allen Library -- (technical address is 185 Stevens Way,
+south of the Hub, but the dispatchers seem to have assigned an address
+plotted within the grid surrounding campus:  3815 Stevens Way.
+
+
+Career center, for prospective employers who want to hire a student:
+  <http://careers.washington.edu/employers>
+
+
+To enter grades online:  <https://catalyst.uw.edu/gradepage>
+
+
+Final exam times can be predicted from weekly meeting times.
+See <http://www.washington.edu/students/reg/calendar.html>
+
+
+For off-campus access to the ACM digital library and similar UW-licensed
+collections of content, three options:
+
+* Go to lib.washington.edu and click the off-campus login button at the
+   top right (or go directly to <http://offcampus.lib.washington.edu/>).
+   Then, restricted links should work.
+* Add offcampus.lib.washington.edu to the end of the hostname.
+
+
+Getting study approval from IRB (run by HSD, Human Subjects Division):
+
+* Exempt studies:  usually interviews, questionnaires, and use of existing data
+* Non-emempt studies:
+   For the purposes of a grant proposal, you file an "approval in principle".
+   It's an IRB application for expedited review, but without consent forms
+   or other materials. The IRB generates a human subjects application #,
+   but not actual approval to do the study.  NSF only needs a box checked by
+   UW OSP, and UW OSP only needs an IRB application #.
+
+Another option is to use Western IRB, in Olympia (contact:  Elaine Weakley).
+UW apparently has an arrangement with Western IRB whereby Western IRB can
+handle the IRB function for at least some subset of UW studies.  As with
+other for-profit IRB organizations, they tend to be more
+customer-service-oriented than the UW IRB.
+
+
+To get to Microsoft Research (MSR) from UW by public transit, it's a
+15-minute ride and runs every 10-15 minutes, depending on time of day.
+Take bus 545 from the 520 freeway station at Montlake (on Google Maps, this
+is "Montlake Frwy Sta, Seattle, WA"), or bus 542 (during
+rush hour:  3-4 hours in the morning and afternoon) from the U district,
+UWMC, or the Montlake station above 520.  Exit the bus at the "NE 40th St
+freeway station" (aka "Overlake TC"?); on Google Maps this is "SR 520 Ramp
+& NE 40th St".  From there, take a Microsoft
+shuttle, or walk.  A relevant Microsoft campus map is:
+<http://members.microsoft.com/careers/mslife/locations/images/west_campus.jpg>
+
+
+To access the ACM digital library (or other content licensed by the UW
+libraries) from an IP address that is not at washington.edu,
+
+* bookmark the following JavaScript URL:
+   <javascript:void(location.href=%22http://offcampus.lib.washington.edu/login?url=%22+location.href>.
+To get access, visit the ACM DL, then visit the bookmark.
+
+
+In UW Hires (<https://uwhires.admin.washington.edu/eng/hm/default.cfm?szcat=hm>):
+
+* to remove an individual from your main homepage (doesn't remove the
+   applicant from the position's homepage), click "complete evaluation
+   form" and enter "yes".
+* to see the cover letter, select the position (not the specific
+   applicant), then click on the percentage in the "score" column.
+
+
+[Poll Everywhere](https://www.polleverywhere.com/) is free to UW faculty and
+students.  You can create simple polls that students can vote on anonymously via
+a URL or text message. It also has integrations with Powerpoint and Google
+Slides.
+
+
+User guide for UW Telecom handsets/telephones:
+<https://itconnect.uw.edu/wp-content/uploads/2014/06/9608_9611G-SIP_quick-ref.pdf>
+
+
+The "personal Zoom room" is
+<https://washington.zoom.us/my/USERNAME>.
+
+
+To schedule Panopto automated video recordings:
+<https://itconnect.uw.edu/tools-services-support/teaching-learning/panopto/schedule-recordings/auto-sched/>
+
+
+## CSE (other than sysadmin)
+
+
+PLSE (PL/SE) lab is room CSE2 253.
+
+
+To create press releases about UW/CSE research:
+Kristin Osborne
+Communications Manager
+
+
+In the UW CSE visitor schedule reservation schedule system (mvis):
+
+* In general, you don't need to fill in a description field because your
+   name and room number are automatically shown.  The description field is
+   shown in addition to that.
+* To not show your name and room number (that is, to replace it by the description), prefix the description with "-" , e.g., "-Lunch at Canlis".
+   <http://reserve.cs.washington.edu/visitor/help.php?#SEC25>
+* To blackout some periods, prefix with "--", e.g., "--unavailable".
+   <http://reserve.cs.washington.edu/visitor/help.php?#SEC22>
+
+
+How to sign up for undergrad research for credit in the UW CSE department:
+
+1. Go to <http://www.cs.washington.edu/students/ugrad/research#registration>
+   (Also available via: cs.washington.edu -> Current Students -> Information for
+    Current Undergrads -> MyCSE -> 'Ugrad Research' tab)
+2. Fill out and submit the form on that page
+3. It will send the professor the approval email
+4. When the professor approves, it sends the student an SLN and add code.
+
+
+Petitions for non-majors to take a UW CSE majors-only class:
+<http://www.cs.washington.edu/education/ugrad/academics/petition.html>
+
+
+To reserve seminar rooms CSE 305 and Gates Commons, maybe use <events@cs.washington.edu>?
+
+
+Use the <cse-maintenance@cs.washington.edu> mailing list for requests about facilities (physical plant) issues with the Allen Center.
+<space@cs.washington.edu> is for asking for office space.
+
+
+UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
+Stock reply for people trying to recruit/hire students:
+Good luck on your project!
+The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  <http://www.cs.washington.edu/affiliates/>
+
+
+UW CSE technical reports (TRs) are handled by the TR coordinator
+To create a TR, send the PDF to <tr-request@cs.washington.edu>
+and copy a faculty member.  The TR coordinator can also provide a TR number
+in advance of receiving the PDF, if you provide the title, author list,
+abstract, and a date on which you will provide the PDF.
+
+
+To add a visitor's talk to the CSE colloquium talk calendar
+(<https://www.cs.washington.edu/events/colloquia>), send to either
+Connie Ivey-Pasche or Kay Beck-Benton:
+  name, affiliation, title and abstract, date, room, time,
+  visitor schedule in MVIS if available
+
+
+The UW CSE grad student and advising
+database can be accessed via the Web (if you have proper permissions)
+  <https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/>
+or from the command line (you need postgres, and you need to be on the CSE network):
+
+```sh
+  psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
+```
+
+
+If you want to send a message to UW CSE undergrads, send it to
+ugrad-advising@cs and ask them to post it to the ungergraduates Ed discussion board.
+If you have a time-sensitive message, you should send that to
+cs-ugrads-urgent@cs.
+
+
+Card key access to rooms and labs in CSE buildings (the Allen Center or the Gates Center):
+To: <cardkey@cs.washington.edu>
+
+* For undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253.
+* For non-undergrads: Please give these individuals access to the Gates Center upper floors, and Gates 253, and the amenity spaces like the kitchens.
+
+For undergraduates, need:
+
+* student ID
+* rooms to be given access to
+* end date (I always make it December 31)
+
+For visitors, need:
+
+* name
+* email address
+* end date
+* whether to give access to "amenity" spaces like the kitchens and printer/copier rooms
+
+
+How to order lunches / snack carts at UW CSE:
+<https://www.cs.washington.edu/internal/food>
+
+
+UW CSE course web template:
+<https://gitlab.cs.washington.edu/lab/simple-courseweb-template>
+To use:
+
+```sh
+git clone <git@gitlab.cs.washington.edu>:lab/simple-courseweb-template.git
+```
+
+and then copy the clone contents.
+
+
+Fellowships/scholarships that students can apply for:
+
+* NSF -- first two years only
+* NDSEG -- first two years only
+* Adobe Research fellowship
+* Facebook fellowship
+* Symantec Fellowship
+* Google Fellowship
+
+
+gitlab.cs.washington.edu does not support adding collaborators by email
+address (even though that is an option in the webpage UI, as of August
+2019).  You need to give each collaborator a CSE research guest account.
+
+
+At UW CSE, preparation for a general exam proceeds like this:
+
+* 8 weeks before: committee provides the charge (the instructions to the candidate)
+* 2 weeks before: candidate distributes document
+* committee members read the document and give feedback
+* candidate prepares and practices a talk
+The general exam itself proceeds like this:
+* Candidate presents a 30-40 minute talk.  Questions are common and accepted, so the talk often runs as much as 90 minutes.  This is a reason that the candidate should not prepare a longer talk.
+* Open questions from anyone in the room.
+* Everyone except the candidate and the committee leaves the room.
+* The committee may ask more questions.  These can sometimes be pointed, such as pressing the candidate on incomplete or unclear presentation or understanding.  The goal is never to be malicious, but to identify how to improve the work.
+* The candidate leaves the room.  The committee discusses what feedback to give (including whether the work should be expanded, contracted, or changed in other ways) and how to help the candidate successfully complete a high-quality PhD.
+* It is exceptionally rare for a candidate not to pass the general exam.  The focus is on improving the work and setting up the candidate for success, not on being a gating function.
+
+
+The Allen Center bike room is room 030.  Click on "basement" here:
+<https://norfolk.cs.washington.edu/public-directory/> .  You get to it by going
+down the driveway from Stevens Way.  Go through the man door next to the loading
+dock door, and it's the first door on your right.
+
+
+Course scheduling requests: <csetimes@cs.washington.edu>
+rather than to Pim Lustig or Maude Lustig.
+
+
+Research communications (PR):
+<https://docs.google.com/forms/d/e/1FAIpQLSeZfJ42zK7aKgkaMxjVSkKilHFo70HgT1rdX3zwZ3L9QBCbrw/viewform>
+Or, email to news-tips@cs rather than directly to Kristin Osborne.
+
+
+Examples of successful NSF grant REU supplement requests/proposals:
+<https://drive.google.com/drive/folders/1rzfbCvKYWvImZGsuc7RUaYzvJTlloIaK>
+
+
+For large courses that require grading sessions of 4 hours or more, faculty may purchase food and be reimbursed by UW CSE's discretionary budget.
+<https://www.cs.washington.edu/chair/misc/grading_sessions>
+
+
+UW CSE prospective faculty interview feedback/reviews:
+<https://betterfolio.cs.washington.edu/app/candidates>
+
+
+To pay an undergraduate researcher an hourly wage:
+<https://internal.cs.washington.edu/hrp/about-payroll-contact-us/undergrad-ra-appointment/>
+
+
+To reimburse an expense such as travel or equipment:
+<https://internal.cs.washington.edu/research-admin/research-finance-team/>
+
+
+Allen School event request form:
+<https://docs.google.com/forms/d/e/1FAIpQLSdiiC7fMVgkpUwCT-S9IGbU0RHnHlBBkKKuUKnfl-Ebw4itNA/viewform>
+
+
+Purchase request:
+<https://internal.cs.washington.edu/research-admin/research-finance-team/>
+
+
+## CSE sysadmin
+
+
+UW CSE printers:
+
+* One-sided (single-sided):
+    ps581/noduplex
+* No header pages:
+    ps581/nobanner
+
+Color printer: psc581
+  I can't seem to create
+    psc581/noduplex
+
+
+An undergrad instructional linux server: attu.cs
+
+
+Printing enscript and cedilla output at CSE:
+ced2:
+
+* .pdf: prints portrait (small)
+* .ps: one-sided, otherwise fine
+* .ps --ps2pdf-> .pdf  on ps581: prints portrait (small)
+
+ens2f:
+
+* .ps on ps581: does not work
+* .pdf (converted from .ps with ps2pdf) on ps581:  prints portrait (small)
+* .pdf --pdf2ps-> .ps  on ps581: blank pages
+* .pdf --pdftops-> .ps  on ps581:  WORKS!
+* .ps on psc581: one-sided, otherwise fine
+* .pdf (converted from .ps with ps2pdf) on psc581:  prints portrait (small), one-sided
+ens1f:
+* .ps on ps581: sometimes works, sometimes cuts off left margin
+* all other combinations work
+ens1:
+* directly on ps581:  cut off left margin
+
+
+To apply for a new UW CSE computer account at cs.washington.edu,
+the sponsor fills out a form at
+  <https://password.cs.washington.edu/account/csenetid/>.
+(I think the user gets to choose a preferred username.)
+A guest account ("research" account type) is only permitted to use 25 MB (!) of space, so:
+
+* Always log into the same machine.
+* On that machine, create a directory `/scratch/${USER}` and store your
+  files there.
+* Make symbolic links from your home directory so you don't even notice
+  the disk quota limitation.
+* periodically check whether your jobs have created new files in your home
+  directory -- say, under `${HOME}/.m2/`.  Move any such files to
+  `/scratch/${USER}/` and link from your home directory.
+
+
+To apply for a new UW NetID, the sponsor fills out a form at
+  <https://itconnect.uw.edu/tools-services-support/networks-connectivity/husky-onnet/husky-onnet-for-sponsored-uw-netids/>
+
+
+What files in the file system contain the content served at webpages/URLs
+(for instance, for UW CSE classes/courses)?
+
+* <https://types.cs.washington.edu/> : /cse/www2/types/
+* <https://checkerframework.org/> : /cse/www2/types/checker-framework/
+* <http://fault-localization.cs.washington.edu/> : /cse/web/research/fault-localization/
+* <http://plse.cs.washington.edu/> : /cse/web/research/plse/
+* <http://plse.cs.washington.edu/daikon/> : /cse/web/research/plse/daikon/
+* <http://uwplse.org> : version control repository
+* <https://courses.cs.washington.edu/courses/cse331/18au/> : /cse/web/courses/cse331/18au
+* <http://plumelib.org/> : /cse/web/research/plumelib/
+
+Via tramp: `/tern.cs.washington.edu:/cse/web/courses/cse590n`
+
+
+Support can create a new virtual host, putting data under `/cse/web/research/`.
+(For large data that doesn't need to persist for an extended period of time, can use Google Drive instead.)
+
+
+Remote desktop from Linux workstation to Windows Terminal Server
+(cannot run in the background; enter CSERESEARCH for the domain):
+
+```sh
+  xfreerdp -u mernst -g 2560x1440 aqua.cs.washington.edu
+  xfreerdp -u mernst -g 1920x1200 aqua.cs.washington.edu
+  xfreerdp -u mernst -g 1028x768 aqua.cs.washington.edu
+  xfreerdp -u mernst aqua.cs.washington.edu
+```
+
+Once I log in, probably do
+ Control Panel > Ease of Access > Ease of Access Center > Make the computer easier to see > Set the thickness of the blinking cursor : 5
+ Control Panel > Mouse > Change how the mouse pointer looks > [make it as large as possible
+
+Here are newer commands, but they don't work for me:
+
+```sh
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:2560x1440
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1920x1200
+  xfreerdp /v:aqua /u:mernst /d:cseresearch /size:1028x768
+```
+
+(xfreerdp replaces rdesktop, but with rdesktop you would need to log in
+with CSERESEARCH\mernst rather than AQUA\mernst.)
+VDI (<http://vdi.cs.washington.edu/vdi/>) is like instructional Windows machines;
+maybe it doesn't have access to one's research file system like aqua does.
+Example command:
+
+```sh
+  xfreerdp /d:CSEPCLAB /size:1280x1024 /u:bob /v:vdilab12.cs.washington.edu /sec:nla &
+```
+
+
+To create a directory for a new project, such as to store a version control
+repository, do so under /projects/swlab1 (or swlab2, etc.), such as
+/projects/swlab1/typlessj/.  Please do not create a /projects/swlab1/$USER
+directory, which is less informative.  And don't put this under your home
+directory, which will get reaped eventually when you graduate or leave UW.
+
+
+/cse/www is not mounted for attu.cs and other undergrad-accessible servers.
+An undergrad (such as a TA) who wants to change such files must log in
+through vole.cs.washington.edu.
+
+
+Cycle servers for UW CSE are listed at <https://uwplse.org/internal/computers.html>.
+
+
+Set UW CSE Unix file permissions and access using the GrpAdmin group management
+tool (<https://intranet.cs.washington.edu/grpadmin>).
+
+
+After a user has been added to a group using the GrpAdmin tool
+(<https://intranet.cs.washington.edu/grpadmin>), it is generally
+necessary for the user to do one of the following:
+
+* wait an hour
+* log out and log back in
+* use chgrpsh
+
+after which the user will have access to the group.
+Another potential complication is that each user can have only 20 login
+groups -- those are the ones that are active at any time.  To change login
+groups permanently, use
+<https://intranet.cs.washington.edu/grpadmin?screen=logingroups>.
+To change effective groups temporarily, use `chgrpsh`.
+
+
+Files of the form
+  `/cse/www/education/courses/503/11au`
+have become
+  `/cse/web/courses/cse503/11au`
+To fix, use:
+
+```elisp
+  (replace-string "/cse/www/education/courses/" "/cse/web/courses/cse")
+```
+
+
+If I get
+
+```text
+  CSE Web Login
+  Fatal error: unable to get username and password from the form; contact the administrator
+```
+
+this may be due to a slow or laggy connection.  Try going directly to
+<https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi>
+
+
+A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
+
+
+Anonymous feedback for CSE courses:
+<https://feedback.cs.washington.edu/>
+
+
+A CSE lab-supported Linux machine running CentOS 8 is cremosa.cs.washington.edu.
+You can only log into it from another CSE machine, not from outside.
+
+
+BS/MS students do not have access to the CSE gws research computers/servers like bicycle and tricycle.
+That requires additional account sponsorship.
+
+
+Email for the UW CSE website:
+<web-content@cs.washington.edu>
+
+
+Coriander GPU Server Usage Rules:
+
+1. All long-running GPU tasks must be scheduled before execution, and any task running longer than 30 minutes without a reservation may be terminated.
+2. Do not use the /home/username directory; instead, store all files under /m-coriander/coriander/username.
+3. /m-coriander/coriander/hf is used for storing models and datasets, and /m-coriander/coriander/trace is used for storing shared traces.
+4. Always assign meaningful names to Docker containers and label them with the owner's name.
+
+
+To open a support ticket for UW CSE Support:
+<https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketMessage>
+My tickets:
+<https://otrs.cs.washington.edu/otrs/customer.pl?Action=CustomerTicketOverview;Subaction=MyTickets>
+
+
+To invite undergrads to Slack (permissible only for research, not course staff):
+
+* Choose the Paul G. Allen workspace
+* click the down-caret to its right
+* choose "invite people" from the dropdown
+  * can batch multiple people if they should have access to the same channels
+* Must select Guest (not Member)
+
+
+For course staff communication:
+
+* A private Ed board, which Bekah can setup (or may already exist)
+* Google Chat within CSE Google
+* Un-officially a free 'retail' Slack workspacesuffices too, as 90 day retention cleans up after itself.
+
+
+You must be a member of the CSE unix group "smtp-users" to send mail
+from a script using `attumail.cs.washington.edu`. To check if you are a member:
+
+1. Go to <https://intranet.cs.washington.edu/grpadmin>
+2. Click "Query or change group members"
+3. Click the radio button "user name" next to the Query By button.
+4. Then click the "Query By" button.
+5. You will be presented with a table of all groups you are in. Check
+   if "smtp-users" is in the table.
+6. If it is, you're good to go. If not, submit a ticket to support@cs
+   saying that you need to be added to the group in order to send
+   email.
+
+
+## PLSE
+
+
+If there is trouble with parsing Jekyll webpages (such as those under
+<http://uwplse.org/meet/>), you can see logs at <http://hooknook.uwplse.org/>
+
+
+## Seattle visitors
+
+
+Options for short-term Seattle housing/rentals/apartments/sublets:
+
+* <https://housing.cs.washington.edu/>
+* Craigslist: <http://seattle.craigslist.org/sub/>
+* AirBnB: <https://www.airbnb.com/>
+   You can negotiate a lower long-term rental contract than the nightly rate.
+   It has shared rooms available.
+* UW Visiting Personnel and Visiting Students: stay in a dorm
+   <http://www.hfs.washington.edu/conferences/planners.aspx?id=141>
+* J-1 Scholar Guide (see Housing, and also the complete guide):
+   <http://iso.uw.edu/jfirst.html#Arrival_in_Seattle>
+* Seattle Times: <http://marketplace.nwsource.com/realestate/rentals/>
+* Belltown Inn: <http://www.belltown-inn.com/>
+    (Fausto Spoto says it is very nice, but a touch more expensive than other options.)
+* Radford Court: <http://radfordcourt.com/>
+* UW Daily: <http://dailyuw.com/classifieds/>
+    (UW Daily mostly has offers of sharing with students,
+    but it has some furnished apartments/houses too.)
+* The #housing channel at <https://uw-cse.slack.com/>
+* Sabbatical Homes: <https://www.sabbaticalhomes.com/>
+* This no longer seems to exist: Visiting Faculty Housing Service (VFHS): <http://www.washington.edu/uwfa/visiting-faculty-housing/>
+   They are stuck in the 20th century with all materials available only in
+   hardcopy, but can sometimes be convinced to fax or scan, or to talk someone
+   through what is available by phone.
+   (Or I can go there in person and surreptitiously photograph pages.)
+
+Be sure to check where the apartment or house is in relation to the
+university.  Sites include
+
+* hotpads.com
+* padmapper.com
+
+I am happy to help with logistics in Seattle (such as visiting an
+apartment or helping with signing contracts).
+
+
+Wait lists for preschool or daycare can be very long.  If you want that,
+get on waiting lists as soon as possible, though most places require an
+in-person visit before you can get on the waiting list.
+
+
+All children in the US, regardless of nationality, are entitled to free
+public school.  Schools are assigned based on your home address.  As a
+general rule, any school north of the Montlake Cut and the Ship Canal will
+be good to very good.  South of that waterway, there are both good and bad
+schools.
+
+
+## Seattle
+
+
+Restaurants near CSE:
+
+* U Village (18-minute walk)
+  * Dough Zone
+  * Ba Bar
+* Portage Bay (12-minute walk)
+  * <https://www.saintbread.com/> (long lines tho)
+  * Agua Verde (sometimes long line, on Boat street)
+* Montlake
+  * Oxbow Bakery (24-minute walk)
+* The Ave or close by
+  * Jai Tai (15-minute walk)
+  * Shultzy's
+  * Korean Tofu house (15-minute walk)
+* Far
+  * Araya's (29 minute walk but quite good)
+
+
+<!--
+// Please put new content in the appropriate section above, don't just
+// dump it all here at the end of the file.
+-->

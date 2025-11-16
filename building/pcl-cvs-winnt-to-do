@@ -1,0 +1,63 @@
+Hi...
+
+I have some information for your FAQ. Some people need the pcl-cvs (cvs within emacs)
+package, but it didn't work for NT.
+
+Ok here the solution:
+
+	- Get the current version of pcl-cvs (1.9)
+	- Edit the pcl-cvs.el
+		- Search for >"-m" msg< and replace it to
+		  >"-m" (concat "\"" msg "\"")<
+
+That's all - Now you can update, commit, add (tested) and i hope everthing else will work
+as well...
+
+I can also send you the changed version ?! Here the changes for the _emacs:
+
+;; ======== CVS ========
+ ;; (setq cvs-auto-remove-handled t)
+ (setq cvs-program "c:\\tools\\cvs.exe")
+ (setq cvs-diff-program "c:\\tools\\diff.exe")
+ (setq cvs-rmdir-program "c:\\tools\\rm.exe")
+ (setq cvs-shell "C:\\WINDOWS\\system32\\cmd.exe")
+
+===========================================================================
+
+From: jda@jhk.com (John D. Amidon)
+Sender: owner-ntemacs-users@cs.washington.edu
+To: "David Ward" <davidw@ibm.net>
+Cc: "NT Emacs Mailing List" <ntemacs-users@cs.washington.edu>
+Subject: Re: Is pcl-cvs available for NT Emacs ??
+Date: 23 Jun 1998 10:27:23 -0400
+
+As far as other programs, you'll need a Unix-like shell, a diff program, and
+a remove directory program.  I use `tcsh' as the shell, GNU diff, and GNU
+`rm'.  These are available in various places on the Internet, most notably
+in the Cygnus package and RkTools package.
+
+To use `pcl-cvs' on Windows, all one needs to do is define a couple of
+variables prior to loading the package since it needs to know where to find
+the programs described above.  I have something equivalent to the following
+in my .emacs:
+
+     (defvar cvs-program "c:/TcTools/cvs.exe"
+       "*Full path to the cvs executable.")
+
+     ;; SunOS-4.1.1_U1 has "diff.c 1.12 88/08/04 SMI; from UCB 4.6 86/04/03"
+     ;;
+     (defvar cvs-diff-program "c:/TcTools/diff.exe"
+       "*Full path to the best diff program you've got.
+NOTE:  there are some nasty bugs in the context diff variants of some vendor
+versions, such as the one in SunOS-4.1.1_U1")
+
+     (defvar cvs-rmdir-program "c:/TcTools/rm -fr"
+       "*Full path to the rmdir program.  Typically /bin/rmdir.")
+
+     (defvar cvs-shell (cond
+                        ((getenv "ESHELL")
+                         (getenv "ESHELL"))
+                        (t
+                         "c:/TcTools/sh.exe"))
+       "*Full path to a shell that can do redirection on stdout.")
+

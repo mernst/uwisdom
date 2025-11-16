@@ -1,0 +1,65 @@
+Jar Jar Links
+
+Don't use this any more.  Instead, use Shadow, for example via
+https://stackoverflow.com/questions/79079884/how-do-i-relocate-an-existing-jar-file-using-gradle
+
+### SHEVEK VERSION
+
+https://github.com/shevek/jarjar
+# As of 2025-10-04, the latest commit was 2018-06-08
+cd ~/java
+git clone https://github.com/shevek/jarjar jarjar-shevek
+cd ~/java/jarjar-shevek
+./gradlew build
+wget https://repo1.maven.org/maven2/net/sf/jopt-simple/jopt-simple/4.8/jopt-simple-4.8.jar
+wget https://repo1.maven.org/maven2/org/ow2/asm/asm-commons/5.0.3/asm-commons-5.0.3.jar
+wget https://repo1.maven.org/maven2/org/ow2/asm/asm-util/5.0.3/asm-util-5.0.3.jar
+wget https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar
+wget https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.12/slf4j-simple-1.7.12.jar
+wget https://repo1.maven.org/maven2/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar
+
+pushd ~/java/jarjar-shevek
+rm -rf jarjar-contents
+mkdir jarjar-contents
+pushd jarjar-contents
+unzip -uo $HOME/java/jarjar-shevek/jarjar-core/build/libs/jarjar-core-1.0.0.jar
+unzip -uo $HOME/java/jarjar-shevek/jarjar-command/build/libs/jarjar-command-1.0.0.jar
+unzip -uo $HOME/java/jarjar-shevek/jopt-simple-4.8.jar
+unzip -uo $HOME/java/jarjar-shevek/asm-commons-5.0.3.jar
+unzip -uo $HOME/java/jarjar-shevek/asm-util-5.0.3.jar
+unzip -uo $HOME/java/jarjar-shevek/asm-5.0.1.jar
+unzip -uo $HOME/java/jarjar-shevek/slf4j-api-1.7.12.jar
+unzip -uo $HOME/java/jarjar-shevek/slf4j-simple-1.7.12.jar
+popd
+jar -cvf jarjar-command-all.jar -C jarjar-contents .
+rm -rf jarjar-contents
+popd
+
+# To run:
+java \
+-cp $HOME/java/jarjar-shevek/jarjar-command-all.jar \
+com.tonicsystems.jarjar.Main \
+--mode process --rules daikon-plumelib-rules.txt --output  daikon-util.jar plume-util-*.jar
+
+
+### ABRAMS VERSION
+
+Has been maintained more recently, but no documentation about how to build or use!
+
+# To build from source:
+cd ~/java
+git clone https://github.com/eed3si9n/jarjar-abrams.git
+cd ~/java/jarjar-abrams
+sbt
+
+
+### PANTSBUILD VERSION
+
+# Seems to be maintained, but has no documentation about how to use or build!
+# For usage, see file src/main/java/org/pantsbuild/jarjar/help.txt
+# The build step takes about 5 minutes!
+cd ~/java
+git clone https://github.com/pantsbuild/jarjar jarjar-pantsbuild
+cd ~/java/jarjar-pantsbuild
+~/bin/pants doc test ::
+# Now see file dist/jarjar.jar

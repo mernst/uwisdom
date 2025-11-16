@@ -1,0 +1,2 @@
+cd ~/bin/install
+git clone https://github.com/eriwen/gradle-completion.git

@@ -1,0 +1,107 @@
+===========================================================================
+
+Ubuntu:
+sudo apt install w3m
+
+Cygwin:
+install via cygwin setup program
+
+===========================================================================
+
+# These instructions are written for the CVS version.  As of July 2013, its
+# most recent commit was 2012/05/22; as of Dec 2013, the most recent commit was 2013-04-26.
+
+# Ubuntu:
+sudo apt install libssl-dev compface libgpm-dev
+# (how many of these following ones, if any, are truly needed?)
+sudo apt install libimlib2 gpm libimlib2-dev
+
+# First, install the Boehm-Demers-Weiser garbage-collector.
+# See file build-gc
+
+VER=w3m
+cd ~/bin/install
+# Hit return for password when this command propmts:
+cvs -d:pserver:anonymous@w3m.cvs.sourceforge.net:/cvsroot/w3m login 
+# The following command takes a while to complete
+# ... and once it actually hung for me because of:
+#   cvs checkout: [00:12:40] waiting for anoncvs_w3m's lock in /cvsroot/w3m/w3m/scripts/w3mman
+# ) which forced me to copy another checkout:
+# scp -r mernst@godwit.cs.washington.edu:bin/install/w3m .
+cvs -z3 -d:pserver:anonymous@w3m.cvs.sourceforge.net:/cvsroot/w3m co -P w3m
+cd w3m
+# Due to bug in 0.5.3:
+preplace file_handle w3m_file_handle
+# To enable building with gcc 4.5 and later, apply the patch in this file:
+patch -p7 < ~/wisdom/building/build-w3m
+./configure --with-gc=${HOME}/bin/install/gc-7.1-install
+# Look for "warning" in the configure output
+make
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/${VER}/w3m .
+
+diff -u -b -r --exclude=CVS --exclude=.bzr --exclude=.hg --exclude=.hgtags --exclude=.git --exclude=.svn --exclude='*.class' /homes/gws/mernst/bin/install/w3m/Makefile.in.\~1\~ /homes/gws/mernst/bin/install/w3m/Makefile.in
+--- /homes/gws/mernst/bin/install/w3m/Makefile.in.~1~	2010-12-21 02:13:55.000000000 -0800
++++ /homes/gws/mernst/bin/install/w3m/Makefile.in	2011-12-14 22:22:34.000000000 -0800
+@@ -199,7 +199,7 @@
+ 	$(CC) $(CFLAGS) -DDUMMY -c -o $@ $?
+ 
+ $(IMGDISPLAY): w3mimgdisplay.o $(ALIB) w3mimg/w3mimg.a
+-	$(IMGLINK) $(CFLAGS) -o $(IMGDISPLAY) w3mimgdisplay.o w3mimg/w3mimg.a $(LDFLAGS) $(LIBS) $(IMGLDFLAGS)
++	$(IMGLINK) $(CFLAGS) -o $(IMGDISPLAY) w3mimgdisplay.o w3mimg/w3mimg.a $(LDFLAGS) $(LIBS) -lX11 $(IMGLDFLAGS)
+ 
+ w3mimgdisplay.o: w3mimgdisplay.c w3mimg/w3mimg.h
+ 	$(CC) $(CFLAGS) $(IMGCFLAGS) -o $@ -c $(srcdir)/w3mimgdisplay.c
+
+Diff finished.  Wed Dec 14 22:22:46 2011
+
+===========================================================================
+
+# The w3m program itself:
+
+# 0.5.3 is dated January 2011 and is the latest as of Dec 2011
+# But, I can't build it, due to an error that was corrected in some
+# versions by:
+# * Tue Aug 30 2011 crrodriguez@opensuse.org
+#   - Fix build error: redefinition of 'struct file_handle'
+VER=w3m-0.5.3
+cd ~/bin/install
+wget http://downloads.sourceforge.net/w3m/${VER}.tar.gz
+tar zxf ${VER}.tar.gz
+cd ${VER}
+
+# Due to bug in 0.5.3:
+preplace file_handle w3m_file_handle
+# To enable building with gcc 4.5 and later, apply the patch in this file:
+patch < ~/wisdom/building/build-w3m
+
+# Shouldn't be necessary:
+# export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/bin/install/gc-7.1-install/lib
+./configure --with-gc=${HOME}/bin/install/gc-7.1-install && make
+cd ~/bin/`uname`-`uname -m`
+\rm -f w3m
+ln -s ../install/${VER}/w3m .
+
+
+===========================================================================
+
+Emacs mode:
+
+# Build from CVS (works in Emacs 23):
+cd ~/emacs
+cvs -d :pserver:anonymous@cvs.namazu.org:/storage/cvsroot co emacs-w3m
+cd emacs-w3m
+autoconf
+./configure
+make
+
+# # Build from a release; does not work in Emacs 23
+# # (1.4.4 was released 3/25/2005 and is most recent as of 1/2013!)
+# cd ~/emacs
+# wget http://emacs-w3m.namazu.org/emacs-w3m-1.4.4.tar.gz
+# tar zxf emacs-w3m-1.4.4.tar.gz
+# cd emacs-w3m-1.4.4
+# ./configure
+# make
+
+===========================================================================

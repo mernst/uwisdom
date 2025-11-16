@@ -1,0 +1,5 @@
+mkdir ~/tmp/javabib
+cd ~/tmp/javabib
+wget http://www-plan.cs.colorado.edu/henkel/stuff/javabib/20040801/javabib-src.jar
+jar xf javabib-src.jar
+javac `findfile '*.java'`

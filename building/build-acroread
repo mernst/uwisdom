@@ -1,0 +1,26 @@
+http://www.adobe.com/products/acrobat/readstep.html
+(As of 10/2019, only Windows, Mac, and Android are supported.)
+Be sure to get the version with search.
+
+===========================================================================
+
+On Ubuntu 13.10:
+
+Don't try.  Just use evince.
+
+## This didn't work; when running acroread I get:
+##  /opt/Adobe/Reader9/Reader/intellinux/bin/acroread: error while loading shared libraries: libgdk_pixbuf_xlib-2.0.so.0: cannot open shared object file: No such file or directory
+# Download a .bin from http://get.adobe.com/uk/reader/
+cd ~/tmp
+chmod +x ./AdbeRdr9.5.5-1_i486linux_enu.bin
+sudo ./AdbeRdr9.5.5-1_i486linux_enu.bin
+
+## This no longre works, because there is no acroread package for Ubuntu
+# sudo emacs /etc/apt/sources.list
+# # Enable the line 
+# #   deb http://archive.canonical.com/ubuntu/ saucy partner
+# # in /etc/apt/sources.list
+# sudo apt update
+# sudo apt install acroread
+
+===========================================================================

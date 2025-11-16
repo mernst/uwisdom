@@ -1,0 +1,17 @@
+cd ~/bin/install
+wget http://sourceforge.net/projects/infozip/files/Zip%203.x%20%28latest%29/3.0/zip30.tar.gz
+tar xzf zip30.tar.gz
+cd zip30
+# See file INSTALL
+make -f unix/Makefile generic
+# Use the binaries in ~/bin/install/zip30/ :  zip, etc.
+# There is no unzip binary; you must get that separately, see below.
+
+cd ~/bin/install
+wget ftp://ftp.info-zip.org/pub/infozip/src/unzip60.tgz
+tar xzf unzip60.tgz
+cd unzip60
+# See file INSTALL
+ln -s unix/Makefile .
+make generic
+# Use the binaries in ~/bin/install/unzip60/ :  unzip, primarily

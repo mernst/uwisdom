@@ -1,0 +1,11 @@
+Ubuntu:
+I installed from snap, because installing with pip gave an error.  But the snap version is much too old.
+
+
+SEMGREP_APP_TOKEN=2dca297853342f56f8763a7f3408575d964f7d77178791c2c32d8b27aa311fe4 semgrep login
+
+
+# "semgrep ci" fails, but this works:
+semgrep scan --config=auto
+# ... except that I can't install a new enough version of semgrep on Ubuntu to read the files that semgrep downloads.
+

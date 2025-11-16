@@ -1,0 +1,15 @@
+Installing TeX Live at CSE:
+
+Instructions at https://tug.org/texlive/quickinstall.html .
+(Longer instructions at https://tug.org/texlive/doc/texlive-en/texlive-en.html .)
+
+
+# This takes a loong time to install.
+cd ~/bin/install
+wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+tar zxf install-tl-unx.tar.gz
+cd install-tl-20251030
+perl install-tl --texdir=$HOME/bin/install/texlive/2025
+# Set default paper size to letter by typing:  o p r
+# Start installation by typing:  i
+

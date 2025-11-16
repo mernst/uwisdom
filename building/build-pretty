@@ -1,0 +1,2 @@
+setenv CLASSPATH /homes/fish/mernst/java/Pretty/Pretty.jar:$CLASSPATH
+

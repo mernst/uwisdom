@@ -1,0 +1,20 @@
+GNU getopt for Java
+
+
+http://www.urbanophile.com/arenn/hacking/getopt/
+
+PACKAGE=getopt-1.0.13
+cd ~/java
+mkdir $PACKAGE
+cd $PACKAGE
+wget http://www.urbanophile.com/arenn/hacking/getopt/java-$PACKAGE.tar.gz
+tar zxvf java-$PACKAGE.tar.gz
+cd gnu/getopt
+make all docs
+# javadoc-escape-anchors `find . -name '*.html' -print`
+cd ../../..
+mkdir -p gnu
+cd gnu
+rm -f getopt
+ln -s ../$PACKAGE/gnu/getopt getopt
+javadoc-index-to-alist > ~/.javadoc-index.el

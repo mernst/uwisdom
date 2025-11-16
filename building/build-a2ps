@@ -1,0 +1,7 @@
+# This requires the Boehm conservative collector to be installed.
+
+cd ~/bin/install
+wget https://ftp.gnu.org/gnu/a2ps/a2ps-4.15.6.tar.gz
+tar xzf a2ps-4.15.6.tar.gz
+cd a2ps-4.15.6
+./configure --prefix=${HOME}/.local --with-gnu-gettext

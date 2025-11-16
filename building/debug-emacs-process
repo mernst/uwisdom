@@ -1,0 +1,181 @@
+To see preprocessed code:
+  gcc -E  -Demacs -DHAVE_CONFIG_H  -I. -I/usr/local/src/emacs-19.25.91/src -g -O  process.c
+To see all #defines, use -dM option to gcc.
+
+To send signals:
+  kill -INT processnum
+  kill -QUIT processnum
+It appears that the INT signal is getting ignored -- because of the process
+mask?  Use sigprocmask to find out (not sigsetmask; it's a BSD function).
+But sigprocmask, sigaction is always #ifdef-ed out for us.
+Maybe Emacs's signal mask is getting ignored, or something.
+
+
+Do man on palnu -- monozygote is missing many man pages.
+Or at least do man -k on palnu.
+
+We *don't* use the BSD versions of functions -- only System V and POSIX.
+
+To rebuild emacs, do
+  touch src/paths.h
+  make
+
+
+
+M-x emacs-hide-ifdefs
+M-x show-ifdefs to see them again
+
+
+
+process.c says:
+/** USG WARNING:  Although it is not obvious from the documentation
+ in signal(2), on a USG system the SIGCLD handler MUST NOT call
+ signal() before executing at least one wait(), otherwise the handler
+ will be called again, resulting in an infinite loop.  The relevant
+ portion of the documentation reads "SIGCLD signals will be queued
+ and the signal-catching function will be continually reentered until
+ the queue is empty".  Invoking signal() causes the kernel to reexamine
+ the SIGCLD queue.   Fred Fish, UniSoft Systems Inc. */
+
+
+
+  signal (SIGINT, interrupt_signal);
+might well be the right thing to do.  But where?
+
+also sigchld_handler -- for death of child, so ignore it, I guess.
+
+
+
+read_socket_hook
+
+
+===========================================================================
+This one is crucial
+
+cd /usr/local/src/emacs-19.25.91/src/
+diff -c /usr/local/src/emacs-19.25.91/src/keyboard.c.\~1\~ /usr/local/src/emacs-19.25.91/src/keyboard.c
+*** /usr/local/src/emacs-19.25.91/src/keyboard.c.~1~	Sun Jul 17 23:40:15 1994
+--- /usr/local/src/emacs-19.25.91/src/keyboard.c	Fri Jul 29 13:52:43 1994
+***************
+*** 5599,5605 ****
+    int old_errno = errno;
+  
+  #ifdef USG
+!   if (!read_socket_hook && NILP (Vwindow_system))
+      {
+        /* USG systems forget handlers when they are used;
+  	 must reestablish each time */
+--- 5599,5605 ----
+    int old_errno = errno;
+  
+  #ifdef USG
+!   if (!read_socket_hook && (1 || NILP (Vwindow_system)))
+      {
+        /* USG systems forget handlers when they are used;
+  	 must reestablish each time */
+***************
+*** 5843,5849 ****
+    if (initialized)
+      Ffillarray (kbd_buffer_frame_or_window, Qnil);
+  
+!   if (!noninteractive && !read_socket_hook && NILP (Vwindow_system))
+      {
+        signal (SIGINT, interrupt_signal);
+  #if defined (HAVE_TERMIO) || defined (HAVE_TERMIOS)
+--- 5843,5849 ----
+    if (initialized)
+      Ffillarray (kbd_buffer_frame_or_window, Qnil);
+  
+!   if (!noninteractive && !read_socket_hook && (1 || NILP (Vwindow_system)))
+      {
+        signal (SIGINT, interrupt_signal);
+  #if defined (HAVE_TERMIO) || defined (HAVE_TERMIOS)
+
+Diff exited abnormally with code 1 at Fri Jul 29 14:08:44
+
+
+===========================================================================
+This is purely a debugging change.
+
+cd /usr/local/src/emacs-19.25.91/src/
+diff -c /usr/local/src/emacs-19.25.91/src/process.c.\~1\~ /usr/local/src/emacs-19.25.91/src/process.c
+*** /usr/local/src/emacs-19.25.91/src/process.c.~1~	Tue Jul 19 11:45:58 1994
+--- /usr/local/src/emacs-19.25.91/src/process.c	Fri Jul 29 13:39:39 1994
+***************
+*** 2759,2765 ****
+        kill (gid, signo);
+      }
+  #else /* ! defined (TIOCSIGSEND) */
+!   EMACS_KILLPG (-gid, signo);
+  #endif /* ! defined (TIOCSIGSEND) */
+  }
+  
+--- 2759,2784 ----
+        kill (gid, signo);
+      }
+  #else /* ! defined (TIOCSIGSEND) */
+!   if(( EMACS_KILLPG (-gid, signo)) < 0 ) {
+!       error ("Signal %d not sent to process group %d (errno == %d)", signo, gid, errno );
+!   }
+!   else {
+!       {
+! 	  char *m = "Signal %d successfully sent to process group %d";
+! 	  int blen;
+! 	  char buf[200];
+! 	  char *args[2];
+! 
+! 	  args[0] = (char*)signo;
+! 	  args[1] = (char*)gid;
+! 
+! 	  if (200 <= ( blen=doprnt (buf, 200, m, m + strlen (m), 2, args)))
+! 	    exit(37);
+! 
+! 	  message2 (buf, blen);
+!       }
+!       sit_for( 1, 0, 0, 0 );
+!   }
+  #endif /* ! defined (TIOCSIGSEND) */
+  }
+  
+
+Diff exited abnormally with code 1 at Fri Jul 29 14:11:37
+
+===========================================================================
+These two aren't necessary -- leave them out.
+
+cd /usr/local/src/emacs-19.25.91/src/
+diff -c /usr/local/src/emacs-19.25.91/src/emacs.c.\~1\~ /usr/local/src/emacs-19.25.91/src/emacs.c
+*** /usr/local/src/emacs-19.25.91/src/emacs.c.~1~	Mon Jun 13 13:40:31 1994
+--- /usr/local/src/emacs-19.25.91/src/emacs.c	Thu Jul 28 19:53:40 1994
+***************
+*** 509,514 ****
+--- 509,515 ----
+  	}
+  #else
+  #if defined (USG5) && defined (INTERRUPT_INPUT)
++       setsid ();
+        setpgrp ();
+  #endif
+  #endif
+
+Diff exited abnormally with code 1 at Fri Jul 29 14:05:51
+
+cd /usr/local/src/emacs-19.25.91/src/
+diff -c /usr/local/src/emacs-19.25.91/src/config.h.\~1\~ /usr/local/src/emacs-19.25.91/src/config.h.\~2\~
+*** /usr/local/src/emacs-19.25.91/src/config.h.~1~	Thu Jul 28 13:20:21 1994
+--- /usr/local/src/emacs-19.25.91/src/config.h.~2~	Thu Jul 28 15:28:29 1994
+***************
+*** 268,272 ****
+--- 267,274 ----
+  #ifndef NOT_C_CODE
+  extern char *getenv ();
+  #endif
++ 
++ /* Does this matter anyway? */
++ #define INTERRUPT_INPUT
+  
+  #endif /* EMACS_CONFIG_H */
+
+Diff exited abnormally with code 1 at Fri Jul 29 14:07:11
+
+

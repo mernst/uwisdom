@@ -1,0 +1,7 @@
+# Do NOT attempt to install ffi 1.9.10, which failed for me and then prevented further installation.
+
+gem install html-proofer
+
+Under CI:
+export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+gem install html-proofer

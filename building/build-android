@@ -1,0 +1,51 @@
+===========================================================================
+
+Android Studio:
+
+sudo snap install android-studio --classic
+
+When you open it for the first time it will install the SDK for you (with options).
+
+===========================================================================
+
+Android SDK:
+
+Browse to https://developer.android.com/studio
+Click on "download"
+Accept license and download (1 GB download)
+mv ~/tmp/android-studio-*.tar.gz ~/bin/install
+cd ~/bin/install
+tar xzf android-studio-*.tar.gz
+cd android-studio
+# Now, instructions are in file Install-Linux-tar.txt
+cd bin
+./studio.sh
+
+This runs Android studio, but when compiling a program that uses the Android SDK, I get:
+
+> Failed to install the following Android SDK packages as some licences have not been accepted.
+     build-tools;28.0.3 Android SDK Build-Tools 28.0.3
+     platforms;android-28 Android SDK Platform 28
+  To build this project, accept the SDK license agreements and install the missing components using the Android Studio SDK Manager.
+
+===========================================================================
+
+To obtain android.jar:
+
+Download the "ADT bundle" (not "use an existing IDE") from 
+https://developer.android.com/sdk/index.html#download
+
+unzip it and find android.jar here:
+adt-bundle-linux-x86_64-20131030/sdk/platforms/android-19/android.jar  
+
+https://developer.android.com/sdk/index.html
+and see the "use an existing IDE" section
+
+https://developer.android.com/sdk/installing/bundle.html
+
+===========================================================================
+
+Android SDK:
+
+cd ~/bin/install
+tar xzf ~/tmp/android-sdk_r24.3.3-linux.tgz

@@ -1,0 +1,7 @@
+cd ~/tmp
+wget ftp://ftp.ibiblio.org/pub/linux/apps/www/converters/html2text-1.3.2a.tar.gz
+tar xf html2text-1.3.2a.tar.gz
+cd html2text-1.3.2a
+./configure
+make
+mv html2text ~/bin/`uname`-`uname -m`/

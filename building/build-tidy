@@ -1,0 +1,7 @@
+# Ubuntu:
+sudo apt install -y tidy
+
+# From source.  First, install cmake!
+cd ~/bin/src
+git clone https://github.com/htacg/tidy-html5
+

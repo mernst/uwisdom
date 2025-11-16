@@ -1,0 +1,13 @@
+On Ubuntu:
+sudo apt install global
+
+At CSE:
+# Get version number from https://www.gnu.org/software/global/download.html
+VERSION=6.6.3
+cd ~/bin/install
+wget http://tamacom.com/global/global-$VERSION.tar.gz
+tar xzf global-$VERSION.tar.gz
+cd global-$VERSION
+./configure --prefix=$HOME/bin/install/global-$VERSION-install
+make
+make install

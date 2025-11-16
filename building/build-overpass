@@ -1,0 +1,6 @@
+# Get URL from https://overpassfont.org/
+cd ~/tmp
+wget https://github.com/RedHatBrand/Overpass/releases/download/3.0.2/overpass-desktop-fonts.zip
+unzip overpass-desktop-fonts.zip
+cp -pf overpass/*.otf ~/.fonts
+cp -pf overpass-mono/*.otf ~/.fonts

@@ -1,0 +1,20 @@
+For a comparison of pt with ag, see file build-ag .
+(Don't use pt because it sometimes crashes.)
+
+# Get version number from
+# https://github.com/monochromegane/the_platinum_searcher/releases/
+# 2.1.6 was released 7/7/2018, is most recent as of 7/2018.
+VERSION=2.1.6
+
+mkdir -p ~/bin/install
+cd ~/bin/install
+\rm -rf pt_linux_amd64.tar.gz pt_linux_amd64
+wget https://github.com/monochromegane/the_platinum_searcher/releases/download/v$VERSION/pt_linux_amd64.tar.gz
+tar xzf pt_linux_amd64.tar.gz
+mkdir -p $HOME/bin/`uname`-`uname -m`
+cd $HOME/bin/`uname`-`uname -m`
+\ln -sf ../install/pt_linux_amd64/pt pt
+
+
+Useful command-line arguments to pt:
+  -U  don't pay attention to VCS ignore files such as .gitignore

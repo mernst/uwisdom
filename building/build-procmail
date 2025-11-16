@@ -1,0 +1,8 @@
+www.procmail.org
+
+cd ~/tmp
+wget ftp://ftp.procmail.net/pub/procmail/procmail-3.22.tar.gz
+tar zxvf procmail-3.22.tar.gz
+
+# I stopped at this point because I don't want to change the execuable
+# path, so I asked the sysadmins to take a look.

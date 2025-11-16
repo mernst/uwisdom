@@ -1,0 +1,127 @@
+===========================================================================
+
+http://mew.org/en/
+
+===========================================================================
+
+To get authentication, to read email via Mew:
+https://www.mew.org/en/info/release/mew_9.html#xauth2 says: get a client ID and client secret.
+Browse to https://developers.google.com/identity/protocols/oauth2
+Browse to https://console.developers.google.com/
+  Click "Gmail API"
+  Click "Credentials"
+In the page for this credential:
+  Click "Audience", add michael.ernst@gmail.com and mernst@cs.washington.edu
+Permit connection from "http://..." [localhost]
+
+===========================================================================
+
+Ubuntu:
+
+# Mew 6.8 was released in 6/2018.
+
+===========================================================================
+
+To install from git:
+
+# To check out:
+cd ~/emacs
+git clone https://github.com/kazu-yamamoto/Mew.git mew
+
+# To update (need to redo periodically):
+cd ~/emacs/mew
+# "make distclean" won't work in a fresh clone before ./configure; that is OK.
+make distclean
+git pull
+#if macos
+./configure --emacs=/Users/mernst/bin/Darwin-x86_64/emacs
+#else if WSL
+./configure --enable-shared --with-pic
+#else
+./configure
+#endif macos, WSL
+make; make
+rm -f ~/emacs/mew-mde.elc
+# Ignore the output starting "This is not dpkg install-info anymore, but GNU install-info"
+(cd info && install-info mew.info dir)
+
+cat > ~/emacs/mew/.git/hooks/post-merge <<DELIM
+#!/bin/sh
+make
+DELIM
+chmod +x ~/emacs/mew/.git/hooks/post-merge
+
+# Hunspell was already installed
+
+===========================================================================
+
+[Don't do this, use git.]
+To install from release:
+
+cd ~/emacs
+pkg=mew-6.7
+wget http://www.mew.org/Release/$pkg.tar.gz
+tar xzf $pkg.tar.gz
+cd $pkg
+./configure
+make
+# make install
+
+===========================================================================
+
+Possible patch, though I have worked around this already in a different way.
+
+
+diff -u -b -r --exclude=CVS --exclude=.bzr --exclude=.hg --exclude=.hgtags --exclude=.svn --exclude='*.class' /homes/gws/mernst/emacs/mew/mew-complete.el /homes/gws/mernst/emacs/mew/mew-complete.el-alternate
+--- /homes/gws/mernst/emacs/mew/mew-complete.el	2009-11-11 15:47:13.000000000 -0800
++++ /homes/gws/mernst/emacs/mew/mew-complete.el-alternate	2009-11-11 16:28:18.000000000 -0800
+@@ -190,7 +190,7 @@
+ 	try)
+     (if (null word)
+ 	(message "No expand key")
+-      (setq try (try-completion word mew-addrbook-alist))
++      (setq try (funcall mew-try-completion-function word mew-addrbook-alist))
+       (if (or (eq try t)
+ 	      (and (stringp try) (string= word try)))
+ 	  (insert (mew-addrbook-alias-get word mew-addrbook-alist))
+@@ -578,14 +578,23 @@
+ ;;; Hart function for completions
+ ;;;
+ 
++(defvar mew-try-completion-function 'try-completion
++  "Function to complete input as much as possible.
++Defaults to 'try-completion, and any value should be substitutable for it.")
++
++(defvar mew-all-completions-function 'all-completions
++  "Function to give all completions of an input.
++Defaults to 'all-completions, and any value should be substitutable for it.")
++
++
+ (defalias 'mew-complete-hit 'assoc)
+ 
+ (defun mew-complete-get (key alist)
+   (cdr (mew-complete-hit key alist)))
+ 
+ (defun mew-complete (WORD ALIST MSG EXPAND-CHAR &optional TRY ALL GET HIT)
+-  (let* ((ftry (or TRY 'try-completion))
+-	 (fall (or ALL 'all-completions))
++  (let* ((ftry (or TRY mew-try-completion-function))
++	 (fall (or ALL mew-all-completions-function))
+ 	 (fget (or GET 'mew-complete-get))
+ 	 (fhit (or HIT 'mew-complete-hit))
+ 	 (cmp (funcall ftry WORD ALIST))
+@@ -637,8 +646,8 @@
+     (insert word)))
+ 
+ (defun mew-complete2 (word alist case)
+-  (let* ((cmp (try-completion word alist))
+-	 (all (all-completions word alist)))
++  (let* ((cmp (funcall mew-try-completion-function word alist))
++	 (all (funcall mew-all-completions-function word alist)))
+     (cond
+      ;; already completed
+      ((eq cmp t)
+
+Diff finished.  Wed Nov 11 16:28:27 2009
+
+===========================================================================

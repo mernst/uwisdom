@@ -1,0 +1,38 @@
+When I reinstalled from sources, I lost format_inproceedings, etc., as well
+as some stuff that dealt with non-breaking spaces (ties).  So punt on btool.
+
+===========================================================================
+
+btool:
+
+This patch prevents throwing an error on text including "\em".
+
+--- /g2/users/mernst/bin/src/perl/Text-BibTeX-0.34/btparse-0.33/src/string_util.c	Thu Oct 28 18:50:28 1999
++++ -	Wed Mar 27 21:33:58 2002
+@@ -193,8 +193,9 @@
+          return FALSE;
+    } /* switch on length of control sequence */
+ 
+-   internal_error ("foreign_letter(): should never reach end of function");
+-   return FALSE;                        /* to keep gcc -Wall happy */
++   return FALSE;
++   /* internal_error ("foreign_letter(): should never reach end of function"); */
++   /* return FALSE; */                        /* to keep gcc -Wall happy */
+ 
+ } /* foreign_letter */
+ 
+
+This patch adds "tie_mkup" functionality.
+
+cd ~/bin/src/perl/Text-BibTeX-0.34/BibTeX/
+diff -u -b /g2/users/mernst/bin/src/perl/Text-BibTeX-0.34/BibTeX/Bib.pm.\~1\~ /g2/users/mernst/bin/src/perl/Text-BibTeX-0.34/BibTeX/Bib.pm
+--- /g2/users/mernst/bin/src/perl/Text-BibTeX-0.34/BibTeX/Bib.pm.~1~	Sun May 14 09:24:42 2000
++++ /g2/users/mernst/bin/src/perl/Text-BibTeX-0.34/BibTeX/Bib.pm	Wed Mar 27 21:53:09 2002
+@@ -201,6 +201,7 @@
+     atitle_mkup => ['', ''],
+     btitle_mkup => ['', ''],
+     journal_mkup=> ['', ''],
++    tie_mkup    => ' ',
+    );
+ 
+

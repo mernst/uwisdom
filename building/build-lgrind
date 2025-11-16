@@ -1,0 +1,9 @@
+Download from http://www.ctan.org/tex-archive/help/Catalogue/entries/lgrind.html
+
+cd ~/tex
+unzip ~/tmp/lgrind.zip
+cd ~/tex/lgrind
+make
+(cd ~/tex/sty; ln -s ../lgrind/lgrind.sty .)
+
+(cd ~/bin/`uname`-`uname -m`; ln -s ../../tex/lgrind/source/lgrind .)

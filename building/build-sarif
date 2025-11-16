@@ -1,0 +1,2 @@
+sudo apt install -y dotnet-sdk-8.0
+dotnet tool install --global Sarif.Multitool

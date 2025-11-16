@@ -1,0 +1,9 @@
+cd ~/tmp/
+wget http://ftp.gnu.org/gnu/m4/m4-1.4.tar.gz
+tar zxf m4-1.4.tar.gz
+cd m4-1.4
+./configure
+make
+make check
+# On geyer:
+(cd ~/tmp/m4-1.4; sudo make install)

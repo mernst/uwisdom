@@ -1,0 +1,174 @@
+===========================================================================
+
+uv python install --default
+# To see which versions are available:
+uv python list
+
+===========================================================================
+
+Many people recommend `uv`.
+It is "A single tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more."
+
+To install uv (documentation at https://docs.astral.sh/uv/, don't use sudo):
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# To update uv:
+uv self update
+
+# As of 2025-10-31, I'm trying to avoid all use of pip and pipx on my laptop.
+pipx is for executables.
+pip is for modules.
+
+# As of 2025-05-11, this is a very old version.
+# sudo apt install ruff
+
+===========================================================================
+
+UV
+
+In the future, use `uv` instead of pip, pipx, etc.
+
+# Install uv itself (don't use `sudo`):
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# I should build html5validator rather than installing the Python package.
+
+uv tool install mypy && \
+uv tool install ruff && \
+echo "success"
+# To upgrade all tools:
+uv tool upgrade --all
+
+# For packages, install per-venv, not once and for all in the system as this would do.
+# uv pip install --system \
+#   ggplot \
+#   loguru \
+#   replicate \
+#   rich && \
+# echo "success"
+
+===========================================================================
+
+How to run programs:
+
+# Run within a project:
+mypy --install-types --non-interactive
+
+ruff -q format
+ruff -q format file1.py file2.py ...
+
+===========================================================================
+
+EXECUTABLES/APPLICATIONS
+
+# I should build html5validator rather than installing the Python package.
+
+uv tool install mypy
+uv tool install ruff
+uv tool install ty
+uv tool install html5validator
+
+----------------
+
+# Older (don't use; use uv now):
+
+# I should build html5validator rather than installing the Python package.
+
+# At CSE, use `--user` and drop `sudo`.
+sudo apt -y install pipx
+sudo pipx install pip
+pip install replicate --break-system-packages
+sudo pip install mypy
+# OR: python -m pip install mypy
+
+# Each of these sometimes works and sometimes doesn't!
+# pip install ruff
+# pipx install ruff
+# Alternative, if neither of the above works: pip install ruff --break-system-packages
+
+# After doing any of the above, add ~/.local/bin/ to PATH.
+# Maybe this works too:  sudo pipx ensurepath
+
+# Older, no longer needed, because I use ruff.
+# sudo pipx install black
+# sudo pipx install flake8
+# sudo pipx install pycodestyle
+# sudo pipx install pylint
+
+===========================================================================
+
+MODULES/PACKAGES
+
+# It's better to install them per-venv, using uv, not globally.
+
+# Using Ubuntu:
+sudo apt-get install -y python3-pandas python3-openai
+
+sudo apt -y install pipx
+sudo pip install ggplot
+sudo pip install loguru
+sudo pip install rich
+
+----------------
+
+# At CSE, always use --user flag:
+pipx install --force --user ggplot black
+pip install --upgrade --user requests
+
+----------------
+
+To review which packages can be upgraded/updated:
+pipx install pip-review
+pipx install --upgrade setuptools
+# This gives lots of errors; do I need to pass --use-deprecated=backtrack-on-build-failures to "pip3 install"?
+pip-review --interactive
+
+===========================================================================
+
+To install ipython, DON'T do
+  sudo apt install ipython-notebook
+which is an old version on Ubuntu.
+Instead, do (use `sudo` if I have sudo rights):
+  pipx install ipython --upgrade
+  pipx install notebook --upgrade
+
+But, in other cases the Ubuntu package works better than the pip package.
+
+===========================================================================
+
+Python 3:
+
+# To install the latest Python version:
+uv python install
+
+----------------
+
+# OLDER
+VER=3.13.3
+cd ~/bin/install
+wget https://www.python.org/ftp/python/${VER}/Python-${VER}.tgz
+tar xfz Python-${VER}.tgz
+cd Python-${VER}
+./configure --prefix=${HOME}/.local --enable-optimizations
+make
+# sudo make install
+make install
+(cd $HOME/.local/bin && ln -s python3 python)
+
+# Test:
+python-${VER} --version
+## TODO: test that SSL works
+
+===========================================================================
+
+Python 2, which is no longer in the Debian/Ubuntu repositories:
+
+cd ~/bin/install
+wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+tar xzf Python-2.7.9.tgz
+cd Python-2.7.9
+./configure --prefix $HOME/bin/install/Python-2.7.9-install
+make install
+rm -f $HOME/bin/install/Python-2.7.9-install/bin/python
+
+===========================================================================

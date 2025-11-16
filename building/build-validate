@@ -1,0 +1,43 @@
+===========================================================================
+
+For HTML 5, see file build-html5validator instead
+
+===========================================================================
+
+# Use this even at CSE, as CSE's installed "validate" doesn't use
+# locally-cached versions of W3C .dtd files.
+
+# On Ubuntu, I can do:
+#   sudo apt install wdg-html-validator
+# but that doesn't use locally-cached versions of W3C .dtd files.
+
+http://www.htmlhelp.com/tools/validator/offline/
+
+#if Ubuntu
+sudo apt install g++
+#endif
+
+mkdir ~/bin/install/wdg-validator
+cd ~/bin/install/wdg-validator
+mkdir offline
+(cd offline; wget http://www.htmlhelp.com/tools/validator/offline/validate; chmod +x validate)
+# Apply patches
+patch -p7 < ~/wisdom/building/build-validate-patch
+mkdir src
+cd src
+# released 9/2008, still current as of 2/2016
+# verify by browsing to http://www.htmlhelp.com/tools/validator/src/
+VER=lq-sp-1.3.4.14
+wget http://www.htmlhelp.com/tools/validator/src/$VER.tar.gz
+tar xzf $VER.tar.gz
+make -C $VER
+# released 2/2011, still current as of 2/2016
+# verify by browsing to http://www.htmlhelp.com/tools/validator/src/
+VER=wdg-sgml-lib-1.1.5
+wget http://www.htmlhelp.com/tools/validator/src/$VER.tar.gz
+tar xzf $VER.tar.gz
+(cd ~/bin/share; rm -f validate; ln -s ~/bin/install/wdg-validator/offline/validate .)
+
+
+Patch the validate program as follows:
+

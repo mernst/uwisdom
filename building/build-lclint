@@ -1,0 +1,11 @@
+Source code and installation instructions:
+http://www.sds.lcs.mit.edu/lclint/source.html
+
+cd ~/bin/src/
+tar xzvf lclint-2.4b.src.tar.gz 
+cd lclint-2.4b
+./configure
+make
+# set LARCH_PATH, LCLIMPORTDIR
+make test
+# link the executable into my path

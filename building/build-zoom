@@ -1,0 +1,12 @@
+# I'm not sure this worked!  Maybe I need to reboot too??
+On Ubuntu:
+# Download from https://zoom.us/support/down4j .
+sudo dpkg -i ~/tmp/zoom_amd64.deb
+
+===========================================================================
+
+OLDER:
+Don't try to install on Ubuntu.
+Just run it from the browser.
+I can't get sound to work (I can't hear them, though they can hear me).
+And I don't trust it not to corrupt my system.

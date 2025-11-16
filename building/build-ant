@@ -1,0 +1,52 @@
+===========================================================================
+
+Debian/Ubuntu:  There's a Debian package, so just use that.
+
+===========================================================================
+
+Cygwin:  Why wouldn't I use the version packaged with Cygwin?
+
+===========================================================================
+
+At UW:
+sdk install ant
+
+===========================================================================
+
+# Get version number from https://ant.apache.org/bindownload.cgi
+VER=1.10.10
+cd ~/bin/install
+wget https://mirror.nodesdirect.com/apache//ant/binaries/apache-ant-$VER-bin.zip
+unzip apache-ant-$VER-bin.zip
+cd apache-ant-$VER
+cd $HOME/bin/`uname`-`uname -m`
+rm -f ant
+ln -s ~/bin/install/apache-ant-$VER/bin/ant .
+
+## I don't need the following:
+# export ANT_HOME=$HOME/bin/install/apache-ant-1.9.4
+# export PATH=$ANT_HOME/bin:$PATH
+
+===========================================================================
+
+# cd /usr/local/pkg/ant
+# wget http://apache.secsup.org/dist/ant/binaries/apache-ant-1.6.2-bin.tar.gz
+# tar xzf apache-ant-1.6.2-bin.tar.gz
+# cd /usr/local/bin
+# cp -p ant ant-1.6.2
+# # Edit ant-1.6.2 to fix up paths
+
+
+## To print the manual:
+## Note that this failed!  html2ps made bad PostScript.
+cd apache-ant-1.6.2
+cp -pR docs /scratch/mernst/ant-docs
+cd /scratch/mernst/ant-docs
+cd manual
+rm -rf api
+html2ps -n -u -C bh -W bp index.html > index.ps
+
+===========================================================================
+
+ant-contrib:  version 1.0b3 (note weird name; not ant-contrib-1.0b3):
+http://sourceforge.net/projects/ant-contrib/files/ant-contrib/

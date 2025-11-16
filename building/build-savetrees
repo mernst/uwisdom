@@ -1,0 +1,9 @@
+cd   /usr/share/doc/texlive-doc/latex/savetrees
+sudo cp makethin.pl.gz makethin.gz 
+sudo gunzip makethin.gz 
+sudo chmod +x makethin
+
+cd /home/mernst/research/types/ductile/paper-2010
+/usr/share/doc/texlive-doc/latex/savetrees/makethin -v -v article.dvi --pdftex --extramaps=$HOME/tex/raw-ar-std-urw-kb.map --xscale=0.95
+# Also: ./makethin --clean article.dvi 
+

@@ -1,0 +1,21 @@
+git clone https://github.com/apache/logging-log4j2.git logging-log4j2-fork-apache
+cd logging-log4j2-fork-apache
+export JAVA_HOME_8_X64=$HOME/java/jdk8
+export JAVA_HOME_11_X64=$HOME/java/jdk11
+export JAVA_HOME=${JAVA_HOME_8}
+Run command for "verify" in .github/workflows/build.yml, namely:
+          ./mvnw \
+            --show-version --batch-mode --errors --no-transfer-progress \
+            -DtrimStackTrace=false \
+            -Dsurefire.rerunFailingTestsCount=2 \
+            -Dlog4j2.junit.fileCleanerSleepPeriodMillis=1000 \
+	    -Drat.skip=true \
+            --global-toolchains ".github/workflows/maven-toolchains.xml" \
+            verify
+
+This worked on godwit.
+On my home computer, MongoDB 3 tests failed with
+  java.lang.RuntimeException: Could not start process: <EOF>
+even after I rebooted and did
+  export LC_ALL=C
+

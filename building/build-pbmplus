@@ -1,0 +1,20 @@
+In ./libtiff,
+ cp Makefile.sgi Makefile
+
+Edit ./Makefile:
+  RGBDEF =        -DRGB_DB=\"/usr/lib/X11/rgb.txt\"
+  INSTALLBINARIES =       /usr/local/bin
+  INSTALLMANUALS1 =       /usr/man/man1
+  SUFFIXMANUALS1 =        1
+  INSTALLMANUALS3 =       /usr/man/man3
+  SUFFIXMANUALS3 =        3
+  INSTALLMANUALS5 =       /usr/man/man5
+  SUFFIXMANUALS5 =        5
+
+Edit pbmplus.h:
+ Define SYSV
+ Comment out declarations of malloc, realloc, calloc.
+ Comment out declarations of rand, srand
+
+But I still got problems because /usr/include/math.h has two definitions of
+rand, and their types aren't the same.

@@ -1,0 +1,87 @@
+Project homepage: https://launchpad.net/nme
+
+===========================================================================
+
+Install from repository:
+(Problem at CSE: bzr isn't installed.)
+
+cd ~/bin/install
+bzr branch lp:nme
+cd nme
+make
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/nme/nme .
+
+===========================================================================
+
+Install from distribution.
+This fails with compilation errors, as of version NME-111004 !
+
+# Get version number from http://www.nyctergatis.com/creole/
+# 4 October 2011 is most recent (as of August 2012)
+VER=NME-111004
+cd ~/bin/install
+wget http://www.nyctergatis.com/creole/$VER.zip
+unzip $VER.zip
+mv NME-distrib $VER
+cd $VER
+make
+
+
+Compilation errors:
+
+First I get
+
+g++  -g -ISrc -Izlib -Izlib/contrib/minizip  -c -o NMETest.o Src/NMETest.cpp
+In file included from Src/NMEStyleCpp.h:21:0,
+                 from Src/NMETest.cpp:13:
+Src/NMECpp.h:86:7: error: extra qualification ‘NME::’ on member ‘operator=’ [-fpermissive]
+In file included from Src/NMETest.cpp:13:0:
+Src/NMEStyleCpp.h:109:12: error: extra qualification ‘NMEStyle::’ on member ‘operator=’ [-fpermissive]
+
+and when I fix those, I get more errors starting with:
+
+gcc -g -ISrc -Izlib -Izlib/contrib/minizip -DUSE_FILE32API -g -ISrc -Izlib -Izlib/contrib/minizip  -c -o NMEMain.o Src/NMEMain.c
+Src/NMEMain.c: In function ‘main’:
+Src/NMEMain.c:739:19: error: ‘NMEOutputFormatTest’ undeclared (first use in this function)
+
+So I gave up.
+
+===========================================================================
+
+At http://nyctergatis.com/creole/index.html, the link for anchor 
+"Launchpad" in this text:
+
+  NME is now hosted by Launchpad, a 
+
+is misleading.  It links to the NME team (https://launchpad.net/~nme), not
+the NME project (https://launchpad.net/nme).  I think it would be more
+useful for it to link to the project.
+
+===========================================================================
+
+The NME-111004.zip release (http://nyctergatis.com/creole/NME-111004.zip)
+does not compile for me.
+
+First I get
+
+g++  -g -ISrc -Izlib -Izlib/contrib/minizip  -c -o NMETest.o Src/NMETest.cpp
+In file included from Src/NMEStyleCpp.h:21:0,
+                 from Src/NMETest.cpp:13:
+Src/NMECpp.h:86:7: error: extra qualification ‘NME::’ on member ‘operator=’ [-fpermissive]
+In file included from Src/NMETest.cpp:13:0:
+Src/NMEStyleCpp.h:109:12: error: extra qualification ‘NMEStyle::’ on member ‘operator=’ [-fpermissive]
+
+and when I fix those, I get more errors starting with:
+
+gcc -g -ISrc -Izlib -Izlib/contrib/minizip -DUSE_FILE32API -g -ISrc -Izlib -Izlib/contrib/minizip  -c -o NMEMain.o Src/NMEMain.c
+Src/NMEMain.c: In function ‘main’:
+Src/NMEMain.c:739:19: error: ‘NMEOutputFormatTest’ undeclared (first use in this function)
+
+I eventually gave up and almost abandoned NME.  But, when I obtained the
+code from Launchpad, it built and ran flawlessly.  I suggest that you make
+a new release to avoid alienating/misleading potential users.  It would
+also be good to indicate more prominently on the main page how to get the
+latest development version from Launchpad.
+
+===========================================================================

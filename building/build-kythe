@@ -1,0 +1,9 @@
+Kythe is the open-source version of Google's Grok tool.
+It could replace, for example, etags.
+However, there is no Emacs integration that I could find via a web search in 2016.
+
+An alternative is srclib.
+
+cd ~/bin/install
+wget https://github.com/google/kythe/releases/download/v0.0.26/kythe-v0.0.26.tar.gz
+tar xzf kythe-v*.tar.gz

@@ -1,0 +1,15 @@
+# Must use Maven 3, not Maven 2
+
+VER=2.0.4-alpha
+PKG=hadoop-$VER
+cd ~/tmp
+wget http://apache.mirrors.lucidnetworks.net/hadoop/common/$PKG/$PKG-src.tar.gz
+tar xzf $PKG-src.tar.gz
+cd $PKG-src
+
+cd ~/tmp/$PKG-src/hadoop-common-project
+mvn compile
+
+# There are reports that "mvn compile" fails but
+#   mvn package -Pdist -DskipTests -Dtar
+# succeeds.

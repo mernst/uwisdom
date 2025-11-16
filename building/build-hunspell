@@ -1,0 +1,158 @@
+===========================================================================
+
+Easy installation instructions (no compilation)
+
+## Is this still true as of mid-2015?  I'll try to go back to using a packaged
+## version and see whether the problems are resolved.  All seems well.
+## (Hunspell 1.3.3 (2014-06-02) is the latest version as of 2015-08-04 and
+## doesn't have the fix; I'm not sure whether packaged versions (Ubuntu,
+## Fedora) are 1.3.3 with fixes or just plain 1.3.3.)
+# As of late 2014, I should build from source because of problems with 
+# "Ispell misalignment": "probably incompatible versions" in both the Ubuntu
+# and MacPorts packaged versions, that were fixed in the source code repository
+# around 16 Oct 2014:  http://debbugs.gnu.org/cgi/bugreport.cgi?bug=7781#31
+
+On Ubuntu:
+ sudo apt install hunspell
+On Mac:
+ sudo port install hunspell
+ # brew install hunspell
+ ... then see below
+
+===========================================================================
+
+Extra steps for installation on Mac
+
+Problem: words like "couldn't" are marked as misspelled by hunspell, even from the command line.
+
+On Mac, I need to download English dictionaries from:
+http://extensions.openoffice.org/en/project/english-dictionaries-apache-openoffice
+[Here are some English dictionaries NOT to use:
+ * This one is identical to the above:
+    http://wordlist.aspell.net/dicts
+ * Use this one only if you deal a lot with names; it has a lot of extra names in it.
+    http://extensions.openoffice.org/en/project/us-english-spell-checking-dictionary
+]
+Copy file dict-en.oxt to /Library/Spelling
+cd /Library/Spelling
+unzip dict-en.oxt
+ln -s dict-en.aff default.aff
+ln -s dict-en.dic default.dic
+cd ~
+ln -s .hunspell_en_US .hunspell_default
+
+Now, apply this diff to en_US.aff.
+(Maybe that's all I ever needed to do, without downloading the new dictionaries.)
+
+--- /Users/mernst/Library/Spelling/default.aff	2014-09-22 17:45:13.000000000 +0200
++++ -	2014-09-22 17:45:21.000000000 +0200
+@@ -13,7 +13,7 @@
+ COMPOUNDRULE n*1t
+ COMPOUNDRULE n*mp
+ # WORDCHARS 0123456789
+-WORDCHARS 0123456789'.-’
++WORDCHARS 0123456789'.- 
+ 
+ PFX A Y 1
+ PFX A   0     re         .
+
+
+
+If I get
+  ispell-phaf: No matching entry for nil.
+in Emacs or
+  Can't open affix or dictionary files for dictionary named "default".
+from hunspell then run
+  hunspell -D
+A potential problem is hunspell only working when run from the root directory,
+on MacOS.  That's why we use /Library/Spelling instead of ~/Library/Spelling
+above.
+
+===========================================================================
+
+Building from source
+
+# Building from source (desirable to fix
+# "Ispell misalignment: word ... point ... probably incompatible versions"
+# bug), which is fixed in a 2014-10-16 commit); eventually that will appear
+# in a release.
+
+# To get version number, visit http://hunspell.sourceforge.net/
+# Version 1.3.3 was released 2014-06-02 ; latest as of 2015-05-14
+
+cd ~/bin/install
+
+#if from download
+## Or, download by hand from Sourceforge
+VER=1.3.3
+PKG=hunspell-$VER
+wget http://hivelocity.dl.sourceforge.net/project/hunspell/Hunspell/$VER/$PKG.tar.gz
+tar xzf $PKG.tar.gz
+#else from CVS [should be from Git, now; but not updated for a while]
+VER=cvs
+PKG=hunspell-$VER
+cvs -d:pserver:anonymous@hunspell.cvs.sourceforge.net:/cvsroot/hunspell login 
+# Press the enter key for the password.
+cvs -z3 -d:pserver:anonymous@hunspell.cvs.sourceforge.net:/cvsroot/hunspell co -P hunspell
+mv hunspell $PKG
+#endif
+
+cd $PKG
+
+#if cygwin
+mv config.guess config.guess-ORIG
+cp /usr/share/automake-1.14/config.guess .
+# If the file is not present, then install automake using Cygwin setup utility.
+#endif
+
+./configure && make
+
+#if cygwin
+mkdir -p /usr/share/myspell
+scp -p mernst@godwit.cs.washington.edu:/usr/share/myspell/en_US.aff /usr/share/myspell/
+scp -p mernst@godwit.cs.washington.edu:/usr/share/myspell/en_US.dic /usr/share/myspell/
+#endif
+
+cd ~/bin/`uname`-`uname -m`
+rm -f hunspell
+ln -s ../install/$PKG/src/tools/hunspell .
+
+#if from CVS
+# Apply this patch to ../install/hunspell-cvs/src/tools/hunspell
+
+diff -u -b -r --exclude=CVS --exclude=.bzr --exclude=.hg --exclude=.hgtags --exclude=.git --exclude=.svn --exclude='*.class' /home/mernst/bin/install/hunspell-cvs/src/tools/hunspell-orig /home/mernst/bin/install/hunspell-cvs/src/tools/hunspell
+--- /home/mernst/bin/install/hunspell-cvs/src/tools/hunspell-orig	2014-11-17 01:12:22.159431247 -0300
++++ /home/mernst/bin/install/hunspell-cvs/src/tools/hunspell	2014-11-19 04:49:43.557630634 -0300
+@@ -62,7 +62,7 @@
+   test "x$thisdir" = "x$file" && thisdir=.
+ 
+   # Follow symbolic links until we get to the real thisdir.
+-  file=`ls -ld "$file" | /bin/sed -n 's/.*-> //p'`
++  file=`\ls -ld "$file" | /bin/sed -n 's/.*-> //p'`
+   while test -n "$file"; do
+     destdir=`$ECHO "X$file" | $Xsed -e 's%/[^/]*$%%'`
+ 
+@@ -75,7 +75,7 @@
+     fi
+ 
+     file=`$ECHO "X$file" | $Xsed -e 's%^.*/%%'`
+-    file=`ls -ld "$thisdir/$file" | /bin/sed -n 's/.*-> //p'`
++    file=`\ls -ld "$thisdir/$file" | /bin/sed -n 's/.*-> //p'`
+   done
+ 
+ 
+@@ -102,7 +102,7 @@
+   progdir="$thisdir/.libs"
+ 
+   if test ! -f "$progdir/$program" ||
+-     { file=`ls -1dt "$progdir/$program" "$progdir/../$program" 2>/dev/null | /bin/sed 1q`; \
++     { file=`\ls -1dt "$progdir/$program" "$progdir/../$program" 2>/dev/null | /bin/sed 1q`; \
+        test "X$file" != "X$progdir/$program"; }; then
+ 
+     file="$$-$program"
+
+Diff finished.  Sat May 30 21:02:40 2015
+
+#endif from CVS
+
+===========================================================================

@@ -1,0 +1,20 @@
+===========================================================================
+
+cd ~/tmp
+wget ftp://ftp.andrew.cmu.edu/pub/mpack/mpack-1.6.tar.gz
+tar zxf mpack-1.6.tar.gz
+cd mpack-1.6
+./configure
+make
+sudo make install
+
+===========================================================================
+
+cd ~/tmp
+wget ftp://ftp.andrew.cmu.edu/pub/mpack/mpack-1.5-src.tar.Z
+tar Zxf mpack-1.5-src.tar.Z
+cd mpack
+make
+sudo cp -p mpack munpack /usr/local/bin
+
+===========================================================================

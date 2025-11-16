@@ -1,0 +1,38 @@
+Download the tool for Java:
+https://scan.coverity.com/download
+
+# Browse to wget https://scan.coverity.com/download/java/linux-64
+mv ~/tmp/cov-analysis-linux64-7.7.0.tar.gz ~/bin/install
+cd ~/bin/install
+tar xf cov-analysis-linux64-7.7.0.tar.gz
+
+===========================================================================
+
+To run Coverity:
+
+cd $pl/java
+unset CHECKERFRAMEWORK && unset JSR308 && make clean
+cov-build --dir cov-int make compile
+rm -rf cov-int
+tar czvf ~/tmp/plume-lib.tgz cov-int
+# Now browse to https://scan.coverity.com/projects/mernst-plume-lib/builds/new
+# and upload ~/tmp/plume-lib.tgz
+# There is a script that automates all this; I could install that.
+# To run automatically from Travis-CI: https://scan.coverity.com/travis_ci
+
+# First, add codespecs/daikon at https://scan.coverity.com/projects/new?tab=github_index
+cd $d/java
+make clean_class_files
+cov-build --dir cov-int make all_directly
+tar czvf ~/tmp/daikon.tgz cov-int
+# Now browse to https://scan.coverity.com/projects/mernst-daikon/builds/new
+# and upload ~/tmp/daikon.tgz
+# There is a script that automates all this; I could install that.
+# To run automatically from Travis-CI: https://scan.coverity.com/travis_ci
+
+I ran coverity on plume-lib and daikon.  It was pretty easy to set up.
+
+Most of the output is the result of running FindBugs.
+The tool identified a couple of issues (that would have come up rarely if every in practice), plus a lot of nitpicky trivialities, half of which complained about things I had done intentionally.
+
+The tool is worth running on new code (they don't recommend running it on every commit, for reasons of server load), just so that we keep all the new code clean.  It would also be worthwhile for all our code to adhere to Coverity's lint checks, but I fear it won't be worth it to actively resolve the issues.

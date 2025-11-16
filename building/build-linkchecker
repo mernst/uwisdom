@@ -1,0 +1,6 @@
+wget http://sourceforge.net/projects/linkchecker/files/7.6/LinkChecker-7.6.tar.bz2/download
+cd ~/bin/install
+tar jxf LinkChecker-7.6.tar.bz2
+cd LinkChecker-7.6
+# Instructions in doc/install.txt
+# I need Qt development tools in order to build and install... :-(

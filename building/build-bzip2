@@ -1,0 +1,9 @@
+http://www.digistar.com/bzip2/index.html
+
+make
+cp -fp bzip2 bzip2recover /uns/bin
+pushd /uns/bin
+ln -s bzip2 bunzip2
+ln -s bzip2 bzcat
+popd
+cp -f bzip2.1 /uns/man/man1

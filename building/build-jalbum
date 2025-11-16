@@ -1,0 +1,733 @@
+http://www.datadosen.se/jalbum/
+
+# Using version 4.0.4
+
+# Don't use the installers; install from the .zip file (see below) instead.
+# The installers don't work for me on my laptop:
+#   Error: Unrecognized JVM specific option `-Xmx50331648'.
+#   Error: Unrecognized JVM specific option `-Xms16777216'.
+# The problem is that it is trying to using the (very old: released in
+# 2000) Kaffe JVM, which is in /usr/bin/java.
+
+# Install from .zip file:
+# (Should indicate JAlbum version number when installing...)
+cd ~/bin/src/
+wget http://www.datadosen.se/download/JAlbum.zip
+unzip JAlbum.zip
+rm JAlbum.zip
+# Now run via: java -jar JAlbum.jar
+
+cd ~/bin/src/JAlbum/skins
+cp -pR standard standard-captioned
+# Edit standard-captioned/slide.htt
+
+===========================================================================
+
+To copy files from a CD, first insert the CD.  It is auto-mounted.
+  # Optional: 
+  # Once ever: mkdir -p ~/random/photos-sources
+  mount /dev/cdrom
+  cd /mnt/cdrom
+  setenv ORDERID `perl -ne 'if (s/OrderId = (.*)\r//) { print $1; }' info.cd`
+  cp -pR pictures ~/random/photos-sources/from-cd/$ORDERID
+  cd ~/random/photos-sources/; ln -s from-cd/$ORDERID .
+  cd; umount /mnt/cdrom
+  # umount must be issued before CDROM drive can be opened; CD must not be cwd
+
+One time ever commands:
+  cd ~/random/photos-sources/135371
+  chmod +w .
+  mv 008_6.jpg 008_6.jpg-unrotated
+  convert -rotate "90>" 008_6.jpg-unrotated 008_6.jpg
+  mv 010_8.jpg 010_8.jpg-unrotated
+  convert -rotate "90>" 010_8.jpg-unrotated 010_8.jpg
+  mv 017_15.jpg 017_15.jpg-unrotated
+  convert -rotate "90>" 017_15.jpg-unrotated 017_15.jpg
+  mv 021_19.jpg 021_19.jpg-unrotated
+  convert -rotate "90>" 021_19.jpg-unrotated 021_19.jpg
+  chmod -R -w .
+
+How to do rotation:
+  #land2portrait 90 CCW
+  convert -rotate "-90>" "$i" temp.jpeg;
+  #land2portrait 90 CCW
+  convert -rotate "90>" "$i" temp.jpeg;
+  #port2land 90 CCW
+  convert -rotate "-90<" "$i" temp.jpeg;
+  #port2land 90 CW
+  convert -rotate "90<" "$i" temp.jpeg;
+  #landscape 180
+  convert -rotate "180>" "$i" temp.jpeg;
+  #portrait 180
+  convert -rotate "-180" "$i" temp.jpeg;
+
+===========================================================================
+
+Features of JAlbum 4.0 (2003-10-31) include:
+
+JAlbum now has a new tools menu where users can plug in their own extension
+scripts to do general tasks (like resetting file date to camera date,
+batch-rotating images etc)
+
+Reads and writes comments to external text files in order to speed up the
+process of adding comments (writing directly to the images is time
+consuming but still supported).
+
+===========================================================================
+
+This isn't documented anywhere, but the order of the photos in your web
+pages can be determined by specifying the names in a text file called
+albumfiles.txt.  So I can do that instead of the copying below.
+
+===========================================================================
+
+cd ~/bin/src/JAlbum
+java -jar ~/bin/src/JAlbum/JAlbum.jar -directory ~/www/photos/greece/src -outputDirectory ~/www/photos/greece -highQualityScaling true -user.title "Greece" -skin standard-captioned -imageSize 1000x800 -thumbSize 150x150
+
+----------------
+
+cd ~/bin/src/JAlbum
+java -jar ~/bin/src/JAlbum/JAlbum.jar -directory ~/www/photos/2003-other/src -outputDirectory ~/www/photos/2003-other -highQualityScaling true -user.title "2003-Other" -skin standard-captioned -imageSize 1000x800 -thumbSize 150x150
+
+----------------
+
+# Older commands:
+
+# This isn't quite right; I should have just put the originals in a temporary
+# directory, probably.
+
+mkdir ~/www/photos/levis-wedding
+cd ~/random/photos-sources
+cd 135371
+foreach file (014_12.jpg 015_13.jpg 026_24.jpg 027_25.jpg)
+  cp $file ~/www/photos/levis-wedding/135371-$file
+end
+cd ~/random/photos-sources
+cd 135366
+foreach file (004_1.jpg 006_3.jpg 007_4.jpg 008_5.jpg 009_6.jpg 010_7.jpg 011_8.jpg 013_10.jpg 014_11.jpg)
+  cp $file ~/www/photos/levis-wedding/135366-$file
+end
+cd ~/www/photos/levis-wedding
+ln -s ../levis-wedding-captions.txt captions.txt
+
+cd ~/bin/src/JAlbum
+java -jar ~/bin/src/JAlbum/JAlbum.jar -directory ~/www/photos/levis-wedding -sameDirectory -highQualityScaling true -user.title "Levis/Kerman wedding" -skin standard-captioned -imageSize 1000x800 -thumbSize 150x150
+
+===========================================================================
+
+Default is:
+-imageSize 800x600
+-thumbSize 120x120
+-cols 6
+
+
+Consider:
+ -imageLinking LinkOriginals
+(but this is typically too big for the Web)
+
+ -appendImages
+
+----
+
+To get a list of command-line arguments:
+
+java -jar JAlbum.jar -help
+
+The output is:
+
+JAlbum v3.6.1 started in console mode
+
+Options and their default values:
+-ftpPort 21
+-projectFile 
+-remoteDirectory 
+-imageSize 800x600
+-highQualityScaling false
+-slides true
+-imageLinking LinkScaled
+-imageOrdering OrderByDate
+-textEncoding ISO-8859-1
+-sameDirectory false
+-characterEncoding 
+-alwaysUploadPages true
+-thumbSize 120x120
+-cols 6
+-subdirs true
+-skin standard
+-directory 
+-pageExtension .html
+-dateFormat 
+-ftpPassword 
+-qualityPercent 70
+-passiveMode true
+-urlEncode true
+-indexPageName index
+-reverseOrder false
+-style Plain.css
+-writeUTF8 true
+-outputDirectory 
+-appendImages false
+-ftpUser 
+-metaData true
+-rows 30
+-includeDirectories true
+-savePassword true
+-copyOriginals false
+-ftpServer 
+-user.<your variable> <value>
+Required arguments are -directory and (-outputDirectory or -sameDirectory)
+
+===========================================================================
+
+Reading captions/comments from single text file
+
+Some people wonder if it is possible to have one single text file in each
+directory where all image captions/comments are stored next to the filename
+itself and then have JAlbum pick from this file instead of reading EXIF
+comments. The format should be like this:
+  filename1=caption one
+  filename2=caption two
+  etc
+
+It's easy to do with some scripting. Here is how you do it: Put the
+scriptlet below inside the slide.htt skin template file or wherever you
+wish to have the caption text inserted. Put a "captions.txt" file in the
+image directory. Fill the file with captions next to the filename
+separating them with equals signs. Generate an album using the modified
+skin, that's it.
+
+
+<!-- Extract the comment from a caption.txt file where the filename is the key -->
+<%
+  import se.datadosen.util.*;
+  File cFile = new File(imageDirectory, "captions.txt");
+  if (cFile.exists()) {
+    Map captions = IO.readMapFile(cFile);
+    String text = (String)captions.get(fileName);
+    if (text != null) out.print(text);
+  }
+%>
+
+===========================================================================
+
+Testing for variable existence
+
+Not all variables are available at all times. If a variable is unavailable, it will show up unexpanded in the generated page. To prevent this from happening when one can't be certain if a variable exists, test for existence with the following construct. The example adds a link to the next slide in a slide show if there are more slides, if not, the text "at last page" is displayed instead:
+
+<ja:if exists="nextPage">
+  <A HREF="$nextPage">Next</A>
+</ja:if>
+<ja:else>
+  At last page
+</ja:else>
+
+This example test for existence of camera flash information:
+
+<ja:if exists="flash">Flash used: $flash</ja:if>
+<ja:else>No flash information found</ja:else>
+
+Note: Since v3.5 the if exists construct also ensure that the variable is non null and non empty.
+
+General testing
+
+Any condition can be tested with the following syntax:
+
+<ja:if test="true">This will be included</ja:if>
+<ja:if test="false">This will NOT be included</ja:if>
+
+The examples above look stupid, but can be used to totally exclude a block of code. It is however more common to use a scriptlet as test attribute value (more on scripting below):
+
+
+<ja:if test="<%= engine.isHighQualityScaling() %>">
+  These images have been scaled with the high quality setting
+</ja:if>
+
+Page inclusion
+
+It is common to want headers/footers/navigation bars or other web elements added to the generated album so that the album better fits to the existing site. This is easily done with the include element:
+
+<ja:include page="C:\mysite\header.inc" />
+<ja:include page="header.inc">This text will show if the page does not exist</ja:include>
+
+The page attribute can be an absolute file path or relative the image directory. To include pages relative to the output directory, use scriptlets like this:
+
+<ja:include page="<%=new File(outputDirectory, "header.inc")%>" />
+
+Included pages may contain variables, scriptlets and other include elements. This final example includes a text file carrying the same base name as an image. Image "foo.jpg" will get text from file "foo.txt" etc. This allows for simple comment inclusion or for adding special html to some images:<ja:include page="<%= new File(imageDirectory, label+".txt") %>" />
+Iterator elements
+
+The index page usually have a nested pair of so called iterator elements. The content of the outer "row iterator" is repeated for each row of images and the content of the inner "column iterator" is repeated for each image. Image specific variables only exists within the column iterator for index templates. To make a minimal index page for testing, write the following code (the code below outputs the name of all images in a directory):
+
+<ja:rowiterator>
+   <ja:coliterator>
+     $label
+   </ja:coliterator>
+</ja:rowiterator>
+
+The row and column iterators are however usually used in a table context like this:
+
+<!-- Iterate through images and produce an index table -->
+<TABLE>
+<ja:rowiterator>
+  <TR>
+  <ja:coliterator>
+    <TD VALIGN="bottom">
+      <A HREF="$closeupPath">
+        <ja:if exists="iconPath">
+          <!-- No frames around icons like folders and movie files -->
+          <IMG SRC="$iconPath" WIDTH="$thumbWidth" HEIGHT="$thumbHeight" BORDER=0>
+          <BR>
+        </ja:if>
+        <ja:else>
+          <IMG CLASS="image" SRC="$thumbPath"
+           WIDTH="$thumbWidth" HEIGHT="$thumbHeight" BORDER=0><BR>
+        </ja:else>
+        <SMALL>$label</SMALL>
+      </A>
+    </TD>
+  </ja:coliterator>
+  </TR>
+</ja:rowiterator>
+</TABLE>
+
+Linking correctly
+
+JAlbum tries to allow flexible linking of images. The user interface allows three types of linkings:
+
+    * Link to original images from index pages or slide pages
+    * Link to original images via scaled down slide page
+    * Link to scaled down images only 
+
+When designing a template, it's important that you use correct variables and existence tests in order for the linking to make sense. The code above shows an example of correct linking from an index page to a slide page or image by using the $closeupPath variable. For the slide page template, the linking should be like this:
+
+<!-- Image, maybe with link to original -->
+<ja:if exists=originalPath>
+  <A HREF="$originalPath">
+    <IMG SRC="$imagePath" WIDTH="$imageWidth" HEIGHT="$imageHeight"
+     BORDER=0 ALT="Original image">
+  </A>
+</ja:if>
+<ja:else>
+  <IMG SRC="$imagePath" WIDTH="$imageWidth" HEIGHT="$imageHeight">
+</ja:else>
+
+Adding multilingual text
+
+JAlbum has a mechanism to simplify writing skins that support texts in several languages (usually navigation strings like "Next" and "Previous" etc). Look at this example:
+
+$text.previousPage
+
+Given the example above, JAlbum will look for a mapping for the
+"previousPage" "key" in the current language of the user running
+JAlbum. JAlbum will look into certain property files (see top of page). The
+format of such a file is simply a list of key=value mappings, one for each
+row. Please see the "standard" skin for a full working example. Here is a
+sample Swedish property file (texts_sv.properties):
+
+up=Upp en nivå
+previousPage=Förra sidan
+nextPage=Nästa sida
+firstPage=Första sidan
+lastPage=Sista sidan
+atFirstPage=Vid första sidan
+atLastPage=Vid sista sidan
+indexPage=Till index sidan
+originalImage=Originalbild
+cameraInfo=Kamerainformation
+
+To support a new language, say German, simply copy and paste such a file,
+rename it to texts_de.properties and translate the text strings
+inside. Note: You can force the use of a certain language by setting the
+"language" user defined variable to an ISO two character code that the
+current skin has support for.
+
+Scripting
+
+JAlbum is equipped with BeanShell, a very powerful java-like scripting language. Scripting gives you the ability to add any imaginable features to generated albums. Within special <% scriptlets %> you can construct just about any expression you like that is also valid Java. Scriptlets can be embedded into the template files of jalbum skins (index.htt and slide.htt) or inside style sheet files of skins.
+
+Here are some examples. Copy and paste them into a skin to have them executed during album creation.
+
+Ordinary calculations: <%= 5*(3+2) %> --> 25
+
+Access variables too: <%= thumbWidth*2 %>
+
+Warn for large images and use variables in strings easily:
+<%
+  if (fileSize > 1500000)
+    out.print("Original file is large ($fileSize bytes).");
+%>
+
+Produce fast Google-like numbered links to other index pages:
+<%
+  if (totalIndexes == void) return;  // totalIndexes only exist if several index pages
+  for (i=1; i<=totalIndexes; i++) {
+    if (i == indexNum) out.print(" <b>" + i + "</b>");  // Emphasize current index page
+    else {
+      out.print("<a href=\"" + engine.getIndexPageName() + (i==1?"":i)
+       + engine.getPageExtension() + "\">" + " " + i + "</a>");
+    }
+  }
+%>
+
+Scripting can be performed in three syntaxes:
+
+Ordinary scriptlet: <% ... %>
+Value of this scriptlet is outputted to the page: <%= ... %>
+Old/alternative syntax for the above: <eval> ... </eval>
+
+Use scripting to construct advanced skins containing cool dynamic image borders etc. You have access to the full power and class hierarchy of java + there are also a number of practical "implicit objects" to assist you (see below).
+Bypassing scriptlets
+
+If you are generating album files containing scriptlets that are to be processed by an ASP or JSP engine instead of JAlbum, you need to tell JAlbum to ignore those scriptlets and pass them on to the generated pages. This is done like this:
+
+<ja:ignore>
+  <% This could be some ASP code %>
+</ja:ignore>
+
+Implicit objects
+
+Apart from having access to ordinary variables when scripting, JAlbum also provide some special objects (Java type within parenthesis):
+
+    * out -Page writer. Printing to out will generate output on the resulting page (PrintWriter)
+    * application -Container for variables bound to the current instance of JAlbum (Map)
+    * album -Container for variables bound to the current album generation (Map)
+    * current -Container for all variables bound to the current image (Map)
+    * previous -Container for all variables bound to the previous image (Map)
+    * next -Container for all variables bound to the next image (Map)
+    * meta -Container for all metadata variables (EXIF etc) found inside an image (Map)
+    * programDirectory -File object representing the current JAlbum directory (File)
+    * skinDirectory -File object representing the current skin directory (File)
+    * imageDirectory -File object representing the current image directory (File)
+    * rootImageDirectory -File object representing the root image directory (File)
+    * outputDirectory -File object representing the current output directory (File)
+    * rootOutputDirectory -File object representing the root output directory (File)
+    * files -Array of File objects for the images and mediafiles in the current image directory (File[])
+    * fileVariables -Container of containers for variables bound to each image. Use File objects from files as key. current for example is a shorthand for fileVariables.get(files[imageNum-1]) (Map)
+    * engine -The album generating JavaBean inside JAlbum. See API (AlbumBean)
+    * window -The window of JAlbum, useful when creating modal popup windows like color pickers etc (Frame) 
+
+Note: "current", "previous" and "next" are accessible for slide pages or within a ja:coliterator on index pages
+
+The "meta" object usually contains more EXIF metadata than accessible from ordinary $variables, but possibly in a more raw format. You may list all metadata found inside an image by putting the following code inside a slide.htt file (JAlbum v2.8):
+
+
+<ja:if exists="meta">
+  <pre><%= meta %></pre>
+</ja:if>
+      
+
+It is very important to check for existence of an object prior to accessing it. If there is no metadata in an image, the meta object doesn't exist. Referencing it will then lead to a script error. The following example picks the "Owner Name" variable out of the meta object (assuming it exists, which it does for some Canon cameras):
+
+
+<ja:if exists="meta">
+  <%= meta.get("Owner Name") %>
+</ja:if>
+      
+
+What's next?
+
+I now recommend you to check out some scripting examples so you see the power that lies within BeanShell.
+© 2003, Datadosen.se, David Ekholm
+
+
+===========================================================================
+
+Convert filenames to lower case
+
+Put the following script in the top of the slide.htt file of the skin you are using and run the album generation twice in order to have the filenames of your images converted to lower case. (Lower case filenames are sometimes required when passing the files on to some UNIX systems)
+
+
+<%
+  File oldFile = files[imageNum-1];
+  File newName = new File(oldFile.getParentFile(), oldFile.getName().toLowerCase());
+  oldFile.renameTo(newName);
+%>
+	
+
+Extra slide pages for original images
+
+When clicking on an image in a slide show, you may get to the original image, but it is not displayed in a html page of its own. The downside of this is that the surroundings for the image doesn't match the skin (usually displayed on white background) and you have to use the back navigation button to return. Take a look at the new "Smart" skin in the extras section that addresses this issue by some lines of BeanShell scripting. The skin has an extra template file called "originalslide.htt". The following simple adjustment to the "slide.htt" file will make sure that the "originalslide.htt" file gets processed if needed:
+
+
+<!-- Image, maybe with link to original -->
+<ja:if exists=originalPath>
+<!-- Create a slide page for the original image too
+and link to that one instead of linking to an image -->
+<%
+  String originalPage = originalPath;  // Default if no extra template page
+  File template = new File(skinDirectory, "originalslide.htt");
+  if (template.exists()) {
+    originalPage = label+"_orig"+engine.getPageExtension();
+    engine.processTemplateFile(template,
+     new File(outputDirectory,"slides/"+originalPage), current);
+  }
+%>
+  <A HREF="<%=originalPage%>">
+    <IMG SRC="$imagePath" WIDTH="$imageWidth" HEIGHT="$imageHeight" BORDER=0>
+  </A>
+</ja:if>
+	
+
+Alternative titles for album directories
+
+If you are not happy with JAlbum selecting the directory name as title for your albums, go to the "Advanced" tab and set title = your alternative title as a user defined variable there. This works fine for one flat album, but if you have a deep hierarchy of directories, you will then end up having the same title on each sub album. The following script can be put at the top of the index.htt skin template file in order to have JAlbum grabbing the title from a "meta.properties" text file that you put in the directory of choice. Inside the meta.properties file you simply put title = your alternative title to have that title instead. If the mapping isn't present, JAlbum will revert to use the name of the directory instead.
+
+
+<%
+  import se.datadosen.util.*;
+  // If meta.properties exists in the image directory and contains
+  // an alternative title, use it instead of the directory name
+  File propsFile = new File(imageDirectory, "meta.properties");
+  if (propsFile.exists()) {
+    Properties props = IO.readPropertyFile(propsFile);
+    String newTitle = props.get("title");
+    if (newTitle != null) title = newTitle;
+  }
+%>
+	
+
+There is one final thing to this: You will have to replace all occurrences of $title with <%=title%> in that file too. (This is because $variables are expanded before scripts are being executed)
+
+Adding voice annotations
+
+Many digital cameras allow you to add voice annotations to images. The camera usually puts a wav file next to the image bearing the same base name as the image. This script will make JAlbum look for these wav files and insert a BGSOUND tag if there is an annotation. Put the script just after the body tag of a slide.htt file.
+
+
+<!-- add and play voice annotations (.wav files) if they exist -->
+<%
+  import se.datadosen.util.IO;
+  File sound = new File(imageDirectory, label+".WAV");
+  if (sound.exists()) {
+    // Make a copy if needed
+    String soundPath;
+    if (!outputDirectory.equals(imageDirectory) && engine.isCopyOriginals()) {
+      IO.copyFile(sound.getAbsolutePath(), outputDirectory, true);
+      soundPath = "../" + sound.getName();
+    }
+    else soundPath = IO.relativePath(sound, new File(outputDirectory, "slides"));
+    out.println("<BGSOUND SRC=\"" + soundPath + "\">");
+  }
+%>
+	
+
+Converting focal length to 35mm equivalent
+
+Some users prefer to list the focal length of the camera ($focalLength) as its 35mm equivalent value. Here are two scripts that does the conversion for you. In theory, converting is just a matter of multiplying the focal length with a factor that you can get from your camera manual (the factor varies between camera models), but in JAlbum the focalLength variable is a formatted string including "mm" at the end which can't take part in a multiplication. The following script takes care of that by stripping non-numeric parts of a value and converting the result to a floating point value. After that, converting is simply a matter of multiplication and rounding the result. Put these scripts into the slide.htt file of the skin you wish to use.
+
+<%
+// Strip non-numeric ending on strings and convert result to float
+float numericPart(String s) {
+  int i;
+  for (i=0; i<s.length(); i++) {
+    char c = s.charAt(i);
+    if (!Character.isDigit(c) && c != '.') break;
+  }
+  return Float.parseFloat(s.substring(0,i));
+}
+%>
+
+...And this is the code that displays the converted value (example for a Canon PowerShot G1 camera having 4.857 as conversion factor).
+
+<ja:if exists="focalLength">
+35 mm equivalent: <%= (int)(numericPart(focalLength) * 4.857 + 0.5) /* PowerShot G1 */ %>
+</ja:if>
+
+Google-like links to images
+
+For quick navigation between images, a list of numbered links might be preferred to just having previous and next buttons. Put this script inside a slide.htt file for the Google effect. The "Bluepro" skin makes use of this effect.
+
+
+<% // Produce links to all other pages, cooler than just next, previous links
+  for (int i=0; i<files.length; i++) {
+    Map vars = (Map)fileVariables.get(files[i]);
+    if (i+1 != imageNum) out.print("<a href=\"" + vars.get("currentPage") + "\">");
+    else out.print("<b>");
+    out.print(" " + (i+1));
+    if (i+1 != imageNum) out.print("</a>");
+    else out.print("</b>");
+  }
+%>
+	
+
+Multilevel parent links
+
+You might have an album with many nested folders (animals/mamals/cats...) In this case it helps a lot to have all folder names displayed like this: animals » mammals » cats (being in the "cats" folder), with links to each parent folder. Copy and paste the two scriptlets below for this effect. The first goes into index.htt and the second into slide.htt:
+
+
+<!-- Multilevel index links for index page -->
+<%
+  void writePath(File dir, String prefix) {
+    boolean topLevel = fileVariables.get(dir) == null;
+    if (!topLevel)
+      writePath(dir.getParentFile(), prefix + "../");
+    if (!topLevel) out.print(" » ");
+    if (prefix.length() > 0)
+      out.print("<a href=\"" + prefix + engine.getIndexPageName()
+       + engine.getPageExtension() + "\">");
+    else out.print("<a href=\"" + indexPage + "\">");
+    out.print((topLevel ? album.get("rootName") : dir.getName()) + "</a>");
+  }
+  if (album.get("rootName") == null) album.put("rootName", title);
+  writePath(imageDirectory, "");
+%>
+	
+
+
+<!-- Multilevel index links for slide pages -->
+<%
+  void writePath(File dir, String prefix) {
+    boolean topLevel = fileVariables.get(dir) == null;
+    if (!topLevel)
+      writePath(dir.getParentFile(), prefix + "../");
+    if (!topLevel) out.print(" » ");
+    if (prefix.length() > 0)
+      out.print("<a href=\"../" + prefix + engine.getIndexPageName()
+       + engine.getPageExtension() + "\">");
+    else out.print("<a href=\"../" + indexPage + "\">");
+    out.print((topLevel ? album.get("rootName") : dir.getName()) + "</a>");
+  }
+  if (album.get("rootName") == null) album.put("rootName", title);
+  writePath(imageDirectory, "");
+%>
+	
+
+Reading captions/comments from separate text files
+
+Some people wonder if it is possible to have JAlbum insert the contents of a text file having the same base name as an image but with ".txt" extension, for example "hiking.jpg" will get text from "hiking.txt". This is simple to do with the following scriptlet:
+
+
+<!-- Extract text from textfiles carrying the same base name as this image -->
+<ja:include page="<%= new File(imageDirectory, label+".txt") %>" />
+	
+
+Reading captions/comments from single text file
+
+Some people wonder if it is possible to have one single text file in each directory where all image captions/comments are stored next to the filename itself and then have JAlbum pick from this file instead of reading EXIF comments. The format should be like this:
+filename1=caption one
+filename2=caption two
+etc
+
+It's easy to do with some scripting. Here is how you do it: Put the scriptlet below inside the slide.htt skin template file or wherever you wish to have the caption text inserted. Put a "captions.txt" file in the image directory. Fill the file with captions next to the filename separating them with equals signs. Generate an album using the modified skin, that's it.
+
+
+<!-- Extract the comment from a caption.txt file where the filename is the key -->
+<%
+  import se.datadosen.util.*;
+  File cFile = new File(imageDirectory, "captions.txt");
+  if (cFile.exists()) {
+    Map captions = IO.readMapFile(cFile);
+    String text = (String)captions.get(fileName);
+    if (text != null) out.print(text);
+  }
+%>
+	
+
+Thumbnail to indicate sub album
+
+Usually JAlbum will pick a folder icon to indicate the existence of a sub album (an album in a sub directory), but it might be better to have a thumbnail image from that directory to represent that sub album instead (randomly picked or chosen). The following script does just that. It goes in between the ja:coliterator elements of an index.htt file. The script will pick a random1 image from the sub directory unless there is a "meta.properties" file in that directory with a line indicating what file to pick instead. The format of the file is currently like this:
+
+folderIcon=<filename of image to use as folder icon>
+
+If there are only movie files in the specific directory/album, the ordinary folder icon will be used instead.
+
+Excited? Here is the code to do this (requires at least JAlbum 2.8):
+
+
+<%
+  // Try to replace folder icons with prepresentative image from subdirectory
+  import se.datadosen.util.*;
+
+  if (files[imageNum-1].isDirectory()) {
+    File subDir = files[imageNum-1];
+    File iconFile = null;
+
+    // If meta.properties exists and points to an icon file, use it
+    File propsFile = new File(subDir, "meta.properties");
+    if (propsFile.exists()) {
+      Properties props = IO.readPropertyFile(propsFile);
+      iconFile = new File(subDir, props.get("folderIcon"));
+    }
+    else {
+      // Try to use the first image as folder icon
+      File[] list = subDir.listFiles();
+      for (int i=0; i<list.length; i++) {
+        if (FileFilters.isFileSupported(list[i])) {
+          iconFile = list[i];
+          break;
+        }
+      }
+    }
+    if (iconFile != null) {
+      // Process this image so we can extract width and height
+      setAccessibility(true);  // Turn on access to private methods
+      engine.registerVariables(iconFile, outputDirectory);  // Private = might change
+      Map vars = fileVariables.get(iconFile);
+      // Redefine variables
+      iconPath = engine.encode(subDir.getName() + "/thumbs/" +
+       engine.jpegName(iconFile.getName()));
+      thumbWidth = vars.get("thumbWidth");
+      thumbHeight = vars.get("thumbHeight");
+    }
+  }
+%>
+
+There is one more thing to this, usually an index.htt file contains something similar to this: <img src="$iconPath".... That has to be changed to the following:
+
+<IMG SRC="<%=iconPath%>" WIDTH="<%=thumbWidth%>" HEIGHT="<%=thumbHeight%>" BORDER=0><BR>
+
+The reason for this is that dollar-variables ($iconPath etc) are expanded before script execution occurs and this script redefines existing variables so we have to grab the variables using scriptlet syntax instead.
+
+1 With random I mean that the script picks the first image file that the file system delivers when I ask for a list of files. It can be any file.
+Reset file date to camera date
+
+Sometimes modifications to a file will alter the file date. If the image still has EXIF data into it, the following script can be applied to reset the file date to the date the image was taken. Put it in slide.htt and generate an album
+
+
+<!-- Reset file dates to EXIF dates -->
+<ja:if exists="originalDate">
+<%
+  import java.text.*;
+    Date parseExifDate(String exifDate) {
+        String[] patterns = {
+         "yyyy:MM:dd HH:mm:ss",
+         "yyyy:MM:dd HH:mm",
+         "yyyy-MM-dd HH:mm:ss",
+         "yyyy-MM-dd HH:mm",
+         "yyyyMMdd HHmmss",
+         "yyyyMMdd HHmm"
+        };
+        // Try these patterns. Add new to make this method even smarter
+        for (int i=0; i<patterns.length; i++) {
+            try {
+                DateFormat parser = new SimpleDateFormat(patterns[i]);
+                return parser.parse(exifDate);
+            }
+            catch (ParseException ex) {}
+        }
+        return null;  // We cannot parse
+    }
+%>
+
+<%
+  Date d = parseExifDate(originalDate);
+  if (d != null) {
+    files[imageNum-1].setLastModified(d.getTime());
+    out.println("File date modified for " + files[imageNum-1]);
+  }
+%>
+</ja:if>
+
+Note. In JAlbum 2.8.5 and up, the parseExifDate function is built into JAlbum, then the above can be written as:
+
+
+<ja:if exists="originalDate">
+<%
+  Date d = se.datadosen.imaging.exif.ImageInfoFormatter.parseExifDate(originalDate);
+  if (d != null) {
+    files[imageNum-1].setLastModified(d.getTime());
+    out.println("File date modified for " + files[imageNum-1]);
+  }
+%>
+</ja:if>
+
+© 2003, Datadosen.se, David Ekholm

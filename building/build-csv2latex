@@ -1,0 +1,10 @@
+The debian package doesn't seem to come with a manpage.  So build from source.
+
+cd ~/bin/install
+# wget http://herewe.servebeer.com/csv2latex/releases/csv2latex-0.16.tar.gz
+wget http://brouits.free.fr/csv2latex/csv2latex-0.16.tar.gz
+tar xzf csv2latex-0.16.tar.gz
+cd csv2latex-0.16
+make
+cd ~/bin/`uname`-`uname -m`
+ln -s ../install/csv2latex-0.16/csv2latex .

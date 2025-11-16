@@ -1,0 +1,204 @@
+Bazaar (Bzr) version control system
+
+----------------
+
+Ubuntu: use package manager.
+To get the very latest version, you need to add some lines to your
+/etc/apt/sources.list, see https://launchpad.net/~bzr/+archive
+
+Debian: install from source (because as of 10/15/2008 Debian backports were
+only up to version 1.5).
+
+Downloads:
+  http://bazaar-vcs.org/Download
+  (some links redirect to: http://bazaar-vcs.org/DistroDownloads )
+
+export BZR_MAJ_VER=1.9
+export BZR_VER=1.9
+
+# For a personal (not site-wide) installation (not really recommended):
+cd ~/bin/install
+wget https://launchpad.net/bzr/${BZR_MAJ_VER}/${BZR_VER}/+download/bzr-${BZR_VER}.tar.gz
+tar xzf bzr-${BZR_VER}.tar.gz
+cd ~/bin/share
+ln --force -s ../bzr-${BZR_VER}/bzr .
+
+# Alternately, for a global installation:
+cd ~/tmp
+wget https://launchpad.net/bzr/${BZR_MAJ_VER}/${BZR_VER}/+download/bzr-${BZR_VER}.tar.gz
+tar xzf bzr-${BZR_VER}.tar.gz
+cd bzr-${BZR_VER}
+sudo python setup.py install
+
+# For PAG:
+
+cd /afs/csail/group/pag/software/arch/common/pkg
+wget https://launchpad.net/bzr/${BZR_MAJ_VER}/${BZR_VER}/+download/bzr-${BZR_VER}.tar.gz
+tar xzf bzr-${BZR_VER}.tar.gz
+cd /afs/csail/group/pag/software/arch/linux-amd64/bin
+ln --force -s ../../common/pkg/bzr-${BZR_VER}/bzr .
+cd /afs/csail/group/pag/software/arch/linux-x86/bin
+ln --force -s ../../common/pkg/bzr-${BZR_VER}/bzr .
+
+----------------
+
+# To inform bzr about plugins:
+cd <directory-with-bzr-installation>
+python setup.py build_ext -i
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Bugs:
+https://bugs.launchpad.net/bzr/
+then click red "report a bug" button, possibly after
+searching for an existing bug report.
+
+Mailing list archives:
+https://lists.ubuntu.com/archives/bazaar/
+
+----------------
+
+To submit a patch:
+
+(These instructions are taken from http://bazaar-vcs.org/BzrGivingBack .)
+
+# Install Bzr current development version (only do once ever):
+cd ~/bin/install
+mkdir bzr
+cd bzr
+bzr init-repo .
+bzr branch http://bazaar-vcs.org/bzr/bzr.dev/ bzr.dev
+
+# Make a new branch (choose PATCH-ID appropriately)
+PATCHID=PATCHID
+# First, update the development version.
+cd ~/bin/install/bzr/bzr.dev
+bzr pull
+# Now create the new branch
+# (The "bzr branch" command seemed fast enough without --stacked.)
+bzr branch ~/bin/install/bzr/bzr.dev ~/bin/install/bzr/$PATCHID
+# Create TAGS file for User Guide.
+cd ~/bin/install/bzr/$PATCHID
+cd doc/en/user-guide
+etags `perl -n -e 'if (/^\.\. include:: (.*)/) { print "$1 "; }' index.txt`
+
+# Generate a bundle (the Bzr version of a patch):
+# 0. Commit changes
+cd ~/bin/install/bzr/$PATCHID
+echo 'Don''t forget to commit changes first!'
+bzr commit
+cd ~/bin/install/bzr/bzr.dev
+bzr pull
+cd ~/bin/install/bzr/$PATCHID
+bzr pull
+bzr update
+bzr send -o ~/bin/install/bzr/$PATCHID.patch
+# Now send email to bazaar@lists.canonical.com
+    * Please start your subject line with [MERGE]
+    * Clearly describe the problem or feature that your change addresses
+    * If it fixes a bug listed in the bugtracker, include the bug number or url
+    * Attach your bundle or patch
+    * (Optionally, include a link to the public branch location)
+
+----------------
+
+After editing user guide, do
+  make doc/en/user-guide/index.html
+  validate doc/en/user-guide/index.html
+
+===========================================================================
+
+[Hold off on this.]
+
+Terminology: "stacked" and "lightweight"
+
+The names "stacked" and "lightweight" are somewhat unfortunate, since they
+are rather generic and don't clearly indicate the concepts involved.
+Improving the names will improve usability and understandability.  I
+realize that changing the names might be somewhat disruptive in the short
+term, but that could be mitigated by permitting both names for some time.
+
+Here is some brainstorming.
+
+  lightweight means:
+    history is stored elsewhere
+    no local storage of history
+    historyless
+    remote history
+    use branch for each operation
+    --no-local-history
+    --nohistory
+
+  stacked means:
+    store only differences
+
+===========================================================================
+===========================================================================
+===========================================================================
+
+Submitted patches (see ~/bin/bugs/bug-bazaar.mail)
+
+===========================================================================
+
+branch:  doc-stacked-lightweight
+submitted:  2008-10-16, 13:00
+
+Improved documentation of stacked and lightweight branches
+
+This patch improves the User Guide's documentation of stacked and
+lightweight branches.
+
+Section "1.2.6 Putting the concepts together" should mention stacked
+branches and the difference between them and lightweight branches.  It
+should also contain links to further details of the common scenarios.
+
+Section "5.3.4 Getting a lightweight checkout" should mention stacked
+branches as an option, and should link to all the options, not just some of
+them.  It should also clarify that lightweight only applies to checkouts,
+not to arbitrary branches.
+
+===========================================================================
+
+branch:  doc-hooks
+submitted:  2008-10-20, 09:00
+
+Hook documentation
+
+This patch improves the User Guide's documentation of hooks.
+
+The text no longer intersperses discussion of what a user does with a
+descripton of the code.  Nor does it confusingly use first person to
+describe what the code does.  It puts two lists of hooks together in one
+place.  It fixes bugs in hook examples (per
+https://lists.ubuntu.com/archives/bazaar/2008q3/047498.html).  It clarifies
+where each hook is run (on the client, the server, or both).
+
+===========================================================================
+
+branch: clarify English word "copy"
+submitted:  2009-06-11, 00:00
+
+I suggest changing text in
+
+    bzrlib/builtins.py
+    bzrlib/help_topics/__init__.py
+
+from
+
+  Create a new copy of a branch.
+
+to something like
+
+  Create a new branch that is a copy of an existing branch.
+
+My rationale is that the current text doesn't make clear whether the copy
+is a full-fledged branch on its own, or is some lesser thing (just a
+"copy").  This is a small matter, but I think clarifying it will avoid user
+confusion -- it did confuse me at first.
+
+You can see the generated documentation at, for example,
+http://doc.bazaar-vcs.org/bzr.dev/en/user-reference/bzr_man.html#branch
+
+===========================================================================

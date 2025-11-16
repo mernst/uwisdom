@@ -1,0 +1,46 @@
+Install on Windows, because that's where Adobe Digital Editions runs.
+https://calibre-ebook.com/download_windows64
+
+Install DeDRM Calibre plugins (same as "Apprentice Alf’s DRM Removal Tool"?)
+  releases: https://github.com/apprenticeharper/DeDRM_tools/releases
+  blog: https://apprenticealf.wordpress.com/
+  installation instructions: https://apprenticealf.wordpress.com/2012/09/10/calibre-plugins-the-simplest-option-for-removing-most-ebook-drm/
+
+Install Adobe Digital Editions
+https://www.adobe.com/solutions/ebook/digital-editions/download.html
+
+Now, DRM is automatically removed from books as they are imported into Calibre.
+https://manual.calibre-ebook.com/faq.html says:
+  When you purchase an epub book from a website, you will get an ”.acsm” file.
+   * Open this file with Adobe Digital Editions.
+      * Double-click on the item, or
+      * Use these steps from within the Adobe Digital Editions program:
+         * Use the "Add to Library" menu item (there is no "open" menu item)
+         * It's in the Downloads folder.
+         * You have to change the file type to .acsm in the open file dialog.
+   * That puts the ".epub" book in C:\Users\Michael Ernst\Documents\My Digital Editions
+      * WSL path (just for checking it is there):
+        /mnt/c/Users/mernst/Documents/My Digital Editions
+ Open Calibre
+  * click "Add books", select that book
+     The DRM is stripped as the files are added to the library.
+  * Click "Convert books" (third big icon on the top row)
+     * Convert to AZW3 format (upper right corner)
+     * Click "OK" (lower right corner)
+     * Result is written to:
+         C:\Users\Michael Ernst\Calibre Library\...
+       which on WSL is:
+         /c/Users/mernst/Calibre Library/
+     * I should perhaps save it elsewhere in case I want to re-download.
+Now, download to Kindle
+  /media/${USER}/Kindle
+
+===========================================================================
+
+## Don't do this; install on Windows instead.
+# To install on Linux:
+# http://calibre-ebook.com/download_linux says:
+# "Please do not use your distribution provided calibre package, as those are often buggy/outdated. Instead use the Binary install described below."
+cd ~/tmp
+wget https://github.com/apprenticeharper/DeDRM_tools/releases/download/v6.2.1/tools_v6.2.1.zip
+unzip tools_v6.2.1.zip

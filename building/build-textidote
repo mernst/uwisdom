@@ -1,0 +1,24 @@
+https://github.com/sylvainhalle/textidote
+
+It's not worth using.  There are so many false positive suggestions, because it
+does such a poor job of parsing LaTeX.  It would be better to process the file
+into single-column PDF, then paste it into https://languagetool.org/ or
+elsewhere.
+
+The singleline output isn't in a standard (parsable) format, and uses color
+control characters.
+
+===========================================================================
+
+# To install:
+VER=0.8.3
+cd ~/tmp
+wget https://github.com/sylvainhalle/textidote/releases/download/v${VER}/textidote_${VER}_all.deb
+sudo apt install ./textidote_${VER}_all.deb
+
+===========================================================================
+
+# To run:
+textidote --read-all --check en --remove Verbatim --remove-macros todo --dict ~/.aspell.en.pws --output html ${TEX_FILES} > textidote-report.html
+
+# I can use a configuration file.

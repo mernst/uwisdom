@@ -1,0 +1,139 @@
+John Petersen says in March 2016, explaining why Support won't install it on CSE Linux machines:
+The Linux version of Skype is in a severely neglected state.  It hasn't been updated in almost 2 years, is still 32-bit, and requires too many old compatibility libraries which are a bloat on the OS.  Additionally, the ancient version has broken functionality now, no longer able to connect to clients running OS X and Windows:
+https://www.google.com/search?q=skype+for+linux&ie=utf-8&oe=utf-8#q=skype+for+linux&tbm=nws
+
+===========================================================================
+
+In case of an authentication failure when logging in (signing in), the
+problem may be at skype.com.  For example, you could check whether
+forum.skype.com is available (though any such check is not completely
+authoritative).
+
+===========================================================================
+
+Options:
+  [Does not exist any more] General >> General settings >> Show online user count : unset
+  General >> Save files to: ~/tmp
+  Settings >>
+    General >>
+      Automatically start Skype: unset
+      On close, keep Skype running: unset
+    Notifications >>
+      Notification settings >>
+	{Windows:
+	  [was default] comes online : unset
+	  [no longer exists?] has a birthday : unset
+	}
+	{Linux: 
+	  Contact Came Online: unset
+	  Contact Went Offline: unset
+	  Contact's Birthday: unset
+	}
+      Alerts >> Promotions : unset
+    Messaging >>
+      When I receive a file: Desktop
+  [Windows: IM & SMS >> IM appearance >> show animated emoticons : unset]
+  [Linux: Chat >> 
+     When somebody starts a chat with me: Open a chat window
+     Show animated emoticons : unset]
+  Advanced >>
+    Use Skype to call callto: links: unset
+    Use Skype to call tel: links: unset
+    Keep Skype in taskbar: unset
+    Show Skype watermark: unset
+
+===========================================================================
+
+Ubuntu:
+sudo snap install skype --classic 
+[Then change preference?]
+To run:
+snap run skype
+
+===========================================================================
+
+UW CSE:
+
+[Dynamic version did not work on F19 or F22!  :-( ]
+I get: bash: /homes/gws/mernst/bin/Linux-x86_64/skype: /lib/ld-linux.so.2: bad ELF interpreter: No such file or directory
+
+
+# Navigate to http://www.skype.com/download/skype/linux/choose/
+# The Fedora version is an RPM, which I don't have the permissions to
+# install, so use the standard dynamic version.
+
+VER=skype-4.3.0.37
+cd ~/bin/install
+tar xjf ${VER}.tar.bz2
+cd $HOME/bin/`uname`-`uname -m`
+\ln -sf ../install/${VER}/skype .
+
+See email of 1/2009 with Jan Stanislow for audio setup for godwit
+
+# As of 12/2011, both static and dynamic versions give me the error:
+#   skype: error while loading shared libraries: libasound.so.2: cannot open shared object file: No such file or directory
+# If I do
+#   export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib64
+# then I get
+#   skype: error while loading shared libraries: libasound.so.2: wrong ELF class: ELFCLASS64
+
+# Static version:
+VER=skype_static-2.2.0.35
+cd ~/bin/install
+tar xjf ${VER}.tar.bz2
+cd $HOME/bin/`uname`-`uname -m`
+\ln -sf ../install/${VER}/skype .
+
+===========================================================================
+
+Useful page:
+http://www.skype.com/help/guides/soundsetup_linux.html
+
+skype: no audio in or out
+  Textual output:
+  read error, res = -1 , handle = 26
+
+# For KDE
+artsdsp skype
+  can hear, but mic does not seem to work.
+artsdsp -m skype
+  can hear, but mic does not seem to work
+  
+
+# For Gnome
+esddsp skype 
+  esddsp: command not found
+
+
+Verify that mic and headphones are working with
+  rec ~/tmp/hello.wav
+  play ~/tmp/hello.wav
+
+===========================================================================
+
+Instructions from http://linuxmafia.com/faq/Debian/alsa.html :
+
+sudo apt install alsa-base alsa-headers alsa-modules-`uname -r` alsa-oss alsa-utils alsamixergui 
+
+Choose card named "intel8x0"
+
+(alsamixer says that the card is "Cirrus Logic CS4299 rev 6")
+
+in alsamixer, turn on "mic boost" channel:  use arrows to get to it, then
+type "m".
+
+===========================================================================
+
+Skype customer service says:
+
+  Inconsistent SkypeOut account balances
+
+  To remedy this problem, please select "Log off" from File menu and then
+  "Log in as a New User" from the File menu. Type in your username and
+  password and click next. After successful login, you are able to place
+  calls.
+
+  Please note that closing Skype and running the Skype client again is not
+  the same as logging off.
+
+===========================================================================

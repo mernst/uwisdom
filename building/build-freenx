@@ -1,0 +1,51 @@
+This may be the best description:
+  http://www.debianhelp.co.uk/freenx.htm
+and is what I followed.
+
+[An alternative:
+  http://phantomsdad.blogspot.com/2006/05/giving-freenx-try.html
+]
+
+Only the
+  deb http://www.linux.lk/~anuradha/nx/ ./
+line in /etc/apt/sources.list worked for me; the other 3 alternatives gave
+errors when I ran "apt update".
+It offers to install ssh, which worries me because I'm already using
+ssh-krb5 and don't want that to change.  But it isn't removing anything, so 
+
+The nxsetup line should be
+  nxsetup --install --setup-nomachine-key
+(the instructions are missing "--install")
+
+
+---------------------------------------------------------------------------
+
+CLIENT:
+
+
+wget http://64.34.161.181/download/3.1.0/Linux/nxclient_3.1.0-6_i386.deb
+# Or, as root: dpkg -i ~mernst/tmp/nxclient_3.1.0-6_i386.deb
+sudo dpkg -i nxclient_3.1.0-6_i386.deb
+
+# For x86_64:
+cd ~/tmp
+wget http://64.34.161.181/download/3.1.0/Linux/nxclient_3.1.0-6_x86_64.deb
+# Or, as root: dpkg -i ~mernst/tmp/nxclient_3.1.0-6_x86_64.deb
+sudo dpkg -i nxclient_3.1.0-6_x86_64.deb
+
+
+
+---------------------------------------------------------------------------
+
+After all that, when I ran "nxclient" from swsmde to swsmde, I got:
+
+NX> 203 NXSSH running with pid: 9878
+NX> 285 Enabling check on switch command
+NX> 285 Enabling skip of SSH config files
+NX> 285 Setting the preferred NX options
+NX> 200 Connected to address: 139.19.131.44 on port: 22
+/usr/NX/bin/nxssh: symbol lookup error: /usr/NX/bin/nxssh: undefined symbol: EVP_Cipher
+
+I could try it at home...
+
+---------------------------------------------------------------------------

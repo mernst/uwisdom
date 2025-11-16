@@ -1,0 +1,33 @@
+===========================================================================
+
+mkdir ~/.fonts
+locate '*.ttf'
+# Copy some files into ~/.fonts
+cd ~/.fonts
+for f in *.ttf; do ttf2afm $f -o `basename $f .ttf`.afm ; done
+for f in *.ttf; do ~/tmp/ttf2pt1-3.4.4/ttf2pt1 $f; done
+for f in *.ttf; do ~/tmp/ttf2pt1-3.4.4/ttf2pt1 $f -b; done
+for f in *.ttf; do ~/tmp/ttf2pt1-3.4.4/ttf2pt1 $f -e; done
+mkafmmap *.afm  
+
+===========================================================================
+
+Edit /usr/share/enscript/enscript.st
+  sudo /usr/bin/patch /usr/share/enscript/enscript.st ~mernst/wisdom/building/build-enscript
+
+This needs to be done individually on each machine at pag:
+  pagdo sudo /usr/bin/patch /usr/share/enscript/enscript.st /g2/users/mernst/wisdom/building/build-enscript
+
+cd /usr/share/enscript/
+diff -u -b -r /usr/share/enscript/enscript.st.\~1\~ /usr/share/enscript/enscript.st
+--- /usr/share/enscript/enscript.st.~1~	Wed Apr  3 06:38:20 2002
++++ /usr/share/enscript/enscript.st	Wed Jun  4 08:48:56 2003
+@@ -1289,6 +1289,7 @@
+   /\.py$/				python;
+   /\.js$/				javascript;
+   /\.java$/				java;
++  /\.java.jpp$/				java;
+   /\.([Pp][Aa][Ss]|[Pp][Pp]|[Pp])$/	pascal;
+   /\.[fF]$/				fortran;
+   /\.awk$/				awk;
+

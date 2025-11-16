@@ -1,0 +1,13 @@
+cd ~/bin/install
+wget ftp://ftp.kde.org/pub/kde/stable/4.1.3/src/kdepim-4.1.3.tar.bz2
+tar xjf kdepim-4.1.3.tar.bz2
+
+This says:
+
+  Next release: KDEPIM-3.3 (something like May 2004)
+
+  QUICK NOTES ON WHAT'S NEW IN THE DIFFERENT VERSIONS:
+
+  * Official 3.2 release (January 2004)
+
+So did the 3.3 release ever happen?

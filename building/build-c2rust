@@ -1,0 +1,30 @@
+On 2025-07-20, I could not get `cargo install c2rust` to work.
+
+Here is what I did instead:
+
+## Ensure there is only one version of LLVM and clang installed:
+# Remove all numbered versions of clang and llvm; obtain them by running dpkg -l:
+dpkg -l | grep 'clang|llvm'
+# DO NOT remove: libllvm19 libllvm20
+
+sudo apt update
+sudo apt remove -y \
+  clang \
+  llvm \
+  llvm-dev \
+  llvm-runtime:amd64 \
+  || true
+for ver in 14 15 16 17 18 19 20; do
+  sudo apt remove -y \
+    clang-${ver} clang-tools-${ver} clangd-${ver} lld-${ver} \
+    libclang-common-${ver}-dev libclang-common-${ver}-dev:amd64 libclang-cpp${ver} \
+    llvm-${ver} llvm-${ver}-dev llvm-${ver}-linker-tools llvm-${ver}-runtime llvm-${ver}-tools \
+    || true
+done
+sudo apt install -y clang llvm llvm-dev
+
+
+# Install unnumbered versions, which will all be consistent with one another:
+sudo apt install -y clang libclang-dev llvm llvm-dev
+
+cargo install --git https://github.com/immunant/c2rust.git c2rust

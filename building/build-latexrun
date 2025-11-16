@@ -1,0 +1,9 @@
+Why I hate latexrun:
+
+latexrun turns trivialities such as overfull hboxes into errors.  This means that when I run it, I have to sort through uninteresting messages to find real errors.
+
+Auxiliary files are hidden in the latex.out directory rather than put in their standard places, so the standard toolchain does not work.  For instance, my IDE will run pdflatex to quickly regenerate a paper if I have only updated the paper text, and  it's faster than latexrun, but latexrun's bizarre choice of file locations has broken this functionality.  
+
+The latexrun script is 2000 lines long and has not a shred of user documentation.  (There is documentation at https://github.com/aclements/latexrun, but who would know to look there?  And that documentation is inadequate; for instance, when I looked for how to customize output, I found just the useless and self-satisfied "latexrun prints only the messages that matter".)
+
+I have had problems where latexrun claimed the job failed but the job had not.  I have had problems where running latexrun twice gave visibly different PDF output.  latexrun doesn't handle dependencies, so you need something like Makefile anyway.

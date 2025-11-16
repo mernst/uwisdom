@@ -1,0 +1,26 @@
+cd ~/tmp
+hg clone http://hg.openjdk.java.net/code-tools/jcov
+wget http://download.forge.ow2.org/asm/asm-5.2-bin.zip
+unzip asm-5.2-bin.zip
+cd jcov/build
+cp ../../asm-5.2/lib/all/asm-all-5.2.jar .
+# Now, edit build.properties according to the diff at the end of this file.
+ant
+
+
+diff --git a/build/build.properties b/build/build.properties
+--- a/build/build.properties
++++ b/build/build.properties
+@@ -22,9 +22,9 @@
+ # questions.
+ 
+ # path to asm5 library
+-asmjar5 = asm5.jar
++asmjar5 = asm-all-5.2.jar
+ # path to javatest library (empty value allowed if you do not need jtobserver.jar)
+-javatestjar = javatest.jar
++javatestjar = /usr/share/java/javatest.jar
+ 
+ # path to output directory
+ result.dir =../JCOV_BUILD
+

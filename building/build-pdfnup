@@ -1,0 +1,7 @@
+I should use the pdfnup that comes with pdfjam rather than the standalone pdfnup which is different.
+
+Use the "manual installation" instructions in order to get 0.4.2
+rather than 0.4.1 which is installed by "easy_install" or "pip3 install".
+
+To uninstall:
+pip3 uninstall pdfnup

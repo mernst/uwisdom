@@ -1,0 +1,9 @@
+From http://www.rarlab.com/rar_add.htm :
+
+cd ~/tmp
+wget http://www.rarlab.com/rar/unrarsrc-3.3.6.tar.gz
+tar xzf unrarsrc-3.3.6.tar.gz
+cd unrar
+make -f makefile.unix 
+cp -p unrar ~/bin/Linux-i686
+

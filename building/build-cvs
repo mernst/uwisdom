@@ -1,0 +1,13 @@
+CVS 1.11.2
+
+http://ccvs.cvshome.org/servlets/ProjectDownloadList
+
+# This didn't work for me because the kerberos .so library files are
+# different on different machines, so the executable worked on geyer where
+# it was linked but not on other machines.  Perhaps linking statically
+# rather than dynamically would fix the problem.
+
+tar zxf cvs-1.11.2.tar.gz
+cd cvs-1.11.2
+./configure --prefix=/usr/local --enable-encryption
+make

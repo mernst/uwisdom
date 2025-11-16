@@ -1,0 +1,36 @@
+Converting Google Code wiki webpages to HTML:
+
+1. It doesn't work to print the wiki pages to a printer from a browser.
+
+2. The simplest way may be to print the wiki pages to PDF from a browser,
+then print the PDF.
+
+3. This does work (though some of the formatting is not handled properly):
+
+cd ~/bin/install
+svn checkout http://google-code-wiki.googlecode.com/svn/trunk/ google-code-wiki
+cd ~/bin/share
+ln -s $HOME/bin/install/google-code-wiki/wikify.py .
+
+4.  This doesn't work as of 6/13/2013:
+
+svn checkout http://google-code-wiki-to-html.googlecode.com/svn/trunk/ google-code-wiki-to-html-read-only
+
+5. Since Google Code wikis use MoinMoin syntax, another option is to install
+MoinMoin then see:  http://moinmo.in/MoinDump
+
+sudo apt install python-moinmoin
+
+moin export dump \
+                  --wiki-url=https://code.google.com/p/daikon-dot-net-front-end/w/list \
+                  export dump \
+                  --target-dir=$HOME/tmp/outputdir
+
+This didn't work because of the error 
+
+MoinMoin.error.ConfigurationError: 
+data_dir "/org/mywiki/data" does not exist, or has incorrect ownership or
+permissions.
+
+I don't want to set up a full webserver and MoinMoin instance -- just to
+run MoinDump.  So, give up on this option for now.

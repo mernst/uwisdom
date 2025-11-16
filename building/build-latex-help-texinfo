@@ -1,0 +1,6 @@
+http://home.gna.org/latexrefman
+http://tex.stackexchange.com/questions/129341/latex-info-help-on-ubuntu
+
+cd ~/tex/info
+wget http://svn.gna.org/viewcvs/*checkout*/latexrefman/trunk/latex2e.info
+install-info latex2e.info dir

@@ -1,0 +1,23 @@
+
+# Get version number from https://github.com/google/guava
+# Version 19, released December 9, 2015, is most recent as of September 2016.
+VER=19.0
+
+## Jar file:
+wget http://search.maven.org/remotecontent?filepath=com/google/guava/guava/$VER/guava-$VER.jar
+
+## Source code for released version:
+mkdir ~/java/guava-$VER-sources
+cd ~/java/guava-$VER-sources
+wget http://search.maven.org/remotecontent?filepath=com/google/guava/guava/$VER/guava-$VER-sources.jar -O guava-$VER-sources.jar
+jar xf guava-$VER-sources.jar
+etags `find -name '*.java' | sort-directory-order`
+# I'm not sure how to compile it...
+
+## Source code from version control repository:
+cd ~/java/
+git clone git@github.com:google/guava.git
+cd guava
+git pull
+mvn package
+mvn javadoc:javadoc

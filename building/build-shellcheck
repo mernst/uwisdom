@@ -1,0 +1,14 @@
+Ubuntu:
+sudo apt install shellcheck
+
+CSE:
+# Determine the installed version and the latest version
+shellcheck --version
+# browse to: https://github.com/koalaman/shellcheck/releases
+
+cd ~/bin/install
+rm -rf shellcheck-stable.linux.x86_64.tar.xz shellcheck-stable
+wget https://github.com/koalaman/shellcheck/releases/download/stable/shellcheck-stable.linux.x86_64.tar.xz
+tar xJvf shellcheck-stable.linux.x86_64.tar.xz
+(cd ~/bin/Linux-x86_64/ && rm -rf shellcheck && ln -s ../install/shellcheck-stable/shellcheck .)
+

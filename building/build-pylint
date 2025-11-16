@@ -1,0 +1,7 @@
+# I think I prefer pylint to flake8
+
+python -m pip install flake8
+sudo pip3 install pylint
+
+At CSE:
+pip3 install --user pylint

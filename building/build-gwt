@@ -1,0 +1,15 @@
+See http://code.google.com/webtoolkit/makinggwtbetter.html#workingoncode
+
+mkdir ~/tmp/gwt
+cd ~/tmp/gwt
+svn checkout http://google-web-toolkit.googlecode.com/svn/tools/ tools
+svn checkout http://google-web-toolkit.googlecode.com/svn/trunk/ trunk
+export GWT_TOOLS=~/tmp/gwt/tools
+cd ~/tmp/gwt/trunk
+# This gives errors when using OpenJDK.  I think I need to introduce local
+# variables to work around.
+ant
+# Now the distributions are in ~/tmp/gwt/trunk/build
+
+# To run tests:
+ant test

@@ -1,0 +1,10 @@
+# From https://sdkman.io/install/ :
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk version
+
+# To upgrade:
+sdk selfupdate force
+sdk version
+
+# Make sure that ~/.bash_profile uses $HOME instead of a hard-coded path.

@@ -1,0 +1,4 @@
+Edit Makefile:
+ PRINT_COMMAND = /usr/bsd/more
+
+Edit externs.h: maybe increase MAX_SIZE

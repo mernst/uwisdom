@@ -1,0 +1,11 @@
+pstotext
+
+cd ~/bin/src
+wget http://www.research.compaq.com/SRC/virtualpaper/binaries/pstotext.tar.Z
+tar xZf pstotext.tar.~
+cd pstotext
+make
+cd ~/bin/Linux-i686/
+ln -s ../src/pstotext/pstotext .
+
+cp pstotext ~/bin/Linux-i686/

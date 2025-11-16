@@ -1,0 +1,21 @@
+Java Workshop: http://www.sun.com/workshop/java/download.html
+
+Version 3.0.5
+
+Download file jws3.0.sparc-S2.tar.Z
+
+Installation instructions: www.sun.com/workshop/java/install.html 
+Essentially, just untar the file (it untars into current directory, doesn't
+create its own directory).
+I did this into ~/se/java/jws3.0/.
+
+To run: 
+~/se/java/jws3.0/Java-WorkShop3.0/sparc-S2/bin/jws &
+
+I don't get correct behavior from the UI, however.
+For instance, I often need to resize dialog boxes to see everything in
+them.
+And I wasn't able to set the classpath so I could compile.
+
+And I couldn't figure out how to consistently change projects, interrupt
+programs, etc.

@@ -1,0 +1,2622 @@
+# Wisdom about TeX, LaTeX, Hevea, Texinfo, and related programs
+
+
+On github.com, you can view the table of contents of this file by clicking the
+menu icon (three lines or dots) in the top corner.
+
+
+<!--
+// Each entry should contain one of the words "TeX", "LaTeX", "BibTeX", etc.
+-->
+
+
+<!--
+// PROBLEM with this file is that TeX comments starting in column 1 will be
+// ignored by the database searching program!  Therefore, put a space before
+// any "%" character that is part of an entry.
+-->
+
+
+## Figures (floats)
+
+
+In LaTeX, always put a `\protect` in front of a `\ref` in a `\caption`.
+
+
+In LaTeX, to get a line between floats (figures, tables, etc.) and text, do
+something like (these must take up zero vertical space):
+
+```latex
+ % Add line between figure and text
+ \makeatletter
+ \def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+ \def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+ \def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+ \makeatother
+ % If there is a line, you can get away with reducing the separation between
+ % figures and text.  Don't do this without the line, though.
+ \addtolength{\textfloatsep}{-.5\textfloatsep}
+ \addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+ \addtolength{\floatsep}{-.5\floatsep}
+ \addtolength{\dblfloatsep}{-.5\dblfloatsep}
+```
+
+In ACM styles that add a line between the figure and the caption,
+additionally do
+
+```latex
+ \nocaptionrule
+```
+
+
+<!--
+// Can't unindent the LaTeX comments or the doc program will respect those
+// comments.  That's unfortunate, because I typically unindent when inserting
+// in a LaTeX document.
+-->
+To prevent having just a couple of figures, and lots of white space, on a
+page produced by LaTeX, do the following.  Also consider making it 90%.
+
+```latex
+ % At least 80% of every float page must be taken up by
+ % floats; there will be no page with more than 20% white space.
+ \def\topfraction{.8}
+ \def\dbltopfraction{\topfraction}
+ \def\floatpagefraction{\topfraction}     % default .5
+ \def\dblfloatpagefraction{\topfraction}  % default .5
+ \def\textfraction{.2}
+```
+
+
+To fix "too many unprocessed floats" error, do one of the following:
+
+* spread your figures further apart in your document, or
+* put in a `\clearpage` or `\cleardoublepage` command to allow a page full of figures to be generated.
+
+
+To change the font and line spacing for LaTeX figure captions in acmart.cls (eg, prevent captions from being bold or reduce their font size), do:
+
+```latex
+ % Change font and line spacing for figure captions
+ \usepackage{setspace,caption}
+ \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
+```
+
+
+## Tables
+
+
+To reduce intercolumn space in tables:
+
+```latex
+  \addtolength{\tabcolsep}{-.5\tabcolsep}
+  \setlength{\tabcolsep}{0pt}
+```
+
+
+Aligning decimal points (periods) in tables in TeX/LaTeX:
+use dcolumn package (described in the LaTeX Companion).
+In particular:
+
+```latex
+  \usepackage{dcolumn}
+  % dcolumn customization
+  \newcolumntype{d}[1]{D{.}{.}{#1}} % argument is number of decimal places
+  \newcolumntype{.}{d{1}} % "1" means one digit after the decimal point
+  \newcolumntype{.}{d{-1}} % "-1" means center the decimal point in the column; ugly
+  \newcolumntype{.}{d{0}} % "0" means decimal point is right-justified, not so different from right-justifying the column
+  \newcolumntype{.}{d{5.1} % 5 places to the left of the decimal, one to the right
+```
+
+and then use "." as a column separator, much like "c".
+These column separators do not check the number of decimal points in the
+table itself.  Thus, using a value other than -1 can leave additional space
+at the right side of the column, or let extra digits after the decimal
+point lap into the next column.
+
+
+In LaTeX, to define new column types L, C, and R:  Note that a width is **required**
+as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
+
+```latex
+  % Define new column types L, C, and R that are paragraphs with automatic line
+  % breaking (though \newline is still permitted) but no hyphenation and lines
+  % aligned left, center, or right, and the paragraph centered vertically
+  % because of `m` columns (can use `p` or `b` columns instead):
+  \usepackage{array}
+  \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+  \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+  \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+```
+
+
+To put a footnote within a table in LaTeX, surround the table with a minipage:
+
+```latex
+  \begin{minipage}{\textwidth}
+  \begin{tabular}{ccc}
+  1 & 2 & 3\footnote{Nothing important}\\
+  4 & 5 & 6
+  \end{tabular}
+  \end{minipage}
+```
+
+
+To make entries in a LaTeX "tabular" table that span multiple columns,
+as with the HTML "colspan" attribute, use an entry like
+
+```latex
+   \multicolumn{3}{l}{text}
+```
+
+where 3 is the number of columns to span, and "l" is the alignment of
+the spanning contents. `\multicolumn` seems to want to insert
+inter-column spacing around the contents even if you've tried to
+disable it in the header line with `@{}` (or `@{your amount of space}`),
+but you can override it by putting a negative version of the space on
+the *inside* of the multicolumn, as in:
+
+```latex
+   \multicolumn{3}{l}{\hskip-\tabcolsep...}
+```
+
+
+Here is a "MultiColumn, One, Centered" macro:
+
+```latex
+  \newcommand{\mcoc}[1]{\multicolumn{1}{c|}{#1}}
+```
+
+
+To span multiple rows (as with the HTML "rowspan" attribute), use
+\multirow:
+
+```latex
+  \usepackage{multirow}
+  \multirow{nrows}[bigstruts]{width}[fixup]{text}
+```
+
+
+Multirow documentation is at
+<http://mirror.math.ku.edu/tex-archive/macros/latex/contrib/multirow/multirow.sty>
+The width is a size like "25mm" or `"*"` for "vertically centered".
+The rows that don’t contain the "multi-row" specification must have empty
+cells where the multi-row is going to appear.
+\multirow requires use of the multirow package:
+You can nest \multirow in \multicolumn but not vice versa.
+
+
+## Displays
+
+
+To intersperse left-justified text with aligned equations, use the TeX
+\noalign primitive. For example,
+
+```latex
+  \begin{eqnarray}
+  test & 1 & 2 \\
+  \noalign{\hbox{left}}
+  test & 3 & 4
+  \end{eqnarray}
+```
+
+produces results like the following:
+
+```text
+            test  1  2       (1)
+  left
+            test  3  4       (2)
+```
+
+
+Use
+
+```latex
+  \setlength{\arraycolsep}{.25em}
+```
+
+to reduce/compress the horizontal spaces (as around equal signs) between
+columns in a LaTeX array or eqnarray environment.
+Use
+
+```latex
+  \setlength{\tabcolsep}{.5\tabcolsep}
+```
+
+to reduce the width of columns in a table or tabular environment.
+
+
+## Math mode
+
+
+To define a (say) binary operator in TeX or LaTeX, use `\mathord`, `\mathop`,
+`\mathbin`, `\mathrel`, `\mathopen`, `\mathclose`, `\mathpunct`, `\mathinner`.
+These give "class" 1..8 to the math character or formula.
+
+* `\mathbin`: for binary operators like "+"
+* `\mathrel`: for binary relations like "=" (slightly more space)
+* `\mathop`: for things like \sum, \cos, \ln, etc.
+
+(There is no `\binop` or `\binrel`; I mention them here in case someone
+searches for them.)
+
+
+To typeset a multi-character identifier in LaTeX math mode, use `\mathit{...}`
+(or, if you have it defined, `\|...|`) .  Never use `$...$`, which puts
+incorrect kerning between the letters.  LaTeX typesets `$myvar$` as "m times y
+times v times a times r".  It looks bad, and enough people will notice that it
+is worthwhile to get the typesetting right.
+
+
+## Lists
+
+
+To eliminate LaTeX list/itemize/enumerate spacing/space between items (by
+setting \itemsep and \parskip), use
+`\itemsep 0pt \parskip 0pt`.
+This is necessary even if using `\usepackage{enumitem}`.
+
+
+[Is this still the best approach with `\usepackage{enumitem}`?]
+To control pre-list space, set \partopsep (or insert an explicit negative
+\vspace (not \vskip)).  (I had to give an explicit argument, not -\parsep
+etc.; but `\vspace*{-\partopsep}` worked for me if it came after the
+\begin{enumerate}.)  (See manual page 167.)
+<br>
+To remove the vertical space from between two LaTeX trivlist environments:
+
+```latex
+   \vspace*{-\topsep}\vspace*{-\partopsep}\vspace*{-\itemsep}
+```
+
+  No combination of only two of these does the trick.
+  (Why don't I have -\parskip here too?)
+
+
+To reduce the indentation of bullets/numbers/items a LaTeX list environment
+(itemize, enumerate, description), do this *outside* the environment.  It needs
+to come after `\begin{document}`.  (It's especially needed in the acmart style.)
+
+```latex
+  % Reduce indentation in lists.
+  \setlength{\leftmargini}{.75\leftmargini}
+  \setlength{\leftmarginii}{.75\leftmarginii}
+  \setlength{\leftmarginiii}{.75\leftmarginiii}
+```
+
+
+In a LaTeX enumerate list environment, to insert an ordinary (left-justified)
+paragraph of text outside the list, then resume the item numbering, do the
+following:
+
+```latex
+  \label{item:pre-break}
+  \end{enumerate}
+  PARAGRAPH GOES HERE.
+  \begin{enumerate}
+  \setcounter{enumi}{\ref{item:pre-break}}
+```
+
+
+To interrupt an enumerate environment, then continue the numbering later:
+
+```latex
+    \newcounter{saveenumi}
+    ...
+    \begin{enumerate}
+      ...
+      \item ...
+      \setcounter{saveenumi}{\theenumi}
+    \end{enumerate}
+    ...
+    \begin{enumerate}
+      \setcounter{enumi}{\thesaveenumi}
+      \item ...
+      ...
+    \end{enumerate}
+```
+
+
+To change the margins similarly to what the quote (`\begin{quote}`)
+environment does:
+
+```latex
+ % Arguments are left and right margins
+ \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+ \let\endchangemargin=\endlist
+ \begin{changemargin}{.05\columnwidth}{.05\columnwidth}
+ \end{changemargin}
+```
+
+
+## Defining macros
+
+
+Here are ways to test wither a macro argument is empty/null:
+
+1. The following macro definition will test whether a macro argument is empty:
+
+   ```latex
+       \def\mymacro#1{%
+        \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
+        }%
+   ```
+
+   Note that `plain.tex` defines `\empty` as `\def\empty{}%`.
+
+   LaTeX defines `\@empty` in a similar way, if you want to work with .sty files.
+   Note that since this uses \def to assign the value of #2 to a macro, it
+   won't work in TeX's mouth, and needs the stomach as well (so it won't work
+   inside an \edef for example).
+2. This way of testing for null arguments can be done entirely in TeX's mouth:
+
+   ```latex
+         \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
+   ```
+
+   It does however fail badly if #1 begins with \relax
+   (e.g., \showempty{\relax...}).
+3. Another way of testing for empty arguments in TeX's mouth is to say:
+
+   ```latex
+        \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
+   ```
+
+   This will expand to `true text' iff #2 is empty, or begins with
+   \unlikely.  So if you make \unlikely an unlikely macro for #2 to begin
+   with, then you're away.  (It also dies if #2 contains unbalanced \if,
+   \else or \fi's, but that should be pretty rare.  Touch wood.)
+
+
+LaTeX macros gobble space after them.  If you wish to insert space
+(except before punctuation or other places where it shouldn't be
+inserted) after a macro expansion, then add "\xspace" at the end of the
+macro body.
+
+```latex
+  \usepackage{xspace}
+  \xspaceaddexceptions{\%}
+  \xspaceremoveexception{-}
+  ...
+  \newcommand{\restenergy}{\ensuremath{mc^2}\xspace}
+  ...
+  ... and we find \restenergy available to us ...
+```
+
+
+Here is a LaTeX command that typesets its argument in a smaller \tt font.  It
+permits line breaks at spaces within the argument (but not within words),
+respects current series (such as boldface), and works in both horizontal (text)
+and math mode.
+
+```latex
+  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
+```
+
+Here's a version that takes care of URLs, too:
+
+```latex
+  \def\codesize{\smaller}
+  %HEVEA \def\codesize{\relax}
+  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1}}}\else{\codesize\ttfamily #1}\fi}
+  \newcommand{\myurl}[1]{{\codesize\url{#1}}}
+  %HEVEA \def\myurl{\url}
+```
+
+Or, if your document does `\usepackage{url}`, for URLs you can just do
+
+```latex
+  \renewcommand{\UrlFont}{\smaller}
+```
+
+but note that that is one command; you cannot specify `\smaller\texttt`.
+
+Similarly, "\scshape" is generally preferred to "\sc", because it
+respects the typesetting of the current context.
+For Verbatim environments, do this:
+
+```latex
+  \usepackage{fancyvrb}
+  \RecustomVerbatimEnvironment{Verbatim}{Verbatim}{fontsize=\smaller}
+```
+
+
+<!--
+// Can't unindent the LaTeX comments or the doc program will respect those
+// comments.  That's unfortunate, because I typically unindent when inserting
+// in a LaTeX document.
+-->
+
+
+Here are definitions for identifiers in LaTeX math mode formulas:
+
+```latex
+  % \|name| or \mathid{name} denotes identifiers and slots in formulas
+  \def\|#1|{\mathid{#1}}
+  \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
+  % \<name> or \codeid{name} denotes computer code identifiers
+  \def\<#1>{\codeid{#1}}
+  % Choose one of the following three definitions for \codeid.
+  \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
+  % \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+  % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
+```
+
+This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
+
+```latex
+  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+```
+
+
+To switch from `\texttt{...}` to `\<...>`:
+
+```elisp
+  (tags-query-replace "\\\\texttt{\\([^{}<>]+\\)}" "\\\\<\\1>")
+  (tags-query-replace "\\\\texttt{\\([^{}]+\\)}" "\\\\codeid{\\1}")
+  (tags-search "texttt")
+```
+
+To switch from `$...$` to `\|...|`:
+
+```elisp
+  (tags-query-replace "\\\\|" "\\\\parallel")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.]+\\)+\\$" "\\\\|\\1|")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+ " "$\\\\|\\1| ")
+  (tags-query-replace " \\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" " \\\\|\\1|$")
+  (tags-query-replace "\\$\\([A-Za-z_.][A-Za-z_.\\]+\\)+\\$" "\\\\|\\1|")
+```
+
+
+To permit hyphenation in tt font globally throughout a document, see
+<http://tex.stackexchange.com/questions/44361/how-to-automatically-hyphenate-within-texttt>.
+However, all of those solutions give me a Roman font that differs from the text
+font, whereas I want a typewriter font.  `\usepackage[htt]{hyphenat}` doesn't
+seem to work either.
+
+
+## Bibliographies and citations
+
+
+Very simple BibTeX usage:
+
+* See <https://github.com/mernst/plume-bib> for bibliographies (but you should get your own copy).
+* At beginning of document:   ((Why not at the end?))
+  `\bibliographystyle{alpha}`
+* Within document:
+  `\cite{key}`
+* At end of document:
+  `\bibliography{bibstring-unabbrev,invariants,dispatch,generals,alias}`
+* Run `latex`, then `bibtex`, then `latex` again.
+  But it's better to use `latexmk` rather than `latex` and `bibtex`.
+
+
+Typical LaTeX commands for bibliography:
+
+```latex
+  \bibliographystyle{alpha}
+  \bibliography{bibstring-unabbrev,ernst,invariants,dispatch,generals,alias}
+```
+
+
+`\thebibliography` is defined in the main document style (`article.sty`, etc.).
+
+
+For multiple bibliographies (say, one per chapter), use `chapterbib.sty`.
+
+
+How can I permit line breaks in a citation?
+I'm not sure if this is good style or not, but this is how to do it
+
+```latex
+% undo LaTeX's decision to make citation labels be \hbox'd.
+ \makeatletter
+ \def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+   \def\@citea{}\@cite{\@for\@citeb:=#2\do
+     {\@citea\def\@citea{,\penalty\@m\ }\@ifundefined
+        {b@\@citeb}{{\bf ?}\@warning
+        {Citation `\@citeb' on page \thepage \space undefined}}%
+ {\csname b@\@citeb\endcsname}}}{#1}}
+ \makeatother
+```
+
+
+BibTeX journal abbreviations are in `/usr/local/lib/tex/bib/abbreviations`.
+
+
+The problem with BibTeX's cross referencing feature is that it puts the
+book, proceedings, etc. in the bibliography as an entry of its own.
+However, supplying argument `-min-crossrefs=10000` disables this feature.
+
+
+For mix-n-match BibTeX citations,
+
+```latex
+  \makeatletter
+  \def\bibref#1{\nocite{#1}\@ifundefined{b@#1}{{\bf ??}\@warning
+     {Citation `#1' on page \thepage \space
+      undefined}}{\@nameuse{b@#1```
+  \makeatother
+```
+
+and then
+
+```latex
+  [\bibref{Horn86},p.86;\bibref{PressFTV88},p.516]
+```
+
+produces
+  [50,p.86;75,p.516]
+which is better than the
+  [50,p.86],[76,p.516]
+produced by
+
+```latex
+  \cite[p.~86]{Horn86},\cite[p.~516]{PressFTV88}
+```
+
+
+In LaTeX, to remove vertical spacing (space) between bibliography items when using natbib (which defines \bibsep), use:
+
+```latex
+   \setlength{\bibsep}{0pt}
+```
+
+before the `\biblography` command.
+For other bibliography styles, do
+
+```latex
+\let\oldthebibliography\thebibliography
+\let\endoldthebibliography\endthebibliography
+\renewenvironment{thebibliography}[1]{
+  \begin{oldthebibliography}{#1}
+    \setlength{\itemsep}{0em}
+    \setlength{\parskip}{0em}
+}
+{
+  \end{oldthebibliography}
+}
+```
+
+
+To adjust bibliography formatting:
+(For IEEE styles, just do `\def\IEEEbibitemsep{0pt plus .5pt}`.)
+  First, copy from article.cls the definition of
+
+```latex
+    \newenvironment{thebibliography}[1]
+```
+
+  Surround it by
+
+```latex
+    \makeatletter
+    ...
+    \makeatother
+```
+
+and change the "newenvironment" to "renewenvironment".
+To make bibliography items less indented, do one or both of the these:
+
+1. Comment out
+
+   ```latex
+          \advance\leftmargin\labelsep
+   ```
+
+2. Change
+
+   ```latex
+          \settowidth\labelwidth{\@biblabel{#1}}%
+   ```
+
+   to
+
+   ```latex
+          \settowidth\labelwidth{~}%
+   ```
+
+   (though this is a bit drastic).
+
+   To remove all vertical spacing (space) between bibliography items, add:
+
+   ```latex
+     % These two commands remove inter-bib-item spacing
+     \setlength{\itemsep}{0pt}
+     \setlength{\parsep}{0pt}
+   ```
+
+
+To use only first initials (not whole first name) in BibTeX, change "ff" to
+"f." in the .bst file, on the line containing "format.name".
+Or just use abbrv.bst, which does this.
+
+
+To omit the month in BibTeX, change
+`{ month " " * year * }`
+to
+`'year`
+in the .bst file.
+This is rarely worthwhile, though:  the savings tend to be very small.
+
+
+So that BibTeX does not require the publisher field in ACM conference
+proceedings, make this change:
+
+```diff
+--- a/ACM-Reference-Format.bst
++++ b/ACM-Reference-Format.bst
+@@ -2242,7 +2242,8 @@ FUNCTION { inproceedings }
+           format.bvolume.noseries output
+           new.sentence
+           organization output
+-          publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
++   %% MDE: Don't require, or even output, publisher
++          % publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
+           address "address" bibinfo.output.check  % jtb: require address
+           format.bookpages output
+         }
+@@ -2287,8 +2287,8 @@ FUNCTION { manual }
+   new.block
+   format.btitle "title" output.check
+   organization address new.block.checkb
+-  % jtb: back to normal style: organization, address
+-  organization "organization" output.check
++  % % jtb: back to normal style: organization, address
++  % organization "organization" output.check
+   address output
+   fin.block
+   output.issue.doi.coden.isxn.lccn.url.eprint.note
+```
+
+
+## Texinfo
+
+
+In Texinfo, to prevent the last index pages from being numbered i, ii,
+etc., add an @page before @summarycontents or @contents.
+
+
+To format a texinfo file (ie, to produce printed output such as PDF from a .texi file), do
+
+```sh
+    tex foo.texi
+    texindex foo.??
+    tex foo.texi
+```
+
+
+Texinfo definitions can be done like this:
+
+```texinfo
+ @iftex @def@foo ...
+```
+
+Make sure that any usages of the macro are also put inside @iftex, and
+make sure that you provide an equivalent construction inside @ifinfo.
+
+
+LaTeXinfo takes a different input format than LaTeX -- for instance, there
+are only three special characters (`\{}`), so comments are introduced by `\c`,
+and so forth.  Thus, it could be a lot of work to convert a document into
+LaTeXinfo.
+
+
+Texinfo summary of cross reference commands (`@xref`, `@ref`, `@pxref`, `@inforef`):
+<http://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html#Cross-Reference-Commands>
+
+
+In Texinfo, to insert literal HTML, do
+
+```texinfo
+@html
+<img src="https://travis-ci.org/typecheck-regex.svg?branch=master" alt="Travis codespecs/daikon status"/>
+@end html
+```
+
+If `@` appears in the HTML, it must be quoted; this permits Texinfo commands
+to appear within the HTML.
+By contrast to `@html`, `@ifhtml` is a conditional but its body is regular
+Texinfo.
+
+
+Texinfo does not let you change the margins without changing 'texinfo.tex'
+or 'texinfo.cnf'.  @pagesizes only affects the page size, not the margins.
+
+
+## Non-breaking spaces
+
+
+In LaTeX, there should be a space before a citation.  Both a non-breaking space
+`~` and a regular space ` ` are acceptable:
+
+```latex
+  WRONG: one plus one is two\cite{authority}
+  RIGHT: one plus one is two~\cite{authority}
+  RIGHT: one plus one is two \cite{authority}
+```
+
+
+In LaTeX, `~` is a non-breaking space.  It formats just like a space ` `, but it
+prohibits line breaks at that location.  It should never be adjacent to another
+(breaking) space.
+
+```latex
+  WRONG: one plus one is two ~\cite{authority}
+  RIGHT: one plus one is two~\cite{authority}
+  RIGHT: one plus one is two \cite{authority}
+```
+
+```latex
+  WRONG: Figure ~\ref{fig:beautiful}
+  RIGHT: Figure~\ref{fig:beautiful}
+  RIGHT: Figure \ref{fig:beautiful}
+```
+
+
+In LaTeX, always jam `\footnote` against the preceding text.  If you write
+`text \footnote{...}`, then there is an ugly space between the text and the
+footnote mark, and LaTeX might even put a line break or a page break
+between them.
+
+
+## Hyphenization and hyphenation
+
+
+<raymond@sunkist.berkeley.edu> (Raymond Chen) says:
+To prevent word breaking (hyphenation) in (La)TeX, `\hyphenpenalty=10000`
+Note, however, that although it'll work, it ain't exactly the nicest
+thing to do to your CPU :-)
+
+Reason:  TeX will go ahead and hyphenate all the words in your
+paragraph, and consider every possible breakpoint (including the
+hyphens it inserted), but when it's just about ready to insert a hyphen,
+it looks at \hyphenpenalty and say "Whoa!  Better not do it here."
+This is repeated for every hyphenation point in every word of your
+paragraph.
+
+A much more polite way to do it is to set the \hyphenchar to a
+number not between 0 and 255; typically, -1 is used to suppress
+hyphenation.  When the \hyphenchar is set to an invalid number,
+TeX skips the hyphenation step altogether.  So you would say
+something like
+
+```latex
+  \hyphenchar\the\font=-1
+```
+
+to suppress hyphenation for the current font.  If you use several
+fonts, you'll want to set the \hyphenchar for each one.  So you
+would start off like this:
+
+```latex
+  \hyphenchar\tenrm=-1
+  \hyphenchar\ninerm=-1
+  ...
+```
+
+You'll probably also want to set \defaulthyphenchar=-1 so that any
+new fonts that get loaded will also have hyphenation disabled.
+
+Another way is
+
+```latex
+  \pretolerance=10000
+```
+
+and, if you get complaints about overfull hboxes, also add
+
+```latex
+  \emergencystretch=2em
+```
+
+or some bigger value.
+
+
+<piet@cs.ruu.nl> (Piet van Oostrum) says:
+To hyphenate words with imbedded hyphens, you must disable the hyphenchar
+while reading the word and enable it while TeX hyphenates (i.e. at the end
+of the paragraph).  Two ways to do this:
+
+```latex
+  \def\H#1{\setbox0=\hbox{#1}\unhbox0}
+  \showhyphens{subsystem module \H{subsystem-module}}
+```
+
+or
+
+```latex
+  \edef\savehyphenchar{\the\hyphenchar\the\font}
+  \hyphenchar\the\font=0
+  \showhyphens{subsystem module subsystem-module
+  \hyphenchar\the\font=\savehyphenchar}
+```
+
+
+To have LaTeX hyphenate words with imbedded hyphens, you may use the
+`breakable hyphen' command:
+
+```latex
+      \def\hyph{-\penalty0\hskip0pt\relax}
+```
+
+You could play tricks mapping it to a character that's made active for
+the purpose, but `-`?
+
+
+LaTeX doesn't hyphenate (line-break) automatically when in font `\tt` because
+in the customary uses for `\tt` fonts, one does not want TeX to insert any
+hyphens.
+Here are two workarounds:
+
+ 1. Insert explicit "\-" wherever you wish to permit hyphenization.
+ 2. Non-hyphenization is implemented by setting \hyphenchar of the tt fonts
+    to -1.  You can undo it by explicitly resetting \hyphenchar.  To globally enable hyphenation in \texttt:
+
+```latex
+\DeclareFontFamily{\encodingdefault}{\ttdefault}{\hyphenchar\font=`\-}
+```
+
+or to enable it just for one family:
+
+```latex
+\DeclareFontFamily{T1}{cmtt}{\hyphenchar \font=45}
+```
+
+
+In LaTeX, \discretionary is a way to do custom hyphenization (without
+necessarily using the hyphen character).  Use it like
+
+```latex
+  \discretionary{beforebreak}{afterbreak}{unbroken}
+```
+
+Examples:
+
+```latex
+  \discretionary{-}{}{}              % normal hyphenization; equivalest to: \-
+  \discretionary{}{}{}               % no space, but permit break
+  \discretionary{}{}{\,}             % thin space, or permit break
+  \discretionary{/}{}{/}             % permit break after slash; equivalent to: /\discretionary{}{}{}
+  \discretionary{}{.}{.}             % permit break before period (e.g., in URL)
+  \discretionary{f-}{fi}{ffi}cult    % kerning
+```
+
+
+LaTeX's `\underline{...}` macro does not permit hyphenization (line breaking).
+Instead, use
+
+```latex
+  \usepackage{soul}
+  ...
+  \ul{...}
+```
+
+
+This ought to permit more hyphenization in LaTeX:
+
+```latex
+\hyphenpenalty=100
+\exhyphenpenalty=100
+\lefthyphenmin=2
+\righthyphenmin=2
+```
+
+
+## word, line, and page breaking
+
+
+To permit more space between words, in order to prevent bad breaks in
+narrow columns (like in a newspaper):
+
+```latex
+ {\spaceskip = \fontdimen2\the\font
+ \advance\spaceskip by 0pt plus 0.5em
+ \xspaceskip = \fontdimen7\the\font
+ \advance\xspaceskip by 0pt plus 0.5em
+ Several features were included in TRACEMAP to make it particularly
+ useful for programmers who need to understand the behavior of
+ their codes.}
+ The most important part is a static pictorial representation of
+ .. etc
+```
+
+This adds an extra 0.5em of stretchability to all spaces, producing big
+spaces in the line. This modification is closed as soon as possible by the
+} (could probably be earlier) to avoid having strange spacing further down
+as a space is better than a hyphenation for TeX ... even one of these nasty
+big ones - TeX can't tell the difference. \fontdimen2\the\font is the space
+factor of the current font and 0.5em is the extra space factor.
+
+
+```latex
+\def\nopgbrk{\@nobreaktrue}
+```
+
+appears to prevent LaTeX page breaks, even just before lists.
+
+
+To break a multi-line display math mode equation, use \begin{multline} or
+the breqn package or the split environment provided by the amsmath package.
+
+
+LaTeX can break an inline math mode formula at a \discretionary{}{}{} command.
+It can automatically break the formula only when a relation symbol
+(=, >, ...)  or a binary operation symbol (+, -, ...) exists and at least
+one of these symbols appears at the outer level of the formula. Thus `$a+b+c$`
+can be broken across lines, but `${a+b+c}$` cannot and neither can
+`$\left\langle ... \right\rangle$`.
+You can wrap parts of your formula in \mathrel or the like to fool LaTeX into
+thinking there is a relation symbol at the outer level of the formula.
+There is also `\*` which is discretionary multiplication sign:  `\times`
+appears in the document only if the document is broken there.
+
+
+From
+<http://stackoverflow.com/questions/1703867/latex-how-to-put-line-break-in-a-math>,
+here is a definition of \mytuple that can be used as follows
+
+```latex
+$ \mytuple{ long\_text, other\_long\_text, more\_long\_text } $
+
+% Permits line breaks after commas.  Use like this:
+%   $ \mytuple{ longtext, otherlongtext, morelongtext } $
+\makeatletter
+\newcommand\mytuple[1]{%
+  \@tempcnta=0
+  \bigl\langle
+  \@for\@ii:=#1\do{%
+    \@insertbreakingcomma
+    \@ii
+  }%
+  \bigr\rangle
+}
+\def\@insertbreakingcomma{%
+  \ifnum \@tempcnta = 0 \else\,,\ \linebreak[1] \fi
+  \advance\@tempcnta\@ne
+}
+\makeatother
+```
+
+Another solution, from <http://tex.stackexchange.com/questions/19094/allowing-line-break-at-in-inline-math-mode-breaks-citations>
+
+```latex
+\AtBeginDocument{%
+  \mathchardef\mathcomma\mathcode`\,
+  \mathcode`\,="8000
+}
+{\catcode`,=\active
+  \gdef,{\mathcomma\discretionary{}{}{}}
+}
+```
+
+
+## PDF and pdflatex
+
+
+When using the graphicx package to include figures in a LaTeX document:
+The latex command requires all graphics/images/pictures to be in EPS format.
+The pdflatex command requires all graphics to be in JPEG/JPG, TIFF, PNG, or PDF.
+Therefore, all figures must appear in at least two different formats.
+
+
+To convert .eps to .pdf, either of the following:
+
+```sh
+  # epstopdf seems to do a better job than convert
+  epstopdf picture.eps
+  # This version embeds fonts in the resulting PDF file
+  GS_OPTIONS="-dEmbedAllFonts=true -dPDFSETTINGS=/printer" epstopdf myfile.eps
+  convert file.eps file.pdf
+  eps2pdf
+  ps2pdf -dEPSCrop
+  # a2ping is the successor to epstopdf
+  a2ping
+  # To embed fonts using a2ping
+  a2ping --gsextra='-dEmbedAllFonts=true -dPDFSETTINGS=/printer'
+```
+
+To convert .pdf to .eps, either of the following ("convert" sometimes makes
+huge .eps files, though "pdftops" creates more pixellated .eps files):
+
+```sh
+  convert file.pdf file.eps
+  pdftops -f 1 -l 1 -eps
+```
+
+To include the pdf file:
+
+```latex
+  \usepackage{graphicx}
+  ...
+  % There should never be a .pdf (or any other) filename extension
+  \includegraphics[width=\textwidth]{picture}
+  % For two-column layout:
+  \includegraphics[width=\columnwidth]{picture}
+```
+
+
+To check whether fonts are embedded, run
+
+```sh
+  pdffonts myfile.pdf
+```
+
+or alternately use Adobe Acrobat Reader: go to "File --> Document
+Properties --> Fonts".
+This might tell you a font isn't embedded, but no output can also be a bad sign.
+
+
+pdflatex creates a document with fonts embedded, so long as all your images
+are bitmaps or are .pdf or .ps images with all their fonts embedded.
+
+
+To embed fonts in a PDF document:
+
+```sh
+  gs -q -dSAFER -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=tmp.pdf -dCompatibilityLevel=1.5 -dPDFSETTINGS=/prepress -c .setpdfwrite -f file.pdf
+```
+
+This creates tmp.pdf with as many fonts embedded as are available on the
+computer where you ran the command.
+
+
+You can set the compatibility level (e.g., PDF 1.7) in LaTex as follows:
+
+```latex
+\documentclass[10pt, conference]{IEEEtran}
+\pdfminorversion=7
+```
+
+You can automatically embed all fonts in a PDF file, using ghostscript:
+
+```sh
+  gs -dCompatibilityLevel=1.7 -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=paper-with-embedded-fonts.pdf paper.pdf
+```
+
+R uses font symbols for outliers in a boxplot, and you may not be able to
+embed them.  Minimally tweaking the opacity level of such points, forces R to
+actually draw the points rather than replacing them with symbols:
+
+```r
+geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
+```
+
+
+## URLs
+
+
+To make hyperlinks (e.g., to URLs) in a LaTeX document:
+
+```latex
+  \usepackage{hyperref}
+  \url{http://www.wikibooks.org}
+  \href{http://www.wikibooks.org}{Wikibooks home}
+```
+
+If you also want to line-break the URL text, then:
+
+```latex
+  \usepackage{hyperref}
+  \usepackage{url}
+  \url{http://www.wikibooks.org}
+  \href{\url{http://www.wikibooks.org}}{Wikibooks home}
+```
+
+More on LaTeX HEVEA URLs (\ahref, etc.):
+  <http://pauillac.inria.fr/~maranget/hevea/doc/manual018.html#toc22>
+but perhaps I want to ignore that and focus on using standard
+
+
+URLs in HTML and PDF documents:
+
+```latex
+ % Make a URL visible in PDF the but just be attached to anchor text in HTML:
+ %BEGIN LATEX
+ \newcommand{\ahreforurl}[2]{#2 (\url{#1})}
+ %END LATEX
+ %HEVEA \newcommand{\ahreforurl}[2]{\ahref{#1}{#2}}
+```
+
+
+The url package for LaTeX linebreaks a URL appropriately.
+For a moving argument (or a URL containing characters like %), use
+
+```latex
+    \urldef{\myself}\url{myself%node@gateway.net}   or
+    \urldef{\myself}\url|myself%node@gateway.net|
+```
+
+and then use "\myself" instead of "\url{myself%<node@gateway.net>}".
+However, the hyperref package forbids URL line breaks; the workaround is
+
+```latex
+  \usepackage{hyperref}
+  \usepackage{breakurl}
+```
+
+
+To typeset URLs in a smaller font in LaTeX, using \package{url}:
+First approach (shorter, usually works):
+
+```latex
+  \def\UrlFont{\smaller\ttfamily}
+```
+
+Second approach (better style, possibly more robust):
+
+```latex
+  %% Define and use a 'smallertt' URL style.
+  \makeatletter
+  \def\url@smallerttstyle{%
+    \@ifundefined{selectfont}{\def\UrlFont{\smaller\tt}}{\def\UrlFont{\smaller\ttfamily```
+  \makeatother
+  \urlstyle{smallertt}
+```
+
+
+## Hevea
+
+
+As an alternative to hevea: pandoc or tex4ht or tth
+  tex4ht is bundled with LaTeX distributions (use its make4ht build system instead of the htlatex command)
+All 4 of these are actively maintained as of 2022.
+
+
+Conditional compilation with LaTeX and Hevea:
+To avoid problems with the imagen program, it's usually best to not
+redefine macros with %HEVEA, but to use the \ifhevea conditional.
+
+
+In LaTeX files, to avoid the "This document was translated from LaTeX to
+Hevea" advertisement, write:
+
+```latex
+  %HEVEA \footerfalse    % Disable hevea advertisement in footer
+```
+
+
+Adding info to HTML header in Hevea (this must come after \begin{document}):
+
+```latex
+\let\oldmeta=\@meta
+\renewcommand{\@meta}{%
+\oldmeta
+\begin{rawhtml}
+<link rel="icon" type="image/png" href="my-favicon.png" />
+\end{rawhtml}}
+```
+
+
+Testing whether a file exists, for both LaTeX and Hevea:
+(Note that you need to test for a file, not a directory.)
+
+```latex
+ \newif\ifonbuffalo
+ %HEVEA\makeatletter\@iffileexists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}\makeatother
+ %BEGIN LATEX
+ \IfFileExists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}
+ %END LATEX
+```
+
+
+## Fonts
+
+
+The default LaTeX fonts look bad on-screen.  Consider this alternative; the
+"bitstream-charter" font family was designed to be good on screen.
+
+```latex
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+```
+
+
+In LaTeX, rather than
+
+```latex
+  \usepackage{times}
+```
+
+consider
+
+```latex
+  \usepackage{pslatex}
+```
+
+which differs in that it uses a specially narrowed Courier font.
+(Also consider `\usepackage{palatino}`?
+`\usepackage{times}` is narrower than `\usepackage{gentium}`.  \usepackage{venturis2} is even narrower, but it looks unnatural and makes it clear that you are cheating on space limits.)
+
+
+Do not use
+
+```latex
+  \documentclass[sigconf,anonymous]{acmart}
+  \usepackage{pslatex}
+```
+
+because it causes math-mode parentheses not to print.
+`\usepackage{times}` doesn't work either.
+
+
+To change fonts temporarily in LaTeX, use comands like the following
+
+```latex
+  {\fontfamily{phv}\selectfont Helvetica looks like this}
+```
+
+and
+
+```latex
+  {\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.
+```
+
+
+The following six TeX document style options exist for using PostScript
+fonts.
+
+1. avantgarde, for using the Avant Garde family.
+2. bookman, for using the Bookman family.
+3. helvetica, for using the Helvetica family.
+4. palatino, for using the Palatino family.
+5. ncs, for using the New Century Schoolbook Roman family.
+6. times, for using the Times Roman family
+
+
+To use a thinner (narrower) version of a font in a LaTeX document, run the
+following before running pdflatex:
+
+```sh
+  # Run with --clean once if the --xscale argument changes.
+  # /usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --clean
+   -/usr/share/doc/texlive-doc/latex/savetrees/makethin article.dvi --pdftex --xscale=0.94
+```
+
+
+More attractive monospaced (typewriter, courier) fonts:
+
+```latex
+  \usepackage[T1]{fontenc}
+  % sans-serif monospaced font
+  \usepackage{inconsolata}
+```
+
+```latex
+  % serifed monospaced font
+  \usepackage[T1]{fontenc}
+  \usepackage[scaled=0.88]{luximono}
+```
+
+
+Your LaTeX documents should always use
+
+```latex
+  \usepackage[T1]{fontenc}
+```
+
+Even if you don't care about foreign languages, it has the advantage of
+providing typewriter fonts for curly braces, and other characters that look
+bad due to the fact that OT1 has only 128 glyphs and LaTeX has to get some
+characters such as curly braces from a different font.
+It particular, it solves the problem
+
+```text
+  Font shape `OMS/cmss/m/n' undefined using `OMS/cmsy/m/n' instead for symbol `textbraceleft'
+```
+
+
+The default Computer Modern fonts are Type 3 (bitmap).  Here is how to use
+"Latin Modern" fonts, which are a Type 1 reimplementation of the Computer
+Modern fonts, and ensure you only get Type 1 fonts:
+
+```latex
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+```
+
+However, it is easier and better to just use pdflatex, which will use the
+good-quality type 1 "Blue Sky" implementation of Computer Modern.  Or use a
+different font like Times.
+
+
+If the line spacing is too large/big in a paragraph typeset in a smaller
+font, then be sure to end the paragraph with \par.
+
+
+From an NSF proposal that made it through research.gov:
+  \documentclass[10pt,letterpaper]{article}
+  % Palatino settings
+  \usepackage{palatino}
+  \linespread{1.005}
+
+
+## Overleaf
+
+
+To find the git URL for an Overleaf project, click on the word "menu" in
+the upper left corner, then (in section "sync") "git".
+
+
+To get your Git credential helper to remember an Overleaf password, clone a repository like this:
+
+```sh
+git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
+```
+
+where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
+Then, delete the clone to prevent storing your token in its .git/config file,
+and you can clone any overleaf repository without providing the authentication token.
+The Git authentication token expires every 6 months or so. :-(
+
+
+## Everything else
+
+
+LaTeX style files are found in the directories listed in the TEXINPUTS
+environment variable.
+
+
+Don't forget to check ~/tex/sty/ when looking for TeX files.
+
+
+LATEX directory: see /usr/share/texmf/tex/latex/misc, among others
+
+
+LaTeX form letter:  use "merge" documentstyle option
+
+
+Ragged right text in LaTeX:  use flushleft environment without explicit \\'s.
+Another possibility is \pretolerance=10000 and \raggedright.
+
+
+Use the \jobname command to get the name of the file that TeX is working on.
+
+Summary of UNIX-based methods for "portably" getting FILEID information of
+.tex source into the output file:  (By portable, I mean that the .tex file
+does not identify itself; at processing time, its location is obtained from
+the system and encoded in the resulting output file.)
+
+1. Use the ability of tex/latex to take information from the invocation.
+   Here is a script that does this for a latex document, so that the variable
+   \fileid can be used at will in the document and will expand to the absolute
+   pathname with hostname prepended
+
+   ```sh
+    FN=`basename $1 .tex`.tex
+    FILEID=`hostname`:`pwd`/$FN
+    FILEID=`echo $FILEID | tr _ .`
+    echo Inserting $FILEID...
+    virtex "&"lplain \\def\\fileid{$FILEID}\\input $1
+   ```
+
+2. Use rcs or make.
+3. Use a script and UNIX file-editing filters to replace tokens in the text
+   with dynamically obtained environment information.
+   From: <vjcarey@sphunix.sph.jhu.edu> ("Vincent J. Carey")
+
+
+How can I make the pagestyle of the first page be empty (no page number)?
+Put `\pagestyle{empty}` in the preamble (before `\begin{document}`).  This
+works as long as you don't use \maketitle, which resets the pagestyle.  If
+you use \maketitle, you have to place a `\thispagestyle{empty}` after the
+`\maketitle` command, as well.
+
+
+You can use MakeIndex to process a glossary (.glo file).  Here's an example
+of a MakeIndex style-file you'd need:
+
+```makeindex
+keyword "\\glossaryentry"
+preamble "\\begin{theglossary}\n"
+postamble "\n\n\\end{theglossary}\n"
+actual '='
+quote '!'
+encap '|'
+level '>'
+delim_0 "\\pfill"
+delim_1 "\\pfill"
+delim_2 "\\pfill"
+lethead_flag 0
+```
+
+Use it with the command:
+
+```sh
+  makeindex -s glossary.ist -o your-file.gls your-file.glo
+```
+
+
+For alphabetic enumeration, do:
+
+```latex
+\newcounter{alphaenum@count}
+\newenvironment{alphaenum}%
+{\begin{list}%
+{\alph{alphaenum@count})}%
+{\usecounter{alphaenum@count}\def\p@alphaenum@count{\expandafter\@alph}}}%
+{\end{list}}
+```
+
+
+In LaTeX, to make the first line of all sections etc be indented by the
+usual paragraph indentation:
+
+```latex
+  \let\@afterindentfalse\@afterindenttrue
+  \@afterindenttrue
+```
+
+OR, change the definition of \section (example from art10; '-' becomes '+')
+
+```latex
+  \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
+   -.2ex}{2.3ex plus .2ex}{\Large\bf}}
+```
+
+to
+
+```latex
+  \def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus
+   +.2ex}{2.3ex plus .2ex}{\Large\bf}}
+```
+
+
+To remove some of the extra whitespace around section headers:
+
+```latex
+  \usepackage[compact]{titlesec}
+```
+
+
+A simple LaTeX environment that keeps everything within it
+on the same page:
+
+```latex
+ \def\window#1{\@need=#1\advance\@need\pagetotal
+ \if\@need>\textheight\vfil\newpage\else\fi}
+ %
+ \newbox\@keepbox
+ \newenvironment{keep}{%
+   \setbox\@keepbox=\vbox\bgroup
+ }{%
+   \egroup\window{\ht\@keepbox}\box\@keepbox
+ }
+```
+
+This works fine, except that if the \vbox is higher than textheight, it
+overflows the page. So it needs to be broken up somehow.
+
+
+TeX primitive \time is the number of minutes since midnight this morning.
+Use it via \number\time.  For a timestamp, use it with \today (which
+prints something like `August 7, 1989').
+If you want something like ``13:48'' try the following:
+
+```latex
+ \def\clocktime{{\newcount\scratch
+  \scratch=\time
+  \divide\scratch by 60
+  \number\scratch :\multiply\scratch by -60
+  \advance\scratch by\time
+  \number\scratch}}
+```
+
+Another version by Nelson Beebe, U. of Utah., is:
+
+```latex
+ % TIME OF DAY
+ \newcount\hh
+ \newcount\mm
+ \mm=\time
+ \hh=\time
+ \divide\hh by 60
+ \divide\mm by 60
+ \multiply\mm by 60
+ \mm=-\mm
+ \advance\mm by \time
+ \def\hhmm{\number\hh:\ifnum\mm<10{}0\fi\number\mm}
+```
+
+
+I once had to set
+
+```latex
+  \topskip = 0pt
+```
+
+to remove extra space before the first paragraph of a LaTeX document.
+
+
+Marcel van der Goot's midnight macros (.tex and .doc files):
+
+* quire  Macros for making booklets, printing double pages, and printing outlines and crop marks.
+* gloss:  Macros for vertically aligning words in consecutive sentences.
+* loop:   A simple looping construct (meta-macros).
+* dolines: Meta-macros to separate arguments by newlines and by empty lines.
+* labels: Macros to print address labels and bulk letters.
+   Do `tex make-labels' and then supply the label file name.
+   There are other packages for labels, as well.
+
+
+sober.sty reduces the spacing around section headings in the
+default document styles.
+
+
+In text with explicit line breaks, we can make a box just wide enough to
+hold the widest one via (see LaTeX manual under tabbing for explanation):
+
+```latex
+  \newenvironment{centerlongestline}{\begin{center}\begin{minipage}{\linewidth}
+     \begin{tabbing}}{\end{tabbing}\end{minipage}\end{center}}
+```
+
+Another alternative would be to use \begin{tabular}{l} ...
+\end{tabular} rather than a tabbing environment, in which case
+the minipage environment could be omitted entirely.
+
+
+To capitalize (the first letter only of) a string in TeX, use
+\caps{string}.  The string may contain macros and even embedded macros.
+\def\caps#1{{\edef\tempa{#1}\expandafter\Caps\tempa}}
+\def\Caps#1{\uppercase{#1}}
+
+
+To number tables, figures, footnotes, consecutively through the entire
+report (not by chapters) in LaTeX:
+
+```latex
+        \makeatletter
+        \def\cl@chapter{}
+        \@addtoreset{section}{chapter}
+        \def\thetable{\@arabic\c@table}
+        \def\thefigure{\@arabic\c@figure}
+        \def\theequation{\arabic{equation}}
+        \makeatother
+```
+
+One could also define
+
+```latex
+    \def\@takefromreset#1#2{%
+        \def\@tempa{#1}%
+        \let\@tempd\@elt
+        \def\@elt##1{%
+            \def\@tempb{##1}%
+            \ifx\@tempa\@tempb\else
+                \@addtoreset{##1}{#2}%
+            \fi}%
+        \expandafter\expandafter\let\expandafter\@tempc\csname cl@#2\endcsname
+        \expandafter\def\csname cl@#2\endcsname{}%
+        \@tempc
+        \let\@elt\@tempd
+    }
+```
+
+and then the solution to the original problem becomes:
+
+```latex
+        \@takefromreset{footnote}{chapter}
+        \@takefromreset{table}{chapter}
+        \@takefromreset{figure}{chapter}
+        \@takefromreset{equation}{chapter}
+        \def\thetable{\@arabic\c@table}
+        \def\thefigure{\@arabic\c@figure}
+        \def\theequation{\arabic{equation}}
+```
+
+
+From the ``Golden Rules of Macro Coding'' (for TeX)
+  If a macro starts with \if..., put a \relax in front of it.
+  \if... is not evaluated during the syntactic/semantic analysis, but
+  during the lexical analysis. So there may be places where TeX scans
+  ahead, and where the scan must be stopped, to allow a change to math
+  mode before the test is done. An example where this may occur is
+  within \halign's.
+
+
+TeX code for definitions including multiple alternatives:
+
+```latex
+  \newcommand{\twolinedef}[4]{\left\{ \begin{array}{ll}
+        #1 & \mbox{#2} \\
+        #3 & \mbox{#4} \\
+  \end{array} \right.}
+```
+
+
+To run TeX or LaTeX in batch mode on file foo.tex, do
+
+```sh
+  [la]tex \\batchmode \\input foo.tex
+```
+
+The doubled backslashes are for the shell; TeX will see just one of each pair.
+
+
+How can I get TeX to see LaTeX `\ref{...}` as a *number*?
+
+```latex
+\def\alphref#1{\@ifundefined{r@#1}{?}{\edef\@tempa{\@nameuse{r@#1}}\expandafter
+    \expandafter\expandafter\@alph\expandafter\@car\@tempa \@nil\null}}
+```
+
+
+LaTeX's \raisebox is like TeX's \smash:  change the apparent height of a
+piece of text.
+
+
+\negphantom is like phantom, but the space is negative, not positive
+
+```latex
+\newcommand{\negphantom}[1]{\settowidth{\nplength}{#1}\hspace*{-\nplength}}
+```
+
+
+The useful LaTeX macro \ensuremath lets macros appear in either math or
+horizontal mode; if the latter, it automatically switches to math mode.
+
+
+To save space in a paper using the acmart style:
+
+```latex
+\settopmatter{printfolios=true,printccs=false,printacmref=false}
+```
+
+This does a bit more:
+
+```latex
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+```
+
+To add page numbers (useful during review):
+
+```latex
+\fancyfoot[C]{\thepage}
+```
+
+
+ACM LaTeX styles FAQ:
+  <http://www.acm.org/sigs/publications/sigfaq>
+
+
+To solve the problem
+
+```text
+! pdfTeX warning (ext4): destination with the same identifier ... has been already used, duplicate ignored
+```
+
+add page numbers to the document.
+
+
+To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove
+the copyright box):
+
+```latex
+  % Add page numbers, remove copyright box.  For submitted version only.
+  \pagenumbering{arabic}
+  \makeatletter
+  \def\@copyrightspace{\relax}
+  \makeatother
+```
+
+In sigplanconf style, it's even easier:
+
+```latex
+  \documentclass[preprint,nocopyrightspace]{sigplanconf}
+```
+
+In acmlarge.cls, remove the copyright info by doing:
+
+```latex
+  \def\permission{}
+```
+
+Fixes to ACM SIG style (sig-alternate.cls):
+
+* Uncapitalize section titles:
+  * Delete all instances of "\@ucheadtrue"
+  * Replace "ABSTRACT" by "Abstract" and "REFERENCES" by "References"
+  * Remove (comment out) `\section*{APPENDIX}`
+* Captions:
+  * Change "then" clause to the following:
+       {\small\parbox{\hsize}{#1: #2\strut}}\par               %   THEN set as ordinary paragraph.
+  * Remove instances of "textbf"
+  * Add "\strut" after "#2"
+  * Consider adding "\small"
+  * Comment out "\vskip 10pt" and/or "\vskip \baselineskip"
+* References:
+  * No section number:
+    * change "\section[References]" to `\section*`.  (note removal of optional argument)
+    * remove (comment out) "\vskip -9pt".
+    * remove (comment out) "\advance\leftmargin\labelsep"
+* Copyright data:
+  * In sig-alternate, change two lines to the following:
+
+    ```latex
+           \begin{picture}(20,5) %Space for copyright notice
+           \put(0,-.75){\crnotice{\@toappear}}
+    ```
+
+    (or use a slightly more negative last number like -.95 instead of -.75).
+  * In sigplanconf.cls, change "\vbox to 1in" so that we use:
+
+    ```latex
+           \@float{copyrightbox}[b]%
+             \vbox to .8in{%
+    ```
+
+* Font size:
+
+```latex
+    \def\footnotesize{\@setsize\footnotesize{8pt}\viipt\@viipt}
+```
+
+Fixes to sigplanconf.cls:
+
+```latex
+  \vbox to .8in{%
+    % \vfill
+```
+
+Maybe:
+
+```latex
+  % \vspace{2pt}
+```
+
+To reduce whitespace in the titlebox (near the title and authors):
+
+* Comment out:
+
+```latex
+    %\vskip 2em                   % Vertical space above title.
+```
+
+* To reduce space *after* the authors, reduce "12.75" on this line:
+
+```latex
+ \advance\dimen0 by -12.75pc\relax % Increased space for title box -- KBT
+```
+
+* To reduce space between the title and authors (without affecting the
+   total size of the title box), reduce "1.25" in this line:
+
+```latex
+  {\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi
+```
+
+
+Fixes to IEEETran style file, to save space and improve appearance:
+
+* \usepackage{microtype}
+* pass "nofonttune" option to the class (in \documentclass[...]); IEEETran's font metric tuning is very bad, and microtype is better
+* After \begin{document}: `\nonfrenchspacing\hyphenpenalty=50\hbadness=1000` (IEEETran inexplicably tells TeX to hyphenate *far* less frequently than normal, wasting space and making things ugly)
+
+
+To remove the extra vertical space from around \begin{definition}, make the
+following change to sig-alternate.cls.
+
+```diff
+--- a/sig-alternate.cls Sat Aug 14 14:00:55 2010 -0700
++++ b/sig-alternate.cls Sat Aug 14 14:13:52 2010 -0700
+@@ -948,8 +948,8 @@
+     \expandafter\@ifdefinable\csname #1\endcsname
+         {\@definecounter{#1}%
+          \expandafter\xdef\csname the#1\endcsname{\@thmcounter{#1}}%
+-         \global\@namedef{#1}{\@defthm{#1}{#2}}%
+-         \global\@namedef{end#1}{\@endtheorem}%
++         \global\@namedef{#1}{\vspace{-5pt}\@defthm{#1}{#2}}%
++         \global\@namedef{end#1}{\@endtheorem\vspace{-5pt}}%
+     }%
+ }
+ \def\@defthm#1#2{%
+```
+
+
+Make these fixes to figures and captions when writing a paper using IEEE latex8.sty:
+
+* Remove all references to \tenhv
+* Edit the setting of \@figindent as follows:
+
+```latex
+  \setlength{\@figindent}{0pc}
+```
+
+* In definition of @makecaption, change "then" clause to:
+
+```latex
+      % THEN set as an indented paragraph
+      {\parbox{\hsize}{#1: #2\strut}}\par
+```
+
+
+To permit underfull hboxes in LaTeX, use
+
+```latex
+\begin{sloppypar} ... \end{sloppypar}
+```
+
+I can't get `\sloppy` or `\begin{sloppy} ... \end{sloppy}` to work.
+To disable the warnings globally, say `\hbadness=10000`, which
+disables overfull hbox warnings too.
+
+
+In LaTeX,
+to typeset text in a superscript or subscript, use A_{\mathit{pred}}
+
+
+To produce a footnote without a footnote mark (as for a copyright notice in
+the lower left-hand corner of a conference paper) in LaTeX, do this:
+
+```latex
+  \renewcommand{\thefootnote}{}
+  \footnotetext{A version of this paper will appear in the 25th
+  Annual International Symposium on Computer Architecture, June 1998}
+  \renewcommand{\thefootnote}{\arabic{footnote}}
+```
+
+
+The Harvard bib style for LaTeX
+        <http://www.arch.su.edu.au/~peterw/latex/harvard/>
+supports a "URL" field.  It even works with LaTeX2html so the
+appropriate links are generated.
+
+
+LaTeX2HTML CVS repository:
+  <http://cdc-server.cdc.informatik.th-darmstadt.de/~latex2html/>
+though the source recommends
+  <http://www-dsed.llnl.gov/files/programs/unix/latex2html/manual/>
+  <http://www.cbl.leeds.ac.uk/nikos/tex2html/doc/latex2html/>
+
+
+To use a smaller (9-point) font in a LaTeX document, use
+
+```latex
+  \makeatletter\input{size09.clo}\makeatother
+```
+
+as the first set of commands after \documentclass.
+
+
+The TeX FAQ is searchable:
+    <http://www.tex.ac.uk/cgi-bin/texfaq2html>
+or printable, available from CTAN, in
+
+* usergrps/uktug/faq/newfaq.ps     (for A4 paper)
+* usergrps/uktug/faq/newfaq.pdf    (likewise)
+* usergrps/uktug/faq/letterfaq.ps  (for U.S. letter-size paper)
+* usergrps/uktug/faq/letterfaq.pdf (likewise)
+
+
+Environment for formatting pseudocode
+<http://homes.cs.washington.edu/~zasha/latex.html>
+
+
+To get a plain tilde character in LaTeX, do:  \textasciitilde.
+This works even in \tt font.
+
+
+In LaTeX, any character can be obtained by giving its ASCII code.
+The left and right braces are, respectively, \char"7B and \char"7D.
+Using \{ in \tt yields a Roman "{", it seems.  Here are macros that use the
+\tt font:
+
+```latex
+  % Left and right curly braces in tt font
+  \newcommand{\ttlcb}{\texttt{\char "7B}}
+  \newcommand{\ttrcb}{\texttt{\char "7D}}
+```
+
+
+To set the page number in LaTeX:  \setcounter{page}{98}
+
+
+One way to number LaTeX figures by chaper/section, 1.1, 1.2, ..., 2.1, ...:
+  <http://www-compiler.csa.iisc.ernet.in/~janaki/tex/numbering.html>
+
+
+Three LaTeX references, all published by Addison-Wesley:
+
+* LaTeX:  A Document Preparation System, by Leslie Lamport, 1994
+* The LaTeX Companion, by Goossens, Mittelbach, and Samarin, 1994
+* A Guide to LaTeX, by Helmut Kopka and Patrick Daly, 1999
+
+
+Do not use math mode (such as $define$) for italics.  Instead, use
+\emph{define} or \mathem{define}.  Math mode does not use ligatures and gets
+interletter spacing wrong.
+
+Here is text to send to someone who has misused math mode for italics:
+
+You have improperly used TeX's math mode as a shortcut for producing words
+in italic type.  This is ugly and distracting.  Instead of saying $START$
+(which puts too much space between "T" and "A"), you should say {\em START}
+or, in a formula, \mathit{START} or \mbox{\em START}.  (There are also
+other good ways to get the same output.)  This small point will improve
+readability and will build confidence that you have been careful throughout
+your work.
+
+
+The "beamer" package permits making nice slides with LaTeX.
+(It's better than the "prosper" package, according to Stephen McCamant.)
+"t" class option puts slide content at top rather than vertically centered.
+
+
+Any LaTeX-Beamer slide containing a verbatim environment must start out:
+
+```latex
+  \begin{frame}[fragile]
+```
+
+(or [containsverbatim], though that's more typing)
+
+
+In LaTeX-Beamer:
+
+```latex
+  \begin{frame}[shrink=5]   permits change of font size
+  \begin{frame}[squeeze]    reduces vertical space
+```
+
+
+In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no
+larger in display mode than in any other math mode), do something like
+
+```latex
+  \newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}
+```
+
+
+For a paragraph in a smaller font, on the smaller font's baseline
+inter-line spacing (but it isn't permitted to be broken across columns), do
+
+```latex
+  {\small\noindent\parbox{\columnwidth}{\quad
+  ...
+  }
+```
+
+
+This defines a \Hline macro that is like \hline, but it has an independent
+thickness.
+
+```latex
+\newdimen\arrayruleHwidth
+\setlength{\arrayruleHwidth}{1pt}
+\makeatletter
+\def\Hline{\noalign{\ifnum0=`}\fi\hrule \@height \arrayruleHwidth
+  \futurelet \@tempa\@xhline}
+\makeatother
+```
+
+
+LLNCS (LaTeX LNCS) style:
+wget ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip
+
+
+Derek Rayside says:
+I wrote a little latex macro that lets one write things such as:
+
+```latex
+    \digraph{MyGraph}{a->b}
+```
+
+this produces MyGraph.dot with the contents:
+
+```dot
+    digraph MyGraph {a->b}
+```
+
+If you run `dot` to get `MyGraph.ps` (ie, `dot -Tps -o MyGraph.ps MyGraph.dot`),
+then the `\digraph` macro will include the postscript file in your document.
+The macro file is available at:
+    <http://web.mit.edu/~drayside/www/graphviz.tex/graphviz.tex>
+and a bit more documentation is at:
+   <http://web.mit.edu/~drayside/www/graphviz.tex/main.pdf>
+
+
+In LaTeX, use \enlargethispage to expand a page or column, fitting slightly
+more text on it.
+
+
+Emacs "Local variables" section of a LaTeX file looks like one of the following:
+
+```latex
+ %%% Local Variables:
+ %%% mode: latex
+ %%% TeX-master: t
+ %%% auto-fill-function: nil
+ %%% fill-column: 75
+ %%% TeX-command-default: "PDF"
+ %%% End:
+```
+
+```latex
+ %%% Local Variables:
+ %%% mode: latex
+ %%% TeX-master: "daikon-ioa-2002"
+ %%% End:
+```
+
+
+LaTeX Verbatim environment with embedded commands:
+
+```latex
+\usepackage{fancyvrb}
+\begin{Verbatim}[commandchars=\\\{\}]
+...
+\end{Verbatim}
+```
+
+Other initial lines:
+
+```latex
+\begin{Verbatim}[commandchars=\|\[\]]
+\begin{Verbatim}[commandchars=\\\<\>]   % < and > cannot be used as delimiters
+\begin{Verbatim}[commandchars=\\\<\>,numbers=left,numbersep=6pt,xleftmargin=12pt]
+```
+
+Or set parameters globally:
+
+```latex
+\fvset{fontsize=\small}
+\fvset{fontsize=\relsize{-2}}
+```
+
+The fancyvrb package is preferable to:
+
+* the moreverb package.  (The moreverb documentation recommends fancyvrb!)
+* \alltt, which is built into LaTeX (except possibly for very simple tasks
+   or use with Hevea)
+* listings (which breaks fancyvrb if both are loaded, and breaks wrapfigure
+   if the lstlisting happens to be laid out across two pages).
+   listings provides the lstlisting command, and inserts too much space
+   between characters, which looks bad in any font (fixed- or variable-width).
+   An advantage of listings is that it provides multi-character escapes to
+   LaTeX code, so you don't have to find specific command characters that
+   do not appear in the text (only multi-character sequences that don't appear.)
+   listings can also boldface keywords, but that ends up looking very bad too:
+   it's best to emphasize what is most important, which is never the keywords.
+
+A disadvantage of fancyvrb is that Hevea only partially supports it; for
+example, Hevea does not support the commandchars functionality nor its
+`\VerbatimInput` command.  The Hevea manual (section B.17.12) recommends the
+moreverb package.
+Note that Computer Modern font has no bold fixed width font.
+(See elsewhere in this file for solutions.)
+
+
+The lstlisting package by default puts its line numbers in the column gutter.
+To fix this, use:
+
+```latex
+  \begin{lstlisting}[xleftmargin=5.0ex]
+```
+
+
+To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here are some options.
+When using Computer Modern fonts), use
+
+```latex
+  \usepackage{bold-extra}
+```
+
+See installation instructions at
+   <http://www.tex.ac.uk/cgi-bin/texfaq2html?label=bold-extras>
+(which also offers other solutions).
+Or, use underlining for emphasis.
+Or, try a different font than Computer Modern.  For example, try
+
+```latex
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern} % "latin modern", which has a (too subtle) boldface typewriter font
+  \usepackage[lighttt]{lmodern} % lighter non-bold version (looks better)
+  %\usepackage{luximono}
+  %\usepackage[scaled=0.85]{beramono}
+  \usepackage[T1]{lucidabr}
+```
+
+but if you use Lucida Bright, you probably want to scope the Lucida Bright to
+only the verbatim text.
+Courier also has regular and bold options, but it's considered very ugly.
+
+
+To include a literal backslash (or other special characters) in a LaTeX
+Verbatim (fancyverb) environment, use \SaveVerb and \UseVerb.
+
+```latex
+  \DefineShortVerb{\|}
+  \SaveVerb{myname}|verbatim text \ _ ^|
+  \UndefineShortVerb{\|}
+  \UseVerb{myname}
+```
+
+Even simpler is the verbdef package:
+
+```latex
+  \usepackage{verbdef}
+  \verbdef\mymacroname|verbatim text \ _ ^|
+  \mymacroname
+```
+
+
+In LaTeX, as a general rule, backslashing punctuation characters inside
+\code{} won't give you the right tt-font ones:  you need to either replace
+\code with \verb or use \char and an ASCII code for the symbol, such as
+
+```latex
+  \renewcommand{\_}{\char"5F}
+```
+
+or, to get a backslash
+
+```latex
+  \newcommand{\bs}{\char"5C}
+```
+
+
+The llncs.cls style (class) file (and also sig-alternate.cls) does
+
+```latex
+  \let\footnotesize\small
+```
+
+which changes the font in footnotes.  This is an acceptable goal, but the
+implementation is seriously flawed, since it makes it impossible to get
+that size font in the program.  To fix this, find the "\newcommand" for
+"\footnotesize" (perhaps in file `/usr/share/texmf/tex/latex/base/size10.clo`
+or in `/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo`)
+and copy it to the document after the "\documentclass" directive.
+
+
+The PGF package for LaTeX makes drawings, much like LaTeX picture mode or
+the pstricks package, but works with PDF and is much more powerful than
+LaTeX picture mode.
+
+
+To install a LaTeX package; to generate foo.sty (or foo.cls) from foo.dtx, run
+
+```sh
+  latex foo.ins
+```
+
+and then copy the resulting file somewhere appropriate.
+
+
+TeX fonts are in /usr/local/lib/tex/fonts/tfm.
+
+
+Aim to make your figure captions self-explanatory.  A short caption ("graph
+of the results") forces readers to hunt through the text in order to
+comprehend your results or your message.  Choose to place explanatory
+sentences (such as describing the meaning of the rows, columns, or other
+elements) in the caption itself; they take up no more space there, but are
+easily located either by a careful reader or by someone flipping through
+the document.  This also makes the figures more likely to draw readers into
+the text.
+
+
+Here is a definition of a \todo macro for LaTeX:
+
+```latex
+ \usepackage{color}
+ %%% Todo comments
+ %% Comment or uncomment this line.
+ % \def\notodocomments{}
+ \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+ % Don't show todo commands if the \notodocomments macro is defined.
+ \ifdefined\notodocomments
+   \renewcommand{\todo}[1]{\relax}
+ \fi
+```
+
+When using the \todo macro, don't leave space around it.  For example, write
+
+```latex
+  The approach is effective\todo{add citations}.
+```
+
+rather than
+
+```latex
+  The approach is effective \todo{add citations}.
+```
+
+because the latter would leave a space before the period when todo comments
+are disabled.
+Another way to say this is to always jam \todo against surrounding text
+(either before or after, it doesn't matter).  If there is space both before
+and after \todo, then when \todo is turned off, there are two spaces rather
+than one at that location.
+
+(An alternate definition of \todo would be
+`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`
+but that executes \leavevmode and so it cannot span paragraphs.)
+
+
+Absolute value in LaTeX:
+
+```latex
+  \left| \frac{A+B}{3} \right|
+```
+
+
+"such that" vertical bar in LaTeX, such as in a set comprehension: \mid
+
+
+Typesetting pseudocode in LaTeX:
+<http://www.tex.ac.uk/cgi-bin/texfaq2html?label=algorithms>
+Possible choices seem like
+
+* algorithmicx bundle, which includes the algpseudocode package and is compatible with the algorithm package, offers several environments.
+   It's more flexible than algorithmic and is probably the best choice.
+* algorithms bundle, which provides the `algorithmic` and `algorithms` environments
+* clrscode
+* algorithm2e
+    This is the one with the vertical lines (which I find ugly and
+    distracting); I've had trouble wrestling with it in the past.
+
+The algorithmic LaTeX environment uses \STATE, \IF, \WHILE, \ENDWHILE...
+The algpseudocode LaTeX environment uses \State, \If, \While, \EndWhile...
+
+
+To undo LaTeX's \frenchspacing: \nonfrenchspacing
+
+
+In a two column (or at least twocolumn) document, \newpage doesn't give
+you a new page; it just gives you a new column. An alternative that works
+is \clearpage. (I think the other difference is that it also acts as a
+fence for floats, but you often want that too anyway.)
+
+
+To get extra space in a document:
+
+```latex
+  \renewcommand{\baselinestretch}{.994}
+```
+
+But that is terrible, so consider
+
+```latex
+  \enlargethispage{10pt}
+```
+
+in strategic locations.
+Also helpful is
+
+```latex
+  \usepackage{microtype}
+```
+
+after which only pdflatex, not regular latex, works.
+The `makethin` program of the savetrees package creates thinner versions of
+fonts.
+
+
+To adjust section numbering in LaTeX (e.g., make subsubsections be numbered):
+
+```latex
+  \setcounter{secnumdepth}{3}
+```
+
+There is no `\subsubsubsection` command, but you can make `\paragraph` be numbered:
+
+```latex
+  \def\subsubsubsection{\paragraph}
+  \setcounter{secnumdepth}{4}
+  \Crefname{subsection}{Section}{Sections}%
+  \crefname{paragraph}{section}{sections}
+```
+
+
+If a paragraph has only a word or two on its last line, try adding
+
+```latex
+\looseness=-1
+```
+
+to the end of it. If possible TeX will change line breaks to
+reduce/shorten the length of the paragraph by a line. This won't always
+work because there is a limit to how close TeX will move words. The longer
+the paragraph, the more likely this trick is successful.
+
+
+PGF/TikZ, is a declarative graphics package and relatively-friendly front end syntax
+
+* <http://sourceforge.net/projects/pgf/> -- to download
+* <http://www.fauskes.net/pgftikzexamples/> -- examples
+
+Ben Lerner says: TikZ is a bit  tricky to figure out at first (like most of
+LaTeX), but it's the most consistent and convenient graphics package I've
+found yet.
+
+
+To use color in LaTeX:
+
+```latex
+\usepackage{color}
+\textcolor{color}{words to be in color}
+```
+
+
+To find LaTeX special command that matches a given character shape,
+scribble the shape here:
+<http://detexify.kirelabs.org/classify.html>
+
+
+Ways to get a circled number in LaTeX with better formatting than \textcircled:
+
+```latex
+ \usepackage{circledsteps}
+ \Circled{22}
+ % serif font:
+ \usepackage{pifont}
+ \newcommand{\numcircled}[1]{\ding{\numexpr171+#1\relax}}
+ % sans-serif font:
+ \usepackage{pifont}
+ \newcommand{\numcircled}[1]{\ding{\numexpr191+#1\relax}}
+ % Without using any extra packages
+ \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
+```
+
+
+Use `-O .` To make the latexrun script put auxiliary files in the standard
+locations.  This means that standard commands such as `latex` and
+`pdflatex` can find them, without having to run latexrun every time.
+
+
+Ways to convert LaTeX to plaintext:
+
+* `detex` program (comes with LaTeX distributions):  `detex yourfile > yourfile.txt`
+* convert to PDF (disabling hyphenation), then use `pdftotext`
+* use `pandoc`
+
+
+To make cleveref use a serial comma (sometimes called an Oxford comma):
+
+```latex
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+```
+
+
+To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
+`\newcommand{\crefrangeconjunction}{--}`
+to the preamble of the document.
+Alternately, do this:
+
+```latex
+\usepackage{cleveref}
+\crefrangelabelformat{section}{#3#1#4--#5\crefstripprefix{#1}{#2}#6}
+\crefrangelabelformat{subsection}{#3#1#4--#5\crefstripprefix{#1}{#2}#6}
+\crefrangelabelformat{equation}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
+\crefrangelabelformat{figure}{(#3#1#4--#5\crefstripprefix{#1}{#2}#6)}
+```
+
+
+When using the cleveref package, use `\Cref` at the beginning of a sentence,
+where you would capitalize a word.  Use `\cref` elsewhere, where you would
+not capitalize a word.  If you want the words "Section", "Figure",
+etc. capitalized throughout (this is personal preference, *not* a requirement
+of English or of style guides), then do `\usepackage[capitalize]{cleveref}`
+rather than mis-using `\Cref` where `\cref` belongs.
+
+
+When using hyperref and cleveref together:
+
+```latex
+\usepackage{hyperref}
+\usepackage{cleveref}
+\makeatletter
+\newcounter{HALG@line}
+\renewcommand{\theHALG@line}{\thealgorithm.\arabic{ALG@line}}
+\makeatother
+```
+
+Otherwise, line numbers in the text are correct but the hyper link goes to that
+line number in the very first algorithm of the paper.
+
+
+If you get an error
+
+```text
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has
+been already used, duplicate ignored
+```
+
+and your document does not have an index, then add the `pageanchor=false` option to the hyperref package:
+
+```latex
+\usepackage[pageanchor=false]{hyperref}
+```
+
+
+The `latexmk` program is distributed with LaTeX and so is a fairly
+canonical way to run LaTeX until a fixed point
+(as opposed to non-canonical ways, like the `rubber` program).
+Here is a standard command line:
+
+```sh
+latexmk -bibtex -pdf -interaction=nonstopmode myfile.tex
+```
+
+latexmk's dependency tracking depends on file contents, not timestamps,
+so you cannot make it re-run by `touch`ing a file, but you can do
+`latexmk -C` to clean up all output or
+`latexmk -gg ...` to clean then run.
+
+
+To get less verbose LaTeX output:
+
+```sh
+latexmk -silent ...
+```
+
+However, this suppresses some error messages, so use:
+
+```sh
+latexmk -silent -pdf -interaction=nonstopmode myfile.tex \
+ || latexmk -gg -pdf -interaction=nonstopmode myfile.tex
+```
+
+
+For a single-column, double-spaced version of an ACM LaTeX paper, for review:
+
+```latex
+\documentclass[acmlarge,anonymous,]{acmart}
+\usepackage[doublespacing]{setspace}
+```
+
+
+To control formatting of a LaTeX paper from the command line, add to the paper:
+
+```latex
+\ifdefined\notodocomments
+  \renewcommand{\todo}[1]{\relax}
+\fi
+```
+
+and then invoke LaTeX like this:
+
+```sh
+pdflatex "\def\notodocomments{}\input{main}"
+```
+
+or, in a Makefile:
+
+```make
+paper-notodos.pdf: paper.pdf
+ pdflatex "\def\notodocomments{}\input{paper}"
+ pdflatex "\def\notodocomments{}\input{paper}"
+ cp -pf $< $@
+```
+
+
+Here is a way to get a LaTeX section caption to fit on one line:
+
+```latex
+\section{\fontsize{10.3pt}{13pt}\selectfont\mbox{Quantitative and Qualitative Analysis}}
+```
+
+
+In ACM style, to make acknowledgments smaller:
+
+```latex
+\specialcomment{acks}{%
+  \noindent
+  \begingroup
+  \begin{minipage}{\columnwidth}
+  \smaller
+  \bigskip
+  \noindent\textbf{Acknowledgments}
+  \phantomsection\addcontentsline{toc}{section}{Acknowledgments}
+}{%
+  \end{minipage}
+  \endgroup
+}
+```
+
+
+```latex
+ % Set em dashes (LaTeX ---) with thin spaces surrounding them.
+ \usepackage[kerning=true]{microtype}
+ \SetExtraKerning
+     {encoding =  {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}} % all text
+     {
+  \textemdash  = {167,167} % thinspace = 1/6 em
+     }
+```
+
+
+LaTeX font sizes:
+
+```latex
+\tiny
+\scriptsize
+\footnotesize
+\small
+\normalsize
+\large
+\Large
+\LARGE
+\huge
+\Huge
+```
+
+
+This change prevents an "underfull hbox" warning.
+I need to see whether it is still needed with the latest acmart.cls:
+~/tex/acmart-fork-mernst-branch-linenumbers-underfull-hbox/
+
+```diff
+diff --git a/pldi18/acmart.cls b/pldi18/acmart.cls
+index b97409f..17ec5fb 100644
+--- a/pldi18/acmart.cls
++++ b/pldi18/acmart.cls
+@@ -1829,10 +1829,10 @@ Computing Machinery]
+   \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{%
+       \newlength\ACM@linecount@bxht\setlength{\ACM@linecount@bxht}{-\baselineskip}
+       \@tempcnta\@ne\relax
+
+-      \loop{\color{ACMRed}\scriptsize\the\@tempcnta}\\
++      \loop{\color{ACMRed}\scriptsize\the\@tempcnta}
+       \advance\@tempcnta by \@ne
+       \addtolength{\ACM@linecount@bxht}{\baselineskip}
+-      \ifdim\ACM@linecount@bxht<\textheight\repeat}}
++      \ifdim\ACM@linecount@bxht<\textheight\\\repeat}}
+
+ \fi
+ \def\ACM@linecount{%
+   \if@ACM@review
+```
+
+
+To typeset exercises and solutions in a LaTeX document:
+
+* exercise package. -- last changed 2014
+  Seems good, documentation doesn't give concrete examples.
+* answers package. -- last changed 2014
+  Does what I want, but the documentation is a bit lacking.
+  Section 4 of the documentation contains a MWE.
+  Often recommended.
+* ans.sty -- last changed 1994
+  Supports only a subsection of exercises at the end of each section/chapter,
+  not exercises interspersed throughout the document.
+  Handles book document class.  A bit fiddly wrt carriage returns.
+* ExSol package -- last changed 2018
+  Documentation gives examples.  Can be used with book class.
+  The MWEs at <https://tex.stackexchange.com/questions/510760/how-to-sync-the-exsol-counter-with-the-section-value>
+  both yield LaTeX errors for me.
+* exercises package. -- last changed 2020
+  Does not permit answers at end of document.
+* exam document class. -- last changed 2021
+  Not really for my use case, might not put answers at end.
+* xsim package
+  Doesn't allow for printing at end of document, it seems.
+* probsoln
+  For selecting problems from a database or bank of problems.
+
+
+<!--
+// Please put new content in the appropriate section above, don't just
+// dump it all here at the end of the file.
+-->
+
+<!--
+// This entry is to avoid having the ones earlier in this file be interpreted.
+// Local Variables:
+// major-mode: text-mode
+// End:
+-->
+
+<!--
+// LocalWords:  Hevea wiki makeatletter topfigrule kern hrule botfigrule floatsep
+// LocalWords:  dblfigrule makeatother nocaptionrule textfloatsep dbltextfloatsep
+// LocalWords:  dblfloatsep unindent topfraction dbltopfraction floatpagefraction
+// LocalWords:  dblfloatpagefraction textfraction clearpage cleardoublepage ifdim
+// LocalWords:  renewcommand captionfont newcommand baselineskip hsize noindent
+// LocalWords:  parbox hbox fi
+-->

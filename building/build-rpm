@@ -1,0 +1,14 @@
+http://www.nordugrid.org/documents/rpm_for_everybody.html
+
+http://www.owlriver.com/tips/non-root/
+
+http://www.techonthenet.com/linux/build_rpm.php
+
+http://www.mail-archive.com/rpm-maint@lists.rpm.org/msg00523.html
+
+
+
+mkdir -p $HOME/.rpm/db
+rpmdb --initdb --dbpath $HOME/.rpm/db
+echo "%_dbpath $HOME/.rpm/db" | cat >> $HOME/.rpmmacros
+

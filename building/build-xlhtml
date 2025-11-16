@@ -1,0 +1,20 @@
+I can't build it.  The ./configue command fails with:
+  configure: creating ./config.status
+  /bin/sh: line 6: cd: @top_builddir@: No such file or directory
+  make: *** [Makefile] Error 1
+
+
+
+cd ~/tmp
+wget http://downloads.sourceforge.net/project/chicago/xlhtml/backend/xlhtml-0.5.tgz
+tar xvfz xlhtml-0.5.tgz
+cd xlhtml-0.5
+./configure
+make
+...
+
+
+# This fails for the same reason.
+source /uns/src/generic-builder.sh
+PKG=xlhtml-0.5
+install_generic $PKG http://downloads.sourceforge.net/project/chicago/xlhtml/backend/$PKG.tgz

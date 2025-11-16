@@ -1,0 +1,100 @@
+# An alternative is paps, for which the installation is just
+#   sudo apt -y install paps
+# so I should perhaps switch over to it.
+
+# http://www.pps.jussieu.fr/~jch/software/files/
+
+See INSTALL file.  Requires clisp.
+
+# First, install clisp
+
+# Version 0.7 is dated 2012-08-04, is latest as of 2016-05-21
+pkg=cedilla-0.7
+
+# cd /uns/src
+cd ~/bin/install
+# older: wget http://www.pps.jussieu.fr/~jch/software/files/$pkg.tar.gz
+wget http://www.pps.univ-paris-diderot.fr/~jch/software/files/$pkg.tar.gz
+tar zxf $pkg.tar.gz
+cd $pkg
+mv cedilla-config cedilla-config-orig
+# cp -pf ~/wisdom/building/build-cedilla-uns-cedilla-config cedilla-config
+cp -pf ~/wisdom/building/build-cedilla-homedir-cedilla-config cedilla-config
+perl -pi -e 's/"a4"/"Letter"/' cedilla.lisp
+# For CSE: perl -pi -e 's:/usr/share/texmf-tetex/:/usr/share/texmf/:' cedilla-config.lisp
+./compile-cedilla
+# Due to apparent bug in ./install-cedilla
+# Get PREFIX from ./cedilla-config
+# I also had to link $HOME/bin/install/cedilla-0.6-install to
+# $HOME/bin/install/cedilla-0.7-install because the program was trying to
+# install into the 0.6 directory for some reason.
+PREFIX=$HOME/bin/install/cedilla-0.7-install
+# mkdir -p /uns/encap/$pkg/share/man/man1/
+mkdir -p $PREFIX/share/man/man1/
+./install-cedilla
+
+## Personal installation
+cd $HOME/bin/`uname`-`uname -m`
+ln -s $PREFIX/bin/cedilla .
+
+## CSE /uns installation
+cd /uns/encap
+chgrp -R uns $pkg
+find $pkg -type d | xargs chmod go+x
+epkg -i $pkg
+
+
+===========================================================================
+
+VERSION 0.6
+
+# http://www.pps.jussieu.fr/~jch/software/files/
+
+See INSTALL file.  Requires clisp.
+
+# First, install clisp
+
+# Latest version is 0.6 as of 11/2009
+pkg=cedilla-0.6
+
+cd /uns/src
+wget http://www.pps.jussieu.fr/~jch/software/files/$pkg.tar.gz
+tar zxf $pkg.tar.gz
+cd $pkg
+mv cedilla-config cedilla-config-orig
+cp -pf ~/wisdom/building/build-cedilla-cedilla-config cedilla-config
+perl -pi -e 's/"a4"/"Letter"/' cedilla.lisp
+perl -pi -e 's:/usr/share/texmf-tetex/:/usr/share/texmf/:' cedilla-config.lisp
+./compile-cedilla
+# Due to apparent bug in ./install-cedilla
+mkdir -p /uns/encap/cedilla-0.6/share/man/man1/
+./install-cedilla
+
+cd /uns/encap
+chgrp -R uns $pkg
+find $pkg -type d | xargs chmod go+x
+epkg -i $pkg
+
+
+===========================================================================
+
+The 
+cedilla.1 manpage should not use hard-coded pathnames like /etc/cedilla-config.lisp
+
+
+
+
+This is necessary, for example, when installing using encap, in which case
+the mandir might not yet exist.
+
+
+--- /homes/gws/mernst/tmp/cedilla-0.6/system.lisp	2006-02-15 12:52:09.000000000 -0800
++++ -	2009-07-30 13:43:08.235083016 -0700
+@@ -64,6 +64,7 @@
+       (make-dir bindir out)
+       (make-dir libdir out)
+       (make-dir etcdir out)
++      (make-dir mandir out)
+       (dolist (f *cedilla-sources*)
+         (install (compile-file-pathname f) libdir out))
+       (install "cedilla-config.lisp" etcdir out)

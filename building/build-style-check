@@ -1,0 +1,26 @@
+Neil Spring's style checker:
+http://www.cs.umd.edu/~nspring/software/style-check-readme.html
+
+cd ~/bin/src
+wget http://www.cs.umd.edu/~nspring/software/style-check-current.tar.gz
+tar xzf style-check-current.tar.gz 
+cd style-check-0.9
+make user-install
+# The user-install command puts the rules in ~/.style-check.d
+(cd ~/bin/share; ln -s ../src/style-check-0.9/style-check.rb .)
+
+To use it:
+  style-check.rb *.tex
+Or, if you'd like a little justification with your scolding,
+  style-check.rb -v *.tex
+
+For instance, add to your Makefile:
+style: style-check
+style-check:
+	style-check.rb ${TEX_FILES}
+style-check-v:
+	style-check.rb -v ${TEX_FILES}
+
+I tried this 4/6/2006, and I found the vast numbers of false positives very
+annoying; I don't think it's very useful in its current form, and it would
+take a lot of effort to tune it to be better.

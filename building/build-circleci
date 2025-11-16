@@ -1,0 +1,35 @@
+CircleCI command line interface (CLI)
+
+===========================================================================
+
+Install:
+
+Ubuntu:
+sudo snap install docker circleci
+sudo snap connect circleci:docker docker
+
+WSL:
+curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin sudo bash
+
+CSE:
+mkdir -p $HOME/bin/install/circleci
+curl -fLSs https://circle.ci/cli | DESTDIR=$HOME/bin/install/circleci bash
+cd $HOME/bin/`uname`-`uname -m`
+ln -s ../install/circleci/circleci .
+
+===========================================================================
+
+Setup:
+
+# Not needed if I only want to run `circleci config validate`.
+# Run this from a real terminal, not from an Emacs shell buffer.
+circleci setup
+
+===========================================================================
+
+Update:
+
+circleci update 
+circleci switch
+
+===========================================================================

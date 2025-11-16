@@ -1,0 +1,10 @@
+http://www.guidescope.com
+http://www.guidescope.com/products
+0.994 was the current version as of October 19, 2001 and October 5, 2002.
+
+Other products:
+ * AdSubtract: Windows only
+ * Webwasher: works with Linux; see file "build-webwasher" for details.
+
+Set up Mozilla:
+ Edit >> Preferences >> Advanced >> Proxies >> Manual >> HTTP >> 127.0.0.1 , 8000

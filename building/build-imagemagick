@@ -1,0 +1,16 @@
+Mac:
+brew install imagemagick
+
+===========================================================================
+
+# Determine version number from https://www.imagemagick.org/download
+VER=7.1.1-11
+cd ~/bin/install
+wget https://download.imagemagick.org/archive/ImageMagick-${VER}.tar.xz
+tar xvzf ImageMagick-${VER}.tar.gz
+cd ImageMagick-${VER}
+./configure --prefix=${HOME}/bin/install/ImageMagick-${VER}-install
+make
+make install
+cd ${HOME}/bin/install/ImageMagick-7.0.3-6-install/bin
+ln -s * ../../../`uname`-`uname -m`

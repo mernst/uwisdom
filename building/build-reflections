@@ -1,0 +1,7 @@
+cd ~/java
+git clone git@github.com:ronmamo/reflections.git
+cd ~/java/reflections
+git pull
+mvn package
+
+# Now see ~/java/reflections/target/reflections-0.9.11-SNAPSHOT.jar

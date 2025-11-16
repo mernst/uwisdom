@@ -1,0 +1,27 @@
+Installation
+
+# Non-ubuntu:
+cd ~/java
+wget https://github.com/oracle/visualvm/releases/download/2.0.7/visualvm_207.zip
+unzip visualvm_207.zip 
+
+
+# Ubuntu installation.
+# As of 2021-04-27 Ubuntu has version 1.4.3 whereas the latest release is 2.0.7.
+# As of 2024-12-10 Ubuntu has version 2.1.8 whereas the latest release is 2.1.10.
+sudo apt install -y visualvm
+
+
+Install the Startup Profiler plugin.
+
+===========================================================================
+
+To run:
+~/java/visualvm_207/bin/visualvm
+
+
+Documentation:
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/visualvm/visualvm.java.net.backup/master/www/intro.html
+
+By default, there doesn't seem to be a way to start a Java application under VisualVM.  You need to start the application, then find it in VisualVM.
+However, the Startup Profiler plugin does so:  https://visualvm.github.io/startupprofiler.html

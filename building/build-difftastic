@@ -1,0 +1,5 @@
+# First, install Rust.
+
+# Then (no need to clone the repository):
+cargo install difftastic
+

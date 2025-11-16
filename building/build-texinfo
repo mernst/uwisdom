@@ -1,0 +1,19 @@
+./configure
+make all
+make install
+make TEXMF=/usr/share/texmf install-tex
+
+===========================================================================
+
+texi2html:
+http://www.mathematik.uni-kl.de/~obachman/Texi2html/
+(As of 4/2002, no updates since version 1.56, 03 July 2000)
+
+===========================================================================
+
+Centos 8 and above have dropped Texinfo from their official repository.
+So, run this:
+
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+subscription-manager repos --enable "codeready-builder-for-rhel-8-$(/bin/arch)-rpms"
+
