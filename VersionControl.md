@@ -25,6 +25,15 @@ lines are short and some are long, but that file doesn't matter because readers
 will see a rendered version.
 
 
+When asked a question in a review, please don't answer in the pull request.
+Instead, improve the code so that the question does not arise in the future.
+
+If you agree with a pull request comment, you don't need to reply to a code
+review comment with "done".  Just click "resolve conversation" if no further
+discussion is needed.  But please do comment when followup or further discussion
+is necessary, such as if the pull request comment is confusing or wrong.
+
+
 ## Git
 
 
