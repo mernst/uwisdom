@@ -779,6 +779,19 @@ assembly. Right now it reads in Java byte codes and builds an intermediate
 representation based on a variant of SSA form.  See <www.flexc.lcs.mit.edu>.
 
 
+## Escape analysis
+
+
+Escape analysis, as of late 2205:
+* Graal implements an escape analysis.
+* Dynamic analysis that adds a new field, `is_referenced`, whenever the object is assigned to any field of any object.  At a write, if `is_referenced` is false, no write barrier is needed.
+  https://static.csg.ci.i.u-tokyo.ac.jp/papers/23/yilinzhang-jssst2023.pdf
+* Partial Escape Analysis:  Runs on individual branches.  (is intraprocedural, according to a different paper.)  "In many cases ... an object escapes just in a single unlikely branch."
+  The implementation uses the Graal compiler's intermediate representation rather than bytecodes.
+  https://dl.acm.org/doi/10.1145/2581122.2544157
+* To disable the use of escape analysis in the JVM (HotSpot, I presume), specify `-XX:-DoEscapeAnalysis`.
+
+
 ## Pointer analysis
 
 
