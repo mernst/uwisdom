@@ -20,6 +20,16 @@ To install a new package on debian:
 ```
 
 (and also install anything reasonable that the latter suggests).
+
+
+To upgrade Ubuntu itself:
+```sh
+sudo apt update
+sudo apt upgrade -qyy
+# For a new installation, edit /etc/update-manager/release-upgrades to set "Prompt=normal"
+sudo do-release-update
+```
+
 To upgrade all packages on Debian or Ubuntu (first command updates list of packages):
 
 ```sh
