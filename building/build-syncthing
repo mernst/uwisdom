@@ -11,27 +11,6 @@ On WSL, once the syncthing binary was renamed to syncthing.old, and the
 
 ===========================================================================
 
-To set up a new computer:
-"Add remote device"
-Computer IDs:
-godwit:  XBDRXJJ-LE3533P-MM5GX5A-LQ6IRPE-DIAY53Z-O247PRS-UZ6CCBK-TBMW5AY
-sb2:     7T76G7J-UXL3H4V-ADHH4GV-VFHEZQD-XJVUDO2-JB7HZ3Z-QRF7INB-MN7UMAW
-xps8940: YFV7IVT-7DX6T2U-SN6NSA5-PCR6KBX-4K5NR2J-XLGJCNK-YDGEL3J-BN4VDAG
-old xps8940: TU3QKY5-TTZOMUJ-CUYREUJ-KC6TP7B-Y4VVMUY-XXIZ5Z7-ROQAXAH-CPRDWA7
-
-When setting up a computer, don't forget to edit the "Sharing" tabs!
-Also remove the default folder.
-After syncthing first finishes, shut down syncthing then do:
-mv ~/tmp72112 ~/public_html/
-mv ~/consulting ~/prof/
-rm -rf ~/Sync
-Update paths in /home/mernst/.local/state/syncthing/config.xml (found via `syncthing -paths`).
-
-# Remove default Syncthing folder:
-rm -rf ~/Sync
-
-===========================================================================
-
 To change the name of a folder, it may be easiest to do this simultaneously on all machines:
  * shut down syncthing:  killall syncthing
  * rename the folder locally
@@ -43,42 +22,39 @@ To change the name of a folder, it may be easiest to do this simultaneously on a
 
 CSE installation:
 
-# Follow instructions at https://syncthing.net/downloads/
 # Get version number from https://syncthing.net/downloads/
-# Essentially:
+# Instructions are from https://syncthing.net/downloads/
+unamedir=`uname`-`uname -m`
+archname=$(arch)
+archname=$archname
+if [ "$archname" = "aarch64" ]; then
+  export archname="arm64"
+fi
 cd ~/bin/install
-VER=v1.27.7
-wget https://github.com/syncthing/syncthing/releases/download/${VER}/syncthing-linux-amd64-${VER}.tar.gz
-tar xvf syncthing-linux-amd64-${VER}.tar.gz
-(cd ~/bin/Linux-x86_64 && rm -f syncthing && ln -s ../install/syncthing-linux-amd64-${VER}/syncthing .)
+VER=v2.0.11
+DIR=syncthing-linux-${archname}-${VER}
+wget https://github.com/syncthing/syncthing/releases/download/${VER}/${DIR}.tar.gz
+tar xvf ${DIR}.tar.gz
+(cd ~/bin/${unamedir} && rm -f syncthing && ln -s ../install/${DIR}/syncthing .)
+mkdir -p ~/.config/syncthing
 
 ===========================================================================
 
-Ubuntu:
+If there is trouble with the lockfile, remove it:
+rm -f ~/.local/state/syncthing/syncthing.lock
 
-The syncthing available in the regular Ubuntu repositories was too old to work (as of Sep 2020).
-So, follow the CSE installation instructions.
-Finally, add syncthing to the Ubuntu "startup" applications.
-
-===========================================================================
-
-I use syncthing for:
-~/private
-~/sync
-~/public_html/tmpNNNNN
-~/prof/consulting
+Its location can also be determined by running:
+```sh
+syncthing paths
+```
 
 ===========================================================================
 
-General setup:
+Running automatically:
 
-cd ~/sync && ln -s ../.stignoreglobal .stignore
-cd ~/private && ln -s ../.stignoreglobal .stignore
-
-===========================================================================
+If on Ubustu, add syncthing to the Ubuntu "startup" applications.
 
 WSL:
-
 I could follow directions at
 https://dev.to/ironfroggy/wsl-tips-starting-linux-background-services-on-windows-login-3o98
 but I'll just add it to .profile so it gets started when I start WSL.
