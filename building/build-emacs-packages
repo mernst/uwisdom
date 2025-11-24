@@ -9,6 +9,7 @@
   (package-refresh-contents)
   (package-install 'aidermacs)
   (package-install 'apheleia)
+  (package-install 'auto-compile)
   (package-install 'cargo)
   (package-install 'company)
   (package-install 'dtrt-indent)
