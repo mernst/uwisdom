@@ -29,17 +29,20 @@
   ;; (package-install 'helm-lsp)
   ;; (package-install 'projectile)
 )
+
+
 (progn
   (require 'package)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (package-initialize)
   (package-install 'vterm))
-
-vterm requires:
+After installing vterm, do:
   sudo apt install -qyy libtool libtool-bin cmake
+  # Paste the above in separately from the below.
   cd ~/.emacs.d/elpa/vterm-*
   cmake .
   make
+
 
 ----------------
 
@@ -63,26 +66,13 @@ M-x list-packages RET U x
 
 ===========================================================================
 
-Eclipse jdtls (for LSP)
-
-cd ~/.emacs.d/.cache/lsp
-rm -rf eclipse.jdt.ls
-mkdir eclipse.jdt.ls
-cd eclipse.jdt.ls
-# wget didn't work, I had to download manually.
-wget https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.46.1/jdt-language-server-1.46.1-202504011455.tar.gz
-tar xzf jdt-language-server-1.46.1-202504011455.tar.gz
-
-
-cd ~/tmp
-
-===========================================================================
-
+# get version number from https://github.com/radian-software/apheleia/releases
+VER=4.4.2
 cd ~/emacs
-wget https://github.com/radian-software/apheleia/archive/refs/tags/v4.3.zip
-unzip v4.3.zip
+wget https://github.com/radian-software/apheleia/archive/refs/tags/v${VER}.zip
+unzip v${VER}.zip
 rm -f apheleia
-ln -s apheleia-4.3 apheleia
+ln -s apheleia-${VER} apheleia
 
 ===========================================================================
 
@@ -98,9 +88,24 @@ want to be cautious about updating magit in general.
 
 ===========================================================================
 
+Eclipse jdtls (for LSP)
+
+cd ~/.emacs.d/.cache/lsp
+rm -rf eclipse.jdt.ls
+mkdir eclipse.jdt.ls
+cd eclipse.jdt.ls
+# wget didn't work, I had to download manually.
+wget https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.46.1/jdt-language-server-1.46.1-202504011455.tar.gz
+tar xzf jdt-language-server-1.46.1-202504011455.tar.gz
+
+
+cd ~/tmp
+
+===========================================================================
+
 Magit:
 
-[This is NOT needed any more.  The above installs magit.]
+[This is NOT needed any more.  The above installs magit from melpa.]
 
 As of 9/3/2015, magit cannot be run from a directory that is a symbolic link.
 This is true for both the ELPA installation and the git repository.

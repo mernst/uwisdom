@@ -20,6 +20,7 @@ To install a new package on debian:
 ```
 
 (and also install anything reasonable that the latter suggests).
+<<<<<<< HEAD
 
 
 To upgrade Ubuntu itself:
@@ -29,6 +30,19 @@ sudo do-release-upgrade
 ```
 
 
+||||||| 8f3c702
+=======
+
+
+To upgrade Ubuntu itself:
+```sh
+sudo apt update
+sudo apt upgrade -qyy
+# For a new installation, edit /etc/update-manager/release-upgrades to set "Prompt=normal"
+sudo do-release-update
+```
+
+>>>>>>> 9da5546c5e8f2f234d9e318dad113a290b3c88c7
 To upgrade all packages on Debian or Ubuntu (first command updates list of packages):
 
 ```sh

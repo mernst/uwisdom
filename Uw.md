@@ -316,7 +316,7 @@ Color printer: psc581
     psc581/noduplex
 
 
-An undergrad instructional linux server: attu.cs
+An undergrad instructional linux server: `attu.cs.washington.edu`
 
 
 Printing enscript and cedilla output at CSE:

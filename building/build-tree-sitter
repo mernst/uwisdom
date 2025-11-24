@@ -28,11 +28,14 @@ LD_LIBRARY_PATH=$HOME/.local/lib make install
 # In Emacs:
 # (treesit-library-abi-version)
 # For version 14, use tag: v0.23.3
+# For version 15, use tag: v0.24.0
 
-# It isn't happening automatically for rust.
+# It isn't happening automatically for rust (tree-sitter-rust), so install it manually.
 TSLANG=rust
+VER=0.24.0
 cd ~/tmp/
-git clone --branch v0.23.3 https://github.com/tree-sitter/tree-sitter-${TSLANG}
+rm -rf tree-sitter-${TSLANG}
+git clone --branch v0.23.3 --depth 1 https://github.com/tree-sitter/tree-sitter-${TSLANG}
 cd ~/tmp/tree-sitter-${TSLANG}
 make
 mkdir -p ~/.emacs.d/tree-sitter/
