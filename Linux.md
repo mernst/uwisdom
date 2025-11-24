@@ -20,6 +20,18 @@ To install a new package on debian:
 ```
 
 (and also install anything reasonable that the latter suggests).
+<<<<<<< HEAD
+
+
+To upgrade Ubuntu itself:
+
+```sh
+sudo do-release-upgrade
+```
+
+
+||||||| 8f3c702
+=======
 
 
 To upgrade Ubuntu itself:
@@ -30,10 +42,11 @@ sudo apt upgrade -qyy
 sudo do-release-update
 ```
 
+>>>>>>> 9da5546c5e8f2f234d9e318dad113a290b3c88c7
 To upgrade all packages on Debian or Ubuntu (first command updates list of packages):
 
 ```sh
-  sudo apt update && sudo apt -u -y dist-upgrade && echo "Success: upgraded"
+  sudo apt update && sudo apt -u -qyy dist-upgrade && echo "Success: upgraded"
   # Or "apt -u upgrade" to not automatically resolve dependencies, which
   # might *remove* a package -- this is better if running "Debian unstable".
 ```
