@@ -1,21 +1,24 @@
 ===========================================================================
 
+# To install uv, see below.
+
 uv python install --default
 # To see which versions are available:
 uv python list
 
 ===========================================================================
 
-Many people recommend `uv`.
-It is "A single tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more."
+# uv
 
-To install uv (documentation at https://docs.astral.sh/uv/, don't use sudo):
+# Install uv (don't use `sudo`):
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # To update uv:
 uv self update
 
-# As of 2025-10-31, I'm trying to avoid all use of pip and pipx on my laptop.
+`uv` is "A single tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more."
+
+# As of 2025-10-31, I'm trying to avoid all use of pip and pipx.
 pipx is for executables.
 pip is for modules.
 
@@ -25,11 +28,6 @@ pip is for modules.
 ===========================================================================
 
 UV
-
-In the future, use `uv` instead of pip, pipx, etc.
-
-# Install uv itself (don't use `sudo`):
-curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # I should build html5validator rather than installing the Python package.
 
@@ -61,11 +59,12 @@ ruff -q format file1.py file2.py ...
 
 EXECUTABLES/APPLICATIONS
 
-# I should build html5validator rather than installing the Python package.
+
 
 uv tool install mypy
 uv tool install ruff
 uv tool install ty
+# I should build html5validator rather than installing the Python package.  (Why?)
 uv tool install html5validator
 
 ----------------
