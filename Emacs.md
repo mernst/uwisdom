@@ -83,7 +83,7 @@ Here is a Make command to get a list of LaTeX files that are `\inputted` (not
 `\included`) in a LaTeX file, for use in making a tags table or in a buildfile:
 
 ```make
-  TEX_FILES=$(shell latex-process-inputs -list main.tex)
+TEX_FILES=$(shell latex-process-inputs -list main.tex)
 ```
 
 or, to run tags directly:

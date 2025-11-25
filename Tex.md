@@ -2487,12 +2487,14 @@ pdflatex "\def\notodocomments{}\input{main}"
 
 or, in a Makefile:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 paper-notodos.pdf: paper.pdf
- pdflatex "\def\notodocomments{}\input{paper}"
- pdflatex "\def\notodocomments{}\input{paper}"
- cp -pf $< $@
+	pdflatex "\def\notodocomments{}\input{paper}"
+	pdflatex "\def\notodocomments{}\input{paper}"
+	cp -pf $< $@
 ```
+<!-- markdownlint-enable no-hard-tabs -->
 
 
 Here is a way to get a LaTeX section caption to fit on one line:
