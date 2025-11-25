@@ -27,7 +27,9 @@ CSE installation:
 unamedir=`uname`-`uname -m`
 archname=$(arch)
 archname=$archname
-if [ "$archname" = "aarch64" ]; then
+if [ "$archname" = "x86_64" ]; then
+  export archname="amd64"
+elif [ "$archname" = "aarch64" ]; then
   export archname="arm64"
 fi
 cd ~/bin/install
