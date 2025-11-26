@@ -44,7 +44,6 @@ After installing vterm, do:
   cmake .
   make
 
-
 ----------------
 
 To upgrade packages installed by ELPA (no good programmatic way to do it):
