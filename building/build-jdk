@@ -191,11 +191,11 @@ Building OpenJDK 12:
 # https://www.linuxuprising.com/2019/03/how-to-install-oracle-java-12-jdk-12-in.html
 sudo add-apt-repository ppa:linuxuprising/java && \
 sudo apt update && \
-sudo apt install oracle-java12-installer
+sudo apt install -yqq oracle-java12-installer
 
 # Other prerequisites
-sudo apt install -y libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
-sudo apt install -y libcups2-dev libfontconfig1-dev libasound2-dev
+sudo apt install -yqq libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+sudo apt install -yqq libcups2-dev libfontconfig1-dev libasound2-dev
 
 # Now, clone and build OpenJDK 12
 cd ~/java
@@ -224,7 +224,7 @@ make run-test-tier1
 
 To get documentation of internal JDK files (this one gets those in "jdk.compiler"):
 
-sudo apt install -y libasound2-dev libcups2-dev libfontconfig1-dev \
+sudo apt install -yqq libasound2-dev libcups2-dev libfontconfig1-dev \
   libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
 # Maybe only the first "make" line is necessary; try that.
