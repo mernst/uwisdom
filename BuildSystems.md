@@ -115,13 +115,15 @@ Suppose I want to write a rule that always performs a task, but doesn't
 necessarily cause its dependence to execute first.  This is a snippet of
 the Makefile I would like to write:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 .PHONY: maybe-update-file1
 maybe-update-file1:
-  Command A:  may or may not update file1.txt
+    Command A:  may or may not update file1.txt
 file2.txt:  maybe-update-file1 file1.txt
-  Command B:  computes file2.txt from file1.txt
+    Command B:  computes file2.txt from file1.txt
 ```
+<!-- markdownlint-enable no-hard-tabs -->
 
 Problem: because the maybe-update-file1 target always executes, Command B
 always executes.  That wastes the time to execute Command B, and because it
@@ -130,15 +132,17 @@ also executes unnecessarily.
 
 Here is an approach that works:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 file2.txt: maybe-update-file1 .timestamp-file2
 .PHONY: maybe-update-file1
 maybe-update-file1:
- @if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
+	@if [ `fortune | wc -l` -eq 1 ] ; then echo touch file1.txt; touch file1.txt; fi
 .timestamp-file2: file1.txt
- cp file1.txt file2.txt
- touch .timestamp-file2
+	cp file1.txt file2.txt
+	touch .timestamp-file2
 ```
+<!-- markdownlint-enable no-hard-tabs -->
 
 
 The directory of the current Makefile:
@@ -159,9 +163,9 @@ To permit user-specific setting of variables in a Makefile, add this at the
 top (and change assignments to use "=?" syntax):
 
 ```make
-  # Put user-specific changes in your own Makefile.user.
-  # Make will silently continue if that file does not exist.
-  -include Makefile.user
+# Put user-specific changes in your own Makefile.user.
+# Make will silently continue if that file does not exist.
+-include Makefile.user
 ```
 
 

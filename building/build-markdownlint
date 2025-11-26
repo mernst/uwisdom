@@ -1,4 +1,5 @@
 # If I have root:
+sudo apt install -qyy npm
 sudo npm install markdownlint-cli2 --global
 # If no root:
 npm install markdownlint-cli2 --global

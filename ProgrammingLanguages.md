@@ -199,13 +199,15 @@ For Perl coding standards:
 
 To lint/format/pretty-print perl files, put this in the Makefile:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 perl-style-fix:
- perltidy -b ${PERL_FILES}
+	perltidy -b ${PERL_FILES}
 perl-style-check:
- perltidy -w ${PERL_FILES}
+	perltidy -w ${PERL_FILES}
 ```
+<!-- markdownlint-enable no-hard-tabs -->
 
 
 To convert a Perl program with POD ("plain old documentation") embedded
@@ -261,31 +263,33 @@ even if it is faster...
 
 Typical Makefile rules to enforce Python style rules:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 style-fix: python-style-fix
-style-check: python-style-fix
-PYTHON_FILES:=$(shell find . \( -name ".git" -o -name ".venv" \) -prune -o -name '*.py' -print) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/env \)python')
+style-check: python-style-check
+PYTHON_FILES:=$(wildcard **/*.py) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/\|/usr/bin/env \)python')
 python-style-fix:
 ifneq (${PYTHON_FILES},)
- @ruff --version
- @ruff format ${PYTHON_FILES}
- @ruff -q check ${PYTHON_FILES} --fix
+	@ruff --version
+	@ruff format ${PYTHON_FILES}
+	@ruff -q check ${PYTHON_FILES} --fix
 endif
 python-style-check:
 ifneq (${PYTHON_FILES},)
- @ruff --version
- @ruff -q format --check ${PYTHON_FILES}
- @ruff -q check ${PYTHON_FILES}
+	@ruff --version
+	@ruff -q format --check ${PYTHON_FILES}
+	@ruff -q check ${PYTHON_FILES}
 endif
 python-typecheck:
 ifneq (${PYTHON_FILES},)
- @mypy --version
- @mypy --strict --install-types --non-interactive ${PYTHON_FILES} > /dev/null 2>&1 || true
- mypy --strict --ignore-missing-imports ${PYTHON_FILES}
+	@mypy --version
+	@mypy --strict --scripts-are-modules --install-types --non-interactive ${PYTHON_FILES} > /dev/null 2>&1 || true
+	mypy --strict --scripts-are-modules --ignore-missing-imports ${PYTHON_FILES}
 endif
 showvars:
- @echo "PYTHON_FILES=${PYTHON_FILES}"
+	@echo "PYTHON_FILES=${PYTHON_FILES}"
 ```
+<!-- markdownlint-enable no-hard-tabs -->
 
 
 To activate conda:
@@ -596,6 +600,7 @@ shellcheck --format=gcc
 There is also `checkbashisms`.
 Here are Makefile rules to run them:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
@@ -609,21 +614,23 @@ CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
  fi)
 shell-style-fix:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
- @shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
- @shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
+	@shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
 endif
 shell-style-check:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
- @shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
- @shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+	@shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
 endif
 ifneq ($(SH_SCRIPTS),)
- @${CHECKBASHISMS} -l ${SH_SCRIPTS}
+	@${CHECKBASHISMS} -l ${SH_SCRIPTS}
 endif
 showvars:
- @echo "SH_SCRIPTS=${SH_SCRIPTS}"
- @echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
+	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
+	@echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
 ```
+<!-- markdownlint-enable no-hard-tabs -->
+
 
 Also consider adding rules to enforce Python style, which appear elsewhere in this file.
 
@@ -640,13 +647,24 @@ hexToAscii() {
 
 Typical Makefile rules for markdownlint-cli2:
 
+<!-- markdownlint-disable no-hard-tabs -->
 ```make
 style-fix: markdownlint-fix
 markdownlint-fix:
- markdownlint-cli2 --fix "**/*.md" "#node_modules"
+	markdownlint-cli2 --fix "**/*.md" "#node_modules"
 style-check: markdownlint-check
 markdownlint-check:
- markdownlint-cli2 "**/*.md" "#node_modules"
+	markdownlint-cli2 "**/*.md" "#node_modules"
+```
+<!-- markdownlint-enable no-hard-tabs -->
+
+
+Suppressions for markdownlint-cli2:
+
+```markdown
+<!-- markdownlint-disable no-hard-tabs -->
+...
+<!-- markdownlint-enable no-hard-tabs -->
 ```
 
 
