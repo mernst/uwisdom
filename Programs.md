@@ -2267,6 +2267,13 @@ choose "save as"!
    ```
 
 
+To make ripgrep searh all files, including those in the `.gitignore` file:
+
+```sh
+rg --no-ignore
+```
+
+
 To restrict ripgrep to searching only files with given names:
 
 ```sh
