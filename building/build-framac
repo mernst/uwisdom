@@ -1,12 +1,12 @@
 # Instructions at https://www.frama-c.com/html/get-frama-c.html
 
 # First, install opam
-sudo apt install -y opam
+sudo apt -qqy install opam
 opam init --compiler 4.14.1 # may take a while
 eval $(opam env)
 
 # Install dependencies
-sudo apt-get install -y libcairo2-dev libgmp-dev libgtk-3-dev libgtksourceview-3.0-dev
+sudo apt -qqy install libcairo2-dev libgmp-dev libgtk-3-dev libgtksourceview-3.0-dev
 
 # Then, install Frama-C
 opam install -y frama-c 

@@ -39,7 +39,7 @@ cd openjdk9 && sh ./get_source.sh
 
 # Now, compile it (why do I want/need to do that?):
 #if Ubuntu:
-sudo apt install -y libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev ccache
+sudo apt -qqy install libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev libcups2-dev libfreetype6-dev libasound2-dev ccache
 #endif
 bash ./configure
 make all

@@ -38,7 +38,7 @@
   (package-initialize)
   (package-install 'vterm))
 After installing vterm, do:
-  sudo apt install -qyy libtool libtool-bin cmake
+  sudo apt -qqy install libtool libtool-bin cmake
   # Paste the above in separately from the below.
   cd ~/.emacs.d/elpa/vterm-*
   cmake .

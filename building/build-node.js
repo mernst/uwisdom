@@ -4,4 +4,4 @@ nvm install v6.3.0
 npm init
 
 # Alternative that didn't work for me:
-# sudo apt install -y nodejs npm
+# sudo apt -qqy install nodejs npm

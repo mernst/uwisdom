@@ -101,7 +101,7 @@ MODULES/PACKAGES
 # It's better to install them per-venv, using uv, not globally.
 
 # Using Ubuntu:
-sudo apt-get install -y python3-pandas python3-openai python3-yaml
+sudo apt -qqy install python3-pandas python3-openai python3-yaml
 
 sudo apt -y install pipx
 sudo pip install ggplot

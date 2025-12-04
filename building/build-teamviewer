@@ -17,7 +17,7 @@ cd ~/tmp
 ##   /opt/teamviewer/tv_bin/teamviewerd: error while loading shared libraries: libminizip.so.1: cannot open shared object file: No such file or directory
 ## and furthermore then Ubuntu reports that the package manager is broken!
 ## As of 2025-10-12, does not work -- aborts while launching the GUI.
-sudo apt-get install libminizip1
+sudo apt -y install libminizip1
 wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
 sudo dpkg -i teamviewer_amd64.deb
 

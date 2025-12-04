@@ -43,7 +43,7 @@ tar xzf emacs-${VER}.tar.gz
 cd ~/bin/install/emacs-${VER}
 ./autogen.sh
 # For Ubuntu, I had to install:
-# sudo apt install -qy libncurses-dev libxpm-dev gnutls-dev libgtk-3-dev libtree-sitter-dev libgif-dev libgccjit0 libgccjit-14-dev libacl1-dev
+# sudo apt -qqy install libncurses-dev libxpm-dev gnutls-dev libgtk-3-dev libtree-sitter-dev libgif-dev libgccjit0 libgccjit-14-dev libacl1-dev
 export PKG_CONFIG_PATH=${HOME}/.local/lib/pkgconfig
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${HOME}/.local/lib
 export C_INCLUDE_PATH=${C_INCLUDE_PATH}:${HOME}/.local/include

@@ -188,7 +188,7 @@ From the command line:
 If the `lsb_release` command is not installed, run
 
 ```sh
-apt update && apt install -y lsb-release && apt clean all && lsb_release -a
+apt update && apt -qqy install lsb-release && apt clean all && lsb_release -a
 ```
 
 

@@ -1,5 +1,5 @@
 Ubuntu:
-sudo apt install -y fonts-inconsolata fonts-hack
+sudo apt -qqy install fonts-inconsolata fonts-hack
 
 ----------------
 

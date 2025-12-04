@@ -1,5 +1,5 @@
 # Ubuntu:
-sudo apt install -y tidy
+sudo apt -qqy install tidy
 
 # From source.  First, install cmake!
 cd ~/bin/src

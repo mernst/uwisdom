@@ -21,10 +21,10 @@ for ver in 14 15 16 17 18 19 20; do
     llvm-${ver} llvm-${ver}-dev llvm-${ver}-linker-tools llvm-${ver}-runtime llvm-${ver}-tools \
     || true
 done
-sudo apt install -y clang llvm llvm-dev
+sudo apt -qqy install clang llvm llvm-dev
 
 
 # Install unnumbered versions, which will all be consistent with one another:
-sudo apt install -y clang libclang-dev llvm llvm-dev
+sudo apt -qqy install clang libclang-dev llvm llvm-dev
 
 cargo install --git https://github.com/immunant/c2rust.git c2rust
