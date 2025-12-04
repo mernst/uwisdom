@@ -59,9 +59,6 @@ ruff -q format file1.py file2.py ...
 
 EXECUTABLES/APPLICATIONS
 
-
-
-uv tool install mypy
 uv tool install ruff
 uv tool install ty
 # I should build html5validator rather than installing the Python package.  (Why?)
@@ -93,6 +90,9 @@ sudo pip install mypy
 # sudo pipx install flake8
 # sudo pipx install pycodestyle
 # sudo pipx install pylint
+
+# Older, no longer needed, because I use `ty`.
+# uv tool install mypy
 
 ===========================================================================
 

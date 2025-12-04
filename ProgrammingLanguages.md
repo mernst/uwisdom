@@ -5,6 +5,46 @@ On github.com, you can view the table of contents of this file by clicking the
 menu icon (three lines or dots) in the top corner.
 
 
+## Markdown
+
+
+Typical Makefile rules for markdownlint-cli2:
+
+<!-- markdownlint-disable no-hard-tabs -->
+```make
+style-fix: markdownlint-fix
+style-check: markdownlint-check
+markdownlint-fix:
+	@markdownlint-cli2 --fix "**/*.md" "#node_modules"
+markdownlint-check:
+	@markdownlint-cli2 "**/*.md" "#node_modules"
+```
+<!-- markdownlint-enable no-hard-tabs -->
+
+
+Suppressions for markdownlint-cli2:
+
+```markdown
+<!-- markdownlint-disable no-hard-tabs -->
+...
+<!-- markdownlint-enable no-hard-tabs -->
+```
+
+
+Typical gradle buildfile rules for markdownlint-cli2:
+
+```gradle
+/* Validate Markdown files. */
+tasks.register("markdownlint", Exec) {
+  group = "Verification"
+  description = "Run markdownlint-cli2 linter on Markdown files"
+  executable = "markdownlint-cli2"
+  args(".")
+}
+check.dependsOn("markdownlint")
+```
+
+
 ## Perl
 
 
@@ -201,11 +241,17 @@ To lint/format/pretty-print perl files, put this in the Makefile:
 
 <!-- markdownlint-disable no-hard-tabs -->
 ```make
-PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+style-fix: perl-style-fix
+style-check: perl-style-check
+PERL_FILES   := $(shell grep -r -l --exclude='*~' --exclude='#*' --exclude='*.bak' --exclude='*.tar' --exclude='*.tdy' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/\|/usr/bin/env \)perl'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
 perl-style-fix:
-	perltidy -b ${PERL_FILES}
+	@rm -rf *.tdy
+	@perltidy -b -gnu ${PERL_FILES}
 perl-style-check:
-	perltidy -w ${PERL_FILES}
+	@rm -rf *.tdy
+	@perltidy -w ${PERL_FILES}
+showvars::
+	@echo "PERL_FILES=${PERL_FILES}"
 ```
 <!-- markdownlint-enable no-hard-tabs -->
 
@@ -266,37 +312,28 @@ Typical Makefile rules to enforce Python style rules:
 <!-- markdownlint-disable no-hard-tabs -->
 ```make
 style-fix: python-style-fix
-style-check: python-style-check
-PYTHON_FILES:=$(wildcard **/*.py) $(shell grep -r -l --exclude-dir=.git --exclude-dir=.venv --exclude='*.py' --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/\|/usr/bin/env \)python')
+style-check: python-style-check python-typecheck
+PYTHON_FILES:=$(wildcard **/*.py) $(shell grep -r -l --exclude-dir=.do-like-javac --exclude-dir=.git --exclude-dir=.html-tools --exclude-dir=.plume-scripts --exclude-dir=.venv --exclude='*.py' --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew --exclude=lcb_runner '^\#! \?\(/bin/\|/usr/bin/\|/usr/bin/env \)python')
 python-style-fix:
 ifneq (${PYTHON_FILES},)
-	@ruff --version
-	@ruff format ${PYTHON_FILES}
-	@ruff -q check ${PYTHON_FILES} --fix
+#	@uvx ruff --version
+	@uvx ruff -q format ${PYTHON_FILES}
+	@uvx ruff -q check ${PYTHON_FILES} --fix
 endif
 python-style-check:
 ifneq (${PYTHON_FILES},)
-	@ruff --version
-	@ruff -q format --check ${PYTHON_FILES}
-	@ruff -q check ${PYTHON_FILES}
+#	@uvx ruff --version
+	@uvx ruff -q format --check ${PYTHON_FILES}
+	@uvx ruff -q check ${PYTHON_FILES}
 endif
 python-typecheck:
 ifneq (${PYTHON_FILES},)
-	@mypy --version
-	@mypy --strict --scripts-are-modules --install-types --non-interactive ${PYTHON_FILES} > /dev/null 2>&1 || true
-	mypy --strict --scripts-are-modules --ignore-missing-imports ${PYTHON_FILES}
+	@uv run ty check -q
 endif
-showvars:
+showvars::
 	@echo "PYTHON_FILES=${PYTHON_FILES}"
 ```
 <!-- markdownlint-enable no-hard-tabs -->
-
-
-To activate conda:
-
-```sh
-source activate <yourenvironmentname>
-```
 
 
 To disable tqdm output:
@@ -337,6 +374,58 @@ from pathlib import Path
 file_content = Path('filename.txt').read_text()
 Path('filename.txt').write_text(new_file_content)
 ```
+
+
+### Python dependency management
+
+
+How to use `uv` for Python development:
+
+1. `uv init project_name`  # creates a project_name directory; or `uv init` in an existing directory.
+2. For each dependency: uv add DEPENDENCY
+3. For development tools:
+   `uv add --dev ty`
+   (After `uv add --dev ruff`, `uv run ruff` failed with
+   "error: Failed to read .venv/bin/ruff: stream did not contain valid UTF-8",
+   so run `ruff` with `uvx ruff` instead, for now.)
+4. Commit to version control:
+   * pyproject.toml
+   * uv.lock
+5. Users must run using `uv run PROG.py` instead of `python main.py` or `main.py`.
+   So, create a script for users to run instead, named MYPROG:
+
+   ```sh
+   #!/bin/sh
+   uv run MYPROG.py "$@"
+   ```
+
+Optionally, in Python programs:
+
+```py
+# Or, just "UV":
+if "UV_VIRTUAL_ENV" in os.environ:
+    print("Script is likely running under uv.")
+else:
+    print("Script is likely NOT running under uv.")
+```
+
+
+To install `uv` for Python dependency management, run one of these command lines:
+
+```sh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+
+
+To activate conda (but prefer `uv` instead):
+
+```sh
+source activate <yourenvironmentname>
+```
+
+
+
 
 
 ## Rust
@@ -602,8 +691,10 @@ Here are Makefile rules to run them:
 
 <!-- markdownlint-disable no-hard-tabs -->
 ```make
-SH_SCRIPTS   := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
-BASH_SCRIPTS := $(shell grep -r -l --exclude='#*' --exclude='*~' --exclude='#*' --exclude='*.tar' --exclude=gradlew --exclude-dir=.git '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh)
+style-fix: shell-style-fix
+style-check: shell-style-check
+SH_SCRIPTS   := $(shell grep -r -l --exclude-dir=.git --exclude-dir=.do-like-javac --exclude-dir .git-scripts --exclude-dir .html-tools --exclude-dir .plume-scripts --exclude='#*' --exclude='*~' --exclude='*.tar' --exclude=gradlew '^\#! \?\(/bin/\|/usr/bin/env \)sh'   | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh | sort)
+BASH_SCRIPTS := $(shell grep -r -l --exclude-dir=.git --exclude-dir=.do-like-javac --exclude-dir .git-scripts --exclude-dir .html-tools --exclude-dir .plume-scripts --exclude='#*' --exclude='*~'  --exclude='*.tar' --exclude=gradlew '^\#! \?\(/bin/\|/usr/bin/env \)bash' | grep -v addrfilter | grep -v cronic-orig | grep -v mail-stackoverflow.sh | sort)
 CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
    echo "checkbashisms" ; \
  else \
@@ -612,22 +703,29 @@ CHECKBASHISMS := $(shell if command -v checkbashisms > /dev/null ; then \
    chmod +x ./.checkbashisms && \
    echo "./.checkbashisms" ; \
  fi)
+SHFMT_EXISTS := $(shell command -v shfmt 2> /dev/null)
 shell-style-fix:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
+ifdef SHFMT_EXISTS
 	@shfmt -w -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+endif
 	@shellcheck -x -P SCRIPTDIR --format=diff ${SH_SCRIPTS} ${BASH_SCRIPTS} | patch -p1
 endif
 shell-style-check:
 ifneq ($(SH_SCRIPTS)$(BASH_SCRIPTS),)
+ifdef SHFMT_EXISTS
 	@shfmt -d -i 2 -ci -bn -sr ${SH_SCRIPTS} ${BASH_SCRIPTS}
+endif
 	@shellcheck -x -P SCRIPTDIR --format=gcc ${SH_SCRIPTS} ${BASH_SCRIPTS}
 endif
 ifneq ($(SH_SCRIPTS),)
 	@${CHECKBASHISMS} -l ${SH_SCRIPTS}
 endif
-showvars:
+showvars::
 	@echo "SH_SCRIPTS=${SH_SCRIPTS}"
 	@echo "BASH_SCRIPTS=${BASH_SCRIPTS}"
+	@echo "CHECKBASHISMS=${CHECKBASHISMS}"
+	@echo "SHFMT_EXISTS=${SHFMT_EXISTS}"
 ```
 <!-- markdownlint-enable no-hard-tabs -->
 
@@ -642,43 +740,6 @@ hexToAscii() {
   # shellcheck disable=SC2059 # Justification goes here.
   printf "\x$1"
 }
-```
-
-
-Typical Makefile rules for markdownlint-cli2:
-
-<!-- markdownlint-disable no-hard-tabs -->
-```make
-style-fix: markdownlint-fix
-markdownlint-fix:
-	markdownlint-cli2 --fix "**/*.md" "#node_modules"
-style-check: markdownlint-check
-markdownlint-check:
-	markdownlint-cli2 "**/*.md" "#node_modules"
-```
-<!-- markdownlint-enable no-hard-tabs -->
-
-
-Suppressions for markdownlint-cli2:
-
-```markdown
-<!-- markdownlint-disable no-hard-tabs -->
-...
-<!-- markdownlint-enable no-hard-tabs -->
-```
-
-
-Typical gradle buildfile rules for markdownlint-cli2:
-
-```gradle
-/* Validate Markdown files. */
-tasks.register("markdownlint", Exec) {
-  group = "Verification"
-  description = "Run markdownlint-cli2 linter on Markdown files"
-  executable = "markdownlint-cli2"
-  args(".")
-}
-check.dependsOn("markdownlint")
 ```
 
 
