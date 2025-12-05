@@ -1096,11 +1096,11 @@ the following in an empty directory.
 ```sh
   docker login
   # No tag number; we'll just depend on the "latest" tag.
-  docker -l warn build -t mdernst/ubuntu-for-cf .
+  docker -l warn build --rm=false --progress=plain -t mdernst/ubuntu-for-cf .
   # List the available images
   docker images
   # Upload to Docker Hub
-  docker push mdernst/ubuntu-for-cf
+  docker push --quiet mdernst/ubuntu-for-cf
   # Browse to https://hub.docker.com/ to verify that it exists
 ```
 

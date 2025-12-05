@@ -336,6 +336,13 @@ showvars::
 <!-- markdownlint-enable no-hard-tabs -->
 
 
+To disable Ruff ouput, use "noqa":
+
+```python
+from abc.xyz import function_name  # noqa: F401
+```
+
+
 To disable tqdm output:
 
 ```python
