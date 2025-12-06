@@ -1,7 +1,7 @@
 ===========================================================================
 
 Ubuntu:
-sudo apt install w3m
+sudo apt -yqq install w3m
 
 Cygwin:
 install via cygwin setup program
@@ -12,9 +12,9 @@ install via cygwin setup program
 # most recent commit was 2012/05/22; as of Dec 2013, the most recent commit was 2013-04-26.
 
 # Ubuntu:
-sudo apt install libssl-dev compface libgpm-dev
+sudo apt -yqq install libssl-dev compface libgpm-dev
 # (how many of these following ones, if any, are truly needed?)
-sudo apt install libimlib2 gpm libimlib2-dev
+sudo apt -yqq install libimlib2 gpm libimlib2-dev
 
 # First, install the Boehm-Demers-Weiser garbage-collector.
 # See file build-gc

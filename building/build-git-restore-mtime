@@ -1,7 +1,7 @@
 
 
 # Ubuntu:
-sudo apt install git-restore-mtime
+sudo apt -yqq install git-restore-mtime
 
 
 # From source:

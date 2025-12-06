@@ -1,6 +1,6 @@
 # Install lxc
 
-sudo apt install lxc
+sudo apt -yqq install lxc
 echo "${USER} veth lxcbr0 10" | sudo tee -a /etc/lxc/lxc-usernet
 mkdir -p ~/.config/lxc
 cp /etc/lxc/default.conf ~/.config/lxc/default.conf

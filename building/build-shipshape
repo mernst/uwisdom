@@ -14,7 +14,7 @@ wget -N http://storage.googleapis.com/shipshape-cli/shipshape
 chmod +x shipshape
 
 # To run normally (with cloud connection?)
-sudo apt install docker.io
+sudo apt -yqq install docker.io
 sudo usermod -G docker $USER
 sudo service docker.io restart
 # It might be necessary to reboot as well.
@@ -23,7 +23,7 @@ sudo service docker.io restart
 ## To run entirely locally (probably don't bother to do this):
 # Once ever, do this:
 sudo sh -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list" && sudo apt update
-sudo apt install lxc-docker clang flex golang openjdk-8-jdk
+sudo apt -yqq install lxc-docker clang flex golang openjdk-8-jdk
 # Now do I need to build?  The instructions are ambiguous.
 
 

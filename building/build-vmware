@@ -315,7 +315,7 @@ Essentially:
   # First, save any files, especially in a remote Emacs.
   # Next, warm up the sudo cache
   # Run each of the two following commands on its own.
-  sudo apt install make gcc linux-headers-`uname -r`
+  sudo apt -yqq install make gcc linux-headers-`uname -r`
   sudo apt autoremove -y
   # Run each of the two preceding commands on its own.
   mkdir -p ~/tmp
@@ -379,12 +379,12 @@ setenv VERY 27
 setenv VERZ 2
 setenv VERARCH 386
 
-sudo apt install gcc kernel-package kernel-source-2.${VERX}.${VERY} libc6-dev libncurses5-dev fakeroot
-sudo apt install tk8.3
+sudo apt -yqq install gcc kernel-package kernel-source-2.${VERX}.${VERY} libc6-dev libncurses5-dev fakeroot
+sudo apt -yqq install tk8.3
 
 Download the kernel source package:
 
-apt install kernel-source-2.${VERX}.${VERY}
+apt -yqq install kernel-source-2.${VERX}.${VERY}
 
 Unpack it:
 

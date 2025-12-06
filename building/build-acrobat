@@ -41,7 +41,7 @@ Ubuntu:
 ## This didn't work!
 # sudo apt-add-repository "deb http://archive.canonical.com/ubuntu Saucy partner"
 # sudo apt update
-# sudo apt install acroread
+# sudo apt -yqq install acroread
 
 ## This didn't work!
 # Download .deb from http://get.adobe.com/reader/otherversions/
@@ -56,7 +56,7 @@ http://get.adobe.com/uk/reader/
 sudo dpkg -i --force-architecture AdbeRdr9.5.5-1_i386linux_enu.deb && sudo apt -f install
 To explain this, the switch -i --force-architecture installs 32-bit architecture and -f install installs missing libraries for Kubuntu 13.10 Saucy Salamander 64-bit
 3. Repeat the same steps as for Ubuntu plus run following command (installs missing libraries)
-sudo apt install libxml2:i386 lib32stdc++6
+sudo apt -yqq install libxml2:i386 lib32stdc++6
 4. Run Adobe Reader from you terminal first, just type
 acroread
 5. I got some errors there but after that Adobe Reader is running just fine.
@@ -89,7 +89,7 @@ See http://ubuntu-tutorials.com/2007/10/28/how-to-install-adobe-acrobat-reader-o
 ---------------------------------------------------------------------------
 
 ## This no longer works as of 6/3/2008.
-# On Debian, just:  sudo apt install acroread
+# On Debian, just:  sudo apt -yqq install acroread
 # (requires "multiverse" in /etc/apt/sources.list)
 
 ---------------------------------------------------------------------------

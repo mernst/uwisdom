@@ -1,5 +1,5 @@
 Ubuntu:
-sudo apt install shellcheck
+sudo apt -yqq install shellcheck
 
 CSE:
 # Determine the installed version and the latest version

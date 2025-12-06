@@ -24,7 +24,7 @@ Install:
 
 Debian:
 
-apt install checkstyle
+apt -yqq install checkstyle
 
 Installs into /usr/share/java/checkstyle-3.4.jar
 

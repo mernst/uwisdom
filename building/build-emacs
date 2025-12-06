@@ -71,13 +71,13 @@ TODO: I might want to install GNU Mailutils.
 # For the bleeding-edge version, see
 #   https://launchpad.net/~ubuntu-elisp/+archive/ppa
 # Essentially, just do
-sudo apt install emacs-snapshot emacs-snapshot-el
+sudo apt -yqq install emacs-snapshot emacs-snapshot-el
 
 
 # On Ubuntu, for Emacs 22, just:
-sudo apt install emacs22 emacs22-el
+sudo apt -yqq install emacs22 emacs22-el
 # or for Emacs 23 (I needed to use backports):
-sudo apt install emacs23 emacs23-el
+sudo apt -yqq install emacs23 emacs23-el
 
 
 # On Debian at MPI-SWS, in addition I have to install the manual by hand.  Yuck!

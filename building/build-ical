@@ -13,14 +13,14 @@ Add to "/etc/apt/sources.list" (don't change the "sarge" bit, even for another r
 Then:
 
 apt update
-apt install ical
+apt -yqq install ical
 
 ===========================================================================
 
 tar.gz install:
 
 # (or tcl8.4-dev, tk8.4-dev)
-sudo apt install g++ tcl-dev tk-dev
+sudo apt -yqq install g++ tcl-dev tk-dev
 
 cd ~/tmp
 wget http://www.annexia.org/_file/ical-2.3.3.tar.gz

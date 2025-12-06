@@ -1,6 +1,6 @@
 Ubuntu:
 
-sudo apt install gh
+sudo apt -yqq install gh
 
 ===========================================================================
 

@@ -7,7 +7,7 @@ Maven 3 on Ubuntu:
 (as of 2024-05-15, this is Maven 3.8.7 whereas the newest is 3.9.6)
 
 sudo apt update
-sudo apt install maven
+sudo apt -yqq install maven
 sudo apt remove maven2
 
 ===========================================================================

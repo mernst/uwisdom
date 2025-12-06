@@ -15,12 +15,12 @@ but does not tell me anything more about a failed build.
 Ubuntu, switching between versions of the JDK
 (but I just use symbolic links):
 
-sudo apt install oracle-java8-installer 
-sudo apt install oracle-java8-set-default
+sudo apt -yqq install oracle-java8-installer 
+sudo apt -yqq install oracle-java8-set-default
 
-sudo apt install openjdk-11-jdk
+sudo apt -yqq install openjdk-11-jdk
 
-sudo apt install openjdk-17-jdk
+sudo apt -yqq install openjdk-17-jdk
 
 sudo update-java-alternatives --list
 sudo update-java-alternatives --set /usr/lib/jvm/java-1.8.0-openjdk-amd64
@@ -99,7 +99,7 @@ Installing JDK 17 on Ubuntu, before it is available from official Ubuntu repo:
 
 sudo add-apt-repository ppa:linuxuprising/java
 sudo apt update
-sudo apt install oracle-java17-installer --no-install-recommends
+sudo apt -yqq install oracle-java17-installer --no-install-recommends
 (cd ~/java && ln -s /usr/lib/jvm/java-17-oracle jdk17)
 
 # To uninstall: sudo apt remove oracle-java17-installer
@@ -314,7 +314,7 @@ Building OpenJDK 11:
 # https://www.linuxuprising.com/2019/03/how-to-install-oracle-java-11-jdk-11-in.html
 sudo add-apt-repository ppa:linuxuprising/java && \
 sudo apt update && \
-sudo apt install oracle-java12-installer
+sudo apt -yqq install oracle-java12-installer
 
 # Other prerequisites
 sudo apt -qqy install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev

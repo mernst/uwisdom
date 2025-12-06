@@ -6,7 +6,7 @@ http://freepastry.org/FreePastry/download.html
 # I need to have installed "Oracle Berkeley Database Java Edition" (new
 # name for SleepyCat).  I think I have the multiverse installed, but this
 # does not work:
-sudo apt install libdb-je-java
+sudo apt -yqq install libdb-je-java
 # So get it from:
 #  http://www.oracle.com/technology/software/products/berkeley-db/je/index.html
 # and then:

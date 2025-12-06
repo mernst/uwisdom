@@ -1,5 +1,5 @@
 [Instead of downloading and building, I can just use Debian:
-  sudo apt install jlint
+  sudo apt -yqq install jlint
 ]
 
 Version 3.0

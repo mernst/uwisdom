@@ -2,7 +2,7 @@
 
 Debian:
 
-sudo apt install flashplugin-nonfree
+sudo apt -yqq install flashplugin-nonfree
 # This is not necessary (and that script doesn't exist anyway):
 # sudo update-flashplugin
 

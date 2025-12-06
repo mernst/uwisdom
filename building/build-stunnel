@@ -1,4 +1,4 @@
-# In Ubuntu: sudo apt install stunnel4
+# In Ubuntu: sudo apt -yqq install stunnel4
 
 
 

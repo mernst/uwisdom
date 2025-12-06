@@ -7,7 +7,7 @@ Boldface for tt:
 # instead of tetex.  I don't know of a Debian/Ubuntu distribution for
 # texlive (news: but as of 3/2009 there is one), so you'll have to follow
 # the by-hand instructions below.
-sudo apt install tetex-extra
+sudo apt -yqq install tetex-extra
 
 ## By hand
 # Do this as root

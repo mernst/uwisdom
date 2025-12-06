@@ -2,7 +2,7 @@
 
 Ubuntu:
 
-sudo apt install mono-devel
+sudo apt -yqq install mono-devel
 
 ===========================================================================
 

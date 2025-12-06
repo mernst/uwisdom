@@ -5,7 +5,7 @@
 ===========================================================================
 
 # On Ubuntu (though the version may lag the latest Mercurial release):
-sudo apt install mercurial
+sudo apt -yqq install mercurial
 
 ===========================================================================
 
@@ -21,7 +21,7 @@ It seems old -- it suggests Mercurial 1.3 whereas the current version is 2.9.1 a
 Install from source:
 
 #if Ubuntu
-sudo apt install python-dev
+sudo apt -yqq install python-dev
 #endif
 
 # Get version number from http://www.selenic.com/mercurial/wiki/
@@ -52,7 +52,7 @@ hg clone http://bitbucket.org/tksoh/hgshelve/
 If I get the error
   ImportError: No module named osutil
 then do
-  sudo apt install python-dev
+  sudo apt -yqq install python-dev
 and then re-install Mercurial from source.
 
 ===========================================================================
@@ -79,7 +79,7 @@ But the .egg file is a directory, not a file.
 That didn't work either.  So I did
 
   sudo apt uninstall mercurial
-  sudo apt install mercurial
+  sudo apt -yqq install mercurial
 
 (Maybe I should have done this?
   sudo apt --purge remove mercurial

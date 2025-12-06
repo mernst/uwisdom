@@ -1,5 +1,5 @@
 For Ubuntu 18.10 and later:
-sudo apt install ripgrep
+sudo apt -yqq install ripgrep
 
 For Centos, and for earlier versions of Ubuntu:
 

@@ -1,4 +1,4 @@
-sudo apt install latex-beamer
+sudo apt -yqq install latex-beamer
 
 The user manual is at
 /usr/share/doc/latex-beamer/beameruserguide.pdf.gz

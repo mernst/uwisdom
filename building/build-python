@@ -23,7 +23,7 @@ pipx is for executables.
 pip is for modules.
 
 # As of 2025-05-11, this is a very old version.
-# sudo apt install ruff
+# sudo apt -yqq install ruff
 
 ===========================================================================
 
@@ -127,7 +127,7 @@ pip-review --interactive
 ===========================================================================
 
 To install ipython, DON'T do
-  sudo apt install ipython-notebook
+  sudo apt -yqq install ipython-notebook
 which is an old version on Ubuntu.
 Instead, do (use `sudo` if I have sudo rights):
   pipx install ipython --upgrade

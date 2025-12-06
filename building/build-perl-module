@@ -1,5 +1,5 @@
 On Debian, often there is a pre-existing package; just do something like
-  apt install libcrypt-ssleay-perl
+  apt -yqq install libcrypt-ssleay-perl
 This is better because when perl is updated, they won't break or need to
 be reinstalled.
 However, those packages should be listed not here, but in file
@@ -95,9 +95,9 @@ Do NOT attempt to do
 which does not work for me, even though the program suggests it.
 Then, do these:  either all on one "install" line separated by spaces, or ONE-BY-ONE (because some ask questions):
   install Bundle::CPAN
-# Instead of Bundle::LWP, on Ubuntu just do: sudo apt install libwww-perl
+# Instead of Bundle::LWP, on Ubuntu just do: sudo apt -yqq install libwww-perl
   install Bundle::LWP
-## Instead of CSS::DOM, on Ubuntu just do: sudo apt install libcss-dom-perl
+## Instead of CSS::DOM, on Ubuntu just do: sudo apt -yqq install libcss-dom-perl
   install CSS::DOM
 # I am delaying re-installing the below until I know what each is for.
   install LWP::Protocol::https

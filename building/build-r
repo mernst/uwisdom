@@ -65,7 +65,7 @@ quit()
 
 # R Commander (Rcmdr), is a GUI
 install.packages("Rcmdr", dependencies=TRUE)
-# Alternately: sudo apt install r-cran-rcmdr
+# Alternately: sudo apt -yqq install r-cran-rcmdr
 
 ===========================================================================
 

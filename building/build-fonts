@@ -10,7 +10,7 @@ sudo fc-cache -fv
 ===========================================================================
 
 # Older:
-# sudo apt install ttf-inconsolata
+# sudo apt -yqq install ttf-inconsolata
 # sudo fc-cache -fv
 
 

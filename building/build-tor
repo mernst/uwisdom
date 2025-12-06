@@ -5,7 +5,7 @@
 
 # First, go to ~/wisdom/building/build-vmware
 # In the VM:
-#  * sudo apt install gnome-panel
+#  * sudo apt -yqq install gnome-panel
 #    then log out and back in, selecting Gnome Flashback (Metacity) as your desktop (Metacity is faster than Compiz)
 #  * VMware tools may already be installed; to test run
 #      initctl list | grep vmw
@@ -15,7 +15,7 @@
 #    To reinstall: mount the virtual CD drive in the guest, uncompress the installer, and run
 #    sudo vmware-tools-distrib/vmware-install.pl
 #  * Chrome browser (via Firefox)
-#  * sudo apt install vlc
+#  * sudo apt -yqq install vlc
 
 ===========================================================================
 
@@ -53,10 +53,10 @@ cd ~/bin/install/tor-browser_en-US/
 ----------------
 
 also:
-apt install ...
+apt -yqq install ...
 
 ===========================================================================
 
 ## https://www.torproject.org/docs/debian says:  Do not use the packages in
 ## Ubuntu's universe. In the past they have not reliably been updated.
-# sudo apt install tor
+# sudo apt -yqq install tor

@@ -8,13 +8,13 @@ For HTML 5, see file build-html5validator instead
 # locally-cached versions of W3C .dtd files.
 
 # On Ubuntu, I can do:
-#   sudo apt install wdg-html-validator
+#   sudo apt -yqq install wdg-html-validator
 # but that doesn't use locally-cached versions of W3C .dtd files.
 
 http://www.htmlhelp.com/tools/validator/offline/
 
 #if Ubuntu
-sudo apt install g++
+sudo apt -yqq install g++
 #endif
 
 mkdir ~/bin/install/wdg-validator

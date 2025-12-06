@@ -12,7 +12,7 @@ Yuck!
 
 # For the Checker Framework:
 
-sudo apt install emacs23 openjdk-6-jdk mercurial ant
+sudo apt -yqq install emacs23 openjdk-6-jdk mercurial ant
 
 
 System > Administration > Users and Groups

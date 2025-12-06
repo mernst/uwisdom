@@ -1,6 +1,6 @@
 From http://howto.pilot-link.org/ppp/ca.html:
 To test the serial port with the Palm:
-  apt install statserial
+  apt -yqq install statserial
   # Cradle your palm
   # From a terminal, not under Emacs:
   statserial /dev/ttyS0

@@ -32,8 +32,8 @@ To open a virtual machine, run either of these commands:
 Ubuntu:
 
 # Older:
-# sudo apt install virtualbox-ose
-sudo apt install virtualbox-qt -y
+# sudo apt -yqq install virtualbox-ose
+sudo apt -yqq install virtualbox-qt -y
 
 sudo usermod -a -G lp,users,vboxusers ${USER}
 # Verify the usermod commands succeeded:

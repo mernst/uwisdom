@@ -27,7 +27,7 @@ ln -s findbugs-${VER} findbugs
 # Once ever: (cd ~/bin/cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
 
 # Source:
-# Only necessary once, for native2ascii task:  sudo apt install ant-doc ant-optional
+# Only necessary once, for native2ascii task:  sudo apt -yqq install ant-doc ant-optional
 cd ~/tmp
 wget http://downloads.sourceforge.net/project/findbugs/findbugs/${VER}/findbugs-${VER}-source.zip
 unzip findbugs-${VER}-source.zip
@@ -45,7 +45,7 @@ ant docs
 #      [echo] Running saxon: ${local.software.home}/saxon-6.5.5/saxon.jar
 #      [java] Error: Could not find or load main class com.icl.saxon.StyleSheet
 # so I tried:
-#   sudo apt install libsaxon-java libsaxonb-java docbook-xsl-saxon
+#   sudo apt -yqq install libsaxon-java libsaxonb-java docbook-xsl-saxon
 # of which only the last item was probably necessary (?).
 # but that didn't work either.  So, give up.
 
@@ -66,7 +66,7 @@ ln -s findbugs-1.2.1 findbugs
 # Once ever: (cd ~/bin/`uname`-`uname -m`; rm -f findbugs; ln -s ../src/findbugs/bin/findbugs .)
 
 # Source:
-# Only necessary once, for native2ascii task:  sudo apt install ant-doc ant-optional
+# Only necessary once, for native2ascii task:  sudo apt -yqq install ant-doc ant-optional
 cd ~/tmp
 wget http://superb-east.dl.sourceforge.net/sourceforge/findbugs/findbugs-1.2.1-source.zip
 unzip findbugs-1.2.1-source.zip

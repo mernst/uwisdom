@@ -1,5 +1,5 @@
 Ubuntu:
-sudo apt install paps
+sudo apt -yqq install paps
 
 
 From source:

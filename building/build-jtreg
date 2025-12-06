@@ -1,5 +1,5 @@
 # On Ubuntu:
-sudo apt install jtreg
+sudo apt -yqq install jtreg
 
 # Not on Ubuntu, or if desiring a newer version:
 # Set version by browsing to https://builds.shipilev.net/jtreg/
@@ -22,6 +22,6 @@ jtreg version 5:
 # Problem:  Installs in /usr/share/java/jtreg.jar, and there is no
 # directory I can set to jtreg.home that has a lib/jtreg.jar in it.
 # Question: what problem does that cause?
-sudo apt install jtreg
+sudo apt -yqq install jtreg
 
 ===========================================================================

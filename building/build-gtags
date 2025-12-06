@@ -1,5 +1,5 @@
 On Ubuntu:
-sudo apt install global
+sudo apt -yqq install global
 
 At CSE:
 # Get version number from https://www.gnu.org/software/global/download.html

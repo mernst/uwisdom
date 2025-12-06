@@ -1,7 +1,7 @@
 ===========================================================================
 
 Ubuntu:
-sudo apt install clisp
+sudo apt -yqq install clisp
 
 Mac:
 sudo port install clisp

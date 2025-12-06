@@ -1,6 +1,6 @@
 First try to use the OS's packaging system:
 
-sudo apt install asciidoctor
+sudo apt -yqq install asciidoctor
 
 If I can't do that (for example, at UW CSE), then do:
 

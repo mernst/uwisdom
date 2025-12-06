@@ -4,7 +4,7 @@ Before upgrading, make sure all unison replicas (including Athena) are up
 to date.
 
 Ubuntu:
-sudo apt install unison
+sudo apt -yqq install unison
 
 Ubuntu 20.04:  follow instructions at
 https://askubuntu.com/questions/231562/what-is-the-difference-between-apt-purge-and-apt-remove:
@@ -82,8 +82,8 @@ mv unison-2.27.[45]7 $UBINDIR
 
 # Problem: this is still at version 2.13, and I want 2.27
 Debian:
-  sudo apt install unison
-  sudo apt install unison-gtk
+  sudo apt -yqq install unison
+  sudo apt -yqq install unison-gtk
 
 Troubleshooting:
 ssh pag.lcs.mit.edu 'echo $PATH'

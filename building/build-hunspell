@@ -13,7 +13,7 @@ Easy installation instructions (no compilation)
 # around 16 Oct 2014:  http://debbugs.gnu.org/cgi/bugreport.cgi?bug=7781#31
 
 On Ubuntu:
- sudo apt install hunspell
+ sudo apt -yqq install hunspell
 On Mac:
  sudo port install hunspell
  # brew install hunspell

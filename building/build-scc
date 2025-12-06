@@ -32,7 +32,7 @@ hash -r
 To install cloc:
 
 # Ubuntu
-sudo apt install cloc
+sudo apt -yqq install cloc
 
 # Otherwise:
 cd $HOME/bin/install

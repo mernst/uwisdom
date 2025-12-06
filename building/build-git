@@ -21,7 +21,7 @@ make install-doc install-html install-info
 ===========================================================================
 
 # To install git lfs on Ubuntu:
-sudo apt install git-lfs
+sudo apt -yqq install git-lfs
 git-lfs install
 
 # I later had to do

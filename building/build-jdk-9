@@ -341,7 +341,7 @@ JDK 6 for Linux:
 # and put it in /tmp, owned by root.root.
 
 # 2. Run the following commands.
-sudo apt install sun-java6-bin sun-java6-demo sun-java6-doc sun-java6-fonts sun-java6-jdk sun-java6-jre sun-java6-plugin sun-java6-source
+sudo apt -yqq install sun-java6-bin sun-java6-demo sun-java6-doc sun-java6-fonts sun-java6-jdk sun-java6-jre sun-java6-plugin sun-java6-source
 sudo update-java-alternatives -s java-6-sun
 # Add /usr/lib/jvm/java-6-sun to the top of /etc/jvm
 sudo emacs /etc/jvm
@@ -382,7 +382,7 @@ Docs:
 
 # Ubuntu:
 # Everything should already be installed in the right place by the
-# "sudo apt install sun-java6-doc" command.  (But that package no
+# "sudo apt -yqq install sun-java6-doc" command.  (But that package no
 # longer exists...)
 # (That place is /usr/share/doc/sun-java6-jdk/html.)
 # Already set up:
@@ -403,7 +403,7 @@ Docs:
 ===========================================================================
 
 Debian package for Sun's Java JDK: java-package
-  apt install java-package
+  apt -yqq install java-package
   fakeroot make-jpkg jre-1_5_0_06-linux-i586.bin
   dpkg -i sun-j2re1.5_1.5.0+update06_i386.deb
 More info here:

@@ -113,7 +113,7 @@ Verify that mic and headphones are working with
 
 Instructions from http://linuxmafia.com/faq/Debian/alsa.html :
 
-sudo apt install alsa-base alsa-headers alsa-modules-`uname -r` alsa-oss alsa-utils alsamixergui 
+sudo apt -yqq install alsa-base alsa-headers alsa-modules-`uname -r` alsa-oss alsa-utils alsamixergui 
 
 Choose card named "intel8x0"
 

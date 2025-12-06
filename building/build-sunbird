@@ -20,7 +20,7 @@ Linux:
 # but version 0.8 did work for me.
 
 #if Ubuntu
-sudo apt install libstdc++5
+sudo apt -yqq install libstdc++5
 #endif
 cd ~/bin/install/
 wget 'http://download.mozilla.org/?product=sunbird-0.9&os=linux&lang=en-US'

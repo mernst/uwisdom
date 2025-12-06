@@ -14,7 +14,7 @@ control characters.
 VER=0.8.3
 cd ~/tmp
 wget https://github.com/sylvainhalle/textidote/releases/download/v${VER}/textidote_${VER}_all.deb
-sudo apt install ./textidote_${VER}_all.deb
+sudo apt -yqq install ./textidote_${VER}_all.deb
 
 ===========================================================================
 

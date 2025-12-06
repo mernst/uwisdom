@@ -19,7 +19,7 @@ svn checkout http://google-code-wiki-to-html.googlecode.com/svn/trunk/ google-co
 5. Since Google Code wikis use MoinMoin syntax, another option is to install
 MoinMoin then see:  http://moinmo.in/MoinDump
 
-sudo apt install python-moinmoin
+sudo apt -yqq install python-moinmoin
 
 moin export dump \
                   --wiki-url=https://code.google.com/p/daikon-dot-net-front-end/w/list \

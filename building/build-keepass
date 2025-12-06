@@ -1,7 +1,7 @@
 First, install Mono.  See file build-mono
 Also install xdotool.
 #if Ubuntu
-sudo apt install xdotool
+sudo apt -yqq install xdotool
 #endif
 
 ===========================================================================
@@ -24,6 +24,6 @@ mono KeePass.exe
 KeePassX is a clone.
 It can't read KeePass 2.x database files.
 Thus, do not use it.
-sudo apt install keepassx
+sudo apt -yqq install keepassx
 
 ===========================================================================

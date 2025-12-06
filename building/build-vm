@@ -37,7 +37,7 @@ I failed while trying to use Debian APT to install vm 7.19 (on Debian 4.0
 at MPI), via these commands:
 
   # Debian vm package depends on emacs21.  Why isn't emacs22 acceptable?
-  apt install vm
+  apt -yqq install vm
   cp -pR /usr/share/emacs/site-lisp/vm /usr/share/emacs/22.1/site-lisp/vm
   rm /usr/share/emacs/22.1/site-lisp/vm/vm.elc
   apt uninstall emacs21

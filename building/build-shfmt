@@ -3,7 +3,7 @@
 # As of 2025-05-10, this is version v3.5.1, which was released in 2022-06; and it crashes.
 # sudo snap install shfmt
 # As of 2025-05-10, this is version v3.8.0, which was released in 2024-02; it doesn't crash.
-sudo apt install shfmt
+sudo apt -yqq install shfmt
 
 
 # Systems where I do not have root (e.g., CSE):

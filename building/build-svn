@@ -13,7 +13,7 @@ Until Ubuntu has 1.6 out of experimental:
 ##   deb http://ppa.launchpad.net/anders-kaseorg/subversion-1.6/ubuntu intrepid main
 ##   deb-src http://ppa.launchpad.net/anders-kaseorg/subversion-1.6/ubuntu intrepid main
 sudo apt update
-sudo apt install subversion
+sudo apt -yqq install subversion
 
 ----------------
 

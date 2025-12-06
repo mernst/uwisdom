@@ -1,5 +1,5 @@
 # Ubuntu:
-sudo apt install z3
+sudo apt -yqq install z3
 
 # Otherwise:
 cd ~/bin/install

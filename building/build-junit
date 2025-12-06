@@ -1,7 +1,7 @@
 ===========================================================================
 
 On ubuntu:
-sudo apt install junit4 junit4-doc
+sudo apt -yqq install junit4 junit4-doc
 after which the jar file is
 /usr/share/java/junit4-4.11.jar
 and Javadoc is in /usr/share/doc/junit4/api

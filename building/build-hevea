@@ -1,5 +1,5 @@
 # Can also do:
-sudo apt install hevea
+sudo apt -yqq install hevea
 # which is version 2.06 as of Ubuntu 13.10 "saucy".
 # and which is version 2.23 as of Ubuntu 15.10 "wily" (but 2.28 was released in December 2015).
 
@@ -13,7 +13,7 @@ VER=2.28
 PKG=hevea-$VER
 
 #if Ubuntu
-sudo apt install ocaml
+sudo apt -yqq install ocaml
 #else if Mac
 sudo port install ocaml
 #else

@@ -15,6 +15,6 @@ To install Ocaml 4.02 before it arrives in the main Ubuntu repositories:
     sudo apt update
  * technique 2 (Pavel recommends against it):
     sudo apt remove ocaml
-    sudo apt install opam
+    sudo apt -yqq install opam
     opam init
     opam switch 4.02.3
