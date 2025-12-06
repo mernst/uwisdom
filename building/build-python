@@ -31,7 +31,7 @@ UV
 
 # I should build html5validator rather than installing the Python package.
 
-uv tool install mypy && \
+# uv tool install mypy && \
 uv tool install ruff && \
 echo "success"
 # To upgrade all tools:
@@ -59,6 +59,8 @@ ruff -q format file1.py file2.py ...
 
 EXECUTABLES/APPLICATIONS
 
+# When possible, it is better to do "uv add ..." within a project.
+# That does not currently work for ruff, but it does for all other tools.
 uv tool install ruff
 uv tool install ty
 # I should build html5validator rather than installing the Python package.  (Why?)
