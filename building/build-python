@@ -59,7 +59,7 @@ ruff -q format file1.py file2.py ...
 
 EXECUTABLES/APPLICATIONS
 
-# When possible, it is better to do "uv add ..." within a project.
+# When possible, it is better to do "uv add ... --dev" within a project.
 # That does not currently work for ruff, but it does for all other tools.
 uv tool install ruff
 uv tool install ty

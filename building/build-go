@@ -1,5 +1,11 @@
 ===========================================================================
 
+Rocky Linux, with root:
+
+sudo dnf install golang
+
+===========================================================================
+
 https://go.dev/doc/install says:
 
 # Get version number from https://golang.org/dl/
