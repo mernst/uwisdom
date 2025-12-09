@@ -8,6 +8,46 @@ menu icon (three lines or dots) in the top corner.
 ## Markdown
 
 
+### pymarkdownlnt
+
+
+To run pymarkdownlnt on a project:
+
+```sh
+# Install
+uv add pymarkdownlnt --dev
+# Run
+uv run pymarkdownlnt
+```
+
+To run pymarkdownlnt outside a project:
+
+```sh
+uvx pymarkdownlnt version
+```
+
+
+List of rules for pymarkdownlnt:
+https://pymarkdown.readthedocs.io/en/stable/rules/
+
+To learn configuration options that may appear in a `.pymarkdown` (JSON format),
+`.pymarkdown.yaml`, or `.pymarkdown.toml` file, look at the strings in the `.py`
+files in https://github.com/jackdewinter/pymarkdown/tree/main/pymarkdown/plugins
+
+
+Warning/error suppressions for pymarkdownlnt:
+
+```markdown
+<!-- pyml disable-next-line no-multiple-space-atx -->
+<!-- pyml disable-num-lines 3 blanks-around-fences -->
+<!-- pyml disable line-length -->
+<!-- pyml enable line-length -->
+```
+
+
+### markdownlint-cli2
+
+
 Typical Makefile rules for markdownlint-cli2:
 
 <!-- markdownlint-disable no-hard-tabs -->
@@ -22,7 +62,7 @@ markdownlint-check:
 <!-- markdownlint-enable no-hard-tabs -->
 
 
-Suppressions for markdownlint-cli2:
+Warning/error suppressions for markdownlint-cli2:
 
 ```markdown
 <!-- markdownlint-disable no-hard-tabs -->

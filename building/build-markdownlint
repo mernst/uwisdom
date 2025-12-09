@@ -1,3 +1,34 @@
+Linting markdown
+
+===========================================================================
+
+pymarkdownlnt
+
+In a project:
+```sh
+# To install:
+uv add pymarkdownlnt --dev
+# To run:
+uv pymarkdownlnt
+```
+
+Not in a project:
+```sh
+uvx pymarkdownlnt
+```
+
+===========================================================================
+
+Markdownlint-cli2
+
+markdownlint-cli2 is a nice tool, but installation for CI is a nightmare because
+of incompatibilities with various versions of node, which requires
+trying to configure nvm to re-install node, etc.
+
+Therefore, I'm giving up on it.
+
+----------------
+
 # If I have root:
 sudo apt -qqy install npm
 sudo npm install markdownlint-cli2 --global
@@ -22,6 +53,23 @@ Common to put in .md files:
 
 <!-- markdownlint-disable line-length -->
 <!-- markdownlint-enable line-length -->
+
+===========================================================================
+
+Markdownlint-cli
+
+https://github.com/igorshubovych/markdownlint-cli
+
+npm install -g markdownlint-cli
+
+===========================================================================
+
+mdl, markdownlint
+
+gem install mdl
+
+
+markdownlint-cli2 is generally preferred.
 
 ===========================================================================
 
