@@ -581,7 +581,7 @@ To edit PDF on Linux or Ubuntu:
 
 * online: <https://www.ilovepdf.com/edit-pdf> ; can insert .jpg but not .eps or .pdf files.
 * online: <https://www.scanwritr.com/app/#!/gallery>
-* OpenOffice Draw
+* LibreOffice (or OpenOffice) Draw
    The default file format is ODG, not PDF, so do "export (directly) as PDF".
 * Foxit reader (not updated for Linux since Sep 2018, as of Dec 2023)
 * Okular is designed for KDE, so installing it on Ubuntu installs hundreds of megs of KDE modules.  I should probably try it anyway.
