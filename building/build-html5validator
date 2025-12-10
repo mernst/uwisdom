@@ -1,6 +1,20 @@
 ===========================================================================
 
-Build from source (preferred)
+Run via uv (preferred)
+
+Within a project:
+```sh
+uv html5validator
+```
+
+Outside a project:
+```
+uvx html5validator
+```
+
+===========================================================================
+
+Build from source
 
 
 mkdir -p ~/bin/install
