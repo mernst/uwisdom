@@ -527,6 +527,12 @@ In Git, to clone a particular branch:
 ```
 
 
+In Git, to delete a remote branch:
+
+```sh
+git push origin --delete BRANCHNAME
+```
+
 
 
 ### Git merging
