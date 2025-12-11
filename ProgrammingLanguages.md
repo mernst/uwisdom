@@ -423,6 +423,12 @@ Path('filename.txt').write_text(new_file_content)
 ```
 
 
+Python threads are useful for I/O bound tasks,
+but not for CPU-bound tasks (which need to use processes)
+Multithreading is limited by the global interpreter lock:
+only one thread can execute Python code at a time.
+
+
 ### Python dependency management
 
 
