@@ -445,3 +445,25 @@ Combinatorial games suite (supersedes David Wolfe's package):
 <http://cgsuite.sourceforge.net/>
 
 
+There are two types of "curves" in academic grading.
+As background, one grading standard is that an "A" grade is given to students
+who receive between 90% and 100% of the possible points, a "B" grade is given to
+students who receive between 80% and 90% of the possible points, etc.
+Curving does not use that standard.
+
+* One type of curving insists that some students get a high grade and some
+  students get a low grade, regardless of the students' level of understanding.
+  If all the students received between 50% and 80% of the possible points, the
+  ones who scored 80% would receive an "A" grade and the ones who scored 50%
+  would receive a failing grade.
+* Another type of curving assigns grades based on the students' understanding,
+  regardless of the number of points they received.  Suppose all the students
+  received between 50% and 80% of the possible points.  If the lowest-scoring
+  student did work worthy of a "B" and the highest-scoring student did work
+  worthy of a "B", then the students who scored between 65% and 80% would
+  receive an "A" and students who scored between 50% and 65% would receive a
+  "B".  On the other hand, if the lowest-scoring student did work worthy of a
+  "D" and the highest-scoring student did work worthy of a "B", then perhaps
+  70-80% would earn a "B", 60-70% would earn a "C", and 50-60% would earn a "D".
+  With this type of grading, a "low" numerical score of, say, 65% could still
+  indicate excellent performance.
