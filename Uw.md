@@ -301,6 +301,9 @@ Purchase request:
 <https://internal.cs.washington.edu/research-admin/research-finance-team/>
 
 
+In CSE2 (Gates Center), the gray electrical outlets in every room turn off 15 minutes after the motion occupancy censor stops recording movement.
+
+
 ## CSE sysadmin
 
 
