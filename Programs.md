@@ -1193,6 +1193,24 @@ To write a comment in a Markdown file, write this with blank lines both before a
 ```
 
 
+To permit a Markdown file to fill the width of the browser:
+
+1. Add anywhere in the `.md` file:
+```markdown
+  ``` {=html}
+  <style>
+  body { min-width: 95% !important; }
+  </style>
+  ```
+```
+
+2. Remove from the `body {...}` section of the `.html` file:
+
+```css
+max-width: 36em;
+```
+
+
 List of fenced code block identifiers (programming languages) for Markdown:
 
 * <https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml>
