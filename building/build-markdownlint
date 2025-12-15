@@ -35,6 +35,11 @@ sudo npm install markdownlint-cli2 --global
 # If no root:
 npm install markdownlint-cli2 --global
 
+# To update:
+sudo npm update -g
+# or, if no root:
+npm update -g
+
 ----------------
 
 Typical invocation:
