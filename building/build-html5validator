@@ -8,7 +8,7 @@ uv html5validator
 ```
 
 Outside a project:
-```
+```sh
 uvx html5validator
 ```
 
