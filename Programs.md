@@ -2285,10 +2285,16 @@ choose "save as"!
    ```
 
 
-To make ripgrep searh all files, including those in the `.gitignore` file:
+To make ripgrep search all files, including those in the `.gitignore` file:
 
 ```sh
 rg --no-ignore
+```
+
+Perhaps this also searches everything:
+
+```sh
+rg -uuu
 ```
 
 
