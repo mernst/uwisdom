@@ -203,17 +203,14 @@ For scheduling a meeting:
   When2Meet does not.
 * Doodle only permits 20 possibilities per poll.  For a weekly meeting, I had to make 5 different polls, one per day.
 * Outlook supports "preferred" and "yes" (similar to "yes" and "ifneedbe", which is terminology I prefer).
-* WhenIsGood/When2Meet has a nicer interface.  With Doodle, you need to create
+* When2Meet has a nicer interface.  (As does WhenIsGood.)  With Doodle, you need to create
   many 30-minute proposals even to schedule a 1-hour meeting.  Each one
   takes multiple clicks to create and to answer.  WhenIsGood/When2Meet just lets you
   quickly paint over the relevant times.
-* WhenIsGood has accounts.  When2Meet does not.
-* When2Meet can do days of the week, WhenIsGood does not.
 
-(Tungle.me combined the best of both, but it is no longer supported as of
-December 3, 2012.)
 Other possibilities, none of which seems great
 
+* WhenIsGood only permits meetings to start on the hour, not on the half hour.
 * Framadate: Not bad, but no calendar integration
 * Dudle:  by default gives just by-hour; slightly clunky interface.  No calendar integration
 * schedule once: has Google Calendar integration; $5+/month; not really for group meetings?
@@ -221,6 +218,7 @@ Other possibilities, none of which seems great
 * gathergrid.com: only by hour; no calendar integration
 * whenshouldwe.com: terribly basic; not acceptable
 * selectthedate.com: selects a date, not among multiple times on one date
+* Tungle.me combined the best of both Doodle and When2Meet, but it is no longer supported as of December 3, 2012.)
 
 
 Two tips about Doodle polls:
