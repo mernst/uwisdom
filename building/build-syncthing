@@ -1,7 +1,7 @@
 ===========================================================================
 
 CSE (on godwit): run:
-cd && nohup syncthing &
+cd ~/tmp && nohup syncthing &
 
 To kill, first do:
 killall syncthing
@@ -26,14 +26,14 @@ Installation:
 # Instructions are from https://syncthing.net/downloads/
 unamedir=`uname`-`uname -m`
 archname=$(arch)
-archname=$archname
 if [ "$archname" = "x86_64" ]; then
   export archname="amd64"
 elif [ "$archname" = "aarch64" ]; then
   export archname="arm64"
 fi
+echo "archname=${archname}"
 cd ~/bin/install
-VER=v2.0.11
+VER=v2.0.12
 DIR=syncthing-linux-${archname}-${VER}
 wget https://github.com/syncthing/syncthing/releases/download/${VER}/${DIR}.tar.gz
 tar xvf ${DIR}.tar.gz
