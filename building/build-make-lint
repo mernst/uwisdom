@@ -1,0 +1,23 @@
+Makefile linters:
+
+https://crates.io/crates/unmake
+  To install: cargo install unmake
+  To run: unmake .
+  I found it not useful: it only raised lots of obscure false positives.
+
+https://github.com/checkmake/checkmake
+  This didn't work: To run: go run github.com/checkmake/checkmake/cmd/checkmake@latest MyMakefile
+  To install:
+  cd ~/tmp
+  git clone https://github.com/checkmake/checkmake
+  cd checkmake
+  BUILDER_EMAIL=x make checkmake
+  To run: ~/tmp/checkmake/checkmake/checkmake $(findfile Makefile)
+  I found it not useful: it only warned about "multiple definitions" that were actually in separate branches of an `if`.
+
+https://github.com/EbodShojaei/bake
+  To run: uvx mbake format --check Makefile
+    Formatting is fine, except that it removes newlines at end of files.  :-(
+  To run: uvx mbake validate Makefile
+    Issues false positive errors for a Makefile that just defines variables and includes another Makefile, but does not explicitly define any targets of its own.
+    Runs very slowly.
