@@ -1,8 +1,9 @@
 # Wisdom about using Microsoft Windows on a personal computer (PC)
 
 
-On github.com, you can view the table of contents of this file by clicking the
-menu icon (three lines or dots) in the top corner.
+On github.com, you can view the table of contents (outline) of this file by
+clicking the menu icon (three lines or dots) in the top corner.  It's next to
+the pencil "edit" icon and below the word "History".
 
 
 ## Windows Subsystem for Linux (WSL)
