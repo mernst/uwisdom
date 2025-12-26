@@ -5,3 +5,5 @@ gem install html-proofer
 Under CI:
 export NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 gem install html-proofer
+
+TODO: How does html-proofer compare to other validation programs, such as html5validator?
