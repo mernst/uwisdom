@@ -470,6 +470,9 @@ Javadoc links:
 * under JDK > 17 (i.e., JDK >= 18), use JDK 17 links, and "--link-modularity-mismatch info"
 
 
+To reduce diffs, run Javadoc with `-notimestamp`.
+
+
 ## Command-line options
 
 

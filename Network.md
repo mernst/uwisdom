@@ -466,3 +466,7 @@ Curving does not use that standard.
   70-80% would earn a "B", 60-70% would earn a "C", and 50-60% would earn a "D".
   With this type of grading, a "low" numerical score of, say, 65% could still
   indicate excellent performance.
+
+
+To create a favicon from text:
+https://onlinetools.com/image/generate-image-from-text
