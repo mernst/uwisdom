@@ -365,6 +365,11 @@ A guest account ("research" account type) is only permitted to use 25 MB (!) of 
   `/scratch/${USER}/` and link from your home directory.
 
 
+A list of all my sponsored accounts at CSE (e.g., guest accounts),
+with their expiration dates:
+<sponsor.cs.washington.edu>.
+
+
 To apply for a new UW NetID, the sponsor fills out a form at
   <https://itconnect.uw.edu/tools-services-support/networks-connectivity/husky-onnet/husky-onnet-for-sponsored-uw-netids/>
 
