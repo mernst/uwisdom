@@ -401,6 +401,13 @@ To update submodules to their latest version from their own upstream:
 git submodule update --recursive --remote
 ```
 
+To remove git submodules locally while ensuring that `git status` output is clean:
+
+```sh
+git submodule deinit --all -f
+rm -rf .git/modules/my_submodule
+```
+
 
 To obtain all pull request branches from a GitHub repository:
 
