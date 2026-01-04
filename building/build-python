@@ -49,12 +49,13 @@ uv tool upgrade --all
 
 EXECUTABLES/APPLICATIONS
 
-# When possible, it is better to do "uv add ... --dev" within a project.
-# That does not currently work for ruff, but it does for all other tools.
+# When possible, install within a single project:
+uv add html5validator --dev
+uv add ruff --dev
+uv add ty --dev
+
+# If that does not work, install it globally.
 uv tool install ruff
-uv tool install ty
-# I should build html5validator rather than installing the Python package.  (Why?)
-uv tool install html5validator
 
 ----------------
 
