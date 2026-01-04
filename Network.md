@@ -470,3 +470,7 @@ Curving does not use that standard.
 
 To create a favicon from text:
 https://onlinetools.com/image/generate-image-from-text
+
+
+If someone cites AI as a source to try to prove something:
+https://stopcitingai.com/
