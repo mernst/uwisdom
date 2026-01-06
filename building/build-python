@@ -3,6 +3,8 @@
 # To install uv, see below.
 
 uv python install --default
+uv python install 3.14
+
 # To see which versions are available:
 uv python list
 
