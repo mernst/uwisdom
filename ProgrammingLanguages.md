@@ -569,7 +569,7 @@ and execution tracing) to make sure problems are caught early:
   ...
 ```
 
-For a Posix shell script to halt on error, use:
+For a Posix shell script to halt/stop/die on error, use:
 
 ```sh
   set -e
@@ -588,7 +588,7 @@ It's also possible to set these when running the script:
 
 
 By default, a shell script continues if a command within it fails.  This is
-highly error-prone.  To halt/stop on error, almost all shell scripts should start with
+highly error-prone.  To halt/stop/die on error, almost all shell scripts should start with
 
 ```sh
 set -e

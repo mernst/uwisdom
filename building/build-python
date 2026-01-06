@@ -2,7 +2,9 @@
 
 # To install uv, see below.
 
-uv python install --default
+uv python install 3.14 --default
+# To not link to ~/.local/bin/python and ~/.local/bin/python, remove `--default`:
+uv python install 3.14
 # To see which versions are available:
 uv python list
 
