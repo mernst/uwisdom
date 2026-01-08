@@ -274,6 +274,10 @@ To add to the existing list of tags tables, do
 ```
 
 
+In Emacs, to edit occurrences in a `*grep*` or `*rg*` buffer, run `C-c C-p`.
+When done editing, `C-c C-s` (I think).
+
+
 ## Diffs
 
 
