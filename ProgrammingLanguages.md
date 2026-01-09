@@ -502,7 +502,7 @@ Parsing command-line arguments in a Posix shell script:
 Redirecting output in command shells:
 
 * In sh/bash (in a shell script):
-  * To redirect standard error to standard output, use `2>&1`.
+  * To redirect standard error (stderr) to standard output (stdout), use `2>&1`.
       Warning:  this must come after any file redirection:  `cmd > file 2>&1`.
       This is because `2>&1` means to make stderr a copy of stdout.  If you
       redirect to a file with `> file` after doing so, then stdout is

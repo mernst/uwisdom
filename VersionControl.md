@@ -900,8 +900,11 @@ In GitHub, adding a CONTRIBUTING file to the root of your repository will add a
 link to your file when a contributor creates an Issue or opens a Pull Request.
 
 
-I suggest that you use GitHub's squash-and-merge feature when committing pull requests.  It leads to a cleaner version control history.  A pull request usually represents one concept, so it can be represented as a single commit.  There is no need to record all the iterations from debugging or code review.
-In the repository's settings, you can unselect "Allow merge commits" and "Allow rebase merging", and change the default commit message for squash merging to "Pull request title".
+I suggest that you use squash-and-merge when committing pull requests.  It leads to a cleaner version control history.  A pull request usually represents one concept, so it can be represented as a single commit.  There is no need to record all the iterations from debugging or code review.
+
+For GitHub:  In the repository's settings, unselect "Allow merge commits" and "Allow rebase merging", and change the default commit message for squash merging to "Pull request title".
+
+For GitLab:  Settings > Merge requests > Squash commits when merging : Require  (or "Encourage" for long-lived forks), then "Save changes".
 
 
 In GitHub, you can squash a pull request into a single commit and then merge the
