@@ -2497,6 +2497,18 @@ To turn off screensavers in Gnome:
 3. Click 'OK'
 
 
+To keep older versions of a file or command output, before recreating it, in order to see a diff of the results:
+
+```sh
+for f in output.txt*; do \
+  mv -f $f $f-PREV1; \
+done && \
+for f in *-PREV1; do \
+  mv -f $f ${f%?}; \
+done && \
+```
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
