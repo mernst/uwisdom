@@ -2509,6 +2509,13 @@ done && \
 ```
 
 
+To remove the lock file for Google Chrome:
+
+```sh
+rm -rf ~/.config/google-chrome/SingletonLock
+```
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
