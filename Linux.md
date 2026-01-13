@@ -616,10 +616,10 @@ java randoop.Main arg1 arg2 2>&1 | tee stdout.txt
 To install an RPM, do  `rpm -Uvh foo.rpm`
 
 
-To update all snaps (all snap packages) on an Ubuntu system:
+To update/upgrade all snaps (all snap packages) on an Ubuntu system:
 
 ```sh
-sudo snap update
+sudo snap refresh
 ```
 
 
@@ -635,3 +635,8 @@ sudo killall snap-store && sudo snap refresh
 ```
 
 
+In a shell script, to test whether one string is a prefix of another:
+
+```sh
+beginswith() { case $2 in "$1"*) true ;; *) false ;; esac }
+```
