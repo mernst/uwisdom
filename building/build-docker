@@ -10,6 +10,8 @@ To install Docker on Ubuntu:
  * Method 2: https://docs.docker.com/engine/installation/linux/ubuntulinux/
    It's not optional to do the steps about "Create a Docker group".
 
+sudo usermod -aG docker $USER
+
 DO NOT install the "snap" version of docker.
 To see if it is installed:
   snap list docker
