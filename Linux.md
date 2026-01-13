@@ -635,3 +635,8 @@ sudo killall snap-store && sudo snap refresh
 ```
 
 
+In a shell script, to test whether one string is a prefix of another:
+
+```sh
+beginswith() { case $2 in "$1"*) true ;; *) false ;; esac }
+```
