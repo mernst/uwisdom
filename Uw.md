@@ -546,6 +546,11 @@ from a script using `attumail.cs.washington.edu`. To check if you are a member:
    email.
 
 
+As of 2025-10-01:
+"bam" and "boom" run Rocky 10, as a preview for researchers.
+Other CSE-managed machines run Rocky 9.7.
+
+
 ## PLSE
 
 
