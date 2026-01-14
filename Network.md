@@ -474,3 +474,14 @@ https://onlinetools.com/image/generate-image-from-text
 
 If someone cites AI as a source to try to prove something:
 https://stopcitingai.com/
+
+
+OCR (optical character recognition): 
+
+* Chandra: <https://www.datalab.to/playground/documents/new>, recommended by Kevin Lin 2026-01-14.
+* NotebookLM: <https://notebooklm.google.com/>, also recommended by Kevin Lin 2026-01-14.
+
+Worse, not recommended:
+
+* https://olmocr.allenai.org/
+* https://dotsocr.xiaohongshu.com/
