@@ -2516,6 +2516,13 @@ rm -rf ~/.config/google-chrome/SingletonLock
 ```
 
 
+To convert a file from ISO-8859 to UTF-8 character encoding:
+
+```sh
+FILE=.ispell_english && iconv -f ISO-8859-14 $FILE -t UTF-8 -o $FILE-converted && mv -f $FILE-converted $FILE
+```
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
