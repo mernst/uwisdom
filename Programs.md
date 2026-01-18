@@ -2523,6 +2523,23 @@ FILE=.ispell_english && iconv -f ISO-8859-14 $FILE -t UTF-8 -o $FILE-converted &
 ```
 
 
+In a project that uses `git-clone-related`:
+
+Please
+* create a fork of
+  THE PROJECT
+* create a branch with exactly the same name as this one (
+  THE BRANCH NAME
+)
+* make your proposed change on that branch
+* push it
+* open a PR for it
+* write "merge with `<reference to that PR>`" to the description description at the top of this pull request
+
+Now, CI for this pull request will use it and should no longer fail.
+You need to trigger a re-run of the failing CI job; if you are not allowed to do so, you can either push a trivial change or ask me to do it.
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.

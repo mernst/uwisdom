@@ -46,7 +46,7 @@ Comparison of CI systems:
 ## Azure Pipelines
 
 
-Azure Pipelines terminology:
+Azure Pipelines CI (continuous integration) terminology:
 
 * A pipeline is one or more stages.
 * A stage consists of one or more jobs, which are units of work assignable to a particular machine.
@@ -119,6 +119,11 @@ To enable the "run next" button in Azure Pipelines:
 2. Set specific users as Admins for all agent pools or specific pools depending our needs.
 
 After doing this, it may take a few minutes for users to see the "run next" button.
+
+
+In Azure Pipelines, to add a secret such as a password or a GitHub PAT (personal
+access token), "Edit" the pipeline then click the "Variables" button in the
+upper right corner.
 
 
 ## CircleCI

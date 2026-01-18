@@ -12,7 +12,7 @@ uv add pymarkdownlnt --dev
 uv pymarkdownlnt
 ```
 
-Not in a project:
+Not in a project, to run:
 ```sh
 uvx pymarkdownlnt
 ```
@@ -21,11 +21,15 @@ uvx pymarkdownlnt
 
 Markdownlint-cli2
 
-markdownlint-cli2 is a nice tool, but installation for CI is a nightmare because
+markdownlint-cli2 is a nice tool.  It's better than pymarkdownlnt because it understands YAML front matter in Markdown files.
+
+However, installation for CI is a nightmare because
 of incompatibilities with various versions of node, which requires
 trying to configure nvm to re-install node, etc.
 
-Therefore, I'm giving up on it.
+But I guess I can run it like:
+
+docker run -w /myfolder -v $PWD:/myfolder davidanson/markdownlint-cli2:v0.20.0 "**/*.md" "#node_modules"
 
 ----------------
 
