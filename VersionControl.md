@@ -464,6 +464,13 @@ git diff --no-index ...
 `git diff` is recursive by default.
 
 
+To ensure that your human name is correct on a GitHub pull request, do two things.
+
+On each computer where you have a git clone, run `git config --global user.name`.  If it is incorrect, fix it by running a command like `git config --global user.name "Siddhartha Gautama"`.
+
+On any page under github.com, click on your face or initial in the upper right corner.  If the displayed name is not correct, click "profile" then "edit profile" to fix it.
+
+
 ### The git staging area
 
 

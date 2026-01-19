@@ -2534,7 +2534,7 @@ Please
 * make your proposed change on that branch
 * push it
 * open a PR for it
-* write "merge with `<reference to that PR>`" to the description description at the top of this pull request
+* write "merge with `<reference to that PR>`" in the description at the top of this pull request
 
 Now, CI for this pull request will use it and should no longer fail.
 You need to trigger a re-run of the failing CI job; if you are not allowed to do so, you can either push a trivial change or ask me to do it.
