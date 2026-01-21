@@ -309,6 +309,17 @@ Purchase request:
 In CSE2 (Gates Center), the gray electrical outlets in every room turn off 15 minutes after the motion occupancy censor stops recording movement.
 
 
+Quick and convenient restaurants to take a visitor to:
+
+* Agua Verde, along with Kurtis (Mexican, foot of 15th)
+* Off the Rez (Native American, Burke Museum)
+* Jai Thai (Thai, 4214 U Way)
+* Korean Tofu House (Korean, 4142 Brooklyn)
+* Little Duck (Chinese, 4100 Roosevelt)
+* Aladdin Gyro-Cery & Deli (Mediterranean, 4139 U Way)
+* Chili's on the Ave (many vegan options)
+
+
 ## CSE sysadmin
 
 
