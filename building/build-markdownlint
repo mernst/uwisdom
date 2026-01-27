@@ -23,11 +23,11 @@ Markdownlint-cli2
 
 markdownlint-cli2 is a nice tool.  It's better than pymarkdownlnt because it understands YAML front matter in Markdown files.
 
-However, installation for CI is a nightmare because
+Installation for CI is a nightmare because
 of incompatibilities with various versions of node, which requires
 trying to configure nvm to re-install node, etc.
 
-But I guess I can run it like:
+However, I can run it without installation (only Docker is needed) like:
 
 docker run -w /myfolder -v $PWD:/myfolder davidanson/markdownlint-cli2:v0.20.0 "**/*.md" "#node_modules"
 
