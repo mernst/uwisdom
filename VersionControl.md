@@ -744,9 +744,9 @@ git merge --squash origin/BRANCHNAME
 ## GitHub (Git-specific items go above)
 
 
-For GitHub, to link directly to files in the repository, use rawgit.com.
-Examples:
-  <https://rawgit.com/mernst/bibtex2web/master/bibtex2web.html>
+For GitHub, to render HTMTL files in the repository, use https://htmlpreview.github.io/.
+Example:
+  <https://htmlpreview.github.io/?https://github.com/mernst/bibtex2web/master/bibtex2web.html>
 This does not seem to work for wiki files.
 For GitLab at UW, an example is:
   <https://gitlab.cs.washington.edu/plse/verdi-papers/blob/master/doc/MSR.md>
