@@ -961,6 +961,17 @@ In each case, the directive has no effect unless both tasks would run anyway.
 mustRunAfter is strict.  Gradle may violate shouldRunAfter to increase parallelism.
 
 
+To prepare a Gradle file for eventually upgrading to Kotlin:
+
+```sh
+preplace 'id "(.*)" version "(.*)"' 'id("\1").version("\2")'
+preplace '(api|implementation|target|compileOnly|testCompileOnly|checkerFramework|requireJavadoc) (".*")$' '\1(\2)'
+preplace '(compileOnly|testCompileOnly|checkerFramework) (files.*)$' '\1(\2)'
+preplace 'resolutionStrategy.cacheChangingModulesFor 0, "minutes"' 'resolutionStrategy.cacheChangingModulesFor(0, "minutes")'
+preplace 'check.dependsOn javadoc' 'check.dependsOn(javadoc)'
+```
+
+
 ### Displaying Gradle dependencies
 
 
