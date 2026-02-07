@@ -35,7 +35,7 @@ docker run -w /myfolder -v $PWD:/myfolder davidanson/markdownlint-cli2:v0.20.0 "
 
 # If I have root:
 sudo apt -qqy install npm
-sudo npm install markdownlint-cli2 --global
+sudo npm install --quiet markdownlint-cli2 --global
 # If no root:
 npm install markdownlint-cli2 --global
 

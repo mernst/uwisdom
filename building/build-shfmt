@@ -8,3 +8,4 @@ sudo apt -yqq install shfmt
 
 # Systems where I do not have root (e.g., CSE); and recommended at https://github.com/mvdan/sh :
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
+# It installs into ~/go/bin/ .

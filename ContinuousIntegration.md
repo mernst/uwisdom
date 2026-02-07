@@ -386,6 +386,11 @@ GitHub Actions is problematic if you have flaky jobs.
    resource, so on the re-run, the same or a different job may fail.
 
 
+I can't figure out how to make `apt-get install` run quietly under GitHub
+Actions.  Even with "DEBIAN_FRONTEND=noninteractive" and "-qqy", it still
+produces a lot of output.  It is harmless, though.
+
+
 ## GitLab CI runners
 
 
