@@ -479,7 +479,17 @@ source activate <yourenvironmentname>
 ```
 
 
+To activate a Python venv virtual environment:
 
+```sh
+.venv/bin/activate
+```
+
+To install a package:
+
+```sh
+pip install PACKAGE
+```
 
 
 ## Rust
