@@ -1,4 +1,12 @@
-At CSE:
+curl -fsSL https://claude.ai/install.sh | bash
 
-npm config set prefix "$HOME/.local/"
-npm install -g @anthropic-ai/claude-code
+# OLDER:
+# npm config set prefix "$HOME/.local/"
+# npm install -g @anthropic-ai/claude-code
+# To update:
+# npm i -g @anthropic-ai/claude-code
+# To remove:
+# npm uninstall -g @anthropic-ai/claude-code
+
+To diagnose:
+claude doctor
