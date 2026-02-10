@@ -20,5 +20,12 @@ the document.
 ## Programming
 
 
+For each class in this codebase that overrides a class in , ensure that
+overrides appear in the same order as they are declared in the superclass.
+Keep non-override private helper methods that are closely related to an override
+method together with that override method -- that is, move them together.
+
 In each subclass, ensure that overrides appear in the same order as they are
 declared in the superclass.
+Keep non-override private helper methods that are closely related to an override
+method together with that override method -- that is, move them together.
