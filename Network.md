@@ -487,8 +487,3 @@ Worse, not recommended:
 
 * https://olmocr.allenai.org/
 * https://dotsocr.xiaohongshu.com/
-
-
-For correcting voice-to-text:
-
-The attached text was transcribed using voice dictation.  Please correct all errors, without making changes to content and without removing or paraphrasing content.
