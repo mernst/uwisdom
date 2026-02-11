@@ -1,0 +1,11 @@
+# To install:
+sudo npm i -g @openai/codex
+# To upgrade:
+sudo npm i -g @openai/codex@latest
+
+
+# To run:
+codex
+
+
+As of 2026-02-10, the "Codex App" is only available for macOS.
