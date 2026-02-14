@@ -487,3 +487,7 @@ Worse, not recommended:
 
 * https://olmocr.allenai.org/
 * https://dotsocr.xiaohongshu.com/
+
+
+To add someone to Slack, click the organization and the dropdown will contain
+"Invite people to ...".
