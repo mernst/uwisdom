@@ -567,6 +567,7 @@ To use Docker at UW CSE, after Support has installed it on a machine:
 1. Create a folder named docker in an area local to the host - not on a networked file system (like your home directory). /tmp/CSENETID/docker is a reasonable place.
 2. Create the file ~/.config/docker/daemon.json (creating the directories if need be), containing {"data-root":"/tmp/CSENETID/docker"}. The path in that file is the path to the docker folder you created in the previous step.
 3. Run: `dockerd-rootless-setuptool.sh install`
+   This must be done after every reboot.
 4. Add the things it tells you to your .bashrc file, and then run `source .bashrc`
 5. To start Docker: `systemctl --user start docker`
 6. To run Docker, as a proof of concept `docker run hello-world`
