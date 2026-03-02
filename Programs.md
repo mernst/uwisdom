@@ -211,8 +211,8 @@ the "L" or "R" or "U" modifiers.  For instance:
 To combine/interleave two PDF files, one containing odd pages scanned and the
 other containing even pages scanned in reverse order:
 
-* To use `pdfjam`, see <https://unix.stackexchange.com/a/53316/14002> .
 * To use `pdftk`: `pdftk A=odds.pdf B=evens.pdf shuffle A Bend-1 output merged.pdf`
+* To use `qpdf`: `qpdf --collate --empty --pages odd.pdf 1-z even.pdf z-1 -- merged.pdf`
 * Online: <https://www.sejda.com/alternate-mix-pdf>
 
 
@@ -221,12 +221,11 @@ Tools for transforming PDF files:
 * PDFjam is a single program, along with 10 wrappers, each with
    a single purpose (e.g., pdf90 to rotate by 90 degrees).
 * pdftk is a single program with many command-line options.
-   As of 2023, there has been no release since 2013.
-   Does not install easily on Red Hat/Fedora/RHEL/CentOS.
-   A newer version pdftk-java is aliased to pdftk on Ubuntu (& Debian?).
-   Maybe it can be installed more easily?
+   It is provided by package pdftk-java.
 * cpdf is an alternative to both; but is free only for personal use.
    "Charities and educational institutions still require a license."
+* Poppler
+* qpdf
 
 
 Separate/split a file into individual pages:
