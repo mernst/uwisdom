@@ -160,7 +160,6 @@ that works with CPU time rather than wallclock time.
 
 Official (JLS) terminology for Java generics (parametric polymorphism):
 
-
 * The formal type parameter is called a "type parameter".
   The parameter is
   also, equivalently, called a "type variable".  But "type parameter"
