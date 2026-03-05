@@ -972,6 +972,17 @@ preplace 'check.dependsOn javadoc' 'check.dependsOn(javadoc)'
 ```
 
 
+To convert version numbers to use a Gradle "Version Catalog",
+use https://github.com/Splitties/refreshVersions and run
+
+```sh
+./gradlew refreshVersionsMigrate --mode=VersionCatalogOnly
+```
+
+You need to double-check its work, because sometimes it makes more changes than
+desirable.
+
+
 ### Displaying Gradle dependencies
 
 

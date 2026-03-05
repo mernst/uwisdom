@@ -309,7 +309,7 @@ Purchase request:
 In CSE2 (Gates Center), the gray electrical outlets in every room turn off 15 minutes after the motion occupancy censor stops recording movement.
 
 
-Quick and convenient restaurants to take a visitor to:
+Restaurants that are close to UW CSE, quick and convenient to take a visitor to:
 
 * Agua Verde, along with Kurtis (Mexican, foot of 15th)
 * Off the Rez (Native American, Burke Museum)
@@ -318,6 +318,14 @@ Quick and convenient restaurants to take a visitor to:
 * Little Duck (Chinese, 4100 Roosevelt)
 * Aladdin Gyro-Cery & Deli (Mediterranean, 4139 U Way)
 * Chili's on the Ave (many vegan options)
+
+
+UW CSE instructor guide: https://drive.google.com/drive/u/1/folders/0ANtHmFo1cMyQUk9PVA
+
+UW CSE new quarter teaching guide: https://docs.google.com/document/d/1ZXClMBw9NUyibzLiCL194oeWOp5NWv9FnGPNZnvNucM/edit?tab=t.0#heading=h.f5kaxno85jsp
+
+
+As of 2026-03-05, in the Gates building (CSE2), the only printers that can scan are the ones in the first and third floor print centers.
 
 
 ## CSE sysadmin
