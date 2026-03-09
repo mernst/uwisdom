@@ -519,3 +519,6 @@ Worse, not recommended:
 
 To add someone to Slack, click the organization and the dropdown will contain
 "Invite people to ...".
+
+
+To post grades on Canvas so that they are visible to students, go to "Grades", find the assignment, ellipsis menu, "Post grades".
