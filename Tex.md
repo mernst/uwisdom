@@ -2386,9 +2386,13 @@ To make cleveref use a serial comma (sometimes called an Oxford comma):
 
 
 To get an en-dash instead of the word "to" when cleveref references multiple figures, you need to add
-`\newcommand{\crefrangeconjunction}{--}`
+
+```latex
+\newcommand{\crefrangeconjunction}{--}
+```
+
 to the preamble of the document.
-Alternately, do this:
+Alternately, do this (but I'm not sure why you wouldn't use the above variant):
 
 ```latex
 \usepackage{cleveref}
