@@ -238,9 +238,10 @@ Fellowships/scholarships that students can apply for:
 * NSF -- first two years only
 * NDSEG -- first two years only
 * Adobe Research fellowship
+* Bloomberg fellowship
 * Facebook fellowship
-* Symantec Fellowship
-* Google Fellowship
+* Symantec fellowship
+* Google fellowship
 
 
 gitlab.cs.washington.edu does not support adding collaborators by email
