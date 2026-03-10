@@ -54,7 +54,7 @@ collections of content, three options:
 Getting study approval from IRB (run by HSD, Human Subjects Division):
 
 * Exempt studies:  usually interviews, questionnaires, and use of existing data
-* Non-emempt studies:
+* Non-exempt studies:
    For the purposes of a grant proposal, you file an "approval in principle".
    It's an IRB application for expedited review, but without consent forms
    or other materials. The IRB generates a human subjects application #,
@@ -99,7 +99,7 @@ In UW Hires (<https://uwhires.admin.washington.edu/eng/hm/default.cfm?szcat=hm>)
 
 [Poll Everywhere](https://www.polleverywhere.com/) is free to UW faculty and
 students.  You can create simple polls that students can vote on anonymously via
-a URL or text message. It also has integrations with Powerpoint and Google
+a URL or text message. It also has integrations with PowerPoint and Google
 Slides.
 
 
@@ -162,7 +162,7 @@ Use the <cse-maintenance@cs.washington.edu> mailing list for requests about faci
 <space@cs.washington.edu> is for asking for office space.
 
 
-UW CSE intustrial affiliates program:  key contact is Kay Beck-Benton.
+UW CSE industrial affiliates program:  key contact is Kay Beck-Benton.
 Stock reply for people trying to recruit/hire students:
 Good luck on your project!
 The best way to get access to UW's excellent students is via the UW CSE industrial affiliates program:  <http://www.cs.washington.edu/affiliates/>
@@ -185,7 +185,7 @@ Connie Ivey-Pasche or Kay Beck-Benton:
 The UW CSE grad student and advising
 database can be accessed via the Web (if you have proper permissions)
   <https://norfolk.cs.washington.edu/ssl-php/phpPgAdmin/>
-or from the command line (you need postgres, and you need to be on the CSE network):
+or from the command line (you need Postgres, and you need to be on the CSE network):
 
 ```sh
   psql --dbname=cse_admin --host=norfolk.cs.washington.edu --username=suciu
@@ -193,7 +193,7 @@ or from the command line (you need postgres, and you need to be on the CSE netwo
 
 
 If you want to send a message to UW CSE undergrads, send it to
-ugrad-advising@cs and ask them to post it to the ungergraduates Ed discussion board.
+ugrad-advising@cs and ask them to post it to the undergraduates Ed discussion board.
 If you have a time-sensitive message, you should send that to
 cs-ugrads-urgent@cs.
 
@@ -309,17 +309,6 @@ Purchase request:
 In CSE2 (Gates Center), the gray electrical outlets in every room turn off 15 minutes after the motion occupancy censor stops recording movement.
 
 
-Restaurants that are close to UW CSE, quick and convenient to take a visitor to:
-
-* Agua Verde, along with Kurtis (Mexican, foot of 15th)
-* Off the Rez (Native American, Burke Museum)
-* Jai Thai (Thai, 4214 U Way)
-* Korean Tofu House (Korean, 4142 Brooklyn)
-* Little Duck (Chinese, 4100 Roosevelt)
-* Aladdin Gyro-Cery & Deli (Mediterranean, 4139 U Way)
-* Chili's on the Ave (many vegan options)
-
-
 UW CSE instructor guide: https://drive.google.com/drive/u/1/folders/0ANtHmFo1cMyQUk9PVA
 
 UW CSE new quarter teaching guide: https://docs.google.com/document/d/1ZXClMBw9NUyibzLiCL194oeWOp5NWv9FnGPNZnvNucM/edit?tab=t.0#heading=h.f5kaxno85jsp
@@ -343,29 +332,30 @@ Color printer: psc581
     psc581/noduplex
 
 
-An undergrad instructional linux server: `attu.cs.washington.edu`
+An undergrad instructional Linux server: `attu.cs.washington.edu`
 
 
 Printing enscript and cedilla output at CSE:
-ced2:
 
-* .pdf: prints portrait (small)
-* .ps: one-sided, otherwise fine
-* .ps --ps2pdf-> .pdf  on ps581: prints portrait (small)
+* ced2:
 
-ens2f:
+  * .pdf: prints portrait (small)
+  * .ps: one-sided, otherwise fine
+  * .ps --ps2pdf-> .pdf  on ps581: prints portrait (small)
 
-* .ps on ps581: does not work
-* .pdf (converted from .ps with ps2pdf) on ps581:  prints portrait (small)
-* .pdf --pdf2ps-> .ps  on ps581: blank pages
-* .pdf --pdftops-> .ps  on ps581:  WORKS!
-* .ps on psc581: one-sided, otherwise fine
-* .pdf (converted from .ps with ps2pdf) on psc581:  prints portrait (small), one-sided
-ens1f:
-* .ps on ps581: sometimes works, sometimes cuts off left margin
-* all other combinations work
-ens1:
-* directly on ps581:  cut off left margin
+* ens2f:
+
+  * .ps on ps581: does not work
+  * .pdf (converted from .ps with ps2pdf) on ps581:  prints portrait (small)
+  * .pdf --pdf2ps-> .ps  on ps581: blank pages
+  * .pdf --pdftops-> .ps  on ps581:  WORKS!
+  * .ps on psc581: one-sided, otherwise fine
+  * .pdf (converted from .ps with ps2pdf) on psc581:  prints portrait (small), one-sided
+* ens1f:
+  * .ps on ps581: sometimes works, sometimes cuts off left margin
+  * all other combinations work
+* ens1:
+  * directly on ps581:  cut off left margin
 
 
 To apply for a new UW CSE computer account at cs.washington.edu,
@@ -502,7 +492,7 @@ this may be due to a slow or laggy connection.  Try going directly to
 <https://weblogin.cs.washington.edu/cgi-bin/wlogin.cgi>
 
 
-A UW CSE lab-supported machine that gets upgraded late (eg, will be last to be updated to CentOS): barb.cs.washington.edu
+A UW CSE lab-supported machine that gets upgraded late (e.g., will be last to be updated to CentOS): barb.cs.washington.edu
 
 
 Anonymous feedback for CSE courses:
@@ -551,7 +541,7 @@ For course staff communication:
 * Un-officially a free 'retail' Slack workspacesuffices too, as 90 day retention cleans up after itself.
 
 
-You must be a member of the CSE unix group "smtp-users" to send mail
+You must be a member of the CSE Unix group "smtp-users" to send mail
 from a script using `attumail.cs.washington.edu`. To check if you are a member:
 
 1. Go to <https://intranet.cs.washington.edu/grpadmin>
@@ -649,13 +639,17 @@ Restaurants near CSE:
   * Ba Bar
 * Portage Bay (12-minute walk)
   * <https://www.saintbread.com/> (long lines tho)
-  * Agua Verde (sometimes long line, on Boat street)
+  * Agua Verde (sometimes long line, on Boat street at foot of 15th)
 * Montlake
   * Oxbow Bakery (24-minute walk)
 * The Ave or close by
-  * Jai Tai (15-minute walk)
+  * Jai Tai Thai (15-minute walk, 4214 U Way)
   * Shultzy's
-  * Korean Tofu house (15-minute walk)
+  * Korean Tofu house (15-minute walk, 4142 Brooklyn)
+  * Off the Rez (Native American, Burke Museum)
+  * Little Duck (Chinese, 4100 Roosevelt)
+  * Aladdin Gyro-Cery & Deli (Mediterranean, 4139 U Way)
+  * Chili's on the Ave (many vegan options)
 * Far
   * Araya's (29 minute walk but quite good)
 
@@ -664,3 +658,6 @@ Restaurants near CSE:
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
 -->
+
+<!--  LocalWords:  Deca hostname HSD OSP Weakley Montlake Frwy UWMC Overlake washington edu javascript href DL Telecom Panopto CSE2 mvis Canlis SEC25 SEC22 MyCSE Ugrad SLN TRs Ivey Pasche psql github dbname cse suciu Symantec Pim Lustig REU Agua Rez Jai Cery f5kaxno85jsp ps581 noduplex nobanner psc581 enscript ced2 pdf ps2pdf ens2f pdf2ps pdftops ens1f ens1 NetID CSERESEARCH xfreerdp mernst x1440 x1200 x768 rdesktop VDI swlab2 attu GrpAdmin chgrpsh elisp gws Subaction MyTickets dropdown Bekah Un workspacesuffices smtp bam dockerd setuptool systemctl AirBnB Belltown Radford VFHS hotpads padmapper Shultzy's Araya's
+ -->
