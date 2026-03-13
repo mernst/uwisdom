@@ -1,8 +1,7 @@
 cd ~/tmp
-wget http://internap.dl.sourceforge.net/sourceforge/pmd/pmd-bin-4.0.zip
-wget http://internap.dl.sourceforge.net/sourceforge/pmd/pmd-src-4.0.zip
-unzip -q pmd-bin-4.0.zip
-cd pmd-4.0
+PMDVER=7.22.0
+wget https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.22.0/pmd-dist-$PMDVER-bin.zip
+unzip -q pmd-dist-$PMDVER-bin.zip
 
-cd $inv
-~/tmp/pmd-4.0/bin/pmd.sh daikon.jar emacs basic
+cd $d/java/daikon
+~/tmp/pmd-bin-7.22.0/bin/pmd check --dir=. --rulesets=$HOME/bin/src/plume-scripts/.pmd-ruleset.xml --cache=$(pwd)/pmd.cache -r pmd-output.txt
