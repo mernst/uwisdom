@@ -80,7 +80,7 @@ and then call it from the root of your source tree like this:
 ```
 
 
-Here is a Make command to get a list of LaTeX files that are `\inputted` (not
+Here is a shell command to get a list of LaTeX files that are `\inputted` (not
 `\included`) in a LaTeX file, for use in making a tags table or in a buildfile:
 
 ```make
@@ -91,6 +91,15 @@ or, to run tags directly:
 
 ```sh
   etags $(latex-process-inputs -list main.tex)
+```
+
+or, in a Makefile:
+
+```make
+.PHONY: tags
+TAGS: tags
+tags:
+	etags $(shell latex-process-inputs -list main.tex)
 ```
 
 

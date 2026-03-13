@@ -371,7 +371,7 @@ Here are ways to test wither a macro argument is empty/null:
 
 LaTeX macros gobble space after them.  If you wish to insert space
 (except before punctuation or other places where it shouldn't be
-inserted) after a macro expansion, then add "\xspace" at the end of the
+inserted) after a macro expansion, then add `\xspace` at the end of the
 macro body.
 
 ```latex
@@ -383,6 +383,24 @@ macro body.
   ...
   ... and we find \restenergy available to us ...
 ```
+
+
+There are two significant problems with the `\xspace` macro.
+
+1. A period after `\xspace` is always treated as a non-end-of-sentence period,
+   leading to bad formatting if an `\xspace`-defined macro ends a sentence.
+2. If a macro definition ends with a period then \xspace, and it might appear at
+   the end of a sentence, there is no way to prevent two periods in a row in the
+   final output (because any trick to handle the period would try to look ahead,
+   which is what `\xspace` itself does, and only one of the two would work).
+
+
+Foreign words are often italicized in English writing.  If a word appears in an
+English dictionary, it should not be italicized.  For example, "etc." (short for
+et cetera) should not be italicized.  Although it is of Latin origin, it is a
+commonly used, Anglicized term that has become part of the standard English
+vocabulary, rendering italics unnecessary.  Style guides like The Chicago Manual
+of Style recommend using standard Roman font, not italics.
 
 
 Here is a LaTeX command that typesets its argument in a smaller \tt font.  It
@@ -2440,10 +2458,10 @@ and your document does not have an index, then add the `pageanchor=false` option
 ```
 
 
-The `latexmk` program is distributed with LaTeX and so is a fairly
-canonical way to run LaTeX until a fixed point
-(as opposed to non-canonical ways, like the `rubber` program).
-Here is a standard command line:
+The `latexmk` program is distributed with LaTeX and thus is the canonical way to
+run LaTeX until a fixed point (as opposed to non-canonical ways, like the
+`rubber` program or multiple invocations of `latex`).  Here is a standard
+command line:
 
 ```sh
 latexmk -bibtex -pdf -interaction=nonstopmode myfile.tex
