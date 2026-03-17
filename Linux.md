@@ -278,6 +278,10 @@ An Amazon Kindle plugged into Ubuntu Linux via USB has its books mounted at
 /media/$USER/Kindle/documents/ (not at /mnt).
 
 
+There is a "send to Kindle" webpage, in addition to a dedicated email address per account.
+It accepts EPUB but not MOBI files (need to convert MOBI to EPUB).
+
+
 ## X Windows and the display
 
 The X Windows display server is the local machine.
