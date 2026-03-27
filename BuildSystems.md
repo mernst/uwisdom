@@ -666,7 +666,7 @@ To visualize the task dependencies in a Gradle buildfile:
 
 ```gradle
 plugins {
-    id "com.dorongold.task-tree" version "4.0.0"
+    id "com.dorongold.task-tree" version "4.0.1"
 }
 ```
 
