@@ -15,37 +15,40 @@ uv python list
 # Install uv (don't use `sudo`):
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# To update uv:
-uv self update
-
 `uv` is "A single tool to replace pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more."
 
 # As of 2025-10-31, I'm trying to avoid all use of pip and pipx.
 pipx is for executables.
 pip is for modules.
 
-# As of 2025-05-11, this is a very old version.
-# sudo apt -yqq install ruff
-
 ===========================================================================
 
-UV
+Upgrading
 
-# I should build html5validator rather than installing the Python package.
-
-# uv tool install mypy && \
-uv tool install ruff && \
-echo "success"
-# To upgrade all tools:
+# To update uv and all tools:
+uv self update
 uv tool upgrade --all
+uv sync --upgrade
+# These commands update the uv.lock file but NOT the pyproject.toml file
+# (https://github.com/astral-sh/uv/issues/6794).
 
-# For packages, install per-venv, not once and for all in the system as this would do.
-# uv pip install --system \
-#   ggplot \
-#   loguru \
-#   replicate \
-#   rich && \
-# echo "success"
+# What's outdated in the pyproject.toml file (the project dependencies):
+uv tree --depth 1 --outdated | grep '(latest: '
+
+# What's outdated in the uv.lock file (the installed version):
+uv pip list --outdated
+
+----------------
+
+# Here is a hack to upgrade a single package (in both pyproject.toml and uv.lock); choose one:
+PACKAGE=xxx && uv remove $PACKAGE && uv add $PACKAGE
+PACKAGE=xxx && uv remove $PACKAGE --dev && uv add $PACKAGE --dev
+
+# For example:
+uv remove html5validator --dev && uv add html5validator --dev
+uv remove pymarkdownlnt --dev && uv add pymarkdownlnt --dev
+uv remove ruff --dev && uv add ruff --dev
+uv remove ty --dev && uv add ty --dev
 
 ===========================================================================
 
@@ -53,11 +56,22 @@ EXECUTABLES/APPLICATIONS
 
 # When possible, install within a single project:
 uv add html5validator --dev
+uv add pymarkdownlnt --dev
 uv add ruff --dev
 uv add ty --dev
 
 # If that does not work, install it globally.
 uv tool install ruff
+
+# As of 2025-05-11, this is a very old version.
+# sudo apt -yqq install ruff
+
+----------------
+
+Installing development tools:
+
+`uv add --dev` is for dependencies that every developer needs (for your project).  Developer dependencies are installed into the virtual environment for your project (.venv/bin) and show up in pyproject.toml.
+`uv tool install` is for tools that you personally want to use, but that isn't strictly necessary, an example would be your personal choice of profiler.  Tools are installed into their own isolated environment (in ~/.local/bin).
 
 ----------------
 
@@ -93,7 +107,19 @@ sudo pip install mypy
 
 MODULES/PACKAGES
 
-# It's better to install them per-venv, using uv, not globally.
+This whole section describes less desirable ways to install.
+
+----------------
+
+# It's better to install them per-venv, using uv, not globally as this would do.
+# uv pip install --system \
+#   ggplot \
+#   loguru \
+#   replicate \
+#   rich && \
+# echo "success"
+
+----------------
 
 # Using Ubuntu:
 sudo apt -qqy install python3-pandas python3-openai python3-yaml
