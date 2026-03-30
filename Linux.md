@@ -573,9 +573,11 @@ The replace strings are: `"'"` and `"'\\''"`.
 To edit PDF on Linux or Ubuntu:
 
 * online: <https://www.ilovepdf.com/edit-pdf> ; can insert .jpg but not .eps or .pdf files.
-* online: <https://www.scanwritr.com/app/#!/gallery>
 * LibreOffice (or OpenOffice) Draw
    The default file format is ODG, not PDF, so do "export (directly) as PDF".
+   This garbled fonts once.
+* online: <https://www.scanwritr.com/app/#!/gallery>
+   I couldn't get it to insert a (PDF) image.
 * Foxit reader (not updated for Linux since Sep 2018, as of Dec 2023)
 * Okular is designed for KDE, so installing it on Ubuntu installs hundreds of megs of KDE modules.  I should probably try it anyway.
 * Gimp (only one page at a time, and converts to lossy image format)
@@ -585,7 +587,7 @@ To edit PDF on Linux or Ubuntu:
 * Master PDF Editor (version 4+ only), <http://code-industry.net/masterpdfeditor/>
    Version 4 had no way to scale an image while retaining aspect ratio, but version 5 does.
    Don't use the free release of Version 5, which adds an ugly watermark to the output file.
-* PDF Studio works with Ubuntu 15.04, but it's commercial software (their misleading webpage "PDF Studio 10 Free Download" means it's free to download a trial version that watermarks your documents with a huge diagonal "Qoppa Software" across its content, not that it's free to use!)
+* not PDF Studio works with Ubuntu 15.04, but it's commercial software (their misleading webpage "PDF Studio 10 Free Download" means it's free to download a trial version that watermarks your documents with a huge diagonal "Qoppa Software" across its content, not that it's free to use!)
 * not PDFedit (not updated since January 2014, isn't available in Ubuntu 15.04 Vivid Vervet; also based on old Qt 3 toolkit; once corrupted my file)
 * not evince, it only reads
 
