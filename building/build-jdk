@@ -1,5 +1,8 @@
 Also see file build-graalvm .
 
+# On Ubuntu:
+apt -qqy install openjdk-26-jdk
+
 ===========================================================================
 
 BUILDING
