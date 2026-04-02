@@ -1,5 +1,16 @@
 curl -fsSL https://claude.ai/install.sh | bash
 
+npx ctx7 setup
+npx ctx7 login
+
+
+----------------
+
+To diagnose:
+claude doctor
+
+===========================================================================
+
 # OLDER:
 # npm config set prefix "$HOME/.local/"
 # npm install -g @anthropic-ai/claude-code
@@ -7,6 +18,3 @@ curl -fsSL https://claude.ai/install.sh | bash
 # npm i -g @anthropic-ai/claude-code
 # To remove:
 # npm uninstall -g @anthropic-ai/claude-code
-
-To diagnose:
-claude doctor

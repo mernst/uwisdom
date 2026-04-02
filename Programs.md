@@ -1353,6 +1353,15 @@ AI code review tools to investigate:
 * <https://devlo.ai/>
 
 
+For a list of available Claude Code plugins:
+
+```sh
+claude plugins list --available --json
+```
+
+Or ask Claude to put that in a more readable text file.
+
+
 ## Vi editor
 
 
