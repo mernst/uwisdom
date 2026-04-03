@@ -430,6 +430,12 @@ Multithreading is limited by the global interpreter lock:
 only one thread can execute Python code at a time.
 
 
+The default argument for Python's copytree is copy_function=shutil.copy2.  copy2
+raises Error if it cannot set the modification time.  On Unix systems, only the
+owner or root (not someone in the group) can set the modification time.
+shutil.copy doesn't preserve modification time.
+
+
 ### Python dependency management
 
 
