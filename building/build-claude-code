@@ -1,3 +1,17 @@
+Claude Code
+
+===========================================================================
+
+To run:
+claude --dangerously-skip-permissions
+
+Later, there will be an "auto mode" as an alternative to --dangerously-skip-permissions:
+claude --enable-auto-mode
+
+===========================================================================
+
+To install or update:
+
 curl -fsSL https://claude.ai/install.sh | bash
 
 npx ctx7 setup

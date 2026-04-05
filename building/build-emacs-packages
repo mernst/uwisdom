@@ -66,6 +66,7 @@ M-x list-packages RET U x
 
 ===========================================================================
 
+# Rather than doing this, install via ELPA.
 # get version number from https://github.com/radian-software/apheleia/releases
 VER=4.4.2
 cd ~/emacs
