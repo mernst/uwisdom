@@ -983,6 +983,18 @@ You need to double-check its work, because sometimes it makes more changes than
 desirable.
 
 
+`./gradlew dependencies` downloads many dependencies (but not all, according to a Stack Overflow post).
+This might do so, but I have not tested it:
+
+```gradle
+tasks.register("resolveDependencies") {
+    doLast {
+        configurations.matching { it.canBeResolved }.forEach { it.resolve() }
+    }
+}
+```
+
+
 ### Displaying Gradle dependencies
 
 
