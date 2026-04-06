@@ -10,15 +10,17 @@ claude --enable-auto-mode
 
 ===========================================================================
 
-To install or update:
+To install:
 
 curl -fsSL https://claude.ai/install.sh | bash
 
 npx ctx7 setup
 npx ctx7 login
 
-
 ----------------
+
+To update:
+claude update
 
 To diagnose:
 claude doctor
