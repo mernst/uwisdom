@@ -6,9 +6,10 @@ Instructions at https://tug.org/texlive/quickinstall.html .
 
 # This takes a loong time to install.
 cd ~/bin/install
+rm -f install-tl-unx.tar.gz
 wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 tar zxf install-tl-unx.tar.gz
-cd install-tl-20251030
+cd install-tl-20260403
 perl install-tl --texdir=$HOME/bin/install/texlive/2025
 # Set default paper size to letter by typing:  o p r
 # Start installation by typing:  i
