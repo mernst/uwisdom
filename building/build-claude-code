@@ -13,6 +13,7 @@ claude --enable-auto-mode
 To install:
 
 curl -fsSL https://claude.ai/install.sh | bash
+claude plugin install code-review@claude-plugins-official                     
 
 npx ctx7 setup
 npx ctx7 login

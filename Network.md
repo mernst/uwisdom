@@ -159,6 +159,20 @@ For holistic, whole-codebase code review by an LLM such as Claude Code:
 Review the entire codebase (not just a few commits).  Do not summarize the codebase.  Instead, make changes that improve the codebase.
 
 
+This installs Claude in Github Actions, using the current account:
+
+```
+/install-github-app
+```
+
+
+For maximum effort, run Claude as
+
+```
+claude --model opus --effort max
+```
+
+
 ## Uncategorized
 
 
