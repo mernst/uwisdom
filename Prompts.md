@@ -25,3 +25,16 @@ that overrides appear in the same order as they are declared in the superclass.
 
 Keep non-override private helper methods that are closely related to an override
 method together with that override method -- that is, move them together.
+
+
+In these files:
+
+* src/java.base/share/classes/java/lang/String.java
+* src/java.base/share/classes/java/lang/StringBuffer.java
+* src/java.base/share/classes/java/lang/StringBuilder.java
+
+write @Pure or @SideEffectFree on appropriate methods.
+@SideEffectFree means that the method does not have externally-visible side
+effects.
+@Pure means that the method is side-effect-free and returns the identical
+value if it is called twice with identical arguments.
