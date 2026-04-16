@@ -17,6 +17,9 @@ Process the whole document without asking for confirmation of each portion of
 the document.
 
 
+Comment critically on the attached text.  Suggest ways that it can be improved.
+
+
 ## Programming
 
 

@@ -2,15 +2,34 @@ http://www.gradle.org/installation
 
 ===========================================================================
 
-# Install sdkman, then:
-sdk install gradle 9.2.1
+# For Ubuntu.  But this doesn't work under Docker.
+sudo snap install gradle --classic
+
+# Need zip to install SDKMAN, need SDKMAN to install gradle.
+# However, SDKMAN requires bash, which prevents testing your software under POSIX sh.
+# So this is not appropriate under Docker.
+sdk install gradle
+
+===========================================================================
+
+For Docker (don't use snap under Docker):
+
+# Get version number from top left corner of
+# https://docs.gradle.org/current/userguide/installation.html
+# and use it explicitly, multiple times (don't try to define a variable).
+
+RUN wget -q https://services.gradle.org/distributions/gradle-9.4.1-bin.zip \
+&& unzip -d /opt/gradle gradle-9.4.1-bin.zip \
+&& rm gradle-9.4.1-bin.zip
+ENV PATH=$PATH:/opt/gradle/gradle-9.4.1/bin
 
 ===========================================================================
 
 # Download:
 
-# Get version number at https://gradle.org/gradle-download/
-VER=4.10.2
+# Get version number from top left corner of https://docs.gradle.org/current/userguide/installation.html
+
+VER=9.4.1
 mkdir -p ~/bin/install
 cd ~/bin/install
 wget http://services.gradle.org/distributions/gradle-$VER-all.zip

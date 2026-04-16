@@ -1,3 +1,5 @@
+# SDKMAN requires bash (does not install using POSIX sh), so avoid it if possible.
+
 # From https://sdkman.io/install/ :
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
