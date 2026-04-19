@@ -52,50 +52,6 @@ When creating a mailman mailing list, some common good options to change:
 Throwaway email addresses: simplelogin, maildrop
 
 
-## AWS Amazon Web services
-
-
-To download files from Amazon S3, first install via
-
-```sh
-    sudo easy_install awscli
-    aws configure
-```
-
-and then run a command such as
-
-```sh
-   aws s3 sync s3://bucketname .
-```
-
-For example:
-
-```sh
-   mkdir -p ~/tmp/aws-s3
-   cd ~/tmp/aws-s3
-   aws s3 sync s3://travis-checker-framework .
-```
-
-Doing `aws s3 sync s3://travis-checker-framework/typetools/checker-framework/1048/1048.1 .`
-copies the contents of that remote directory to the current local directory.
-To delete/remove files:
-
-```sh
-   aws s3 rm --recursive s3://travis-checker-framework/typetools
-```
-
-
-Amazon Web Services (AWS) tips, from Darioush Jalali:
-
-* Billing is not logged by default. This can be confusing if you are
-   trying to figure out how much money you are spending initially.
-* If you have jobs that can be restarted easily, spot instances are
-   up to 10x cheaper than on-demand instances. Amazon may turn them off
-   whenever they choose (this is rare).
-* Amazon limits the number of types of certain instances they grant.
-   Customer support will increase this, but it takes a couple days.
-
-
 ## LLMs and generative AI
 
 
