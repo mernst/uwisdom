@@ -1002,6 +1002,12 @@ tasks.register("resolveDependencies") {
 ```
 
 
+Gradle Groovy to Kotlin conversion:
+
+* https://gradle-kotlinize.web.app/
+* https://developer.android.com/build/migrate-to-kotlin-dsl
+
+
 ### Displaying Gradle dependencies
 
 

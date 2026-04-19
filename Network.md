@@ -406,3 +406,11 @@ To add someone to Slack, click the organization and the dropdown will contain
 
 
 eyebuydirect.com is a cheap way to buy glasses.
+
+
+To fix old preview links for GitHub:
+
+```sh
+preplace 'https://rawgit.com/' 'https://htmlpreview.github.io/?https://github.com/'
+preplace 'https://htmlpreview.github.io/\?https://github.com/typetools/checker-framework/master/docs/developer/' 'https://checkerframework.org/manual/'
+```
