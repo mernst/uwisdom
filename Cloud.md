@@ -50,6 +50,10 @@ Amazon Web Services (AWS) tips, from Darioush Jalali:
    Customer support will increase this, but it takes a couple days.
 
 
+Cloud credits for research from AWS and EC2, for experiments:
+<https://aws.amazon.com/research-credits/>
+
+
 ## Google Cloud Platform (GCP)
 
 There is no requirement on the account you use for GCP (i.e., it can be your

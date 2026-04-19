@@ -14,19 +14,20 @@
 
 // \include{Afs.md}
 \include{BuildSystems.md}
+\include{Cloud.md}
 \include{ContinuousIntegration.md}
 \include{Emacs.md}
 \include{Java.md}
 // \include{JavaFormatters.md}
 // \include{JavaTools.md}
+\include{LLMs.md}
 \include{Linux.md}
 \include{Mac.md}
 \include{MicrosoftWindows.md}
 \include{Network.md}
 \include{ProgrammingLanguages.md}
 \include{Programs.md}
-// \include{Prompts.md}
 \include{Research.md}
 \include{Tex.md}
 // \include{Uw.md}
-\include{VersionControl.md}
+\include{VersionControl.md

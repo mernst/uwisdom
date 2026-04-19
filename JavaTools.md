@@ -949,6 +949,9 @@ java -Xrunhprof:cpu=samples,heap=all ...
      trial version available
 * JIE does branch coverage
 
+Coveralls (<https://coveralls.io/>) reports test coverage.
+For Java, it requires Maven.
+
 
 ## Mutation coverage ("mutation testing") tools
 

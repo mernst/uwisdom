@@ -114,8 +114,6 @@ For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 Review the entire codebase (not just a few commits).  Do not summarize the codebase.  Instead, make changes that improve the codebase.
 
-(This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
-
 
 This installs Claude in Github Actions, using the current account:
 
@@ -131,98 +129,10 @@ claude --model opus --effort max
 ```
 
 
-## Uncategorized
+## Surveys, web polls, scheduling
 
 
-LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
-
-
-The Forsythe list is a list of Ph.D.-granting Computer Science and Computer
-Engineering Departments.
-
-
-The dot/dotty tool is part of AT&T Research's graphviz package:
-<http://www.graphviz.org/>
-DaVinci is similar, but for X windows:
-<http://www.informatik.uni-bremen.de/~inform/forschung/daVinci/>
-
-
-ACM copyright form is available at
-<http://www.acm.org/pubs/copyright_form.html>.
-
-
-Phil Agre's "Designing Effective Action Alerts for the Internet" is
-available at <http://dlis.gseis.ucla.edu/people/pagre/alerts.html>.  Point 15
-is "Do not use a chain-letter petition."
-
-
-To see whether a domain has been registered:
-<http://www.networksolutions.com/cgi-bin/whois/whois>
-
-
-BSD calendar program:
-ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
-Or, use "qalendar", but it doesn't permit comment lines.
-Install:
-
-```sh
-  rpm -Uvh -vv ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
-```
-
-
-To donate used inkjet printer cartriges:  <www.donateinkjets.com>
-
-
-The Elements of Style by Strunk and White is online (do a search for it).
-
-
-NSF GPG (Grant Proposal Guide):
-<http://www.nsf.gov/publications/pub_summ.jsp?ods_key=GPG>
-
-
-Shimano road bicycle components, as explained by
-<http://www.epinions.com/content_957259908>:
-
-* Sora
-   Like the Deore mountain bike parts, the Sora is entry-level components.
-* Tiagra
-   Like the LX side of Shimano.
-* 105
-   The 105 component group is somewhere between an LX component group and
-   an XT component group in the mountain biking division.
-* Ultegra
-   This product line will be most comparable to the XT product line in the
-   mountain division of Shimano.
-* Dura-Ace
-   Like the XTR component group in the mountain bike division.
-
-
-Buy clip art and photos:  <http://istockphoto.com>
-
-
-When having networking problems in a Linux/Debian/Ubuntu VMware guest (e.g,
-"no network connection" when hovering over icon), reinstall VMware tools.
-
-
-plume-bib README instructions:  <https://github.com/mernst/plume-bib>
-
-
-For PC remote control:
-
-* teamviewer
-* logmein.com,
-* If they are running Windows 7:
-  * Hit the start button,
-  * Typ. 'Windows Remote Assistance' in the search bar
-  * Click 'Invite someone you trust to help you'
-  * Click Easy Connect and having them recite the letters on their screen.
-* <www.mikogo.com>
-* ultraVNC single click
-* Meraki Systems Manager
-* Chrome Remote Desktop: <https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp>
-
-
-For a Google spreadsheets survey, be sure to ask for repsondents' name,
+For a Google spreadsheets survey, be sure to ask for respondents' name,
 because the user ID is not recorded by default.
 
 
@@ -263,60 +173,7 @@ Two tips about Doodle polls:
 * Consider permitting "if-need-be" as a response.  It can give more scheduling flexibiliity.
 
 
-Briticizer:  <http://us2uk.eu/>
-also: <http://www.translatebritish.com/reverse.php>
-
-
-If someone asks a question whose answer can be easily Googled, you can supply them a link from the "Let me Google that for you" website, such as
-<http://lmgtfy.com/?q=UI+Chicago>
-
-
-To save a URL to Pocket, email one link at a time, in the body of mail to
-<add@getpocket.com>.
-
-
-Trello is a popular task management system (a to-do list).  I don't see
-what makes it compelling, though.  It doesn't support the most important
-things that I want to do, such as sorting items, seeing an overview of all
-the issues, integrating with my existing toolchain (version control system,
-editor, etc.), working offline, etc.
-
-
-Coveralls (<https://coveralls.io/>) reports test coverage.
-For Java, it requires Maven.
-
-
-To avoid waiting on hold:
-<http://www.lucyphone.com/>
-<http://www.fastcustomer.co/mf>
-
-
-Outsourcing companies (I have no particular reason to prefer one over the other):
-
-* Freelancer (was vWorker)
-* oDesk (Panos Ipeirotis is on sabbatical there)
-* Elance
-* others? TaskRabbit, Guru, TopCoder, Craigslist, rentacoder
-
-For designs: 99designs.com, dribbble.com
-Advice on hiring: <https://news.ycombinator.com/item?id=2539892>.  Key: ask
-a simple domain-knowledge type question in the posting, or how they would
-go about the project. Ask for references. Ask them to restate what you want,
-in their own words. Do a Skype interview. Be
-willing to pay (say, $50/hour instead of $25). Give a small test
-project before moving forward. Hire multiple people for that first project.
-Say there may be more work after the initial bit.
-<http://www.keithmander.com/?p=243> says:
-
-* Use uTest to perform QA of the code.
-* Always make sure you have a clear agreement in place that spells out how owns the finished output and what the rights are for the contractor.
-
-
-Creating a new Maven Central ("the Central Repository") project:
-<http://central.sonatype.org/pages/ossrh-guide.html>
-Example issues:
-<https://issues.sonatype.org/browse/OSSRH-28628>
-<https://issues.sonatype.org/browse/OSSRH-37810>
+## Seattle
 
 
 SPL (Seattle Public Library) suggestions for purchase:
@@ -325,6 +182,12 @@ SPL (Seattle Public Library) suggestions for purchase:
 
 SPL (Seattle Public Library) access to Consumer Reports and more databases:
 <http://www.spl.org/library-collection/articles-and-research/databases-a-z>
+
+
+## Teaching
+
+
+To post grades on Canvas so that they are visible to students, go to "Grades", find the assignment, ellipsis menu, "Post grades".
 
 
 A tip about combining sections in Canvas.
@@ -373,23 +236,175 @@ have disappeared from your Dashboard.   Do one final check via
 that everything is there.  If so, you are done!
 
 
+Gradescope for exams is well worthwhile.
+
+You should scan the exams exam by exam. That is, staple the exam together for the students and then unstaple them for scanning without any reordering. Don't make the piles of scanned exams too big, because sometimes the students have mangled them and they will get stuck in the feeder. It is very easy to upload many separate files of scanned exams.
+
+If your exam is one-sided (which I recommend for ease of students taking the exam and also for ease of scanning), do not under any circumstances permit students to write on the back of pages.
+
+You will also scan, separately, a single example exam. Then you will choose, with a mouse, the area of the page that is related to each "Question". You want each Gradescope question to be as small as possible. For instance, if you have question 22 on the exam that is "select all of the following four that apply", then you almost certainly want to split it into separate Gradescope questions, each one treated like a true false question by gradescope. Don't make the TAs do any mental arithmetic in their heads.
+
+There is a specific graphical format that you want to use for true false questions. It is shown on some Gradescope web pages. For multiple choice, I think it isn't as important. That is, I think that circling a letter or filling in a Scantron style are both acceptable.
+
+One nice thing about Gradescope grading is that it will cluster answers. For example, it will show you one example of all the students who marked question 22.B, and one example of all the students who didn't mark it. Thus, it is not necessary to look at each m exam individually. Except for written answers, that is.
+
+One advantage of gradescope is that it reduces cheating. You have a photocopy of the exam before it was graded. Students can't change it and then come to you saying, isn't it odd how the TA marked this question as incorrect even though it is actually correct (now, in the version the student is showing you)?
+
+
+There are two types of "curves" in academic grading.
+As background, one grading standard is that an "A" grade is given to students
+who receive between 90% and 100% of the possible points, a "B" grade is given to
+students who receive between 80% and 90% of the possible points, etc.
+Curving does not use that standard.
+
+* One type of curving insists that some students get a high grade and some
+  students get a low grade, regardless of the students' level of understanding.
+  If all the students received between 50% and 80% of the possible points, the
+  ones who scored 80% would receive an "A" grade and the ones who scored 50%
+  would receive a failing grade.
+* Another type of curving assigns grades based on the students' understanding,
+  regardless of the number of points they received.  Suppose all the students
+  received between 50% and 80% of the possible points.  If the lowest-scoring
+  student did work worthy of a "B" and the highest-scoring student did work
+  worthy of a "B", then the students who scored between 65% and 80% would
+  receive an "A" and students who scored between 50% and 65% would receive a
+  "B".  On the other hand, if the lowest-scoring student did work worthy of a
+  "D" and the highest-scoring student did work worthy of a "B", then perhaps
+  70-80% would earn a "B", 60-70% would earn a "C", and 50-60% would earn a "D".
+  With this type of grading, a "low" numerical score of, say, 65% could still
+  indicate excellent performance.
+
+
+## Uncategorized
+
+
+The Forsythe list is a list of Ph.D.-granting Computer Science and Computer
+Engineering Departments.
+
+
+The dot/dotty tool is part of AT&T Research's graphviz package:
+<http://www.graphviz.org/>
+DaVinci is similar, but for X windows:
+<http://www.informatik.uni-bremen.de/~inform/forschung/daVinci/>
+
+
+ACM copyright form is available at
+<http://www.acm.org/pubs/copyright_form.html>.
+
+
+Phil Agre's "Designing Effective Action Alerts for the Internet" is
+available at <http://dlis.gseis.ucla.edu/people/pagre/alerts.html>.  Point 15
+is "Do not use a chain-letter petition."
+
+
+To see whether a domain has been registered:
+<http://www.networksolutions.com/cgi-bin/whois/whois>
+
+
+BSD calendar program:
+ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
+Or, use "qalendar", but it doesn't permit comment lines.
+Install:
+
+```sh
+  rpm -Uvh -vv ftp://ftp.cs.uni-frankfurt.de/pub/linux/Mirror/ftp.redhat.com/contrib/libc5/SRPMS/calendar-8.4-3.src.rpm
+```
+
+
+The Elements of Style by Strunk and White is online (do a search for it).
+
+
+NSF GPG (Grant Proposal Guide):
+<http://www.nsf.gov/publications/pub_summ.jsp?ods_key=GPG>
+
+
+Shimano road bicycle components:
+
+* Sora (Entry-Level): 9-speed
+* Tiagra (Mid-Level): 10-speed
+* 105 (Enthusiast): 11 or 12-speed, widely considered the "sweet spot" for performance-to-cost, featuring trickle-down technology from top groups.
+* Ultegra (High-End): 12-speed Di2 (electronic)
+* Dura-Ace (Pro-Level): 12-speed Di2 (electronic)
+
+
+Buy clip art and photos:  <http://istockphoto.com>
+
+
+When having networking problems in a Linux/Debian/Ubuntu VMware guest (e.g,
+"no network connection" when hovering over icon), reinstall VMware tools.
+
+
+plume-bib README instructions:  <https://github.com/mernst/plume-bib>
+
+
+For PC remote control:
+
+* teamviewer
+* logmein.com,
+* If they are running Windows 7:
+  * Hit the start button,
+  * Typ. 'Windows Remote Assistance' in the search bar
+  * Click 'Invite someone you trust to help you'
+  * Click Easy Connect and having them recite the letters on their screen.
+* <www.mikogo.com>
+* ultraVNC single click
+* Meraki Systems Manager
+* Chrome Remote Desktop: <https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp>
+
+
+Briticizer:  <http://us2uk.eu/>
+also: <http://www.translatebritish.com/reverse.php>
+
+
+If someone asks a question whose answer can be easily Googled, you can supply them a link from the "Let me Google that for you" website, such as
+<http://lmgtfy.com/?q=UI+Chicago>
+
+
+To save a URL to Pocket, email one link at a time, in the body of mail to
+<add@getpocket.com>.
+
+
+Trello is a popular task management system (a to-do list).  I don't see
+what makes it compelling, though.  It doesn't support the most important
+things that I want to do, such as sorting items, seeing an overview of all
+the issues, integrating with my existing toolchain (version control system,
+editor, etc.), working offline, etc.
+
+
+To avoid waiting on hold:
+<http://www.lucyphone.com/>
+<http://www.fastcustomer.co/mf>
+
+
+Outsourcing companies (I have no particular reason to prefer one over the other):
+
+* Freelancer (was vWorker)
+* oDesk (Panos Ipeirotis is on sabbatical there)
+* Elance
+* others? TaskRabbit, Guru, TopCoder, Craigslist, rentacoder
+
+For designs: 99designs.com, dribbble.com
+Advice on hiring: <https://news.ycombinator.com/item?id=2539892>.  Key: ask
+a simple domain-knowledge type question in the posting, or how they would
+go about the project. Ask for references. Ask them to restate what you want,
+in their own words. Do a Skype interview. Be
+willing to pay (say, $50/hour instead of $25). Give a small test
+project before moving forward. Hire multiple people for that first project.
+Say there may be more work after the initial bit.
+<http://www.keithmander.com/?p=243> says:
+
+* Use uTest to perform QA of the code.
+* Always make sure you have a clear agreement in place that spells out how owns the finished output and what the rights are for the contractor.
+
+
+
+
 I don't have permission to edit the calendar event (in Google Calendar).  I personally use this Chrome extension to make that the default:
 <https://chrome.google.com/webstore/detail/google-calendar-guests-mo/hjhicmeghjagaicbkmhmbbnibhbkcfdb?hl=en>
 
 To change the default guest permissions in Google Calendar:
 In the Settings menu, click Settings.
 Under General > Event Settings, choose Default guest permissions.
-
-
-Charlie Garrett's perferred C++ references:
-
-* The C++ Standard Library by Josuttis
-* C++ Templates by Vandevoorde, Josuttis and Gregor
-* C++ for the Impatient by Overland
-
-
-Cloud credits for research from AWS and EC2, for experiments:
-<https://aws.amazon.com/research-credits/>
 
 
 To import an ical file into Google Calendar:
@@ -434,24 +449,6 @@ Handwriting practice worksheets:
 To report malicious/abusive Bitbucket repositories: <abuse@atlassian.com>
 
 
-Gradescope for exams is well worthwhile.
-
-You should scan the exams exam by exam. That is, staple the exam together for the students and then unstaple them for scanning without any reordering. Don't make the piles of scanned exams too big, because sometimes the students have mangled them and they will get stuck in the feeder. It is very easy to upload many separate files of scanned exams.
-
-If your exam is one-sided (which I recommend for ease of students taking the exam and also for ease of scanning), do not under any circumstances permit students to write on the back of pages.
-
-You will also scan, separately, a single example exam. Then you will choose, with a mouse, the area of the page that is related to each "Question". You want each Gradescope question to be as small as possible. For instance, if you have question 22 on the exam that is "select all of the following four that apply", then you almost certainly want to split it into separate Gradescope questions, each one treated like a true false question by gradescope. Don't make the TAs do any mental arithmetic in their heads.
-
-There is a specific graphical format that you want to use for true false questions. It is shown on some Gradescope web pages. For multiple choice, I think it isn't as important. That is, I think that circling a letter or filling in a Scantron style are both acceptable.
-
-One nice thing about Gradescope grading is that it will cluster answers. For example, it will show you one example of all the students who marked question 22.B, and one example of all the students who didn't mark it. Thus, it is not necessary to look at each m exam individually. Except for written answers, that is.
-
-One advantage of gradescope is that it reduces cheating. You have a photocopy of the exam before it was graded. Students can't change it and then come to you saying, isn't it odd how the TA marked this question as incorrect even though it is actually correct (now, in the version the student is showing you)?
-
-
-Tailscale is a way to get a public IP address within the Allen School.
-
-
 To create a favicon from text:
 <https://onlinetools.com/image/generate-image-from-text>
 
@@ -466,36 +463,8 @@ Combinatorial games suite (supersedes David Wolfe's package):
 <http://cgsuite.sourceforge.net/>
 
 
-There are two types of "curves" in academic grading.
-As background, one grading standard is that an "A" grade is given to students
-who receive between 90% and 100% of the possible points, a "B" grade is given to
-students who receive between 80% and 90% of the possible points, etc.
-Curving does not use that standard.
-
-* One type of curving insists that some students get a high grade and some
-  students get a low grade, regardless of the students' level of understanding.
-  If all the students received between 50% and 80% of the possible points, the
-  ones who scored 80% would receive an "A" grade and the ones who scored 50%
-  would receive a failing grade.
-* Another type of curving assigns grades based on the students' understanding,
-  regardless of the number of points they received.  Suppose all the students
-  received between 50% and 80% of the possible points.  If the lowest-scoring
-  student did work worthy of a "B" and the highest-scoring student did work
-  worthy of a "B", then the students who scored between 65% and 80% would
-  receive an "A" and students who scored between 50% and 65% would receive a
-  "B".  On the other hand, if the lowest-scoring student did work worthy of a
-  "D" and the highest-scoring student did work worthy of a "B", then perhaps
-  70-80% would earn a "B", 60-70% would earn a "C", and 50-60% would earn a "D".
-  With this type of grading, a "low" numerical score of, say, 65% could still
-  indicate excellent performance.
-
-
 To create a favicon from text:
 https://onlinetools.com/image/generate-image-from-text
-
-
-If someone cites AI as a source to try to prove something:
-https://stopcitingai.com/
 
 
 OCR (optical character recognition):
@@ -511,6 +480,3 @@ Worse, not recommended:
 
 To add someone to Slack, click the organization and the dropdown will contain
 "Invite people to ...".
-
-
-To post grades on Canvas so that they are visible to students, go to "Grades", find the assignment, ellipsis menu, "Post grades".

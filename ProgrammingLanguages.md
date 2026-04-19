@@ -952,3 +952,13 @@ portable; it works in bash, ksh, and zsh.
 For more on the difference between `[` and `[[`, see <http://mywiki.wooledge.org/BashFAQ/031>
 
 
+LEDA is the Library of Efficient Data Types and Algorithms, implemented in C++.
+
+
+Charlie Garrett's perferred C++ references:
+
+* The C++ Standard Library by Josuttis
+* C++ Templates by Vandevoorde, Josuttis and Gregor
+* C++ for the Impatient by Overland
+
+

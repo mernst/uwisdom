@@ -578,6 +578,9 @@ To use Docker at UW CSE, after Support has installed it on a machine:
 6. To run Docker, as a proof of concept `docker run hello-world`
 
 
+Tailscale is a way to get a public IP address within the UW CSE Allen School.
+
+
 ## PLSE
 
 

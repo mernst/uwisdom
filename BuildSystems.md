@@ -478,6 +478,13 @@ To delete Maven Central snapshots, delete this directory:
 .m2/repository/org/checkerframework:
 
 
+Creating a new Maven Central ("the Central Repository") project:
+<http://central.sonatype.org/pages/ossrh-guide.html>
+Example issues:
+<https://issues.sonatype.org/browse/OSSRH-28628>
+<https://issues.sonatype.org/browse/OSSRH-37810>
+
+
 ## Buck
 
 
