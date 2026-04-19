@@ -50,7 +50,7 @@ Amazon Web Services (AWS) tips, from Darioush Jalali:
    Customer support will increase this, but it takes a couple days.
 
 
-## Working with Google Cloud Platform (GCP)
+## Google Cloud Platform (GCP)
 
 There is no requirement on the account you use for GCP (i.e., it can be your
   personal account,
