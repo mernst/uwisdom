@@ -87,11 +87,19 @@ value if it is called twice with identical arguments.
 
 ### Code review
 
+
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 Review the entire codebase (not just a few commits).  Do not summarize the codebase.  Instead, make changes that improve the codebase.
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
+
+
+For code review of an entire single file by an LLM such as Claude Code:
+
+Critically review file
+XXXXX
+.  Make suggestions for improvement.
 
 
 ## Claude
