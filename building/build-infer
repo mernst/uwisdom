@@ -1,0 +1,22 @@
+https://fbinfer.com
+https://github.com/facebook/infer
+
+As of 2026-04-23, the latest release is 1.2.0, dated 2026-06-21.
+So, install from source:
+https://github.com/facebook/infer/blob/main/INSTALL.md#install-infer-from-source
+
+# Preliminaries
+sudo apt install -y opam libgmp-dev libsqlite3-dev
+
+# Without setting TMPDIR, it created a directory /tmp/clang-setup.MaQGUp/
+# which filled up /tmp/ with 31GB of data and crashed the process.
+
+cd ~/bin/install
+git clone https://github.com/facebook/infer.git
+# If re-making after a build failure: make clean
+./build-infer.sh --only-setup-opam
+# `--disable-swift-analyzers` is per https://github.com/facebook/infer/issues/1982
+./build-infer.sh -y -- --disable-swift-analyzers
+sudo make install
+# ...or, alternatively, install Infer into your PATH
+# export PATH=`pwd`/infer/bin:$PATH
