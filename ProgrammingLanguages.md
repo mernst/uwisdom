@@ -962,3 +962,11 @@ Charlie Garrett's perferred C++ references:
 * C++ for the Impatient by Overland
 
 
+## Style checking
+
+
+To check code style (also for Markdown `.md` files, etc.), run:
+
+```sh
+make -f ~/bin/src/plume-scripts/code-style.Makefile style-check
+```

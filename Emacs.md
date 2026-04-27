@@ -665,6 +665,15 @@ Error: error ("Eager macro-expansion failure: (void-function transient-define-gr
 I fiddled around a bit and it finally worked, but I'm not sure exactly what I did.
 
 
+To run Emacs within a docker container:
+```sh
+apt-get update && apt-get install -y emacs-nox
+# Maybe need to run:
+# export TERM=xterm
+emacs -nw
+```
+
+
 <!--
 This last  is to prevent Emacs from thinking the local variables above
 are for real; the local variables below are the ones Emacs should process.
