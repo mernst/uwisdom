@@ -2445,7 +2445,7 @@ json-compact () {
 }
 json-compact FILENAME
 # reformats file in place; also works on `.jsonl` files ; data loss if jq fails
-JQFILE="myfilename" && jq . "${FILENAME}" | sponge "${FILENAME}"
+JQFILE="myfilename" && jq . "${JQFILE}" | sponge "${JQFILE}"
 # not sure where output goes; does not work on `.jsonl` files
 python -m json.tool FILENAME
 ```
