@@ -1197,6 +1197,17 @@ checkstyle {
 ```
 
 
+As of September 2026, Azul says that this is the answer to "Which version(s) of Java does your organization use in production (select all that apply)?
+
+* Java 25: 18%  (this was only a few weeks after Java 25 was released)
+* Java 21: 37%
+* Java 17: 26%
+* Java 11: 24%
+* Java 8: 21%
+* Java 7: 11%
+* Java 6: 9%
+
+
 <!--
 LocalWords:  jtrek JIT Djava Throwable printStackTrace Ljava toc java ps1 jdb TestRunner cp MyTestClass Hamcrest assertFalse assertThat assertTrue assertEquals SIGQUIT LinkedHashMap LinkedHashSet HashSet listFiles segfaults VM jstack wiki JavaHeap JavaTools hprof Xrunhprof cpu currentTimeMillis wallclock JLS JLS3 Xlint compilerarg Xmx1024M
 LocalWords:  Solaris setenv invokevirtual invokestatic JavaPP filename javapp
