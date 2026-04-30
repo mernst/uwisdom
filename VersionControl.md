@@ -26,6 +26,8 @@ lines are short and some are long, but that file doesn't matter because readers
 will see a rendered version.
 
 
+(This is also explained at https://homes.cs.washington.edu/~mernst/advice/github-pull-request.html#respond-to-reviews .)
+
 When asked a question in a review, please don't answer in the pull request.
 Instead, improve the code so that the question does not arise in the future.
 
