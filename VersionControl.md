@@ -956,6 +956,18 @@ On the other hand, if you disagree with a suggestion or more discussion is
 needed, then continuing the conversation in the pull request thread is great.
 
 
+To enable CodeRabbit pull request reviews:
+
+* go to https://www.coderabbit.ai/
+* click "Log In"
+* click "GitHub"
+* click "Continue"
+* click "Add Repositories"
+
+A configuration file is
+https://github.com/plume-lib/plume-scripts/blob/master/.coderabbit.yaml .
+
+
 CodeRabbit comments on every push to a pull request.  CodeRabbit only comments
 on new changes in the pull request If you want a fresh review of an entire pull
 request (for example, if you have lost track of the CodeRabbit comments or you
