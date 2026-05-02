@@ -126,6 +126,19 @@ access token), "Edit" the pipeline then click the "Variables" button in the
 upper right corner.
 
 
+In Azure Pipelines, if you use a variable group such as
+
+```yaml
+variables:
+  - group: github-token
+```
+
+then every fork must contain that group or else Azure will refuse to run the
+pipeline.  So, if any forks exist, it is better to set a single secret variable
+in multipe Azure Pipelines than to try to use a variable group.
+But, using a secret varibale is tricky.
+
+
 ## CircleCI
 
 
