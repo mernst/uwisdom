@@ -165,8 +165,6 @@ CircleCI 2.1:
 
 * New features:  orbs, commands, and executors are new faces in the config.yml party. Also, workflows no longer have a version number. Make sure to take the version key out of your workflows section or bad things will happen. The only version key in 2.1 is the top-level key.
   * also jobs with parameters
-* CircleCI 2.1 pipelines disable the CIRCLE_COMPARE_URL environment variable.
-   <https://github.com/iynere/compare-url#examples> re-enables it, but crashes sometimes.
 * Triggering a build after a build succeeds (<https://discuss.circleci.com/t/if-a-build-completes-in-one-project-is-there-a-way-to-trigger-build-on-another-project/23941/4>) apparently doesn't work any longer in v2.1:
    <https://discuss.circleci.com/t/circleci-2-1-is-it-possible-to-trigger-a-job-through-api/26294/8>
 
