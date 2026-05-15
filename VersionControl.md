@@ -991,6 +991,13 @@ Now, you have a choice:
    this until there are no more CodeRabbit comments on the new PR.
 
 
+CodeRabbit instructions:
+
+```
+@CodeRabbit permit use of the mutable `:latest` tag for container images.
+```
+
+
 ## GitLab (Git-specific and GitHub-specific items go above)
 
 

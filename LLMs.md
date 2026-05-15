@@ -14,6 +14,12 @@ https://stopcitingai.com/
 Comment critically on the attached text.  Suggest ways that it can be improved.
 
 
+Lightly rephrase the attached text, without changing or removing any substantive comment and without restructuring the text.  Change the wording locally to be more encouraging and to convert criticism into suggestions for improvement.
+
+
+Edit the paper review in @FILE to fill in the empty sections "Reasons to accept the paper", "Reasons to not accept the paper", and "Questions for authors' response".
+
+
 ### Correcting voice-to-text dictation
 
 
