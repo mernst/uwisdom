@@ -2421,15 +2421,9 @@ Alternately, do this (but I'm not sure why you wouldn't use the above variant):
 ```
 
 
-When using the cleveref package, use `\Cref` at the beginning of a sentence,
-where you would capitalize a word.  Use `\cref` elsewhere, where you would
-not capitalize a word.
+When using the cleveref package, use `\Cref` at the beginning of a sentence, where you would capitalize a word.  Use `\cref` elsewhere, where you would not capitalize a word.
 
-It is odd to capitalize the words "Section", "Figure", etc. throughout if you do
-not also capitalize phrases like "on Line 22" and "on Page 5".  If, for
-personal preference, you want to do that (it is *not* a requirement of English or
-of style guides), then do `\usepackage[capitalize]{cleveref}` rather than
-mis-using `\Cref` where `\cref` belongs.
+It is odd to capitalize the words "Section", "Figure", etc. throughout if you do not also capitalize phrases like "on Line 22" and "on Page 5".  If, for personal preference, you want to do that (it is *not* a requirement of English or of style guides), then do `\usepackage[capitalize]{cleveref}` rather than mis-using `\Cref` where `\cref` belongs.
 
 
 When using hyperref and cleveref together:
