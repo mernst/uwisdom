@@ -746,6 +746,9 @@ git merge --squash origin/BRANCHNAME
 ## GitHub (Git-specific items go above)
 
 
+GitHub search: https://sourcegraph.com/search
+
+
 For GitHub, to render HTMTL files in the repository, use https://htmlpreview.github.io/.
 Example:
   <https://htmlpreview.github.io/?https://github.com/mernst/bibtex2web/master/bibtex2web.html>
