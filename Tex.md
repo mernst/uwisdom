@@ -28,25 +28,25 @@ In LaTeX, to get a line between floats (figures, tables, etc.) and text, do
 something like (these must take up zero vertical space):
 
 ```latex
- % Add line between figure and text
- \makeatletter
- \def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
- \def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
- \def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
- \makeatother
- % If there is a line, you can get away with reducing the separation between
- % figures and text.  Don't do this without the line, though.
- \addtolength{\textfloatsep}{-.5\textfloatsep}
- \addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
- \addtolength{\floatsep}{-.5\floatsep}
- \addtolength{\dblfloatsep}{-.5\dblfloatsep}
+% Add line between figure and text
+\makeatletter
+\def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+\def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\makeatother
+% If there is a line, you can get away with reducing the separation between
+% figures and text.  Don't do this without the line, though.
+\addtolength{\textfloatsep}{-.5\textfloatsep}
+\addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+\addtolength{\floatsep}{-.5\floatsep}
+\addtolength{\dblfloatsep}{-.5\dblfloatsep}
 ```
 
 In ACM styles that add a line between the figure and the caption,
 additionally do
 
 ```latex
- \nocaptionrule
+\nocaptionrule
 ```
 
 
@@ -59,13 +59,13 @@ To prevent having just a couple of figures, and lots of white space, on a
 page produced by LaTeX, do the following.  Also consider making it 90%.
 
 ```latex
- % At least 80% of every float page must be taken up by
- % floats; there will be no page with more than 20% white space.
- \def\topfraction{.8}
- \def\dbltopfraction{\topfraction}
- \def\floatpagefraction{\topfraction}     % default .5
- \def\dblfloatpagefraction{\topfraction}  % default .5
- \def\textfraction{.2}
+% At least 80% of every float page must be taken up by
+% floats; there will be no page with more than 20% white space.
+\def\topfraction{.8}
+\def\dbltopfraction{\topfraction}
+\def\floatpagefraction{\topfraction}     % default .5
+\def\dblfloatpagefraction{\topfraction}  % default .5
+\def\textfraction{.2}
 ```
 
 
@@ -78,9 +78,9 @@ To fix "too many unprocessed floats" error, do one of the following:
 To change the font and line spacing for LaTeX figure captions in acmart.cls (eg, prevent captions from being bold or reduce their font size), do:
 
 ```latex
- % Change font and line spacing for figure captions
- \usepackage{setspace,caption}
- \captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
+% Change font and line spacing for figure captions
+\usepackage{setspace,caption}
+\captionsetup{labelfont={small,bf}, textfont={small,bf,stretch=0.8}, labelsep=colon, margin=0pt}
 ```
 
 
@@ -90,8 +90,8 @@ To change the font and line spacing for LaTeX figure captions in acmart.cls (eg,
 To reduce intercolumn space in tables:
 
 ```latex
-  \addtolength{\tabcolsep}{-.5\tabcolsep}
-  \setlength{\tabcolsep}{0pt}
+\addtolength{\tabcolsep}{-.5\tabcolsep}
+\setlength{\tabcolsep}{0pt}
 ```
 
 
@@ -100,13 +100,13 @@ use dcolumn package (described in the LaTeX Companion).
 In particular:
 
 ```latex
-  \usepackage{dcolumn}
-  % dcolumn customization
-  \newcolumntype{d}[1]{D{.}{.}{#1}} % argument is number of decimal places
-  \newcolumntype{.}{d{1}} % "1" means one digit after the decimal point
-  \newcolumntype{.}{d{-1}} % "-1" means center the decimal point in the column; ugly
-  \newcolumntype{.}{d{0}} % "0" means decimal point is right-justified, not so different from right-justifying the column
-  \newcolumntype{.}{d{5.1} % 5 places to the left of the decimal, one to the right
+\usepackage{dcolumn}
+% dcolumn customization
+\newcolumntype{d}[1]{D{.}{.}{#1}} % argument is number of decimal places
+\newcolumntype{.}{d{1}} % "1" means one digit after the decimal point
+\newcolumntype{.}{d{-1}} % "-1" means center the decimal point in the column; ugly
+\newcolumntype{.}{d{0}} % "0" means decimal point is right-justified, not so different from right-justifying the column
+\newcolumntype{.}{d{5.1} % 5 places to the left of the decimal, one to the right
 ```
 
 and then use "." as a column separator, much like "c".
@@ -120,26 +120,26 @@ In LaTeX, to define new column types L, C, and R:  Note that a width is **requir
 as an argument, as in `\begin{tabular}{| c | L{3cm} | C{3cm} | R{3cm} |}`.
 
 ```latex
-  % Define new column types L, C, and R that are paragraphs with automatic line
-  % breaking (though \newline is still permitted) but no hyphenation and lines
-  % aligned left, center, or right, and the paragraph centered vertically
-  % because of `m` columns (can use `p` or `b` columns instead):
-  \usepackage{array}
-  \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-  \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-  \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+% Define new column types L, C, and R that are paragraphs with automatic line
+% breaking (though \newline is still permitted) but no hyphenation and lines
+% aligned left, center, or right, and the paragraph centered vertically
+% because of `m` columns (can use `p` or `b` columns instead):
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 ```
 
 
 To put a footnote within a table in LaTeX, surround the table with a minipage:
 
 ```latex
-  \begin{minipage}{\textwidth}
-  \begin{tabular}{ccc}
-  1 & 2 & 3\footnote{Nothing important}\\
-  4 & 5 & 6
-  \end{tabular}
-  \end{minipage}
+\begin{minipage}{\textwidth}
+\begin{tabular}{ccc}
+1 & 2 & 3\footnote{Nothing important}\\
+4 & 5 & 6
+\end{tabular}
+\end{minipage}
 ```
 
 
@@ -147,7 +147,7 @@ To make entries in a LaTeX "tabular" table that span multiple columns,
 as with the HTML "colspan" attribute, use an entry like
 
 ```latex
-   \multicolumn{3}{l}{text}
+\multicolumn{3}{l}{text}
 ```
 
 where 3 is the number of columns to span, and "l" is the alignment of
@@ -158,14 +158,14 @@ but you can override it by putting a negative version of the space on
 the *inside* of the multicolumn, as in:
 
 ```latex
-   \multicolumn{3}{l}{\hskip-\tabcolsep...}
+\multicolumn{3}{l}{\hskip-\tabcolsep...}
 ```
 
 
 Here is a "MultiColumn, One, Centered" macro:
 
 ```latex
-  \newcommand{\mcoc}[1]{\multicolumn{1}{c|}{#1}}
+\newcommand{\mcoc}[1]{\multicolumn{1}{c|}{#1}}
 ```
 
 
@@ -173,8 +173,8 @@ To span multiple rows (as with the HTML "rowspan" attribute), use
 \multirow:
 
 ```latex
-  \usepackage{multirow}
-  \multirow{nrows}[bigstruts]{width}[fixup]{text}
+\usepackage{multirow}
+\multirow{nrows}[bigstruts]{width}[fixup]{text}
 ```
 
 
@@ -194,11 +194,11 @@ To intersperse left-justified text with aligned equations, use the TeX
 \noalign primitive. For example,
 
 ```latex
-  \begin{eqnarray}
-  test & 1 & 2 \\
-  \noalign{\hbox{left}}
-  test & 3 & 4
-  \end{eqnarray}
+\begin{eqnarray}
+test & 1 & 2 \\
+\noalign{\hbox{left}}
+test & 3 & 4
+\end{eqnarray}
 ```
 
 produces results like the following:
@@ -213,7 +213,7 @@ produces results like the following:
 Use
 
 ```latex
-  \setlength{\arraycolsep}{.25em}
+\setlength{\arraycolsep}{.25em}
 ```
 
 to reduce/compress the horizontal spaces (as around equal signs) between
@@ -221,7 +221,7 @@ columns in a LaTeX array or eqnarray environment.
 Use
 
 ```latex
-  \setlength{\tabcolsep}{.5\tabcolsep}
+\setlength{\tabcolsep}{.5\tabcolsep}
 ```
 
 to reduce the width of columns in a table or tabular environment.
@@ -267,7 +267,7 @@ etc.; but `\vspace*{-\partopsep}` worked for me if it came after the
 To remove the vertical space from between two LaTeX trivlist environments:
 
 ```latex
-   \vspace*{-\topsep}\vspace*{-\partopsep}\vspace*{-\itemsep}
+\vspace*{-\topsep}\vspace*{-\partopsep}\vspace*{-\itemsep}
 ```
 
   No combination of only two of these does the trick.
@@ -279,10 +279,10 @@ To reduce the indentation of bullets/numbers/items a LaTeX list environment
 to come after `\begin{document}`.  (It's especially needed in the acmart style.)
 
 ```latex
-  % Reduce indentation in lists.
-  \setlength{\leftmargini}{.75\leftmargini}
-  \setlength{\leftmarginii}{.75\leftmarginii}
-  \setlength{\leftmarginiii}{.75\leftmarginiii}
+% Reduce indentation in lists.
+\setlength{\leftmargini}{.75\leftmargini}
+\setlength{\leftmarginii}{.75\leftmarginii}
+\setlength{\leftmarginiii}{.75\leftmarginiii}
 ```
 
 
@@ -291,30 +291,30 @@ paragraph of text outside the list, then resume the item numbering, do the
 following:
 
 ```latex
-  \label{item:pre-break}
-  \end{enumerate}
-  PARAGRAPH GOES HERE.
-  \begin{enumerate}
-  \setcounter{enumi}{\ref{item:pre-break}}
+\label{item:pre-break}
+\end{enumerate}
+PARAGRAPH GOES HERE.
+\begin{enumerate}
+\setcounter{enumi}{\ref{item:pre-break}}
 ```
 
 
 To interrupt an enumerate environment, then continue the numbering later:
 
 ```latex
-    \newcounter{saveenumi}
-    ...
-    \begin{enumerate}
-      ...
-      \item ...
-      \setcounter{saveenumi}{\theenumi}
-    \end{enumerate}
-    ...
-    \begin{enumerate}
-      \setcounter{enumi}{\thesaveenumi}
-      \item ...
-      ...
-    \end{enumerate}
+\newcounter{saveenumi}
+...
+\begin{enumerate}
+  ...
+  \item ...
+  \setcounter{saveenumi}{\theenumi}
+\end{enumerate}
+...
+\begin{enumerate}
+  \setcounter{enumi}{\thesaveenumi}
+  \item ...
+  ...
+\end{enumerate}
 ```
 
 
@@ -322,11 +322,11 @@ To change the margins similarly to what the quote (`\begin{quote}`)
 environment does:
 
 ```latex
- % Arguments are left and right margins
- \def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
- \let\endchangemargin=\endlist
- \begin{changemargin}{.05\columnwidth}{.05\columnwidth}
- \end{changemargin}
+% Arguments are left and right margins
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+\begin{changemargin}{.05\columnwidth}{.05\columnwidth}
+\end{changemargin}
 ```
 
 
@@ -338,9 +338,9 @@ Here are ways to test wither a macro argument is empty/null:
 1. The following macro definition will test whether a macro argument is empty:
 
    ```latex
-       \def\mymacro#1{%
-        \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
-        }%
+   \def\mymacro#1{%
+    \def\tempa{#1}\ifx\tempa\empty{then-part}\else{else-part}\fi
+    }%
    ```
 
    Note that `plain.tex` defines `\empty` as `\def\empty{}%`.
@@ -352,7 +352,7 @@ Here are ways to test wither a macro argument is empty/null:
 2. This way of testing for null arguments can be done entirely in TeX's mouth:
 
    ```latex
-         \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
+   \def\showempty#1{\message{\ifx\relax#1\relax empty\else not empty\fi}}
    ```
 
    It does however fail badly if #1 begins with \relax
@@ -360,7 +360,7 @@ Here are ways to test wither a macro argument is empty/null:
 3. Another way of testing for empty arguments in TeX's mouth is to say:
 
    ```latex
-        \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
+   \ifx\unlikely#2\unlikely ...true text... \else ...false text ... \fi
    ```
 
    This will expand to `true text' iff #2 is empty, or begins with
@@ -375,13 +375,13 @@ inserted) after a macro expansion, then add `\xspace` at the end of the
 macro body.
 
 ```latex
-  \usepackage{xspace}
-  \xspaceaddexceptions{\%}
-  \xspaceremoveexception{-}
-  ...
-  \newcommand{\restenergy}{\ensuremath{mc^2}\xspace}
-  ...
-  ... and we find \restenergy available to us ...
+\usepackage{xspace}
+\xspaceaddexceptions{\%}
+\xspaceremoveexception{-}
+...
+\newcommand{\restenergy}{\ensuremath{mc^2}\xspace}
+...
+... and we find \restenergy available to us ...
 ```
 
 
@@ -409,23 +409,23 @@ respects current series (such as boldface), and works in both horizontal (text)
 and math mode.
 
 ```latex
-  \newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
+\newcommand{\code}[1]{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ```
 
 Here's a version that takes care of URLs, too:
 
 ```latex
-  \def\codesize{\smaller}
-  %HEVEA \def\codesize{\relax}
-  \newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1}}}\else{\codesize\ttfamily #1}\fi}
-  \newcommand{\myurl}[1]{{\codesize\url{#1}}}
-  %HEVEA \def\myurl{\url}
+\def\codesize{\smaller}
+%HEVEA \def\codesize{\relax}
+\newcommand{\code}[1]{\ifmmode{\mbox{\codesize\ttfamily{#1}}}\else{\codesize\ttfamily #1}\fi}
+\newcommand{\myurl}[1]{{\codesize\url{#1}}}
+%HEVEA \def\myurl{\url}
 ```
 
 Or, if your document does `\usepackage{url}`, for URLs you can just do
 
 ```latex
-  \renewcommand{\UrlFont}{\smaller}
+\renewcommand{\UrlFont}{\smaller}
 ```
 
 but note that that is one command; you cannot specify `\smaller\texttt`.
@@ -435,8 +435,8 @@ respects the typesetting of the current context.
 For Verbatim environments, do this:
 
 ```latex
-  \usepackage{fancyvrb}
-  \RecustomVerbatimEnvironment{Verbatim}{Verbatim}{fontsize=\smaller}
+\usepackage{fancyvrb}
+\RecustomVerbatimEnvironment{Verbatim}{Verbatim}{fontsize=\smaller}
 ```
 
 
@@ -450,21 +450,21 @@ For Verbatim environments, do this:
 Here are definitions for identifiers in LaTeX math mode formulas:
 
 ```latex
-  % \|name| or \mathid{name} denotes identifiers and slots in formulas
-  \def\|#1|{\mathid{#1}}
-  \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
-  % \<name> or \codeid{name} denotes computer code identifiers
-  \def\<#1>{\codeid{#1}}
-  % Choose one of the following three definitions for \codeid.
-  \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
-  % \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
-  % \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
+% \|name| or \mathid{name} denotes identifiers and slots in formulas
+\def\|#1|{\mathid{#1}}
+\newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
+% \<name> or \codeid{name} denotes computer code identifiers
+\def\<#1>{\codeid{#1}}
+% Choose one of the following three definitions for \codeid.
+\protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
 ```
 
 This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
 
 ```latex
-  \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+\newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
 ```
 
 
@@ -513,8 +513,8 @@ Very simple BibTeX usage:
 Typical LaTeX commands for bibliography:
 
 ```latex
-  \bibliographystyle{alpha}
-  \bibliography{bibstring-unabbrev,ernst,invariants,dispatch,generals,alias}
+\bibliographystyle{alpha}
+\bibliography{bibstring-unabbrev,ernst,invariants,dispatch,generals,alias}
 ```
 
 
@@ -551,9 +551,9 @@ However, supplying argument `-min-crossrefs=10000` disables this feature.
 For mix-n-match BibTeX citations,
 
 ```latex
-  \makeatletter
-  \def\bibref#1{\nocite{#1}\@ifundefined{b@#1}{{\bf ??}\@warning
-     {Citation `#1' on page \thepage \space
+\makeatletter
+\def\bibref#1{\nocite{#1}\@ifundefined{b@#1}{{\bf ??}\@warning
+   {Citation `#1' on page \thepage \space
       undefined}}{\@nameuse{b@#1```
   \makeatother
 ```
@@ -561,7 +561,7 @@ For mix-n-match BibTeX citations,
 and then
 
 ```latex
-  [\bibref{Horn86},p.86;\bibref{PressFTV88},p.516]
+[\bibref{Horn86},p.86;\bibref{PressFTV88},p.516]
 ```
 
 produces
@@ -571,14 +571,14 @@ which is better than the
 produced by
 
 ```latex
-  \cite[p.~86]{Horn86},\cite[p.~516]{PressFTV88}
+\cite[p.~86]{Horn86},\cite[p.~516]{PressFTV88}
 ```
 
 
 In LaTeX, to remove vertical spacing (space) between bibliography items when using natbib (which defines \bibsep), use:
 
 ```latex
-   \setlength{\bibsep}{0pt}
+\setlength{\bibsep}{0pt}
 ```
 
 before the `\biblography` command.
@@ -603,15 +603,15 @@ To adjust bibliography formatting:
   First, copy from article.cls the definition of
 
 ```latex
-    \newenvironment{thebibliography}[1]
+\newenvironment{thebibliography}[1]
 ```
 
   Surround it by
 
 ```latex
-    \makeatletter
-    ...
-    \makeatother
+\makeatletter
+...
+\makeatother
 ```
 
 and change the "newenvironment" to "renewenvironment".
@@ -620,19 +620,19 @@ To make bibliography items less indented, do one or both of the these:
 1. Comment out
 
    ```latex
-          \advance\leftmargin\labelsep
+   \advance\leftmargin\labelsep
    ```
 
 2. Change
 
    ```latex
-          \settowidth\labelwidth{\@biblabel{#1}}%
+   \settowidth\labelwidth{\@biblabel{#1}}%
    ```
 
    to
 
    ```latex
-          \settowidth\labelwidth{~}%
+   \settowidth\labelwidth{~}%
    ```
 
    (though this is a bit drastic).
@@ -640,9 +640,9 @@ To make bibliography items less indented, do one or both of the these:
    To remove all vertical spacing (space) between bibliography items, add:
 
    ```latex
-     % These two commands remove inter-bib-item spacing
-     \setlength{\itemsep}{0pt}
-     \setlength{\parsep}{0pt}
+   % These two commands remove inter-bib-item spacing
+   \setlength{\itemsep}{0pt}
+   \setlength{\parsep}{0pt}
    ```
 
 
@@ -750,9 +750,9 @@ In LaTeX, there should be a space before a citation.  Both a non-breaking space
 `~` and a regular space ` ` are acceptable:
 
 ```latex
-  WRONG: one plus one is two\cite{authority}
-  RIGHT: one plus one is two~\cite{authority}
-  RIGHT: one plus one is two \cite{authority}
+WRONG: one plus one is two\cite{authority}
+RIGHT: one plus one is two~\cite{authority}
+RIGHT: one plus one is two \cite{authority}
 ```
 
 
@@ -761,15 +761,15 @@ prohibits line breaks at that location.  It should never be adjacent to another
 (breaking) space.
 
 ```latex
-  WRONG: one plus one is two ~\cite{authority}
-  RIGHT: one plus one is two~\cite{authority}
-  RIGHT: one plus one is two \cite{authority}
+WRONG: one plus one is two ~\cite{authority}
+RIGHT: one plus one is two~\cite{authority}
+RIGHT: one plus one is two \cite{authority}
 ```
 
 ```latex
-  WRONG: Figure ~\ref{fig:beautiful}
-  RIGHT: Figure~\ref{fig:beautiful}
-  RIGHT: Figure \ref{fig:beautiful}
+WRONG: Figure ~\ref{fig:beautiful}
+RIGHT: Figure~\ref{fig:beautiful}
+RIGHT: Figure \ref{fig:beautiful}
 ```
 
 
@@ -801,7 +801,7 @@ TeX skips the hyphenation step altogether.  So you would say
 something like
 
 ```latex
-  \hyphenchar\the\font=-1
+\hyphenchar\the\font=-1
 ```
 
 to suppress hyphenation for the current font.  If you use several
@@ -809,9 +809,9 @@ fonts, you'll want to set the \hyphenchar for each one.  So you
 would start off like this:
 
 ```latex
-  \hyphenchar\tenrm=-1
-  \hyphenchar\ninerm=-1
-  ...
+\hyphenchar\tenrm=-1
+\hyphenchar\ninerm=-1
+...
 ```
 
 You'll probably also want to set \defaulthyphenchar=-1 so that any
@@ -820,13 +820,13 @@ new fonts that get loaded will also have hyphenation disabled.
 Another way is
 
 ```latex
-  \pretolerance=10000
+\pretolerance=10000
 ```
 
 and, if you get complaints about overfull hboxes, also add
 
 ```latex
-  \emergencystretch=2em
+\emergencystretch=2em
 ```
 
 or some bigger value.
@@ -838,17 +838,17 @@ while reading the word and enable it while TeX hyphenates (i.e. at the end
 of the paragraph).  Two ways to do this:
 
 ```latex
-  \def\H#1{\setbox0=\hbox{#1}\unhbox0}
-  \showhyphens{subsystem module \H{subsystem-module}}
+\def\H#1{\setbox0=\hbox{#1}\unhbox0}
+\showhyphens{subsystem module \H{subsystem-module}}
 ```
 
 or
 
 ```latex
-  \edef\savehyphenchar{\the\hyphenchar\the\font}
-  \hyphenchar\the\font=0
-  \showhyphens{subsystem module subsystem-module
-  \hyphenchar\the\font=\savehyphenchar}
+\edef\savehyphenchar{\the\hyphenchar\the\font}
+\hyphenchar\the\font=0
+\showhyphens{subsystem module subsystem-module
+\hyphenchar\the\font=\savehyphenchar}
 ```
 
 
@@ -856,7 +856,7 @@ To have LaTeX hyphenate words with imbedded hyphens, you may use the
 `breakable hyphen' command:
 
 ```latex
-      \def\hyph{-\penalty0\hskip0pt\relax}
+\def\hyph{-\penalty0\hskip0pt\relax}
 ```
 
 You could play tricks mapping it to a character that's made active for
@@ -887,18 +887,18 @@ In LaTeX, \discretionary is a way to do custom hyphenization (without
 necessarily using the hyphen character).  Use it like
 
 ```latex
-  \discretionary{beforebreak}{afterbreak}{unbroken}
+\discretionary{beforebreak}{afterbreak}{unbroken}
 ```
 
 Examples:
 
 ```latex
-  \discretionary{-}{}{}              % normal hyphenization; equivalest to: \-
-  \discretionary{}{}{}               % no space, but permit break
-  \discretionary{}{}{\,}             % thin space, or permit break
-  \discretionary{/}{}{/}             % permit break after slash; equivalent to: /\discretionary{}{}{}
-  \discretionary{}{.}{.}             % permit break before period (e.g., in URL)
-  \discretionary{f-}{fi}{ffi}cult    % kerning
+\discretionary{-}{}{}              % normal hyphenization; equivalest to: \-
+\discretionary{}{}{}               % no space, but permit break
+\discretionary{}{}{\,}             % thin space, or permit break
+\discretionary{/}{}{/}             % permit break after slash; equivalent to: /\discretionary{}{}{}
+\discretionary{}{.}{.}             % permit break before period (e.g., in URL)
+\discretionary{f-}{fi}{ffi}cult    % kerning
 ```
 
 
@@ -906,9 +906,9 @@ LaTeX's `\underline{...}` macro does not permit hyphenization (line breaking).
 Instead, use
 
 ```latex
-  \usepackage{soul}
-  ...
-  \ul{...}
+\usepackage{soul}
+...
+\ul{...}
 ```
 
 
@@ -929,15 +929,15 @@ To permit more space between words, in order to prevent bad breaks in
 narrow columns (like in a newspaper):
 
 ```latex
- {\spaceskip = \fontdimen2\the\font
- \advance\spaceskip by 0pt plus 0.5em
- \xspaceskip = \fontdimen7\the\font
- \advance\xspaceskip by 0pt plus 0.5em
- Several features were included in TRACEMAP to make it particularly
- useful for programmers who need to understand the behavior of
- their codes.}
- The most important part is a static pictorial representation of
- .. etc
+{\spaceskip = \fontdimen2\the\font
+\advance\spaceskip by 0pt plus 0.5em
+\xspaceskip = \fontdimen7\the\font
+\advance\xspaceskip by 0pt plus 0.5em
+Several features were included in TRACEMAP to make it particularly
+useful for programmers who need to understand the behavior of
+their codes.}
+The most important part is a static pictorial representation of
+.. etc
 ```
 
 This adds an extra 0.5em of stretchability to all spaces, producing big
@@ -1046,12 +1046,12 @@ huge .eps files, though "pdftops" creates more pixellated .eps files):
 To include the pdf file:
 
 ```latex
-  \usepackage{graphicx}
-  ...
-  % There should never be a .pdf (or any other) filename extension
-  \includegraphics[width=\textwidth]{picture}
-  % For two-column layout:
-  \includegraphics[width=\columnwidth]{picture}
+\usepackage{graphicx}
+...
+% There should never be a .pdf (or any other) filename extension
+\includegraphics[width=\textwidth]{picture}
+% For two-column layout:
+\includegraphics[width=\columnwidth]{picture}
 ```
 
 
@@ -1108,18 +1108,18 @@ geom_boxplot(outlier.colour=rgb(0, 0, 0, .99))
 To make hyperlinks (e.g., to URLs) in a LaTeX document:
 
 ```latex
-  \usepackage{hyperref}
-  \url{http://www.wikibooks.org}
-  \href{http://www.wikibooks.org}{Wikibooks home}
+\usepackage{hyperref}
+\url{http://www.wikibooks.org}
+\href{http://www.wikibooks.org}{Wikibooks home}
 ```
 
 If you also want to line-break the URL text, then:
 
 ```latex
-  \usepackage{hyperref}
-  \usepackage{url}
-  \url{http://www.wikibooks.org}
-  \href{\url{http://www.wikibooks.org}}{Wikibooks home}
+\usepackage{hyperref}
+\usepackage{url}
+\url{http://www.wikibooks.org}
+\href{\url{http://www.wikibooks.org}}{Wikibooks home}
 ```
 
 More on LaTeX HEVEA URLs (\ahref, etc.):
@@ -1130,11 +1130,11 @@ but perhaps I want to ignore that and focus on using standard
 URLs in HTML and PDF documents:
 
 ```latex
- % Make a URL visible in PDF the but just be attached to anchor text in HTML:
- %BEGIN LATEX
- \newcommand{\ahreforurl}[2]{#2 (\url{#1})}
- %END LATEX
- %HEVEA \newcommand{\ahreforurl}[2]{\ahref{#1}{#2}}
+% Make a URL visible in PDF the but just be attached to anchor text in HTML:
+%BEGIN LATEX
+\newcommand{\ahreforurl}[2]{#2 (\url{#1})}
+%END LATEX
+%HEVEA \newcommand{\ahreforurl}[2]{\ahref{#1}{#2}}
 ```
 
 
@@ -1142,16 +1142,17 @@ The url package for LaTeX linebreaks a URL appropriately.
 For a moving argument (or a URL containing characters like %), use
 
 ```latex
-    \urldef{\myself}\url{myself%node@gateway.net}   or
-    \urldef{\myself}\url|myself%node@gateway.net|
+\urldef{\myself}\url{myself%node@gateway.net}
+or
+\urldef{\myself}\url|myself%node@gateway.net|
 ```
 
 and then use "\myself" instead of "\url{myself%<node@gateway.net>}".
 However, the hyperref package forbids URL line breaks; the workaround is
 
 ```latex
-  \usepackage{hyperref}
-  \usepackage{breakurl}
+\usepackage{hyperref}
+\usepackage{breakurl}
 ```
 
 
@@ -1159,15 +1160,15 @@ To typeset URLs in a smaller font in LaTeX, using \package{url}:
 First approach (shorter, usually works):
 
 ```latex
-  \def\UrlFont{\smaller\ttfamily}
+\def\UrlFont{\smaller\ttfamily}
 ```
 
 Second approach (better style, possibly more robust):
 
 ```latex
-  %% Define and use a 'smallertt' URL style.
-  \makeatletter
-  \def\url@smallerttstyle{%
+%% Define and use a 'smallertt' URL style.
+\makeatletter
+\def\url@smallerttstyle{%
     \@ifundefined{selectfont}{\def\UrlFont{\smaller\tt}}{\def\UrlFont{\smaller\ttfamily```
   \makeatother
   \urlstyle{smallertt}
@@ -1191,7 +1192,7 @@ In LaTeX files, to avoid the "This document was translated from LaTeX to
 Hevea" advertisement, write:
 
 ```latex
-  %HEVEA \footerfalse    % Disable hevea advertisement in footer
+%HEVEA \footerfalse    % Disable hevea advertisement in footer
 ```
 
 
@@ -1211,11 +1212,11 @@ Testing whether a file exists, for both LaTeX and Hevea:
 (Note that you need to test for a file, not a directory.)
 
 ```latex
- \newif\ifonbuffalo
- %HEVEA\makeatletter\@iffileexists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}\makeatother
- %BEGIN LATEX
- \IfFileExists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}
- %END LATEX
+\newif\ifonbuffalo
+%HEVEA\makeatletter\@iffileexists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}\makeatother
+%BEGIN LATEX
+\IfFileExists{/scratch/secs-jenkins/java/jdk1.7.0/LICENSE}{\onbuffalotrue}{\onbuffalofalse}
+%END LATEX
 ```
 
 
@@ -1235,13 +1236,13 @@ The default LaTeX fonts look bad on-screen.  Consider this alternative; the
 In LaTeX, rather than
 
 ```latex
-  \usepackage{times}
+\usepackage{times}
 ```
 
 consider
 
 ```latex
-  \usepackage{pslatex}
+\usepackage{pslatex}
 ```
 
 which differs in that it uses a specially narrowed Courier font.
@@ -1252,8 +1253,8 @@ which differs in that it uses a specially narrowed Courier font.
 Do not use
 
 ```latex
-  \documentclass[sigconf,anonymous]{acmart}
-  \usepackage{pslatex}
+\documentclass[sigconf,anonymous]{acmart}
+\usepackage{pslatex}
 ```
 
 because it causes math-mode parentheses not to print.
@@ -1263,13 +1264,13 @@ because it causes math-mode parentheses not to print.
 To change fonts temporarily in LaTeX, use comands like the following
 
 ```latex
-  {\fontfamily{phv}\selectfont Helvetica looks like this}
+{\fontfamily{phv}\selectfont Helvetica looks like this}
 ```
 
 and
 
 ```latex
-  {\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.
+{\fontencoding{OT1}\fontfamily{ppl} Palatino looks like this}.
 ```
 
 
@@ -1297,22 +1298,22 @@ following before running pdflatex:
 More attractive monospaced (typewriter, courier) fonts:
 
 ```latex
-  \usepackage[T1]{fontenc}
-  % sans-serif monospaced font
-  \usepackage{inconsolata}
+\usepackage[T1]{fontenc}
+% sans-serif monospaced font
+\usepackage{inconsolata}
 ```
 
 ```latex
-  % serifed monospaced font
-  \usepackage[T1]{fontenc}
-  \usepackage[scaled=0.88]{luximono}
+% serifed monospaced font
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.88]{luximono}
 ```
 
 
 Your LaTeX documents should always use
 
 ```latex
-  \usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
 ```
 
 Even if you don't care about foreign languages, it has the advantage of
@@ -1463,29 +1464,29 @@ In LaTeX, to make the first line of all sections etc be indented by the
 usual paragraph indentation:
 
 ```latex
-  \let\@afterindentfalse\@afterindenttrue
-  \@afterindenttrue
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
 ```
 
 OR, change the definition of \section (example from art10; '-' becomes '+')
 
 ```latex
-  \def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
-   -.2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
+ -.2ex}{2.3ex plus .2ex}{\Large\bf}}
 ```
 
 to
 
 ```latex
-  \def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus
-   +.2ex}{2.3ex plus .2ex}{\Large\bf}}
+\def\section{\@startsection {section}{1}{\z@}{+3.5ex plus +1ex minus
+ +.2ex}{2.3ex plus .2ex}{\Large\bf}}
 ```
 
 
 To remove some of the extra whitespace around section headers:
 
 ```latex
-  \usepackage[compact]{titlesec}
+\usepackage[compact]{titlesec}
 ```
 
 
@@ -1493,15 +1494,15 @@ A simple LaTeX environment that keeps everything within it
 on the same page:
 
 ```latex
- \def\window#1{\@need=#1\advance\@need\pagetotal
- \if\@need>\textheight\vfil\newpage\else\fi}
- %
- \newbox\@keepbox
- \newenvironment{keep}{%
-   \setbox\@keepbox=\vbox\bgroup
- }{%
-   \egroup\window{\ht\@keepbox}\box\@keepbox
- }
+\def\window#1{\@need=#1\advance\@need\pagetotal
+\if\@need>\textheight\vfil\newpage\else\fi}
+%
+\newbox\@keepbox
+\newenvironment{keep}{%
+ \setbox\@keepbox=\vbox\bgroup
+}{%
+ \egroup\window{\ht\@keepbox}\box\@keepbox
+}
 ```
 
 This works fine, except that if the \vbox is higher than textheight, it
@@ -1514,35 +1515,35 @@ prints something like `August 7, 1989').
 If you want something like ``13:48'' try the following:
 
 ```latex
- \def\clocktime{{\newcount\scratch
-  \scratch=\time
-  \divide\scratch by 60
-  \number\scratch :\multiply\scratch by -60
-  \advance\scratch by\time
-  \number\scratch}}
+\def\clocktime{{\newcount\scratch
+\scratch=\time
+\divide\scratch by 60
+\number\scratch :\multiply\scratch by -60
+\advance\scratch by\time
+\number\scratch}}
 ```
 
 Another version by Nelson Beebe, U. of Utah., is:
 
 ```latex
- % TIME OF DAY
- \newcount\hh
- \newcount\mm
- \mm=\time
- \hh=\time
- \divide\hh by 60
- \divide\mm by 60
- \multiply\mm by 60
- \mm=-\mm
- \advance\mm by \time
- \def\hhmm{\number\hh:\ifnum\mm<10{}0\fi\number\mm}
+% TIME OF DAY
+\newcount\hh
+\newcount\mm
+\mm=\time
+\hh=\time
+\divide\hh by 60
+\divide\mm by 60
+\multiply\mm by 60
+\mm=-\mm
+\advance\mm by \time
+\def\hhmm{\number\hh:\ifnum\mm<10{}0\fi\number\mm}
 ```
 
 
 I once had to set
 
 ```latex
-  \topskip = 0pt
+\topskip = 0pt
 ```
 
 to remove extra space before the first paragraph of a LaTeX document.
@@ -1567,8 +1568,8 @@ In text with explicit line breaks, we can make a box just wide enough to
 hold the widest one via (see LaTeX manual under tabbing for explanation):
 
 ```latex
-  \newenvironment{centerlongestline}{\begin{center}\begin{minipage}{\linewidth}
-     \begin{tabbing}}{\end{tabbing}\end{minipage}\end{center}}
+\newenvironment{centerlongestline}{\begin{center}\begin{minipage}{\linewidth}
+   \begin{tabbing}}{\end{tabbing}\end{minipage}\end{center}}
 ```
 
 Another alternative would be to use \begin{tabular}{l} ...
@@ -1586,43 +1587,43 @@ To number tables, figures, footnotes, consecutively through the entire
 report (not by chapters) in LaTeX:
 
 ```latex
-        \makeatletter
-        \def\cl@chapter{}
-        \@addtoreset{section}{chapter}
-        \def\thetable{\@arabic\c@table}
-        \def\thefigure{\@arabic\c@figure}
-        \def\theequation{\arabic{equation}}
-        \makeatother
+\makeatletter
+\def\cl@chapter{}
+\@addtoreset{section}{chapter}
+\def\thetable{\@arabic\c@table}
+\def\thefigure{\@arabic\c@figure}
+\def\theequation{\arabic{equation}}
+\makeatother
 ```
 
 One could also define
 
 ```latex
-    \def\@takefromreset#1#2{%
-        \def\@tempa{#1}%
-        \let\@tempd\@elt
-        \def\@elt##1{%
-            \def\@tempb{##1}%
-            \ifx\@tempa\@tempb\else
-                \@addtoreset{##1}{#2}%
-            \fi}%
-        \expandafter\expandafter\let\expandafter\@tempc\csname cl@#2\endcsname
-        \expandafter\def\csname cl@#2\endcsname{}%
-        \@tempc
-        \let\@elt\@tempd
-    }
+\def\@takefromreset#1#2{%
+    \def\@tempa{#1}%
+    \let\@tempd\@elt
+    \def\@elt##1{%
+        \def\@tempb{##1}%
+        \ifx\@tempa\@tempb\else
+            \@addtoreset{##1}{#2}%
+        \fi}%
+    \expandafter\expandafter\let\expandafter\@tempc\csname cl@#2\endcsname
+    \expandafter\def\csname cl@#2\endcsname{}%
+    \@tempc
+    \let\@elt\@tempd
+}
 ```
 
 and then the solution to the original problem becomes:
 
 ```latex
-        \@takefromreset{footnote}{chapter}
-        \@takefromreset{table}{chapter}
-        \@takefromreset{figure}{chapter}
-        \@takefromreset{equation}{chapter}
-        \def\thetable{\@arabic\c@table}
-        \def\thefigure{\@arabic\c@figure}
-        \def\theequation{\arabic{equation}}
+\@takefromreset{footnote}{chapter}
+\@takefromreset{table}{chapter}
+\@takefromreset{figure}{chapter}
+\@takefromreset{equation}{chapter}
+\def\thetable{\@arabic\c@table}
+\def\thefigure{\@arabic\c@figure}
+\def\theequation{\arabic{equation}}
 ```
 
 
@@ -1638,10 +1639,10 @@ From the ``Golden Rules of Macro Coding'' (for TeX)
 TeX code for definitions including multiple alternatives:
 
 ```latex
-  \newcommand{\twolinedef}[4]{\left\{ \begin{array}{ll}
-        #1 & \mbox{#2} \\
-        #3 & \mbox{#4} \\
-  \end{array} \right.}
+\newcommand{\twolinedef}[4]{\left\{ \begin{array}{ll}
+      #1 & \mbox{#2} \\
+      #3 & \mbox{#4} \\
+\end{array} \right.}
 ```
 
 
@@ -1715,23 +1716,23 @@ To add page numbers in ACM SIG (or sig-alternate) LaTeX style (and remove
 the copyright box):
 
 ```latex
-  % Add page numbers, remove copyright box.  For submitted version only.
-  \pagenumbering{arabic}
-  \makeatletter
-  \def\@copyrightspace{\relax}
-  \makeatother
+% Add page numbers, remove copyright box.  For submitted version only.
+\pagenumbering{arabic}
+\makeatletter
+\def\@copyrightspace{\relax}
+\makeatother
 ```
 
 In sigplanconf style, it's even easier:
 
 ```latex
-  \documentclass[preprint,nocopyrightspace]{sigplanconf}
+\documentclass[preprint,nocopyrightspace]{sigplanconf}
 ```
 
 In acmlarge.cls, remove the copyright info by doing:
 
 ```latex
-  \def\permission{}
+\def\permission{}
 ```
 
 Fixes to ACM SIG style (sig-alternate.cls):
@@ -1756,35 +1757,35 @@ Fixes to ACM SIG style (sig-alternate.cls):
   * In sig-alternate, change two lines to the following:
 
     ```latex
-           \begin{picture}(20,5) %Space for copyright notice
-           \put(0,-.75){\crnotice{\@toappear}}
+    \begin{picture}(20,5) %Space for copyright notice
+    \put(0,-.75){\crnotice{\@toappear}}
     ```
 
     (or use a slightly more negative last number like -.95 instead of -.75).
   * In sigplanconf.cls, change "\vbox to 1in" so that we use:
 
     ```latex
-           \@float{copyrightbox}[b]%
-             \vbox to .8in{%
+    \@float{copyrightbox}[b]%
+      \vbox to .8in{%
     ```
 
 * Font size:
 
 ```latex
-    \def\footnotesize{\@setsize\footnotesize{8pt}\viipt\@viipt}
+\def\footnotesize{\@setsize\footnotesize{8pt}\viipt\@viipt}
 ```
 
 Fixes to sigplanconf.cls:
 
 ```latex
-  \vbox to .8in{%
-    % \vfill
+\vbox to .8in{%
+  % \vfill
 ```
 
 Maybe:
 
 ```latex
-  % \vspace{2pt}
+% \vspace{2pt}
 ```
 
 To reduce whitespace in the titlebox (near the title and authors):
@@ -1792,20 +1793,20 @@ To reduce whitespace in the titlebox (near the title and authors):
 * Comment out:
 
 ```latex
-    %\vskip 2em                   % Vertical space above title.
+%\vskip 2em                   % Vertical space above title.
 ```
 
 * To reduce space *after* the authors, reduce "12.75" on this line:
 
 ```latex
- \advance\dimen0 by -12.75pc\relax % Increased space for title box -- KBT
+\advance\dimen0 by -12.75pc\relax % Increased space for title box -- KBT
 ```
 
 * To reduce space between the title and authors (without affecting the
    total size of the title box), reduce "1.25" in this line:
 
 ```latex
-  {\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi
+{\subttlfnt \the\subtitletext\par}\vskip 1.25em%\fi
 ```
 
 
@@ -1842,14 +1843,14 @@ Make these fixes to figures and captions when writing a paper using IEEE latex8.
 * Edit the setting of \@figindent as follows:
 
 ```latex
-  \setlength{\@figindent}{0pc}
+\setlength{\@figindent}{0pc}
 ```
 
 * In definition of @makecaption, change "then" clause to:
 
 ```latex
-      % THEN set as an indented paragraph
-      {\parbox{\hsize}{#1: #2\strut}}\par
+% THEN set as an indented paragraph
+{\parbox{\hsize}{#1: #2\strut}}\par
 ```
 
 
@@ -1872,10 +1873,10 @@ To produce a footnote without a footnote mark (as for a copyright notice in
 the lower left-hand corner of a conference paper) in LaTeX, do this:
 
 ```latex
-  \renewcommand{\thefootnote}{}
-  \footnotetext{A version of this paper will appear in the 25th
-  Annual International Symposium on Computer Architecture, June 1998}
-  \renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thefootnote}{}
+\footnotetext{A version of this paper will appear in the 25th
+Annual International Symposium on Computer Architecture, June 1998}
+\renewcommand{\thefootnote}{\arabic{footnote}}
 ```
 
 
@@ -1895,7 +1896,7 @@ though the source recommends
 To use a smaller (9-point) font in a LaTeX document, use
 
 ```latex
-  \makeatletter\input{size09.clo}\makeatother
+\makeatletter\input{size09.clo}\makeatother
 ```
 
 as the first set of commands after \documentclass.
@@ -1925,9 +1926,9 @@ Using \{ in \tt yields a Roman "{", it seems.  Here are macros that use the
 \tt font:
 
 ```latex
-  % Left and right curly braces in tt font
-  \newcommand{\ttlcb}{\texttt{\char "7B}}
-  \newcommand{\ttrcb}{\texttt{\char "7D}}
+% Left and right curly braces in tt font
+\newcommand{\ttlcb}{\texttt{\char "7B}}
+\newcommand{\ttrcb}{\texttt{\char "7D}}
 ```
 
 
@@ -1968,7 +1969,7 @@ The "beamer" package permits making nice slides with LaTeX.
 Any LaTeX-Beamer slide containing a verbatim environment must start out:
 
 ```latex
-  \begin{frame}[fragile]
+\begin{frame}[fragile]
 ```
 
 (or [containsverbatim], though that's more typing)
@@ -1977,8 +1978,8 @@ Any LaTeX-Beamer slide containing a verbatim environment must start out:
 In LaTeX-Beamer:
 
 ```latex
-  \begin{frame}[shrink=5]   permits change of font size
-  \begin{frame}[squeeze]    reduces vertical space
+\begin{frame}[shrink=5]   permits change of font size
+\begin{frame}[squeeze]    reduces vertical space
 ```
 
 
@@ -1986,7 +1987,7 @@ In TeX/LaTeX, to create a large "forall" symbol (which ordinarily is no
 larger in display mode than in any other math mode), do something like
 
 ```latex
-  \newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}
+\newcommand{\bigforall}[2]{{{\raisebox{-6pt}{\mbox{\Large$\forall$}$#1$}}\atop{\scriptstyle #2}}}
 ```
 
 
@@ -1994,9 +1995,9 @@ For a paragraph in a smaller font, on the smaller font's baseline
 inter-line spacing (but it isn't permitted to be broken across columns), do
 
 ```latex
-  {\small\noindent\parbox{\columnwidth}{\quad
-  ...
-  }
+{\small\noindent\parbox{\columnwidth}{\quad
+...
+}
 ```
 
 
@@ -2021,13 +2022,13 @@ Derek Rayside says:
 I wrote a little latex macro that lets one write things such as:
 
 ```latex
-    \digraph{MyGraph}{a->b}
+\digraph{MyGraph}{a->b}
 ```
 
 this produces MyGraph.dot with the contents:
 
 ```dot
-    digraph MyGraph {a->b}
+digraph MyGraph {a->b}
 ```
 
 If you run `dot` to get `MyGraph.ps` (ie, `dot -Tps -o MyGraph.ps MyGraph.dot`),
@@ -2045,20 +2046,20 @@ more text on it.
 Emacs "Local variables" section of a LaTeX file looks like one of the following:
 
 ```latex
- %%% Local Variables:
- %%% mode: latex
- %%% TeX-master: t
- %%% auto-fill-function: nil
- %%% fill-column: 75
- %%% TeX-command-default: "PDF"
- %%% End:
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% auto-fill-function: nil
+%%% fill-column: 75
+%%% TeX-command-default: "PDF"
+%%% End:
 ```
 
 ```latex
- %%% Local Variables:
- %%% mode: latex
- %%% TeX-master: "daikon-ioa-2002"
- %%% End:
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "daikon-ioa-2002"
+%%% End:
 ```
 
 
@@ -2113,7 +2114,7 @@ The lstlisting package by default puts its line numbers in the column gutter.
 To fix this, use:
 
 ```latex
-  \begin{lstlisting}[xleftmargin=5.0ex]
+\begin{lstlisting}[xleftmargin=5.0ex]
 ```
 
 
@@ -2121,7 +2122,7 @@ To get bold fixed width (typewriter, teletype, tt) font in LaTeX, here are some 
 When using Computer Modern fonts), use
 
 ```latex
-  \usepackage{bold-extra}
+\usepackage{bold-extra}
 ```
 
 See installation instructions at
@@ -2131,12 +2132,12 @@ Or, use underlining for emphasis.
 Or, try a different font than Computer Modern.  For example, try
 
 ```latex
-  \usepackage[T1]{fontenc}
-  \usepackage{lmodern} % "latin modern", which has a (too subtle) boldface typewriter font
-  \usepackage[lighttt]{lmodern} % lighter non-bold version (looks better)
-  %\usepackage{luximono}
-  %\usepackage[scaled=0.85]{beramono}
-  \usepackage[T1]{lucidabr}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % "latin modern", which has a (too subtle) boldface typewriter font
+\usepackage[lighttt]{lmodern} % lighter non-bold version (looks better)
+%\usepackage{luximono}
+%\usepackage[scaled=0.85]{beramono}
+\usepackage[T1]{lucidabr}
 ```
 
 but if you use Lucida Bright, you probably want to scope the Lucida Bright to
@@ -2148,18 +2149,18 @@ To include a literal backslash (or other special characters) in a LaTeX
 Verbatim (fancyverb) environment, use \SaveVerb and \UseVerb.
 
 ```latex
-  \DefineShortVerb{\|}
-  \SaveVerb{myname}|verbatim text \ _ ^|
-  \UndefineShortVerb{\|}
-  \UseVerb{myname}
+\DefineShortVerb{\|}
+\SaveVerb{myname}|verbatim text \ _ ^|
+\UndefineShortVerb{\|}
+\UseVerb{myname}
 ```
 
 Even simpler is the verbdef package:
 
 ```latex
-  \usepackage{verbdef}
-  \verbdef\mymacroname|verbatim text \ _ ^|
-  \mymacroname
+\usepackage{verbdef}
+\verbdef\mymacroname|verbatim text \ _ ^|
+\mymacroname
 ```
 
 
@@ -2168,20 +2169,20 @@ In LaTeX, as a general rule, backslashing punctuation characters inside
 \code with \verb or use \char and an ASCII code for the symbol, such as
 
 ```latex
-  \renewcommand{\_}{\char"5F}
+\renewcommand{\_}{\char"5F}
 ```
 
 or, to get a backslash
 
 ```latex
-  \newcommand{\bs}{\char"5C}
+\newcommand{\bs}{\char"5C}
 ```
 
 
 The llncs.cls style (class) file (and also sig-alternate.cls) does
 
 ```latex
-  \let\footnotesize\small
+\let\footnotesize\small
 ```
 
 which changes the font in footnotes.  This is an acceptable goal, but the
@@ -2222,27 +2223,27 @@ the text.
 Here is a definition of a \todo macro for LaTeX:
 
 ```latex
- \usepackage{color}
- %%% Todo comments
- %% Comment or uncomment this line.
- % \def\notodocomments{}
- \newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
- % Don't show todo commands if the \notodocomments macro is defined.
- \ifdefined\notodocomments
-   \renewcommand{\todo}[1]{\relax}
- \fi
+\usepackage{color}
+%%% Todo comments
+%% Comment or uncomment this line.
+% \def\notodocomments{}
+\newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+% Don't show todo commands if the \notodocomments macro is defined.
+\ifdefined\notodocomments
+ \renewcommand{\todo}[1]{\relax}
+\fi
 ```
 
 When using the \todo macro, don't leave space around it.  For example, write
 
 ```latex
-  The approach is effective\todo{add citations}.
+The approach is effective\todo{add citations}.
 ```
 
 rather than
 
 ```latex
-  The approach is effective \todo{add citations}.
+The approach is effective \todo{add citations}.
 ```
 
 because the latter would leave a space before the period when todo comments
@@ -2260,7 +2261,7 @@ but that executes \leavevmode and so it cannot span paragraphs.)
 Absolute value in LaTeX:
 
 ```latex
-  \left| \frac{A+B}{3} \right|
+\left| \frac{A+B}{3} \right|
 ```
 
 
@@ -2295,20 +2296,20 @@ fence for floats, but you often want that too anyway.)
 To get extra space in a document:
 
 ```latex
-  \renewcommand{\baselinestretch}{.994}
+\renewcommand{\baselinestretch}{.994}
 ```
 
 But that is terrible, so consider
 
 ```latex
-  \enlargethispage{10pt}
+\enlargethispage{10pt}
 ```
 
 in strategic locations.
 Also helpful is
 
 ```latex
-  \usepackage{microtype}
+\usepackage{microtype}
 ```
 
 after which only pdflatex, not regular latex, works.
@@ -2319,17 +2320,17 @@ fonts.
 To adjust section numbering in LaTeX (e.g., make subsubsections be numbered):
 
 ```latex
-  \setcounter{secnumdepth}{3}
+\setcounter{secnumdepth}{3}
 ```
 
 There is no `\subsubsubsection` command, but you can make `\paragraph` be numbered:
 
 ```latex
-  % Define \subsubsubsection and make it be numbered.
-  \def\subsubsubsection{\paragraph}
-  \setcounter{secnumdepth}{4}
-  \Crefname{subsection}{Section}{Sections}%
-  \crefname{paragraph}{section}{sections}
+% Define \subsubsubsection and make it be numbered.
+\def\subsubsubsection{\paragraph}
+\setcounter{secnumdepth}{4}
+\Crefname{subsection}{Section}{Sections}%
+\crefname{paragraph}{section}{sections}
 ```
 
 
@@ -2371,16 +2372,16 @@ scribble the shape here:
 Ways to get a circled number in LaTeX with better formatting than \textcircled:
 
 ```latex
- \usepackage{circledsteps}
- \Circled{22}
- % serif font:
- \usepackage{pifont}
- \newcommand{\numcircled}[1]{\ding{\numexpr171+#1\relax}}
- % sans-serif font:
- \usepackage{pifont}
- \newcommand{\numcircled}[1]{\ding{\numexpr191+#1\relax}}
- % Without using any extra packages
- \newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
+\usepackage{circledsteps}
+\Circled{22}
+% serif font:
+\usepackage{pifont}
+\newcommand{\numcircled}[1]{\ding{\numexpr171+#1\relax}}
+% sans-serif font:
+\usepackage{pifont}
+\newcommand{\numcircled}[1]{\ding{\numexpr191+#1\relax}}
+% Without using any extra packages
+\newcommand{\numcircled}[1]{\raisebox{.5pt}{\textcircled{\raisebox{-.9pt}{#1}}}}
 ```
 
 
@@ -2544,13 +2545,13 @@ In ACM style, to make acknowledgments smaller:
 
 
 ```latex
- % Set em dashes (LaTeX ---) with thin spaces surrounding them.
- \usepackage[kerning=true]{microtype}
- \SetExtraKerning
-     {encoding =  {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}} % all text
-     {
-  \textemdash  = {167,167} % thinspace = 1/6 em
-     }
+% Set em dashes (LaTeX ---) with thin spaces surrounding them.
+\usepackage[kerning=true]{microtype}
+\SetExtraKerning
+   {encoding =  {OT1,T1,T2A,LY1,OT4,QX,T5,TS1,EU1,EU2}} % all text
+   {
+\textemdash  = {167,167} % thinspace = 1/6 em
+   }
 ```
 
 
