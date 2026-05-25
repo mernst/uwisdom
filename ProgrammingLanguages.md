@@ -491,10 +491,18 @@ To activate a Python venv virtual environment:
 .venv/bin/activate
 ```
 
+OLD, use `uv` instead:
 To install a package:
 
 ```sh
 pip install PACKAGE
+```
+
+
+To update all dependencies in your lockfile to the latest versions allowed by your constraints:
+
+```sh
+uv sync --upgrade
 ```
 
 
