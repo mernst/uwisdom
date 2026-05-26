@@ -844,6 +844,11 @@ SCRIPT_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)"
 ```
 
 
+In a shell script,
+`env` reports *exported* environment variables.
+`set` set all environment variables.
+
+
 ## C and C++
 
 
