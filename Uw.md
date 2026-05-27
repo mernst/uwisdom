@@ -324,6 +324,17 @@ UW CSE new quarter teaching guide: https://docs.google.com/document/d/1ZXClMBw9N
 As of 2026-03-05, in the Gates building (CSE2), the only printers that can scan are the ones in the first and third floor print centers.
 
 
+Custodial staff for UW CSE buildings:
+
+* Gates 1 - Thanh Lai
+* Gates 2 - Eun Han
+* Gates 3 - Zaid Ogbay
+* Gates G & 4 - Teresa Reynoso
+* Allen 1 & 5 - Dehab Seare
+* Allen 2 & 6 - Lemlem Hadera
+* Allen 3 & 4 - Hannah Eyasu
+
+
 ## CSE sysadmin
 
 
