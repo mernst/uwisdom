@@ -1,0 +1,7 @@
+cd ~/bin/install
+VER=1.7.4
+wget https://git.zx2c4.com/password-store/snapshot/password-store-$VER.tar.xz
+unxz -c password-store-$VER.tar.xz | tar xvf -
+cd password-store-$VER
+ln -s ../..
+~/bin/Linux-x86_64
