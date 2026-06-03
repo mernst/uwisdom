@@ -473,6 +473,13 @@ On each computer where you have a git clone, run `git config --global user.name`
 On any page under github.com, click on your face or initial in the upper right corner.  If the displayed name is not correct, click "profile" then "edit profile" to fix it.
 
 
+To set the modification times of files in a git clone to be the last time they were modified in git (as opposed to, say, when `git clone` was executed):
+
+```sh
+git restore-mtime
+```
+
+
 ### The git staging area
 
 
