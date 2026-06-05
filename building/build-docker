@@ -28,7 +28,7 @@ On my home machine:
 "data-root": "/scratch/docker"
 }
 3. reboot
-4. sudo chmod -R og+r /scratch/docker && find /scratch/docker -type d -exec chmod +x {} + && echo "done"
+4. sudo chmod -R og+r /scratch/docker && sudo find /scratch/docker -type d -exec sudo chmod +x {} + && echo "done"
 
 ===========================================================================
 
