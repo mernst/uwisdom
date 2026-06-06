@@ -1,8 +1,10 @@
-https://download.eclipse.org/jdtls/milestones/1.41.0/
+# Get version number at: https://download.eclipse.org/jdtls/milestones/
 
-
+VER=1.58.0
 cd ~/bin/install
-mkdir jdt-language-server-1.41.0
-cd jdt-language-server-1.41.0
-wget -O jdt-language-server-1.41.0-202410311350.tar.gz https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.41.0/jdt-language-server-1.41.0-202410311350.tar.gz
-tar xzf jdt-language-server-1.41.0-202410311350.tar.gz
+mkdir jdt-language-server-$VER
+cd jdt-language-server-$VER
+wget https://download.eclipse.org/jdtls/milestones/$VER/latest.txt
+wget -O jdt-language-server-$VER.tar.gz https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/$VER/$(cat latest.txt)
+tar xzf jdt-language-server-$VER.tar.gz
+(cd ~/bin/$(uname)-$(uname -m) && ln -s ../install/jdt-language-server-$VER/bin/jdtls .)

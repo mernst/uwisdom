@@ -28,10 +28,15 @@ claude doctor
 
 ===========================================================================
 
-# OLDER:
-# npm config set prefix "$HOME/.local/"
-# npm install -g @anthropic-ai/claude-code
-# To update:
-# npm i -g @anthropic-ai/claude-code
-# To remove:
-# npm uninstall -g @anthropic-ai/claude-code
+LSP support:
+
+(See file build-lsp for non-Claude-specific installation.)
+
+* Java instructions at: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/jdtls-lsp
+* C instructions at: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp
+* bash:
+
+cd ~/bin/install
+wget -O jdt-language-server-latest.tar.gz https://www.eclipse.org/downloads/download.php?file=/jdtls/snapshots/jdt-language-server-latest.tar.gz
+
+===========================================================================

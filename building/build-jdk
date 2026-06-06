@@ -64,34 +64,12 @@ Installing an early access JDK on Ubuntu:
 
 ----------------
 
-# Obtain URL from https://jdk.java.net/25/
+# Obtain URL from https://jdk.java.net/27
 
 cd ~/java
-wget https://download.java.net/java/GA/jdk25/bd75d5f9689641da8e1daabeccb5528b/36/GPL/openjdk-25_linux-x64_bin.tar.gz
-tar xzf openjdk-25_linux-x64_bin.tar.gz
-ln -s jdk-25 jdk25
-
-
-cd ~/java
-wget https://download.oracle.com/java/24/latest/jdk-24_linux-x64_bin.tar.gz
-tar xzf jdk-24_linux-x64_bin.tar.gz
-ln -s jdk-24 jdk24
-
-
-----------------
-
-# Obtain URL from https://jdk.java.net/23
-
-# Install JDK 21 on Ubuntu, before openjdk-21-jdk package exists:
-cd ~/java
-wget https://download.java.net/java/GA/jdk21/fd2272bbf8e04c3dbaee13770090416c/35/GPL/openjdk-21_linux-x64_bin.tar.gz
-tar xzf openjdk-21_linux-x64_bin.tar.gz
-
-# JDK 23
-cd ~/java
-wget https://download.java.net/java/GA/jdk23/3c5b90190c68498b986a97f276efd28a/36/GPL/openjdk-23_linux-x64_bin.tar.gz
-tar xzf openjdk-23_linux-x64_bin.tar.gz
-ln -s jdk-23 jdk23
+wget https://download.java.net/java/early_access/jdk27/24/GPL/openjdk-27-ea+24_linux-x64_bin.tar.gz
+tar xzf openjdk-27-ea+24_linux-x64_bin.tar.gz
+ln -s jdk-27 jdk27
 
 ----------------
 

@@ -26,15 +26,17 @@ pip is for modules.
 Upgrading
 
 # To update uv and all tools:
+
+# Globally:
 uv self update
 uv tool upgrade --all
-uv sync --upgrade
-# These commands update the uv.lock file but NOT the pyproject.toml file
-# (https://github.com/astral-sh/uv/issues/6794).
 
+# Within a single project that has a `pyproject.toml` file:
+uv sync --upgrade
+## These commands update the uv.lock file but NOT the pyproject.toml file
+## (https://github.com/astral-sh/uv/issues/6794).
 # What's outdated in the pyproject.toml file (the project dependencies):
 uv tree --depth 1 --outdated | grep '(latest: '
-
 # What's outdated in the uv.lock file (the installed version):
 uv pip list --outdated
 
