@@ -1,0 +1,25 @@
+LSP support:
+
+* bash:
+  * Ubuntu: sudo snap install bash-language-server --classic
+  * Fedora: dnf install -y nodejs-bash-language-server
+* C
+  * Ubuntu: sudo apt install clangd
+  * Fedora: sudo dnf install clang-tools-extra
+  * Read https://clangd.llvm.org/installation#project-setup
+* Docker:
+  * sudo npm install -g dockerfile-language-server-nodejs
+* HTML/CSS/JSON/ESLint:
+  * sudo npm i -g vscode-langservers-extracted
+* Java: See file build-jdtls
+* LaTeX:
+  * Ubuntu: sudo apt-get install texlab
+* Markdown:
+  * Ubuntu: sudo snap install marksman
+* Pyhon:
+  * uv tool install pyright
+* Rust:
+  * cargo install ra_ap_rust-analyzer
+* YAML:
+  * Ubuntu: sudo snap install yaml-language-server
+  * Non-Ubuntu: npm install -g yaml-language-server
