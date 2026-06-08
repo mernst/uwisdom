@@ -2110,6 +2110,12 @@ Note that Computer Modern font has no bold fixed width font.
 (See elsewhere in this file for solutions.)
 
 
+To reduce font size in the lstlistings package:
+```latex
+basicstyle=\ttfamily\smaller\smaller
+```
+
+
 The lstlisting package by default puts its line numbers in the column gutter.
 To fix this, use:
 

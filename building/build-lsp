@@ -23,3 +23,10 @@ LSP support:
 * YAML:
   * Ubuntu: sudo snap install yaml-language-server
   * Non-Ubuntu: npm install -g yaml-language-server
+
+
+
+For Emacs:
+
+(package-vc-install "https://github.com/jdtsmith/eglot-booster")
+cargo install emacs-lsp-booster
