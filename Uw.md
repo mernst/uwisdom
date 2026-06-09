@@ -335,6 +335,9 @@ Custodial staff for UW CSE buildings:
 * Allen 3 & 4 - Hannah Eyasu
 
 
+CSE2 287 and CSE2 387 are "medium seminar" rooms.
+
+
 ## CSE sysadmin
 
 
