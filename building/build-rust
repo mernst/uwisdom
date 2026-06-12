@@ -9,6 +9,13 @@ rustup component add rust-analyzer
 # to update Rust:
 rustup update
 
+# To update all globally installed binaries:
+cargo install cargo-update
+cargo install-update -a
+
+# To update all installed dependencies, for one project only:
+cargo update
+
 The Rust book in PDF:
  * https://doc.rust-lang.org/book/print.html and browser "print" or "save as PDF"
  * https://github.com/max-heller/mdbook-pandoc?tab=readme-ov-file#rendered-books

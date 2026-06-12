@@ -8,21 +8,23 @@ LSP support:
   * Fedora: sudo dnf install clang-tools-extra
   * Read https://clangd.llvm.org/installation#project-setup
 * Docker:
-  * sudo npm install -g dockerfile-language-server-nodejs
+  * [sudo] npm install -g dockerfile-language-server-nodejs
 * HTML/CSS/JSON/ESLint:
-  * sudo npm i -g vscode-langservers-extracted
+  * [sudo] npm i -g vscode-langservers-extracted
 * Java: See file build-jdtls
 * LaTeX:
   * Ubuntu: sudo apt-get install texlab
+  * Others: cd ~/bin/Linux-x86_64 && wget https://github.com/latex-lsp/texlab/releases/download/v5.25.1/texlab-x86_64-linux.tar.gz && tar xzf texlab-x86_64-linux.tar.gz && rm -f texlab-x86_64-linux.tar.gz
 * Markdown:
   * Ubuntu: sudo snap install marksman
+  * Others: cd ~/bin/Linux-x86_64 && wget -O marksman https://github.com/artempyanykh/marksman/releases/download/2026-02-08/marksman-linux-x64 && chmod +x marksman
 * Pyhon:
   * uv tool install pyright
 * Rust:
-  * cargo install ra_ap_rust-analyzer
+  * May need to run "rustup update" first (or that may be sufficient!).
+    cargo install ra_ap_rust-analyzer
 * YAML:
-  * Ubuntu: sudo snap install yaml-language-server
-  * Non-Ubuntu: npm install -g yaml-language-server
+  * Ubuntu: [sudo] snap install yaml-language-server
 
 
 
