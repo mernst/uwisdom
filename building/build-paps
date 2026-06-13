@@ -1,6 +1,77 @@
 Ubuntu:
 sudo apt -yqq install paps
 
+===========================================================================
+
+# Install paps from source:
+cd ~/bin/install
+git clone https://github.com/dov/paps.git
+cd paps
+export FMT_LIBS=$HOME/bin/install/fmt/build
+export FMT_CFLAGS=-I$HOME/bin/install/fmt/include
+./configure --disable-Werror
+make
+
+
+# Install meson:
+cd ~/bin/install
+wget https://github.com/mesonbuild/meson/releases/download/1.11.1/meson-1.11.1.tar.gz
+tar xzf meson-1.11.1.tar.gz
+# link meson.py to `meson` on the PATH
+
+# Install ninja
+uvx 
+
+# Install libpaper
+cd ~/bin/install
+wget https://github.com/rrthomas/libpaper/releases/download/v2.2.8/libpaper-2.2.8.tar.gz
+tar xzf libpaper-2.2.8.tar.gz
+cd libpaper-2.2.8
+./configure --enable-relocatable && make
+
+# Install paps
+cd ~/bin/install
+git clone https://github.com/dov/paps.git
+cd paps
+export PKG_CONFIG_PATH=$HOME/bin/install/libpaper-2.2.8/lib/.libs
+export LDFLAGS=-L$HOME/bin/install/libpaper-2.2.8/lib/.libs
+meson build
+cd build && ninja
+# Current problem: paper.h: No such file or directory
+# Maybe I should build on Ubuntu and then copy the binary to Fedora?
+
+===========================================================================
+
+# Install paps from a release.
+# Get version number from https://github.com/dov/paps/releases
+
+# Install fmt.
+# Instructions at https://fmt.dev/latest/get-started/#building-from-source
+cd ~/bin/install
+git clone https://github.com/fmtlib/fmt.git
+cd fmt
+mkdir build
+cd build
+cmake ..
+make
+# This creates files build/libfmt.a and build/libfmt-c.a.
+
+# Install paps from a release (lots of trouble here!)
+cd ~/bin/install
+wget https://github.com/dov/paps/releases/download/v0.8.0/paps-0.8.0.tar.gz
+tar xzf paps-0.8.0.tar.gz
+cd paps-0.8.0
+# `--with-fmt` is not recognized by ./configure
+# This didn't work either: export FMT_CFLAGS=-I$HOME/bin/install/fmt/build; ./configure
+#### TODO: replace uses of "fmt::localtime" by "std::localtime" in the source code.
+export FMT_LIBS=$HOME/bin/install/fmt/build
+export FMT_CFLAGS=-I$HOME/bin/install/fmt/include
+./configure --disable-Werror
+make
+
+===========================================================================
+
+Older:
 
 From source:
 # PROBLEM: running paps as installed by the below produces ridiculously

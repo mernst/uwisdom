@@ -1,0 +1,11 @@
+cd ~/bin/install
+git clone https://github.com/arsv/u2ps.git
+cd u2ps
+./configure
+make
+
+Running
+  u2ps -W --columns=101 somefile.txt
+leads to:
+  GPL Ghostscript 9.54.0: Unrecoverable error, exit code 1
+  gs failed, aborting

@@ -1,0 +1,9 @@
+cd ~/bin/install
+git clone https://github.com/baruchel/txt2pdf.git
+# Remove "<=3.6.1" in `requirements.txt`
+cd txt2pdf/
+uv venv
+source .venv/bin/activate
+uv pip install --only-binary :all: -r requirements.txt
+
+# The result contains lots of black boxes.
