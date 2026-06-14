@@ -275,7 +275,7 @@ that root doesn't necessarily have read-access to my private files!
 
 
 An Amazon Kindle plugged into Ubuntu Linux via USB has its books mounted at
-/media/$USER/Kindle/documents/ (not at /mnt).
+/run/media/$USER/Kindle/documents/ (not at /mnt).
 
 
 There is a "send to Kindle" webpage, in addition to a dedicated email address per account.

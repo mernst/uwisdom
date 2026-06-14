@@ -31,3 +31,11 @@ diff -u -b -r /usr/share/enscript/enscript.st.\~1\~ /usr/share/enscript/enscript
    /\.[fF]$/				fortran;
    /\.awk$/				awk;
 
+===========================================================================
+
+# This handles Unicode, but it uses a fixed font that fits 82 columns on a US letter-sized page.
+# It wraps lines (at spaces), but gives no indication of the wrapped lines.
+libreoffice --headless --convert-to pdf 
+
+# This treats all runs of whitepsace the same (does not preserve indentation, for example).
+pandoc analysis.py -V geometry:margin=1in --highlight-style=monokai --pdf-engine=wkhtmltopdf -o output.pdf

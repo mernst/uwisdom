@@ -1,3 +1,23 @@
 # For pygmentize program, one of these:
 pip3 install pygments
 pip3 install --user Pygments
+
+
+
+# Pygments produced a partial LaTeX file without "\begin{document}" etc.
+pygmentize -f latex -O style=bw,linenos=1 analysis.py > code.tex && pdflatex code.tex
+
+# pdflatex failed due to a unicode character.  lualatex worked better but omitted non-found characters which is probably worse than rendering them as "?".
+pygmentize -f tex -O full -o code.tex analysis.py
+lualatex code.tex
+
+
+# These two didn't work, either.
+
+pygmentize -f html -O full -l python analysis.py > analysis.pygments
+paps --paper letter --header --cpi 14 analysis.pygments > analysis.ps
+ps2pdf analysis.ps
+
+pygmentize -f html -O full -l python analysis.py | paps --paper letter --header --cpi 14 > analysis.ps
+ps2pdf analysis.ps
+

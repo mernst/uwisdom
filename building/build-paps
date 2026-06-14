@@ -1,7 +1,14 @@
 Ubuntu:
 sudo apt -yqq install paps
 
+# 14 characters per inch fits 100 columns onto a letter-sized page.
+# There is no syntax highlighting.
+paps --paper letter --header --cpi 14  analysis.py > analysis.ps
+ps2pdf analysis.ps
+
 ===========================================================================
+
+# This failed on Rocky Linux.
 
 # Install paps from source:
 cd ~/bin/install
@@ -41,6 +48,8 @@ cd build && ninja
 # Maybe I should build on Ubuntu and then copy the binary to Fedora?
 
 ===========================================================================
+
+# This failed on Rocky Linux.
 
 # Install paps from a release.
 # Get version number from https://github.com/dov/paps/releases

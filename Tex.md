@@ -2630,6 +2630,9 @@ To typeset exercises and solutions in a LaTeX document:
   For selecting problems from a database or bank of problems.
 
 
+Use `lualatex` instead of `pdflatex`, for Unicode (UTF-8) support.
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
