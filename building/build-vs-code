@@ -1,0 +1,4 @@
+sudo snap install code --classic
+
+# Documentation on reviewing pull requests:
+https://github.com/microsoft/vscode-pull-request-github
