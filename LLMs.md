@@ -131,3 +131,24 @@ For maximum effort, run Claude as
 ```
 claude --model opus --effort max
 ```
+
+
+To run Claude non-interactively:
+
+```sh
+claude "PROMPT" --model opus --effort max --dangerously-skip-permissions \
+  --print --output-format json > claude-output.json
+```
+
+This passes a prompt to Claude and captures output, including the cost in dollars.
+
+You can process the JSON file using https://github.com/daaain/claude-code-log .
+
+As of 2026-06-15, Claude Agent SDK, `claude -p` (= `claude --print`), and
+third-party app usage draw from your subscription's usage limits.  In the
+future, they may bill separately using usage-based rules.
+
+
+Claude's `--bare` command-line which avoids loading the user's own Claude settings and
+thus is better for experiments.  (With `--bare`, Anthropic authentication must
+come from environment variable `ANTHROPIC_API_KEY`.)

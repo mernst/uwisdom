@@ -480,6 +480,16 @@ git restore-mtime
 ```
 
 
+The `git` program depends on certain environment variables that are set by git when running pre-commit hook.
+If you call `git clone` for a *different* repository within a git pre-commit hook, then that corrupts the original repository (!).
+
+To avoid the problem, the pre-commit hook should do:
+
+```sh
+(unset $(git rev-parse --local-env-vars); git clone ...)
+```
+
+
 ### The git staging area
 
 
