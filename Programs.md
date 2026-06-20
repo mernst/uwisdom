@@ -1173,6 +1173,11 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 ```
 
 
+Running snapd inside a container is not supported and is discouraged.  Snaps
+rely heavily on systemd, apparmor, and kernel isolation features that Docker
+containers strip away by default
+
+
 ## Markdown
 
 

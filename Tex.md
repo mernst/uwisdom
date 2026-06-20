@@ -1352,6 +1352,36 @@ From an NSF proposal that made it through research.gov:
   \linespread{1.005}
 
 
+For "petite" small caps, this did not work for me.  It gave regular lowercase letters.
+
+Use `latexmk -lualatex` and do *not* supply `-pdf` to `latexmk`, and use this code:
+
+```latex
+\usepackage{fontspec}
+\usepackage{newcomputermodern}
+\setmainfont{Latin Modern Roman}[
+    SmallCapsFeatures={Letters=PetiteCaps}
+]
+```
+
+
+To make small caps (`\sc`) a bit less overwhelming, you can reduce the space (kerning) between letters:
+
+```latex
+\textls[-20]{\textsc{Your Text Here}}
+```
+
+
+Within small caps, it may be necessary to improve kerning:
+
+```latex
+\newcommand{\optionalBreakNegativeKerning}{\discretionary{-}{}{\kern-0.075em}}
+\newcommand{\obnk}{\optionalBreakNegativeKerning}
+\newcommand{\scMutation}{Mu\-ta\obnk{}tion}
+\newcommand{\scCoverage}{Cov\-er\obnk{}age}
+```
+
+
 ## Overleaf
 
 

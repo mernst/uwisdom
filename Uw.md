@@ -298,7 +298,14 @@ UW CSE prospective faculty interview feedback/reviews:
 
 
 To pay an undergraduate researcher an hourly wage:
-<https://internal.cs.washington.edu/hrp/about-payroll-contact-us/undergrad-ra-appointment/>
+https://internal.cs.washington.edu/hrp/about-payroll-contact-us/for-grant-managers/undergrad-ra-appointment/ .
+
+But the student needs to initiate the process by using the 
+the CSE research registration tool (available at https://mycse.cs.washington.edu/),
+which is used for both research for credit and research for pay.
+
+This is information aimed at undergrads, not supervisors:
+https://internal.cs.washington.edu/hrp/about-payroll-contact-us/student-employment-the-basics/ .
 
 
 To reimburse an expense such as travel or equipment:
