@@ -5,6 +5,15 @@ If someone cites AI as a source to try to prove something:
 https://stopcitingai.com/
 
 
+A large language model (LLM) is a statistical model of human language text.
+Given some text, it predicts what may follow.  A simple statistical model
+of English might be able to predict that the next word after ``go back to
+the drawing'' is most likely ``board''.  An LLM can contain trillions of
+decision-making units (neurons or parameters), enabling it to predict,
+given a prompt such as ``Summarize the following 5 pages of text in one
+paragraph: \ldots'', a paragraph that is likely to be a good summary.
+
+
 ## LLM/GenAI prompts
 
 
@@ -16,13 +25,16 @@ Please do not open a pull request without an understanding of the code and of yo
 ### Copy-editing
 
 
-Comment critically on the attached text.  Suggest ways that it can be improved.
+Copy-edit the text.
 
 
 Lightly rephrase the attached text, without changing or removing any substantive comment and without restructuring the text.  Change the wording locally to be more encouraging and to convert criticism into suggestions for improvement.
 
 
 Edit the paper review in @FILE to fill in the empty sections "Reasons to accept the paper", "Reasons to not accept the paper", and "Questions for authors' response".
+
+
+Comment critically on the attached text.  Suggest ways that it can be improved.
 
 
 ### Correcting voice-to-text dictation
