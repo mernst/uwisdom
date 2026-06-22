@@ -25,7 +25,16 @@ Please do not open a pull request without an understanding of the code and of yo
 ### Copy-editing
 
 
-Copy-edit the text.
+Copy-edit all the files in the paper.
+
+
+Improve the writing in all the files in the paper.
+
+
+Comment critically on the attached text.  Suggest ways that it can be improved.
+
+
+#### Copy-editing criticism
 
 
 Lightly rephrase the attached text, without changing or removing any substantive comment and without restructuring the text.  Change the wording locally to be more encouraging and to convert criticism into suggestions for improvement.
@@ -34,10 +43,7 @@ Lightly rephrase the attached text, without changing or removing any substantive
 Edit the paper review in @FILE to fill in the empty sections "Reasons to accept the paper", "Reasons to not accept the paper", and "Questions for authors' response".
 
 
-Comment critically on the attached text.  Suggest ways that it can be improved.
-
-
-### Correcting voice-to-text dictation
+#### Correcting voice-to-text dictation
 
 
 LLM (e.g., ChatGPT) prompting for correcting voice-to-text dictation:
