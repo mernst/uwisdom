@@ -308,7 +308,7 @@ This is information aimed at undergrads, not supervisors:
 https://internal.cs.washington.edu/hrp/about-payroll-contact-us/student-employment-the-basics/ .
 
 
-To reimburse an expense such as travel or equipment:
+To reimburse an expense such as travel or equipment, at UW CSE:
 <https://internal.cs.washington.edu/research-admin/research-finance-team/>
 
 

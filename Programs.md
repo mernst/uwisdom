@@ -2553,6 +2553,9 @@ Now, CI for this pull request will use it and should no longer fail.
 You need to trigger a re-run of the failing CI job; if you are not allowed to do so, you can either push a trivial change or ask me to do it.
 
 
+UBSan is a run-time tool to find undefined behavior, notably integer overflows and out-of-bounds indexes.
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
