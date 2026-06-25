@@ -664,6 +664,8 @@ Error: error ("Eager macro-expansion failure: (void-function transient-define-gr
 (find-file (locate-library "transient"))
 I fiddled around a bit and it finally worked, but I'm not sure exactly what I did.
 
+I might have deleted all the magit and transient files from ~/.emacs.d/elpa
+
 
 To run Emacs within a docker container:
 ```sh
