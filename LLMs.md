@@ -120,18 +120,39 @@ Introduce a local variable in places where a procedure call is definitely perfor
 ### Code review
 
 
+```sh
+clauded --print "Spell-check, grammar-check, and copy-edit the entire repository, including both source code and non-source-code files."
+```
+
+
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
-Critically review the entire codebase (not just a few commits).  Do not summarize the codebase.  Instead, make changes that improve the codebase.
+```sh
+clauded --print "Review the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it."
+```
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
 
 
 For code review of an entire single file by an LLM such as Claude Code:
 
-Critically review file
+Review file
 XXXXX
-.  Make suggestions for improvement.
+Do not summarize it.  Instead, make changes that improve it.
+
+
+coderabbit.ai settings:
+* reviews
+  * summary
+    * high level summary: off
+  * walkthrough:
+    * sequence diagrams: off
+    * estimate code review effort: off
+    * suggested labels: off
+* fun
+  * poem: off
+  * in progress fortune: off
+  * art: off
 
 
 ## Claude
