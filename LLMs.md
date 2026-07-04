@@ -158,6 +158,14 @@ coderabbit.ai settings:
 ## Claude
 
 
+Before running `claude --print`:
+
+```sh
+cp ~/.claude.json ~/.claude.json-SAVE-$(date +%Y%m%d)
+jq '.projects["'$(pwd)'"].hasTrustDialogAccepted = true' ~/.claude.json | sponge ~/.claude.json
+```
+
+
 This installs Claude in Github Actions, using the current account:
 
 ```
