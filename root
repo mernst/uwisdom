@@ -12,22 +12,23 @@
 // because they are not organized as lots of small nuggets of searchable
 // information.
 
-// \include{Afs.md}
-\include{BuildSystems.md}
-\include{Cloud.md}
-\include{ContinuousIntegration.md}
-\include{Emacs.md}
-\include{Java.md}
-// \include{JavaFormatters.md}
-// \include{JavaTools.md}
-\include{LLMs.md}
-\include{Linux.md}
-\include{Mac.md}
-\include{MicrosoftWindows.md}
-\include{Network.md}
-\include{ProgrammingLanguages.md}
-\include{Programs.md}
-\include{Research.md}
-\include{Tex.md}
-// \include{Uw.md}
-\include{VersionControl.md}
+// \include{afs.md}
+\include{build-systems.md}
+\include{cloud.md}
+\include{continuous-integration.md}
+\include{emacs.md}
+\include{java.md}
+// \include{java-formatters.md}
+// \include{java-tools.md}
+\include{linux.md}
+\include{llms.md}
+\include{mac.md}
+\include{microsoft-windows.md}
+// \include{mit.md}
+\include{network.md}
+\include{programming-languages.md}
+\include{programs.md}
+\include{research.md}
+\include{tex.md}
+// \include{uw.md}
+\include{version-control.md}
