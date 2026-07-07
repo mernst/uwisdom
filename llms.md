@@ -31,7 +31,7 @@ Copy-edit all the files in the paper.
 Improve the writing in all the files in the paper.
 
 
-Comment critically on the attached text.  Suggest ways that it can be improved.
+Comment critically on the attached text.  Suggest ways that it can be improved.  Write your suggestions to a file.
 
 
 #### Copy-editing criticism
