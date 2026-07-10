@@ -87,15 +87,16 @@ sudo apt -yqq install oracle-java17-installer --no-install-recommends
 
 ===========================================================================
 
-Installing JDK 21 or 25 at CSE:
+Installing the JDK at CSE:
 
-# Choose one of the following two variable definitions.
-
+# Choose one of the following variable definitions.
 VER=21
 FULLVER=21.0.10
-
 VER=25
 FULLVER=25.0.2
+VER=26
+FULLVER=26.0.1
+
 
 cd ~/java
 wget https://download.oracle.com/java/${VER}/latest/jdk-${VER}_linux-x64_bin.tar.gz
