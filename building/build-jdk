@@ -110,6 +110,8 @@ usejdk21
 java -version
 usejdk25
 java -version
+usejdk26
+java -version
 
 ===========================================================================
 
