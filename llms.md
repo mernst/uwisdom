@@ -40,7 +40,7 @@ Comment critically on the attached text.  Suggest ways that it can be improved. 
 Soften particularly harsh criticism, and add encouragement.  Make minimal changes, without changing or removing any substantive comment and without restructuring the text.
 
 
-Edit the paper review in @FILE to fill in the empty sections "Reasons to accept the paper", "Reasons to not accept the paper", and "Questions for authors' response".
+Edit the paper review to fill in the empty sections "Reasons to accept the paper" and "Reasons to not accept the paper", as brief bullet points (1 sentence each) that summarize text elsewhere in the review.  Fill in "Questions for authors' response" as brief enumerated list items (1 sentence each).
 
 
 #### Correcting voice-to-text dictation
@@ -67,11 +67,7 @@ Before uploading to the LLM:
     (replace-regexp "^ +" ""))
   (delete-trailing-whitespace)
   (save-excursion
-    (replace-regexp "\\([.!?])?\\)  +" "\\1 "))
-  (save-excursion
     (replace-regexp "  +" " "))
-  (save-excursion
-    (replace-regexp "\\(\\([.!?])?\\) \\|\n\n\\)\\([a-z]\\)" '(replace-eval-replacement replace-quote (upcase (match-string 0)))))
   )
 ```
 
