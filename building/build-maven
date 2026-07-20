@@ -12,6 +12,30 @@ sudo apt remove maven2
 
 ===========================================================================
 
+Maven 4 from download:
+
+VER=4.0.0-rc-5
+mkdir -p $HOME/bin/install
+cd $HOME/bin/install
+wget https://dlcdn.apache.org/maven/maven-4/${VER}/binaries/apache-maven-${VER}-bin.tar.gz
+tar xzf apache-maven-${VER}-bin.tar.gz
+cd $HOME/bin/install
+rm -rf apache-maven
+ln -s apache-maven-${VER} apache-maven
+export PATH=$HOME/bin/install/apache-maven-${VER}/bin:$PATH
+mkdir -p ~/bin/`uname`-`uname -m`
+cd ~/bin/`uname`-`uname -m`
+# The below is required only once.
+ln -s ../install/apache-maven/bin/mvn .
+
+# Alternative to last command:
+# (cd /usr/local/bin && ln -sf $HOME/bin/install/apache-maven-${VER}/bin/* .)
+# hash -r
+
+===========================================================================
+
+Maven 3 from download:
+
 # Get version number from http://apache.mirrors.pair.com/maven/maven-3/
 VER=3.9.6
 mkdir -p $HOME/bin/install
