@@ -1,1 +1,9 @@
 cargo install taplo-cli --locked
+
+To process one file:
+taplo fmt Cargo.toml
+taplo lint Cargo.toml
+
+To process all files in a directory:
+taplo fmt
+taplo lint
