@@ -112,14 +112,19 @@ Introduce a local variable in places where a procedure call is definitely perfor
 
 
 ```sh
-clauded --print "Spell-check, grammar-check, and copy-edit the entire repository, including both source code and non-source-code files."
+claude -p "Code-review the differences between this branch and the main or master branch.  Then fix the identified issues, without asking questions." > claude-review-done.md
+```
+
+
+```sh
+claude --print "Spell-check, grammar-check, and copy-edit the entire repository, including both source code and non-source-code files."
 ```
 
 
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 ```sh
-clauded --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it."
+claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it."
 ```
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
