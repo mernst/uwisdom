@@ -56,6 +56,9 @@ uv remove ty --dev && uv add ty --dev
 
 EXECUTABLES/APPLICATIONS
 
+# Install some tools globally.
+uv tool install pre-commit --with pre-commit-uv
+
 # When possible, install within a single project:
 uv add html5validator --dev
 uv add pymarkdownlnt --dev
