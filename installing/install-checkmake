@@ -1,0 +1,8 @@
+git clone --depth 1 https://github.com/checkmake/checkmake
+cd checkmake
+git config user.email "your_email@example.com"
+make checkmake
+
+
+Run as:
+$HOME/tmp/checkmake/checkmake
