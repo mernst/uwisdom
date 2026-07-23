@@ -4,7 +4,7 @@
 
 # Disable some built-in rules
 config:
-  first-line-heading: false
+  # first-line-heading: false
   no-multiple-blanks: false
   line-length: false
   no-trailing-punctuation:
@@ -28,7 +28,7 @@ config:
 # customRules:
 #   - markdownlint-rule-extended-ascii
 
-# Fix any fixable errors
+# Fix any fixable errors; equivalent to passing `--fix`.
 fix: true
 
 # # Define a custom front matter pattern
@@ -65,8 +65,7 @@ noProgress: true
 
 # Use a specific formatter (only valid at root)
 outputFormatters:
-  -
-    - markdownlint-cli2-formatter-default
+  - - markdownlint-cli2-formatter-default
 
 # # Show found files on stdout (only valid at root)
 # showFound: true

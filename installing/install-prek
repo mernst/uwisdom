@@ -5,4 +5,4 @@ uv tool install prek
 prek install
 
 # To run immediately:
-prek run --all-files
+prek -q run --all-files
