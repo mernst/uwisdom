@@ -117,7 +117,7 @@ claude -p "Code-review the differences between this branch and the main or maste
 
 
 ```sh
-claude --print "Spell-check, grammar-check, and copy-edit the entire repository, including both source code and non-source-code files."
+claude --print "Spell-check, grammar-check, and copy-edit the entire repository, including both source code and non-source-code files." > claude-review-done.md
 ```
 
 

@@ -2556,6 +2556,17 @@ You need to trigger a re-run of the failing CI job; if you are not allowed to do
 UBSan is a run-time tool to find undefined behavior, notably integer overflows and out-of-bounds indexes.
 
 
+To determine the number of jobs to run in parallel:
+
+```
+if [ -n "$("$CHECKERFRAMEWORK"/checker/bin-devel/is-ci.sh)" ]; then
+  num_jobs=1
+else
+  num_jobs="$(nproc || sysctl -n hw.ncpu || getconf _NPROCESSORS_ONLN || echo 1)"
+fi
+```
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
