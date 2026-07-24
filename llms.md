@@ -124,7 +124,7 @@ claude --print "Spell-check, grammar-check, and copy-edit the entire repository,
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 ```sh
-claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it."
+claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it." > claude-review-done.md
 ```
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
