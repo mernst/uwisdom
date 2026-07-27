@@ -519,10 +519,18 @@ Gradle task to create a TAGS table:
 
 ```gradle
 /* Make Emacs TAGS table */
-task tags(type: Exec, dependsOn: 'clone') {
-  description "Run etags to create an Emacs TAGS table"
-  environment PATH: "$System.env.PATH:$buildDir/utils/plume-lib/bin"
-  commandLine "bash", "-c", "find src/ -name '*.java' | sort-directory-order | xargs etags"
+tasks.register("tags", Exec) {
+  description = "Run etags to create an Emacs TAGS table"
+  def javaFiles = fileTree("src") {
+    include("**/*.java")
+  }
+  inputs.files(javaFiles)
+  outputs.file(layout.projectDirectory.file("TAGS"))
+  executable("etags")
+  def projectPath = layout.projectDirectory.asFile.toPath()
+  argumentProviders.add({
+    javaFiles.files.sort()*.toPath().collect { projectPath.relativize(it).toString() }
+  } as CommandLineArgumentProvider)
 }
 ```
 
