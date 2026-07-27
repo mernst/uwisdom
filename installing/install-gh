@@ -7,12 +7,15 @@ sudo apt -yqq install gh
 
 CSE:
 
+# Get version number from https://github.com/cli/cli/releases/ .
+VER=2.96.0
 cd ~/bin/install
-wget https://github.com/cli/cli/releases/download/v2.22.1/gh_2.22.1_linux_amd64.tar.gz
-tar xzf gh_2.22.1_linux_amd64.tar.gz
+wget https://github.com/cli/cli/releases/download/v${VER}/gh_${VER}_linux_amd64.tar.gz
+tar xzf gh_${VER}_linux_amd64.tar.gz
 mkdir -p ~/bin/`uname`-`uname -m`
 cd ~/bin/`uname`-`uname -m`
-ln -s ../install/gh_2.22.1_linux_amd64/bin/gh
+rm -f gh
+ln -s ../install/gh_${VER}_linux_amd64/bin/gh
 
 # In a terminal (not under Emacs) run:
 git auth login

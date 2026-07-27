@@ -1181,6 +1181,13 @@ containers strip away by default
 ## Markdown
 
 
+To convert markdown to PDF:
+
+```sh
+pandoc -V geometry:margin=1in -o myfile.pdf myfile.md
+```
+
+
 For converting (GitHub-style) markdown format (.md file) to HTML:
 
 * `basename=myfile && pandoc --standalone < ${basename}.md > ${basename}.html`
