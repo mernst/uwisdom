@@ -414,3 +414,6 @@ To fix old preview links for GitHub:
 preplace 'https://rawgit.com/' 'https://htmlpreview.github.io/?https://github.com/'
 preplace 'https://htmlpreview.github.io/\?https://github.com/typetools/checker-framework/master/docs/developer/' 'https://checkerframework.org/manual/'
 ```
+
+
+The CodeRabbit Pro paid plan tops out at 1 review per hour.  The limit is advertised to be 5 reviews per hour at https://www.coderabbit.ai/pricing (under "Compare plans" and under "Is there a limit on the number of reviews or repositories?").  The actual review limit is described at https://docs.coderabbit.ai/management/plans#pro .
