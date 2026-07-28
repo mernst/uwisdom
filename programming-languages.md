@@ -377,7 +377,15 @@ showvars::
 <!-- markdownlint-enable no-hard-tabs -->
 
 
-To disable Ruff ouput, use "noqa":
+To suppress/disable a Ruff linter error or warning message on one line of code:
+
+The new way:
+
+```python
+for file, temp in zip(files, temps):  # ruff:ignore[zip-without-explicit-strict]
+```
+
+The old way:
 
 ```python
 from abc.xyz import function_name  # noqa: F401
@@ -406,13 +414,6 @@ module named '__main__'".  To fix it, pass `--scripts-are-modules` to `mypy`.
 
 
 In Python, instead of `datetime.date.today()`, use `datetime.now().astimezone()`.
-
-
-To suppress a Ruff error or warning message on one line of code:
-
-```python
-.... # noqa: F401
-```
 
 
 The simplest way to read or write a a whole file into a string in Python is:
