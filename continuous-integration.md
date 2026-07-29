@@ -373,7 +373,7 @@ When there are multiple Travis jobs in a single Travis build, each job runs diff
 ## GitHub Actions
 
 
-GitHub Workflows CI is easy to set up: just commit a file to `.github/workflows/` (e.g., `gradle.yml`).
+GitHub Actions CI is very easy to set up: just commit a file to `.github/workflows/` (e.g., `gradle.yml`).
 Beware that the default/suggested setup file only does CI on the master branch!
 
 
@@ -381,20 +381,10 @@ GitHub Actions offers free 2000 Linux minutes per month for public repositories.
   That's 1 hour per day.
   A macOS minutes costs 10 Linux minutes.
   A Windows minute costs 2 Linux minutes.
-  Details at <https://help.github.com/en/github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-packages>.
+  Details at <https://docs.github.com/en/billing/concepts/product-billing/github-actions>.
 
 Each virtual machine has a 2-core CPU with 7 GB of RAM.
   Details at <https://help.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners> .
-
-
-GitHub Actions is problematic if you have flaky jobs.
-
-* GitHub Actions halts all jobs if any job fails.
-* GitHub Actions offers only a "Re-run all jobs" option,
-   but no "Re-run failing jobs" option.  That means that if a job is flaky, it is
-   expensive to re-run it.  Furthermore, starting lots of jobs at exactly the same
-   time can *cause* flakiness as they all attempt to retrieve the same network
-   resource, so on the re-run, the same or a different job may fail.
 
 
 I can't figure out how to make `apt-get install` run quietly under GitHub
