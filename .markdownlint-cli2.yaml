@@ -4,7 +4,6 @@
 
 # Disable some built-in rules
 config:
-  # first-line-heading: false
   no-multiple-blanks: false
   line-length: false
   no-trailing-punctuation:
