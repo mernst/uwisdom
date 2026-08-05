@@ -490,6 +490,9 @@ To avoid the problem, the pre-commit hook should do:
 ```
 
 
+`git diff` supports the pathspec `:(exclude)` and its short form `:!` or `:^`.  That is available only within a Git working tree; it cannot be used with `git diff --noindex`.
+
+
 ### The git staging area
 
 
