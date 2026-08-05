@@ -2334,6 +2334,9 @@ If ripgrep matches files within the `.git` directory, then add this to the `.git
 ```
 
 
+To make ripgrep (`rg`) follow symbolic links, pass `-L` or `--follow`.
+
+
 Chromebook:
 
 * the `terminal` application runs Linux
