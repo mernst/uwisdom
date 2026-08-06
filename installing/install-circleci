@@ -4,6 +4,10 @@ CircleCI command line interface (CLI)
 
 Install:
 
+# Installing with `snap` does NOT work for running `prek` pre-commit hooks in
+# GitHub Actions, because snap confinement prevents it from writing files that
+# it needs to write.
+
 Ubuntu:
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
