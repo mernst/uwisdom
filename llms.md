@@ -154,6 +154,36 @@ coderabbit.ai settings:
   * art: off
 
 
+### Splitting a branch/PR
+
+
+Split the branch into independent pull requests.
+
+Phase 1 -- plan only, no branches yet:
+- Run `git diff master...HEAD --stat` and read the full diff.
+- Propose a grouping into the smallest set of PRs such that each PR is a
+  single coherent change a reviewer can evaluate on its own.
+- For each group: title, one-line rationale, the files/hunks the group
+  contains, and any dependency on another group.
+- Show me the plan and stop.
+
+Phase 2 -- after I approve:
+- Create one branch per group, each branched from master,
+  named <prefix>-<topic>.  Avoid stacked/dependent branches/PRs when
+  possible; if unavoidable, state the required merge order.
+  Each rename-only change should be its own branch.  When there are
+  dependencies, prefer to do renaming first, before other changes.
+- Do not change behavior while splitting: the union of the PRs must be
+  byte-identical to the original diff.  Verify this by merging all the
+  branches into a scratch branch and confirming
+  `git diff <scratch> <branch>` is empty.  Report the result.
+- Build and run the tests on each branch separately and report pass/fail
+  per branch.  Do not open PRs for branches that do not build.
+- Then push each branch.  Do not open PRs yet.  Report which branches
+  depend on which other branches, if any.
+
+
+
 ## Claude
 
 
@@ -198,3 +228,7 @@ future, they may bill separately using usage-based rules.
 Claude's `--bare` command-line avoids loading the user's own Claude settings and
 thus is better for experiments.  (With `--bare`, Anthropic authentication must
 come from environment variable `ANTHROPIC_API_KEY`.)
+
+
+File `.claude/history.jsonl` contains a history of all prompts provided to Claude Code.
+
