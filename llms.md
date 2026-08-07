@@ -124,7 +124,7 @@ claude --print "Spell-check, grammar-check, and copy-edit the entire repository,
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 ```sh
-claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Instead, make changes that improve it." > claude-review-done.md
+claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it." > claude-review.md
 ```
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
@@ -135,6 +135,9 @@ For code review of an entire single file by an LLM such as Claude Code:
 Review file
 XXXXX
 Do not summarize it.  Instead, make changes that improve it.
+
+
+In this directory, fix item $item in REVIEW-FILE.md .  If appropriate, write a test that fails before the fix and succeeds after the fix.
 
 
 coderabbit.ai settings:
@@ -192,6 +195,6 @@ third-party app usage draw from your subscription's usage limits.  In the
 future, they may bill separately using usage-based rules.
 
 
-Claude's `--bare` command-line which avoids loading the user's own Claude settings and
+Claude's `--bare` command-line avoids loading the user's own Claude settings and
 thus is better for experiments.  (With `--bare`, Anthropic authentication must
 come from environment variable `ANTHROPIC_API_KEY`.)
