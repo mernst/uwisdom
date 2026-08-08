@@ -163,16 +163,17 @@ Phase 1 -- plan only, no branches yet:
 - Run `git diff master...HEAD --stat` and read the full diff.
 - Propose a grouping into the smallest set of PRs such that each PR is a
   single coherent change a reviewer can evaluate on its own.
+  Avoid stacked/dependent branches/PRs when possible.
+  Each rename-only change should be its own branch; when there are 
+  dependencies, prefer to do renaming first, before other changes.
 - For each group: title, one-line rationale, the files/hunks the group
   contains, and any dependency on another group.
-- Show me the plan and stop.
+- Write the plan to a file, show it to me, and stop.
 
 Phase 2 -- after I approve:
-- Create one branch per group, each branched from master,
-  named <prefix>-<topic>.  Avoid stacked/dependent branches/PRs when
-  possible; if unavoidable, state the required merge order.
-  Each rename-only change should be its own branch.  When there are
-  dependencies, prefer to do renaming first, before other changes.
+- Create one branch per group, named PREFIX-<groupnumber>
+  Most will be branched from the main branch; dependent ones will be 
+  based on the branch they depend on.
 - Do not change behavior while splitting: the union of the PRs must be
   byte-identical to the original diff.  Verify this by merging all the
   branches into a scratch branch and confirming
