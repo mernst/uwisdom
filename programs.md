@@ -2577,6 +2577,11 @@ fi
 ```
 
 
+PMD does not re-analyze a class if its superclass changes.
+To force a complete re-run, delete the cache in
+`*/build/tmp/pmd*/incremental.cache`.
+
+
 <!--
 // Please put new content in the appropriate section above, don't just
 // dump it all here at the end of the file.
