@@ -168,7 +168,7 @@ Phase 1 -- plan only, no branches yet:
   dependencies, prefer to do renaming first, before other changes.
 - For each group: title, one-line rationale, the files/hunks the group
   contains, and any dependency on another group.
-- Write the plan to a file, show it to me, and stop.
+- Write the plan to a file in this directory, show me the plan, and stop.
 
 Phase 2 -- after I approve:
 - Create one branch per group, named PREFIX-<groupnumber>
