@@ -160,7 +160,7 @@ coderabbit.ai settings:
 Split the branch into independent pull requests.
 
 Phase 1 -- plan only, no branches yet:
-- Run `git diff master...HEAD --stat` and read the full diff.
+- Read the full diff.
 - Propose a grouping into the smallest set of PRs such that each PR is a
   single coherent change a reviewer can evaluate on its own.
   Avoid stacked/dependent branches/PRs when possible.
