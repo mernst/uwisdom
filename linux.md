@@ -223,6 +223,8 @@ Unstable is always codenamed "sid".
 
 Ubuntu's equivalent of /usr/bin/dict is
 /usr/share/dict/american-english
+On CentOS and Rocky Linux, it is
+/usr/share/dict/words
 
 
 ## Devices

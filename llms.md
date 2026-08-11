@@ -25,13 +25,19 @@ Please do not open a pull request without an understanding of the code and of yo
 ### Copy-editing
 
 
-Copy-edit all the files in the paper.
+Copy-edit all the files in the document.
 
 
-Improve the writing in all the files in the paper.
+Improve the writing in all the files in the document.  Keep edits sentence-local.
 
 
-Comment critically on the attached text.  Suggest ways that it can be improved.  Write your suggestions to a file.
+Improve the writing in all the files in the document.
+
+
+Comment critically on the attached text.  Suggest ways that it can be improved.  Write your suggestions to a file in the current directory.
+
+
+For file @PAPER.pdf, examine each of the references in the bibliography, one-by-one.  For each reference, determine whether it is real or it is a LLM hallucination.  Report the hallucinated ones.
 
 
 #### Copy-editing criticism
