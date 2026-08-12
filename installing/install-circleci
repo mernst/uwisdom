@@ -8,6 +8,9 @@ Install:
 # GitHub Actions, because snap confinement prevents it from writing files that
 # it needs to write.
 
+For CI:
+curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | sudo bash
+
 Ubuntu:
 sudo snap install docker circleci
 sudo snap connect circleci:docker docker
