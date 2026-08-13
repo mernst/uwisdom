@@ -944,6 +944,14 @@ Also see the tips here:
 <https://support.google.com/mail/answer/78892?hl=en>
 
 
+To search for a single message (not a thread) in Gmail:
+
+* turn OFF conversation view
+  To turn on/off conversation view in Gmail, click the Gear icon (Settings) in the top-right corner of Gmail, scroll down the slide-out panel, and uncheck the box next to Conversation view. Click Reload on the pop-up notification that appears
+* do the search
+* turn conversation view back on.
+
+
 ## Eclipse
 
 

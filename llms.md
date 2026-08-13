@@ -37,7 +37,7 @@ Improve the writing in all the files in the document.
 Comment critically on the attached text.  Suggest ways that it can be improved.  Write your suggestions to a file in the current directory.
 
 
-For file @PAPER.pdf, examine each of the references in the bibliography, one-by-one.  For each reference, determine whether it is real or it is a LLM hallucination.  Report the hallucinated ones.
+Examine each of the references in file @BIBFILE, one-by-one.  For each reference, determine whether it is real or it is a LLM hallucination.  Report the hallucinated ones.
 
 
 #### Copy-editing criticism
@@ -130,7 +130,7 @@ claude --print "Spell-check, grammar-check, and copy-edit the entire repository,
 For holistic, whole-codebase code review by an LLM such as Claude Code:
 
 ```sh
-claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it." > claude-review.md
+claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Number all findings sequentially and uniquely." > claude-review.md
 ```
 
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
