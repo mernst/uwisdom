@@ -37,7 +37,7 @@ Improve the writing in all the files in the document.
 Comment critically on the attached text.  Suggest ways that it can be improved.  Write your suggestions to a file in the current directory.
 
 
-Examine each of the references in file @BIBFILE, one-by-one.  For each reference, determine whether it is real or it is a LLM hallucination.  Report the hallucinated ones.
+For each PDF in this directory, run `references-from-pdf.py` to obtain the bibliography in plaintext, then run `references-check.py` to determine whether the bibliography entry corresponds to a real paper.  (Otherwise, it may be a hallucination.)  Finally, report to me, for each paper, which of its references are hallucinated.  You may edit the Python scripts to improve them if appropriate.
 
 
 #### Copy-editing criticism
