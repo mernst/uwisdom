@@ -143,7 +143,29 @@ XXXXX
 Do not summarize it.  Instead, make changes that improve it.
 
 
-claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete.  Finally, commit the change and push the branch." > claude-output.md
+basedir=...
+branchbase=...
+for $item in 1 2 3 4 5 6 7 8 9 10; do
+  cd $basedir
+  gnb $branchbase-fix-$item
+  cd $basedir-branch-$branchbase-fix-$item && \
+  pwd && \
+  claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete -- do not return control to the user early while waiting for tests.  Finally, commit the change and push the branch." > claude-output.md && \
+  echo "Fixed item $item."
+done
+  
+
+basedir=...
+branchbase=...
+for item in 1 2 3 4 5 6 7 8 9 10; do
+  cd $basedir-branch-$branchbase-fix-$item && \
+  pwd && \
+  git pull ../linked-list-detector-branch-shape-analysis && \
+  git push && \
+  claude -p "/review $(pr-number)" > claude-review-$item.md && \
+  echo "Reviewed $(pwd)."
+done
+
 
 
 coderabbit.ai settings:
