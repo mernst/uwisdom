@@ -143,7 +143,7 @@ XXXXX
 Do not summarize it.  Instead, make changes that improve it.
 
 
-In this directory, fix item $item in REVIEW-FILE.md .  If appropriate, write a test that fails before the fix and succeeds after the fix.
+claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete.  Finally, commit the change and push the branch." > claude-output.md
 
 
 coderabbit.ai settings:
