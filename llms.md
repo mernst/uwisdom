@@ -153,7 +153,7 @@ for $item in 1 2 3 4 5 6 7 8 9 10; do
   claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete -- do not return control to the user early while waiting for tests.  Finally, commit the change and push the branch." > claude-output.md && \
   echo "Fixed item $item."
 done
-  
+
 
 basedir=...
 branchbase=...
