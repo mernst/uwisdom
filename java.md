@@ -1197,7 +1197,7 @@ checkstyle {
 ```
 
 
-As of September 2026, Azul says that this is the answer to "Which version(s) of Java does your organization use in production (select all that apply)?
+As of September 2025, Azul says that this is the answer to "Which version(s) of Java does your organization use in production (select all that apply)?
 
 * Java 25: 18%  (this was only a few weeks after Java 25 was released)
 * Java 21: 37%
@@ -1206,6 +1206,10 @@ As of September 2026, Azul says that this is the answer to "Which version(s) of 
 * Java 8: 21%
 * Java 7: 11%
 * Java 6: 9%
+
+
+google-java-format 1.29.0 and later requires JDK 21.
+JVM 25 requires google-java-format 1.30.0 or later.
 
 
 <!--
