@@ -46,7 +46,7 @@ For each PDF in this directory, run `references-from-pdf.py` to obtain the bibli
 Soften particularly harsh criticism, and add encouragement.  Make minimal changes, without changing or removing any substantive comment and without restructuring the text.
 
 
-Edit the paper review to fill in the empty sections "Reasons to accept the paper" and "Reasons to not accept the paper", as brief bullet points (1 sentence each) that summarize text elsewhere in the review.  Fill in "Questions for authors' response" as brief enumerated list items (1 sentence each).
+Edit the paper review to fill in the empty sections "Strengths" (or "Reasons to accept the paper") and "Weaknesses" (or "Reasons to not accept the paper"), as brief bullet points (1 sentence each) that summarize text elsewhere in the review.  Fill in "Questions for authors' response" as brief enumerated list items (1 sentence each).
 
 
 #### Correcting voice-to-text dictation
