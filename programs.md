@@ -235,7 +235,7 @@ Separate/split a file into individual pages:
   pdftk infile.pdf burst
 ```
 
-Select pages from a file:
+Select/extract pages from a file:
 
 ```sh
   pdfjam -o outfile.pdf infile.pdf 2-3
