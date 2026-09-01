@@ -1,5 +1,7 @@
 CircleCI command line interface (CLI)
 
+circleci setup --no-prompt --host=https://circleci.com --token=$(cat ~/private/circle_token)
+
 ===========================================================================
 
 Install:
@@ -31,6 +33,12 @@ Setup:
 # Not needed if I only want to run `circleci config validate`.
 # Run this from a real terminal, not from an Emacs shell buffer.
 circleci setup
+
+# Alternately:
+circleci setup --no-prompt --host=https://circleci.com --token=$(cat ~/private/circle_token)
+
+# Then I can run:
+circleci config validate --org=gh/mernst
 
 ===========================================================================
 
