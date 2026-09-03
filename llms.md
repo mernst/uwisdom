@@ -133,7 +133,15 @@ For holistic, whole-codebase code review by an LLM such as Claude Code:
 claude --print "Perform a code review on the entire repository (not just a few commits).  Do not summarize it.  Number all findings sequentially and uniquely." > claude-review.md
 ```
 
-(This probably is not effective, though.  It is probably better to issue N different queries, one for each file in the codebase, with each query instructing the LLM to focus on one file.)
+(This probably is not effective, though.  It is probably better to issue N different queries, one for each directory or file in the codebase, with each query instructing the LLM to focus on one file.)
+
+
+For code review of an entire directory by an LLM such as Claude Code:
+
+```sh
+claude --print "Perform a code review on all files in @framework/src/main/java/org/checkerframework/common/wholeprograminference/
+and @framework/src/test/java/org/checkerframework/common/wholeprograminference/ (not just a few commits).  Do not summarize it.  Number all findings sequentially and uniquely." > claude-review.md
+```
 
 
 For code review of an entire single file by an LLM such as Claude Code:
@@ -143,12 +151,13 @@ XXXXX
 Do not summarize it.  Instead, make changes that improve it.
 
 
-basedir=...
-branchbase=...
-for $item in 1 2 3 4 5 6 7 8 9 10; do
-  cd $basedir
+basedir=/home/mernst/research/types/checker-framework-fork-mernst-branch-wpi-review
+branchbase=wpi-review
+for item in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66; do
+  cd $basedir && \
   gnb $branchbase-fix-$item
-  cd $basedir-branch-$branchbase-fix-$item && \
+  # Intentionally permit `gnb` to fail. 
+  cd $basedir-fix-$item && \
   pwd && \
   claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete -- do not return control to the user early while waiting for tests.  Finally, commit the change and push the branch." > claude-output.md && \
   echo "Fixed item $item."
@@ -165,7 +174,6 @@ for item in 1 2 3 4 5 6 7 8 9 10; do
   claude -p "/review $(pr-number)" > claude-review-$item.md && \
   echo "Reviewed $(pwd)."
 done
-
 
 
 coderabbit.ai settings:

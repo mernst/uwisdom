@@ -331,6 +331,9 @@ UW CSE new quarter teaching guide: https://docs.google.com/document/d/1ZXClMBw9N
 As of 2026-03-05, in the Gates building (CSE2), the only printers that can scan are the ones in the first and third floor print centers.
 
 
+Any copier/printer made by Xerox is supported by operations@cs, not support@cs.
+
+
 Custodial staff for UW CSE buildings:
 
 * Gates 1 - Thanh Lai
