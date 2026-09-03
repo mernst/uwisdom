@@ -27,3 +27,7 @@ Browse to https://github.com/quarto-dev/quarto-cli/releases/, expand "assets".
 Quarto requires an empty file
 _quarto.yml
 in the project root directory, so it knows where the project root is.
+
+===========================================================================
+
+René Just uses quarto for CSE 403 webpages.
