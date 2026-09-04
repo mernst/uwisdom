@@ -1,8 +1,12 @@
 # To install the prek tool:
 uv tool install prek
+# To upgrade:
+uv self update
+uv tool upgrade --all
 
 # To install in pre-commit hooks (must be run on each clone):
 prek install
 
 # To run immediately:
 prek -q run --all-files
+
