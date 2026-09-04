@@ -5,6 +5,28 @@ coderabbit auth login
 # To update:
 coderabbit update
 
-# To review, either of these:
-coderabbit --prompt-only
-cr --prompt-only
+# To review local changes against the base branch, either of these:
+coderabbit review --base $(git rev-parse --abbrev-ref origin/HEAD) > coderabbit-findings.md
+cr review --base $(git rev-parse --abbrev-ref origin/HEAD) > coderabbit-findings.md
+# To review a GitHub PR (but this should be rarely necessary, I suspect):
+coderabbit review `<PRNUMBER>` > coderabbit-findings.md
+
+# Show previous local review findings:
+coderabbit review findings
+
+
+
+
+# Within Claude:
+# I guess the advantage of this is that I can trigger CodeRabbit reviews from within Claude and have Claude ingest them without any cut-and-paste.
+# I probably do not want to install CodeRabbit's skills, as they would take over from Claude which I do not want.
+
+# Option 1: from the shell.
+claude "/coderabbit:coderabbit-review --base $(git rev-parse --abbrev-ref origin/HEAD)"
+
+# Option 1: within Claude
+/coderabbit:coderabbit-review
+/coderabbit:coderabbit-review --base main
+/coderabbit:coderabbit-review --base master
+# This requires having previously run:
+claude plugin install coderabbit@claude-plugins-official

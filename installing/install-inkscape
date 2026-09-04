@@ -1,6 +1,5 @@
 # Doesn't work without Boehm-GC, see http://wiki.inkscape.org/wiki/index.php/CompilingInkscape
 
-#VER=0.48.4
 VER=0.48.5
 cd ~/bin/install
 wget http://downloads.sourceforge.net/inkscape/inkscape-${VER}.tar.gz

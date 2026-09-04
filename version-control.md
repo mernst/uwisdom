@@ -1021,6 +1021,11 @@ CodeRabbit instructions:
 ```
 
 
+For a new contributor to a repository who opens their first pull request:
+
+Thank you for your contribution.  Please fix all CI failures and resolve all CodeRabbit comments (address or reject each one), then request a review.  Please ask if you have questions or need help.
+
+
 ## GitLab (Git-specific and GitHub-specific items go above)
 
 
