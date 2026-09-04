@@ -1,6 +1,6 @@
 ===========================================================================
 
-CSE (on godwit): run:
+CSE (on bicycle): run:
 cd ~/tmp && nohup syncthing &
 
 To kill, first do:
@@ -33,7 +33,7 @@ elif [ "$archname" = "aarch64" ]; then
 fi
 echo "archname=${archname}"
 cd ~/bin/install
-VER=v2.0.12
+VER=v2.1.3
 DIR=syncthing-linux-${archname}-${VER}
 wget https://github.com/syncthing/syncthing/releases/download/${VER}/${DIR}.tar.gz
 tar xvf ${DIR}.tar.gz
