@@ -268,4 +268,3 @@ come from environment variable `ANTHROPIC_API_KEY`.)
 
 
 File `.claude/history.jsonl` contains a history of all prompts provided to Claude Code.
-
