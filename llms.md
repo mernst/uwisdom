@@ -171,6 +171,14 @@ done
 #### Handling multipe existing branches
 
 
+for dir in ~/bin/src/plume-scripts-branch-fix2-*; do
+  cd $dir && \
+  pwd && \
+  claude -p "/review $(pr-number)" > claude-review-pr$(pr-number).md && \
+  echo "Reviewed $(pwd)."
+done
+
+
 basedir=...
 branchbase=...
 for item in 1 2 3 4 5 6 7 8 9 10; do
