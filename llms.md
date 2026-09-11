@@ -136,7 +136,7 @@ claude --print "Perform a code review on the entire repository (not just a few c
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each directory or file in the codebase, with each query instructing the LLM to focus on one file.)
 
 
-For code review of an entire directory by an LLM such as Claude Code:
+For code review of specific files or directories by an LLM such as Claude Code:
 
 ```sh
 claude --print "Perform a code review on all files in @framework/src/main/java/org/checkerframework/common/wholeprograminference/
@@ -151,17 +151,24 @@ XXXXX
 Do not summarize it.  Instead, make changes that improve it.
 
 
-basedir=$HOME/research/types/checker-framework-fork-mernst-branch-wpi-review
-branchbase=wpi-review
+#### Creating a branches for each distinct code review finding
+
+
+basedir=$HOME/bin/src/plume-scripts
+branchbase=fix2
 for item in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66; do
+  branchname="$branchbase-$item"
   cd $basedir && \
-  gnb $branchbase-fix-$item
+  gnb $branchname
   # Intentionally permit `gnb` to fail. 
-  cd $basedir-fix-$item && \
+  cd $basedir-branch-$branchname && \
   pwd && \
-  claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete -- do not return control to the user early while waiting for tests.  Finally, commit the change and push the branch." > claude-output.md && \
+  claude -p "In this directory, fix item $item in @claude-review.md.  If appropriate, add a test that fails before the fix and passes after the fix.  Wait for all tests to complete -- do not return control to the user early while waiting for tests.  Finally, commit the change, push the branch, and open a pull request." > claude-output.md && \
   echo "Fixed item $item."
 done
+
+
+#### Handling multipe existing branches
 
 
 basedir=...
@@ -174,6 +181,17 @@ for item in 1 2 3 4 5 6 7 8 9 10; do
   claude -p "/review $(pr-number)" > claude-review-$item.md && \
   echo "Reviewed $(pwd)."
 done
+
+
+for dir in \
+$t/checker-framework-fork-mernst-branch-wpi-review-fix-21 $t/checker-framework-fork-mernst-branch-wpi-review-fix-25 $t/checker-framework-fork-mernst-branch-wpi-review-fix-32 $t/checker-framework-fork-mernst-branch-wpi-review-fix-46 $t/checker-framework-fork-mernst-branch-wpi-review-fix-47 $t/checker-framework-fork-mernst-branch-wpi-review-fix-50 ; do
+  cd $dir && \
+  pwd && \
+  claude -p "Fix all findings in @claude-review-pr$(pr-number).md, then rename that file to claude-review-pr$(pr-number)-fixed.md" > claude-fix.md
+done
+
+
+#### coderabbit.ai settings
 
 
 coderabbit.ai settings:
@@ -196,6 +214,8 @@ coderabbit.ai settings:
 Split the branch into independent pull requests.
 
 Phase 1 -- plan only, no branches yet:
+- If a PR is open for this branch, pull the upstream into this branch.
+  Otherwise, pull the main or master branch into this branch.
 - Read the full diff.
 - Propose a grouping into the smallest set of PRs such that each PR is a
   single coherent change a reviewer can evaluate on its own.
@@ -207,18 +227,27 @@ Phase 1 -- plan only, no branches yet:
 - Write the plan to a file in this directory, show me the plan, and stop.
 
 Phase 2 -- after I approve:
-- Create one branch per group, named PREFIX-<groupnumber>
-  Most will be branched from the main branch; dependent ones will be 
-  based on the branch they depend on.
+- Create one branch per group, named `split-<groupnumber>`.
+  Each branch should include all the commits in all its dependencies,
+  possibly some merge commits, and finally a commit with its own changes.
 - Do not change behavior while splitting: the union of the PRs must be
   byte-identical to the original diff.  Verify this by merging all the
   branches into a scratch branch and confirming
   `git diff <scratch> <branch>` is empty.  Report the result.
-- Build and run the tests on each branch separately and report pass/fail
-  per branch.  Do not open PRs for branches that do not build.
-- Then push each branch.  Do not open PRs yet.  Report which branches
-  depend on which other branches, if any.
+- Build and run the tests on each branch separately and report all those
+  that fail.
+- Push each branch.
+- Open PRs for all branches that depend on no other PR and pass tests.
+- Output a script that uses `git-push-to` (found at
+  `~/bin/src/manage-git-branches/git-push-to` or
+  https://github.com/plume-lib/manage-git-branches/blob/main/git-push-to) to
+  keep all the branches up to date by pulling in their dependences.
 
+Phase 3 -- iteration, when I prompt:
+- Check which pull requests have been merged.
+  Record this in file @merged-prs.txt.
+- Open pull requests for all branches that depend on no unmerged PR.
+  Report those branches.
 
 
 ## Claude
@@ -232,7 +261,7 @@ jq '.projects["'$(pwd)'"].hasTrustDialogAccepted = true' ~/.claude.json | sponge
 ```
 
 
-This installs Claude in Github Actions, using the current account:
+This installs Claude in GitHub Actions, using the current account:
 
 ```
 /install-github-app
@@ -268,3 +297,7 @@ come from environment variable `ANTHROPIC_API_KEY`.)
 
 
 File `.claude/history.jsonl` contains a history of all prompts provided to Claude Code.
+
+<!-- 
+LocalWords:  ldots GenAI pdf py plaintext elisp progn goto uneducate rg src claude md XXXXX basedir branchbase wpi gnb pwd coderabbit walkthrough PRs groupnumber unmerged jq hasTrustDialogAccepted json SDK
+ -->
