@@ -191,11 +191,10 @@ for item in 1 2 3 4 5 6 7 8 9 10; do
 done
 
 
-for dir in \
-$t/checker-framework-fork-mernst-branch-wpi-review-fix-21 $t/checker-framework-fork-mernst-branch-wpi-review-fix-25 $t/checker-framework-fork-mernst-branch-wpi-review-fix-32 $t/checker-framework-fork-mernst-branch-wpi-review-fix-46 $t/checker-framework-fork-mernst-branch-wpi-review-fix-47 $t/checker-framework-fork-mernst-branch-wpi-review-fix-50 ; do
+for dir in $t/checker-framework-fork-mernst-branch-wpi-review-fix-* ; do
   cd $dir && \
   pwd && \
-  claude -p "Fix all findings in @claude-review-pr$(pr-number).md, then rename that file to claude-review-pr$(pr-number)-fixed.md" > claude-fix.md
+  claude -p "Fix all findings in @claude-review-pr$(pr-number).md, then rename that file to claude-review-pr$(pr-number)-fixed.md, commit, and push" > claude-fix.md
 done
 
 
