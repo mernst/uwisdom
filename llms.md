@@ -136,7 +136,7 @@ claude --print "Perform a code review on the entire repository (not just a few c
 (This probably is not effective, though.  It is probably better to issue N different queries, one for each directory or file in the codebase, with each query instructing the LLM to focus on one file.)
 
 
-For code review of specific files or directories by an LLM such as Claude Code:
+For code review of specific files or directories (or one directory) by an LLM such as Claude Code:
 
 ```sh
 claude --print "Perform a code review on all files in @framework/src/main/java/org/checkerframework/common/wholeprograminference/
