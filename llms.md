@@ -171,7 +171,7 @@ done
 #### Handling multipe existing branches
 
 
-for dir in ~/bin/src/plume-scripts-branch-fix2-*; do
+for dir in $t/checker-framework-fork-mernst-branch-stub-fix-high-*; do
   cd $dir && \
   pwd && \
   claude -p "/review $(pr-number)" > claude-review-pr$(pr-number).md && \
