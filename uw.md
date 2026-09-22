@@ -125,6 +125,9 @@ UW (not CSE) cloud intake form (to pay for cloud services):
 https://uwconnect.uw.edu/sp?id=sc_cat_item&sys_id=857ef55287385e906f1997dd3fbb354c
 
 
+Classroom rentals on UW campus: https://eventservices.uw.edu/
+
+
 ## CSE (other than sysadmin)
 
 
