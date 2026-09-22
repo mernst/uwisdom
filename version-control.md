@@ -571,6 +571,12 @@ git push origin --delete BRANCHNAME
 ```
 
 
+In Git, to fast-forward local `master` or `main` branch from the upstream:
+
+```sh
+git fetch origin master:master
+```
+
 
 ### Git merging
 
