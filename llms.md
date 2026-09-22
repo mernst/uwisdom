@@ -215,10 +215,15 @@ coderabbit.ai settings:
   * art: off
 
 
-### Splitting a branch/PR
+### Splitting a branch/PR into two, or multiple, pull requests
 
 
-Split the branch into independent pull requests.
+Split the branch into two independent pull requests.
+
+Consider the PR for this branch.  If there are minor changes in the PR that are ancillary to the main goal of the pull request, then create a new branch and pull request for those changes.  Do not modify this branch.  After the other pull request lands and master is pulled into this branch, then this PR will have simpler, smaller diffs.
+
+
+Split the branch into multiple independent pull requests.
 
 Phase 1 -- plan only, no branches yet:
 - If a PR is open for this branch, pull the upstream into this branch.
