@@ -1398,7 +1398,8 @@ git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
 where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
 Then, delete the clone to prevent storing your token in its .git/config file,
 and you can clone any overleaf repository without providing the authentication token.
-The Git authentication token expires every 6 months or so. :-(
+
+The Git authentication token expires after 12 months.
 
 
 ## Everything else
