@@ -127,6 +127,12 @@ https://uwconnect.uw.edu/sp?id=sc_cat_item&sys_id=857ef55287385e906f1997dd3fbb35
 
 Classroom rentals on UW campus: https://eventservices.uw.edu/
 
+Also SPL and Seattle Parks & Rec:
+
+* https://www.spl.org/using-the-library/reservations-and-requests/reserve-a-room/central-library-meeting-rooms/meeting-room-capacity-and-photos
+* https://www.seattle.gov/parks/reserve/indoor-event-rental
+  * https://www.seattle.gov/documents/Departments/ParksAndRecreation/Reserve/Permits/2026%20Parks%20Indoor%20Venue%20Brochure%20_ADA.pdf
+
 
 ## CSE (other than sysadmin)
 
