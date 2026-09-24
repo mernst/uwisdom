@@ -1392,12 +1392,15 @@ the upper left corner, then (in section "sync") "git".
 To get your Git credential helper to remember an Overleaf password, clone a repository like this:
 
 ```sh
-git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16
+cd ~/tmp && \
+git clone https://git:olp_XXXXX@git.overleaf.com/67ee1fa662833741e6d27e16 && \
+rm -rf 67ee1fa662833741e6d27e16 && \
+git clone https://git@git.overleaf.com/67ee1fa662833741e6d27e16 && \
+rm 67ee1fa662833741e6d27e16 && \
+echo "success"
 ```
 
 where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
-Then, delete the clone to prevent storing your token in its .git/config file,
-and you can clone any overleaf repository without providing the authentication token.
 
 The Git authentication token expires after 12 months.
 
