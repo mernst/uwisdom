@@ -493,6 +493,14 @@ To avoid the problem, the pre-commit hook should do:
 `git diff` supports the pathspec `:(exclude)` and its short form `:!` or `:^`.  That is available only within a Git working tree; it cannot be used with `git diff --noindex`.
 
 
+To repair a GitHub stacked pull request, for example if I commit a merge within it:
+
+```sh
+gh stack rebase
+gh stack push
+```
+
+
 ### The git staging area
 
 
