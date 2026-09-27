@@ -614,6 +614,11 @@ To use Docker at UW CSE, after Support has installed it on a machine:
 Tailscale is a way to get a public IP address within the UW CSE Allen School.
 
 
+As of 2026-09-25, UW's Tillicum is much cheaper than other GPU rentals.  If we
+simply want LLM service, then current API providers are even cheaper than
+renting Tillicum for self-hosting models.
+
+
 ## PLSE
 
 
