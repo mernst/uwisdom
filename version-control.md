@@ -493,12 +493,25 @@ To avoid the problem, the pre-commit hook should do:
 `git diff` supports the pathspec `:(exclude)` and its short form `:!` or `:^`.  That is available only within a Git working tree; it cannot be used with `git diff --noindex`.
 
 
-To repair a GitHub stacked pull request, for example if I commit a merge within it:
+To create a GitHub stacked pull request:
 
 ```sh
-gh stack rebase
-gh stack push
+gh stack init --base branch1 branch2 ...
 ```
+
+
+A stacked pull request in GitHub's UI requires all branches to live in the same
+repo, so all the PRs are intra-repo.
+
+
+`gh stack ...` commands for a GitHub stacked pull request do *not* support
+per-branch worktrees.  The whole stack has to fit in the same worktree.  If
+different branches are in separate clones, then only run `gh stack ...` in
+the topmost branch, to avoid minor headaches.
+
+
+To repair a GitHub stacked pull request, for example if I commit a merge within it:
+`git-rebase-to dir1 dir2 ...`.
 
 
 ### The git staging area

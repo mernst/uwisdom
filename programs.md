@@ -1202,8 +1202,8 @@ For converting (GitHub-style) markdown format (.md file) to HTML:
 * `quarto render INPUT.MD --output-dir OUTDIR` where OUTDIR may be the same for multiple files.
 * `markdown` produces poor output, doesn't handle triple-backtick, etc.
 * `grip --export` exports to `<path>.html`.
-Markdown format is idiosyncratic and has many variants, so it may be better
-to use AsciiDoc format and the Asciidoctor processor, when possible.
+
+Markdown format is idiosyncratic and has many variants.
 
 
 To write a comment in a Markdown file, write this with blank lines both before and after:

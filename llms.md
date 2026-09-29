@@ -1,3 +1,6 @@
+# Wisdom about LLMs
+
+
 ## LLMs and generative AI
 
 
@@ -260,6 +263,13 @@ Phase 3 -- iteration, when I prompt:
   Record this in file @merged-prs.txt.
 - Open pull requests for all branches that depend on no unmerged PR.
   Report those branches.
+
+
+### Email
+
+
+
+
 
 
 ## Claude
