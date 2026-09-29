@@ -850,6 +850,21 @@ In a shell script,
 `set` set all environment variables.
 
 
+```sh
+REPO_DIR="$(CDPATH='' cd -- "${SCRIPT_DIR}/.." && pwd -P)"
+```
+
+Always returns an absolute path; handles `.`, `..`, trailing slash, and leading hyphen; resolves symlinks; fails if directory does not exist.
+
+Here are two ways to determine the current working directory:
+
+```sh
+REPO_DIR="$(dirname -- "${SCRIPT_DIR}")"
+```
+
+Fast, works even if the directory does not exist, includes symlinks in the result.
+
+
 ## C and C++
 
 
