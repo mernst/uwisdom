@@ -69,6 +69,11 @@ Before uploading to the LLM:
   (goto-char (point-min))
   (uneducate-quotes)
   (save-excursion
+    (let* ((sent-end (sentence-end))
+           (pattern (format "%s\\([a-z]\\)" sent-end)))
+      (while (re-search-forward pattern nil t)
+        (replace-match (upcase (match-string 3)) nil nil nil 3)))))
+  (save-excursion
     (replace-regexp "\\( \\|^\\)\" " "\\1\""))
   (save-excursion
     (replace-regexp "\\( \\|^\\)( " "\\1("))
