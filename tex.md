@@ -1178,9 +1178,7 @@ Second approach (better style, possibly more robust):
 ## Hevea
 
 
-As an alternative to hevea: pandoc or tex4ht or tth
-  tex4ht is bundled with LaTeX distributions (use its make4ht build system instead of the htlatex command)
-All 4 of these are actively maintained as of 2022.
+I have switched from hevea to lwarp.
 
 
 Conditional compilation with LaTeX and Hevea:
@@ -2267,12 +2265,26 @@ Here is a definition of a \todo macro for LaTeX:
 %%% Todo comments
 %% Comment or uncomment this line.
 % \def\notodocomments{}
-\newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+\DeclareRobustCommand{\todo}{\begingroup\color{red}\bfseries [[\bgroup\aftergroup\finishtodo\let\next=}
+\newcommand{\finishtodo}{]]\endgroup}
 % Don't show todo commands if the \notodocomments macro is defined.
 \ifdefined\notodocomments
- \renewcommand{\todo}[1]{\relax}
+ \DeclareRobustCommand{\todo}{\setbox0=\vbox}
 \fi
 ```
+
+`\todo` does not read its text as a macro argument, so the text may contain
+`\url{...}` with `#` or `%` in the URL, without quoting them as `\#` or `\%`.
+`\todo` permits multiple paragraphs.
+
+To define a variant of `\todo`, such as one that adds the author's initials, write:
+
+```latex
+\DeclareRobustCommand{\mde}{\todo\bgroup MDE: \let\next=}
+```
+
+and use it as `\mde{...}`.
+
 
 When using the \todo macro, don't leave space around it.  For example, write
 
@@ -2293,9 +2305,29 @@ Another way to say this is to always jam \todo against surrounding text
 and after \todo, then when \todo is turned off, there are two spaces rather
 than one at that location.
 
-(An alternate definition of \todo would be
-`\newcommand{\todo}[1]{\textcolor{red}{\textbf{[[#1]]}}}`
-but that executes \leavevmode and so it cannot span paragraphs.)
+
+Details about the implementation of `\todo`:
+
+`\todo` avoids reading its text as an argument because a macro argument's
+characters are tokenized when the argument is read, before `\url` can treat `#`
+and `%` as ordinary characters.  `\let\next=` consumes the `{`, the text is
+typeset as it is read, and the matching `}` triggers `\finishtodo`.  Similarly,
+the disabled version typesets the text into a box that is discarded.  The
+helper isn't named `\endtodo` because `\newcommand` refuses names starting with
+"end".
+
+`\DeclareRobustCommand` (rather than `\newcommand`) is required for `\todo` in a
+`\caption` or `\section`, because otherwise LaTeX expands `\todo` when writing it to
+the .aux file, which garbles the list of figures or table of contents.
+Inside another command's argument (such as `\caption` or `\footnote`), the text
+has already been read, so a URL containing `#` or `%` must be quoted as `\#` or
+`\%` there.
+
+In `\mde`, `\todo` consumes the `\bgroup` (or, when todo
+comments are disabled, the `\bgroup` opens the discarded box), and
+`\let\next=` consumes the `{`.
+Don't define `\mde` as `\newcommand{\mde}[1]{\todo{MDE: #1}}`, which reads its
+text as an argument.
 
 
 Absolute value in LaTeX:
@@ -2537,7 +2569,7 @@ To control formatting of a LaTeX paper from the command line, add to the paper:
 
 ```latex
 \ifdefined\notodocomments
-  \renewcommand{\todo}[1]{\relax}
+  \DeclareRobustCommand{\todo}{\setbox0=\vbox}
 \fi
 ```
 
