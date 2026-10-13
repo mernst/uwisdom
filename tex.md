@@ -2273,9 +2273,22 @@ Here is a definition of a `\todo` macro for LaTeX:
 \fi
 ```
 
+`\todo` permits multiple paragraphs.
+
 `\todo` does not read its text as a macro argument, so the text may contain
 `\url{...}` with `#` or `%` in the URL, without quoting them as `\#` or `\%`.
-`\todo` permits multiple paragraphs.
+However, inside another command's argument (such as `\footnote`), the text has
+already been read, so a URL containing `#` or `%` must be quoted there.
+Alternately, use `\urldef` outside the argument:
+
+```latex
+\urldef{\issueurl}\url{https://example.com/issues?q=a%20b#c}
+...
+\footnote{Details\todo{see \issueurl}}
+```
+
+Do not use `\todo` in a moving argument, such as the argument of `\section` or
+`\caption`.  Instead, place the `\todo` just after the command.
 
 To define a variant of `\todo`, such as one that adds the author's initials, write:
 
@@ -2319,9 +2332,6 @@ helper isn't named `\endtodo` because `\newcommand` refuses names starting with
 `\DeclareRobustCommand` (rather than `\newcommand`) is required for `\todo` in a
 `\caption` or `\section`, because otherwise LaTeX expands `\todo` when writing it to
 the .aux file, which garbles the list of figures or table of contents.
-Inside another command's argument (such as `\caption` or `\footnote`), the text
-has already been read, so a URL containing `#` or `%` must be quoted as `\#` or
-`\%` there.
 
 In `\mde`, `\todo` consumes the `\bgroup` (or, when todo
 comments are disabled, the `\bgroup` opens the discarded box), and
