@@ -255,6 +255,13 @@ To concatenate PDF files:
 ```
 
 
+To expand a PDF document to fit the entire page:
+
+```
+pdfjam --letterpaper --outfile main-letter.pdf main.pdf
+```
+
+
 To rotate a PDF file:
 
 ```sh
