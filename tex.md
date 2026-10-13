@@ -2258,7 +2258,7 @@ the document.  This also makes the figures more likely to draw readers into
 the text.
 
 
-Here is a definition of a \todo macro for LaTeX:
+Here is a definition of a `\todo` macro for LaTeX:
 
 ```latex
 \usepackage{color}
@@ -2286,7 +2286,7 @@ To define a variant of `\todo`, such as one that adds the author's initials, wri
 and use it as `\mde{...}`.
 
 
-When using the \todo macro, don't leave space around it.  For example, write
+When using the `\todo` macro, don't leave space around it.  For example, write
 
 ```latex
 The approach is effective\todo{add citations}.
@@ -2300,9 +2300,9 @@ The approach is effective \todo{add citations}.
 
 because the latter would leave a space before the period when todo comments
 are disabled.
-Another way to say this is to always jam \todo against surrounding text
+Another way to say this is to always jam `\todo` against surrounding text
 (either before or after, it doesn't matter).  If there is space both before
-and after \todo, then when \todo is turned off, there are two spaces rather
+and after `\todo`, then when `\todo` is turned off, there are two spaces rather
 than one at that location.
 
 
