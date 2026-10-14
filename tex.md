@@ -456,9 +456,9 @@ Here are definitions for identifiers in LaTeX math mode formulas:
 % \<name> or \codeid{name} denotes computer code identifiers
 \def\<#1>{\codeid{#1}}
 % Choose one of the following three definitions for \codeid.
-\protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else{\sf #1}\fi}
-% \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
-% \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else{\smaller\ttfamily #1}\fi}
+\protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else\leavevmode{\sf #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else\leavevmode{\ttfamily #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else\leavevmode{\smaller\ttfamily #1}\fi}
 ```
 
 This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
