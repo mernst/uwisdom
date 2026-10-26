@@ -1387,7 +1387,9 @@ To find the git URL for an Overleaf project, click on the word "menu" in
 the upper left corner, then (in section "sync") "git".
 
 
-To get your Git credential helper to remember an Overleaf password, clone a repository like this:
+To get your Git credential helper to remember an Overleaf password, 
+create a new Git authentication token  (<https://www.overleaf.com/user/settings>)
+and clone a repository like this:
 
 ```sh
 cd ~/tmp && \
@@ -1397,8 +1399,6 @@ git clone https://git@git.overleaf.com/67ee1fa662833741e6d27e16 && \
 rm 67ee1fa662833741e6d27e16 && \
 echo "success"
 ```
-
-where olp_XXXXX is a Git authentication token (<https://www.overleaf.com/user/settings>).
 
 The Git authentication token expires after 12 months.
 
