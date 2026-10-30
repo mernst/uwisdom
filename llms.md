@@ -325,6 +325,13 @@ come from environment variable `ANTHROPIC_API_KEY`.)
 
 File `.claude/history.jsonl` contains a history of all prompts provided to Claude Code.
 
+
+## Codex
+
+In Codex, the `SKILL.md` file in `~/.agents/skills/<skillname>/SKILL.md` must
+not be a symbolic link.  Any of the directories up to it can be a symbolic link.
+
+
 <!-- 
 LocalWords:  ldots GenAI pdf py plaintext elisp progn goto uneducate rg src claude md XXXXX basedir branchbase wpi gnb pwd coderabbit walkthrough PRs groupnumber unmerged jq hasTrustDialogAccepted json SDK
  -->
