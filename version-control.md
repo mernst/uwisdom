@@ -28,13 +28,9 @@ will see a rendered version.
 
 (This is also explained at https://homes.cs.washington.edu/~mernst/advice/github-pull-request.html#respond-to-reviews .)
 
-When asked a question in a review, please don't answer in the pull request.
-Instead, improve the code so that the question does not arise in the future.
+When asked a question in a review, please don't answer in the pull request.  Instead, improve the code so that the question does not arise in the future.
 
-If you agree with a pull request comment, you don't need to reply to a code
-review comment with "done".  Just click "resolve conversation" if no further
-discussion is needed.  But please do comment when followup or further discussion
-is necessary, such as if the pull request comment is confusing or wrong.
+If you agree with a pull request comment, you don't need to reply to a code review comment with "done" or "I agree".  Just click "resolve conversation" if no further discussion is needed.  But please do comment when followup or further discussion is necessary, such as if the pull request comment is confusing or wrong.
 
 
 ## Git
