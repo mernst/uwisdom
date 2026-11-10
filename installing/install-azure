@@ -1,5 +1,11 @@
-Azure CLI (command line interface).
+# Azure CLI (command line interface)
+
+Invoke as `az`.
+
+## On ubuntu, with root:
 
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-Invoke as `az`.
+## Otherwise:
+
+uv tool install azure-cli --with azure-cli
