@@ -6,6 +6,22 @@ clicking the menu icon (three lines or dots) in the top corner.  It's next to
 the pencil "edit" icon and below the word "History".
 
 
+## Djot
+
+
+To convert a GitHub-flavored Markdown document to djot, using djot and pandoc:
+
+```sh
+pandoc mydoc.md -f gfm -t json | djot -f pandoc -t djot > mydoc.dj
+```
+
+To convert a djot document to any format pandoc supports (in this example, html):
+
+```sh
+djot -t pandoc mydoc.dj | pandoc -f json -s -t docx -o mydoc.html
+```
+
+
 ## Markdown
 
 
