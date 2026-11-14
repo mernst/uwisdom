@@ -455,11 +455,16 @@ Here are definitions for identifiers in LaTeX math mode formulas:
 \newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
 % \<name> or \codeid{name} denotes computer code identifiers
 \def\<#1>{\codeid{#1}}
+\newcommand{\codespaceskip}{\spaceskip=\fontdimen2\font plus .5\fontdimen2\font minus .333\fontdimen2\font\relax}
 % Choose one of the following three definitions for \codeid.
 \protected\def\codeid#1{\ifmmode{\mbox{\sf{#1}}}\else\leavevmode{\sf #1}\fi}
-% \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily{#1}}}\else\leavevmode{\ttfamily #1}\fi}
-% \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily{#1}}}\else\leavevmode{\smaller\ttfamily #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\ttfamily\codespaceskip{#1}}}\else\leavevmode{\ttfamily\codespaceskip #1}\fi}
+% \protected\def\codeid#1{\ifmmode{\mbox{\smaller\ttfamily\codespaceskip{#1}}}\else\leavevmode{\smaller\ttfamily\codespaceskip #1}\fi}
 ```
+
+`\codespaceskip` lets spaces within code stretch and shrink.  Use
+`\codespaceskip` after `\ttfamily` (and `\smaller`), because it uses the space
+width of the current font.
 
 This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
 
@@ -1387,7 +1392,7 @@ To find the git URL for an Overleaf project, click on the word "menu" in
 the upper left corner, then (in section "sync") "git".
 
 
-To get your Git credential helper to remember an Overleaf password, 
+To get your Git credential helper to remember an Overleaf password,
 create a new Git authentication token  (<https://www.overleaf.com/user/settings>)
 and clone a repository like this:
 
@@ -2143,6 +2148,7 @@ Note that Computer Modern font has no bold fixed width font.
 
 
 To reduce font size in the lstlistings package:
+
 ```latex
 basicstyle=\ttfamily\smaller\smaller
 ```
