@@ -403,9 +403,9 @@ vocabulary, rendering italics unnecessary.  Style guides like The Chicago Manual
 of Style recommend using standard Roman font, not italics.
 
 
-Here is a LaTeX command that typesets its argument in a smaller \tt font.  It
+Here is a LaTeX command that typesets its argument in a smaller `\tt` font.  It
 permits line breaks at spaces within the argument (but not within words),
-respects current series (such as boldface), and works in both horizontal (text)
+respects the current series (such as boldface), and works in both horizontal (text)
 and math mode.
 
 ```latex
@@ -430,7 +430,7 @@ Or, if your document does `\usepackage{url}`, for URLs you can just do
 
 but note that that is one command; you cannot specify `\smaller\texttt`.
 
-Similarly, "\scshape" is generally preferred to "\sc", because it
+Similarly, `\scshape` is generally preferred to `\sc`, because it
 respects the typesetting of the current context.
 For Verbatim environments, do this:
 
@@ -447,7 +447,8 @@ For Verbatim environments, do this:
 -->
 
 
-Here are definitions for identifiers in LaTeX math mode formulas:
+Here are definitions for identifiers in LaTeX math-mode formulas and for code
+identifiers:
 
 ```latex
 % \|name| or \mathid{name} denotes identifiers and slots in formulas
@@ -466,7 +467,7 @@ Here are definitions for identifiers in LaTeX math mode formulas:
 `\codespaceskip` after `\ttfamily` (and `\smaller`), because it uses the space
 width of the current font.
 
-This alternate definition of `\codeid` does not work inside an array environments (see <http://tex.stackexchange.com/questions/27592/>):
+This alternate definition of `\codeid` does not work inside an array environment (see <http://tex.stackexchange.com/questions/27592/>):
 
 ```latex
 \newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
